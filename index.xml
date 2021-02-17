@@ -5,7 +5,16 @@
     <link>https://zhenfeng-zhu.github.io/</link>
     <description>Recent content on Go Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 20 Nov 2020 16:01:49 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Feb 2021 16:46:52 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>unix 哲学</title>
+      <link>https://zhenfeng-zhu.github.io/posts/unix-philosophy/</link>
+      <pubDate>Wed, 17 Feb 2021 16:46:52 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/unix-philosophy/</guid>
+      <description>unix 哲学  让每个程序都做好一件事。要做一件新的工作，写一个新程序，而不是通过添加“功能”让老程序复杂化。 期待每个程序的输出成为另一个程序的输入。不要将无关信息混入输出。避免使用严格的列数据或二进制输入格式。不要坚持交互式输入。 设计和构建软件，甚至是操作系统，要尽早尝试，最好在几周内完成。不要犹豫，扔掉笨拙的部分，重建它们。 优先使用工具来减轻编程任务，即使必须曲线救国编写工具，且在用完后很可能要扔掉大部分。  </description>
+    </item>
+    
     <item>
       <title>Web前端性能优化</title>
       <link>https://zhenfeng-zhu.github.io/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
