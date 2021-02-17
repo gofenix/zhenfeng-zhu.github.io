@@ -1,0 +1,77 @@
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Go Data</title><meta name=keywords content><meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/><link href=/assets/css/stylesheet.min.3839cf02b87f30309470412461116907caabd1b3ec3f5d015df618da2d034992.css integrity="sha256-ODnPArh/MDCUcEEkYRFpB8qr0bPsP10BXfYY2i0DSZI=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.80.0"><link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml><link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json><meta property="og:title" content="Go Data"><meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta property="og:type" content="website"><meta property="og:url" content="https://zhenfeng-zhu.github.io/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="og:updated_time" content="2020-11-20T16:01:49+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="Go Data"><meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"Go Data","url":"https://zhenfeng-zhu.github.io","description":"Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod","thumbnailUrl":"https://zhenfeng-zhu.github.io/favicon.ico","sameAs":["https://github.com/zhenfeng-zhu","index.xml"]}</script></head><body class=list id=top><script>if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}else if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.classList.add('dark');}</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><article class=post-entry><header class=entry-header><h2>以太坊开发总结</h2></header><section class=entry-content><p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
+在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
+什么是区块链
+相信大家对区块链都有自己的理解，不仅仅是互联网公司，传统企业也在“币改转型”。
+**简言之，区块链就是数据库。**它是特定数据的数据库，里面的数据不断增长，具有非凡特性：
+一旦数据存储于数据库，永远都无法被修改或删除。区块链上的每个记录会被永久保存下来。 没有单独的个人或组织能维护该数据库。必须要上千个人才行，每个人都有数据库的副本。 什么是以太坊？
+以太坊（英语：Ethereum）是一个开源的有智能合约功能的公共区块链平台[1][2]。通过其专用加密货币以太币（Ether，又称“以太币”）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。
+为什么选择以太坊？
+智能合约
+代币
+资料相对完善，相对容易开发
+大佬对以太坊比较熟悉
+大佬对以太坊比较熟悉
+大佬对以太坊比较熟悉
+重要的事情说三遍，有一个经验丰富的人带领，做东西肯定事半功倍。
+自己动手写区块链
+这里提供两个教程，一个是书，一个是视频。其中视频和书是对应的，不清楚是不是同一个作者。
+Blockchain Tutorial
+私有区块链，我们一起GO
+以太坊开发
+由于我是专注于后端的开发，现在的技术栈是
+node go 正式进入以太坊的开发。这是我这段时间接触到的一些资源：
+go-ethereum：也就是geth，官方的go版本的客户端
+solidity：智能合约编程语言
+truffle：智能合约的编程框架，基于nodejs
+Ganache：启动了多个节点本地私链
+Rinkeby：以太坊测试链
+Etherscan：以太坊区块链浏览器，可以查询交易
+MetaMask：chrome的钱包插件...</p></section><footer class=entry-footer>August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a></article><article class=post-entry><header class=entry-header><h2>以太坊</h2></header><section class=entry-content><p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
+首先先把go的依赖下载下来：
+go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从github上拉下来代码。
+账户 以太坊的地址在离线状态下也可以创建到。
+创建账户有两种方式：
+以公钥和私钥的形式创建 func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return "", nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println("address: ", address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println("privateKey: ", privateKey) return address, nil } 这种方式一般用的比较少。
+以keystore的形式创建 keystore会创建一个文件，这个文件如下所示：
+{ "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p></section><footer class=entry-footer>August 7, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 以太坊" href=https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/></a></article><article class=post-entry><header class=entry-header><h2>contract</h2></header><section class=entry-content><p>类型 Solidity是静态类型的语言。
+值类型 bool int/uint fixed/unfixed address balance和transfer send call, callcode和delegatecall byte bytes 和 string 十六进制hex"0012" enum function 引用类型 数组
+uint[]
+结构体
+struct
+映射
+mapping(key => value)
+单元和全局变量 以太币的单位
+在数字后面加上 wei、 finney、 szabo 或 ether。默认是wei
+时间单位
+数字后面带有 seconds、 minutes、 hours、 days、 weeks 和 years。默认是秒。
+区块和交易
+block.blockhash(uint blockNumber) returns (bytes32)：指定区块的区块哈希。 block.coinbase (address): 挖出当前区块的矿工地址 block....</p></section><footer class=entry-footer>August 3, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to contract" href=https://zhenfeng-zhu.github.io/posts/contract/></a></article><article class=post-entry><header class=entry-header><h2>faas-provider</h2></header><section class=entry-content><p>faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。
+faas-provider OpenFaaS官方提供了两套后台provider：
+Docker Swarm Kubernetes 这两者在部署和调用函数的时候流程图如下：
+部署一个函数
+调用一个函数
+provider要提供的一些API有：
+List / Create / Delete 一个函数 /system/functions
+方法: GET / POST / DELETE
+获取一个函数 /system/function/{name:[-a-zA-Z_0-9]+}
+方法: GET
+伸缩一个函数 /system/scale-function/{name:[-a-zA-Z_0-9]+}
+方法: POST
+调用一个函数 /function/{name:[-a-zA-Z_0-9]+}
+方法: POST
+在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。
+// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc("/system/functions", handlers.FunctionReader).Methods("GET") r.HandleFunc("/system/functions", handlers....</p></section><footer class=entry-footer>August 1, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to faas-provider" href=https://zhenfeng-zhu.github.io/posts/faas-provider/></a></article><article class=post-entry><header class=entry-header><h2>gateway-reading</h2></header><section class=entry-content><p>OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
+UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
+源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。
+go-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。
+client_golang是Prometheus的客户端。
+项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test....</p></section><footer class=entry-footer>August 1, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to gateway-reading" href=https://zhenfeng-zhu.github.io/posts/gateway-reading/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://zhenfeng-zhu.github.io/page/5/>« Prev Page</a>
+<a class=next href=https://zhenfeng-zhu.github.io/page/7/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&#183;</span>
+<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
+<span>&#183;</span>
+<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
+<script>window.onload=function(){if(localStorage.getItem("menu-scroll-position")){document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position");}}
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener("click",function(e){e.preventDefault();var id=this.getAttribute("href").substr(1);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({behavior:"smooth"});}else{document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();}
+if(id==="top"){history.replaceState(null,null," ");}else{history.pushState(null,null,`#${id}`);}});});var mybutton=document.getElementById("top-link");window.onscroll=function(){if(document.body.scrollTop>800||document.documentElement.scrollTop>800){mybutton.style.visibility="visible";mybutton.style.opacity="1";}else{mybutton.style.visibility="hidden";mybutton.style.opacity="0";}};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft);}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{if(document.body.className.includes("dark")){document.body.classList.remove('dark');localStorage.setItem("pref-theme",'light');}else{document.body.classList.add('dark');localStorage.setItem("pref-theme",'dark');}})</script></body></html>

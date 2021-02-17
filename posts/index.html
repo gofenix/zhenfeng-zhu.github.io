@@ -1,0 +1,75 @@
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Posts | Go Data</title><meta name=keywords content><meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/posts/><link href=/assets/css/stylesheet.min.3839cf02b87f30309470412461116907caabd1b3ec3f5d015df618da2d034992.css integrity="sha256-ODnPArh/MDCUcEEkYRFpB8qr0bPsP10BXfYY2i0DSZI=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.80.0"><link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml><meta property="og:title" content="Posts"><meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta property="og:type" content="website"><meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="og:updated_time" content="2020-11-20T16:01:49+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="Posts"><meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"}]}</script></head><body class=list id=top><script>if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}else if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.classList.add('dark');}</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div><h1>Posts</h1></header><article class=post-entry><header class=entry-header><h2>Web前端性能优化</h2></header><section class=entry-content><p>一般来说web前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN服务等等。web前端优化主要从如下三个方面入手：
+浏览器访问优化 减少http请求
+http协议是一个无状态的，每次请求都需要建立通信链路进行传输，在服务器端，一般每个请求都会分配一个线程去处理。
+减少http请求的主要手段是合并CSS、合并js、合并图片。
+使用浏览器缓存
+css、js、Logo、图标等静态资源文件更新频率较低，可以将这些文件缓存在浏览器中。
+在更新js等文件的时候，一般不是将文件内容更新，而是生成一个新的文件，然后更新html的引用。
+更新静态资源的时候，也是要逐量更新，以避免用户浏览器的大量缓存失效，造成服务器负载增加、网络堵塞。
+启用压缩
+在服务器对文件压缩，然后在浏览器端解压缩，可以减少通信传输的数据量。
+CSS放在页面最上面，js放在页面最下面
+浏览器会在下载完全部CSS之后才对整个页面进行渲染，而浏览器是在加载js之后就立即执行，有可能会阻塞整个页面。因此最好的做法就是把CSS放在最上面，js放在最下面。但是如果是页面解析的时候就用到js，也是要相应的js放在上面。
+减少cookie传输
+cookie会包含在每次请求和响应中，太大的cookie会影响数据传输，需要慎重考虑哪些数据写入cookie中。
+对于某些静态资源的访问，如css和js等，发送cookie没意义，可以考虑静态资源使用独立域名访问，避免请求静态资源时发送cookie。
+CDN加速 CDN（content distribute network，内容分发网络）的本质仍然是一个缓存。将缓存放在离用户最近的地方，使得用户可以以最快的速度获取数据。
+CDN缓存的一般是静态资源，如图片、文件、CSS、js、静态网页等。
+反向代理 反向代理服务器位于网站中心机房的一侧，代理网站web服务器接收http请求。
+反向代理可以在一定程度上保护网站安全，来自互联网的访问请求必须经过代理服务器，相当于在web服务器和攻击之间加了一个屏障。
+反向代理也可以通过配置缓存，静态资源被缓存在反向代理服务器，当用户访问时，可以从反向代理服务器上返回。有些网站也会将部分动态内容缓存在代理服务器上，通过内部通知机制，更新缓存。
+反向代理也可以实现负载均衡的功能。
+写在最后 可以发现，在web前端性能优化的时候，提到最多的就是缓存。
+网站性能优化第一定律：优先考虑使用缓存！
+...</p></section><footer class=entry-footer>November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Web前端性能优化" href=https://zhenfeng-zhu.github.io/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/></a></article><article class=post-entry><header class=entry-header><h2>大型网站发展历程</h2></header><section class=entry-content><p>前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。
+code less, play more!
+前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有庞大的用户，高并发的访问，海量的数据；大型网站都是从小型网站发展而来。网站的价值在于它能给用户提供什么家宅，在于网站能做什么，而不在于它是怎么做的，所以网站在小的时候就去追求网站的架构是舍本逐末，得不偿失的。小型网站最需要做的就是为用户提供更好的服务来创造价值，得到用户认可，活下去，野蛮生长。
+大型网站软件系统的特点 高并发，大流量 高可用 海量数据 用户分布广泛，网络情况复杂 安全环境恶劣 需求快速变更，发布平频繁 渐进式发展 大型网站的发展历程 初始阶段的网站架构
+最开始没有多少人访问，所以应用程序，数据库，文件都在同一台机器上。
+应用服务器和数据服务分离
+应用和数据分离之后，一般需要三台服务器。应用服务器，文件服务器和数据库服务器，这三种服务器对于硬件要求各不相同。
+应用服务器：更强大的CPU 数据库服务器：更快速的磁盘和更大的内存 文件服务器：容量更大的硬盘 使用缓存改善性能
+网站的访问也遵循二八定律：80%的业务集中在20%的数据上。因此可以把这一小部分数据缓存在内存中，减少数据库的访问压力。
+网站的缓存可以分为两种：
+本地缓存：缓存在应用服务器上。本地缓存访问速度快，但是受制于内存限制，缓存数量有限，而且也会出现和应用程序争抢内存的情况。 远程分布式缓存：以集群的方式，缓存在大内存的专用缓存服务器。可以在理论上做到不受内存容量限制。 使用应用服务器集群提高并发能力
+当一台服务器的处理能力和存储空间不足的时候，不要企图更换更强大的服务器。对于大型网站来说，不管多么强大的服务器，都满足不了网站持续增长的业务需求。此时就可以考虑集群的方式，通过负载均衡调度服务器，可以将来自用户的请求分发到应用服务器集群中的任何一台服务器上。
+数据库读写分离
+使用缓存后，大部分的数据读操作访问都可以不通过数据库完成，但是仍有部分读操作（如缓存过期，缓存不命中）和全部的写操作需要访问数据库。
+目前大部分数据库都提供主从热备的功能，在写数据的时候，访问主库，主库通过主从复制机制将数据更新同步至从数据库，在读的时候就可以通过从数据库获取数据。
+使用反向代理和CDN加速网站响应
+在《web性能权威指南》中有讲到，网站性能的瓶颈，大部分时间都浪费在TCP的握手和传输上。因此可以通过CDN和反向代理的方式来加快响应。
+CDN和反向代理的本质都是通过缓存，不同的主要是：
+CDN部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。 使用分布式文件系统和分布式数据库系统
+随着业务的发展，依旧不能满足的时候，就采用分布式的文件和分布式的数据库系统。
+分布式数据库是数据库拆分的最后手段，只用在单表数据规模特别庞大的时候才使用。更常用的拆分手段是业务分库，将不同的业务数据存储在不同的数据库中。
+使用NoSQL和搜索引擎
+对数据检索和存储越来越复杂的时候，就可以采用一些非关系型数据库如HBase和非数据库查询技术如ElasticSearch等等
+业务拆分...</p></section><footer class=entry-footer>November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 大型网站发展历程" href=https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/></a></article><article class=post-entry><header class=entry-header><h2>Geth 私链</h2></header><section class=entry-content><p>在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。
+genesis.json { "config": { "chainId": 10, "homesteadBlock": 0, "eip155Block": 0, "eip158Block": 0 }, "coinbase" : "0x0000000000000000000000000000000000000000", "difficulty" : "0x40000", "extraData" : "", "gasLimit" : "0xffffffff", "nonce" : "0x0000000000000042", "mixhash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "timestamp" : "0x00", "alloc": { } } 参数 描述 nonce nonce就是一个64位随机数，用于挖矿 mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度 alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以 coinbase 矿工的账号，随便填 timestamp 设置创世块的时间戳 parentHash 上一个区块的hash值，因为是创世块，所以这个值是0 extraData 附加信息，随便填，可以填你的个性信息 gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。 config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1....</p></section><footer class=entry-footer>November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Geth 私链" href=https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/></a></article><article class=post-entry><header class=entry-header><h2>Geth</h2></header><section class=entry-content><p>Geth简介 go-ethereum
+go-ethereum客户端通常被称为geth，它是个命令行界面，执行在Go上实现的完整以太坊节点。通过安装和运行geth，可以参与到以太坊前台实时网络并进行以下操作：
+挖掘真的以太币 在不同地址间转移资金 创建合约，发送交易 探索区块历史 及很多其他 网站: http://ethereum.github.io/go-ethereum/
+Github: https://github.com/ethereum/go-ethereum
+维基百科: https://github.com/ethereum/go-ethereum/wiki/geth
+Gitter: https://gitter.im/ethereum/go-ethereum
+mac下安装geth 首先安装homebrew， 使用brew安装即可。在安装geth的时候，会将go也安装上。 brew tap ethereum/ethereum brew install ethereum 在命令行输入geth —help，如果出现
+zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum command line interface Copyright 2013-2017 The go-ethereum Authors USAGE: geth [options] command [command options] [arguments...] VERSION: 1.7.3-unstable-eea996e4 证明安装成功。
+使用Geth 打开终端，输入以下命令，以开发的方式启动geth...</p></section><footer class=entry-footer>November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Geth" href=https://zhenfeng-zhu.github.io/posts/geth/></a></article><article class=post-entry><header class=entry-header><h2>hive常用函数</h2></header><section class=entry-content><p>json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path)
+解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。
+path 就是 ‘$.字段名’。
+如果该字段的 value 也是 json，就可以一直点下去。
+如果该字段的 value 是数组，就可以用 ‘$.字段名[0]'，类似这样下标的形式去访问。
+explode explode(array)
+经常和 lateral view 一起使用，将数组中的元素拆分成多行显示。
+substr substr(string A, int start, int len)
+返回字符串 A 从 start 位置开始，长度为 len 的字符串
+json_tuple json_tuple(string json_string, col1, col2, …)
+经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。
+parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)...</p></section><footer class=entry-footer>April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to hive常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a></article><footer class=page-footer><nav class=pagination><a class=next href=https://zhenfeng-zhu.github.io/posts/page/2/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&#183;</span>
+<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
+<span>&#183;</span>
+<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
+<script>window.onload=function(){if(localStorage.getItem("menu-scroll-position")){document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position");}}
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener("click",function(e){e.preventDefault();var id=this.getAttribute("href").substr(1);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({behavior:"smooth"});}else{document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();}
+if(id==="top"){history.replaceState(null,null," ");}else{history.pushState(null,null,`#${id}`);}});});var mybutton=document.getElementById("top-link");window.onscroll=function(){if(document.body.scrollTop>800||document.documentElement.scrollTop>800){mybutton.style.visibility="visible";mybutton.style.opacity="1";}else{mybutton.style.visibility="hidden";mybutton.style.opacity="0";}};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft);}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{if(document.body.className.includes("dark")){document.body.classList.remove('dark');localStorage.setItem("pref-theme",'light');}else{document.body.classList.add('dark');localStorage.setItem("pref-theme",'dark');}})</script></body></html>
