@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go Data</title>
-    <link>https://zhenfeng-zhu.github.io/gh/</link>
+    <link>https://zhenfeng-zhu.github.io/</link>
     <description>Recent content on Go Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 20 Nov 2020 16:01:49 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/gh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Nov 2020 16:01:49 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Web前端性能优化</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
       <pubDate>Fri, 20 Nov 2020 16:01:49 +0800</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
       <description>一般来说web前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN服务等等。web前端优化主要从如下三个方面入手：
 浏览器访问优化   减少http请求
 http协议是一个无状态的，每次请求都需要建立通信链路进行传输，在服务器端，一般每个请求都会分配一个线程去处理。
@@ -40,10 +40,10 @@ CDN缓存的一般是静态资源，如图片、文件、CSS、js、静态网页
     
     <item>
       <title>大型网站发展历程</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/</link>
       <pubDate>Fri, 20 Nov 2020 16:00:59 +0800</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/</guid>
       <description>前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。
  code less, play more!
  前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有庞大的用户，高并发的访问，海量的数据；大型网站都是从小型网站发展而来。网站的价值在于它能给用户提供什么家宅，在于网站能做什么，而不在于它是怎么做的，所以网站在小的时候就去追求网站的架构是舍本逐末，得不偿失的。小型网站最需要做的就是为用户提供更好的服务来创造价值，得到用户认可，活下去，野蛮生长。
@@ -72,20 +72,20 @@ CDN和反向代理的本质都是通过缓存，不同的主要是：
     
     <item>
       <title>Geth 私链</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/geth-%E7%A7%81%E9%93%BE/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/</link>
       <pubDate>Fri, 20 Nov 2020 15:59:22 +0800</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/geth-%E7%A7%81%E9%93%BE/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/</guid>
       <description>在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。
 genesis.json { &amp;#34;config&amp;#34;: { &amp;#34;chainId&amp;#34;: 10, &amp;#34;homesteadBlock&amp;#34;: 0, &amp;#34;eip155Block&amp;#34;: 0, &amp;#34;eip158Block&amp;#34;: 0 }, &amp;#34;coinbase&amp;#34; : &amp;#34;0x0000000000000000000000000000000000000000&amp;#34;, &amp;#34;difficulty&amp;#34; : &amp;#34;0x40000&amp;#34;, &amp;#34;extraData&amp;#34; : &amp;#34;&amp;#34;, &amp;#34;gasLimit&amp;#34; : &amp;#34;0xffffffff&amp;#34;, &amp;#34;nonce&amp;#34; : &amp;#34;0x0000000000000042&amp;#34;, &amp;#34;mixhash&amp;#34; : &amp;#34;0x0000000000000000000000000000000000000000000000000000000000000000&amp;#34;, &amp;#34;parentHash&amp;#34; : &amp;#34;0x0000000000000000000000000000000000000000000000000000000000000000&amp;#34;, &amp;#34;timestamp&amp;#34; : &amp;#34;0x00&amp;#34;, &amp;#34;alloc&amp;#34;: { } }    参数 描述     nonce nonce就是一个64位随机数，用于挖矿   mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash   difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的hash值，因为是创世块，所以这个值是0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.</description>
     </item>
     
     <item>
       <title>Geth</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/geth/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/geth/</link>
       <pubDate>Fri, 20 Nov 2020 10:07:39 +0800</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/geth/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/geth/</guid>
       <description>Geth简介 go-ethereum
 go-ethereum客户端通常被称为geth，它是个命令行界面，执行在Go上实现的完整以太坊节点。通过安装和运行geth，可以参与到以太坊前台实时网络并进行以下操作：
  挖掘真的以太币 在不同地址间转移资金 创建合约，发送交易 探索区块历史 及很多其他   网站: http://ethereum.github.io/go-ethereum/
@@ -99,10 +99,10 @@ zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum comma
     
     <item>
       <title>hive常用函数</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</link>
       <pubDate>Thu, 16 Apr 2020 17:59:03 +0800</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
       <description>json 字符串处理  get_json_object lateral_view explode substr json_tuple  get_json_object get_json_object(string json_string, string path)
 解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。
 path 就是 &amp;lsquo;$.字段名&amp;rsquo;。
@@ -119,10 +119,10 @@ parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, 
     
     <item>
       <title>mysql的学习</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/</link>
       <pubDate>Thu, 16 Apr 2020 17:34:30 +0800</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/</guid>
       <description>SQL条件语句 IF if(exp1, exp2, exp3)
 exp1是条件，条件为true的话，是exp2，否则是exp3
 case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNULL IFNULL(exp1, exp2)
@@ -131,10 +131,10 @@ case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNUL
     
     <item>
       <title>clickhouse</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/clickhouse/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/clickhouse/</link>
       <pubDate>Sat, 12 Oct 2019 06:48:01 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/clickhouse/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/clickhouse/</guid>
       <description>ClickHouse ClickHouse 是一个用于联机分析（Online Analytical Processing：OLAP）的列式数据库管理系统(DBMS)。通过使用 OLAP 工具，用户能够从多个角度交互地分析多维数据。
 OLAP 由三个基本的分析操作组成：上卷（roll-up）、钻取（drill-down）、切片（slicing）和切块（dicing）。
   上卷（roll-up）：涉及可以在一个或多个维度中累积和计算的数据的聚合。例如，所有的销售办事处汇总到销售部门，以预测销售趋势。
@@ -150,29 +150,29 @@ clickhouse的独特功能 真正的列式数据库管理系统    </description>
     
     <item>
       <title>每日学习2</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/</link>
       <pubDate>Sun, 29 Sep 2019 02:19:03 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/</guid>
       <description>https://mubu.com/doc/oHlgG0FSu0</description>
     </item>
     
     <item>
       <title>每日学习-2019-09-24</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/</link>
       <pubDate>Sun, 29 Sep 2019 02:17:46 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/</guid>
       <description>开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理？  语义分析的本质，就是针对上下文相关的情况做处理。  引用消解：不同作用域里可能有相同名称的变量，必须找到正确的那个，这个过程就是引用消解。  函数引用消解 命名空间引用消解   左值和右值  左值取的是变量的地址或者说是变量的引用，获得地址之后，我们就可以把新值写进去。 右值就是我们常说的值。 不是所有的表达式都能生成一个合格的左值。   属性计算  上下文分析或者说语义分析的一种算法。 属性文法的主要思路是计算机科学的重要开拓者，是在上下文无关文法的基础上做了一些增强，使之可以计算属性值。   过程  类型和作用域解析 类型的消解 引用的消解和S属性的类型推导 做类型检查 做一些语义合法性检查      趣谈Linux操作系统 Namespace技术：内部创业公司应该独立运营 为了隔离不同类型的资源，Linux内核里面有如下几种不同类型的namespace：
  UTS，表示不同的namespace可以配置不同的hostname User，可以配置不同的用户和组 Mount，文件系统挂载点是隔离的 PID，有完全独立的pid Network，有独立的网络协议栈  </description>
     </item>
     
     <item>
       <title>tmux</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/tmux/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/tmux/</link>
       <pubDate>Wed, 28 Aug 2019 12:03:46 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/tmux/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/tmux/</guid>
       <description>折腾一下 tmux
 安装 brew install tmux 概念  session：理解为一个会话，持久保存工作状态。 window：可以理解为我们常说的 tab 页。 pane：一个 window 被分成若干个 pane，理解为 iterm 的分屏。  session 新建
 tmux new -s your-session-name 断开
@@ -186,10 +186,10 @@ tmux list-session tmux ls tmux 的基础配置 prefix 是 tmux 的前缀键，�
     
     <item>
       <title>crystal开发环境</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Tue, 27 Aug 2019 14:03:12 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
       <description>突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。
 安装 crystal brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang
 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。
@@ -199,10 +199,10 @@ $ git clone https://github.com/crystal-lang-tools/scry.git $ cd scry $ shards bu
     
     <item>
       <title>crystal简介</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/crystal%E7%AE%80%E4%BB%8B/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/crystal%E7%AE%80%E4%BB%8B/</link>
       <pubDate>Tue, 27 Aug 2019 02:14:18 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/crystal%E7%AE%80%E4%BB%8B/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/crystal%E7%AE%80%E4%BB%8B/</guid>
       <description>关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。
  Fast as C, Slick as Ruby
  语法 crystal 的语法和 Ruby 比较类似。
@@ -212,10 +212,10 @@ def shout(x) # Notice that both Int32 and String respond_to `to_s` x.to_s.upcase
     
     <item>
       <title>socket</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/socket/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/socket/</link>
       <pubDate>Mon, 26 Aug 2019 06:54:14 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/socket/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/socket/</guid>
       <description>Socket 网络模型 osi七层模型  应用层 表示层 会话层 传输层 网络层 数据链路层 物理层  对应的tcpip就是  应用层  dns http   传输层  icmp tcp udp   ip层  ipv4 ipv6   mac层  arp vlan   物理层  Ethernet    为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
 二层到四层，即mac、ip和传输等层都是Linux内核中处理。应用层的如浏览器、Nginx和Tomcat等都是用户态的。
 传输层的tcp和udp里都有端口的概念，不同应用监听不同的段即可。
@@ -229,10 +229,10 @@ socket函数 int socket(int domain, int type, int protocol) socket函数用于�
     
     <item>
       <title>go进阶</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/go%E8%BF%9B%E9%98%B6/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/</link>
       <pubDate>Mon, 26 Aug 2019 06:53:32 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/go%E8%BF%9B%E9%98%B6/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/</guid>
       <description>Diagnostics go提供了一系列诊断逻辑和性能问题的工具。
  profiling分析 tracing跟踪 debuging调试 运行时统计信息和事件  Profiling profiling信息可以在go test或者net/http/pprof包的时候使用。
 runtime/pprof包有：
@@ -250,10 +250,10 @@ package main import ( &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;
     
     <item>
       <title>mysql</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/mysql/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/mysql/</link>
       <pubDate>Sat, 01 Dec 2018 15:54:53 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/mysql/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/mysql/</guid>
       <description>MySQL基本架构 客户端
 server层
   连接器：管理连接，权限验证
@@ -292,10 +292,10 @@ mysql启动事务的方式
     
     <item>
       <title>graphql</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/graphql/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/graphql/</link>
       <pubDate>Thu, 08 Nov 2018 18:28:13 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/graphql/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/graphql/</guid>
       <description>graphql经常被认为是聚焦于前端的技术。
 核心概念 SDL：schema definition language（模式定义语言） 如：
 type Person{ name: String! age: Int! } 这个类型有两个字段，name和age，他们的类型是String和Int。！的意思代表他们是必需的。
@@ -311,10 +311,10 @@ type Person{ name: String! age: Int! posts: [Post!]! } 通过Query获取数据 �
     
     <item>
       <title>go-best-practice</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/go-best-practice/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/go-best-practice/</link>
       <pubDate>Wed, 07 Nov 2018 17:16:07 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/go-best-practice/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/go-best-practice/</guid>
       <description> 短变量名称在声明和上次使用之间的距离很短时效果很好。 长变量名称需要证明自己的合理性; 名称越长，需要提供的价值越高。冗长的名称与页面上的重量相比，信号量较小。 请勿在变量名称中包含类型名称。 常量应该描述它们持有的值，而不是该如何使用。 对于循环和分支使用单字母变量，参数和返回值使用单个字，函数和包级别声明使用多个单词 方法、接口和包使用单个词。 请记住，包的名称是调用者用来引用名称的一部分，因此要好好利用这一点。  变量的名称应描述其内容，而不是内容的类型。
 典型错误：
 var usersMap map[string]*User 如果users的描述性都不够用，那么usersMap也不会。
@@ -327,10 +327,10 @@ var usersMap map[string]*User 如果users的描述性都不够用，那么usersM
     
     <item>
       <title>kubernetes</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/kubernetes/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/kubernetes/</link>
       <pubDate>Mon, 08 Oct 2018 15:29:21 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/kubernetes/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/kubernetes/</guid>
       <description>docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。
 docker镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
 解决了应用打包的根本性问题。
@@ -357,10 +357,10 @@ sudo
     
     <item>
       <title>watchdog</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/watchdog/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/watchdog/</link>
       <pubDate>Thu, 06 Sep 2018 16:23:57 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/watchdog/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/watchdog/</guid>
       <description>监视器
 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从API网关来的HTTP请求，然后调用程序。监视器是一个小型的Golang服务——下图展示了它是如何工作的：
  上图：一个小型的web服务，可以为每个传入的HTTP请求分配所需要的进程。
@@ -375,10 +375,10 @@ FROM alpine:3.7 ADD https://github.com/openfaas/faas/releases/download/0.8.0/fwa
     
     <item>
       <title>queue-worker</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/queue-worker/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/queue-worker/</link>
       <pubDate>Thu, 06 Sep 2018 16:23:12 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/queue-worker/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/queue-worker/</guid>
       <description>queue-worker源码分析 异步函数和同步函数 在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
  网关的路由是：/function/&amp;lt;function_name&amp;gt; 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：
  网关的路由是：/async-function/&amp;lt;function_name&amp;gt; 客户端获得202的即时响应码 从queue-worker中调用函数 默认情况下，结果是被丢弃的。  查看queue-worker的日志 docker service logs -f func_queue-worker 利用requestbin和X-Callback-Url获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
@@ -389,10 +389,10 @@ package queue import &amp;quot;net/url&amp;quot; import &amp;quot;net/http&amp;q
     
     <item>
       <title>区块链学习笔记</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/blockchain/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/blockchain/</link>
       <pubDate>Thu, 23 Aug 2018 15:14:02 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/blockchain/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/blockchain/</guid>
       <description>本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html上的一些笔记。
  理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html
 区块链中提到的账本，记账等词汇是和会计无关的词汇。
@@ -421,10 +421,10 @@ package queue import &amp;quot;net/url&amp;quot; import &amp;quot;net/http&amp;q
     
     <item>
       <title>谈谈聊天机器人框架的实现原理</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/botbuilder/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/botbuilder/</link>
       <pubDate>Wed, 22 Aug 2018 19:39:12 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/botbuilder/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/botbuilder/</guid>
       <description>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
 聊天机器人  聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
  我们可以看到现有的IM工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了chatops，通过和机器人聊天，进行运维操作。
@@ -448,10 +448,10 @@ const {startWith, when, goto, stay, stop} = botkit.DSL(fsm); startWith(MyStates.
     
     <item>
       <title>基于以太坊的Parity联盟链部署</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/parity/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/parity/</link>
       <pubDate>Wed, 22 Aug 2018 16:51:13 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/parity/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/parity/</guid>
       <description>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity是可以构建出一个基于PoA共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
 部署联盟链 parity的文档：https://wiki.parity.io/Demo-PoA-tutorial
 安装 首先是下载parity，在mac下是直接brew安装即可。
@@ -461,10 +461,10 @@ brew tap paritytech/paritytech brew install parity 创世区块 创世区块的�
     
     <item>
       <title>dive-into-redis</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/dive-into-redis/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/dive-into-redis/</link>
       <pubDate>Mon, 20 Aug 2018 09:39:08 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/dive-into-redis/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/dive-into-redis/</guid>
       <description>redis持久化，
 机制有两种：
  快照：全量备份，二进制序列化，存储紧凑 AOF日志：连续的增量备份，内存数据修改的文本  </description>
@@ -472,10 +472,10 @@ brew tap paritytech/paritytech brew install parity 创世区块 创世区块的�
     
     <item>
       <title>golang踩坑</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/golang%E8%B8%A9%E5%9D%91/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/</link>
       <pubDate>Tue, 14 Aug 2018 20:10:55 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/golang%E8%B8%A9%E5%9D%91/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/</guid>
       <description>一  x509 error when using HTTPS inside a Docker container
  因为docker中没有CA证书。
 普通的镜像解决办法
@@ -486,10 +486,10 @@ FROM docker.finogeeks.club/base/alpine MAINTAINER &amp;quot;zhuzhenfeng@finogeek
     
     <item>
       <title>以太坊开发总结</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/eth-tools/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/eth-tools/</link>
       <pubDate>Fri, 10 Aug 2018 18:57:09 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/eth-tools/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/eth-tools/</guid>
       <description>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
 在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
 什么是区块链
@@ -523,10 +523,10 @@ Blockchain Tutorial
     
     <item>
       <title>以太坊</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/</link>
       <pubDate>Tue, 07 Aug 2018 20:09:26 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/</guid>
       <description>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
 首先先把go的依赖下载下来：
 go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从github上拉下来代码。
@@ -539,10 +539,10 @@ go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以�
     
     <item>
       <title>contract</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/contract/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/contract/</link>
       <pubDate>Fri, 03 Aug 2018 14:32:03 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/contract/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/contract/</guid>
       <description>类型 Solidity是静态类型的语言。
 值类型  bool int/uint fixed/unfixed address  balance和transfer send call, callcode和delegatecall   byte bytes 和 string 十六进制hex&amp;quot;0012&amp;quot; enum function  引用类型   数组
 uint[]
@@ -560,10 +560,10 @@ mapping(key =&amp;gt; value)
     
     <item>
       <title>faas-provider</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/faas-provider/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/faas-provider/</link>
       <pubDate>Wed, 01 Aug 2018 19:53:23 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/faas-provider/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/faas-provider/</guid>
       <description>faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。
 faas-provider OpenFaaS官方提供了两套后台provider：
  Docker Swarm Kubernetes  这两者在部署和调用函数的时候流程图如下：
@@ -584,10 +584,10 @@ provider要提供的一些API有：
     
     <item>
       <title>gateway-reading</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/gateway-reading/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/gateway-reading/</link>
       <pubDate>Wed, 01 Aug 2018 09:15:35 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/gateway-reading/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/gateway-reading/</guid>
       <description>OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
  UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
 源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。
@@ -598,10 +598,10 @@ client_golang是Prometheus的客户端。
     
     <item>
       <title>NATS streaming</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/nats-streaming/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/nats-streaming/</link>
       <pubDate>Mon, 30 Jul 2018 14:51:26 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/nats-streaming/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/nats-streaming/</guid>
       <description>市面上常见到的和Nats功能类似的消息通信系统有：
 ActiveMQ（Java编写）、KafKa（Scala编写）、RabbitMq（Ruby编写）、Nats（之前是Ruby编写现已修改为Go）、Redis（C语言编写）、Kestrel（Scala编写不常用）、NSQ（Go语言编写），这些消息通信系统在Broker吞吐量方面的比较：
 可以看到NATS的吞吐量特别高， NATS原来是使用Ruby编写，可以实现每秒150k消息，后来使用Go语言重写，能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于NATS的详细介绍，请参考上篇文章：NATS简介
@@ -623,10 +623,10 @@ go get github.com/nats-io/go-nats-streaming 运行发布者</description>
     
     <item>
       <title>nats简介</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/nats/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/nats/</link>
       <pubDate>Mon, 30 Jul 2018 11:15:39 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/nats/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/nats/</guid>
       <description>nats是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC和爱立信等公司都有在使用。
 核心基于EventMachine开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向MessageBus发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用nats streaming可以做到持久化，缓存等功能。
 NATS server nats提供了一个go编写的轻量级服务器。发行版包括二进制和docker镜像
@@ -643,10 +643,10 @@ NATS 设计目标
     
     <item>
       <title>overview-of-openfaas</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/overview-of-openfaas/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/</link>
       <pubDate>Thu, 26 Jul 2018 17:41:33 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/overview-of-openfaas/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/</guid>
       <description>OpenFaaS概览  无服务器函数变得简单。
  函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。   API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。
  命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
@@ -660,10 +660,10 @@ NATS 设计目标
     
     <item>
       <title>OpenFaaS on Rancher 2.0</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/openfaas-on-rancher/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/</link>
       <pubDate>Thu, 26 Jul 2018 09:50:46 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/openfaas-on-rancher/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/</guid>
       <description>这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。
 下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：
 https://www.youtube.com/watch?v=kX8mXv5d1qg&amp;amp;feature=youtu.be
@@ -673,10 +673,10 @@ version: &amp;#34;2&amp;#34; services: alertmanager: image: functions/alertmanag
     
     <item>
       <title>openfaas-workshop-lab4</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/openfaas-workshop-lab4/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/</link>
       <pubDate>Mon, 02 Jul 2018 09:32:59 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/openfaas-workshop-lab4/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/</guid>
       <description>Lab 4 - 深入函数 在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：
 $ cp -r lab3 lab4 \ &amp;amp;&amp;amp; cd lab4 通过环境变量注入配置 It is useful to be able to control how a function behaves at runtime, we can do that in at least two ways:
 控制函数在运行时的行为很有用，我们至少可以通过两种方式来实现：
@@ -686,19 +686,19 @@ $ cp -r lab3 lab4 \ &amp;amp;&amp;amp; cd lab4 通过环境变量注入配置 It
     
     <item>
       <title>ubuntu-docker-sudo</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/ubuntu-docker-sudo/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/ubuntu-docker-sudo/</link>
       <pubDate>Fri, 29 Jun 2018 13:54:25 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/ubuntu-docker-sudo/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/ubuntu-docker-sudo/</guid>
       <description>sudo chown &amp;quot;$USER&amp;quot;:&amp;quot;$USER&amp;quot; /home/&amp;quot;$USER&amp;quot;/.docker -R sudo chmod g+rwx &amp;quot;/home/$USER/.docker&amp;quot; -R https://api.finochat.com/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI http://localhost:3000/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI </description>
     </item>
     
     <item>
       <title>openfaas-workshop-lab3</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/openfaas-workshop-lab3/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab3/</link>
       <pubDate>Thu, 28 Jun 2018 17:29:56 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/openfaas-workshop-lab3/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab3/</guid>
       <description>Lab3 - 函数的介绍 在开始本实验之前，创建一个新文件夹：
 $ mkdir -p lab3 \ &amp;amp;&amp;amp; cd lab3 创建一个新函数 创建函数有两种方式：
  使用内置的或社区提供的代码末班创建一个函数脚手架（默认）   将现有的二进制文件作为函数（高级）  生成一个新函数 在使用模板创建一个新函数之前，首先确认你已经从 Github 上拉下来模板文件：
@@ -708,10 +708,10 @@ $ faas-cli new --list Languages available as templates: - csharp - dockerfile - 
     
     <item>
       <title>openfaas-workshop-lab2</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/openfaas-workshop-lab2/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/</link>
       <pubDate>Wed, 27 Jun 2018 18:10:47 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/openfaas-workshop-lab2/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/</guid>
       <description>Lab2 测试一下 在开始这个实验之前，首先创建一个新的文件夹：
 $ mkdir -p lab2 \ &amp;amp;&amp;amp; cd lab2 使用UI界面 你现在可以打开http://127.0.0.1:8080测试OpenFaaS的UI。如果是在一台LInux虚拟机中部署，将127.0.0.1替换为该虚拟机的ip地址。
  备注：我们使用的是127.0.0.1而不是localhost，因为在一些Linux发行版中IPv4/IPv6出现不兼容。
@@ -730,10 +730,10 @@ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.
     
     <item>
       <title>译：openfaas-workshop-Lab1</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/workshop-lab1/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/workshop-lab1/</link>
       <pubDate>Mon, 25 Jun 2018 18:04:09 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/workshop-lab1/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/workshop-lab1/</guid>
       <description>今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。
 目前已经有一批优秀的serverless架构开源项目，OpenFaas就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力serverless的发展。
 这是一个自学研讨会，学习如何构建、部署和运行OpenFaas 函数。
@@ -750,10 +750,10 @@ $ docker swarm init  如果运行此命令出错，加上 &amp;ndash;advertise-a
     
     <item>
       <title>openfaas</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/openfaas/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas/</link>
       <pubDate>Sun, 24 Jun 2018 15:43:46 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/openfaas/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas/</guid>
       <description>对于mac环境来讲，首先安装新版docker:
 brew cask install docker 然后启动docker。
 命令行登陆docker hub
@@ -771,10 +771,10 @@ $ faas-cli new --list $ faas-cli build -f ./hello-openfaas.yml $ faas-cli push -
     
     <item>
       <title>java-reactive-web</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/java-reactive-web/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/java-reactive-web/</link>
       <pubDate>Sat, 23 Jun 2018 15:05:32 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/java-reactive-web/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/java-reactive-web/</guid>
       <description>Spring web mvc： 传统servlet web
 spring web flux： Reactive web
  编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程
@@ -783,10 +783,10 @@ In computing, reactive programming is a declarative programming paradigm co
     
     <item>
       <title>kafka</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/kafka/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/kafka/</link>
       <pubDate>Thu, 21 Jun 2018 17:49:46 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/kafka/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/kafka/</guid>
       <description>启动zookeeper
 bin/zookeeper-server-start.sh config/zookeeper.properties 启动kafka
 bin/kafka-server-start.sh config/server.properties 创建一个主题
@@ -800,10 +800,10 @@ bin/connect-standalone.sh config/connect-standalone.</description>
     
     <item>
       <title>译：vertx-kotlin-coroutine</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/vertx-kotlin-coroutine/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/vertx-kotlin-coroutine/</link>
       <pubDate>Sat, 02 Jun 2018 16:00:52 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/vertx-kotlin-coroutine/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/vertx-kotlin-coroutine/</guid>
       <description>尝试翻译vertx的文档。尊重原文，部分使用自己的理解。
  Vert.x的kotlin协程提供了async/await或者和go类似的channel。这使得你能够以熟悉的顺序风格写垂直代码。
 vertx-lang-kotlin-coroutines集成了kotlin协程，用于执行异步操作和处理事件。这样就能够以同步代码的模型编写代码，而且不会阻塞内核线程。
@@ -826,10 +826,10 @@ The method is executed by specifying the asynchronous operation that needs to be
     
     <item>
       <title>小议async/await和coroutine</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/async/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/async/</link>
       <pubDate>Mon, 21 May 2018 19:37:14 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/async/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/async/</guid>
       <description>Being happy doesn&amp;rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections.
  后端编程，涉及最多的就是并发。简单理解就是：
  并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行多个任务。可以理解为一个是manage，一个是run。
@@ -864,10 +864,10 @@ function* gen(x){ var y = yield x + 2; return y; } 不同于普通函数的地�
     
     <item>
       <title>elasticsearch</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/elasticsearch/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/elasticsearch/</link>
       <pubDate>Sun, 20 May 2018 14:17:07 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/elasticsearch/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/elasticsearch/</guid>
       <description>以前没有好好学的东西，现在在工作中慢慢的补回来了。
 基础概念  索引  es是将数据存储在一个或者多个索引（index）中。
 索引就像是数据库。
@@ -886,10 +886,10 @@ function* gen(x){ var y = yield x + 2; return y; } 不同于普通函数的地�
     
     <item>
       <title>git常用操作</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/git/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/git/</link>
       <pubDate>Mon, 14 May 2018 10:04:02 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/git/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/git/</guid>
       <description>整理一下常用的git操作，不用再到处找了。
 git放弃本地修改，强制更新 git fetch --all git reset --hard origin/master git修改远程仓库地址 git remote set-url origin url cherry-pick 当你通过一番挣扎终于搞定一个bug,顺手提交到 git 服务器,心里一阵暗爽. 这时发现你当前所在的分支是 master !!!
 这个分支不是开发者用来提交代码的,可惜现在剁手也晚了.
@@ -904,10 +904,10 @@ git rvm</description>
     
     <item>
       <title>node的cluster</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/node%E7%9A%84cluster/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/</link>
       <pubDate>Sat, 05 May 2018 15:45:47 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/node%E7%9A%84cluster/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/</guid>
       <description>我们知道js是运行单线程的，也就是说一个node进程只能运行在一个cpu上。那么如果用node来做web server的话，就无法享受到多核运算的好处。
 一个问题就是：
 如何榨干服务器资源，利用多核CPU的并发优势。 node官方提供的解决方案是cluster。
@@ -919,10 +919,10 @@ const cluster = require(&#39;cluster&#39;); const http = require(&#39;http&#39;)
     
     <item>
       <title>node踩坑</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/node%E8%B8%A9%E5%9D%91/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/</link>
       <pubDate>Sat, 05 May 2018 15:32:59 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/node%E8%B8%A9%E5%9D%91/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/</guid>
       <description>module 首先第一个就是es6的module。
 看到别人写的
 import { a } from &amp;quot;./module&amp;quot;; 所以自己也想要这么写，但是每次运行的时候都会报错。
@@ -931,10 +931,10 @@ import { a } from &amp;quot;./module&amp;quot;; 所以自己也想要这么写�
     
     <item>
       <title>node学习笔记</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/node-learning/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/node-learning/</link>
       <pubDate>Sun, 22 Apr 2018 15:41:21 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/node-learning/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/node-learning/</guid>
       <description>写node也有一段时间了，整理一下学习笔记，共同进步
 什么是node？ 首先看一下什么是node.js
  Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效 Node.js 的包管理器 npm，是全球最大的开源库生态系统  模块系统是node最基本也是最常用的。一般可以分为四类：
@@ -949,10 +949,10 @@ module.exports 就 Node.</description>
     
     <item>
       <title>node的redis实战</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/</link>
       <pubDate>Fri, 13 Apr 2018 10:00:12 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/</guid>
       <description>Node.js Redis客户端模块 为了追新，这里我使用的yarn，毕竟我是HDD（面向热点编程）编程实践者。
 模块安装
 yarn add redis 模块使用实例
@@ -961,10 +961,10 @@ const redis = require(&#39;redis&#39;) const client = redis.createClient(&#39;63
     
     <item>
       <title>谈谈web框架</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/</link>
       <pubDate>Sun, 08 Apr 2018 16:01:48 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/</guid>
       <description>这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对web框架的理解。自己了解的也不是很多，也请多多指教。
 写程序免不了要做web相关的，现在由于前后端的分离，后端一般只提供rest接口，前端一般使用node来做渲染。在之前使用jsp那一套的时候，基本上都要写html+js的前端的一套，也要写后端java的CRUD。
 我理解的web框架中，大致是分为这么两类：
@@ -976,10 +976,10 @@ const redis = require(&#39;redis&#39;) const client = redis.createClient(&#39;63
     
     <item>
       <title>技术栈</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/</link>
       <pubDate>Thu, 05 Apr 2018 09:49:06 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/</guid>
       <description>创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
 技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。
  rancher  rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。
@@ -1005,19 +1005,19 @@ const redis = require(&#39;redis&#39;) const client = redis.createClient(&#39;63
     
     <item>
       <title>同步一个 fork</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/</link>
       <pubDate>Wed, 04 Apr 2018 16:01:31 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/</guid>
       <description>具体方法 Configuring a remote for a fork  给 fork 配置一个 remote 主要使用 git remote -v 查看远程状态。  git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)  添加一个将被同步给 fork 远程的上游仓库  git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git  再次查看状态确认是否配置成功。  git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push) Syncing a fork  从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master git fetch upstream  git fetch upstream # remote: Counting objects: 75, done.</description>
     </item>
     
     <item>
       <title>Go语言体会</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/</link>
       <pubDate>Wed, 04 Apr 2018 13:48:57 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/</guid>
       <description>最近公司要统一技术栈，在kotlin和go之间选。我心里是比较倾向go的，主要有如下几点体会。
  语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置  我最早听说协程，是在大三找实习的时候，那个时候面试会问线程和进程的关系，问的深一些就是协程和线程的区别。游戏公司基本都用lua，看了lua的资料后，对协程有了一些自己的了解，随后就是在做Unity相关的开发，在unity中使用了很多的协程，但是在unity中使用的协程好像跟主流的不太一样，在看了go之后，豁然开朗。
 goroutine使用的内存比线程更少，go在运行的时候会自动在配置的一组逻辑处理器上调度执行。比如：
@@ -1037,20 +1037,20 @@ go的并发 说到并发，就会想到另外一个概念，并行。可以简�
     
     <item>
       <title>关于时间管理</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/</link>
       <pubDate>Sun, 25 Mar 2018 20:28:42 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/</guid>
       <description>主动管理时间，敢于说不。
 有目标向前看，没目标向钱看。</description>
     </item>
     
     <item>
       <title>一致性哈希算法</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</link>
       <pubDate>Sat, 24 Mar 2018 19:03:58 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</guid>
       <description>当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：
 如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。
 1 hash取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。
@@ -1076,10 +1076,10 @@ go的并发 说到并发，就会想到另外一个概念，并行。可以简�
     
     <item>
       <title>Spring Boot启动原理分析</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/</link>
       <pubDate>Sat, 24 Mar 2018 19:03:22 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/</guid>
       <description>Spring Boot启动原理分析 我们在开发spring boot应用的时候，一般会遇到如下的启动类：
 @SpringBootApplication public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } } 从这段代码可以看出，注解@SpringBootApplication和SpringApplication.run()是比较重要的两个东西。
 1 @SpringApplication注解 @Target(ElementType.TYPE) @Retention(RetentionPolicy.RUNTIME) @Documented @Inherited @SpringBootConfiguration @EnableAutoConfiguration @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class), @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) }) public @interface SpringBootApplication { ... } 在这段代码里，比较重要的只有三个注解：
@@ -1089,10 +1089,10 @@ go的并发 说到并发，就会想到另外一个概念，并行。可以简�
     
     <item>
       <title>Spring Data Jpa实战</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/spring-data-jpa%E5%AE%9E%E6%88%98/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/spring-data-jpa%E5%AE%9E%E6%88%98/</link>
       <pubDate>Sat, 24 Mar 2018 19:02:48 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/spring-data-jpa%E5%AE%9E%E6%88%98/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/spring-data-jpa%E5%AE%9E%E6%88%98/</guid>
       <description>为了解决抽象各个Java实体基本的“增删改查”操作，我们通常会以泛型的方式封装一个模板Dao来进行抽象简化，但是这样依然不是很方便，我们需要针对每个实体编写一个继承自泛型模板Dao的接口，再编写该接口的实现。虽然一些基础的数据访问已经可以得到很好的复用，但是在代码结构上针对每个实体都会有一堆Dao的接口和实现。
 由于模板Dao的实现，使得这些具体实体的Dao层已经变的非常“薄”，有一些具体实体的Dao实现可能完全就是对模板Dao的简单代理，并且往往这样的实现类可能会出现在很多实体上。Spring-data-jpa的出现正可以让这样一个已经很“薄”的数据访问层变成只是一层接口的编写方式。
 1 工程配置 1.1 pom &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;project xmlns=&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34; xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34; xsi:schemaLocation=&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&amp;gt; &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt; &amp;lt;groupId&amp;gt;com.example&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jpa-demo&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;packaging&amp;gt;jar&amp;lt;/packaging&amp;gt; &amp;lt;name&amp;gt;jpa-demo&amp;lt;/name&amp;gt; &amp;lt;description&amp;gt;Demo project for Spring Boot&amp;lt;/description&amp;gt; &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.5.9.RELEASE&amp;lt;/version&amp;gt; &amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt; &amp;lt;/parent&amp;gt; &amp;lt;properties&amp;gt; &amp;lt;project.build.sourceEncoding&amp;gt;UTF-8&amp;lt;/project.build.sourceEncoding&amp;gt; &amp;lt;project.reporting.outputEncoding&amp;gt;UTF-8&amp;lt;/project.reporting.outputEncoding&amp;gt; &amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt; &amp;lt;/properties&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-data-jpa&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt; &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt; &amp;lt;optional&amp;gt;true&amp;lt;/optional&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-test&amp;lt;/artifactId&amp;gt; &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt; &amp;lt;plugin&amp;gt; &amp;lt;groupId&amp;gt;org.</description>
@@ -1100,10 +1100,10 @@ go的并发 说到并发，就会想到另外一个概念，并行。可以简�
     
     <item>
       <title>spring boot多数据源配置</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sat, 24 Mar 2018 19:01:37 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/</guid>
       <description>spring boot多数据源配置 在单数据源的情况下，Spring Boot的配置非常简单，只需要在application.properties文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数据库拆分或是引入其他数据库，从而我们需要配置多个数据源。
 1 准备 1.1 禁止DataSourceAutoConfiguration 首先要将spring boot自带的DataSourceAutoConfiguration禁掉，因为它会读取application.properties文件的spring.datasource.*属性并自动配置单数据源。在@SpringBootApplication注解中添加exclude属性即可：
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) public class DemoApplication { public static void main(String[] args) { SpringApplication.run(JpaDemoApplication.class, args); } } 1.2 配置数据库连接 然后在application.properties中配置多数据源连接信息：
@@ -1113,10 +1113,10 @@ spring.datasource.primary.url=jdbc:mysql://localhost:3306/test spring.datasource
     
     <item>
       <title>spring boot连接redis</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/spring-boot%E8%BF%9E%E6%8E%A5redis/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/spring-boot%E8%BF%9E%E6%8E%A5redis/</link>
       <pubDate>Sat, 24 Mar 2018 19:00:48 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/spring-boot%E8%BF%9E%E6%8E%A5redis/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/spring-boot%E8%BF%9E%E6%8E%A5redis/</guid>
       <description>Spring-data-redis为spring-data模块中对redis的支持部分，简称为“SDR”，提供了基于jedis客户端API的高度封装以及与spring容器的整合，
 jedis客户端在编程实施方面存在如下不足：
  connection管理缺乏自动化，connection-pool的设计缺少必要的容器支持。 数据操作需要关注“序列化”/“反序列化”，因为jedis的客户端API接受的数据类型为string和byte，对结构化数据(json,xml,pojo等)操作需要额外的支持。 事务操作纯粹为硬编码 pub/sub功能，缺乏必要的设计模式支持，对于开发者而言需要关注的太多。  1 spring-data-redis特性  连接池自动管理，提供了一个高度封装的“RedisTemplate”类 针对jedis客户端中大量api进行了归类封装,将同一类型操作封装为operation接口  ValueOperations：简单K-V操作 SetOperations：set类型数据操作 ZSetOperations：zset类型数据操作 HashOperations：针对map类型的数据操作 ListOperations：针对list类型的数据操作   提供了对key的“bound”(绑定)便捷化操作API，可以通过bound封装指定的key，然后进行一系列的操作而无须“显式”的再次指定Key，即BoundKeyOperations：  BoundValueOperations BoundSetOperations BoundListOperations BoundSetOperations BoundHashOperations   将事务操作封装，有容器控制。 针对数据的“序列化/反序列化”，提供了多种可选择策略(RedisSerializer)  JdkSerializationRedisSerializer：POJO对象的存取场景，使用JDK本身序列化机制，将pojo类通过ObjectInputStream/ObjectOutputStream进行序列化操作，最终redis-server中将存储字节序列。是目前最常用的序列化策略。 StringRedisSerializer：Key或者value为字符串的场景，根据指定的charset对数据的字节序列编码成string，是“new String(bytes, charset)”和“string.getBytes(charset)”的直接封装。是最轻量级和高效的策略。 JacksonJsonRedisSerializer：jackson-json工具提供了javabean与json之间的转换能力，可以将pojo实例序列化成json格式存储在redis中，也可以将json格式的数据转换成pojo实例。因为jackson工具在序列化和反序列化时，需要明确指定Class类型，因此此策略封装起来稍微复杂。 OxmSerializer：提供了将javabean与xml之间的转换能力，目前可用的三方支持包括jaxb，apache-xmlbeans；redis存储的数据将是xml工具。不过使用此策略，编程将会有些难度，而且效率最低；不建议使用。   基于设计模式，和JMS开发思路，将pub/sub的API设计进行了封装，使开发更加便捷。 spring-data-redis中，并没有对sharding提供良好的封装，如果你的架构是基于sharding，那么你需要自己去实现，这也是sdr和jedis相比，唯一缺少的特性。  2 引入依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 3 配置 # REDIS (RedisProperties) # Redis数据库索引（默认为0） spring.redis.database=0 # Redis服务器地址 spring.redis.host=localhost # Redis服务器连接端口 spring.redis.port=6379 # Redis服务器连接密码（默认为空） spring.redis.password=root # 连接池最大连接数（使用负值表示没有限制） spring.redis.pool.max-active=8 # 连接池最大阻塞等待时间（使用负值表示没有限制） spring.</description>
@@ -1124,10 +1124,10 @@ jedis客户端在编程实施方面存在如下不足：
     
     <item>
       <title>最终一致性的实现手段</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5/</link>
       <pubDate>Sat, 24 Mar 2018 18:59:55 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5/</guid>
       <description>最终一致性的实现手段 实现最终一致性有三种手段：可靠事件模式、业务补偿模式和TCC模式
 1 可靠事件模式 可靠事件模式属于事件驱动架构，当某件重要的事情发生时，比如更新一个业务实体，微服务会向消息代理发布一个事件。消息代理会将订阅事件的微服务推送事件。
 要实现这种模式需要消息队列实现事件的持久化和at least once的可靠事件投递模式。
@@ -1151,10 +1151,10 @@ jedis客户端在编程实施方面存在如下不足：
     
     <item>
       <title>Reactive微服务</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
       <pubDate>Sat, 24 Mar 2018 17:57:58 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
       <description>Reactive微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被CAP和FLP理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive便出现了。
 Reactive编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。
 在reactive编程中，刺激信号是数据的转移，叫做streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。
@@ -1183,10 +1183,10 @@ verticles Verticles是被Vert.x部署和运行的代码块。一个微服务的�
     
     <item>
       <title>Guice快速入门</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
       <pubDate>Sat, 24 Mar 2018 17:57:15 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
       <description>Guice快速入门 接手的新项目主要是使用kotlin+vert.x来写的，使用gradle构建，依赖注入框架使用了guice。这段时间都是在熟悉代码的过程，恶补一些知识。
 guice是谷歌推出的一个轻量级的依赖注入框架，当然spring也可以实现依赖注入，只是spring太庞大了。
 1 基本使用 引入依赖 使用gradle或者maven，引入guice。
@@ -1199,10 +1199,10 @@ package com.learning.guice; public interface LogService { void log(String msg); 
     
     <item>
       <title>kotlin快速入门</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
       <pubDate>Sat, 24 Mar 2018 17:56:45 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
       <description>快速浏览一下 Kotlin 的语法。
 基本语法 包定义和引用 在源文件头部：
 package my.demo import java.util.* 方法定义  带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参数并返回 Int 类型的值：  fun sum(a: Int, b: Int): Int { return a + b }  带有方法体，返回推断类型数据的定义方式，例如：  fun sum(a: Int, b: Int) = a + b  返回无意义类型的定义方式：  fun printSum(a: Int, b: Int): Unit { println(&amp;#34;sum of $aand $bis ${a + b}&amp;#34;) } 或者省略 Unit：
@@ -1211,29 +1211,29 @@ fun printSum(a: Int, b: Int) { println(&amp;#34;sum of $aand $bis ${a + b}&amp;#
     
     <item>
       <title>RxJava2快速入门</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
       <pubDate>Sat, 24 Mar 2018 17:55:56 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
       <description>RxJava2快速入门 引入依赖 compile &#39;io.reactivex.rxjava2:rxjava:2.0.1&#39; 写法 简单版本 	private static void helloSimple() { Consumer&amp;lt;String&amp;gt; consumer = new Consumer&amp;lt;String&amp;gt;() { @Override public void accept(String s) throws Exception { System.out.println(&amp;quot;consumer accept is &amp;quot; + s); } }; Observable.just(&amp;quot;hello world&amp;quot;).subscribe(consumer); } 复杂版本 	private static void helloComplex() { Observer&amp;lt;String&amp;gt; observer = new Observer&amp;lt;String&amp;gt;() { @Override public void onSubscribe(Disposable d) { System.out.println(&amp;quot;onSubscribe: &amp;quot; + d); } @Override public void onNext(String s) { System.out.println(&amp;quot;onNext: &amp;quot; + s); } @Override public void onError(Throwable e) { System.</description>
     </item>
     
     <item>
       <title>领域实体类</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/</link>
       <pubDate>Sat, 24 Mar 2018 17:53:42 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/</guid>
       <description>在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。
  pojo类：这是普通的java类，具有一部分的get和set方法。 dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo类：vo有两种说法，一种是view object，一种是value object。 po类：persisent object 持久对象。和pojo类一样，也是只有get set方法，但是这种类一般是用于持久层。 bo类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在domain包，或者entity包里。再细分一下的话，可以把dto类单独提取到一个包里。</description>
     </item>
     
     <item>
       <title>docker</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/docker/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/docker/</link>
       <pubDate>Sat, 24 Mar 2018 17:42:58 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/docker/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/docker/</guid>
       <description>docker常用命令 docker   获取镜像
 docker pull
   新建并启动
@@ -1261,10 +1261,10 @@ exec格式
     
     <item>
       <title>express</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/express/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/express/</link>
       <pubDate>Sat, 24 Mar 2018 17:41:01 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/express/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/express/</guid>
       <description>Express 快速入门 安装 npm init npm install --save express hello world var express = require(&#39;express&#39;); var app = express(); app.get(&#39;/&#39;, function (req, res) { res.send(&#39;Hello World!&#39;); }); app.listen(3000, function () { console.log(&#39;Example app listening on port 3000!&#39;); }); 执行命令运行应用程序
 node app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。
 express程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
@@ -1274,10 +1274,10 @@ DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以�
     
     <item>
       <title>碎碎念</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/a-month-in-finogeeks/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/a-month-in-finogeeks/</link>
       <pubDate>Sat, 24 Mar 2018 15:55:58 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/a-month-in-finogeeks/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/a-month-in-finogeeks/</guid>
       <description>一直没有机会写2017的年终总结，想到去年写的新的一年的计划，好像自己都没有按照计划来做，而且写的计划也不知道写到哪里去了。
 站在现在的时间点去审视过去的一年，这个本命年还是发生了很多对自己的未来有着比较大影响的的事情。房子+女朋友+新工作，这些事情突然的涌现出来，搞得自己有些手忙脚乱。
 梳理一下自己的收获吧：
@@ -1292,10 +1292,10 @@ DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以�
     
     <item>
       <title>Java内存模型和线程</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/java-memory-thread/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/java-memory-thread/</link>
       <pubDate>Thu, 22 Mar 2018 19:16:37 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/java-memory-thread/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/java-memory-thread/</guid>
       <description>java内存模型和线程  并发不一定依赖多线程，但是在java里面谈论并发，大多与线程脱不开关系。
  线程是大多是面试都会问到的问题。我们都知道，线程是比进程更轻量级的调度单位，线程之间可以共享内存。之前面试的时候，也是这样回答，迷迷糊糊，没有一个清晰的概念。
 大学的学习的时候，写C和C++，自己都没有用过多线程，看过一个Windows编程的书，里面讲多线程的时候，一大堆大写的字母，看着一点都不爽，也是惭愧。后来的实习，写unity，unity的C#使用的是协程。只有在做了java后端之后，才知道线程到底是怎么用的。了解了java内存模型之后，仔细看了一些资料，对java线程有了更深入的认识，整理写成这篇文章，用来以后参考。
@@ -1335,10 +1335,10 @@ final的可见性是指被final修饰的字段在构造器中一旦初始化完�
     
     <item>
       <title>aws.md</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/aws-md/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/aws-md/</link>
       <pubDate>Thu, 22 Mar 2018 14:04:09 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/aws-md/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/aws-md/</guid>
       <description>一些基础概念
 EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。
 VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。
@@ -1352,28 +1352,28 @@ IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：�
     
     <item>
       <title>About Me</title>
-      <link>https://zhenfeng-zhu.github.io/gh/about/</link>
+      <link>https://zhenfeng-zhu.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/about/</guid>
+      <guid>https://zhenfeng-zhu.github.io/about/</guid>
       <description>about</description>
     </item>
     
     <item>
       <title>Archive</title>
-      <link>https://zhenfeng-zhu.github.io/gh/archives/</link>
+      <link>https://zhenfeng-zhu.github.io/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/archives/</guid>
+      <guid>https://zhenfeng-zhu.github.io/archives/</guid>
       <description>archives</description>
     </item>
     
     <item>
       <title>Hello World</title>
-      <link>https://zhenfeng-zhu.github.io/gh/posts/hello-world/</link>
+      <link>https://zhenfeng-zhu.github.io/posts/hello-world/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/posts/hello-world/</guid>
+      <guid>https://zhenfeng-zhu.github.io/posts/hello-world/</guid>
       <description>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
 Quick Start Create a new post $ hexo new &amp;#34;My New Post&amp;#34; More info: Writing
 Run server $ hexo server More info: Server
@@ -1383,10 +1383,10 @@ Deploy to remote sites $ hexo deploy More info: Deployment</description>
     
     <item>
       <title>Search</title>
-      <link>https://zhenfeng-zhu.github.io/gh/search/</link>
+      <link>https://zhenfeng-zhu.github.io/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://zhenfeng-zhu.github.io/gh/search/</guid>
+      <guid>https://zhenfeng-zhu.github.io/search/</guid>
       <description></description>
     </item>
     
