@@ -1,66 +1,124 @@
 <!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Go Data</title><meta name=keywords content><meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/><link href=/assets/css/stylesheet.min.3839cf02b87f30309470412461116907caabd1b3ec3f5d015df618da2d034992.css integrity="sha256-ODnPArh/MDCUcEEkYRFpB8qr0bPsP10BXfYY2i0DSZI=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.80.0"><link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml><link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json><meta property="og:title" content="Go Data"><meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta property="og:type" content="website"><meta property="og:url" content="https://zhenfeng-zhu.github.io/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="og:updated_time" content="2020-11-20T16:01:49+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="Go Data"><meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"Go Data","url":"https://zhenfeng-zhu.github.io","description":"Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod","thumbnailUrl":"https://zhenfeng-zhu.github.io/favicon.ico","sameAs":["https://github.com/zhenfeng-zhu","index.xml"]}</script></head><body class=list id=top><script>if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}else if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.classList.add('dark');}</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><article class=post-entry><header class=entry-header><h2>crystal开发环境</h2></header><section class=entry-content><p>突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。
-安装 crystal brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang
-安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。
-$ git clone https://github.com/crystal-lang-tools/scry.git $ cd scry $ shards build -v Dependencies are satisfied Building: scry crystal build -o /Users/lucas/Documents/demos/crystal/scry/bin/scry src/scry.cr /Users/lucas/Documents/demos/crystal/scry/bin/scry 就是编译出来的二进制的路径
-配置插件 "crystal-lang.compiler": "crystal", "crystal-lang.server": "/Users/lucas/Documents/demos/crystal/scry/bin/scry", "crystal-lang.maxNumberOfProblems": 20, "crystal-lang.mainFile": "${workspaceRoot}/src/main.cr", "crystal-lang.processesLimit": 5, "crystal-lang.hover": true, "crystal-lang.problems": "build", "crystal-lang.implementations": true, "crystal-lang.completion": true, "crystal-lang.logLevel": "info", 把上面的配置加到 vscode 的 settings 文件中，就可以愉快的开发啦。...</p></section><footer class=entry-footer>August 27, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to crystal开发环境" href=https://zhenfeng-zhu.github.io/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/></a></article><article class=post-entry><header class=entry-header><h2>crystal简介</h2></header><section class=entry-content><p>关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。
-Fast as C, Slick as Ruby
-语法 crystal 的语法和 Ruby 比较类似。
-# A very basic HTTP server require "http/server" server = HTTP::Server.new do |context| context.response.content_type = "text/plain" context.response.print "Hello world, got #{context.request.path}!" end puts "Listening on http://127.0.0.1:8080" server.listen(8080) 类型系统 crystal 的一大卖点就是静态类型系统，但是写起来又和脚本语言类似。
-def shout(x) # Notice that both Int32 and String respond_to `to_s` x.to_s.upcase end foo = ENV["FOO"]? || 10 typeof(foo) # => (Int32 | String) typeof(shout(foo)) # => String 空引用检查 crystal 可以在编译的时候检查空引用，避免出现空指针异常。...</p></section><footer class=entry-footer>August 27, 2019&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to crystal简介" href=https://zhenfeng-zhu.github.io/posts/crystal%E7%AE%80%E4%BB%8B/></a></article><article class=post-entry><header class=entry-header><h2>socket</h2></header><section class=entry-content><p>Socket 网络模型 osi七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的tcpip就是 应用层 dns http 传输层 icmp tcp udp ip层 ipv4 ipv6 mac层 arp vlan 物理层 Ethernet 为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
-二层到四层，即mac、ip和传输等层都是Linux内核中处理。应用层的如浏览器、Nginx和Tomcat等都是用户态的。
-传输层的tcp和udp里都有端口的概念，不同应用监听不同的段即可。
-应用层和内核的互通机制，就是通过socket系统调用。其实socket哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是socket。
-TCP和UDP的区别 tcp是面向连接的，udp是面向无连接的 tcp提供可靠交付，无差错、不丢失、不重复、并且按序到达。udp不提供可靠交付，可能丢失，不按顺序。 tcp是面向字节流的，发送的是一个流，无头无尾。udp是数据报文的，一个一个发送。 tcp可以提供流量控制和拥塞控制，可以防止对端被压垮，也防止网络被压垮。 所谓的连接，指两端的数据结构状态的协同，两边状态对的上，符合tcp协议的规则，就认为连接是存在的，否则就是断掉的。
-所谓的建立连接，其实是为了在客户端和服务端维护连接，而建立一定的数据结构来维护双方交互的状态。并用这样的数据结构来保证面向连接的特性。tcp无法左右中间的任何通路，也没有什么虚拟的连接。
-所谓的可靠，也是两端的数据结构做的事情。不丢失其实是数据结构在“点名”，顺序到达是数据结构在“排序”，面向数据流其实是数据结构将零散的包，按照顺序捏成一个流发给应用层。
-所谓的流量控制和拥塞控制，其实就是根据收到的对端的网络包，调整两端的数据结构状态。
-socket函数 int socket(int domain, int type, int protocol) socket函数用于创建一个socket文件描述符。...</p></section><footer class=entry-footer>August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a></article><article class=post-entry><header class=entry-header><h2>go进阶</h2></header><section class=entry-content><p>Diagnostics go提供了一系列诊断逻辑和性能问题的工具。
-profiling分析 tracing跟踪 debuging调试 运行时统计信息和事件 Profiling profiling信息可以在go test或者net/http/pprof包的时候使用。
-runtime/pprof包有：
-cpu 主动消费cpu周期所花费的时间，不包括睡眠或者io等待 heap 报告内存分配采样； 当前或历史内存使用状况 检测内存泄露 threadcreate 报告创建新的系统线程 goroutine 当前所有协程的堆栈跟踪 block 显示goroutine阻塞等待同步原语的位置。 默认不开启，使用runtime.SetBlockProfileRate启用 mutex 报告锁竞争。 如果认为自己的程序因为互斥锁导致cpu不能充分利用的时候，使用这个。 默认也是不开启，使用 runtime.SetMutexProfileFraction 启用。 其他可用的的性能分析工具
-Linux使用https://perf.wiki.kernel.org/index.php/Tutorial，perf可以分析cgo/SWIG代码和系统内核。
-mac上使用 https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/ 就足够了。
-分析线上处于生产状态服务
-在生产上分析程序也是没问题的，但是开启某些指标会增加成本。
-可视化分析数据
-go 提供了很多可视化的工具，参考https://blog.golang.org/profiling-go-programs
-也可以创建自定义的profil文件：参考https://golang.org/pkg/runtime/pprof/#Profile
-也可以自定义修改pprof程序监听的端口和路径，参考：
-package main import ( "log" "net/http" "net/http/pprof" ) func main() { mux := http....</p></section><footer class=entry-footer>August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to go进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a></article><article class=post-entry><header class=entry-header><h2>mysql</h2></header><section class=entry-content><p>MySQL基本架构 客户端
-server层
-连接器：管理连接，权限验证
-查询缓存：命中规则，直接返回结果 8.0之后全部删除了这个模块
-分析器：词法分析，语法分析
-优化器：执行计划生成，索引选择
-执行器：操作引擎，返回结果
-存储引擎：存储数据，提供读写接口
-数据库中的长连接指连接成功之后，如果客户端持续有请求，则一直使用同一个连接。短连接是指每次执行完很少的几次查询之后就断开连接，下次再重新建立。
-如果全部使用长连接，会导致mysql内存涨的很快，可能出现OOM，因此要定期断开长连接，或者在执行一个比较大的操作之后，执行mysql_reset_connection重置一下。
-日志系统 redo log重做日志 redo log是innodb引擎特有的。物理日志，记录的是某个数据页上做了什么修改。循环写入。
-WAL技术：Write-Ahead Logging：关键点就是先写日志，再写磁盘。当一条记录更新时，先把记录写到redolog中，更新到内存，这时这个更新操作就成功了。然后innodb引擎就会在适当的时候，将这个操作记录更新到磁盘中。因此在数据库异常重启的时候，之前的提交的记录不会丢失。
-binlog归档日志 binlog是server层实现的，所有的引擎都可以使用。binlog是逻辑日志，记录的是这个语句的原始逻辑。binlog是写到一定大小后，切换下一个，不会覆盖以前的日志。
-因此一个update操作就是：
-找到该行
-判断数据页是否在内存中，如果是返回行数据，否则从磁盘读入到内存中。
-将值进行更新，写入新行
-新行更新到内存
-写入redolog，处于prepare阶段
-写入binlog
-提交事务，处于commit阶段。
-这个就是两阶段提交。
-事务隔离 Isolation：隔离性
-脏读，幻读，不可重复读
-隔离的越严实，效率越低。
-SQL的标准隔离级别：
-读未提交：一个事务没提交的时候，它做的变更就能被别的事务看到
-读提交：一个事务提交之后，做的变更才能被其他事务看到
-可重复读：一个事务执行时看到的数据，总是跟这个事务启动时看到的数据时一致的。
-串行化：顾名思义，对于同一行记录，写会加写锁，读也会加读锁。当读写锁冲突时，后访问的事务，必须等前一个事务完成。
-在实现的时候，数据库会创建一个视图，访问的时候以视图的逻辑结果为准。
-可重复读，这个视图是在事务启动时创建，整个事务存在期间都用这个视图。 读提交，这个视图在每个sql语句开始执行的时候创建 读未提交直接返回记录的最新值，没有视图的概念。 串行化是用加锁的方式。 mysql在每条记录更新的时候，都会记录一条回滚操作，记录上的最新值都可以通过回滚操作，得到前一个状态的值。当没有事务需要用到回滚日志时，就会被删除。所以不建议使用长事务，这样会占用存储空间和锁。
-mysql启动事务的方式
-显式启动：begin或者start transaction。配套的提交语句是commit，回滚语句是rollback。 set autocommit=0这个命令会将这个线程的自动提交关闭。意味着如果只执行一个select语句，事务就启动了，而且不会自动关闭，除非主动执行commit或者rollback，或者断开连接。 因此一般set autocommit=1，打开显示启动的模式。...</p></section><footer class=entry-footer>December 1, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to mysql" href=https://zhenfeng-zhu.github.io/posts/mysql/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://zhenfeng-zhu.github.io/page/2/>« Prev Page</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><article class=post-entry><header class=entry-header><h2>区块链学习笔记</h2></header><section class=entry-content><p>本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html上的一些笔记。
+理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html
+区块链中提到的账本，记账等词汇是和会计无关的词汇。
+我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：
+时间 用途 金额 2018-08-23 借 100 2018-08-22 还 200 2018-08-21 借 50 2018-08-20 还 1000 如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。
+但是区块链的记账形式是：
+可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。
+所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。
+之所以采用区块链来做分布式记账，主要是区块链有如下好处：
+去中心化
+传统的数据库存储是中心化的，通过暴露ip地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。
+与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。
+可追溯
+安全
+安全分为很多层，区块链只能做到存储层的安全。
+区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。
+不可篡改
+很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。
+撰改是指非法修改区块链数据，而修改则是合法变更数据。
+通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。
+多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。
+采用区块链作为账本的时候，会面临如下几个问题：
+不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan.io就是把以太坊上的区块重新入库，借助数据库实现数据检索。
+区块链只能顺序检索，运算成本高。例如在中心化账本中汇总求和操作，区块链必须从头向后遍历。...</p></section><footer class=entry-footer>August 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 区块链学习笔记" href=https://zhenfeng-zhu.github.io/posts/blockchain/></a></article><article class=post-entry><header class=entry-header><h2>谈谈聊天机器人框架的实现原理</h2></header><section class=entry-content><p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
+聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
+我们可以看到现有的IM工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了chatops，通过和机器人聊天，进行运维操作。
+机器人开发框架 作为聊天机器人开发者，面对如此多的IM工具和SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。
+然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个IM工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发SDK，连接器和模拟器等。
+使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。
+实现方式 webhook事件回调 FSM状态机 workflow工作流 最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用webhook的方式进行开发。不需要采用什么开发框架。
+那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了FSM状态机。
+可能有人不是很懂有限状态机，这里做一下简单说明。
+有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。
+有限状态机，缩写为FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
+可以总结为：f(state, action) => state’
+也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。
+可以认为状态机是图灵完备的。
+我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
+我们可以将对话的过程，分为一个个的状态，然后使用DSL来实现一个FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。
+特点是：
+人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限 示例：
+const {startWith, when, goto, stay, stop} = botkit.DSL(fsm); startWith(MyStates.IDLE, {counter: 0}); when(MyStates.IDLE)(async (sender, content, data) => { }); when(MyStates.UI)((sender, content, data) => { }); when(MyStates.STEP1)((sender, content, data) => { }); when(MyStates....</p></section><footer class=entry-footer>August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a></article><article class=post-entry><header class=entry-header><h2>基于以太坊的Parity联盟链部署</h2></header><section class=entry-content><p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity是可以构建出一个基于PoA共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
+部署联盟链 parity的文档：https://wiki.parity.io/Demo-PoA-tutorial
+安装 首先是下载parity，在mac下是直接brew安装即可。
+brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
+// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0节点：...</p></section><footer class=entry-footer>August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 基于以太坊的Parity联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a></article><article class=post-entry><header class=entry-header><h2>dive-into-redis</h2></header><section class=entry-content><p>redis持久化，
+机制有两种：
+快照：全量备份，二进制序列化，存储紧凑 AOF日志：连续的增量备份，内存数据修改的文本 ...</p></section><footer class=entry-footer>August 20, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a></article><article class=post-entry><header class=entry-header><h2>golang踩坑</h2></header><section class=entry-content><p>一 x509 error when using HTTPS inside a Docker container
+因为docker中没有CA证书。
+普通的镜像解决办法
+FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是alpine的参考这个：
+FROM docker.finogeeks.club/base/alpine MAINTAINER "zhuzhenfeng@finogeeks.club" RUN set -ex \ && apk add --no-cache ca-certificates COPY src/wallet/wallet /opt/wallet ENTRYPOINT /opt/wallet 二 panic: runtime error: invalid memory address or nil pointer dereference [signal 0xb code=0x1 addr=0x38 pc=0x26df]
+“An error is returned if caused by client policy (such as CheckRedirect), or if there was an HTTP protocol error....</p></section><footer class=entry-footer>August 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to golang踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a></article><article class=post-entry><header class=entry-header><h2>以太坊开发总结</h2></header><section class=entry-content><p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
+在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
+什么是区块链
+相信大家对区块链都有自己的理解，不仅仅是互联网公司，传统企业也在“币改转型”。
+**简言之，区块链就是数据库。**它是特定数据的数据库，里面的数据不断增长，具有非凡特性：
+一旦数据存储于数据库，永远都无法被修改或删除。区块链上的每个记录会被永久保存下来。 没有单独的个人或组织能维护该数据库。必须要上千个人才行，每个人都有数据库的副本。 什么是以太坊？
+以太坊（英语：Ethereum）是一个开源的有智能合约功能的公共区块链平台[1][2]。通过其专用加密货币以太币（Ether，又称“以太币”）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。
+为什么选择以太坊？
+智能合约
+代币
+资料相对完善，相对容易开发
+大佬对以太坊比较熟悉
+大佬对以太坊比较熟悉
+大佬对以太坊比较熟悉
+重要的事情说三遍，有一个经验丰富的人带领，做东西肯定事半功倍。
+自己动手写区块链
+这里提供两个教程，一个是书，一个是视频。其中视频和书是对应的，不清楚是不是同一个作者。
+Blockchain Tutorial
+私有区块链，我们一起GO
+以太坊开发
+由于我是专注于后端的开发，现在的技术栈是
+node go 正式进入以太坊的开发。这是我这段时间接触到的一些资源：
+go-ethereum：也就是geth，官方的go版本的客户端
+solidity：智能合约编程语言
+truffle：智能合约的编程框架，基于nodejs
+Ganache：启动了多个节点本地私链
+Rinkeby：以太坊测试链
+Etherscan：以太坊区块链浏览器，可以查询交易
+MetaMask：chrome的钱包插件...</p></section><footer class=entry-footer>August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a></article><article class=post-entry><header class=entry-header><h2>以太坊</h2></header><section class=entry-content><p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
+首先先把go的依赖下载下来：
+go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从github上拉下来代码。
+账户 以太坊的地址在离线状态下也可以创建到。
+创建账户有两种方式：
+以公钥和私钥的形式创建 func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return "", nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println("address: ", address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println("privateKey: ", privateKey) return address, nil } 这种方式一般用的比较少。
+以keystore的形式创建 keystore会创建一个文件，这个文件如下所示：
+{ "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p></section><footer class=entry-footer>August 7, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 以太坊" href=https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/></a></article><article class=post-entry><header class=entry-header><h2>contract</h2></header><section class=entry-content><p>类型 Solidity是静态类型的语言。
+值类型 bool int/uint fixed/unfixed address balance和transfer send call, callcode和delegatecall byte bytes 和 string 十六进制hex"0012" enum function 引用类型 数组
+uint[]
+结构体
+struct
+映射
+mapping(key => value)
+单元和全局变量 以太币的单位
+在数字后面加上 wei、 finney、 szabo 或 ether。默认是wei
+时间单位
+数字后面带有 seconds、 minutes、 hours、 days、 weeks 和 years。默认是秒。
+区块和交易
+block.blockhash(uint blockNumber) returns (bytes32)：指定区块的区块哈希。 block.coinbase (address): 挖出当前区块的矿工地址 block....</p></section><footer class=entry-footer>August 3, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to contract" href=https://zhenfeng-zhu.github.io/posts/contract/></a></article><article class=post-entry><header class=entry-header><h2>faas-provider</h2></header><section class=entry-content><p>faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。
+faas-provider OpenFaaS官方提供了两套后台provider：
+Docker Swarm Kubernetes 这两者在部署和调用函数的时候流程图如下：
+部署一个函数
+调用一个函数
+provider要提供的一些API有：
+List / Create / Delete 一个函数 /system/functions
+方法: GET / POST / DELETE
+获取一个函数 /system/function/{name:[-a-zA-Z_0-9]+}
+方法: GET
+伸缩一个函数 /system/scale-function/{name:[-a-zA-Z_0-9]+}
+方法: POST
+调用一个函数 /function/{name:[-a-zA-Z_0-9]+}
+方法: POST
+在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。
+// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc("/system/functions", handlers.FunctionReader).Methods("GET") r.HandleFunc("/system/functions", handlers....</p></section><footer class=entry-footer>August 1, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to faas-provider" href=https://zhenfeng-zhu.github.io/posts/faas-provider/></a></article><article class=post-entry><header class=entry-header><h2>gateway-reading</h2></header><section class=entry-content><p>OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
+UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
+源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。
+go-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。
+client_golang是Prometheus的客户端。
+项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test....</p></section><footer class=entry-footer>August 1, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to gateway-reading" href=https://zhenfeng-zhu.github.io/posts/gateway-reading/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://zhenfeng-zhu.github.io/page/2/>« Prev Page</a>
 <a class=next href=https://zhenfeng-zhu.github.io/page/4/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>

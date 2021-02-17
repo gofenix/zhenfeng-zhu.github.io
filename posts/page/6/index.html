@@ -1,72 +1,78 @@
 <!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Posts | Go Data</title><meta name=keywords content><meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/posts/><link href=/assets/css/stylesheet.min.3839cf02b87f30309470412461116907caabd1b3ec3f5d015df618da2d034992.css integrity="sha256-ODnPArh/MDCUcEEkYRFpB8qr0bPsP10BXfYY2i0DSZI=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.80.0"><link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml><meta property="og:title" content="Posts"><meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta property="og:type" content="website"><meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="og:updated_time" content="2020-11-20T16:01:49+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="Posts"><meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"}]}</script></head><body class=list id=top><script>if(localStorage.getItem("pref-theme")==="dark"){document.body.classList.add('dark');}else if(localStorage.getItem("pref-theme")==="light"){document.body.classList.remove('dark')}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.body.classList.add('dark');}</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div><h1>Posts</h1></header><article class=post-entry><header class=entry-header><h2>以太坊开发总结</h2></header><section class=entry-content><p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
-在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
-什么是区块链
-相信大家对区块链都有自己的理解，不仅仅是互联网公司，传统企业也在“币改转型”。
-**简言之，区块链就是数据库。**它是特定数据的数据库，里面的数据不断增长，具有非凡特性：
-一旦数据存储于数据库，永远都无法被修改或删除。区块链上的每个记录会被永久保存下来。 没有单独的个人或组织能维护该数据库。必须要上千个人才行，每个人都有数据库的副本。 什么是以太坊？
-以太坊（英语：Ethereum）是一个开源的有智能合约功能的公共区块链平台[1][2]。通过其专用加密货币以太币（Ether，又称“以太币”）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。
-为什么选择以太坊？
-智能合约
-代币
-资料相对完善，相对容易开发
-大佬对以太坊比较熟悉
-大佬对以太坊比较熟悉
-大佬对以太坊比较熟悉
-重要的事情说三遍，有一个经验丰富的人带领，做东西肯定事半功倍。
-自己动手写区块链
-这里提供两个教程，一个是书，一个是视频。其中视频和书是对应的，不清楚是不是同一个作者。
-Blockchain Tutorial
-私有区块链，我们一起GO
-以太坊开发
-由于我是专注于后端的开发，现在的技术栈是
-node go 正式进入以太坊的开发。这是我这段时间接触到的一些资源：
-go-ethereum：也就是geth，官方的go版本的客户端
-solidity：智能合约编程语言
-truffle：智能合约的编程框架，基于nodejs
-Ganache：启动了多个节点本地私链
-Rinkeby：以太坊测试链
-Etherscan：以太坊区块链浏览器，可以查询交易
-MetaMask：chrome的钱包插件...</p></section><footer class=entry-footer>August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a></article><article class=post-entry><header class=entry-header><h2>以太坊</h2></header><section class=entry-content><p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
-首先先把go的依赖下载下来：
-go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从github上拉下来代码。
-账户 以太坊的地址在离线状态下也可以创建到。
-创建账户有两种方式：
-以公钥和私钥的形式创建 func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return "", nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println("address: ", address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println("privateKey: ", privateKey) return address, nil } 这种方式一般用的比较少。
-以keystore的形式创建 keystore会创建一个文件，这个文件如下所示：
-{ "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p></section><footer class=entry-footer>August 7, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 以太坊" href=https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/></a></article><article class=post-entry><header class=entry-header><h2>contract</h2></header><section class=entry-content><p>类型 Solidity是静态类型的语言。
-值类型 bool int/uint fixed/unfixed address balance和transfer send call, callcode和delegatecall byte bytes 和 string 十六进制hex"0012" enum function 引用类型 数组
-uint[]
-结构体
-struct
-映射
-mapping(key => value)
-单元和全局变量 以太币的单位
-在数字后面加上 wei、 finney、 szabo 或 ether。默认是wei
-时间单位
-数字后面带有 seconds、 minutes、 hours、 days、 weeks 和 years。默认是秒。
-区块和交易
-block.blockhash(uint blockNumber) returns (bytes32)：指定区块的区块哈希。 block.coinbase (address): 挖出当前区块的矿工地址 block....</p></section><footer class=entry-footer>August 3, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to contract" href=https://zhenfeng-zhu.github.io/posts/contract/></a></article><article class=post-entry><header class=entry-header><h2>faas-provider</h2></header><section class=entry-content><p>faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。
-faas-provider OpenFaaS官方提供了两套后台provider：
-Docker Swarm Kubernetes 这两者在部署和调用函数的时候流程图如下：
-部署一个函数
-调用一个函数
-provider要提供的一些API有：
-List / Create / Delete 一个函数 /system/functions
-方法: GET / POST / DELETE
-获取一个函数 /system/function/{name:[-a-zA-Z_0-9]+}
-方法: GET
-伸缩一个函数 /system/scale-function/{name:[-a-zA-Z_0-9]+}
-方法: POST
-调用一个函数 /function/{name:[-a-zA-Z_0-9]+}
-方法: POST
-在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。
-// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc("/system/functions", handlers.FunctionReader).Methods("GET") r.HandleFunc("/system/functions", handlers....</p></section><footer class=entry-footer>August 1, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to faas-provider" href=https://zhenfeng-zhu.github.io/posts/faas-provider/></a></article><article class=post-entry><header class=entry-header><h2>gateway-reading</h2></header><section class=entry-content><p>OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
-UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
-源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。
-go-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。
-client_golang是Prometheus的客户端。
-项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test....</p></section><footer class=entry-footer>August 1, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to gateway-reading" href=https://zhenfeng-zhu.github.io/posts/gateway-reading/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://zhenfeng-zhu.github.io/posts/page/5/>« Prev Page</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div><h1>Posts</h1></header><article class=post-entry><header class=entry-header><h2>谈谈web框架</h2></header><section class=entry-content><p>这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对web框架的理解。自己了解的也不是很多，也请多多指教。
+写程序免不了要做web相关的，现在由于前后端的分离，后端一般只提供rest接口，前端一般使用node来做渲染。在之前使用jsp那一套的时候，基本上都要写html+js的前端的一套，也要写后端java的CRUD。
+我理解的web框架中，大致是分为这么两类：
+router框架 mvc框架 mvc类框架 mvc，初级程序员面试笔试的时候必考的一个知识点。model-view-controller，即模型-视图-控制器。
+m，模型主要用于封装与应用程序相关的数据以及对数据的处理方法。 v，在 View 中一般没有程序上的逻辑。为了实现 View 上的刷新功能，View 需要访问它监视的数据模型（Model），因此应该事先在被它监视的数据那里注册。 c，用于控制应用程序的流程。 我了解比较多的mvc框架是spring mvc。spring、spring mvc和spring boot等，他们并不是一个概念，也不是仅仅用于web开发。但是在这里我就不分那么细，统一用spring来代替。这里所说的spring都是指狭义上的web开发方面。
+在做web开发的时候，项目目录一般是这样的：
+$ tree [16:23:43] . ├── mvnw ├── mvnw.cmd ├── pom.xml └── src ├── main │ ├── java │ │ └── com │ │ └── example │ │ └── demo │ │ └── DemoApplication.java │ └── resources │ ├── application.properties │ ├── static │ └── templates └── test └── java └── com └── example └── demo └── DemoApplicationTests....</p></section><footer class=entry-footer>April 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 谈谈web框架" href=https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/></a></article><article class=post-entry><header class=entry-header><h2>技术栈</h2></header><section class=entry-content><p>创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
+技术栈 Docker docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。
+rancher rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。
+aws 近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。
+kotlin 之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。
+guice 这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。
+需要我们编写AppModule.java去手动配置哪个类注入哪个类。
+rxjava rxjava我都没有找到一个系统的教程，不知道该从哪里学习。
+vertx vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。
+ES6 node代码中都是用es6来写的，async和await现在也会用了。
+express 想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。
+typescript 还没它去写东西，可能下周会用它来写个机器人。
+貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。
+知识面扩展 监控 grafana+Prometheus+graylog去做可视化和日志的监控。
+对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。
+FSM状态机 机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。
+网关 网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。
+我们使用的是kong，在这里kong加上一些插件，相当好用。
+规则引擎 在规则引擎中，都是一个个规则。
+DSL 领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。
+Key Transparency 谷歌的一个公钥管理库，保证了无法被篡改。...</p></section><footer class=entry-footer>April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 技术栈" href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/></a></article><article class=post-entry><header class=entry-header><h2>同步一个 fork</h2></header><section class=entry-content><p>具体方法 Configuring a remote for a fork 给 fork 配置一个 remote 主要使用 git remote -v 查看远程状态。 git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) 添加一个将被同步给 fork 远程的上游仓库 git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git 再次查看状态确认是否配置成功。 git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push) Syncing a fork 从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master git fetch upstream git fetch upstream # remote: Counting objects: 75, done....</p></section><footer class=entry-footer>April 4, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 同步一个 fork" href=https://zhenfeng-zhu.github.io/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/></a></article><article class=post-entry><header class=entry-header><h2>Go语言体会</h2></header><section class=entry-content><p>最近公司要统一技术栈，在kotlin和go之间选。我心里是比较倾向go的，主要有如下几点体会。
+语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置 我最早听说协程，是在大三找实习的时候，那个时候面试会问线程和进程的关系，问的深一些就是协程和线程的区别。游戏公司基本都用lua，看了lua的资料后，对协程有了一些自己的了解，随后就是在做Unity相关的开发，在unity中使用了很多的协程，但是在unity中使用的协程好像跟主流的不太一样，在看了go之后，豁然开朗。
+goroutine使用的内存比线程更少，go在运行的时候会自动在配置的一组逻辑处理器上调度执行。比如：
+func log(msg string){ ... } go log("") 使用关键字go，即可让log函数在一个goroutine里执行了。
+并发最难的部分是要确保其他并发运行的进程、线程或者goroutine不会以外的修改数据。go使用了Channel的方式来解决这个问题。对于通道模式，保证同一时刻只会有一个goroutine修改数据。
+说起go的语言简单，其实主要是他的类型比较简单。go使用的是组合模式，只需要将一个类型嵌入到另外一个类型就可以复用所有的功能。而且go还具有独特的接口实现机制，允许用户对行为进行建模，在go中不需要声明某个类型实现了某个接口，编译器会自动判断一个实例是使用什么接口。
+对于java来说，所有的设计都是围绕着接口展开，于是在设计模式中，就是面向接口编程：
+interface User{ void login(); void logout(); } 在java中，继承的类必须显式声明继承了此接口。而在go中接口只是描述一个动作，如果说是实现这个接口，只需要让某个实例实现了这个接口中的所有方法就行了。
+type Reader interface{ Read(p []byte))(n int, err error) } 这其实和传统的oop语言的接口有着本质的区别，go中的接口一般只定义一个单一的动作，实际使用的过程中，这更有利于使用组合来复用代码。
+约定大于配置这点，go在这方面上做的感觉有点儿吹毛求疵了，但是这样也使得程序可读性更强，没有很多垃圾代码。比如go的文件结构必须是src pkg 和bin 三个包，而且go也不允许你声明一个变量却不使用，导入了一个包却不使用，而且程序的代码也有约定，init方法比main方法更早执行。
+go的并发 说到并发，就会想到另外一个概念，并行。可以简单这样的理解：
+并发是同时管理多个事情，而并行是同时做很多事情。也就是并发是manage，并行是run。 对于单核处理器来讲，同一时刻只能有一个任务在执行，那么并发就是同时管理多个任务，让他们交替执行。并行是针对于多核处理器的，同一时刻可以把多个任务放在不同的处理器上执行，这样就可以同时执行。
+在go里面主要是采用协程来实现并发的，也就是goroutine。与其他语言不同的是，go是在语法层面做到的，即go func();
+语法 go f(x, y) go是关键字，后面跟函数。
+例子 package main import ( "log" "time" ) func doSomething(id int) { log.Printf("before do job:(%d) \n", id) time....</p></section><footer class=entry-footer>April 4, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Go语言体会" href=https://zhenfeng-zhu.github.io/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/></a></article><article class=post-entry><header class=entry-header><h2>关于时间管理</h2></header><section class=entry-content><p>主动管理时间，敢于说不。
+有目标向前看，没目标向钱看。...</p></section><footer class=entry-footer>March 25, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 关于时间管理" href=https://zhenfeng-zhu.github.io/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/></a></article><article class=post-entry><header class=entry-header><h2>一致性哈希算法</h2></header><section class=entry-content><p>当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：
+如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。
+1 hash取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。
+可以将传入的key按照 $$ index=hash(key) % N $$ 这样来计算出需要存放的节点。
+这样可以满足数据的均匀分配，但是这个算法的容错性和扩展性比较差。比如增加或者删除一个节点的时候，所有的key都要重新计算，显然这样的成本比较高，为此需要一个算法来满足均匀的同时也要有良好的容错性和扩展性。
+2 一致性hash算法 一致性hash算法是将所有的哈希值构成了一个环，其范围是0~2^32-1。如图：
+之后将各个服务器节点散列到这个环上，可以用节点的IP，hostname这样唯一性的字段作为key进行hash。散列之后如下：
+之后需要将数据定位到对应的节点上，使用同样的hash函数将key也映射到这个环上。
+这样就按照顺时针方向就可以将k1定位到N1节点，k2定位到N3节点，k3定位到N2节点。
+2.1 容错性 假设N1宕机了：
+依然根据顺时针方向，k2和k3保持不变，只有k1被重新映射到了N3。这样就很好的保证了容错性，当一个节点宕机时只会影响到少部分数据。
+2.2 扩展性 当新增一个节点时：
+在N2和N3之间新增了一个节点N4，这时受影响的数据只有k3，其余的数据也是保持不变。
+2.3 虚拟节点 到目前为止，该算法也有一些问题：
+当节点较少的时候可能出现数据不均匀的情况：
+这样会导致大部分数据都在N1节点，只有少量的数据在N2节点。
+为了解决这个问题，一致性哈希算法引入了虚拟节点。
+将每一个节点进行多次哈希，生成的节点放置在环上成为虚拟节点。
+计算时可以在 IP 后加上编号来生成哈希值。
+这样只需要在原有的基础上多一步由虚拟节点映射到实际节点的步骤即可让少量节点也能满足均匀性。
+3 参考 https://crossoverjie.top/2018/01/08/Consistent-Hash/#more...</p></section><footer class=entry-footer>March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 一致性哈希算法" href=https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/></a></article><article class=post-entry><header class=entry-header><h2>Spring Boot启动原理分析</h2></header><section class=entry-content><p>Spring Boot启动原理分析 我们在开发spring boot应用的时候，一般会遇到如下的启动类：
+@SpringBootApplication public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } } 从这段代码可以看出，注解@SpringBootApplication和SpringApplication.run()是比较重要的两个东西。
+1 @SpringApplication注解 @Target(ElementType.TYPE) @Retention(RetentionPolicy.RUNTIME) @Documented @Inherited @SpringBootConfiguration @EnableAutoConfiguration @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class), @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) }) public @interface SpringBootApplication { ... } 在这段代码里，比较重要的只有三个注解：
+@Configuration（@SpringBootConfiguration点开查看发现里面还是应用了@Configuration） @EnableAutoConfiguration @ComponentScan 其实，我们使用这三个注解来修饰springboot的启动类也可以正常运行,如下所示：
+@ComponentScan @EnableAutoConfiguration @Configuration public class DemoApplication { public static void main(String[] args) { SpringApplication....</p></section><footer class=entry-footer>March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Spring Boot启动原理分析" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/></a></article><article class=post-entry><header class=entry-header><h2>Spring Data Jpa实战</h2></header><section class=entry-content><p>为了解决抽象各个Java实体基本的“增删改查”操作，我们通常会以泛型的方式封装一个模板Dao来进行抽象简化，但是这样依然不是很方便，我们需要针对每个实体编写一个继承自泛型模板Dao的接口，再编写该接口的实现。虽然一些基础的数据访问已经可以得到很好的复用，但是在代码结构上针对每个实体都会有一堆Dao的接口和实现。
+由于模板Dao的实现，使得这些具体实体的Dao层已经变的非常“薄”，有一些具体实体的Dao实现可能完全就是对模板Dao的简单代理，并且往往这样的实现类可能会出现在很多实体上。Spring-data-jpa的出现正可以让这样一个已经很“薄”的数据访问层变成只是一层接口的编写方式。
+1 工程配置 1.1 pom &lt;?xml version="1.0" encoding="UTF-8"?> &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"> &lt;modelVersion>4.0.0&lt;/modelVersion> &lt;groupId>com.example&lt;/groupId> &lt;artifactId>jpa-demo&lt;/artifactId> &lt;version>0.0.1-SNAPSHOT&lt;/version> &lt;packaging>jar&lt;/packaging> &lt;name>jpa-demo&lt;/name> &lt;description>Demo project for Spring Boot&lt;/description> &lt;parent> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-parent&lt;/artifactId> &lt;version>1.5.9.RELEASE&lt;/version> &lt;relativePath/> &lt;!-- lookup parent from repository --> &lt;/parent> &lt;properties> &lt;project.build.sourceEncoding>UTF-8&lt;/project.build.sourceEncoding> &lt;project.reporting.outputEncoding>UTF-8&lt;/project.reporting.outputEncoding> &lt;java.version>1.8&lt;/java.version> &lt;/properties> &lt;dependencies> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-data-jpa&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-web&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>mysql&lt;/groupId> &lt;artifactId>mysql-connector-java&lt;/artifactId> &lt;scope>runtime&lt;/scope> &lt;/dependency> &lt;dependency> &lt;groupId>org.projectlombok&lt;/groupId> &lt;artifactId>lombok&lt;/artifactId> &lt;optional>true&lt;/optional> &lt;/dependency> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-test&lt;/artifactId> &lt;scope>test&lt;/scope> &lt;/dependency> &lt;/dependencies> &lt;build> &lt;plugins> &lt;plugin> &lt;groupId>org....</p></section><footer class=entry-footer>March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Spring Data Jpa实战" href=https://zhenfeng-zhu.github.io/posts/spring-data-jpa%E5%AE%9E%E6%88%98/></a></article><article class=post-entry><header class=entry-header><h2>spring boot多数据源配置</h2></header><section class=entry-content><p>spring boot多数据源配置 在单数据源的情况下，Spring Boot的配置非常简单，只需要在application.properties文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数据库拆分或是引入其他数据库，从而我们需要配置多个数据源。
+1 准备 1.1 禁止DataSourceAutoConfiguration 首先要将spring boot自带的DataSourceAutoConfiguration禁掉，因为它会读取application.properties文件的spring.datasource.*属性并自动配置单数据源。在@SpringBootApplication注解中添加exclude属性即可：
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) public class DemoApplication { public static void main(String[] args) { SpringApplication.run(JpaDemoApplication.class, args); } } 1.2 配置数据库连接 然后在application.properties中配置多数据源连接信息：
+spring.datasource.primary.url=jdbc:mysql://localhost:3306/test spring.datasource.primary.username=root spring.datasource.primary.password=root spring.datasource.primary.driver-class-name=com.mysql.jdbc.Driver spring.datasource.secondary.url=jdbc:mysql://localhost:3306/test1 spring.datasource.secondary.username=root spring.datasource.secondary.password=root spring.datasource.secondary.driver-class-name=com.mysql.jdbc.Driver 1.3 手段创建数据源 由于我们禁掉了自动数据源配置，因些下一步就需要手动将这些数据源创建出来：
+@Configuration public class DataSourceConfig { @Bean(name = "primaryDataSource") // @Qualifier(value = "primaryDataSource") @ConfigurationProperties(prefix = "spring.datasource.primary") public DataSource primaryDataSource(){ return DataSourceBuilder.create().build(); } @Bean(name = "secondaryDataSource") // @Qualifier(value = "secondaryDataSource") @ConfigurationProperties(prefix = "spring....</p></section><footer class=entry-footer>March 24, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to spring boot多数据源配置" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/></a></article><article class=post-entry><header class=entry-header><h2>spring boot连接redis</h2></header><section class=entry-content><p>Spring-data-redis为spring-data模块中对redis的支持部分，简称为“SDR”，提供了基于jedis客户端API的高度封装以及与spring容器的整合，
+jedis客户端在编程实施方面存在如下不足：
+connection管理缺乏自动化，connection-pool的设计缺少必要的容器支持。 数据操作需要关注“序列化”/“反序列化”，因为jedis的客户端API接受的数据类型为string和byte，对结构化数据(json,xml,pojo等)操作需要额外的支持。 事务操作纯粹为硬编码 pub/sub功能，缺乏必要的设计模式支持，对于开发者而言需要关注的太多。 1 spring-data-redis特性 连接池自动管理，提供了一个高度封装的“RedisTemplate”类 针对jedis客户端中大量api进行了归类封装,将同一类型操作封装为operation接口 ValueOperations：简单K-V操作 SetOperations：set类型数据操作 ZSetOperations：zset类型数据操作 HashOperations：针对map类型的数据操作 ListOperations：针对list类型的数据操作 提供了对key的“bound”(绑定)便捷化操作API，可以通过bound封装指定的key，然后进行一系列的操作而无须“显式”的再次指定Key，即BoundKeyOperations： BoundValueOperations BoundSetOperations BoundListOperations BoundSetOperations BoundHashOperations 将事务操作封装，有容器控制。 针对数据的“序列化/反序列化”，提供了多种可选择策略(RedisSerializer) JdkSerializationRedisSerializer：POJO对象的存取场景，使用JDK本身序列化机制，将pojo类通过ObjectInputStream/ObjectOutputStream进行序列化操作，最终redis-server中将存储字节序列。是目前最常用的序列化策略。 StringRedisSerializer：Key或者value为字符串的场景，根据指定的charset对数据的字节序列编码成string，是“new String(bytes, charset)”和“string.getBytes(charset)”的直接封装。是最轻量级和高效的策略。 JacksonJsonRedisSerializer：jackson-json工具提供了javabean与json之间的转换能力，可以将pojo实例序列化成json格式存储在redis中，也可以将json格式的数据转换成pojo实例。因为jackson工具在序列化和反序列化时，需要明确指定Class类型，因此此策略封装起来稍微复杂。 OxmSerializer：提供了将javabean与xml之间的转换能力，目前可用的三方支持包括jaxb，apache-xmlbeans；redis存储的数据将是xml工具。不过使用此策略，编程将会有些难度，而且效率最低；不建议使用。 基于设计模式，和JMS开发思路，将pub/sub的API设计进行了封装，使开发更加便捷。 spring-data-redis中，并没有对sharding提供良好的封装，如果你的架构是基于sharding，那么你需要自己去实现，这也是sdr和jedis相比，唯一缺少的特性。 2 引入依赖 &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-data-redis&lt;/artifactId> &lt;/dependency> 3 配置 # REDIS (RedisProperties) # Redis数据库索引（默认为0） spring.redis.database=0 # Redis服务器地址 spring.redis.host=localhost # Redis服务器连接端口 spring.redis.port=6379 # Redis服务器连接密码（默认为空） spring.redis.password=root # 连接池最大连接数（使用负值表示没有限制） spring.redis.pool.max-active=8 # 连接池最大阻塞等待时间（使用负值表示没有限制） spring....</p></section><footer class=entry-footer>March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to spring boot连接redis" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E8%BF%9E%E6%8E%A5redis/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://zhenfeng-zhu.github.io/posts/page/5/>« Prev Page</a>
 <a class=next href=https://zhenfeng-zhu.github.io/posts/page/7/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
