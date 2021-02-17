@@ -5,7 +5,17 @@
     <link>https://zhenfeng-zhu.github.io/</link>
     <description>Recent content on Go Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 17 Feb 2021 16:46:52 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Feb 2021 17:45:40 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>业务代码的成长机会</title>
+      <link>https://zhenfeng-zhu.github.io/posts/%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84%E6%88%90%E9%95%BF%E6%9C%BA%E4%BC%9A/</link>
+      <pubDate>Wed, 17 Feb 2021 17:45:40 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84%E6%88%90%E9%95%BF%E6%9C%BA%E4%BC%9A/</guid>
+      <description>对于大部分公司而言，能够写底层代码或者中间件代码的人总是有限的，写业务代码会面临更高的复杂度。这里分三个层次来看其中的机会：
+ 第一个层次，让代码写的不一样。可从代码规范、可读性、可扩展性等角度着手，这也是程序员的基本功。 第二个层次，考虑业务问题和技术问题的匹配。可从写业务代码中理解需求，并做好分析设计。被动接收需求和实现接口，确实成长空间不大。 第三个层次，总结相关方法体系，成为业务及技术双料专家。  </description>
+    </item>
+    
     <item>
       <title>unix 哲学</title>
       <link>https://zhenfeng-zhu.github.io/posts/unix-philosophy/</link>
