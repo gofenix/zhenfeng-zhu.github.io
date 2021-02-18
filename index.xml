@@ -5,7 +5,21 @@
     <link>https://zhenfeng-zhu.github.io/</link>
     <description>Recent content on Go Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 18 Feb 2021 13:05:31 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Feb 2021 13:20:11 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github Action自动部署blog</title>
+      <link>https://zhenfeng-zhu.github.io/posts/hugo-github-action/</link>
+      <pubDate>Thu, 18 Feb 2021 13:20:11 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/hugo-github-action/</guid>
+      <description>之前我采用的方式是两个github repo的方式：
+一个叫hugo-blog，用于存放blog的源文件
+一个叫zhenfeng-zhu.github.io，用于存放生成之后的文件
+然后通过写一个shell脚本，将生成之后的文件推向zhenfeng-zhu.github.io仓库中，同时将blog的源文件也做了一个backup。后来使用了一个github action的方式， 就不用在两个仓库中进行折腾，一切都由github action来做了。
+方案 设置workflow 首先创建一个.github/workflows/gh-pages.yml
+name: github pages on: push: branches: - main  # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: &amp;#39;latest&amp;#39; # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets.</description>
+    </item>
+    
     <item>
       <title>编程语言的世界观</title>
       <link>https://zhenfeng-zhu.github.io/posts/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%96%E7%95%8C%E8%A7%82/</link>
