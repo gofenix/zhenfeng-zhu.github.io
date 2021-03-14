@@ -5,7 +5,21 @@
     <link>https://zhenfeng-zhu.github.io/</link>
     <description>Recent content on Go Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 27 Feb 2021 12:16:48 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Mar 2021 20:09:11 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>K3d With Openfaas</title>
+      <link>https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/</link>
+      <pubDate>Wed, 10 Mar 2021 20:09:11 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/</guid>
+      <description>openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
+安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
+k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面
+kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。
+但是当你打开页面的时候，要输入密码，那就需要下面的操作：
+# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=&amp;quot;{.</description>
+    </item>
+    
     <item>
       <title>换一种方式思考</title>
       <link>https://zhenfeng-zhu.github.io/posts/%E6%8D%A2%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%80%9D%E8%80%83/</link>
