@@ -3,12 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zhenfeng-zhu.github.io/</loc>
-    <lastmod>2021-03-10T20:09:11+08:00</lastmod>
+    <lastmod>2021-03-30T09:57:01+08:00</lastmod>
   </url><url>
-    <loc>https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/</loc>
-    <lastmod>2021-03-10T20:09:11+08:00</lastmod>
+    <loc>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/</loc>
+    <lastmod>2021-03-30T09:57:01+08:00</lastmod>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/</loc>
+    <lastmod>2021-03-30T09:57:01+08:00</lastmod>
+  </url><url>
+    <loc>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/</loc>
+    <lastmod>2021-03-30T09:55:20+08:00</lastmod>
+  </url><url>
+    <loc>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/</loc>
+    <lastmod>2021-03-30T09:54:25+08:00</lastmod>
+  </url><url>
+    <loc>https://zhenfeng-zhu.github.io/posts/openfaas-workshop/</loc>
+    <lastmod>2021-03-30T09:53:12+08:00</lastmod>
+  </url><url>
+    <loc>https://zhenfeng-zhu.github.io/posts/streaming-101/</loc>
+    <lastmod>2021-03-26T14:11:29+08:00</lastmod>
+  </url><url>
+    <loc>https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/</loc>
     <lastmod>2021-03-10T20:09:11+08:00</lastmod>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/%E6%8D%A2%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%80%9D%E8%80%83/</loc>
@@ -142,9 +157,6 @@
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab3/</loc>
     <lastmod>2018-06-28T17:29:56+00:00</lastmod>
-  </url><url>
-    <loc>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/</loc>
-    <lastmod>2018-06-27T18:10:47+00:00</lastmod>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/workshop-lab1/</loc>
     <lastmod>2018-06-25T18:04:09+00:00</lastmod>

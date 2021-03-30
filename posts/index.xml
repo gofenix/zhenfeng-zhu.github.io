@@ -5,7 +5,79 @@
     <link>https://zhenfeng-zhu.github.io/posts/</link>
     <description>Recent content in Posts on Go Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 10 Mar 2021 20:09:11 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Mar 2021 09:57:01 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Openfaas Workshop Lab2</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/</link>
+      <pubDate>Tue, 30 Mar 2021 09:57:01 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/</guid>
+      <description>实验 2 - 测试 在开始实验之前，先创建一个文件夹：
+$ mkdir -p lab2 \  &amp;amp;&amp;amp; cd lab2 使用 UI 门户 您现在可以测试 OpenFaaS UI：
+如果你已经设置了 $OPENFAAS_URL ，请获取 URL，并点开:
+echo $OPENFAAS_URL http://127.0.0.1:31112 如果还没有设置 $OPENFAAS_URL ，那么默认的值通常是： http://127.0.0.1:8080.
+我们可以部署一些示例函数，然后使用它们进行测试：
+$ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 您可以在用户界面中试用它们，例如 Markdown 函数，它将 Markdown 代码转换成超文本标记语言。
+在 Request 字段中输入如下的内容：
+## The **OpenFaaS** _workshop_ 现在点击 Invoke ，然后就可以看到响应出现在屏幕的下半部分。
+I.e.
+&amp;lt;h2&amp;gt;The &amp;lt;strong&amp;gt;OpenFaaS&amp;lt;/strong&amp;gt; &amp;lt;em&amp;gt;workshop&amp;lt;/em&amp;gt;&amp;lt;/h2&amp;gt; 您将会看到如下的字段：
+ Status - 函数是否准备好运行。在状态显示就绪之前，您将无法从用户界面调用该函数。 Replicas - 在集群中运行的函数的副本数量。 Image - 发布到 Docker Hub 或 Docker 存储库的 Docker 镜像名称和版本。 Invocation count - 这显示了函数被调用的次数，并且每 5 秒更新一次。  多次点击 Invoke ，就可以看到 Invocation count 在递增。</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop Lab1b</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/</link>
+      <pubDate>Tue, 30 Mar 2021 09:55:20 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/</guid>
+      <description>实验 1 - 使用 Kubernetes 设置 OpenFaaS 安装 kubectl 使用下面的说明或官方文档为您的操作系统安装kubectl。
+ Linux  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  MacOS  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  Windows  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/windows/amd64/kubectl.exe chmod +x kubectl.exe mkdir -p $HOME/bin/ mv kubectl $HOME/bin/ 设置 Kubernetes 集群 您可以在使用 Kubernetes 时遵循实验，但您可能需要在此过程中进行一些小的更改。网关的服务地址从http://gateway:8080 更改为http://gateway.openfaas:8080。尽可能记录这些差异，并在每个实验室提供替代方案。
+在笔记本电脑上创建本地集群 k3s 和 k3d 如果您的计算机上有 Docker，那么您可以使用 Rancher Labs 的 k3d。它安装了一个名为 k3s 的 Kubernetes 轻量级版本，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的计算机上工作。</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop Lab1</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/</link>
+      <pubDate>Tue, 30 Mar 2021 09:54:25 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/</guid>
+      <description>实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。
+任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。
+先决条件： 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
+Docker For Mac
+ Docker CE for Mac Edge Edition  For Windows
+ 仅支持 Windows 10 Pro 或 Enterprise 安装 Docker CE for Windows   请确保通过使用 Windows 任务栏通知区域中的 Docker 菜单来使用Linux容器 Docker 守护进程。
+  安装 Git Bash  当您安装 git bash 时，请选择以下选项：“安装 UNIX 命令”和“使用真实类型的字体”。
+ 注意：所有步骤请使用Git Bash：不要尝试使用PowerShell，WSL或Bash for Windows。</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop/</link>
+      <pubDate>Tue, 30 Mar 2021 09:53:12 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop/</guid>
+      <description>openfaas-研讨会 这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。
+在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。
+最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。
+其他语言
+ 日本語 中文  要求： 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1
+ 函数将用 Python 编写，因此有编程或脚本经验者优先 安装推荐的代码编辑器/IDE VSCode Windows 安装 Git Bash 首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux  Docker:
+ Docker CE for Mac/Windows Edge edition Docker CE for Linux   注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会
+ 讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。</description>
+    </item>
+    
+    <item>
+      <title>Streaming 101</title>
+      <link>https://zhenfeng-zhu.github.io/posts/streaming-101/</link>
+      <pubDate>Fri, 26 Mar 2021 14:11:29 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/streaming-101/</guid>
+      <description> 有效的复杂系统总是从简单
+ </description>
+    </item>
+    
     <item>
       <title>K3d With Openfaas</title>
       <link>https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/</link>
@@ -793,28 +865,6 @@ $ mkdir -p lab3 \ &amp;amp;&amp;amp; cd lab3 创建一个新函数 创建函数�
  使用内置的或社区提供的代码末班创建一个函数脚手架（默认）   将现有的二进制文件作为函数（高级）  生成一个新函数 在使用模板创建一个新函数之前，首先确认你已经从 Github 上拉下来模板文件：
 $ faas-cli template pull Fetch templates from repository: https://github.com/openfaas/templates.git Attempting to expand templates from https://github.com/openfaas/templates.git Fetched 11 template(s) : [csharp dockerfile go go-armhf node node-arm64 node-armhf python python-armhf python3 ruby] 之后找到可用的语言：
 $ faas-cli new --list Languages available as templates: - csharp - dockerfile - go - go-armhf - node - node-arm64 - node-armhf - python - python-armhf - python3 - ruby Or alternatively create a folder containing a Dockerfile, then pick the &amp;quot;Dockerfile&amp;quot; lang type in your YAML file.</description>
-    </item>
-    
-    <item>
-      <title>openfaas-workshop-lab2</title>
-      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/</link>
-      <pubDate>Wed, 27 Jun 2018 18:10:47 +0000</pubDate>
-      
-      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/</guid>
-      <description>Lab2 测试一下 在开始这个实验之前，首先创建一个新的文件夹：
-$ mkdir -p lab2 \ &amp;amp;&amp;amp; cd lab2 使用UI界面 你现在可以打开http://127.0.0.1:8080测试OpenFaaS的UI。如果是在一台LInux虚拟机中部署，将127.0.0.1替换为该虚拟机的ip地址。
- 备注：我们使用的是127.0.0.1而不是localhost，因为在一些Linux发行版中IPv4/IPv6出现不兼容。
- 我们可以部署一些样例代码来进行测试：
-faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 你可以在UI里面选择Markdown函数进行测试，这个函数将markdown转换为html。
-在Request一栏中输入：
-## The **OpenFaaS** _workshop_ 点击INVOKE按钮，然后在屏幕下方观察响应。
-即：
-&amp;lt;h2&amp;gt;The &amp;lt;strong&amp;gt;OpenFaaS&amp;lt;/strong&amp;gt; &amp;lt;em&amp;gt;workshop&amp;lt;/em&amp;gt;&amp;lt;/h2&amp;gt; 你同时也会发现在其他栏中的值：
- Status - 函数是否可以运行的状态。如果在UI中的状态不可用，你将不能invoke函数。 Replicas - 运行在swarm集群中的函数副本。 Image - 发布在docker hub或其他docker仓库中的镜像名字。 Invocation count - 5秒更新一次，显示该函数已经被触发的次数。  点击INVOKE按钮几次，可以看到Invocation count在增加。
-通过函数商店进行部署 你也可以从OpenFaas商店中部署一个函数。这个商店是是社区整理的一些免费函数集合。
- 点击Deploy New Function 点击From Store 点击Figlet或者从搜索栏中进入figlet，然后点击Deploy  Figlet函数将会在左侧的函数列表中。稍等几分钟，等待函数从Docker Hub中下载。然后就像Markdown函数一样，输入一些文字，点击INVOKE。
-一个ASCII的logo将会生成：
- _ ___ ___ _ __ / |/ _ \ / _ (_)/ / | | | | | | | |/ / | | |_| | |_| / /_ |_|\___/ \___/_/(_) 学习CLI 你现在可以测试CLI，但是首先先做一些网关URL的说明：</description>
     </item>
     
     <item>
