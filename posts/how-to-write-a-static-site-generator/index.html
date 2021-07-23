@@ -29,7 +29,7 @@
 <meta name=twitter:title content="如何从零开始写一个静态网站生成器">
 <meta name=twitter:description content="Desc Text.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"如何从零开始写一个静态网站生成器","item":"https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"如何从零开始写一个静态网站生成器","name":"如何从零开始写一个静态网站生成器","description":"我们常见的静态网站生成器有 Hugo、Hexo 等，程序员们经常会使用类似的工具去将自己的播客托管到 github pages。前段时间研究了一下实现的方式，用 Elixir 简单实现了一个版本。\n一个静态网站生成器的工作流程通常有如下几个步骤：\n 读取源文件，一般是 markdown 格式的。 模板引擎的渲染 生成目标文件  接下来会从每个步骤来进行简单介 …","keywords":[],"articleBody":"我们常见的静态网站生成器有 Hugo、Hexo 等，程序员们经常会使用类似的工具去将自己的播客托管到 github pages。前段时间研究了一下实现的方式，用 Elixir 简单实现了一个版本。\n一个静态网站生成器的工作流程通常有如下几个步骤：\n 读取源文件，一般是 markdown 格式的。 模板引擎的渲染 生成目标文件  接下来会从每个步骤来进行简单介绍。\n最终版本的请参考：https://github.com/zhenfeng-zhu/ego， 欢迎pr和issue。\n极简 MVP 版本介绍 初始化 $ mix new ego 在 mix.exs 中添加依赖\n earmark 是将 markdown 转换为 html。 plug_cowboy 是提供本地预览 html 文件的 server。 json 是一个 json 解析库 指定以 escript 的方式启动  解析 markdown 文件 将一个 markdown 文件转为 html 也是比较简单的，首先读取，然后调用 Earmark.as_html!函数，就能将 markdown 转换为 html 了。\neg.\ndef gen_blogs(m) do m | File.read!() | Earmark.as_html!() end 更进一步的我们认为 markdown 的博客源文件都在当前项目目录下面，即{current_dir()}/contents/。如果要获取到所有的文件，可以使用 wildcard 函数。\ndef blog_files do Path.wildcard(\"#{current_dir()}/contents/*.md\") end 因此就可以批量对目录下的所有 markdown 文件进行转换。\neg.\nblog_files() | Enum.each(fn m - gen_blogs(m) end) 模板引擎渲染 既然用了 elixir，那就得使用 eex 来进行渲染了。\n我们写一个最简单的 eex 模板文件，eg\nhtml head head body div article class=\"markdown-body\"%= @content %article div body html 上述的模板文件中，content 是 markdown 生成的 html。\n渲染 eex 也是很简单，eg\ndef blog_layout do \"#{current_dir()}/layouts/blog.eex\" end def eval_blog(m) do title = get_title(m) EEx.eval_file(blog_layout(), assigns: [content: m] ) end 生成目标文件 需要将上述的文件生成到文件系统中，我们先生成到 public 目录下面。\nElixir 的写入函数也是特别好用，只需要把 string 写入到目标文件即可，eg\ndef write_to(d, m) do title = get_title(m) File.write!(\"#{static_dir()}/#{title}.html\", d) end 一些优化 生成目录文件 生成 index 目录文件和生成 blog 的流程类似，我们需要解析每个 markdown 的文件名，然后填充到 index 的 layout 中即可。\nhtml head head body div article class=\"markdown-body\" %= for item - @list do % p a href=\"\" %= item[:title] % a p % end % article div body html s 注意在生成目录的时候，一定要指定目标博客的地址，因此要对目录加一个的标签。\ndef gen_index(blogs) do blogs | Enum.map(fn m - m | get_title() | build_title_with_href() end) | eval_index() | write_to(\"index\") end def build_title_with_href(title) do %{:title = title, :href = get_href(title)} end def get_href(title) do \"#{EgoConfig.domain()}/#{title}.html\" end def eval_index(titles) do EEx.eval_file(index_layout(), assigns: [t: \"zzf-blog\", list: titles] ) end 加速构建 上面的构建流程有一点小小的问题，就是每个文件的生成都是串行的，我们可以加速一下。\nTask.start_link(fn - blog_files() | gen_index() end) blog_files() | Enum.map(fn m - Task.async(fn - gen_blogs(m) end) end) | Task.await_many() | IO.inspect() 让生成 index 的时候在后台执行，同时生成 blog 的时候，开启 async 模式，并 await 一下。\n本地预览 简单使用 plug 来做本地预览\ndefmodule MyPlug do use Plug.Router import Plug.Conn plug(:match) plug(:dispatch) get \"/\" do conn | put_resp_content_type(\"text/html\") | send_file(200, \"public/index.html\") end get \"/:file\" do conn | put_resp_content_type(\"text/html\") | send_file(200, \"public/#{file}\") end get \"favicon.ico\" do send_resp(conn, 404, \"not found\") end match _ do send_resp(conn, 404, \"not found\") end end 通过访问域名，可以进到 index 文件，当点击目录的时候，就访问目标博客文件。\n构建可执行文件 通过 escript 来生成可执行文件\n参考 https://elixirschool.com/zh-hans/lessons/advanced/escripts/\n丰富命令行 defp parse_args(args) do case hd(args) do \"server\" - start_server() \"build\" - Mark.convert() \"new\" - gen_template(args) end end ego server 启动本地预览模式\nego build 就将本地的博客生成 html 文件\nego new site xxx 生成静态站点\n更多 elixir 写起来很丝滑，一个最终版本的请参考：https://github.com/zhenfeng-zhu/ego，欢迎pr和issue。\n另外也给 elixir-ls 提了一个 pr，大家快去 conversation 呀，尽快让 merge 了：https://github.com/elixir-lsp/elixir-ls/pull/574\n","wordCount":"376","inLanguage":"en","datePublished":"2021-07-23T09:33:18+08:00","dateModified":"2021-07-23T09:33:18+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"如何从零开始写一个静态网站生成器","name":"如何从零开始写一个静态网站生成器","description":"我们常见的静态网站生成器有 Hugo、Hexo 等，程序员们经常会使用类似的工具去将自己的播客托管到 github pages。前段时间研究了一下实现的方式，用 Elixir 简单实现了一个版本。\n一个静态网站生成器的工作流程通常有如下几个步骤：\n 读取源文件，一般是 markdown 格式的。 模板引擎的渲染 生成目标文件  接下来会从每个步骤来进行简单介 …","keywords":[],"articleBody":"我们常见的静态网站生成器有 Hugo、Hexo 等，程序员们经常会使用类似的工具去将自己的播客托管到 github pages。前段时间研究了一下实现的方式，用 Elixir 简单实现了一个版本。\n一个静态网站生成器的工作流程通常有如下几个步骤：\n 读取源文件，一般是 markdown 格式的。 模板引擎的渲染 生成目标文件  接下来会从每个步骤来进行简单介绍。\n最终版本的请参考：https://github.com/zhenfeng-zhu/ego， 欢迎 pr 和 issue。\n极简 MVP 版本介绍 初始化 $ mix new ego 在 mix.exs 中添加依赖\n earmark 是将 markdown 转换为 html。 plug_cowboy 是提供本地预览 html 文件的 server。 json 是一个 json 解析库 指定以 escript 的方式启动  解析 markdown 文件 将一个 markdown 文件转为 html 也是比较简单的，首先读取，然后调用 Earmark.as_html!函数，就能将 markdown 转换为 html 了。\neg.\ndef gen_blogs(m) do m | File.read!() | Earmark.as_html!() end 更进一步的我们认为 markdown 的博客源文件都在当前项目目录下面，即{current_dir()}/contents/。如果要获取到所有的文件，可以使用 wildcard 函数。\ndef blog_files do Path.wildcard(\"#{current_dir()}/contents/*.md\") end 因此就可以批量对目录下的所有 markdown 文件进行转换。\neg.\nblog_files() | Enum.each(fn m - gen_blogs(m) end) 模板引擎渲染 既然用了 elixir，那就得使用 eex 来进行渲染了。\n我们写一个最简单的 eex 模板文件，eg\nhtml head head body div article class=\"markdown-body\"%= @content %article div body html 上述的模板文件中，content 是 markdown 生成的 html。\n渲染 eex 也是很简单，eg\ndef blog_layout do \"#{current_dir()}/layouts/blog.eex\" end def eval_blog(m) do title = get_title(m) EEx.eval_file(blog_layout(), assigns: [content: m] ) end 生成目标文件 需要将上述的文件生成到文件系统中，我们先生成到 public 目录下面。\nElixir 的写入函数也是特别好用，只需要把 string 写入到目标文件即可，eg\ndef write_to(d, m) do title = get_title(m) File.write!(\"#{static_dir()}/#{title}.html\", d) end 一些优化 生成目录文件 生成 index 目录文件和生成 blog 的流程类似，我们需要解析每个 markdown 的文件名，然后填充到 index 的 layout 中即可。\nhtml head head body div article class=\"markdown-body\" %= for item - @list do % p a href=\"\" %= item[:title] % a p % end % article div body html s 注意在生成目录的时候，一定要指定目标博客的地址，因此要对目录加一个的标签。\ndef gen_index(blogs) do blogs | Enum.map(fn m - m | get_title() | build_title_with_href() end) | eval_index() | write_to(\"index\") end def build_title_with_href(title) do %{:title = title, :href = get_href(title)} end def get_href(title) do \"#{EgoConfig.domain()}/#{title}.html\" end def eval_index(titles) do EEx.eval_file(index_layout(), assigns: [t: \"zzf-blog\", list: titles] ) end 加速构建 上面的构建流程有一点小小的问题，就是每个文件的生成都是串行的，我们可以加速一下。\nTask.start_link(fn - blog_files() | gen_index() end) blog_files() | Enum.map(fn m - Task.async(fn - gen_blogs(m) end) end) | Task.await_many() | IO.inspect() 让生成 index 的时候在后台执行，同时生成 blog 的时候，开启 async 模式，并 await 一下。\n本地预览 简单使用 plug 来做本地预览\ndefmodule MyPlug do use Plug.Router import Plug.Conn plug(:match) plug(:dispatch) get \"/\" do conn | put_resp_content_type(\"text/html\") | send_file(200, \"public/index.html\") end get \"/:file\" do conn | put_resp_content_type(\"text/html\") | send_file(200, \"public/#{file}\") end get \"favicon.ico\" do send_resp(conn, 404, \"not found\") end match _ do send_resp(conn, 404, \"not found\") end end 通过访问域名，可以进到 index 文件，当点击目录的时候，就访问目标博客文件。\n美化  添加代码高亮，  在 head 中引入 highlight.js 即可。\neg.\nlink rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.1.0/build/styles/default.min.css\" / script src=\"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.1.0/build/highlight.min.js\"script script hljs.highlightAll(); script 居中展示  在 layout 文件中加上如下 css 样式即可。\nmeta name=\"viewport\" content=\"width=device-width, initial-scale=1\" / style .markdown-body { box-sizing: border-box; min-width: 200px; max-width: 980px; margin: 0 auto; padding: 45px; } @media (max-width: 767px) { .markdown-body { padding: 15px; } } style 构建可执行文件 通过 escript 来生成可执行文件\n参考 https://elixirschool.com/zh-hans/lessons/advanced/escripts/\n丰富命令行 defp parse_args(args) do case hd(args) do \"server\" - start_server() \"build\" - Mark.convert() \"new\" - gen_template(args) end end ego server 启动本地预览模式\nego build 就将本地的博客生成 html 文件\nego new site xxx 生成静态站点\n更多 elixir 写起来很丝滑，一个最终版本的请参考：https://github.com/zhenfeng-zhu/ego，欢迎pr和issue。\n另外也给 elixir-ls 提了一个 pr，大家快去 conversation 呀，尽快让 merge 了：https://github.com/elixir-lsp/elixir-ls/pull/574\n","wordCount":"433","inLanguage":"en","datePublished":"2021-07-23T09:33:18+08:00","dateModified":"2021-07-23T09:33:18+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -71,7 +71,7 @@
 Desc Text.
 </div>
 <div class=post-meta>
-July 23, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+July 23, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
 </div>
 </header>
 <div class=post-content>
@@ -83,7 +83,7 @@ July 23, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <li>生成目标文件</li>
 </ol>
 <p>接下来会从每个步骤来进行简单介绍。</p>
-<p>最终版本的请参考：https://github.com/zhenfeng-zhu/ego， 欢迎pr和issue。</p>
+<p>最终版本的请参考：https://github.com/zhenfeng-zhu/ego， 欢迎 pr 和 issue。</p>
 <h1 id=极简-mvp-版本介绍>极简 MVP 版本介绍<a hidden class=anchor aria-hidden=true href=#极简-mvp-版本介绍>#</a></h1>
 <h2 id=初始化>初始化<a hidden class=anchor aria-hidden=true href=#初始化>#</a></h2>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-elixir data-lang=elixir><span style=color:#960050;background-color:#1e0010>$</span> mix new ego
@@ -221,7 +221,42 @@ s
   <span style=color:#66d9ef>end</span>
 <span style=color:#66d9ef>end</span>
 </code></pre></div><p>通过访问域名，可以进到 index 文件，当点击目录的时候，就访问目标博客文件。</p>
-<h2 id=构建可执行文件>构建可执行文件<a hidden class=anchor aria-hidden=true href=#构建可执行文件>#</a></h2>
+<h2 id=美化>美化<a hidden class=anchor aria-hidden=true href=#美化>#</a></h2>
+<ol>
+<li>添加代码高亮，</li>
+</ol>
+<p>在 head 中引入 highlight.js 即可。</p>
+<p>eg.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;<span style=color:#f92672>link</span>
+  <span style=color:#a6e22e>rel</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;stylesheet&#34;</span>
+  <span style=color:#a6e22e>href</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.1.0/build/styles/default.min.css&#34;</span>
+/&gt;
+&lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.1.0/build/highlight.min.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+
+&lt;<span style=color:#f92672>script</span>&gt;
+  <span style=color:#a6e22e>hljs</span>.<span style=color:#a6e22e>highlightAll</span>();
+&lt;/<span style=color:#f92672>script</span>&gt;
+</code></pre></div><ol start=2>
+<li>居中展示</li>
+</ol>
+<p>在 layout 文件中加上如下 css 样式即可。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1&#34;</span> /&gt;
+&lt;<span style=color:#f92672>style</span>&gt;
+  .<span style=color:#a6e22e>markdown-body</span> {
+    <span style=color:#66d9ef>box-sizing</span>: <span style=color:#66d9ef>border-box</span>;
+    <span style=color:#66d9ef>min-width</span>: <span style=color:#ae81ff>200</span><span style=color:#66d9ef>px</span>;
+    <span style=color:#66d9ef>max-width</span>: <span style=color:#ae81ff>980</span><span style=color:#66d9ef>px</span>;
+    <span style=color:#66d9ef>margin</span>: <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>auto</span>;
+    <span style=color:#66d9ef>padding</span>: <span style=color:#ae81ff>45</span><span style=color:#66d9ef>px</span>;
+  }
+
+  @<span style=color:#66d9ef>media</span> <span style=color:#f92672>(</span><span style=color:#f92672>max-width</span><span style=color:#f92672>:</span> <span style=color:#f92672>767px</span><span style=color:#f92672>)</span> {
+    .<span style=color:#a6e22e>markdown-body</span> {
+      <span style=color:#66d9ef>padding</span>: <span style=color:#ae81ff>15</span><span style=color:#66d9ef>px</span>;
+    }
+  }
+&lt;/<span style=color:#f92672>style</span>&gt;
+</code></pre></div><h2 id=构建可执行文件>构建可执行文件<a hidden class=anchor aria-hidden=true href=#构建可执行文件>#</a></h2>
 <p>通过 escript 来生成可执行文件</p>
 <p>参考 <a href=https://elixirschool.com/zh-hans/lessons/advanced/escripts/>https://elixirschool.com/zh-hans/lessons/advanced/escripts/</a></p>
 <h2 id=丰富命令行>丰富命令行<a hidden class=anchor aria-hidden=true href=#丰富命令行>#</a></h2>
