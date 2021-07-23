@@ -1,5 +1,98 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Posts | Go Data</title><meta name=keywords content><meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/posts/><link href=/assets/css/stylesheet.min.273d297e8e2096cd41415928bf1a2bd639dc59b3c2bd13c640f55ca202f0cc69.css integrity="sha256-Jz0pfo4gls1BQVkovxor1jncWbPCvRPGQPVcogLwzGk=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.82.0"><link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml><meta property="og:title" content="Posts"><meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta property="og:type" content="website"><meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="og:updated_time" content="2021-03-30T09:57:01+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="Posts"><meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"}]}</script></head><body class=list id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div><h1>Posts</h1></header><article class=post-entry><header class=entry-header><h2>Openfaas Workshop Lab2</h2></header><section class=entry-content><p>实验 2 - 测试 在开始实验之前，先创建一个文件夹：
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Posts | Go Data</title>
+<meta name=keywords content>
+<meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta name=author content="Lucas">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/posts/>
+<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.86.0">
+<link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
+<meta property="og:title" content="Posts">
+<meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
+<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta name=twitter:title content="Posts">
+<meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"}]}</script>
+</head>
+<body class=list id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<noscript>
+<style type=text/css>#theme-toggle,.top-link{display:none}</style>
+</noscript>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/about title=About>
+<span>About</span>
+</a>
+</li>
+<li>
+<a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
+<span>🔍</span>
+</a>
+</li></ul>
+</nav>
+</header>
+<main class=main>
+<header class=page-header>
+<div class=breadcrumbs>
+<a href=https://zhenfeng-zhu.github.io>Home</a>
+</div>
+<h1>Posts</h1>
+</header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+如何从零开始写一个静态网站生成器
+</h2>
+</header>
+<section class=entry-content>
+<p>我们常见的静态网站生成器有 Hugo、Hexo 等，程序员们经常会使用类似的工具去将自己的播客托管到 github pages。前段时间研究了一下实现的方式，用 Elixir 简单实现了一个版本。
+一个静态网站生成器的工作流程通常有如下几个步骤：
+读取源文件，一般是 markdown 格式的。 模板引擎的渲染 生成目标文件 接下来会从每个步骤来进行简单介绍。
+最终版本的请参考：https://github.com/zhenfeng-zhu/ego， 欢迎pr和issue。
+极简 MVP 版本介绍 初始化 $ mix new ego 在 mix.exs 中添加依赖
+earmark 是将 markdown 转换为 html。 plug_cowboy 是提供本地预览 html 文件的 server。 json 是一个 json 解析库 指定以 escript 的方式启动 解析 markdown 文件 将一个 markdown 文件转为 html 也是比较简单的，首先读取，然后调用 Earmark.as_html!函数，就能将 markdown 转换为 html 了。
+eg.
+def gen_blogs(m) do m |> File.read!() |> Earmark.as_html!() end 更进一步的我们认为 markdown 的博客源文件都在当前项目目录下面，即{current_dir()}/contents/。如果要获取到所有的文件，可以使用 wildcard 函数。...</p>
+</section>
+<footer class=entry-footer>
+July 23, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 如何从零开始写一个静态网站生成器" href=https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Openfaas Workshop Lab2
+</h2>
+</header>
+<section class=entry-content>
+<p>实验 2 - 测试 在开始实验之前，先创建一个文件夹：
 $ mkdir -p lab2 \ && cd lab2 使用 UI 门户 您现在可以测试 OpenFaaS UI：
 如果你已经设置了 $OPENFAAS_URL ，请获取 URL，并点开:
 echo $OPENFAAS_URL http://127.0.0.1:31112 如果还没有设置 $OPENFAAS_URL ，那么默认的值通常是： http://127.0.0.1:8080.
@@ -9,37 +102,170 @@ $ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stac
 ## The **OpenFaaS** _workshop_ 现在点击 Invoke ，然后就可以看到响应出现在屏幕的下半部分。
 I.e.
 &lt;h2>The &lt;strong>OpenFaaS&lt;/strong> &lt;em>workshop&lt;/em>&lt;/h2> 您将会看到如下的字段：
-Status - 函数是否准备好运行。在状态显示就绪之前，您将无法从用户界面调用该函数。 Replicas - 在集群中运行的函数的副本数量。 Image - 发布到 Docker Hub 或 Docker 存储库的 Docker 镜像名称和版本。 Invocation count - 这显示了函数被调用的次数，并且每 5 秒更新一次。 多次点击 Invoke ，就可以看到 Invocation count 在递增。...</p></section><footer class=entry-footer>March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Openfaas Workshop Lab2" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/></a></article><article class=post-entry><header class=entry-header><h2>Openfaas Workshop Lab1b</h2></header><section class=entry-content><p>实验 1 - 使用 Kubernetes 设置 OpenFaaS 安装 kubectl 使用下面的说明或官方文档为您的操作系统安装kubectl。
+Status - 函数是否准备好运行。在状态显示就绪之前，您将无法从用户界面调用该函数。 Replicas - 在集群中运行的函数的副本数量。 Image - 发布到 Docker Hub 或 Docker 存储库的 Docker 镜像名称和版本。 Invocation count - 这显示了函数被调用的次数，并且每 5 秒更新一次。 多次点击 Invoke ，就可以看到 Invocation count 在递增。...</p>
+</section>
+<footer class=entry-footer>
+March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab2" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Openfaas Workshop Lab1b
+</h2>
+</header>
+<section class=entry-content>
+<p>实验 1 - 使用 Kubernetes 设置 OpenFaaS 安装 kubectl 使用下面的说明或官方文档为您的操作系统安装kubectl。
 Linux export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/ MacOS export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/ Windows export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/windows/amd64/kubectl.exe chmod +x kubectl.exe mkdir -p $HOME/bin/ mv kubectl $HOME/bin/ 设置 Kubernetes 集群 您可以在使用 Kubernetes 时遵循实验，但您可能需要在此过程中进行一些小的更改。网关的服务地址从http://gateway:8080 更改为http://gateway.openfaas:8080。尽可能记录这些差异，并在每个实验室提供替代方案。
-在笔记本电脑上创建本地集群 k3s 和 k3d 如果您的计算机上有 Docker，那么您可以使用 Rancher Labs 的 k3d。它安装了一个名为 k3s 的 Kubernetes 轻量级版本，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的计算机上工作。...</p></section><footer class=entry-footer>March 30, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Openfaas Workshop Lab1b" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/></a></article><article class=post-entry><header class=entry-header><h2>Openfaas Workshop Lab1</h2></header><section class=entry-content><p>实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。
+在笔记本电脑上创建本地集群 k3s 和 k3d 如果您的计算机上有 Docker，那么您可以使用 Rancher Labs 的 k3d。它安装了一个名为 k3s 的 Kubernetes 轻量级版本，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的计算机上工作。...</p>
+</section>
+<footer class=entry-footer>
+March 30, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab1b" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Openfaas Workshop Lab1
+</h2>
+</header>
+<section class=entry-content>
+<p>实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。
 任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。
 先决条件： 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
 Docker For Mac
 Docker CE for Mac Edge Edition For Windows
 仅支持 Windows 10 Pro 或 Enterprise 安装 Docker CE for Windows 请确保通过使用 Windows 任务栏通知区域中的 Docker 菜单来使用Linux容器 Docker 守护进程。
 安装 Git Bash 当您安装 git bash 时，请选择以下选项：“安装 UNIX 命令”和“使用真实类型的字体”。
-注意：所有步骤请使用Git Bash：不要尝试使用PowerShell，WSL或Bash for Windows。...</p></section><footer class=entry-footer>March 30, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Openfaas Workshop Lab1" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/></a></article><article class=post-entry><header class=entry-header><h2>Openfaas Workshop</h2></header><section class=entry-content><p>openfaas-研讨会 这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。
+注意：所有步骤请使用Git Bash：不要尝试使用PowerShell，WSL或Bash for Windows。...</p>
+</section>
+<footer class=entry-footer>
+March 30, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab1" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Openfaas Workshop
+</h2>
+</header>
+<section class=entry-content>
+<p>openfaas-研讨会 这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。
 在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。
 最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。
 其他语言
 日本語 中文 要求： 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1
 函数将用 Python 编写，因此有编程或脚本经验者优先 安装推荐的代码编辑器/IDE VSCode Windows 安装 Git Bash 首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux Docker:
 Docker CE for Mac/Windows Edge edition Docker CE for Linux 注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会
-讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。...</p></section><footer class=entry-footer>March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Openfaas Workshop" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop/></a></article><article class=post-entry><header class=entry-header><h2>Streaming 101</h2></header><section class=entry-content><p>有效的复杂系统总是从简单
-...</p></section><footer class=entry-footer>March 26, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Streaming 101" href=https://zhenfeng-zhu.github.io/posts/streaming-101/></a></article><article class=post-entry><header class=entry-header><h2>K3d With Openfaas</h2></header><section class=entry-content><p>openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
+讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。...</p>
+</section>
+<footer class=entry-footer>
+March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Streaming 101
+</h2>
+</header>
+<section class=entry-content>
+<p> 有效的复杂系统总是从简单
+...</p>
+</section>
+<footer class=entry-footer>
+March 26, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Streaming 101" href=https://zhenfeng-zhu.github.io/posts/streaming-101/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+K3d With Openfaas
+</h2>
+</header>
+<section class=entry-content>
+<p>openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
 安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
 k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面
 kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。
 但是当你打开页面的时候，要输入密码，那就需要下面的操作：
-# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{....</p></section><footer class=entry-footer>March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to K3d With Openfaas" href=https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/></a></article><article class=post-entry><header class=entry-header><h2>换一种方式思考</h2></header><section class=entry-content><p>面向对象不是设计代码的唯一方法 函数式编程不一定是复杂和纯数学的 编程的基础不是赋值、if语句和循环 并发不一定需要锁、信号量、监视器等类似的东西 进程不必消耗大量的资源 元编程不只是语言的附属品 即使编程是你的工作，也应该是充满乐趣的 ...</p></section><footer class=entry-footer>February 27, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 换一种方式思考" href=https://zhenfeng-zhu.github.io/posts/%E6%8D%A2%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%80%9D%E8%80%83/></a></article><article class=post-entry><header class=entry-header><h2>小白都能快速上手的Vim配置</h2></header><section class=entry-content><p>首先把所有的vim相关的都删除。 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc中添加下面的代码
-" basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set backspace=eol,start,indent set laststatus=2 set colorcolumn=80 set cursorline set linebreak set autoindent set ignorecase set smartcase set ruler set diffopt+=internal,indent-heuristic,algorithm:patience set showcmd set clipboard^=unnamed,unnamedplus set showmode set mouse=a set tabstop=2 set shiftwidth=4 set expandtab set softtabstop=2 set showmatch set incsearch set nobackup set autoread set wildmenu set wildmode=longest:list,full set nofoldenable filetype plugin indent on syntax on 有了上面的设置，会让你的vim更好用一些。...</p></section><footer class=entry-footer>February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 小白都能快速上手的Vim配置" href=https://zhenfeng-zhu.github.io/posts/vim/></a></article><article class=post-entry><header class=entry-header><h2>Github Action自动部署blog</h2></header><section class=entry-content><p>之前我采用的方式是两个github repo的方式：
+# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{....</p>
+</section>
+<footer class=entry-footer>
+March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to K3d With Openfaas" href=https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+换一种方式思考
+</h2>
+</header>
+<section class=entry-content>
+<p> 面向对象不是设计代码的唯一方法 函数式编程不一定是复杂和纯数学的 编程的基础不是赋值、if语句和循环 并发不一定需要锁、信号量、监视器等类似的东西 进程不必消耗大量的资源 元编程不只是语言的附属品 即使编程是你的工作，也应该是充满乐趣的 ...</p>
+</section>
+<footer class=entry-footer>
+February 27, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 换一种方式思考" href=https://zhenfeng-zhu.github.io/posts/%E6%8D%A2%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%80%9D%E8%80%83/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+小白都能快速上手的Vim配置
+</h2>
+</header>
+<section class=entry-content>
+<p>首先把所有的vim相关的都删除。 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc中添加下面的代码
+" basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set backspace=eol,start,indent set laststatus=2 set colorcolumn=80 set cursorline set linebreak set autoindent set ignorecase set smartcase set ruler set diffopt+=internal,indent-heuristic,algorithm:patience set showcmd set clipboard^=unnamed,unnamedplus set showmode set mouse=a set tabstop=2 set shiftwidth=4 set expandtab set softtabstop=2 set showmatch set incsearch set nobackup set autoread set wildmenu set wildmode=longest:list,full set nofoldenable filetype plugin indent on syntax on 有了上面的设置，会让你的vim更好用一些。...</p>
+</section>
+<footer class=entry-footer>
+February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 小白都能快速上手的Vim配置" href=https://zhenfeng-zhu.github.io/posts/vim/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Github Action自动部署blog
+</h2>
+</header>
+<section class=entry-content>
+<p>之前我采用的方式是两个github repo的方式：
 一个叫hugo-blog，用于存放blog的源文件
 一个叫zhenfeng-zhu.github.io，用于存放生成之后的文件
 然后通过写一个shell脚本，将生成之后的文件推向zhenfeng-zhu.github.io仓库中，同时将blog的源文件也做了一个backup。后来使用了一个github action的方式， 就不用在两个仓库中进行折腾，一切都由github action来做了。
 方案 设置workflow 首先创建一个.github/workflows/gh-pages.yml
-name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: 'latest' # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets....</p></section><footer class=entry-footer>February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to Github Action自动部署blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a></article><article class=post-entry><header class=entry-header><h2>编程语言的世界观</h2></header><section class=entry-content><p>Elixir everything is a process. process are strongly isolated. process creation and destruction is a lightweight operation. message passing is the only way for processes to interact. processes have unique names. if you know the name of a process you can send it a message. processes share no resources. error handling is non-local. processes do what they are supposed to do or fail. Go simple, poetic, pithy don’t communicate by sharing memory, share memory by communicating concurrency is not parallelism channels orchestrate; mutexes serialize the bigger the interface, the weaker the abstraction make the zero value useful interface{} says nothing gofmt’s style is no one’s favorite, yet gofmt is everyone’s favorite A little copying is better than a little dependency ...</p></section><footer class=entry-footer>February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 编程语言的世界观" href=https://zhenfeng-zhu.github.io/posts/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%96%E7%95%8C%E8%A7%82/></a></article><footer class=page-footer><nav class=pagination><a class=next href=https://zhenfeng-zhu.github.io/posts/page/2/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: 'latest' # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets....</p>
+</section>
+<footer class=entry-footer>
+February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Github Action自动部署blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a>
+</article>
+<footer class=page-footer>
+<nav class=pagination>
+<a class=next href=https://zhenfeng-zhu.github.io/posts/page/2/>Next Page »</a>
+</nav>
+</footer>
+</main><footer class=footer>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
+<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</button>
+</a>
+<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

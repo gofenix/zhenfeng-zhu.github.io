@@ -1,40 +1,202 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Openfaas Workshop Lab2 | Go Data</title><meta name=keywords content><meta name=description content="Desc Text."><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/><link href=/assets/css/stylesheet.min.273d297e8e2096cd41415928bf1a2bd639dc59b3c2bd13c640f55ca202f0cc69.css integrity="sha256-Jz0pfo4gls1BQVkovxor1jncWbPCvRPGQPVcogLwzGk=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.82.0"><meta property="og:title" content="Openfaas Workshop Lab2"><meta property="og:description" content="Desc Text."><meta property="og:type" content="article"><meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="article:published_time" content="2021-03-30T09:57:01+08:00"><meta property="article:modified_time" content="2021-03-30T09:57:01+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="Openfaas Workshop Lab2"><meta name=twitter:description content="Desc Text."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Openfaas Workshop Lab2","item":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop Lab2","name":"Openfaas Workshop Lab2","description":"实验 2 - 测试 在开始实验之前，先创建一个文件夹：\n$ mkdir -p lab2 \\  \u0026amp;amp;\u0026amp;amp; cd lab2 使用 UI 门户 您现在可以测试 OpenFaaS UI：\n如果你已经设置了 $OPENFAAS_URL ，请获取 URL，并点开:\necho $OPENFAAS_URL http://127.0.0.1:31112 如果还没有 …","keywords":[],"articleBody":"实验 2 - 测试 在开始实验之前，先创建一个文件夹：\n$ mkdir -p lab2 \\  \u0026\u0026 cd lab2 使用 UI 门户 您现在可以测试 OpenFaaS UI：\n如果你已经设置了 $OPENFAAS_URL ，请获取 URL，并点开:\necho $OPENFAAS_URL http://127.0.0.1:31112 如果还没有设置 $OPENFAAS_URL ，那么默认的值通常是： http://127.0.0.1:8080.\n我们可以部署一些示例函数，然后使用它们进行测试：\n$ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 您可以在用户界面中试用它们，例如 Markdown 函数，它将 Markdown 代码转换成超文本标记语言。\n在 Request 字段中输入如下的内容：\n## The **OpenFaaS** _workshop_ 现在点击 Invoke ，然后就可以看到响应出现在屏幕的下半部分。\nI.e.\nThe OpenFaaS workshop 您将会看到如下的字段：\n Status - 函数是否准备好运行。在状态显示就绪之前，您将无法从用户界面调用该函数。 Replicas - 在集群中运行的函数的副本数量。 Image - 发布到 Docker Hub 或 Docker 存储库的 Docker 镜像名称和版本。 Invocation count - 这显示了函数被调用的次数，并且每 5 秒更新一次。  多次点击 Invoke ，就可以看到 Invocation count 在递增。\n通过函数商店部署 你也可以从 OpenFaaS 商店部署一个函数。这个商店是社区策划的函数集合。\n 点击 Deploy New Function 点击 From Store 点击 Figlet 或者在搜索栏里输入 figlet ，然后点击 Deploy  Figlet 函数将会出现在左侧函数列表中，耐心等几分钟，它需要从 docker hub 下载。 下载完成之后，输入一些文本，然后点击 invoke。\n你会看的一个 ASCII logo：\n_ ___ ___ _ __ / |/ _ \\ / _ (_)/ / | | | | | | | |/ / | | |_| | |_| / /_ |_|\\___/ \\___/_/(_) 学习 CLI 你现在可以测试 CLI，但是首先看下网关的 URL：\n如果 gateway 没有部署在http://127.0.0.1:8080，你需要按如下的几种方法指定一下：\n 设置环境变量OPENFAAS_URL，faas-cli将会在 shell 会话中使用这个。比如：export OPENFAAS_URL=http://openfaas.endpoint.com:8080。这个已经在实验 1中设置好了。 使用-g 或 --gateway指定正确的端点：faas deploy --gateway http://openfaas.endpoint.com:8080。 在 YAML 文件中，在provider:下修改一下gateway:。  列出已经部署的函数 这个会显示有多少函数，多少个副本以及调用次数。\n$ faas-cli list 现在尝试使用 verbose 命令\n$ faas-cli list --verbose 或\n$ faas-cli list -v 现在可以在函数旁边看的 Docker 镜像。\n调用函数 选择faas-cli list中看的的函数，比如 markdown:\n$ faas-cli invoke markdown 然后你会被要求输入一些文本，然后按 Control + D 结束。\n或者也可以使用echo 或 uname -a作为调用的输入。\n$ echo Hi | faas-cli invoke markdown $ uname -a | faas-cli invoke markdown 你甚至可以使用一个 HTML 文件：\n$ git clone https://github.com/openfaas/workshop \\  \u0026\u0026 cd workshop $ cat lab2.md | faas-cli invoke markdown 监控面板 OpenFaas 使用 Prometheus 监控函数的指标。这些指标可以通过Grafana变成一个可视化的仪表盘。\n在 OpenFaaS 的 Kubernetes 命名空间下运行 Grafana：\nkubectl -n openfaas run \\ --image=stefanprodan/faas-grafana:4.6.3 \\ --port=3000 \\ grafana 通过 NodePort 暴露：\nkubectl -n openfaas expose pod grafana \\ --type=NodePort \\ --name=grafana 找到 Grafana 的 node port 地址\n$ GRAFANA_PORT=$(kubectl -n openfaas get svc grafana -o jsonpath=\"{.spec.ports[0].nodePort}\") $ GRAFANA_URL=http://IP_ADDRESS:$GRAFANA_PORT/dashboard/db/openfaas 其中 IP_ADDRESS 就是 Kubernetes 的对应 IP。\n或者你也可以用端口转发命令，这样就可以在http://127.0.0.1:3000Grafana。\n$ kubectl port-forward pod/grafana 3000:3000 -n openfaas 如果使用 Kubernetes 1.17 或更高版本，请使用deploy/grafana ，而不是用 pod/ 。\n创建服务之后，在浏览器中打开 Grafana，然后输入用户名admin 和密码 admin登录，并以 $GRAFANA_URL找到之前已经做好的 OpenFaaS 仪表盘。\nPictured: example of an OpenFaaS dashboard with Grafana\n现在进入 实验 3\n","wordCount":"323","inLanguage":"en","datePublished":"2021-03-30T09:57:01+08:00","dateModified":"2021-03-30T09:57:01+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a></div><h1 class=post-title>Openfaas Workshop Lab2</h1><div class=post-description>Desc Text.</div><div class=post-meta>March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</div></header><div class=post-content><h1 id=实验-2---测试>实验 2 - 测试<a hidden class=anchor aria-hidden=true href=#实验-2---测试>#</a></h1><p></p><p>在开始实验之前，先创建一个文件夹：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ mkdir -p lab2 <span style=color:#ae81ff>\
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Openfaas Workshop Lab2 | Go Data</title>
+<meta name=keywords content>
+<meta name=description content="Desc Text.">
+<meta name=author content="Lucas">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/>
+<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.86.0">
+<meta property="og:title" content="Openfaas Workshop Lab2">
+<meta property="og:description" content="Desc Text.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/">
+<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta property="article:published_time" content="2021-03-30T09:57:01+08:00">
+<meta property="article:modified_time" content="2021-03-30T09:57:01+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta name=twitter:title content="Openfaas Workshop Lab2">
+<meta name=twitter:description content="Desc Text.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Openfaas Workshop Lab2","item":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop Lab2","name":"Openfaas Workshop Lab2","description":"实验 2 - 测试 在开始实验之前，先创建一个文件夹：\n$ mkdir -p lab2 \\  \u0026amp;amp;\u0026amp;amp; cd lab2 使用 UI 门户 您现在可以测试 OpenFaaS UI：\n如果你已经设置了 $OPENFAAS_URL ，请获取 URL，并点开:\necho $OPENFAAS_URL http://127.0.0.1:31112 如果还没有 …","keywords":[],"articleBody":"实验 2 - 测试 在开始实验之前，先创建一个文件夹：\n$ mkdir -p lab2 \\  \u0026\u0026 cd lab2 使用 UI 门户 您现在可以测试 OpenFaaS UI：\n如果你已经设置了 $OPENFAAS_URL ，请获取 URL，并点开:\necho $OPENFAAS_URL http://127.0.0.1:31112 如果还没有设置 $OPENFAAS_URL ，那么默认的值通常是： http://127.0.0.1:8080.\n我们可以部署一些示例函数，然后使用它们进行测试：\n$ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 您可以在用户界面中试用它们，例如 Markdown 函数，它将 Markdown 代码转换成超文本标记语言。\n在 Request 字段中输入如下的内容：\n## The **OpenFaaS** _workshop_ 现在点击 Invoke ，然后就可以看到响应出现在屏幕的下半部分。\nI.e.\nThe OpenFaaS workshop 您将会看到如下的字段：\n Status - 函数是否准备好运行。在状态显示就绪之前，您将无法从用户界面调用该函数。 Replicas - 在集群中运行的函数的副本数量。 Image - 发布到 Docker Hub 或 Docker 存储库的 Docker 镜像名称和版本。 Invocation count - 这显示了函数被调用的次数，并且每 5 秒更新一次。  多次点击 Invoke ，就可以看到 Invocation count 在递增。\n通过函数商店部署 你也可以从 OpenFaaS 商店部署一个函数。这个商店是社区策划的函数集合。\n 点击 Deploy New Function 点击 From Store 点击 Figlet 或者在搜索栏里输入 figlet ，然后点击 Deploy  Figlet 函数将会出现在左侧函数列表中，耐心等几分钟，它需要从 docker hub 下载。 下载完成之后，输入一些文本，然后点击 invoke。\n你会看的一个 ASCII logo：\n_ ___ ___ _ __ / |/ _ \\ / _ (_)/ / | | | | | | | |/ / | | |_| | |_| / /_ |_|\\___/ \\___/_/(_) 学习 CLI 你现在可以测试 CLI，但是首先看下网关的 URL：\n如果 gateway 没有部署在http://127.0.0.1:8080，你需要按如下的几种方法指定一下：\n 设置环境变量OPENFAAS_URL，faas-cli将会在 shell 会话中使用这个。比如：export OPENFAAS_URL=http://openfaas.endpoint.com:8080。这个已经在实验 1中设置好了。 使用-g 或 --gateway指定正确的端点：faas deploy --gateway http://openfaas.endpoint.com:8080。 在 YAML 文件中，在provider:下修改一下gateway:。  列出已经部署的函数 这个会显示有多少函数，多少个副本以及调用次数。\n$ faas-cli list 现在尝试使用 verbose 命令\n$ faas-cli list --verbose 或\n$ faas-cli list -v 现在可以在函数旁边看的 Docker 镜像。\n调用函数 选择faas-cli list中看的的函数，比如 markdown:\n$ faas-cli invoke markdown 然后你会被要求输入一些文本，然后按 Control + D 结束。\n或者也可以使用echo 或 uname -a作为调用的输入。\n$ echo Hi | faas-cli invoke markdown $ uname -a | faas-cli invoke markdown 你甚至可以使用一个 HTML 文件：\n$ git clone https://github.com/openfaas/workshop \\  \u0026\u0026 cd workshop $ cat lab2.md | faas-cli invoke markdown 监控面板 OpenFaas 使用 Prometheus 监控函数的指标。这些指标可以通过Grafana变成一个可视化的仪表盘。\n在 OpenFaaS 的 Kubernetes 命名空间下运行 Grafana：\nkubectl -n openfaas run \\ --image=stefanprodan/faas-grafana:4.6.3 \\ --port=3000 \\ grafana 通过 NodePort 暴露：\nkubectl -n openfaas expose pod grafana \\ --type=NodePort \\ --name=grafana 找到 Grafana 的 node port 地址\n$ GRAFANA_PORT=$(kubectl -n openfaas get svc grafana -o jsonpath=\"{.spec.ports[0].nodePort}\") $ GRAFANA_URL=http://IP_ADDRESS:$GRAFANA_PORT/dashboard/db/openfaas 其中 IP_ADDRESS 就是 Kubernetes 的对应 IP。\n或者你也可以用端口转发命令，这样就可以在http://127.0.0.1:3000Grafana。\n$ kubectl port-forward pod/grafana 3000:3000 -n openfaas 如果使用 Kubernetes 1.17 或更高版本，请使用deploy/grafana ，而不是用 pod/ 。\n创建服务之后，在浏览器中打开 Grafana，然后输入用户名admin 和密码 admin登录，并以 $GRAFANA_URL找到之前已经做好的 OpenFaaS 仪表盘。\nPictured: example of an OpenFaaS dashboard with Grafana\n现在进入 实验 3\n","wordCount":"323","inLanguage":"en","datePublished":"2021-03-30T09:57:01+08:00","dateModified":"2021-03-30T09:57:01+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<noscript>
+<style type=text/css>#theme-toggle,.top-link{display:none}</style>
+</noscript>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/about title=About>
+<span>About</span>
+</a>
+</li>
+<li>
+<a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
+<span>🔍</span>
+</a>
+</li></ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs>
+<a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a>
+</div>
+<h1 class=post-title>
+Openfaas Workshop Lab2
+</h1>
+<div class=post-description>
+Desc Text.
+</div>
+<div class=post-meta>
+March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</div>
+</header>
+<div class=post-content>
+<h1 id=实验-2---测试>实验 2 - 测试<a hidden class=anchor aria-hidden=true href=#实验-2---测试>#</a></h1>
+<p></p>
+<p>在开始实验之前，先创建一个文件夹：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ mkdir -p lab2 <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>   <span style=color:#f92672>&amp;&amp;</span> cd lab2
-</code></pre></div><h2 id=使用-ui-门户>使用 UI 门户<a hidden class=anchor aria-hidden=true href=#使用-ui-门户>#</a></h2><p>您现在可以测试 OpenFaaS UI：</p><p>如果你已经设置了 <code>$OPENFAAS_URL</code> ，请获取 URL，并点开:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>echo $OPENFAAS_URL
+</code></pre></div><h2 id=使用-ui-门户>使用 UI 门户<a hidden class=anchor aria-hidden=true href=#使用-ui-门户>#</a></h2>
+<p>您现在可以测试 OpenFaaS UI：</p>
+<p>如果你已经设置了 <code>$OPENFAAS_URL</code> ，请获取 URL，并点开:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>echo $OPENFAAS_URL
 http://127.0.0.1:31112
-</code></pre></div><p>如果还没有设置 <code>$OPENFAAS_URL</code> ，那么默认的值通常是： <a href=http://127.0.0.1:8080>http://127.0.0.1:8080</a>.</p><p>我们可以部署一些示例函数，然后使用它们进行测试：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml
-</code></pre></div><p><img src=./screenshot/markdown_portal.png alt></p><p>您可以在用户界面中试用它们，例如 Markdown 函数，它将 Markdown 代码转换成超文本标记语言。</p><p>在 <em>Request</em> 字段中输入如下的内容：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#75715e>## The **OpenFaaS** _workshop_</span>
-</code></pre></div><p>现在点击 <em>Invoke</em> ，然后就可以看到响应出现在屏幕的下半部分。</p><p>I.e.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>&lt;h2&gt;The &lt;strong&gt;OpenFaaS&lt;/strong&gt; &lt;em&gt;workshop&lt;/em&gt;&lt;/h2&gt;
-</code></pre></div><p>您将会看到如下的字段：</p><ul><li>Status - 函数是否准备好运行。在状态显示就绪之前，您将无法从用户界面调用该函数。</li><li>Replicas - 在集群中运行的函数的副本数量。</li><li>Image - 发布到 Docker Hub 或 Docker 存储库的 Docker 镜像名称和版本。</li><li>Invocation count - 这显示了函数被调用的次数，并且每 5 秒更新一次。</li></ul><p>多次点击 <em>Invoke</em> ，就可以看到 <em>Invocation count</em> 在递增。</p><h2 id=通过函数商店部署>通过函数商店部署<a hidden class=anchor aria-hidden=true href=#通过函数商店部署>#</a></h2><p>你也可以从 OpenFaaS 商店部署一个函数。这个商店是社区策划的函数集合。</p><ul><li>点击 <em>Deploy New Function</em></li><li>点击 <em>From Store</em></li><li>点击 <em>Figlet</em> 或者在搜索栏里输入 <em>figlet</em> ，然后点击 <em>Deploy</em></li></ul><p>Figlet 函数将会出现在左侧函数列表中，耐心等几分钟，它需要从 docker hub 下载。 下载完成之后，输入一些文本，然后点击 invoke。</p><p>你会看的一个 ASCII logo：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh> _  ___   ___ _  __
+</code></pre></div><p>如果还没有设置 <code>$OPENFAAS_URL</code> ，那么默认的值通常是： <a href=http://127.0.0.1:8080>http://127.0.0.1:8080</a>.</p>
+<p>我们可以部署一些示例函数，然后使用它们进行测试：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml
+</code></pre></div><p><img src=./screenshot/markdown_portal.png alt></p>
+<p>您可以在用户界面中试用它们，例如 Markdown 函数，它将 Markdown 代码转换成超文本标记语言。</p>
+<p>在 <em>Request</em> 字段中输入如下的内容：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#75715e>## The **OpenFaaS** _workshop_</span>
+</code></pre></div><p>现在点击 <em>Invoke</em> ，然后就可以看到响应出现在屏幕的下半部分。</p>
+<p>I.e.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>&lt;h2&gt;The &lt;strong&gt;OpenFaaS&lt;/strong&gt; &lt;em&gt;workshop&lt;/em&gt;&lt;/h2&gt;
+</code></pre></div><p>您将会看到如下的字段：</p>
+<ul>
+<li>Status - 函数是否准备好运行。在状态显示就绪之前，您将无法从用户界面调用该函数。</li>
+<li>Replicas - 在集群中运行的函数的副本数量。</li>
+<li>Image - 发布到 Docker Hub 或 Docker 存储库的 Docker 镜像名称和版本。</li>
+<li>Invocation count - 这显示了函数被调用的次数，并且每 5 秒更新一次。</li>
+</ul>
+<p>多次点击 <em>Invoke</em> ，就可以看到 <em>Invocation count</em> 在递增。</p>
+<h2 id=通过函数商店部署>通过函数商店部署<a hidden class=anchor aria-hidden=true href=#通过函数商店部署>#</a></h2>
+<p>你也可以从 OpenFaaS 商店部署一个函数。这个商店是社区策划的函数集合。</p>
+<ul>
+<li>点击 <em>Deploy New Function</em></li>
+<li>点击 <em>From Store</em></li>
+<li>点击 <em>Figlet</em> 或者在搜索栏里输入 <em>figlet</em> ，然后点击 <em>Deploy</em></li>
+</ul>
+<p>Figlet 函数将会出现在左侧函数列表中，耐心等几分钟，它需要从 docker hub 下载。 下载完成之后，输入一些文本，然后点击 invoke。</p>
+<p>你会看的一个 ASCII logo：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh> _  ___   ___ _  __
 / |/ _ <span style=color:#ae81ff>\ </span>/ _ <span style=color:#f92672>(</span>_<span style=color:#f92672>)</span>/ /
 | | | | | | | |/ /
 | | |_| | |_| / /_
 |_|<span style=color:#ae81ff>\_</span>__/ <span style=color:#ae81ff>\_</span>__/_/<span style=color:#f92672>(</span>_<span style=color:#f92672>)</span>
-</code></pre></div><h2 id=学习-cli>学习 CLI<a hidden class=anchor aria-hidden=true href=#学习-cli>#</a></h2><p>你现在可以测试 CLI，但是首先看下网关的 URL：</p><p>如果 gateway 没有部署在http://127.0.0.1:8080，你需要按如下的几种方法指定一下：</p><ol><li>设置环境变量<code>OPENFAAS_URL</code>，<code>faas-cli</code>将会在 shell 会话中使用这个。比如：<code>export OPENFAAS_URL=http://openfaas.endpoint.com:8080</code>。这个已经在<a href=./lab1.md>实验 1</a>中设置好了。</li><li>使用<code>-g</code> 或 <code>--gateway</code>指定正确的端点：<code>faas deploy --gateway http://openfaas.endpoint.com:8080</code>。</li><li>在 YAML 文件中，在<code>provider:</code>下修改一下<code>gateway:</code>。</li></ol><h3 id=列出已经部署的函数>列出已经部署的函数<a hidden class=anchor aria-hidden=true href=#列出已经部署的函数>#</a></h3><p>这个会显示有多少函数，多少个副本以及调用次数。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli list
-</code></pre></div><p>现在尝试使用 verbose 命令</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli list --verbose
-</code></pre></div><p>或</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli list -v
-</code></pre></div><p>现在可以在函数旁边看的 Docker 镜像。</p><h3 id=调用函数>调用函数<a hidden class=anchor aria-hidden=true href=#调用函数>#</a></h3><p>选择<code>faas-cli list</code>中看的的函数，比如 <code>markdown</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli invoke markdown
-</code></pre></div><p>然后你会被要求输入一些文本，然后按 Control + D 结束。</p><p>或者也可以使用<code>echo</code> 或 <code>uname -a</code>作为调用的输入。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ echo Hi | faas-cli invoke markdown
+</code></pre></div><h2 id=学习-cli>学习 CLI<a hidden class=anchor aria-hidden=true href=#学习-cli>#</a></h2>
+<p>你现在可以测试 CLI，但是首先看下网关的 URL：</p>
+<p>如果 gateway 没有部署在http://127.0.0.1:8080，你需要按如下的几种方法指定一下：</p>
+<ol>
+<li>设置环境变量<code>OPENFAAS_URL</code>，<code>faas-cli</code>将会在 shell 会话中使用这个。比如：<code>export OPENFAAS_URL=http://openfaas.endpoint.com:8080</code>。这个已经在<a href=./lab1.md>实验 1</a>中设置好了。</li>
+<li>使用<code>-g</code> 或 <code>--gateway</code>指定正确的端点：<code>faas deploy --gateway http://openfaas.endpoint.com:8080</code>。</li>
+<li>在 YAML 文件中，在<code>provider:</code>下修改一下<code>gateway:</code>。</li>
+</ol>
+<h3 id=列出已经部署的函数>列出已经部署的函数<a hidden class=anchor aria-hidden=true href=#列出已经部署的函数>#</a></h3>
+<p>这个会显示有多少函数，多少个副本以及调用次数。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli list
+</code></pre></div><p>现在尝试使用 verbose 命令</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli list --verbose
+</code></pre></div><p>或</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli list -v
+</code></pre></div><p>现在可以在函数旁边看的 Docker 镜像。</p>
+<h3 id=调用函数>调用函数<a hidden class=anchor aria-hidden=true href=#调用函数>#</a></h3>
+<p>选择<code>faas-cli list</code>中看的的函数，比如 <code>markdown</code>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli invoke markdown
+</code></pre></div><p>然后你会被要求输入一些文本，然后按 Control + D 结束。</p>
+<p>或者也可以使用<code>echo</code> 或 <code>uname -a</code>作为调用的输入。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ echo Hi | faas-cli invoke markdown
 
 $ uname -a | faas-cli invoke markdown
-</code></pre></div><p>你甚至可以使用一个 HTML 文件：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git clone https://github.com/openfaas/workshop <span style=color:#ae81ff>\
+</code></pre></div><p>你甚至可以使用一个 HTML 文件：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git clone https://github.com/openfaas/workshop <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>   <span style=color:#f92672>&amp;&amp;</span> cd workshop
 
 $ cat lab2.md | faas-cli invoke markdown
-</code></pre></div><h2 id=监控面板>监控面板<a hidden class=anchor aria-hidden=true href=#监控面板>#</a></h2><p>OpenFaas 使用 Prometheus 监控函数的指标。这些指标可以通过<a href=https://grafana.com>Grafana</a>变成一个可视化的仪表盘。</p><p>在 OpenFaaS 的 Kubernetes 命名空间下运行 Grafana：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl -n openfaas run <span style=color:#ae81ff>\
+</code></pre></div><h2 id=监控面板>监控面板<a hidden class=anchor aria-hidden=true href=#监控面板>#</a></h2>
+<p>OpenFaas 使用 Prometheus 监控函数的指标。这些指标可以通过<a href=https://grafana.com>Grafana</a>变成一个可视化的仪表盘。</p>
+<p>在 OpenFaaS 的 Kubernetes 命名空间下运行 Grafana：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl -n openfaas run <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--image<span style=color:#f92672>=</span>stefanprodan/faas-grafana:4.6.3 <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--port<span style=color:#f92672>=</span><span style=color:#ae81ff>3000</span> <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>grafana
-</code></pre></div><p>通过 NodePort 暴露：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl -n openfaas expose pod grafana <span style=color:#ae81ff>\
+</code></pre></div><p>通过 NodePort 暴露：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl -n openfaas expose pod grafana <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--type<span style=color:#f92672>=</span>NodePort <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--name<span style=color:#f92672>=</span>grafana
-</code></pre></div><p>找到 Grafana 的 node port 地址</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ GRAFANA_PORT<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>kubectl -n openfaas get svc grafana -o jsonpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{.spec.ports[0].nodePort}&#34;</span><span style=color:#66d9ef>)</span>
+</code></pre></div><p>找到 Grafana 的 node port 地址</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ GRAFANA_PORT<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>kubectl -n openfaas get svc grafana -o jsonpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{.spec.ports[0].nodePort}&#34;</span><span style=color:#66d9ef>)</span>
 $ GRAFANA_URL<span style=color:#f92672>=</span>http://IP_ADDRESS:$GRAFANA_PORT/dashboard/db/openfaas
-</code></pre></div><p>其中 <code>IP_ADDRESS</code> 就是 Kubernetes 的对应 IP。</p><p>或者你也可以用端口转发命令，这样就可以在<code>http://127.0.0.1:3000</code>Grafana。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ kubectl port-forward pod/grafana 3000:3000 -n openfaas
-</code></pre></div><p>如果使用 Kubernetes 1.17 或更高版本，请使用<code>deploy/grafana</code> ，而不是用 <code>pod/</code> 。</p><p>创建服务之后，在浏览器中打开 Grafana，然后输入用户名<code>admin</code> 和密码 <code>admin</code>登录，并以 <code>$GRAFANA_URL</code>找到之前已经做好的 OpenFaaS 仪表盘。</p><p></p><p><em>Pictured: example of an OpenFaaS dashboard with Grafana</em></p><p>现在进入 <a href=./lab3.md>实验 3</a></p></div><footer class=post-footer><nav class=paginav><a class=next href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/><span class=title>Next Page »</span><br><span>Openfaas Workshop Lab1b</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+</code></pre></div><p>其中 <code>IP_ADDRESS</code> 就是 Kubernetes 的对应 IP。</p>
+<p>或者你也可以用端口转发命令，这样就可以在<code>http://127.0.0.1:3000</code>Grafana。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ kubectl port-forward pod/grafana 3000:3000 -n openfaas
+</code></pre></div><p>如果使用 Kubernetes 1.17 或更高版本，请使用<code>deploy/grafana</code> ，而不是用 <code>pod/</code> 。</p>
+<p>创建服务之后，在浏览器中打开 Grafana，然后输入用户名<code>admin</code> 和密码 <code>admin</code>登录，并以 <code>$GRAFANA_URL</code>找到之前已经做好的 OpenFaaS 仪表盘。</p>
+<p></p>
+<p><em>Pictured: example of an OpenFaaS dashboard with Grafana</em></p>
+<p>现在进入 <a href=./lab3.md>实验 3</a></p>
+</div>
+<footer class=post-footer>
+<nav class=paginav>
+<a class=prev href=https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/>
+<span class=title>« Prev Page</span>
+<br>
+<span>如何从零开始写一个静态网站生成器</span>
+</a>
+<a class=next href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/>
+<span class=title>Next Page »</span>
+<br>
+<span>Openfaas Workshop Lab1b</span>
+</a>
+</nav>
+</footer>
+</article>
+</main><footer class=footer>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script><script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
+<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</button>
+</a>
+<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

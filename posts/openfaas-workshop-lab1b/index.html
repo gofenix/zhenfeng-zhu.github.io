@@ -1,63 +1,320 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Openfaas Workshop Lab1b | Go Data</title><meta name=keywords content><meta name=description content="Desc Text."><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/><link href=/assets/css/stylesheet.min.273d297e8e2096cd41415928bf1a2bd639dc59b3c2bd13c640f55ca202f0cc69.css integrity="sha256-Jz0pfo4gls1BQVkovxor1jncWbPCvRPGQPVcogLwzGk=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.82.0"><meta property="og:title" content="Openfaas Workshop Lab1b"><meta property="og:description" content="Desc Text."><meta property="og:type" content="article"><meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="article:published_time" content="2021-03-30T09:55:20+08:00"><meta property="article:modified_time" content="2021-03-30T09:55:20+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="Openfaas Workshop Lab1b"><meta name=twitter:description content="Desc Text."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Openfaas Workshop Lab1b","item":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop Lab1b","name":"Openfaas Workshop Lab1b","description":"实验 1 - 使用 Kubernetes 设置 OpenFaaS 安装 kubectl 使用下面的说明或官方文档为您的操作系统安装kubectl。\n Linux  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl …","keywords":[],"articleBody":"实验 1 - 使用 Kubernetes 设置 OpenFaaS 安装 kubectl 使用下面的说明或官方文档为您的操作系统安装kubectl。\n Linux  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  MacOS  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  Windows  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/windows/amd64/kubectl.exe chmod +x kubectl.exe mkdir -p $HOME/bin/ mv kubectl $HOME/bin/ 设置 Kubernetes 集群 您可以在使用 Kubernetes 时遵循实验，但您可能需要在此过程中进行一些小的更改。网关的服务地址从http://gateway:8080 更改为http://gateway.openfaas:8080。尽可能记录这些差异，并在每个实验室提供替代方案。\n在笔记本电脑上创建本地集群 k3s 和 k3d 如果您的计算机上有 Docker，那么您可以使用 Rancher Labs 的 k3d。它安装了一个名为 k3s 的 Kubernetes 轻量级版本，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的计算机上工作。\n  安装 k3d\n  启动一个集群\n   k3d cluster create CLUSTER_NAME 创建一个新的单节点集群 (= 1 个运行 k3s 的容器+1 个负载均衡器容器) k3d kubeconfig merge CLUSTER_NAME --switch-context 更新默认的 kubeconfig 并且 切换到当前的上下文。 执行一下命令，比如 kubectl get pods --all-namespaces 如果你想要删除一个集群 k3d cluster delete CLUSTER_NAME  Docker for Mac  安装 Docker for Mac   请注意，Kubernetes 仅适用于 Mac 17.12 CE 及更高版本的 Docker\n 使用 Minikube   要安装 Minikube，请根据您的平台从 latest release 进行下载安装。\n  现在通过如下命令启动 Minikube\n  $ minikube start Minikube VM 通过一个仅限主机的 IP 地址暴露给主机系统。通过minikube ip检测这个 IP。 这是稍后将用于网关 URL 的 IP。\n 注意： Minikube 还需要一个 Hypervisor，如 VirtualBox 或 Hyperkit（在 MacOS 上）。请遵循 Minikube 说明和文档\n 在云上创建远程集群 您可以在云中创建远程集群，享受与本地开发相同的体验，同时节省 RAM/CPU 和电池。运行集群 1-2 天的成本是最低的。\n在 DigitalOcean 上运行 Kubernetes 服务 您可以使用免费学分通过 DigitalOcean 的 UI 创建集群。\n然后，DigitalOcean 的 dashboard 将指导您如何配置用于实验室的kubectl 和KUBECONFIG 文件。\n 申请您的免费信用-30 天内的 50 美元信用。  即使您已经申请了免费信用，2-3 个节点集群 24-48 小时的运行成本也是可以忽略不计的。\n  单击 dashboard 左侧面板的 Kubernetes， 然后点击 “Enable Limited Access”\n  登录后, 单击 Kubernetes 菜单创建一个集群。\n  建议使用最新的 Kubernetes 版本和选择最近的数据中心以最大限度地减少延迟。\n 在 “Add node pool(s)” 下面  使用 2x 4GB / 2vCPU\n 注意：如果需要，您可以在以后添加更多容量。\n   下载 doctl CLI， 并且放到自己的路径下面。\n  创建 API Key\n  跟踪 API key (复制到剪贴板)\n 授权 CLI  $ doctl auth init 粘贴 API key\n 现在获取集群的名称：  $ doctl k8s cluster list GUID workshop-lon1 nyc1 1.13.5-do.1 provisioning workshop-lon1-1  保存一个配置文件， 这样kubectl 就可以指向一个新集群：  $ doctl k8s cluster kubeconfig save workshop-lon1 现在需要将 Kubernetes 上下文切换到指向新集群。\n如果在kubectl config get-contexts中找不到高亮显示的集群名称，则使用kubectl config set-context 。\nRun on GKE (Google Kubernetes Engine) 登录谷歌云，创建一个项目并为其启用计费。如果你没有账户，你可以在这里注册here。\n安装 Google Cloud SDK - 这将可以使用 gcloud 和 kubectl 命令。 对于 windows，请参考 documentation.\n安装 gcloud 命令之后，通过gcloud init配置默认项目、计算区域等（将 PROJECT_ID 替换为您自己的项目）。\n$ gcloud config set project PROJECT_ID $ gcloud config set compute/region us-central1 $ gcloud config set compute/zone us-central1-a 启用 Kubernetes service:\n$ gcloud services enable container.googleapis.com 安装 kubectl:\ngcloud components install kubectl 创建 Kubernetes cluster:\n$ gcloud container clusters create openfaas \\ --zone=us-central1-a \\ --num-nodes=1 \\ --machine-type=n1-standard-2 \\ --disk-size=30 \\ --no-enable-cloud-logging 给kubectl设置 credentials:\n$ gcloud container clusters get-credentials openfaas 创建一个集群管理员：\n$ kubectl create clusterrolebinding \"cluster-admin-$(whoami)\" \\ --clusterrole=cluster-admin \\ --user=\"$(gcloud config get-value core/account)\" 现在验证 kubectl 已经被配置到了 GKE 集群：\n$ kubectl get nodes NAME STATUS ROLES AGE VERSION gke-name-default-pool-eceef152-qjmt Ready  1h v1.10.7-gke.2 部署 OpenFaaS 部署 OpenFaaS 的说明会不时更改，因为我们努力让这变得更容易。\n安装 OpenFaaS 有三种安装 OpenFaaS 的方法，您可以选择对您和您的团队有意义的方法。在这个研讨会中，我们将使用官方安装程序arkade。\n  arkade 应用安装 - arkade 使用官方的 helm chart 安装 OpenFaaS。 它还可以提供其他具有用户友好型 CLI 的软件，比如 cert-manager 和 nginx-ingress。 这是启动和运行的最简单、最快的方法。\n  Helm chart - 易于通过 YAML 或 CLI 标志进行配置。对于那些在限制性环境中工作的人来说，也存在安全选项， 比如 helm template 或 helm 3。\n  普通 YAML 文件 - 硬编码 settings/values。如 Kustomise 可以提供自定义设置。\n  arkade  获取 arkade  For MacOS / Linux:\ncurl -SLsf https://dl.get-arkade.dev/ | sudo sh For Windows:\ncurl -SLsf https://dl.get-arkade.dev/ | sh  安装 OpenFaaS  如果使用提供负载均衡器的托管云 Kubernetes 服务，则运行以下操作：\narkade install openfaas --load-balancer  注意：'–load-balancer’标志默认为false，因此需要通过传递该标志给云厂商。\n 如果使用本地 Kubernetes 群集或 VM，请运行：\narkade install openfaas helm (高级) 如果您愿意，您可以使用[ helm chart。\n登录 OpenFaaS gateway  检查 gateway 已经可用  kubectl rollout status -n openfaas deploy/gateway 如果您使用的是笔记本电脑、VM 或任何其他类型的 Kubernetes 发行版，请改为运行以下内容：\nkubectl port-forward svc/gateway -n openfaas 8080:8080 此命令将打开一条从 Kubernetes 集群到本地计算机的隧道，以便您可以访问 OpenFaaS 网关。还有其他方法可以访问 OpenFaaS，但这超出了本研讨会的范围。\nGateway URL 是： http://127.0.0.1:8080\n如果使用托管云 Kubernetes 服务，则从下面的命令中的EXTERNAL-IP 字段获取 LoadBalancer 的 IP 地址或 DNS 地址。\nkubectl get svc -o wide gateway-external -n openfaas  登录：  export OPENFAAS_URL=\"\" # Populate as above # This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=\"{.data.basic-auth-password}\" | base64 --decode; echo) # This command logs in and saves a file to ~/.openfaas/config.yml echo -n $PASSWORD | faas-cli login --username admin --password-stdin  检查 faas-cli list：  faas-cli list 永久保存您的 OpenFaaS URL 编辑 ~/.bashrc or ~/.bash_profile 。\n现在添加以下内容——根据上面看到的内容更改 URL 地址。\nexport OPENFAAS_URL=\"\" # populate as above 现在进入 实验 2\n","wordCount":"595","inLanguage":"en","datePublished":"2021-03-30T09:55:20+08:00","dateModified":"2021-03-30T09:55:20+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a></div><h1 class=post-title>Openfaas Workshop Lab1b</h1><div class=post-description>Desc Text.</div><div class=post-meta>March 30, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</div></header><div class=post-content><h1 id=实验-1---使用-kubernetes-设置-openfaas>实验 1 - 使用 Kubernetes 设置 OpenFaaS<a hidden class=anchor aria-hidden=true href=#实验-1---使用-kubernetes-设置-openfaas>#</a></h1><p></p><h2 id=安装-kubectl>安装 <code>kubectl</code><a hidden class=anchor aria-hidden=true href=#安装-kubectl>#</a></h2><p>使用下面的说明或<a href=https://kubernetes.io/docs/tasks/tools/install-kubectl/>官方文档</a>为您的操作系统安装<code>kubectl</code>。</p><ul><li>Linux</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export VER<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style=color:#66d9ef>)</span>
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Openfaas Workshop Lab1b | Go Data</title>
+<meta name=keywords content>
+<meta name=description content="Desc Text.">
+<meta name=author content="Lucas">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/>
+<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.86.0">
+<meta property="og:title" content="Openfaas Workshop Lab1b">
+<meta property="og:description" content="Desc Text.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/">
+<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta property="article:published_time" content="2021-03-30T09:55:20+08:00">
+<meta property="article:modified_time" content="2021-03-30T09:55:20+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta name=twitter:title content="Openfaas Workshop Lab1b">
+<meta name=twitter:description content="Desc Text.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Openfaas Workshop Lab1b","item":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop Lab1b","name":"Openfaas Workshop Lab1b","description":"实验 1 - 使用 Kubernetes 设置 OpenFaaS 安装 kubectl 使用下面的说明或官方文档为您的操作系统安装kubectl。\n Linux  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl …","keywords":[],"articleBody":"实验 1 - 使用 Kubernetes 设置 OpenFaaS 安装 kubectl 使用下面的说明或官方文档为您的操作系统安装kubectl。\n Linux  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  MacOS  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  Windows  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/windows/amd64/kubectl.exe chmod +x kubectl.exe mkdir -p $HOME/bin/ mv kubectl $HOME/bin/ 设置 Kubernetes 集群 您可以在使用 Kubernetes 时遵循实验，但您可能需要在此过程中进行一些小的更改。网关的服务地址从http://gateway:8080 更改为http://gateway.openfaas:8080。尽可能记录这些差异，并在每个实验室提供替代方案。\n在笔记本电脑上创建本地集群 k3s 和 k3d 如果您的计算机上有 Docker，那么您可以使用 Rancher Labs 的 k3d。它安装了一个名为 k3s 的 Kubernetes 轻量级版本，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的计算机上工作。\n  安装 k3d\n  启动一个集群\n   k3d cluster create CLUSTER_NAME 创建一个新的单节点集群 (= 1 个运行 k3s 的容器+1 个负载均衡器容器) k3d kubeconfig merge CLUSTER_NAME --switch-context 更新默认的 kubeconfig 并且 切换到当前的上下文。 执行一下命令，比如 kubectl get pods --all-namespaces 如果你想要删除一个集群 k3d cluster delete CLUSTER_NAME  Docker for Mac  安装 Docker for Mac   请注意，Kubernetes 仅适用于 Mac 17.12 CE 及更高版本的 Docker\n 使用 Minikube   要安装 Minikube，请根据您的平台从 latest release 进行下载安装。\n  现在通过如下命令启动 Minikube\n  $ minikube start Minikube VM 通过一个仅限主机的 IP 地址暴露给主机系统。通过minikube ip检测这个 IP。 这是稍后将用于网关 URL 的 IP。\n 注意： Minikube 还需要一个 Hypervisor，如 VirtualBox 或 Hyperkit（在 MacOS 上）。请遵循 Minikube 说明和文档\n 在云上创建远程集群 您可以在云中创建远程集群，享受与本地开发相同的体验，同时节省 RAM/CPU 和电池。运行集群 1-2 天的成本是最低的。\n在 DigitalOcean 上运行 Kubernetes 服务 您可以使用免费学分通过 DigitalOcean 的 UI 创建集群。\n然后，DigitalOcean 的 dashboard 将指导您如何配置用于实验室的kubectl 和KUBECONFIG 文件。\n 申请您的免费信用-30 天内的 50 美元信用。  即使您已经申请了免费信用，2-3 个节点集群 24-48 小时的运行成本也是可以忽略不计的。\n  单击 dashboard 左侧面板的 Kubernetes， 然后点击 “Enable Limited Access”\n  登录后, 单击 Kubernetes 菜单创建一个集群。\n  建议使用最新的 Kubernetes 版本和选择最近的数据中心以最大限度地减少延迟。\n 在 “Add node pool(s)” 下面  使用 2x 4GB / 2vCPU\n 注意：如果需要，您可以在以后添加更多容量。\n   下载 doctl CLI， 并且放到自己的路径下面。\n  创建 API Key\n  跟踪 API key (复制到剪贴板)\n 授权 CLI  $ doctl auth init 粘贴 API key\n 现在获取集群的名称：  $ doctl k8s cluster list GUID workshop-lon1 nyc1 1.13.5-do.1 provisioning workshop-lon1-1  保存一个配置文件， 这样kubectl 就可以指向一个新集群：  $ doctl k8s cluster kubeconfig save workshop-lon1 现在需要将 Kubernetes 上下文切换到指向新集群。\n如果在kubectl config get-contexts中找不到高亮显示的集群名称，则使用kubectl config set-context 。\nRun on GKE (Google Kubernetes Engine) 登录谷歌云，创建一个项目并为其启用计费。如果你没有账户，你可以在这里注册here。\n安装 Google Cloud SDK - 这将可以使用 gcloud 和 kubectl 命令。 对于 windows，请参考 documentation.\n安装 gcloud 命令之后，通过gcloud init配置默认项目、计算区域等（将 PROJECT_ID 替换为您自己的项目）。\n$ gcloud config set project PROJECT_ID $ gcloud config set compute/region us-central1 $ gcloud config set compute/zone us-central1-a 启用 Kubernetes service:\n$ gcloud services enable container.googleapis.com 安装 kubectl:\ngcloud components install kubectl 创建 Kubernetes cluster:\n$ gcloud container clusters create openfaas \\ --zone=us-central1-a \\ --num-nodes=1 \\ --machine-type=n1-standard-2 \\ --disk-size=30 \\ --no-enable-cloud-logging 给kubectl设置 credentials:\n$ gcloud container clusters get-credentials openfaas 创建一个集群管理员：\n$ kubectl create clusterrolebinding \"cluster-admin-$(whoami)\" \\ --clusterrole=cluster-admin \\ --user=\"$(gcloud config get-value core/account)\" 现在验证 kubectl 已经被配置到了 GKE 集群：\n$ kubectl get nodes NAME STATUS ROLES AGE VERSION gke-name-default-pool-eceef152-qjmt Ready  1h v1.10.7-gke.2 部署 OpenFaaS 部署 OpenFaaS 的说明会不时更改，因为我们努力让这变得更容易。\n安装 OpenFaaS 有三种安装 OpenFaaS 的方法，您可以选择对您和您的团队有意义的方法。在这个研讨会中，我们将使用官方安装程序arkade。\n  arkade 应用安装 - arkade 使用官方的 helm chart 安装 OpenFaaS。 它还可以提供其他具有用户友好型 CLI 的软件，比如 cert-manager 和 nginx-ingress。 这是启动和运行的最简单、最快的方法。\n  Helm chart - 易于通过 YAML 或 CLI 标志进行配置。对于那些在限制性环境中工作的人来说，也存在安全选项， 比如 helm template 或 helm 3。\n  普通 YAML 文件 - 硬编码 settings/values。如 Kustomise 可以提供自定义设置。\n  arkade  获取 arkade  For MacOS / Linux:\ncurl -SLsf https://dl.get-arkade.dev/ | sudo sh For Windows:\ncurl -SLsf https://dl.get-arkade.dev/ | sh  安装 OpenFaaS  如果使用提供负载均衡器的托管云 Kubernetes 服务，则运行以下操作：\narkade install openfaas --load-balancer  注意：'–load-balancer’标志默认为false，因此需要通过传递该标志给云厂商。\n 如果使用本地 Kubernetes 群集或 VM，请运行：\narkade install openfaas helm (高级) 如果您愿意，您可以使用[ helm chart。\n登录 OpenFaaS gateway  检查 gateway 已经可用  kubectl rollout status -n openfaas deploy/gateway 如果您使用的是笔记本电脑、VM 或任何其他类型的 Kubernetes 发行版，请改为运行以下内容：\nkubectl port-forward svc/gateway -n openfaas 8080:8080 此命令将打开一条从 Kubernetes 集群到本地计算机的隧道，以便您可以访问 OpenFaaS 网关。还有其他方法可以访问 OpenFaaS，但这超出了本研讨会的范围。\nGateway URL 是： http://127.0.0.1:8080\n如果使用托管云 Kubernetes 服务，则从下面的命令中的EXTERNAL-IP 字段获取 LoadBalancer 的 IP 地址或 DNS 地址。\nkubectl get svc -o wide gateway-external -n openfaas  登录：  export OPENFAAS_URL=\"\" # Populate as above # This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=\"{.data.basic-auth-password}\" | base64 --decode; echo) # This command logs in and saves a file to ~/.openfaas/config.yml echo -n $PASSWORD | faas-cli login --username admin --password-stdin  检查 faas-cli list：  faas-cli list 永久保存您的 OpenFaaS URL 编辑 ~/.bashrc or ~/.bash_profile 。\n现在添加以下内容——根据上面看到的内容更改 URL 地址。\nexport OPENFAAS_URL=\"\" # populate as above 现在进入 实验 2\n","wordCount":"595","inLanguage":"en","datePublished":"2021-03-30T09:55:20+08:00","dateModified":"2021-03-30T09:55:20+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<noscript>
+<style type=text/css>#theme-toggle,.top-link{display:none}</style>
+</noscript>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/about title=About>
+<span>About</span>
+</a>
+</li>
+<li>
+<a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
+<span>🔍</span>
+</a>
+</li></ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs>
+<a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a>
+</div>
+<h1 class=post-title>
+Openfaas Workshop Lab1b
+</h1>
+<div class=post-description>
+Desc Text.
+</div>
+<div class=post-meta>
+March 30, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
+</div>
+</header>
+<div class=post-content>
+<h1 id=实验-1---使用-kubernetes-设置-openfaas>实验 1 - 使用 Kubernetes 设置 OpenFaaS<a hidden class=anchor aria-hidden=true href=#实验-1---使用-kubernetes-设置-openfaas>#</a></h1>
+<p></p>
+<h2 id=安装-kubectl>安装 <code>kubectl</code><a hidden class=anchor aria-hidden=true href=#安装-kubectl>#</a></h2>
+<p>使用下面的说明或<a href=https://kubernetes.io/docs/tasks/tools/install-kubectl/>官方文档</a>为您的操作系统安装<code>kubectl</code>。</p>
+<ul>
+<li>Linux</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export VER<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style=color:#66d9ef>)</span>
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl
 chmod +x kubectl
 mv kubectl /usr/local/bin/
-</code></pre></div><ul><li>MacOS</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export VER<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style=color:#66d9ef>)</span>
+</code></pre></div><ul>
+<li>MacOS</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export VER<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style=color:#66d9ef>)</span>
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl
 chmod +x kubectl
 mv kubectl /usr/local/bin/
-</code></pre></div><ul><li>Windows</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export VER<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style=color:#66d9ef>)</span>
+</code></pre></div><ul>
+<li>Windows</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export VER<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style=color:#66d9ef>)</span>
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/windows/amd64/kubectl.exe
 chmod +x kubectl.exe
 mkdir -p $HOME/bin/
 mv kubectl $HOME/bin/
-</code></pre></div><h2 id=设置-kubernetes-集群>设置 Kubernetes 集群<a hidden class=anchor aria-hidden=true href=#设置-kubernetes-集群>#</a></h2><p>您可以在使用 Kubernetes 时遵循实验，但您可能需要在此过程中进行一些小的更改。网关的服务地址从<code>http://gateway:8080</code> 更改为<code>http://gateway.openfaas:8080</code>。尽可能记录这些差异，并在每个实验室提供替代方案。</p><h3 id=在笔记本电脑上创建本地集群>在笔记本电脑上创建本地集群<a hidden class=anchor aria-hidden=true href=#在笔记本电脑上创建本地集群>#</a></h3><h4 id=_k3s-和-k3d_><em>k3s 和 k3d</em><a hidden class=anchor aria-hidden=true href=#_k3s-和-k3d_>#</a></h4><p>如果您的计算机上有 Docker，那么您可以使用 Rancher Labs 的 k3d。它安装了一个名为 k3s 的 Kubernetes 轻量级版本，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的计算机上工作。</p><ul><li><p><a href=https://github.com/rancher/k3d>安装 k3d</a></p></li><li><p>启动一个集群</p></li></ul><ol><li><code>k3d cluster create CLUSTER_NAME</code> 创建一个新的单节点集群 (= 1 个运行 k3s 的容器+1 个负载均衡器容器)</li><li><code>k3d kubeconfig merge CLUSTER_NAME --switch-context</code> 更新默认的 kubeconfig 并且 切换到当前的上下文。</li><li>执行一下命令，比如 <code>kubectl get pods --all-namespaces</code>
-如果你想要删除一个集群 <code>k3d cluster delete CLUSTER_NAME</code></li></ol><h4 id=_docker-for-mac_><em>Docker for Mac</em><a hidden class=anchor aria-hidden=true href=#_docker-for-mac_>#</a></h4><ul><li><a href=https://docs.docker.com/v17.12/docker-for-mac/install/>安装 Docker for Mac</a></li></ul><blockquote><p>请注意，Kubernetes 仅适用于 Mac 17.12 CE 及更高版本的 Docker</p></blockquote><h4 id=_使用-minikube_><em>使用 Minikube</em><a hidden class=anchor aria-hidden=true href=#_使用-minikube_>#</a></h4><ul><li><p>要安装 Minikube，请根据您的平台从 <a href=https://github.com/kubernetes/minikube/releases>latest release</a> 进行下载安装。</p></li><li><p>现在通过如下命令启动 Minikube</p></li></ul><pre><code>$ minikube start
+</code></pre></div><h2 id=设置-kubernetes-集群>设置 Kubernetes 集群<a hidden class=anchor aria-hidden=true href=#设置-kubernetes-集群>#</a></h2>
+<p>您可以在使用 Kubernetes 时遵循实验，但您可能需要在此过程中进行一些小的更改。网关的服务地址从<code>http://gateway:8080</code> 更改为<code>http://gateway.openfaas:8080</code>。尽可能记录这些差异，并在每个实验室提供替代方案。</p>
+<h3 id=在笔记本电脑上创建本地集群>在笔记本电脑上创建本地集群<a hidden class=anchor aria-hidden=true href=#在笔记本电脑上创建本地集群>#</a></h3>
+<h4 id=_k3s-和-k3d_><em>k3s 和 k3d</em><a hidden class=anchor aria-hidden=true href=#_k3s-和-k3d_>#</a></h4>
+<p>如果您的计算机上有 Docker，那么您可以使用 Rancher Labs 的 k3d。它安装了一个名为 k3s 的 Kubernetes 轻量级版本，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的计算机上工作。</p>
+<ul>
+<li>
+<p><a href=https://github.com/rancher/k3d>安装 k3d</a></p>
+</li>
+<li>
+<p>启动一个集群</p>
+</li>
+</ul>
+<ol>
+<li><code>k3d cluster create CLUSTER_NAME</code> 创建一个新的单节点集群 (= 1 个运行 k3s 的容器+1 个负载均衡器容器)</li>
+<li><code>k3d kubeconfig merge CLUSTER_NAME --switch-context</code> 更新默认的 kubeconfig 并且 切换到当前的上下文。</li>
+<li>执行一下命令，比如 <code>kubectl get pods --all-namespaces</code>
+如果你想要删除一个集群 <code>k3d cluster delete CLUSTER_NAME</code></li>
+</ol>
+<h4 id=_docker-for-mac_><em>Docker for Mac</em><a hidden class=anchor aria-hidden=true href=#_docker-for-mac_>#</a></h4>
+<ul>
+<li><a href=https://docs.docker.com/v17.12/docker-for-mac/install/>安装 Docker for Mac</a></li>
+</ul>
+<blockquote>
+<p>请注意，Kubernetes 仅适用于 Mac 17.12 CE 及更高版本的 Docker</p>
+</blockquote>
+<h4 id=_使用-minikube_><em>使用 Minikube</em><a hidden class=anchor aria-hidden=true href=#_使用-minikube_>#</a></h4>
+<ul>
+<li>
+<p>要安装 Minikube，请根据您的平台从 <a href=https://github.com/kubernetes/minikube/releases>latest release</a> 进行下载安装。</p>
+</li>
+<li>
+<p>现在通过如下命令启动 Minikube</p>
+</li>
+</ul>
+<pre><code>$ minikube start
 </code></pre><p>Minikube VM 通过一个仅限主机的 IP 地址暴露给主机系统。通过<code>minikube ip</code>检测这个 IP。
-这是稍后将用于网关 URL 的 IP。</p><blockquote><p>注意： Minikube 还需要一个 Hypervisor，如 VirtualBox 或 Hyperkit（在 MacOS 上）。请遵循 Minikube 说明和文档</p></blockquote><h3 id=在云上创建远程集群>在云上创建远程集群<a hidden class=anchor aria-hidden=true href=#在云上创建远程集群>#</a></h3><p>您可以在云中创建远程集群，享受与本地开发相同的体验，同时节省 RAM/CPU 和电池。运行集群 1-2 天的成本是最低的。</p><h4 id=_在-digitalocean-上运行-kubernetes-服务_><em>在 DigitalOcean 上运行 Kubernetes 服务</em><a hidden class=anchor aria-hidden=true href=#_在-digitalocean-上运行-kubernetes-服务_>#</a></h4><p>您可以使用免费学分通过 DigitalOcean 的 UI 创建集群。</p><p>然后，DigitalOcean 的 dashboard 将指导您如何配置用于实验室的<code>kubectl</code> 和<code>KUBECONFIG</code> 文件。</p><ul><li><a href=https://m.do.co/c/8d4e75e9886f>申请您的免费信用-30 天内的 50 美元信用。</a></li></ul><p>即使您已经申请了免费信用，2-3 个节点集群 24-48 小时的运行成本也是可以忽略不计的。</p><ul><li><p>单击 dashboard 左侧面板的 <em>Kubernetes</em>， 然后点击 &ldquo;Enable Limited Access&rdquo;</p></li><li><p>登录后, 单击 <em>Kubernetes</em> 菜单创建一个集群。</p></li></ul><p>建议使用最新的 Kubernetes 版本和选择最近的数据中心以最大限度地减少延迟。</p><ul><li>在 &ldquo;Add node pool(s)&rdquo; 下面</li></ul><p>使用 2x 4GB / 2vCPU</p><blockquote><p>注意：如果需要，您可以在以后添加更多容量。</p></blockquote><ul><li><p>下载 <a href=https://github.com/digitalocean/doctl#installing-doctl>doctl</a> CLI， 并且放到自己的路径下面。</p></li><li><p>创建 <a href=https://cloud.digitalocean.com/account/api/tokens/new>API Key</a></p></li></ul><p>跟踪 API key (复制到剪贴板)</p><ul><li>授权 CLI</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ doctl auth init
-</code></pre></div><p>粘贴 API key</p><ul><li>现在获取集群的名称：</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ doctl k8s cluster list
+这是稍后将用于网关 URL 的 IP。</p>
+<blockquote>
+<p>注意： Minikube 还需要一个 Hypervisor，如 VirtualBox 或 Hyperkit（在 MacOS 上）。请遵循 Minikube 说明和文档</p>
+</blockquote>
+<h3 id=在云上创建远程集群>在云上创建远程集群<a hidden class=anchor aria-hidden=true href=#在云上创建远程集群>#</a></h3>
+<p>您可以在云中创建远程集群，享受与本地开发相同的体验，同时节省 RAM/CPU 和电池。运行集群 1-2 天的成本是最低的。</p>
+<h4 id=_在-digitalocean-上运行-kubernetes-服务_><em>在 DigitalOcean 上运行 Kubernetes 服务</em><a hidden class=anchor aria-hidden=true href=#_在-digitalocean-上运行-kubernetes-服务_>#</a></h4>
+<p>您可以使用免费学分通过 DigitalOcean 的 UI 创建集群。</p>
+<p>然后，DigitalOcean 的 dashboard 将指导您如何配置用于实验室的<code>kubectl</code> 和<code>KUBECONFIG</code> 文件。</p>
+<ul>
+<li><a href=https://m.do.co/c/8d4e75e9886f>申请您的免费信用-30 天内的 50 美元信用。</a></li>
+</ul>
+<p>即使您已经申请了免费信用，2-3 个节点集群 24-48 小时的运行成本也是可以忽略不计的。</p>
+<ul>
+<li>
+<p>单击 dashboard 左侧面板的 <em>Kubernetes</em>， 然后点击 &ldquo;Enable Limited Access&rdquo;</p>
+</li>
+<li>
+<p>登录后, 单击 <em>Kubernetes</em> 菜单创建一个集群。</p>
+</li>
+</ul>
+<p>建议使用最新的 Kubernetes 版本和选择最近的数据中心以最大限度地减少延迟。</p>
+<ul>
+<li>在 &ldquo;Add node pool(s)&rdquo; 下面</li>
+</ul>
+<p>使用 2x 4GB / 2vCPU</p>
+<blockquote>
+<p>注意：如果需要，您可以在以后添加更多容量。</p>
+</blockquote>
+<ul>
+<li>
+<p>下载 <a href=https://github.com/digitalocean/doctl#installing-doctl>doctl</a> CLI， 并且放到自己的路径下面。</p>
+</li>
+<li>
+<p>创建 <a href=https://cloud.digitalocean.com/account/api/tokens/new>API Key</a></p>
+</li>
+</ul>
+<p>跟踪 API key (复制到剪贴板)</p>
+<ul>
+<li>授权 CLI</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ doctl auth init
+</code></pre></div><p>粘贴 API key</p>
+<ul>
+<li>现在获取集群的名称：</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ doctl k8s cluster list
 GUID    workshop-lon1      nyc1      1.13.5-do.1    provisioning    workshop-lon1-1
-</code></pre></div><ul><li>保存一个配置文件， 这样<code>kubectl</code> 就可以指向一个新集群：</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ doctl k8s cluster kubeconfig save workshop-lon1
-</code></pre></div><p>现在需要将 Kubernetes 上下文切换到指向新集群。</p><p>如果在<code>kubectl config get-contexts</code>中找不到高亮显示的集群名称，则使用<code>kubectl config set-context &lt;context-name></code>。</p><h4 id=_run-on-gke-google-kubernetes-engine_><em>Run on GKE (Google Kubernetes Engine)</em><a hidden class=anchor aria-hidden=true href=#_run-on-gke-google-kubernetes-engine_>#</a></h4><p>登录谷歌云，创建一个项目并为其启用计费。如果你没有账户，你可以在这里注册<a href=https://cloud.google.com/free/>here</a>。</p><p>安装 <a href=https://cloud.google.com/sdk/docs>Google Cloud SDK</a> - 这将可以使用 <code>gcloud</code> 和 <code>kubectl</code> 命令。
-对于 windows，请参考 <a href=https://cloud.google.com/sdk/docs/#windows>documentation</a>.</p><p>安装 gcloud 命令之后，通过<code>gcloud init</code>配置默认项目、计算区域等（将 PROJECT_ID 替换为您自己的项目）。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gcloud config set project PROJECT_ID
+</code></pre></div><ul>
+<li>保存一个配置文件， 这样<code>kubectl</code> 就可以指向一个新集群：</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ doctl k8s cluster kubeconfig save workshop-lon1
+</code></pre></div><p>现在需要将 Kubernetes 上下文切换到指向新集群。</p>
+<p>如果在<code>kubectl config get-contexts</code>中找不到高亮显示的集群名称，则使用<code>kubectl config set-context &lt;context-name></code>。</p>
+<h4 id=_run-on-gke-google-kubernetes-engine_><em>Run on GKE (Google Kubernetes Engine)</em><a hidden class=anchor aria-hidden=true href=#_run-on-gke-google-kubernetes-engine_>#</a></h4>
+<p>登录谷歌云，创建一个项目并为其启用计费。如果你没有账户，你可以在这里注册<a href=https://cloud.google.com/free/>here</a>。</p>
+<p>安装 <a href=https://cloud.google.com/sdk/docs>Google Cloud SDK</a> - 这将可以使用 <code>gcloud</code> 和 <code>kubectl</code> 命令。
+对于 windows，请参考 <a href=https://cloud.google.com/sdk/docs/#windows>documentation</a>.</p>
+<p>安装 gcloud 命令之后，通过<code>gcloud init</code>配置默认项目、计算区域等（将 PROJECT_ID 替换为您自己的项目）。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gcloud config set project PROJECT_ID
 $ gcloud config set compute/region us-central1
 $ gcloud config set compute/zone us-central1-a
-</code></pre></div><p>启用 Kubernetes service:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gcloud services enable container.googleapis.com
-</code></pre></div><p>安装 kubectl:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>gcloud components install kubectl
-</code></pre></div><p>创建 Kubernetes cluster:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gcloud container clusters create openfaas <span style=color:#ae81ff>\
+</code></pre></div><p>启用 Kubernetes service:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gcloud services enable container.googleapis.com
+</code></pre></div><p>安装 kubectl:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>gcloud components install kubectl
+</code></pre></div><p>创建 Kubernetes cluster:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gcloud container clusters create openfaas <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--zone<span style=color:#f92672>=</span>us-central1-a <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--num-nodes<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--machine-type<span style=color:#f92672>=</span>n1-standard-2 <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--disk-size<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span> <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--no-enable-cloud-logging
-</code></pre></div><p>给<code>kubectl</code>设置 credentials:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gcloud container clusters get-credentials openfaas
-</code></pre></div><p>创建一个集群管理员：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ kubectl create clusterrolebinding <span style=color:#e6db74>&#34;cluster-admin-</span><span style=color:#66d9ef>$(</span>whoami<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</code></pre></div><p>给<code>kubectl</code>设置 credentials:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gcloud container clusters get-credentials openfaas
+</code></pre></div><p>创建一个集群管理员：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ kubectl create clusterrolebinding <span style=color:#e6db74>&#34;cluster-admin-</span><span style=color:#66d9ef>$(</span>whoami<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--clusterrole<span style=color:#f92672>=</span>cluster-admin <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--user<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>gcloud config get-value core/account<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
-</code></pre></div><p>现在验证 <code>kubectl</code> 已经被配置到了 GKE 集群：</p><pre><code>$ kubectl get nodes
+</code></pre></div><p>现在验证 <code>kubectl</code> 已经被配置到了 GKE 集群：</p>
+<pre><code>$ kubectl get nodes
 NAME                                   STATUS    ROLES     AGE       VERSION
 gke-name-default-pool-eceef152-qjmt   Ready     &lt;none&gt;    1h        v1.10.7-gke.2
-</code></pre><h2 id=部署-openfaas>部署 OpenFaaS<a hidden class=anchor aria-hidden=true href=#部署-openfaas>#</a></h2><p>部署 OpenFaaS 的说明会不时更改，因为我们努力让这变得更容易。</p><h3 id=安装-openfaas>安装 OpenFaaS<a hidden class=anchor aria-hidden=true href=#安装-openfaas>#</a></h3><p>有三种安装 OpenFaaS 的方法，您可以选择对您和您的团队有意义的方法。在这个研讨会中，我们将使用官方安装程序<code>arkade</code>。</p><ul><li><p><code>arkade 应用安装</code> - arkade 使用官方的 helm chart 安装 OpenFaaS。 它还可以提供其他具有用户友好型 CLI 的软件，比如 <code>cert-manager</code> 和 <code>nginx-ingress</code>。 这是启动和运行的最简单、最快的方法。</p></li><li><p>Helm chart - 易于通过 YAML 或 CLI 标志进行配置。对于那些在限制性环境中工作的人来说，也存在安全选项， 比如 <code>helm template</code> 或 <code>helm 3</code>。</p></li><li><p>普通 YAML 文件 - 硬编码 settings/values。如 Kustomise 可以提供自定义设置。</p></li></ul><h4 id=arkade><code>arkade</code><a hidden class=anchor aria-hidden=true href=#arkade>#</a></h4><ul><li>获取 arkade</li></ul><p>For MacOS / Linux:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>curl -SLsf https://dl.get-arkade.dev/ | sudo sh
-</code></pre></div><p>For Windows:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>curl -SLsf https://dl.get-arkade.dev/ | sh
-</code></pre></div><ul><li>安装 OpenFaaS</li></ul><p>如果使用提供负载均衡器的托管云 Kubernetes 服务，则运行以下操作：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>arkade install openfaas --load-balancer
-</code></pre></div><blockquote><p>注意：'&ndash;load-balancer&rsquo;标志默认为<code>false</code>，因此需要通过传递该标志给云厂商。</p></blockquote><p>如果使用本地 Kubernetes 群集或 VM，请运行：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>arkade install openfaas
-</code></pre></div><h4 id=helm-高级>helm (高级)<a hidden class=anchor aria-hidden=true href=#helm-高级>#</a></h4><p>如果您愿意，您可以使用[ <a href=https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md>helm chart</a>。</p><h3 id=登录-openfaas-gateway>登录 OpenFaaS gateway<a hidden class=anchor aria-hidden=true href=#登录-openfaas-gateway>#</a></h3><ul><li>检查 gateway 已经可用</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl rollout status -n openfaas deploy/gateway
-</code></pre></div><p>如果您使用的是笔记本电脑、VM 或任何其他类型的 Kubernetes 发行版，请改为运行以下内容：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl port-forward svc/gateway -n openfaas 8080:8080
-</code></pre></div><p>此命令将打开一条从 Kubernetes 集群到本地计算机的隧道，以便您可以访问 OpenFaaS 网关。还有其他方法可以访问 OpenFaaS，但这超出了本研讨会的范围。</p><p>Gateway URL 是： <code>http://127.0.0.1:8080</code></p><p>如果使用托管云 Kubernetes 服务，则从下面的命令中的<code>EXTERNAL-IP</code> 字段获取 LoadBalancer 的 IP 地址或 DNS 地址。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl get svc -o wide gateway-external -n openfaas
-</code></pre></div><ul><li>登录：</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export OPENFAAS_URL<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span> <span style=color:#75715e># Populate as above</span>
+</code></pre><h2 id=部署-openfaas>部署 OpenFaaS<a hidden class=anchor aria-hidden=true href=#部署-openfaas>#</a></h2>
+<p>部署 OpenFaaS 的说明会不时更改，因为我们努力让这变得更容易。</p>
+<h3 id=安装-openfaas>安装 OpenFaaS<a hidden class=anchor aria-hidden=true href=#安装-openfaas>#</a></h3>
+<p>有三种安装 OpenFaaS 的方法，您可以选择对您和您的团队有意义的方法。在这个研讨会中，我们将使用官方安装程序<code>arkade</code>。</p>
+<ul>
+<li>
+<p><code>arkade 应用安装</code> - arkade 使用官方的 helm chart 安装 OpenFaaS。 它还可以提供其他具有用户友好型 CLI 的软件，比如 <code>cert-manager</code> 和 <code>nginx-ingress</code>。 这是启动和运行的最简单、最快的方法。</p>
+</li>
+<li>
+<p>Helm chart - 易于通过 YAML 或 CLI 标志进行配置。对于那些在限制性环境中工作的人来说，也存在安全选项， 比如 <code>helm template</code> 或 <code>helm 3</code>。</p>
+</li>
+<li>
+<p>普通 YAML 文件 - 硬编码 settings/values。如 Kustomise 可以提供自定义设置。</p>
+</li>
+</ul>
+<h4 id=arkade><code>arkade</code><a hidden class=anchor aria-hidden=true href=#arkade>#</a></h4>
+<ul>
+<li>获取 arkade</li>
+</ul>
+<p>For MacOS / Linux:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>curl -SLsf https://dl.get-arkade.dev/ | sudo sh
+</code></pre></div><p>For Windows:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>curl -SLsf https://dl.get-arkade.dev/ | sh
+</code></pre></div><ul>
+<li>安装 OpenFaaS</li>
+</ul>
+<p>如果使用提供负载均衡器的托管云 Kubernetes 服务，则运行以下操作：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>arkade install openfaas --load-balancer
+</code></pre></div><blockquote>
+<p>注意：'&ndash;load-balancer&rsquo;标志默认为<code>false</code>，因此需要通过传递该标志给云厂商。</p>
+</blockquote>
+<p>如果使用本地 Kubernetes 群集或 VM，请运行：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>arkade install openfaas
+</code></pre></div><h4 id=helm-高级>helm (高级)<a hidden class=anchor aria-hidden=true href=#helm-高级>#</a></h4>
+<p>如果您愿意，您可以使用[ <a href=https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md>helm chart</a>。</p>
+<h3 id=登录-openfaas-gateway>登录 OpenFaaS gateway<a hidden class=anchor aria-hidden=true href=#登录-openfaas-gateway>#</a></h3>
+<ul>
+<li>检查 gateway 已经可用</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl rollout status -n openfaas deploy/gateway
+</code></pre></div><p>如果您使用的是笔记本电脑、VM 或任何其他类型的 Kubernetes 发行版，请改为运行以下内容：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl port-forward svc/gateway -n openfaas 8080:8080
+</code></pre></div><p>此命令将打开一条从 Kubernetes 集群到本地计算机的隧道，以便您可以访问 OpenFaaS 网关。还有其他方法可以访问 OpenFaaS，但这超出了本研讨会的范围。</p>
+<p>Gateway URL 是： <code>http://127.0.0.1:8080</code></p>
+<p>如果使用托管云 Kubernetes 服务，则从下面的命令中的<code>EXTERNAL-IP</code> 字段获取 LoadBalancer 的 IP 地址或 DNS 地址。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>kubectl get svc -o wide gateway-external -n openfaas
+</code></pre></div><ul>
+<li>登录：</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export OPENFAAS_URL<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span> <span style=color:#75715e># Populate as above</span>
 
 <span style=color:#75715e># This command retrieves your password</span>
 PASSWORD<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>kubectl get secret -n openfaas basic-auth -o jsonpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{.data.basic-auth-password}&#34;</span> | base64 --decode; echo<span style=color:#66d9ef>)</span>
 
 <span style=color:#75715e># This command logs in and saves a file to ~/.openfaas/config.yml</span>
 echo -n $PASSWORD | faas-cli login --username admin --password-stdin
-</code></pre></div><ul><li>检查 <code>faas-cli list</code>：</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>faas-cli list
-</code></pre></div><h3 id=永久保存您的-openfaas-url>永久保存您的 OpenFaaS URL<a hidden class=anchor aria-hidden=true href=#永久保存您的-openfaas-url>#</a></h3><p>编辑 <code>~/.bashrc</code> or <code>~/.bash_profile</code> 。</p><p>现在添加以下内容——根据上面看到的内容更改 URL 地址。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export OPENFAAS_URL<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span> <span style=color:#75715e># populate as above</span>
-</code></pre></div><p>现在进入 <a href=lab2.md>实验 2</a></p></div><footer class=post-footer><nav class=paginav><a class=prev href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/><span class=title>« Prev Page</span><br><span>Openfaas Workshop Lab2</span></a>
-<a class=next href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/><span class=title>Next Page »</span><br><span>Openfaas Workshop Lab1</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+</code></pre></div><ul>
+<li>检查 <code>faas-cli list</code>：</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>faas-cli list
+</code></pre></div><h3 id=永久保存您的-openfaas-url>永久保存您的 OpenFaaS URL<a hidden class=anchor aria-hidden=true href=#永久保存您的-openfaas-url>#</a></h3>
+<p>编辑 <code>~/.bashrc</code> or <code>~/.bash_profile</code> 。</p>
+<p>现在添加以下内容——根据上面看到的内容更改 URL 地址。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>export OPENFAAS_URL<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span> <span style=color:#75715e># populate as above</span>
+</code></pre></div><p>现在进入 <a href=lab2.md>实验 2</a></p>
+</div>
+<footer class=post-footer>
+<nav class=paginav>
+<a class=prev href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/>
+<span class=title>« Prev Page</span>
+<br>
+<span>Openfaas Workshop Lab2</span>
+</a>
+<a class=next href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/>
+<span class=title>Next Page »</span>
+<br>
+<span>Openfaas Workshop Lab1</span>
+</a>
+</nav>
+</footer>
+</article>
+</main><footer class=footer>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script><script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
+<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</button>
+</a>
+<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

@@ -1,5 +1,98 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Posts | Go Data</title><meta name=keywords content><meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/posts/><link href=/assets/css/stylesheet.min.273d297e8e2096cd41415928bf1a2bd639dc59b3c2bd13c640f55ca202f0cc69.css integrity="sha256-Jz0pfo4gls1BQVkovxor1jncWbPCvRPGQPVcogLwzGk=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.82.0"><link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml><meta property="og:title" content="Posts"><meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta property="og:type" content="website"><meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="og:updated_time" content="2021-03-30T09:57:01+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="Posts"><meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"}]}</script></head><body class=list id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div><h1>Posts</h1></header><article class=post-entry><header class=entry-header><h2>kubernetes</h2></header><section class=entry-content><p>docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Posts | Go Data</title>
+<meta name=keywords content>
+<meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta name=author content="Lucas">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/posts/>
+<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.86.0">
+<link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
+<meta property="og:title" content="Posts">
+<meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
+<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta name=twitter:title content="Posts">
+<meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"}]}</script>
+</head>
+<body class=list id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<noscript>
+<style type=text/css>#theme-toggle,.top-link{display:none}</style>
+</noscript>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/about title=About>
+<span>About</span>
+</a>
+</li>
+<li>
+<a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
+<span>🔍</span>
+</a>
+</li></ul>
+</nav>
+</header>
+<main class=main>
+<header class=page-header>
+<div class=breadcrumbs>
+<a href=https://zhenfeng-zhu.github.io>Home</a>
+</div>
+<h1>Posts</h1>
+</header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+go-best-practice
+</h2>
+</header>
+<section class=entry-content>
+<p> 短变量名称在声明和上次使用之间的距离很短时效果很好。 长变量名称需要证明自己的合理性; 名称越长，需要提供的价值越高。冗长的名称与页面上的重量相比，信号量较小。 请勿在变量名称中包含类型名称。 常量应该描述它们持有的值，而不是该如何使用。 对于循环和分支使用单字母变量，参数和返回值使用单个字，函数和包级别声明使用多个单词 方法、接口和包使用单个词。 请记住，包的名称是调用者用来引用名称的一部分，因此要好好利用这一点。 变量的名称应描述其内容，而不是内容的类型。
+典型错误：
+var usersMap map[string]*User 如果users的描述性都不够用，那么usersMap也不会。
+声明变量但没有初始化时，请使用var。
+在声明和初始化时，使用:=。
+关于变量和常量的注释应描述其内容而非其目的 任何既不明显也不简短的公共功能必须予以注释。 无论长度或复杂程度如何，对库中的任何函数都必须进行注释 在编写函数之前，请编写描述函数的注释。 如果你发现很难写出注释，那么这就表明你将要编写的代码很难理解。
+以包所提供的内容来命名，而不是它包含的内容。
+避免使用类似base，common或util的包名称 尽早return而不是深度嵌套 使用internal包来减少公共API 不鼓励使用nil作为参数 首选可变参数函数而非[]T参数 通过消除错误来消除错误处理 使用github.com/pkg/errors包装errors 永远不要启动一个停止不了的goroutine。 ...</p>
+</section>
+<footer class=entry-footer>
+November 7, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to go-best-practice" href=https://zhenfeng-zhu.github.io/posts/go-best-practice/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+kubernetes
+</h2>
+</header>
+<section class=entry-content>
+<p>docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。
 docker镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
 解决了应用打包的根本性问题。
 容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理
@@ -20,7 +113,21 @@ kubernetes要解决的问题
 master kube-apiserver：API服务 kube-scheduler：调度 kube-controller-manager：编排 node kubelet：同容器运行时打交道。依赖于CRI（container runtime interface容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。 etcd 运行在大规模集群中的各种任务之间，实际存在各种各样的关系。这些关系的处理，才是作业编排和管理系统最困难的地方。
 sudo
 首先，通过一个编排对象，如pod，job或cronjob等，来描述你试图管理的应用； 然后，再为它定义一些服务对象，如service，secret，autoscaler等。这些对象，会负责具体的平台级功能。 这种使用方法，就是所谓的“声明式API”。这种API对应的编排对象和服务对象，都是k8s项目中的API对象。
-简单使用 $ kubectl create -f 我的配置文件 pod就是k8s世界中的应用，而一个应用可以由多个容器组成。...</p></section><footer class=entry-footer>October 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to kubernetes" href=https://zhenfeng-zhu.github.io/posts/kubernetes/></a></article><article class=post-entry><header class=entry-header><h2>watchdog</h2></header><section class=entry-content><p>监视器
+简单使用 $ kubectl create -f 我的配置文件 pod就是k8s世界中的应用，而一个应用可以由多个容器组成。...</p>
+</section>
+<footer class=entry-footer>
+October 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to kubernetes" href=https://zhenfeng-zhu.github.io/posts/kubernetes/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+watchdog
+</h2>
+</header>
+<section class=entry-content>
+<p>监视器
 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从API网关来的HTTP请求，然后调用程序。监视器是一个小型的Golang服务——下图展示了它是如何工作的：
 上图：一个小型的web服务，可以为每个传入的HTTP请求分配所需要的进程。
 每个函数都需要嵌入这个二进制文件并将其作为ENTRYPOINT 或 CMD，实际上是把它作为容器的初始化进程。一旦你的进程被创建分支，监视器就会通过stdin 传递HTTP请求并从stdout中读取HTTP响应。这意味着你的程序无需知道web和HTTP的任何信息。
@@ -29,12 +136,40 @@ sudo
 你的第一个使用OpenFaaS的无服务器Python函数 阅读有关FaaS CLI的教程 深入研究 Package your function打包你的函数
 如果你不想使用CLI或者现有的二进制文件或镜像，可以使用下面的方法去打包函数：
 使用一个现有的或者一个新的Docker镜像作为基础镜像 FROM 通过curl 或 ADD https://从 Releases 页面 添加fwatchdog二进制文件 为每个你要运行的函数设置 fprocess(函数进程) 环境变量 Expose port 8080 暴露端口8080 Set the CMD to fwatchdog 设置 CMD为fwatchdog 一个echo函数的示例Dockerfile：
-FROM alpine:3.7 ADD https://github.com/openfaas/faas/releases/download/0.8.0/fwatchdog /usr/bin RUN chmod +x /usr/bin/fwatchdog # Define your binary here ENV fprocess="/bin/cat" CMD ["fwatchdog"] Implementing a Docker healthcheck实现一个Docker健康检查...</p></section><footer class=entry-footer>September 6, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to watchdog" href=https://zhenfeng-zhu.github.io/posts/watchdog/></a></article><article class=post-entry><header class=entry-header><h2>queue-worker</h2></header><section class=entry-content><p>queue-worker源码分析 异步函数和同步函数 在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
+FROM alpine:3.7 ADD https://github.com/openfaas/faas/releases/download/0.8.0/fwatchdog /usr/bin RUN chmod +x /usr/bin/fwatchdog # Define your binary here ENV fprocess="/bin/cat" CMD ["fwatchdog"] Implementing a Docker healthcheck实现一个Docker健康检查...</p>
+</section>
+<footer class=entry-footer>
+September 6, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to watchdog" href=https://zhenfeng-zhu.github.io/posts/watchdog/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+queue-worker
+</h2>
+</header>
+<section class=entry-content>
+<p>queue-worker源码分析 异步函数和同步函数 在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
 网关的路由是：/function/&lt;function_name> 必须等待 在结束的时候得到结果 明确知道是成功还是失败 异步函数会有一些差异：
 网关的路由是：/async-function/&lt;function_name> 客户端获得202的即时响应码 从queue-worker中调用函数 默认情况下，结果是被丢弃的。 查看queue-worker的日志 docker service logs -f func_queue-worker 利用requestbin和X-Callback-Url获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个url，queue-worker会报告函数的成功或失败。 requestbin会创建一个新的bin，这是互联网的一个url地址，可以从这里获取函数的结果。 源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats和go-nats-streaming是nats和nats-streaming的go版本的客户端。
 faas这个依赖其实是只用到了queue包下面的types.go文件。这个文件是定义了异步请求的Request结构体和一个CanQueueRequests接口。如下所示：
-package queue import "net/url" import "net/http" // Request for asynchronous processing type Request struct { Header http.Header Body []byte Method string QueryString string Function string CallbackURL *url.URL `json:"CallbackUrl"` } // CanQueueRequests can take on asynchronous requests type CanQueueRequests interface { Queue(req *Request) error } 从这里我们就可以明白作者的设计思路，只要是实现了这个CanQueueRequests接口，就可以作为一个queue-worker。...</p></section><footer class=entry-footer>September 6, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to queue-worker" href=https://zhenfeng-zhu.github.io/posts/queue-worker/></a></article><article class=post-entry><header class=entry-header><h2>区块链学习笔记</h2></header><section class=entry-content><p>本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html上的一些笔记。
+package queue import "net/url" import "net/http" // Request for asynchronous processing type Request struct { Header http.Header Body []byte Method string QueryString string Function string CallbackURL *url.URL `json:"CallbackUrl"` } // CanQueueRequests can take on asynchronous requests type CanQueueRequests interface { Queue(req *Request) error } 从这里我们就可以明白作者的设计思路，只要是实现了这个CanQueueRequests接口，就可以作为一个queue-worker。...</p>
+</section>
+<footer class=entry-footer>
+September 6, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to queue-worker" href=https://zhenfeng-zhu.github.io/posts/queue-worker/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+区块链学习笔记
+</h2>
+</header>
+<section class=entry-content>
+<p>本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html上的一些笔记。
 理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html
 区块链中提到的账本，记账等词汇是和会计无关的词汇。
 我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：
@@ -57,7 +192,21 @@ package queue import "net/url" import "net/http" // Request for asynchronous pro
 多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。
 采用区块链作为账本的时候，会面临如下几个问题：
 不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan.io就是把以太坊上的区块重新入库，借助数据库实现数据检索。
-区块链只能顺序检索，运算成本高。例如在中心化账本中汇总求和操作，区块链必须从头向后遍历。...</p></section><footer class=entry-footer>August 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 区块链学习笔记" href=https://zhenfeng-zhu.github.io/posts/blockchain/></a></article><article class=post-entry><header class=entry-header><h2>谈谈聊天机器人框架的实现原理</h2></header><section class=entry-content><p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
+区块链只能顺序检索，运算成本高。例如在中心化账本中汇总求和操作，区块链必须从头向后遍历。...</p>
+</section>
+<footer class=entry-footer>
+August 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 区块链学习笔记" href=https://zhenfeng-zhu.github.io/posts/blockchain/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+谈谈聊天机器人框架的实现原理
+</h2>
+</header>
+<section class=entry-content>
+<p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
 我们可以看到现有的IM工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了chatops，通过和机器人聊天，进行运维操作。
 机器人开发框架 作为聊天机器人开发者，面对如此多的IM工具和SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。
@@ -75,18 +224,74 @@ package queue import "net/url" import "net/http" // Request for asynchronous pro
 我们可以将对话的过程，分为一个个的状态，然后使用DSL来实现一个FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。
 特点是：
 人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限 示例：
-const {startWith, when, goto, stay, stop} = botkit.DSL(fsm); startWith(MyStates.IDLE, {counter: 0}); when(MyStates.IDLE)(async (sender, content, data) => { }); when(MyStates.UI)((sender, content, data) => { }); when(MyStates.STEP1)((sender, content, data) => { }); when(MyStates....</p></section><footer class=entry-footer>August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a></article><article class=post-entry><header class=entry-header><h2>基于以太坊的Parity联盟链部署</h2></header><section class=entry-content><p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity是可以构建出一个基于PoA共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
+const {startWith, when, goto, stay, stop} = botkit.DSL(fsm); startWith(MyStates.IDLE, {counter: 0}); when(MyStates.IDLE)(async (sender, content, data) => { }); when(MyStates.UI)((sender, content, data) => { }); when(MyStates.STEP1)((sender, content, data) => { }); when(MyStates....</p>
+</section>
+<footer class=entry-footer>
+August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+基于以太坊的Parity联盟链部署
+</h2>
+</header>
+<section class=entry-content>
+<p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity是可以构建出一个基于PoA共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
 部署联盟链 parity的文档：https://wiki.parity.io/Demo-PoA-tutorial
 安装 首先是下载parity，在mac下是直接brew安装即可。
 brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
-// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0节点：...</p></section><footer class=entry-footer>August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 基于以太坊的Parity联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a></article><article class=post-entry><header class=entry-header><h2>dive-into-redis</h2></header><section class=entry-content><p>redis持久化，
+// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0节点：...</p>
+</section>
+<footer class=entry-footer>
+August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 基于以太坊的Parity联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+dive-into-redis
+</h2>
+</header>
+<section class=entry-content>
+<p>redis持久化，
 机制有两种：
-快照：全量备份，二进制序列化，存储紧凑 AOF日志：连续的增量备份，内存数据修改的文本 ...</p></section><footer class=entry-footer>August 20, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a></article><article class=post-entry><header class=entry-header><h2>golang踩坑</h2></header><section class=entry-content><p>一 x509 error when using HTTPS inside a Docker container
+快照：全量备份，二进制序列化，存储紧凑 AOF日志：连续的增量备份，内存数据修改的文本 ...</p>
+</section>
+<footer class=entry-footer>
+August 20, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+golang踩坑
+</h2>
+</header>
+<section class=entry-content>
+<p>一 x509 error when using HTTPS inside a Docker container
 因为docker中没有CA证书。
 普通的镜像解决办法
 FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是alpine的参考这个：
 FROM docker.finogeeks.club/base/alpine MAINTAINER "zhuzhenfeng@finogeeks.club" RUN set -ex \ && apk add --no-cache ca-certificates COPY src/wallet/wallet /opt/wallet ENTRYPOINT /opt/wallet 二 panic: runtime error: invalid memory address or nil pointer dereference [signal 0xb code=0x1 addr=0x38 pc=0x26df]
-“An error is returned if caused by client policy (such as CheckRedirect), or if there was an HTTP protocol error....</p></section><footer class=entry-footer>August 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to golang踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a></article><article class=post-entry><header class=entry-header><h2>以太坊开发总结</h2></header><section class=entry-content><p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
+“An error is returned if caused by client policy (such as CheckRedirect), or if there was an HTTP protocol error....</p>
+</section>
+<footer class=entry-footer>
+August 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to golang踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+以太坊开发总结
+</h2>
+</header>
+<section class=entry-content>
+<p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
 在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
 什么是区块链
 相信大家对区块链都有自己的理解，不仅仅是互联网公司，传统企业也在“币改转型”。
@@ -114,17 +319,31 @@ truffle：智能合约的编程框架，基于nodejs
 Ganache：启动了多个节点本地私链
 Rinkeby：以太坊测试链
 Etherscan：以太坊区块链浏览器，可以查询交易
-MetaMask：chrome的钱包插件...</p></section><footer class=entry-footer>August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a></article><article class=post-entry><header class=entry-header><h2>以太坊</h2></header><section class=entry-content><p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
-首先先把go的依赖下载下来：
-go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从github上拉下来代码。
-账户 以太坊的地址在离线状态下也可以创建到。
-创建账户有两种方式：
-以公钥和私钥的形式创建 func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return "", nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println("address: ", address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println("privateKey: ", privateKey) return address, nil } 这种方式一般用的比较少。
-以keystore的形式创建 keystore会创建一个文件，这个文件如下所示：
-{ "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p></section><footer class=entry-footer>August 7, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas</footer><a class=entry-link aria-label="post link to 以太坊" href=https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://zhenfeng-zhu.github.io/posts/page/3/>« Prev Page</a>
-<a class=next href=https://zhenfeng-zhu.github.io/posts/page/5/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+MetaMask：chrome的钱包插件...</p>
+</section>
+<footer class=entry-footer>
+August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a>
+</article>
+<footer class=page-footer>
+<nav class=pagination>
+<a class=prev href=https://zhenfeng-zhu.github.io/posts/page/3/>« Prev Page</a>
+<a class=next href=https://zhenfeng-zhu.github.io/posts/page/5/>Next Page »</a>
+</nav>
+</footer>
+</main><footer class=footer>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
+<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</button>
+</a>
+<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

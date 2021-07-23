@@ -1,9 +1,89 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>小白都能快速上手的Vim配置 | Go Data</title><meta name=keywords content><meta name=description content="Desc Text."><meta name=author content="Lucas"><link rel=canonical href=https://zhenfeng-zhu.github.io/posts/vim/><link href=/assets/css/stylesheet.min.273d297e8e2096cd41415928bf1a2bd639dc59b3c2bd13c640f55ca202f0cc69.css integrity="sha256-Jz0pfo4gls1BQVkovxor1jncWbPCvRPGQPVcogLwzGk=" rel="preload stylesheet" as=style><link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png><link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.82.0"><meta property="og:title" content="小白都能快速上手的Vim配置"><meta property="og:description" content="Desc Text."><meta property="og:type" content="article"><meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/vim/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="article:published_time" content="2021-02-20T09:56:31+08:00"><meta property="article:modified_time" content="2021-02-20T09:56:31+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta name=twitter:title content="小白都能快速上手的Vim配置"><meta name=twitter:description content="Desc Text."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"小白都能快速上手的Vim配置","item":"https://zhenfeng-zhu.github.io/posts/vim/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"小白都能快速上手的Vim配置","name":"小白都能快速上手的Vim配置","description":"首先把所有的vim相关的都删除。 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc中添加下面的代码\n\u0026amp;quot; basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set …","keywords":[],"articleBody":"首先把所有的vim相关的都删除。 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc中添加下面的代码\n\" basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set backspace=eol,start,indent set laststatus=2 set colorcolumn=80 set cursorline set linebreak set autoindent set ignorecase set smartcase set ruler set diffopt+=internal,indent-heuristic,algorithm:patience set showcmd set clipboard^=unnamed,unnamedplus set showmode set mouse=a set tabstop=2 set shiftwidth=4 set expandtab set softtabstop=2 set showmatch set incsearch set nobackup set autoread set wildmenu set wildmode=longest:list,full set nofoldenable filetype plugin indent on syntax on 有了上面的设置，会让你的vim更好用一些。\n每个参数的含义，可以看下阮一峰写的vim配置入门\n安装vim-plug curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 我是用vim-plug来管理vim的插件配置的，用起来比较简单。\n它的思路是这样的，把github的vim配置clone下来，然后加载。\n安装一些插件 在.vimrc中继续添加下面的代码\n\" Plugs call plug#begin() Plug 'luochen1990/rainbow' Plug 'jiangmiao/auto-pairs' Plug 'mechatroner/rainbow_csv' Plug 'liuchengxu/space-vim-theme' Plug 'lvht/mru' Plug 'preservim/tagbar' Plug 'preservim/nerdtree' Plug 'Xuyuanp/nerdtree-git-plugin' Plug 'ryanoasis/vim-devicons' Plug 'liuchengxu/nerdtree-dash' Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } Plug 'godlygeek/tabular' Plug 'plasticboy/vim-markdown' Plug 'liuchengxu/eleline.vim' Plug 'tpope/vim-fugitive' call plug#end() 这些是我比较常用的插件\n rainbow 是一个每个括号都用不同颜色区分，增加代码的可读性 auto-pairs 是自动补全括号 rainbow_csv 是打开csv文件更好看一些的插件 space-vim-theme 是vim的一个主题 mru 是最近最常使用的文件 tagbar 显示代码结构的 nerdtree + nerdtree-git-plugin + vim-devicons + nerdtree-dash 这几个搭配起来，展示一个更好看的文件目录 vim-go 写go必备 tabular + vim-markdown 写markdown必备的 eleline 状态栏更好看一些 vim-fugitive vim的git插件  插件的自定义设置 安装了这么多插件，一般可能会自定义一下，有些插件都提供了一些变量，我们可以通过let g:xxx的方式去自定义\n这些设置也是在vimrc中，要在插件安装的下面\n\" plug settings let g:rainbow_active=1 keymap的设置 我们可以设置一些快捷键加快操作。\nvim 有一个leader键，这个键的作用是按下之后，再按别的键，触发一些命令。 之所以有这个leader键，就是为了防止用户自己的快捷键，覆盖了默认的。 vim默认的leader键是|,也就是enter上面那个中竖线。\n\" key map nnoremap   :Mru nnoremap   :call fzf#Open() nnoremap  t :TagbarToggle nnoremap  e :NERDTreeToggle nnoremap  f :NERDTreeFind nnoremap  c :call lv#Term() 如果你想和我的一样 参考这个github项目：https://github.com/zhenfeng-zhu/vim\ngit clone --recursive https://github.com/zhenfeng-zhu/vim.git ~/.vim ln -s ~/.vim/init.vim ~/.vimrc 然后就可以愉快的自己定制了。\n","wordCount":"217","inLanguage":"en","datePublished":"2021-02-20T09:56:31+08:00","dateModified":"2021-02-20T09:56:31+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/vim/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu onscroll=menu_on_scroll()><li><a href=https://zhenfeng-zhu.github.io/about title=About><span>About</span></a></li><li><a href=https://zhenfeng-zhu.github.io/search/ title=🔍><span>🔍</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a></div><h1 class=post-title>小白都能快速上手的Vim配置</h1><div class=post-description>Desc Text.</div><div class=post-meta>February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas</div></header><div class=post-content><h1 id=首先把所有的vim相关的都删除>首先把所有的vim相关的都删除。<a hidden class=anchor aria-hidden=true href=#首先把所有的vim相关的都删除>#</a></h1><pre><code>cd
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>小白都能快速上手的Vim配置 | Go Data</title>
+<meta name=keywords content>
+<meta name=description content="Desc Text.">
+<meta name=author content="Lucas">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/posts/vim/>
+<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.86.0">
+<meta property="og:title" content="小白都能快速上手的Vim配置">
+<meta property="og:description" content="Desc Text.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/vim/">
+<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta property="article:published_time" content="2021-02-20T09:56:31+08:00">
+<meta property="article:modified_time" content="2021-02-20T09:56:31+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta name=twitter:title content="小白都能快速上手的Vim配置">
+<meta name=twitter:description content="Desc Text.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"小白都能快速上手的Vim配置","item":"https://zhenfeng-zhu.github.io/posts/vim/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"小白都能快速上手的Vim配置","name":"小白都能快速上手的Vim配置","description":"首先把所有的vim相关的都删除。 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc中添加下面的代码\n\u0026amp;quot; basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set …","keywords":[],"articleBody":"首先把所有的vim相关的都删除。 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc中添加下面的代码\n\" basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set backspace=eol,start,indent set laststatus=2 set colorcolumn=80 set cursorline set linebreak set autoindent set ignorecase set smartcase set ruler set diffopt+=internal,indent-heuristic,algorithm:patience set showcmd set clipboard^=unnamed,unnamedplus set showmode set mouse=a set tabstop=2 set shiftwidth=4 set expandtab set softtabstop=2 set showmatch set incsearch set nobackup set autoread set wildmenu set wildmode=longest:list,full set nofoldenable filetype plugin indent on syntax on 有了上面的设置，会让你的vim更好用一些。\n每个参数的含义，可以看下阮一峰写的vim配置入门\n安装vim-plug curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 我是用vim-plug来管理vim的插件配置的，用起来比较简单。\n它的思路是这样的，把github的vim配置clone下来，然后加载。\n安装一些插件 在.vimrc中继续添加下面的代码\n\" Plugs call plug#begin() Plug 'luochen1990/rainbow' Plug 'jiangmiao/auto-pairs' Plug 'mechatroner/rainbow_csv' Plug 'liuchengxu/space-vim-theme' Plug 'lvht/mru' Plug 'preservim/tagbar' Plug 'preservim/nerdtree' Plug 'Xuyuanp/nerdtree-git-plugin' Plug 'ryanoasis/vim-devicons' Plug 'liuchengxu/nerdtree-dash' Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } Plug 'godlygeek/tabular' Plug 'plasticboy/vim-markdown' Plug 'liuchengxu/eleline.vim' Plug 'tpope/vim-fugitive' call plug#end() 这些是我比较常用的插件\n rainbow 是一个每个括号都用不同颜色区分，增加代码的可读性 auto-pairs 是自动补全括号 rainbow_csv 是打开csv文件更好看一些的插件 space-vim-theme 是vim的一个主题 mru 是最近最常使用的文件 tagbar 显示代码结构的 nerdtree + nerdtree-git-plugin + vim-devicons + nerdtree-dash 这几个搭配起来，展示一个更好看的文件目录 vim-go 写go必备 tabular + vim-markdown 写markdown必备的 eleline 状态栏更好看一些 vim-fugitive vim的git插件  插件的自定义设置 安装了这么多插件，一般可能会自定义一下，有些插件都提供了一些变量，我们可以通过let g:xxx的方式去自定义\n这些设置也是在vimrc中，要在插件安装的下面\n\" plug settings let g:rainbow_active=1 keymap的设置 我们可以设置一些快捷键加快操作。\nvim 有一个leader键，这个键的作用是按下之后，再按别的键，触发一些命令。 之所以有这个leader键，就是为了防止用户自己的快捷键，覆盖了默认的。 vim默认的leader键是|,也就是enter上面那个中竖线。\n\" key map nnoremap   :Mru nnoremap   :call fzf#Open() nnoremap  t :TagbarToggle nnoremap  e :NERDTreeToggle nnoremap  f :NERDTreeFind nnoremap  c :call lv#Term() 如果你想和我的一样 参考这个github项目：https://github.com/zhenfeng-zhu/vim\ngit clone --recursive https://github.com/zhenfeng-zhu/vim.git ~/.vim ln -s ~/.vim/init.vim ~/.vimrc 然后就可以愉快的自己定制了。\n","wordCount":"217","inLanguage":"en","datePublished":"2021-02-20T09:56:31+08:00","dateModified":"2021-02-20T09:56:31+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/vim/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<noscript>
+<style type=text/css>#theme-toggle,.top-link{display:none}</style>
+</noscript>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/about title=About>
+<span>About</span>
+</a>
+</li>
+<li>
+<a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
+<span>🔍</span>
+</a>
+</li></ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs>
+<a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a>
+</div>
+<h1 class=post-title>
+小白都能快速上手的Vim配置
+</h1>
+<div class=post-description>
+Desc Text.
+</div>
+<div class=post-meta>
+February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</div>
+</header>
+<div class=post-content>
+<h1 id=首先把所有的vim相关的都删除>首先把所有的vim相关的都删除。<a hidden class=anchor aria-hidden=true href=#首先把所有的vim相关的都删除>#</a></h1>
+<pre><code>cd
 
 rm -rf .vim*
-</code></pre><h1 id=创建自己的vimrc>创建自己的.vimrc<a hidden class=anchor aria-hidden=true href=#创建自己的vimrc>#</a></h1><pre><code>vim .vimrc
-</code></pre><h1 id=一些基本的设置>一些基本的设置<a hidden class=anchor aria-hidden=true href=#一些基本的设置>#</a></h1><p>在.vimrc中添加下面的代码</p><pre><code>&quot; basic set
+</code></pre><h1 id=创建自己的vimrc>创建自己的.vimrc<a hidden class=anchor aria-hidden=true href=#创建自己的vimrc>#</a></h1>
+<pre><code>vim .vimrc
+</code></pre><h1 id=一些基本的设置>一些基本的设置<a hidden class=anchor aria-hidden=true href=#一些基本的设置>#</a></h1>
+<p>在.vimrc中添加下面的代码</p>
+<pre><code>&quot; basic set
 set number
 set noswapfile
 set encoding=utf-8
@@ -37,9 +117,16 @@ set nofoldenable
 filetype plugin indent on
 syntax on
 
-</code></pre><p>有了上面的设置，会让你的vim更好用一些。</p><p>每个参数的含义，可以看下阮一峰写的<a href=https://www.ruanyifeng.com/blog/2018/09/vimrc.html>vim配置入门</a></p><h1 id=安装vim-plug>安装vim-plug<a hidden class=anchor aria-hidden=true href=#安装vim-plug>#</a></h1><pre><code>curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+</code></pre><p>有了上面的设置，会让你的vim更好用一些。</p>
+<p>每个参数的含义，可以看下阮一峰写的<a href=https://www.ruanyifeng.com/blog/2018/09/vimrc.html>vim配置入门</a></p>
+<h1 id=安装vim-plug>安装vim-plug<a hidden class=anchor aria-hidden=true href=#安装vim-plug>#</a></h1>
+<pre><code>curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-</code></pre><p>我是用vim-plug来管理vim的插件配置的，用起来比较简单。</p><p>它的思路是这样的，把github的vim配置clone下来，然后加载。</p><h1 id=安装一些插件>安装一些插件<a hidden class=anchor aria-hidden=true href=#安装一些插件>#</a></h1><p>在.vimrc中继续添加下面的代码</p><pre><code>&quot; Plugs
+</code></pre><p>我是用vim-plug来管理vim的插件配置的，用起来比较简单。</p>
+<p>它的思路是这样的，把github的vim配置clone下来，然后加载。</p>
+<h1 id=安装一些插件>安装一些插件<a hidden class=anchor aria-hidden=true href=#安装一些插件>#</a></h1>
+<p>在.vimrc中继续添加下面的代码</p>
+<pre><code>&quot; Plugs
 call plug#begin()
 Plug 'luochen1990/rainbow'
 Plug 'jiangmiao/auto-pairs'
@@ -57,22 +144,70 @@ Plug 'plasticboy/vim-markdown'
 Plug 'liuchengxu/eleline.vim'
 Plug 'tpope/vim-fugitive'
 call plug#end()
-</code></pre><p>这些是我比较常用的插件</p><ul><li>rainbow 是一个每个括号都用不同颜色区分，增加代码的可读性</li><li>auto-pairs 是自动补全括号</li><li>rainbow_csv 是打开csv文件更好看一些的插件</li><li>space-vim-theme 是vim的一个主题</li><li>mru 是最近最常使用的文件</li><li>tagbar 显示代码结构的</li><li>nerdtree + nerdtree-git-plugin + vim-devicons + nerdtree-dash 这几个搭配起来，展示一个更好看的文件目录</li><li>vim-go 写go必备</li><li>tabular + vim-markdown 写markdown必备的</li><li>eleline 状态栏更好看一些</li><li>vim-fugitive vim的git插件</li></ul><h1 id=插件的自定义设置>插件的自定义设置<a hidden class=anchor aria-hidden=true href=#插件的自定义设置>#</a></h1><p>安装了这么多插件，一般可能会自定义一下，有些插件都提供了一些变量，我们可以通过let g:xxx的方式去自定义</p><p>这些设置也是在vimrc中，要在插件安装的下面</p><pre><code>&quot; plug settings
+</code></pre><p>这些是我比较常用的插件</p>
+<ul>
+<li>rainbow 是一个每个括号都用不同颜色区分，增加代码的可读性</li>
+<li>auto-pairs 是自动补全括号</li>
+<li>rainbow_csv 是打开csv文件更好看一些的插件</li>
+<li>space-vim-theme 是vim的一个主题</li>
+<li>mru 是最近最常使用的文件</li>
+<li>tagbar 显示代码结构的</li>
+<li>nerdtree + nerdtree-git-plugin + vim-devicons + nerdtree-dash 这几个搭配起来，展示一个更好看的文件目录</li>
+<li>vim-go 写go必备</li>
+<li>tabular + vim-markdown 写markdown必备的</li>
+<li>eleline 状态栏更好看一些</li>
+<li>vim-fugitive vim的git插件</li>
+</ul>
+<h1 id=插件的自定义设置>插件的自定义设置<a hidden class=anchor aria-hidden=true href=#插件的自定义设置>#</a></h1>
+<p>安装了这么多插件，一般可能会自定义一下，有些插件都提供了一些变量，我们可以通过let g:xxx的方式去自定义</p>
+<p>这些设置也是在vimrc中，要在插件安装的下面</p>
+<pre><code>&quot; plug settings
 let g:rainbow_active=1
-</code></pre><h1 id=keymap的设置>keymap的设置<a hidden class=anchor aria-hidden=true href=#keymap的设置>#</a></h1><p>我们可以设置一些快捷键加快操作。</p><p>vim 有一个leader键，这个键的作用是按下之后，再按别的键，触发一些命令。 之所以有这个leader键，就是为了防止用户自己的快捷键，覆盖了默认的。 vim默认的leader键是|,也就是enter上面那个中竖线。</p><pre><code>&quot; key map 
+</code></pre><h1 id=keymap的设置>keymap的设置<a hidden class=anchor aria-hidden=true href=#keymap的设置>#</a></h1>
+<p>我们可以设置一些快捷键加快操作。</p>
+<p>vim 有一个leader键，这个键的作用是按下之后，再按别的键，触发一些命令。 之所以有这个leader键，就是为了防止用户自己的快捷键，覆盖了默认的。 vim默认的leader键是|,也就是enter上面那个中竖线。</p>
+<pre><code>&quot; key map 
 nnoremap &lt;silent&gt; &lt;c-m&gt; :Mru&lt;cr&gt;
 nnoremap &lt;silent&gt; &lt;c-p&gt; :call fzf#Open()&lt;cr&gt;
 nnoremap &lt;silent&gt; &lt;leader&gt;t :TagbarToggle&lt;cr&gt;
 nnoremap &lt;silent&gt; &lt;leader&gt;e :NERDTreeToggle&lt;cr&gt;
 nnoremap &lt;silent&gt; &lt;leader&gt;f :NERDTreeFind&lt;cr&gt;
 nnoremap &lt;silent&gt; &lt;leader&gt;c :call lv#Term()&lt;cr&gt;
-</code></pre><h1 id=如果你想和我的一样>如果你想和我的一样<a hidden class=anchor aria-hidden=true href=#如果你想和我的一样>#</a></h1><p>参考这个github项目：https://github.com/zhenfeng-zhu/vim</p><pre><code>git clone --recursive https://github.com/zhenfeng-zhu/vim.git ~/.vim
+</code></pre><h1 id=如果你想和我的一样>如果你想和我的一样<a hidden class=anchor aria-hidden=true href=#如果你想和我的一样>#</a></h1>
+<p>参考这个github项目：https://github.com/zhenfeng-zhu/vim</p>
+<pre><code>git clone --recursive https://github.com/zhenfeng-zhu/vim.git ~/.vim
 
 ln -s ~/.vim/init.vim ~/.vimrc
-</code></pre><p>然后就可以愉快的自己定制了。</p></div><footer class=post-footer><nav class=paginav><a class=prev href=https://zhenfeng-zhu.github.io/posts/%E6%8D%A2%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%80%9D%E8%80%83/><span class=title>« Prev Page</span><br><span>换一种方式思考</span></a>
-<a class=next href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/><span class=title>Next Page »</span><br><span>Github Action自动部署blog</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+</code></pre><p>然后就可以愉快的自己定制了。</p>
+</div>
+<footer class=post-footer>
+<nav class=paginav>
+<a class=prev href=https://zhenfeng-zhu.github.io/posts/%E6%8D%A2%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%80%9D%E8%80%83/>
+<span class=title>« Prev Page</span>
+<br>
+<span>换一种方式思考</span>
+</a>
+<a class=next href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/>
+<span class=title>Next Page »</span>
+<br>
+<span>Github Action自动部署blog</span>
+</a>
+</nav>
+</footer>
+</article>
+</main><footer class=footer>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script><script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
+<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</button>
+</a>
+<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
