@@ -45,7 +45,7 @@ function* gen(x){ var y = yield x + 2; return y; } 不同于普通函数的地�
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="小议async/await和coroutine">
 <meta property="og:description" content="Being happy doesn&rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections.
  后端编程，涉及最多的就是并发。简单理解就是：
@@ -204,7 +204,7 @@ May 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <li>
 <p>generator</p>
 <p>es6增加了generator函数，就是协程的一种实现，最大特点就是使用yield关键字就是用来交出函数的执行权。</p>
-<pre><code>function* gen(x){
+<pre tabindex=0><code>function* gen(x){
   var y = yield x + 2;
   return y;
 }
@@ -214,7 +214,7 @@ May 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <li>
 <p>Thunk函数</p>
 <p>说到thunk函数，就得先了解一下参数的求值策略。</p>
-<pre><code>let m=1;
+<pre tabindex=0><code>let m=1;
 function f(x){
     return x*2
 }

@@ -24,7 +24,7 @@ zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum comma
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="Geth">
 <meta property="og:description" content="Geth简介 go-ethereum
 go-ethereum客户端通常被称为geth，它是个命令行界面，执行在Go上实现的完整以太坊节点。通过安装和运行geth，可以参与到以太坊前台实时网络并进行以下操作：
@@ -146,17 +146,17 @@ VERSION:
 <ol>
 <li>
 <p>打开终端，输入以下命令，以开发的方式启动geth</p>
-<pre><code>geth  --datadir “~/Documents/github/ethfans/ethdev” --dev
+<pre tabindex=0><code>geth  --datadir “~/Documents/github/ethfans/ethdev” --dev
 </code></pre><p>&ndash;datadir 是指定geth的开发目录，引号的路径可以随便设置</p>
 </li>
 <li>
 <p>新开一个终端，执行以下命令，进入geth的控制台</p>
-<pre><code>geth --dev console 2&gt;&gt;file_to_log_output
+<pre tabindex=0><code>geth --dev console 2&gt;&gt;file_to_log_output
 </code></pre><p>该命令会将在console中执行的命令，生成一个文本保存在file_to_log_output文件中。</p>
 </li>
 <li>
 <p>再新开一个终端，查看打印出来的日志</p>
-<pre><code>tail -f file_to_log_output
+<pre tabindex=0><code>tail -f file_to_log_output
 </code></pre></li>
 </ol>
 <p>切换到geth控制台终端，geth有如下常用的命令</p>

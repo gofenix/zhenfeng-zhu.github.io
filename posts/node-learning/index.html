@@ -25,7 +25,7 @@ module.exports 就 Node.">
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="node学习笔记">
 <meta property="og:description" content="写node也有一段时间了，整理一下学习笔记，共同进步
 什么是node？ 首先看一下什么是node.js
@@ -121,7 +121,7 @@ April 22, 2018&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Lucas
 <ul>
 <li>
 <p>创建模块</p>
-<pre><code>// b.js
+<pre tabindex=0><code>// b.js
 function FunA(){
     return &quot;hello world&quot;;
 }
@@ -131,7 +131,7 @@ module.exports = FunA;
 </code></pre></li>
 <li>
 <p>加载模块</p>
-<pre><code>// a.js
+<pre tabindex=0><code>// a.js
 const FunA=require('./b.js');
 
 // 运行FunA
@@ -149,7 +149,7 @@ console.log(name);
 <li>
 <p>exports</p>
 <p>exports 是 module 对象的一个属性，同时它也是一个对象。在很多时候一个 js 文件有多个需要暴露的方法或是对象，module.exports 又只能暴露一个，那这个时候就要用到 exports:</p>
-<pre><code>function FunA(){
+<pre tabindex=0><code>function FunA(){
     return 'Tom';
 }
 
@@ -159,14 +159,14 @@ function FunB(){
 
 exports.FunA = FunA;
 exports.FunB = FunB;
-</code></pre><pre><code>//FunA = exports,exports 是一个对象
+</code></pre><pre tabindex=0><code>//FunA = exports,exports 是一个对象
 var FunA = require('./b.js');
 var name1 = FunA.FunA();// 运行 FunA，name = 'Tom'
 var name2 = FunA.FunB();// 运行 FunB，name = 'Sam'
 console.log(name1);
 console.log(name2);
 </code></pre><p>当然在引入的时候也可以这样写：</p>
-<pre><code>//FunA = exports,exports 是一个对象
+<pre tabindex=0><code>//FunA = exports,exports 是一个对象
 var {FunA, FunB} = require('./b.js');
 var name1 = FunA();// 运行 FunA，name = 'Tom'
 var name2 = FunB();// 运行 FunB，name = 'Sam'
@@ -190,7 +190,7 @@ console.log(name2);
 <li>在回调函数中一定要使用 response.end() 方法，用于结束当前请求，不然当前请求会一直处在等待的状态。</li>
 <li>调用 listen 监听一个端口。</li>
 </ol>
-<pre><code>//原生模块
+<pre tabindex=0><code>//原生模块
 var http = require('http');
 
 http.createServer(function(reqeust, response){
@@ -201,7 +201,7 @@ http.createServer(function(reqeust, response){
 <li>
 <p>get</p>
 <p>当get请求的时候，服务器通过request.method来判断当前的请求方式并通过request.url来获取当前的请求参数：</p>
-<pre><code>var http = require('http');
+<pre tabindex=0><code>var http = require('http');
 var url = require('url');
 
 http.createServer(function(req, res){
@@ -213,7 +213,7 @@ http.createServer(function(req, res){
 <li>
 <p>post</p>
 <p>post请求则不能通过url来获取，这时候就得对请求体进行事件监听。</p>
-<pre><code>var http = require('http');
+<pre tabindex=0><code>var http = require('http');
 var util = require('util');
 var querystring = require('querystring');
 
@@ -279,17 +279,17 @@ http.createServer(function(req, res){
 </ul>
 <h3 id=拼接>拼接<a hidden class=anchor aria-hidden=true href=#拼接>#</a></h3>
 <p>当有多个 url 需要拼接处理的时候，可以用到 url.resolve</p>
-<pre><code>var url = require('url');
+<pre tabindex=0><code>var url = require('url');
 url.resolve('http://dk-lan.com/', '/one')// 'http://dk-lan.com/one'
 </code></pre><h2 id=querystring>querystring<a hidden class=anchor aria-hidden=true href=#querystring>#</a></h2>
 <p>url是对url字符串的处理，而querystring就是仅针对参数的处理。</p>
 <h3 id=字符串转对象-1>字符串转对象<a hidden class=anchor aria-hidden=true href=#字符串转对象-1>#</a></h3>
-<pre><code>var str = 'firstname=dk&amp;url=http%3A%2F%2Fdk-lan.com&amp;lastname=tom&amp;passowrd=123456';
+<pre tabindex=0><code>var str = 'firstname=dk&amp;url=http%3A%2F%2Fdk-lan.com&amp;lastname=tom&amp;passowrd=123456';
 var param = querystring.parse(param);
 //结果
 //{firstname:&quot;dk&quot;, url:&quot;http://dk-lan.com&quot;, lastname: 'tom', passowrd: 123456};
 </code></pre><h3 id=对象转字符串-1>对象转字符串<a hidden class=anchor aria-hidden=true href=#对象转字符串-1>#</a></h3>
-<pre><code>var querystring = require('querystring');
+<pre tabindex=0><code>var querystring = require('querystring');
 
 var obj = {firstname:&quot;dk&quot;, url:&quot;http://dk-lan.com&quot;, lastname: 'tom', passowrd: 123456};
 //将对象转换成字符串
@@ -299,7 +299,7 @@ var param = querystring.stringify(obj);
 </code></pre><h2 id=fs>fs<a hidden class=anchor aria-hidden=true href=#fs>#</a></h2>
 <p>任何服务端语言都不能缺失文件的读写操作。</p>
 <h3 id=读取文本----异步读取>读取文本 &ndash; 异步读取<a hidden class=anchor aria-hidden=true href=#读取文本----异步读取>#</a></h3>
-<pre><code>var fs = require('fs');
+<pre tabindex=0><code>var fs = require('fs');
 // 异步读取
 // 参数1：文件路径，
 // 参数2：读取文件后的回调
@@ -310,11 +310,11 @@ fs.readFile('demoFile.txt', function (err, data) {
    console.log(&quot;异步读取: &quot; + data.toString());
 });
 </code></pre><h3 id=读取文本----同步读取>读取文本 &ndash; 同步读取<a hidden class=anchor aria-hidden=true href=#读取文本----同步读取>#</a></h3>
-<pre><code>var fs = require('fs');
+<pre tabindex=0><code>var fs = require('fs');
 var data = fs.readFileSync('demoFile.txt');
 console.log(&quot;同步读取: &quot; + data.toString());
 </code></pre><h3 id=写入文本----覆盖写入>写入文本 &ndash; 覆盖写入<a hidden class=anchor aria-hidden=true href=#写入文本----覆盖写入>#</a></h3>
-<pre><code>var fs = require('fs');
+<pre tabindex=0><code>var fs = require('fs');
 //每次写入文本都会覆盖之前的文本内容
 fs.writeFile('input.txt', '抵制一切不利于中国和世界和平的动机！',  function(err) {
    if (err) {
@@ -331,7 +331,7 @@ fs.writeFile('input.txt', '抵制一切不利于中国和世界和平的动机�
    });
 });
 </code></pre><h3 id=写入文本----追加写入>写入文本 &ndash; 追加写入<a hidden class=anchor aria-hidden=true href=#写入文本----追加写入>#</a></h3>
-<pre><code>var fs = require('fs');
+<pre tabindex=0><code>var fs = require('fs');
 fs.appendFile('input.txt', '愿世界和平！', function (err) {
    if (err) {
        return console.error(err);
@@ -352,7 +352,7 @@ fs.appendFile('input.txt', '愿世界和平！', function (err) {
 <li>图片读取是以字节的方式</li>
 <li>图片在浏览器的渲染因为没有 img 标签，所以需要设置响应头为 image</li>
 </ol>
-<pre><code>var http = require('http');
+<pre tabindex=0><code>var http = require('http');
 var fs = require('fs');
 var content =  fs.readFileSync('001.jpg', &quot;binary&quot;);
 
@@ -378,7 +378,7 @@ console.log('Server running at http://127.0.0.1:8888/');
 <h1 id=fetch>fetch<a hidden class=anchor aria-hidden=true href=#fetch>#</a></h1>
 <p>axios是一种对ajax的封装，fetch是一种浏览器原生实现的请求方式，跟ajax对等。</p>
 <p>在现在发起http请求里，都是通过fetch来发送请求，和ajax类似。</p>
-<pre><code>const fetch=require('isomorphic-fetch');
+<pre tabindex=0><code>const fetch=require('isomorphic-fetch');
 
 const options={
     header:{},
@@ -408,24 +408,24 @@ try{
 <h2 id=简单使用>简单使用<a hidden class=anchor aria-hidden=true href=#简单使用>#</a></h2>
 <p>express的使用比较简单，由于我最早接触的是spring那套web框架，所以在使用到express的时候觉得node的web特别轻量简单。</p>
 <p>加载模块</p>
-<pre><code>const express=require('express');
+<pre tabindex=0><code>const express=require('express');
 const app=express();
 </code></pre><p>监听端口8080</p>
-<pre><code>app.listen(3000, ()=&gt;consloe.log('running'));
+<pre tabindex=0><code>app.listen(3000, ()=&gt;consloe.log('running'));
 </code></pre><h2 id=路由-1>路由<a hidden class=anchor aria-hidden=true href=#路由-1>#</a></h2>
 <p>express对路由的处理特别简单，配合中间件body parser，很方便的提供rest接口：</p>
-<pre><code>app.get('/', (req, res)=&gt;{
+<pre tabindex=0><code>app.get('/', (req, res)=&gt;{
     res.send('hello world');
 })
 </code></pre><p><code>response.send()</code> 可理解为 <code>response.end()</code>，其中一个不同点在于 <code>response.send()</code> 参数可为对象。</p>
 <p>Node.js 默认是不能访问静态资源文件（<em>.html、</em>.js、<em>.css、</em>.jpg 等），如果要访问服务端的静态资源文件则要用到方法 <code>sendFile</code></p>
 <p>__dirname 为 Node.js 的系统变量，指向文件的绝对路径。</p>
-<pre><code>app.get('/index.html', function (req, res) {
+<pre tabindex=0><code>app.get('/index.html', function (req, res) {
    res.sendFile( __dirname + &quot;/&quot; + &quot;index.html&quot; );
 });
 </code></pre><p>Express &ndash; GET 参数接收之路径方式</p>
 <p>访问地址：<code>http://localhost:8080/getusers/admin/18</code>，可通过 <code>request.params</code> 来获取参数</p>
-<pre><code>app.get('/getUsers/:username/:age', function(request, response){
+<pre tabindex=0><code>app.get('/getUsers/:username/:age', function(request, response){
     var params = {
         username: request.params.username,
         age: request.params.age
@@ -438,7 +438,7 @@ const app=express();
 <li>安装 body-parser <code>npm install body-parser</code></li>
 <li>参数接受和 GET 基本一样，不同的在于 GET 是 <code>request.query</code> 而 POST 的是 <code>request.body</code></li>
 </ul>
-<pre><code>var bodyParser = require('body-parser');
+<pre tabindex=0><code>var bodyParser = require('body-parser');
 // 创建 application/x-www-form-urlencoded 编码解析
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.post('/getUsers', urlencodedParser, function (request, response) {
@@ -449,7 +449,7 @@ app.post('/getUsers', urlencodedParser, function (request, response) {
    response.send(params);
 });
 </code></pre><p>Express &ndash; 跨域支持(放在最前面)</p>
-<pre><code>app.all('*', function(req, res, next) {
+<pre tabindex=0><code>app.all('*', function(req, res, next) {
     res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
     res.header(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type,Content-Length, Authorization, Accept,X-Requested-With&quot;);
     res.header(&quot;Access-Control-Allow-Methods&quot;,&quot;PUT,POST,GET,DELETE,OPTIONS&quot;);
@@ -463,7 +463,7 @@ app.post('/getUsers', urlencodedParser, function (request, response) {
 </code></pre><h2 id=中间件>中间件<a hidden class=anchor aria-hidden=true href=#中间件>#</a></h2>
 <p>express的中间件编写——过滤器</p>
 <p>简单使用</p>
-<pre><code>const express = require('express')
+<pre tabindex=0><code>const express = require('express')
 const app = express();
 
 let filter = (req, res, next) =&gt; {
@@ -480,14 +480,14 @@ app.get('/:name/:pwd', filter, (req, res) =&gt; {
 }).listen(88)
 </code></pre><p>这里写了一个filter方法，有一个next参数。在路由的时候，把filter作为一个参数，则就可以先执行filter函数，然后执行路由的逻辑。</p>
 <p>如果想要全局使用的话，就直接使用use方法即可。</p>
-<pre><code>app.use(filter);
+<pre tabindex=0><code>app.use(filter);
 </code></pre><h2 id=文件上传>文件上传<a hidden class=anchor aria-hidden=true href=#文件上传>#</a></h2>
 <p>前面说到的body-parser不支持文件上传，那么使用multer则可以实现。</p>
 <h1 id=操作数据库>操作数据库<a hidden class=anchor aria-hidden=true href=#操作数据库>#</a></h1>
 <p>node一般会使用mongo和mysql，使用下面这个例子即可：</p>
 <h2 id=操作-mongodb>操作 MongoDB<a hidden class=anchor aria-hidden=true href=#操作-mongodb>#</a></h2>
 <p>官方 api <code>http://mongodb.github.io/node-mongodb-native/</code></p>
-<pre><code>var mongodb = require('mongodb');
+<pre tabindex=0><code>var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var db;
 
@@ -510,7 +510,7 @@ module.exports = {
     }
 }
 </code></pre><h2 id=操作-mysql>操作 MySql<a hidden class=anchor aria-hidden=true href=#操作-mysql>#</a></h2>
-<pre><code>var mysql = require('mysql');
+<pre tabindex=0><code>var mysql = require('mysql');
 
 //创建连接池
 var pool  = mysql.createPool({
@@ -541,7 +541,7 @@ module.exports = {
 <p>Session 相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</p>
 <p>Session 不能跨域。</p>
 <p>node操作session和cookie也很简单，也是通过中间件的形式。</p>
-<pre><code>const express = require('express')
+<pre tabindex=0><code>const express = require('express')
 const path = require('path')
 const app = express();
 
@@ -596,7 +596,7 @@ app.listen(88)
 </ol>
 <p>Token 身份验证实现 —— jsonwebtoken</p>
 <p>先安装第三方模块 jsonwebtoken <code>npm install jsonwebtoken</code></p>
-<pre><code>const express = require('express')
+<pre tabindex=0><code>const express = require('express')
 const path = require('path')
 const app = express();
 const bodyParser = require('body-parser');
@@ -666,12 +666,12 @@ app.listen(88)
 </ul>
 <p>安装第三方模块 ws：<code>npm install ws</code></p>
 <p>开启一个 WebSocket 的服务器，端口为 8080</p>
-<pre><code>var socketServer = require('ws').Server;
+<pre tabindex=0><code>var socketServer = require('ws').Server;
 var wss = new socketServer({
     port: 8080
 });
 </code></pre><p>也可以利用 Express 来开启 WebSocket 的服务器</p>
-<pre><code>var app = require('express')();
+<pre tabindex=0><code>var app = require('express')();
 var server = require('http').Server(app);
 
 var socketServer = require('ws').Server;
@@ -689,7 +689,7 @@ soket.io 依靠事件驱动的模式，灵活的使用了自定义事件和调�
 <li>安装第三方模块 <code>npm install express socket.io</code></li>
 <li>开户 Socket 服务器，端口为 88</li>
 </ul>
-<pre><code>var express = require('express');
+<pre tabindex=0><code>var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -699,7 +699,7 @@ http.listen(88);
 <li>connection：监听客户端连接,回调函数会传递本次连接的socket</li>
 <li>emit：触发用客户端的事件</li>
 </ul>
-<pre><code>io.on('connection', function(client){
+<pre tabindex=0><code>io.on('connection', function(client){
     //把当前登录的用户保存到对象 onlinePersons，并向所有在线的用户发起上线提示
     //serverLogin 为自定义事件，供客户端调用
     client.on('serverLogin', function(_person){
@@ -723,10 +723,10 @@ http.listen(88);
 })
 </code></pre><h1 id=kafka-node>kafka-node<a hidden class=anchor aria-hidden=true href=#kafka-node>#</a></h1>
 <p>node也可以去读写kafka，而且很简单。只需要引入kafka的库即可。</p>
-<pre><code>yarn add kafka-node
+<pre tabindex=0><code>yarn add kafka-node
 </code></pre><p>具体api可以看文档：https://github.com/SOHU-Co/kafka-node</p>
 <p>生产者</p>
-<pre><code>var kafka = require('..');
+<pre tabindex=0><code>var kafka = require('..');
 var Producer = kafka.Producer;
 var KeyedMessage = kafka.KeyedMessage;
 var Client = kafka.Client;
@@ -753,7 +753,7 @@ producer.on('error', function (err) {
   console.log('error', err);
 });
 </code></pre><p>消费者</p>
-<pre><code>'use strict';
+<pre tabindex=0><code>'use strict';
 
 var kafka = require('..');
 var Consumer = kafka.Consumer;
@@ -828,7 +828,7 @@ consumer.on('offsetOutOfRange', function (topic) {
 </table>
 <p>从代码层面来看：</p>
 <p>TDD</p>
-<pre><code>suite('Array', ()=&gt;{
+<pre tabindex=0><code>suite('Array', ()=&gt;{
     setup(()={
         
     });
@@ -838,7 +838,7 @@ consumer.on('offsetOutOfRange', function (topic) {
     });
 })
 </code></pre><p>BDD</p>
-<pre><code>describe('Array', function() {
+<pre tabindex=0><code>describe('Array', function() {
   before(function() {
   });
 
@@ -850,7 +850,7 @@ consumer.on('offsetOutOfRange', function (topic) {
 <h2 id=测试框架实践>测试框架实践<a hidden class=anchor aria-hidden=true href=#测试框架实践>#</a></h2>
 <p>在node社区，比较成熟的是mocha。mocha本身是不提供断言库的，一般来说断言库比较常用的是chai。mocha和chai，合起来就被戏称为抹茶。</p>
 <p>mocha一般需要全局安装，chai安装到项目目录下即可。</p>
-<pre><code>yarn global add mocha
+<pre tabindex=0><code>yarn global add mocha
 
 yarn add chai
 </code></pre><h3 id=mocha>mocha<a hidden class=anchor aria-hidden=true href=#mocha>#</a></h3>
@@ -864,7 +864,7 @@ yarn add chai
 <li><code>afterEach()</code>：在每个Test Case 结束后执行的代码。</li>
 </ul>
 <h4 id=代码示例>代码示例<a hidden class=anchor aria-hidden=true href=#代码示例>#</a></h4>
-<pre><code>describe('hooks', function() { 
+<pre tabindex=0><code>describe('hooks', function() { 
   before(function() {
     
   });
@@ -896,17 +896,17 @@ yarn add chai
 <p>既然是给功能代码写单元测试，那就应该有个指标去衡量单元测试覆盖了哪些功能代码，这就是接下来要介绍的测试覆盖率。</p>
 <p>在 Node.js 中，我们使用 istanbul 作为覆盖率统计的工具，istanbul 可以帮助我们统计到代码的语句覆盖率、分支覆盖率、函数覆盖率以及行覆盖率。</p>
 <p>全局安装：</p>
-<pre><code>yarn global add istanbul
+<pre tabindex=0><code>yarn global add istanbul
 </code></pre><p>只需要使用istanbul cover就可以得到覆盖率。</p>
-<pre><code>istanbul cover simple.js
+<pre tabindex=0><code>istanbul cover simple.js
 </code></pre><p>可以和mocha配合使用：</p>
-<pre><code>isbuntal cover _mocha test/simple-test.js
+<pre tabindex=0><code>isbuntal cover _mocha test/simple-test.js
 </code></pre><p>mocha 和 _mocha 是两个不同的命令，前者会新建一个进程执行测试，而后者是在当前进程（即 istanbul 所在的进程）执行测试，只有这样， istanbul 才会捕捉到覆盖率数据。其他测试框架也是如此，必须在同一个进程执行测试。</p>
 <h1 id=引入typescript>引入typescript<a hidden class=anchor aria-hidden=true href=#引入typescript>#</a></h1>
 <p>typescript其实就是加了类型的js。</p>
 <p>所谓类型，就是约定变量的内存布局。js作为一个动态弱类型的语言，在开发大型项目的时候，不免可能出现问题，所以有类型的语言可以在编译期就能检测到错误，减少debug的时间。</p>
 <h2 id=安装>安装<a hidden class=anchor aria-hidden=true href=#安装>#</a></h2>
-<pre><code>yarn global add typescript
+<pre tabindex=0><code>yarn global add typescript
 </code></pre><h2 id=新项目引入ts>新项目引入ts<a hidden class=anchor aria-hidden=true href=#新项目引入ts>#</a></h2>
 <p>现在新建文件<code>server.ts</code>：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>http</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;http&#39;</span>;
@@ -919,27 +919,27 @@ yarn add chai
   <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#39;server is listening&#39;</span>);
 });
 </code></pre></div><p>为了能执行此文件，需要通过 <strong>tsc</strong> 命令来编译该 TypeScript 源码：</p>
-<pre><code>tsc server.ts
+<pre tabindex=0><code>tsc server.ts
 </code></pre><p>如果没有什么意外的话，此时控制台会打印出以下的出错信息：</p>
-<pre><code>server.ts(1,23): error TS2307: Cannot find module 'http'.
+<pre tabindex=0><code>server.ts(1,23): error TS2307: Cannot find module 'http'.
 </code></pre><p>这表示没有找到<code>http</code>这个模块定义（TyprScript 编译时是通过查找模块的 typings 声明文件来判断模块是否存在的，而不是根据真实的 js 文件，下文会详细解释），但是我们当前目录下还是生成了一个新的文件<code>server.js</code>，我们可以试着执行它：</p>
-<pre><code>node server.js
+<pre tabindex=0><code>node server.js
 </code></pre><p>如果一切顺利，那么控制台将会打印出 <strong>server is listening</strong> 这样的信息，并且我们在浏览器中访问 <a href=http://127.0.0.1:3000/>http://127.0.0.1:3000</a>时也能看到正确的结果：<strong>Hello, world</strong></p>
 <p>现在再回过头来看看刚才的编译错误信息。由于这是一个 Node.js 项目，typescript 语言中并没有定义<code>http</code>这个模块，所以我们需要安装 Node.js 运行环境的声明文件：</p>
-<pre><code>yarn global add @types/node 
+<pre tabindex=0><code>yarn global add @types/node 
 </code></pre><p>安装完毕之后，再重复上文的编译过程，此时 <strong>tsc</strong> 不再报错了。</p>
 <p>大多数时候，为了方便我们可以直接使用 <strong>ts-node</strong> 命令执行 TypeScript 源文件而不需要预先编译。首先执行以下命令安装 <strong>ts-node</strong>：</p>
-<pre><code>yarn global add -g ts-node
+<pre tabindex=0><code>yarn global add -g ts-node
 </code></pre><p>然后使用 <strong>ts-node</strong> 命令执行即可：</p>
-<pre><code>ts-node --no-cache server.ts
+<pre tabindex=0><code>ts-node --no-cache server.ts
 </code></pre><p>说明：使用 <strong>ts-node</strong> 执行 TypeScript 程序时，为了提高编译速度，默认会缓存未修改过的 <strong>.ts</strong> 文件，但有时候会导致一些 Bug，所以建议启动时加上 <code>--no-cache</code> 参数。</p>
 <h3 id=tsconfigjson-配置文件>tsconfig.json 配置文件<a hidden class=anchor aria-hidden=true href=#tsconfigjson-配置文件>#</a></h3>
 <p>每个 TypeScript 项目都需要一个 <strong>tsconfig.json</strong> 文件来指定相关的配置，比如告诉 TypeScript 编译器要将代码转换成 ES5 还是 ES6 代码等。</p>
 <p>可以使用tsc命令生成。</p>
-<pre><code>tsc --init
+<pre tabindex=0><code>tsc --init
 </code></pre><h3 id=使用第三方模块>使用第三方模块<a hidden class=anchor aria-hidden=true href=#使用第三方模块>#</a></h3>
 <p>一般情况下在 TypeScript 中是不能”<em>直接</em>“使用 npm 上的模块的，比如我们要使用 express 模块，先执行以下命令安装：</p>
-<pre><code>yarn add express
+<pre tabindex=0><code>yarn add express
 </code></pre><p>然后新建文件 <code>server.ts</code> :</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>import</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>express</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;express&#39;</span>;
 
@@ -952,13 +952,13 @@ yarn add chai
   <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#39;server is listening&#39;</span>);
 });
 </code></pre></div><p>然后使用以下命令执行：</p>
-<pre><code>ts-node server.ts
+<pre tabindex=0><code>ts-node server.ts
 </code></pre><p>如果不出意外，我们将会看到这样的报错信息：</p>
-<pre><code>src/server.ts(1,26): error TS7016: Could not find a declaration file for module 'express'.
+<pre tabindex=0><code>src/server.ts(1,26): error TS7016: Could not find a declaration file for module 'express'.
 </code></pre><p>报错的信息表明没有找到<code>express</code>模块的声明文件。由于 TypeScript 项目最终会编译成 JavaScript 代码执行，当我们在 TypeScript 源码中引入这些被编译成 JavaScript 的模块时，它需要相应的声明文件（<strong>.d.ts</strong>文件）来知道该模块类型信息，这些声明文件可以通过设置<code>tsconfig.json</code>中的<code>declaration: true</code>来自动生成。而那些不是使用 TypeScript 编写的模块，也可以通过手动编写声明文件来兼容 TypeScript。</p>
 <p>当遇到缺少模块声明文件的情况，开发者可以尝试通过 yarn addl @types/xxx 来安装模块声明文件即可。</p>
 <p>现在我们尝试执行以下命令安装 <strong>express</strong> 模块的声明文件：</p>
-<pre><code>yarn add @types/express
+<pre tabindex=0><code>yarn add @types/express
 </code></pre><p>没有意外，果然能成功安装。现在再通过 <strong>ts-node</strong> 来执行的时候，发现已经没有报错了。</p>
 <h3 id=单元测试>单元测试<a hidden class=anchor aria-hidden=true href=#单元测试>#</a></h3>
 <p>直接使用mocha和chai，进行ts的测试。</p>

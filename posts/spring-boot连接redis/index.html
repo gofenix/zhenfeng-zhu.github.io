@@ -18,7 +18,7 @@ jedis客户端在编程实施方面存在如下不足：
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="spring boot连接redis">
 <meta property="og:description" content="Spring-data-redis为spring-data模块中对redis的支持部分，简称为“SDR”，提供了基于jedis客户端API的高度封装以及与spring容器的整合，
 jedis客户端在编程实施方面存在如下不足：
@@ -125,7 +125,7 @@ March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 	<span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-data-redis<span style=color:#f92672>&lt;/artifactId&gt;</span>
 <span style=color:#f92672>&lt;/dependency&gt;</span>
 </code></pre></div><h2 id=3-配置>3 配置<a hidden class=anchor aria-hidden=true href=#3-配置>#</a></h2>
-<pre><code class=language-properties data-lang=properties># REDIS (RedisProperties)
+<pre tabindex=0><code class=language-properties data-lang=properties># REDIS (RedisProperties)
 # Redis数据库索引（默认为0）
 spring.redis.database=0
 # Redis服务器地址
@@ -146,7 +146,7 @@ spring.redis.pool.min-idle=0
 spring.redis.timeout=0
 </code></pre><p>其中spring.redis.database的配置通常使用0即可，Redis在配置的时候可以设置数据库数量，默认为16，可以理解为数据库的schema</p>
 <h3 id=31-stringredistemplate>3.1 <code>StringRedisTemplate</code><a hidden class=anchor aria-hidden=true href=#31-stringredistemplate>#</a></h3>
-<pre><code>@RunWith(SpringRunner.class)
+<pre tabindex=0><code>@RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
 
@@ -164,7 +164,7 @@ public class DemoApplicationTests {
 <p>除了String类型，我们还经常会在Redis中存储对象。</p>
 <h3 id=32-redistemplateobject-object>3.2 <code>RedisTemplate&lt;Object, Object></code><a hidden class=anchor aria-hidden=true href=#32-redistemplateobject-object>#</a></h3>
 <h4 id=321-新建user类>3.2.1 新建User类<a hidden class=anchor aria-hidden=true href=#321-新建user类>#</a></h4>
-<pre><code>@Data
+<pre tabindex=0><code>@Data
 @AllArgsConstructor
 public class User implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -173,7 +173,7 @@ public class User implements Serializable{
     private Integer age;
 }
 </code></pre><h4 id=322-创建userrepository>3.2.2 创建UserRepository<a hidden class=anchor aria-hidden=true href=#322-创建userrepository>#</a></h4>
-<pre><code>@Repository
+<pre tabindex=0><code>@Repository
 public class UserRepository {
     @Autowired
     private RedisTemplate&lt;Object, Object&gt; redisTemplate;
@@ -203,7 +203,7 @@ public class UserRepository {
 }
 </code></pre><p>@Resource注解和@Autowired一样，也可以标注在字段或属性的setter方法上，但它默认按名称装配。名称可以通过@Resource的name属性指定，如果没有指定name属性，当注解标注在字段上，即默认取字段的名称作为bean名称寻找依赖对象，当注解标注在属性的setter方法上，即默认取属性名作为bean名称寻找依赖对象。</p>
 <h4 id=323-单元测试>3.2.3 单元测试<a hidden class=anchor aria-hidden=true href=#323-单元测试>#</a></h4>
-<pre><code>@RunWith(SpringRunner.class)
+<pre tabindex=0><code>@RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
 	@Autowired

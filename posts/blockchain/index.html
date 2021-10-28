@@ -39,7 +39,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="区块链学习笔记">
 <meta property="og:description" content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html上的一些笔记。
  理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html
@@ -329,24 +329,24 @@ August 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <p>HD Wallet 采用 2048 个单词，或者汉字作为助记词，这些词库对外公开，很多钱包仅仅使用path第一个地址并且没有加密。如果你知道某个用户的助记词中的11各词的排列顺序，那么我们就可以通过穷举方法，算出所有地址的私钥，如果碰巧找到了已经在使用的地址。就可以将里面的ETH全部转走。</p>
 <h2 id=以太坊常用操作>以太坊常用操作<a hidden class=anchor aria-hidden=true href=#以太坊常用操作>#</a></h2>
 <p>计算gas费用</p>
-<pre><code>var estimateGas = eth.estimateGas({from:eth.accounts[1], to: eth.accounts[2], value: web3.toWei(1)})
+<pre tabindex=0><code>var estimateGas = eth.estimateGas({from:eth.accounts[1], to: eth.accounts[2], value: web3.toWei(1)})
 
 var cost = estimateGas * gasPrice
 </code></pre><p>解锁账户</p>
-<pre><code>personal.unlockAccount(eth.accounts[3], &quot;12345678&quot;)
+<pre tabindex=0><code>personal.unlockAccount(eth.accounts[3], &quot;12345678&quot;)
 </code></pre><p>转账</p>
-<pre><code>var txnHash = eth.sendTransaction({from: eth.accounts[3], to: eth.accounts[5], value: eth.getBalance(eth.accounts[3]) - cost, gas: estimateGas})
+<pre tabindex=0><code>var txnHash = eth.sendTransaction({from: eth.accounts[3], to: eth.accounts[5], value: eth.getBalance(eth.accounts[3]) - cost, gas: estimateGas})
 </code></pre><p>查看交易细节</p>
-<pre><code>web3.eth.getTransaction(txnHash)
+<pre tabindex=0><code>web3.eth.getTransaction(txnHash)
 </code></pre><p>获取余额</p>
-<pre><code>eth.getBalance(eth.accounts[3])
+<pre tabindex=0><code>eth.getBalance(eth.accounts[3])
 </code></pre><p>keystore文件</p>
 <p>以太坊的每个外部账户都是由一对密钥（一个公钥和一个私钥）定义的。账户以地址为索引，地址由公钥衍生而来，取公钥的最后 20个字节。</p>
 <p>每对私钥 /地址都编码在一个钥匙文件里，也就是我们说的keystore文件。该文件是 JSON 文本文件，可以用任何文本编辑器打开和浏览。钥匙文件的关键部分——账户私钥，通常用你创建帐户时设置的密码进行加密。如果你丢失了这个文件，你就丢失了私钥，意味着你失去了签署交易的能力，意味着你的资金被永久的锁定在了你的账户里。</p>
 <p>批量转账</p>
 <p>有时我们需要将Token发送到多个地址上去。通常的做法就是使用web.js写一个循环程序，但是实际使用过程中发现这种做法存在很多问题，常会发生转账失败情况。</p>
 <p>经过分析造成发送失败原因是，频率太高，因为web.js 是异步操作，当前程序还未完成交易，交易尚未确认的情况下第二笔交易发送出去，这时就会出错。</p>
-<pre><code>web3.eth.getTransactionCount(from).then(function(nonce){
+<pre tabindex=0><code>web3.eth.getTransactionCount(from).then(function(nonce){
 	// 问题就出在 nonce ， nonce 如同数据库中的序列主键，如果上一个交易没有完成，下一个交易取得 nonce + 1 后与上一个 pending 的交易相同，产生冲突
 }	
 </code></pre><p>最好的解方案是在合约中实现批量转账功能，这样需要一个交易 txhash 完成多比交易。</p>
@@ -363,7 +363,7 @@ var cost = estimateGas * gasPrice
 <li>批准花费代币</li>
 </ul>
 <p>最简单的合约如下：</p>
-<pre><code>pragma solidity ^0.4.24;
+<pre tabindex=0><code>pragma solidity ^0.4.24;
 
 contract EncryptToken {
     uint256 INITIAL_SUPPLY = 666666;
@@ -385,7 +385,7 @@ contract EncryptToken {
 
 }
 </code></pre><p>使用了openzeppeline-solidity的安全标准代币合约是：</p>
-<pre><code>  pragma solidity ^0.4.24;
+<pre tabindex=0><code>  pragma solidity ^0.4.24;
   import &quot;openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol&quot;;
 
   contract BloggerCoin is StandardToken{

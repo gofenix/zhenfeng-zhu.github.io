@@ -34,7 +34,7 @@ const {startWith, when, goto, stay, stop} = botkit.DSL(fsm); startWith(MyStates.
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="谈谈聊天机器人框架的实现原理">
 <meta property="og:description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
 聊天机器人  聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
@@ -165,7 +165,7 @@ August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
 <li>缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限</li>
 </ul>
 <p>示例：</p>
-<pre><code>const {startWith, when, goto, stay, stop} = botkit.DSL(fsm);
+<pre tabindex=0><code>const {startWith, when, goto, stay, stop} = botkit.DSL(fsm);
  
 startWith(MyStates.IDLE, {counter: 0});
 
@@ -201,7 +201,7 @@ when(MyStates.LOOP)((sender, content, data) =&gt; {
 <ul>
 <li>
 <p>routing dialog</p>
-<pre><code>// hotels.js
+<pre tabindex=0><code>// hotels.js
 module.exports = [
     // Destination
     function (session) {
@@ -231,7 +231,7 @@ bot.dialog('flights', require('./flights'));
 <li>
 <p>waterfall dialog</p>
 <p>一个瀑布流的dialog，可以让我们在一个dialog中像流一样完成一系列的动作。就像fsm的多种状态的集合。</p>
-<pre><code>[
+<pre tabindex=0><code>[
     // Destination
     function (session) {
         session.send('Welcome to the Hotels finder!');
@@ -313,7 +313,7 @@ bot.dialog('flights', require('./flights'));
 <h2 id=bot-builder源码阅读>Bot Builder源码阅读<a hidden class=anchor aria-hidden=true href=#bot-builder源码阅读>#</a></h2>
 <p>微软的botbuilder-js出到了V4版本，在新版本的机器人框架有着很大的变动，相比于V3目录结构变化了，而且机器人编写流程也有了一定的差异。</p>
 <p>项目结构</p>
-<pre><code>├── botbuilder
+<pre tabindex=0><code>├── botbuilder
 ├── botbuilder-ai
 ├── botbuilder-azure
 ├── botbuilder-core

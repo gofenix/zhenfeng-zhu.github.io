@@ -28,7 +28,7 @@ mapping(key => value)
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="contract">
 <meta property="og:description" content="类型 Solidity是静态类型的语言。
 值类型  bool int/uint fixed/unfixed address  balance和transfer send call, callcode和delegatecall   byte bytes 和 string 十六进制hex&#34;0012&#34; enum function  引用类型   数组
@@ -215,7 +215,7 @@ August 3, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <h2 id=控制结构>控制结构<a hidden class=anchor aria-hidden=true href=#控制结构>#</a></h2>
 <p>输入参数和我们常见的函数的参数相同</p>
 <p>输出参数必须要在returns后面，和go的类似</p>
-<pre><code>function arithmetics(uint _a, uint _b) returns (uint o_sum, uint o_product) {
+<pre tabindex=0><code>function arithmetics(uint _a, uint _b) returns (uint o_sum, uint o_product) {
         o_sum = _a + _b;
         o_product = _a * _b;
 }
@@ -229,7 +229,7 @@ function arithmetics(uint _a, uint _b) returns (uint , uint ) {
 <p>内部函数调用，就和普通的方法调用一样。</p>
 <p>从外部调用合约的函数，先创建一个合约实例（和类的对象一样），然后调用实例方法。</p>
 <p>调函数要发送wei和gas，就像下图所示：</p>
-<pre><code>pragma solidity ^0.4.0;
+<pre tabindex=0><code>pragma solidity ^0.4.0;
 
 contract InfoFeed {
     function info() public payable returns (uint ret) { return 42; }
@@ -259,7 +259,7 @@ contract Consumer {
 <li>
 <p>事件</p>
 <p>以太坊的日志工具接口。</p>
-<pre><code>event HighestBidIncreased(address bidder, uint amount); // 事件
+<pre tabindex=0><code>event HighestBidIncreased(address bidder, uint amount); // 事件
 
 emit HighestBidIncreased(msg.sender, msg.value); // 触发事件
 </code></pre></li>

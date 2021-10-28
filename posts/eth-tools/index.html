@@ -44,7 +44,7 @@ Blockchain Tutorial
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="以太坊开发总结">
 <meta property="og:description" content="最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
 在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
@@ -276,9 +276,9 @@ August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <p>创建钱包</p>
 <p>golang</p>
 <p>依赖</p>
-<pre><code>github.com/ethereum/go-ethereum
+<pre tabindex=0><code>github.com/ethereum/go-ethereum
 </code></pre><p>首先要连接到测试链，测试链可以是本地的也可以是公网的。</p>
-<pre><code>func connectRPC() (*ethclient.Client, error) {
+<pre tabindex=0><code>func connectRPC() (*ethclient.Client, error) {
 	// 连接测试链的节点
 	//rpcClient, err := rpc.Dial(&quot;https://rinkeby.infura.io/v3/6c81fb1b66804f0698d49f2ec242afc9&quot;)
 	rpcClient, err := rpc.Dial(&quot;http://127.0.0.1:7545&quot;)
@@ -291,7 +291,7 @@ August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 	return conn, nil
 }
 </code></pre><p>一般都选择以keystore的形式创建账户</p>
-<pre><code>func CreateWallet() (key, addr string) {
+<pre tabindex=0><code>func CreateWallet() (key, addr string) {
 	ks := keystore.NewKeyStore(&quot;~/Documents/github/gowork/src/geth-demo/&quot;,
 		keystore.StandardScryptN, keystore.StandardScryptP)
 	account, _ := ks.NewAccount(&quot;password&quot;)
@@ -305,7 +305,7 @@ August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 	return
 }
 </code></pre><p>当然另一种创建账户的方式是用私钥：</p>
-<pre><code>func CreateWallet() (string, error) {
+<pre tabindex=0><code>func CreateWallet() (string, error) {
 	key, err := crypto.GenerateKey()
 	if err != nil {
 		log.Fatalln(err)
@@ -322,15 +322,15 @@ August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 </code></pre><p>Node</p>
 <p>node一般使用web3。创建web3对象的时候要使用一个provider，这个provider用来连接到测试链，可以是钱包的，也可以是一个HttpProvider。</p>
 <p>创建web3</p>
-<pre><code>const web3 = new Web3(new Web3.providers.HttpProvider(&quot;http://localhost:7545&quot;));
+<pre tabindex=0><code>const web3 = new Web3(new Web3.providers.HttpProvider(&quot;http://localhost:7545&quot;));
 </code></pre><p>或者使用<code>truffle-hdwallet-provider</code>来创建，使用这个的前提是，自己已经创建了一个钱包，并且这个钱包是HD的。</p>
-<pre><code>const Web3 = require('web3');
+<pre tabindex=0><code>const Web3 = require('web3');
 const HDWalletProvider = require('truffle-hdwallet-provider');
 
 const provider = new HDWalletProvider(助记词, 测试链url);
 const web3 = new Web3(provider);
 </code></pre><p>创建账户</p>
-<pre><code>
+<pre tabindex=0><code>
 </code></pre>
 </div>
 <footer class=post-footer>

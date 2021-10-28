@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -64,6 +64,42 @@
 </div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+docker
+</h2>
+</header>
+<section class=entry-content>
+<p>docker常用命令 docker 获取镜像
+docker pull
+新建并启动
+docker run
+列出镜像
+docker image ls
+docker images
+删除虚悬镜像
+docker image prune
+删除本地镜像
+docker iamge rm
+查看应用信息
+docker logs
+dockerfile 一般步骤： 在一个目录里，新建一个文件，命名为Dockerfile 在Dockerfile的目录内，执行docker build 常用指令 FROM 指定基础镜像，且是第一条命令
+RUN 执行命令
+shell格式
+exec格式
+COPY和ADD指令是复制文件
+CMD指令和RUN类似，容器启动命令
+shell格式
+exec格式
+参数列表格式
+ENV 设置环境变量...</p>
+</section>
+<footer class=entry-footer>
+March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to docker" href=https://zhenfeng-zhu.github.io/posts/docker/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -178,6 +214,43 @@ March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+</h2>
+</header>
+<section class=entry-content>
+<p>#! https://zhuanlan.zhihu.com/p/426634841
+roadmap title: “Crystal_roadmap” date: 2021-10-28T10:11:41+08:00 This roadmap defines the things that we want to have in the language and plan to do.
+Language Stuff that has to do with the language syntax, semantic and runtime.
+Concurrency Finalize multithreading support, so fibers can run on multiple threads.
+Windows support Finalize support for Windows platform. The compiler already works, but some stdlib features like concurrency support are still missing. Ongoing efforts on #5430....</p>
+</section>
+<footer class=entry-footer>
+2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to " href=https://zhenfeng-zhu.github.io/posts/crystal_roadmap/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+</h2>
+</header>
+<section class=entry-content>
+<p>#! https://zhuanlan.zhihu.com/p/421703318
+title: “如何理解可观测性” date: 2021-10-15T09:45:38+08:00
+可观测性 可观测性 ≠ 监控 核心不同
+监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分析。 维度不同
+监控是从外围的角度，通过各种指标（机器 CPU、负载、网络等维度）来判断整个系统的执行情况。 可观测性则在上述外部指标基础上，以应用内的各个维度来展开推测，通过二者的数据结合来真实的反应应用的运行情况。 展现的信息不同
+有些系统在正常运行时十分稳定，但是一到高并发就会出现问题，此时监控只能汇报问题出现的状况，而可观测性可以很好的通过图形化的方式告知我们问题的原因，不用我们通过经验来猜测。 可观测性打破了开发和运维的原有问题解决方式，不再是运维发现问题开发解决，而是以开发为中心。
+监控数据来源 端上访问
+用户体验监控 web 页面的白屏时间 dom 元素/资源加载耗时 文档网络耗时 app 卡顿率 崩溃率 热启动加载时长 日志 端到端 用户端到后端的请求状况，访问量、成功率、响应时间等。 还需要端上所处的地区、网络环境、响应状态码 可用率 访问是否可用、响应耗时长短的一些指标和 cdn、dns 等公共资源有关系。 应用程序...</p>
+</section>
+<footer class=entry-footer>
+1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to " href=https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 Hello World
 </h2>
 </header>
@@ -209,6 +282,7 @@ Deploy to remote sites $ hexo deploy More info: Deployment...</p>
 <button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </button>
 </a>
+<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>

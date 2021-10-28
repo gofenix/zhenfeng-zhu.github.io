@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="Openfaas Workshop Lab1b">
 <meta property="og:description" content="Desc Text.">
 <meta property="og:type" content="article">
@@ -136,7 +136,7 @@ mv kubectl $HOME/bin/
 <p>现在通过如下命令启动 Minikube</p>
 </li>
 </ul>
-<pre><code>$ minikube start
+<pre tabindex=0><code>$ minikube start
 </code></pre><p>Minikube VM 通过一个仅限主机的 IP 地址暴露给主机系统。通过<code>minikube ip</code>检测这个 IP。
 这是稍后将用于网关 URL 的 IP。</p>
 <blockquote>
@@ -218,7 +218,7 @@ $ gcloud config set compute/zone us-central1-a
 </span><span style=color:#ae81ff></span>--clusterrole<span style=color:#f92672>=</span>cluster-admin <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--user<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>gcloud config get-value core/account<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
 </code></pre></div><p>现在验证 <code>kubectl</code> 已经被配置到了 GKE 集群：</p>
-<pre><code>$ kubectl get nodes
+<pre tabindex=0><code>$ kubectl get nodes
 NAME                                   STATUS    ROLES     AGE       VERSION
 gke-name-default-pool-eceef152-qjmt   Ready     &lt;none&gt;    1h        v1.10.7-gke.2
 </code></pre><h2 id=部署-openfaas>部署 OpenFaaS<a hidden class=anchor aria-hidden=true href=#部署-openfaas>#</a></h2>

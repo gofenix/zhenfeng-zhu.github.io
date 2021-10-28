@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -64,6 +64,26 @@
 </div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Crystal1
+</h2>
+</header>
+<section class=entry-content>
+<p>Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行说明。重大更改标有 ⚠️。
+统计数据 在此版本中，我们包含了自 1.1.1 版本以来 32 位贡献者的 181 个 PR。我们感谢为改进语言及其标准库所做的所有努力！❤️
+平台支持 正如在 1.2 的上一篇博客文章中提到的，我们决定降低对 32 位 x86 架构的支持。但是我们确实有一些好消息要分享！
+我们在原生 Windows 支持方面取得了进展，在此版本中包括套接字实现（#11205、#11137、#10605、#10605）。
+与 Windows 相关，也与 ARM64 架构相关，我们修复了一个重要的代码生成错误。我们现在处于将 aarch64 平台提升到 Tier 1 的条件，预计很快就会支持。这也与带有 M1 芯片组的 macOS 相关：从这个版本开始，我们包含一个适用于 x86 和 M1 mac 的通用 macOS 包。
+我们发现 Windows 和 M1 的 mac 上出现的两个错误来自 LLVM 11 和 12。我们预计该修复将随最近发布的 LLVM 13 一起提供。Crystal 1.2.0 与 LLVM 12 兼容，尽管我们建议不要使用 LLVM 11 和 12.
+语言变化 现在可以将泛型类的子类分配给父类的实例：...</p>
+</section>
+<footer class=entry-footer>
+October 17, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Crystal1" href=https://zhenfeng-zhu.github.io/posts/crystal1.2/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -230,25 +250,6 @@ February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to 小白都能快速上手的Vim配置" href=https://zhenfeng-zhu.github.io/posts/vim/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-Github Action自动部署blog
-</h2>
-</header>
-<section class=entry-content>
-<p>之前我采用的方式是两个github repo的方式：
-一个叫hugo-blog，用于存放blog的源文件
-一个叫zhenfeng-zhu.github.io，用于存放生成之后的文件
-然后通过写一个shell脚本，将生成之后的文件推向zhenfeng-zhu.github.io仓库中，同时将blog的源文件也做了一个backup。后来使用了一个github action的方式， 就不用在两个仓库中进行折腾，一切都由github action来做了。
-方案 设置workflow 首先创建一个.github/workflows/gh-pages.yml
-name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: 'latest' # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets....</p>
-</section>
-<footer class=entry-footer>
-February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to Github Action自动部署blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=next href=https://zhenfeng-zhu.github.io/posts/page/2/>Next Page »</a>
@@ -265,6 +266,7 @@ February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </button>
 </a>
+<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>

@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <meta property="og:title" content="Go Data">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Go Data">
@@ -59,6 +59,48 @@
 </nav>
 </header>
 <main class=main>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+以太坊开发总结
+</h2>
+</header>
+<section class=entry-content>
+<p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
+在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
+什么是区块链
+相信大家对区块链都有自己的理解，不仅仅是互联网公司，传统企业也在“币改转型”。
+**简言之，区块链就是数据库。**它是特定数据的数据库，里面的数据不断增长，具有非凡特性：
+一旦数据存储于数据库，永远都无法被修改或删除。区块链上的每个记录会被永久保存下来。 没有单独的个人或组织能维护该数据库。必须要上千个人才行，每个人都有数据库的副本。 什么是以太坊？
+以太坊（英语：Ethereum）是一个开源的有智能合约功能的公共区块链平台[1][2]。通过其专用加密货币以太币（Ether，又称“以太币”）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。
+为什么选择以太坊？
+智能合约
+代币
+资料相对完善，相对容易开发
+大佬对以太坊比较熟悉
+大佬对以太坊比较熟悉
+大佬对以太坊比较熟悉
+重要的事情说三遍，有一个经验丰富的人带领，做东西肯定事半功倍。
+自己动手写区块链
+这里提供两个教程，一个是书，一个是视频。其中视频和书是对应的，不清楚是不是同一个作者。
+Blockchain Tutorial
+私有区块链，我们一起GO
+以太坊开发
+由于我是专注于后端的开发，现在的技术栈是
+node go 正式进入以太坊的开发。这是我这段时间接触到的一些资源：
+go-ethereum：也就是geth，官方的go版本的客户端
+solidity：智能合约编程语言
+truffle：智能合约的编程框架，基于nodejs
+Ganache：启动了多个节点本地私链
+Rinkeby：以太坊测试链
+Etherscan：以太坊区块链浏览器，可以查询交易
+MetaMask：chrome的钱包插件...</p>
+</section>
+<footer class=entry-footer>
+August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -266,20 +308,6 @@ $ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be
 July 2, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to openfaas-workshop-lab4" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-ubuntu-docker-sudo
-</h2>
-</header>
-<section class=entry-content>
-<p>sudo chown "$USER":"$USER" /home/"$USER"/.docker -R sudo chmod g+rwx "/home/$USER/.docker" -R https://api.finochat.com/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI http://localhost:3000/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI ...</p>
-</section>
-<footer class=entry-footer>
-June 29, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to ubuntu-docker-sudo" href=https://zhenfeng-zhu.github.io/posts/ubuntu-docker-sudo/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

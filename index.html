@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <meta property="og:title" content="Go Data">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Go Data">
@@ -75,6 +75,26 @@
 </section>
 <footer class=entry-footer><div class=social-icons><a href=https://github.com/zhenfeng-zhu target=_blank rel="noopener noreferrer me" title=Github><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a href=index.xml target=_blank rel="noopener noreferrer me" title="Rs s"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div>
 </footer>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Crystal1
+</h2>
+</header>
+<section class=entry-content>
+<p>Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行说明。重大更改标有 ⚠️。
+统计数据 在此版本中，我们包含了自 1.1.1 版本以来 32 位贡献者的 181 个 PR。我们感谢为改进语言及其标准库所做的所有努力！❤️
+平台支持 正如在 1.2 的上一篇博客文章中提到的，我们决定降低对 32 位 x86 架构的支持。但是我们确实有一些好消息要分享！
+我们在原生 Windows 支持方面取得了进展，在此版本中包括套接字实现（#11205、#11137、#10605、#10605）。
+与 Windows 相关，也与 ARM64 架构相关，我们修复了一个重要的代码生成错误。我们现在处于将 aarch64 平台提升到 Tier 1 的条件，预计很快就会支持。这也与带有 M1 芯片组的 macOS 相关：从这个版本开始，我们包含一个适用于 x86 和 M1 mac 的通用 macOS 包。
+我们发现 Windows 和 M1 的 mac 上出现的两个错误来自 LLVM 11 和 12。我们预计该修复将随最近发布的 LLVM 13 一起提供。Crystal 1.2.0 与 LLVM 12 兼容，尽管我们建议不要使用 LLVM 11 和 12.
+语言变化 现在可以将泛型类的子类分配给父类的实例：...</p>
+</section>
+<footer class=entry-footer>
+October 17, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Crystal1" href=https://zhenfeng-zhu.github.io/posts/crystal1.2/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -241,25 +261,6 @@ February 27, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to 小白都能快速上手的Vim配置" href=https://zhenfeng-zhu.github.io/posts/vim/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-Github Action自动部署blog
-</h2>
-</header>
-<section class=entry-content>
-<p>之前我采用的方式是两个github repo的方式：
-一个叫hugo-blog，用于存放blog的源文件
-一个叫zhenfeng-zhu.github.io，用于存放生成之后的文件
-然后通过写一个shell脚本，将生成之后的文件推向zhenfeng-zhu.github.io仓库中，同时将blog的源文件也做了一个backup。后来使用了一个github action的方式， 就不用在两个仓库中进行折腾，一切都由github action来做了。
-方案 设置workflow 首先创建一个.github/workflows/gh-pages.yml
-name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: 'latest' # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets....</p>
-</section>
-<footer class=entry-footer>
-February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to Github Action自动部署blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

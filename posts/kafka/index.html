@@ -24,7 +24,7 @@ bin/connect-standalone.sh config/connect-standalone.">
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="kafka">
 <meta property="og:description" content="启动zookeeper
 bin/zookeeper-server-start.sh config/zookeeper.properties 启动kafka
@@ -97,34 +97,34 @@ June 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </header>
 <div class=post-content>
 <p>启动zookeeper</p>
-<pre><code>bin/zookeeper-server-start.sh config/zookeeper.properties
+<pre tabindex=0><code>bin/zookeeper-server-start.sh config/zookeeper.properties
 </code></pre><p>启动kafka</p>
-<pre><code>bin/kafka-server-start.sh config/server.properties
+<pre tabindex=0><code>bin/kafka-server-start.sh config/server.properties
 </code></pre><p>创建一个主题</p>
-<pre><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
-</code></pre><pre><code>bin/kafka-topics.sh --list --zookeeper localhost:2181
+<pre tabindex=0><code>bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+</code></pre><pre tabindex=0><code>bin/kafka-topics.sh --list --zookeeper localhost:2181
 </code></pre><p>生产者</p>
-<pre><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+<pre tabindex=0><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
 </code></pre><p>消费者</p>
-<pre><code>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+<pre tabindex=0><code>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 </code></pre><p>kafka connect</p>
-<pre><code>echo -e &quot;zhisheng\ntian&quot; &gt; test.txt
+<pre tabindex=0><code>echo -e &quot;zhisheng\ntian&quot; &gt; test.txt
 </code></pre><p>ls</p>
-<pre><code>zhuzhenfengdeMacBook-Pro➜  kafka_2.12-1.1.0  ᐅ  echo -e &quot;zhisheng\ntian&quot; &gt; test.txt
+<pre tabindex=0><code>zhuzhenfengdeMacBook-Pro➜  kafka_2.12-1.1.0  ᐅ  echo -e &quot;zhisheng\ntian&quot; &gt; test.txt
 
 zhuzhenfengdeMacBook-Pro➜  kafka_2.12-1.1.0  ᐅ
 zhuzhenfengdeMacBook-Pro➜  kafka_2.12-1.1.0  ᐅ  ls
 LICENSE   NOTICE    bin       config    libs      logs      site-docs test.txt
 zhuzhenfengdeMacBook-Pro➜  kafka_2.12-1.1.0  ᐅ
 </code></pre><p>启动连接器</p>
-<pre><code>bin/connect-standalone.sh  config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
+<pre tabindex=0><code>bin/connect-standalone.sh  config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
 </code></pre><p>然后发现多了一个文件</p>
-<pre><code>/Users/zhuzhenfeng/Documents/software/kafka_2.12-1.1.0
+<pre tabindex=0><code>/Users/zhuzhenfeng/Documents/software/kafka_2.12-1.1.0
 [kafka_2.12-1.1.0] ls                                                                                                 18:25:38
 LICENSE       NOTICE        bin           config        libs          logs          site-docs     test.sink.txt test.txt
 [kafka_2.12-1.1.0]
 </code></pre><p>然后消费</p>
-<pre><code>&gt;&gt; bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic connect-test --from-beginning
+<pre tabindex=0><code>&gt;&gt; bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic connect-test --from-beginning
 
 {&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;zhisheng&quot;}
 {&quot;schema&quot;:{&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false},&quot;payload&quot;:&quot;tian&quot;}

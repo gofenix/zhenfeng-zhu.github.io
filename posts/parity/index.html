@@ -20,7 +20,7 @@ brew tap paritytech/paritytech brew install parity 创世区块 创世区块的�
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="基于以太坊的Parity联盟链部署">
 <meta property="og:description" content="公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity是可以构建出一个基于PoA共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
 部署联盟链 parity的文档：https://wiki.parity.io/Demo-PoA-tutorial
@@ -89,12 +89,12 @@ August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
 <p>parity的文档：https://wiki.parity.io/Demo-PoA-tutorial</p>
 <h3 id=安装>安装<a hidden class=anchor aria-hidden=true href=#安装>#</a></h3>
 <p>首先是下载parity，在mac下是直接brew安装即可。</p>
-<pre><code>brew tap paritytech/paritytech
+<pre tabindex=0><code>brew tap paritytech/paritytech
 
 brew install parity
 </code></pre><h3 id=创世区块>创世区块<a hidden class=anchor aria-hidden=true href=#创世区块>#</a></h3>
 <p>创世区块的配置文件：</p>
-<pre><code class=language-on data-lang=on>// demo-spec.json
+<pre tabindex=0><code class=language-on data-lang=on>// demo-spec.json
 
 {
   &quot;name&quot;: &quot;DemoPoA&quot;,
@@ -238,23 +238,23 @@ brew install parity
 <span style=color:#a6e22e>disable</span> = <span style=color:#66d9ef>true</span>
 </code></pre></div><h3 id=启动并创建账户>启动并创建账户<a hidden class=anchor aria-hidden=true href=#启动并创建账户>#</a></h3>
 <p>启动</p>
-<pre><code>parity --config node0.toml --fat-db=on
+<pre tabindex=0><code>parity --config node0.toml --fat-db=on
 parity --config node1.toml --fat-db=on
 </code></pre><p>创建账户：</p>
-<pre><code>curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parity_newAccountFromPhrase&quot;,&quot;params&quot;:[&quot;node0&quot;, &quot;node0&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8546
-</code></pre><pre><code>curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parity_newAccountFromPhrase&quot;,&quot;params&quot;:[&quot;user&quot;, &quot;user&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8546
-</code></pre><pre><code>curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parity_newAccountFromPhrase&quot;,&quot;params&quot;:[&quot;node1&quot;, &quot;node1&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8541
+<pre tabindex=0><code>curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parity_newAccountFromPhrase&quot;,&quot;params&quot;:[&quot;node0&quot;, &quot;node0&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8546
+</code></pre><pre tabindex=0><code>curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parity_newAccountFromPhrase&quot;,&quot;params&quot;:[&quot;user&quot;, &quot;user&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8546
+</code></pre><pre tabindex=0><code>curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parity_newAccountFromPhrase&quot;,&quot;params&quot;:[&quot;node1&quot;, &quot;node1&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8541
 </code></pre><p>这样就创建了3个账户，其中node0和node1是见证者 user是初始发钱的。</p>
 <p>因为parity ui是要连接8546端口，所以这里就让node0的rpc的端口是8546。</p>
 <h3 id=节点互通和转账>节点互通和转账<a hidden class=anchor aria-hidden=true href=#节点互通和转账>#</a></h3>
 <p>让node0和node1节点相通，其实就是让两个节点成为一个网络：</p>
-<pre><code>// 获取node0的encode
+<pre tabindex=0><code>// 获取node0的encode
 curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parity_enode&quot;,&quot;params&quot;:[],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8546
 
 // 调用node1的rpc，将node0加入， RESULT就是上一步获取的
 curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parity_addReservedPeer&quot;,&quot;params&quot;:[&quot;enode://RESULT&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8541
 </code></pre><p>我们先给两个账户转账：</p>
-<pre><code>curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;personal_sendTransaction&quot;,&quot;params&quot;:[{&quot;from&quot;:&quot;0x004ec07d2329997267Ec62b4166639513386F32e&quot;,&quot;to&quot;:&quot;0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e&quot;,&quot;value&quot;:&quot;0xde0b6b3a7640000&quot;}, &quot;user&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8540
+<pre tabindex=0><code>curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;personal_sendTransaction&quot;,&quot;params&quot;:[{&quot;from&quot;:&quot;0x004ec07d2329997267Ec62b4166639513386F32e&quot;,&quot;to&quot;:&quot;0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e&quot;,&quot;value&quot;:&quot;0xde0b6b3a7640000&quot;}, &quot;user&quot;],&quot;id&quot;:0}' -H &quot;Content-Type: application/json&quot; -X POST localhost:8540
 </code></pre><p>从user中转了1个以太坊到了node0账户中，同样再转给node1。</p>
 <h2 id=部署合约>部署合约<a hidden class=anchor aria-hidden=true href=#部署合约>#</a></h2>
 <p>再使用truffle开发完合约之后，把账户部署到我们刚刚起来的联盟链。部署合约需要消耗一定的gas，truffle使用的是HD wallet的Provider，所以我们要先给一个钱包转一些以太币。</p>
@@ -262,7 +262,7 @@ curl --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;parit
 <p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fuioo9rlayj30ab0h2gne.jpg alt></p>
 <p>创建一个账户，向那个账户转几个以太币。</p>
 <p>然后在truffle中，配置如下：</p>
-<pre><code>// truffle.js
+<pre tabindex=0><code>// truffle.js
 
 module.exports = {
   // See &lt;http://truffleframework.com/docs/advanced/configuration&gt;
@@ -283,16 +283,16 @@ module.exports = {
   }
 };
 </code></pre><p>然后在执行部署合约的时候，指定parity即可：</p>
-<pre><code>truffle migrate --network parity
+<pre tabindex=0><code>truffle migrate --network parity
 </code></pre><h2 id=部署以太坊浏览器>部署以太坊浏览器<a hidden class=anchor aria-hidden=true href=#部署以太坊浏览器>#</a></h2>
 <p>以太坊的浏览器找了好几个，最后选中了<a href=https://github.com/gobitfly/etherchain-light>etherchain-light</a>。部署起来简单。</p>
 <p>首先clone代码到本地，然后npm安装依赖。</p>
-<pre><code>git clone https://github.com/gobitfly/etherchain-light --recursive
+<pre tabindex=0><code>git clone https://github.com/gobitfly/etherchain-light --recursive
 
 cd etherchain-light &amp;&amp; yarn
 </code></pre><p>一定要用<code>—-recursive</code>，将所有git的子模块都下载下来。</p>
 <p>修改config.js.example文件为config.js，然后把Provider改为HttpProvider，连接到node0的节点即可。</p>
-<pre><code>// config.js
+<pre tabindex=0><code>// config.js
 var web3 = require('web3');
 var net = require('net');
 

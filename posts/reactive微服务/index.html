@@ -39,7 +39,7 @@ verticles Verticles是被Vert.x部署和运行的代码块。一个微服务的�
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="Reactive微服务">
 <meta property="og:description" content="Reactive微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被CAP和FLP理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive便出现了。
 Reactive编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。
@@ -171,13 +171,13 @@ March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <h2 id=vertx>Vert.x<a hidden class=anchor aria-hidden=true href=#vertx>#</a></h2>
 <p>Vert.x是一个用于构建reactive和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用Vert.x构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。</p>
 <p>传统编程模式</p>
-<pre><code>int res = compute(1, 2);
+<pre tabindex=0><code>int res = compute(1, 2);
 </code></pre><p>在这段代码中，是在等待compute函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个handler：</p>
-<pre><code>compute(1, 2, res -&gt; {
+<pre tabindex=0><code>compute(1, 2, res -&gt; {
     // called with the result
 });
 </code></pre><p>在上述代码中，compute函数不再返回一个结果，而是传一个handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在vert.x中，到处都可以看到这种形式的代码，比如创建http服务器时：</p>
-<pre><code>vertx.createHttpServer()
+<pre tabindex=0><code>vertx.createHttpServer()
     .requestHandler(request -&gt; {
         request.response().end(&quot;hello vert.x&quot;);
     })

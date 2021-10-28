@@ -20,7 +20,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="Spring Boot启动原理分析">
 <meta property="og:description" content="Spring Boot启动原理分析 我们在开发spring boot应用的时候，一般会遇到如下的启动类：
 @SpringBootApplication public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } } 从这段代码可以看出，注解@SpringBootApplication和SpringApplication.run()是比较重要的两个东西。
@@ -86,7 +86,7 @@ March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <div class=post-content>
 <h1 id=spring-boot启动原理分析>Spring Boot启动原理分析<a hidden class=anchor aria-hidden=true href=#spring-boot启动原理分析>#</a></h1>
 <p>我们在开发spring boot应用的时候，一般会遇到如下的启动类：</p>
-<pre><code>@SpringBootApplication
+<pre tabindex=0><code>@SpringBootApplication
 public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -94,7 +94,7 @@ public class DemoApplication {
 }
 </code></pre><p>从这段代码可以看出，注解@SpringBootApplication和SpringApplication.run()是比较重要的两个东西。</p>
 <h2 id=1-springapplication注解>1 @SpringApplication注解<a hidden class=anchor aria-hidden=true href=#1-springapplication注解>#</a></h2>
-<pre><code>@Target(ElementType.TYPE)
+<pre tabindex=0><code>@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
@@ -113,7 +113,7 @@ public @interface SpringBootApplication {
 <li>@ComponentScan</li>
 </ul>
 <p>其实，我们使用这三个注解来修饰springboot的启动类也可以正常运行,如下所示：</p>
-<pre><code>@ComponentScan
+<pre tabindex=0><code>@ComponentScan
 @EnableAutoConfiguration
 @Configuration
 public class DemoApplication {
@@ -137,7 +137,7 @@ public class DemoApplication {
   <span style=color:#75715e>&lt;!--bean定义--&gt;</span>
 <span style=color:#f92672>&lt;/beans&gt;</span>
 </code></pre></div><p>基于java config配置方式是这样的：</p>
-<pre><code>@Configuration
+<pre tabindex=0><code>@Configuration
 public class MockConfiguration{
     //bean定义
 }
@@ -149,7 +149,7 @@ public class MockConfiguration{
     ...
 <span style=color:#f92672>&lt;/bean&gt;</span>
 </code></pre></div><p>而基于Java config的配置形式是这样的：</p>
-<pre><code>@Configuration
+<pre tabindex=0><code>@Configuration
 public class MockConfiguration{
 	@Bean
 	public MockService mockService(){
@@ -167,7 +167,7 @@ public class MockConfiguration{
 
 <span style=color:#f92672>&lt;bean</span> <span style=color:#a6e22e>id=</span><span style=color:#e6db74>&#34;dependencyService&#34;</span> <span style=color:#a6e22e>class=</span><span style=color:#e6db74>&#34;DependencyServiceImpl&#34;</span><span style=color:#f92672>&gt;&lt;/bean&gt;</span>
 </code></pre></div><p>而基于Java config的配置形式是这样的：</p>
-<pre><code>@Configuration
+<pre tabindex=0><code>@Configuration
 public class MockConfiguration{
     @Bean
     public MockService mockService(){
@@ -189,7 +189,7 @@ public class MockConfiguration{
 <h3 id=13-enableautoconfiguration>1.3 @EnableAutoConfiguration<a hidden class=anchor aria-hidden=true href=#13-enableautoconfiguration>#</a></h3>
 <p>Spring框架提供了各种名字为@Enable开头的Annotation定义，比如@EnableScheduling、@EnableCaching、@EnableMBeanExport等。@EnableAutoConfiguration的理念和做事方式其实一脉相承，简单概括一下就是，借助@Import的支持，收集和注册特定场景相关的bean定义。</p>
 <p>@EnableAutoConfiguration也是借助@Import的帮助，将所有符合自动配置条件的bean定义加载到IoC容器。</p>
-<pre><code>@SuppressWarnings(&quot;deprecation&quot;)
+<pre tabindex=0><code>@SuppressWarnings(&quot;deprecation&quot;)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -203,7 +203,7 @@ public @interface EnableAutoConfiguration {
 <p>其中，最关键的要属@Import(EnableAutoConfigurationImportSelector.class)，借助EnableAutoConfigurationImportSelector，@EnableAutoConfiguration借助于SpringFactoriesLoader的支持可以帮助SpringBoot应用将所有符合条件的@Configuration配置都加载到当前SpringBoot创建并使用的IoC容器。SpringFactoriesLoader的支持。</p>
 <h3 id=14-springfactoriesloader>1.4 SpringFactoriesLoader<a hidden class=anchor aria-hidden=true href=#14-springfactoriesloader>#</a></h3>
 <p>SpringFactoriesLoader属于Spring框架私有的一种扩展方案，其主要功能就是从指定的配置文件<code>META-INF/spring.factories</code>加载配置。</p>
-<pre><code>public abstract class SpringFactoriesLoader {
+<pre tabindex=0><code>public abstract class SpringFactoriesLoader {
     public static &lt;T&gt; List&lt;T&gt; loadFactories(Class&lt;T&gt; factoryClass, ClassLoader classLoader) {
         ...
     }

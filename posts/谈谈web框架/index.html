@@ -22,7 +22,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="谈谈web框架">
 <meta property="og:description" content="这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对web框架的理解。自己了解的也不是很多，也请多多指教。
 写程序免不了要做web相关的，现在由于前后端的分离，后端一般只提供rest接口，前端一般使用node来做渲染。在之前使用jsp那一套的时候，基本上都要写html+js的前端的一套，也要写后端java的CRUD。
@@ -106,7 +106,7 @@ April 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 </ul>
 <p>我了解比较多的mvc框架是spring mvc。spring、spring mvc和spring boot等，他们并不是一个概念，也不是仅仅用于web开发。但是在这里我就不分那么细，统一用spring来代替。这里所说的spring都是指狭义上的web开发方面。</p>
 <p>在做web开发的时候，项目目录一般是这样的：</p>
-<pre><code> $ tree                                                              [16:23:43]
+<pre tabindex=0><code> $ tree                                                              [16:23:43]
 .
 ├── mvnw
 ├── mvnw.cmd
@@ -141,7 +141,7 @@ April 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <p><em>路由</em>用于确定应用程序如何响应对特定端点的客户机请求，包含一个 URI（或路径）和一个特定的 HTTP 请求方法（GET、POST 等）。</p>
 <p>每个路由可以具有一个或多个处理程序函数，这些函数在路由匹配时执行。</p>
 <p>路由一般采用如下的结构：</p>
-<pre><code>router.METHOD(PATH, HANDLER)
+<pre tabindex=0><code>router.METHOD(PATH, HANDLER)
 </code></pre><p>其中：</p>
 <ul>
 <li>router是路由实例。</li>
@@ -152,7 +152,7 @@ April 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <p>可以发现，在router类框架中，handler是一个很常用的，这是一种编程的模式——行为参数化。</p>
 <p>java的vertx和go的gin框架也是这样一种思路。</p>
 <p>下面这个示例是gin的：</p>
-<pre><code>package main
+<pre tabindex=0><code>package main
 
 import (
 	&quot;github.com/gin-gonic/gin&quot;
@@ -200,7 +200,7 @@ func greeting(context *gin.Context)  {
 <p>这些中间件其实就是一些可插拔的函数组件，对请求和响应的对象进行封装处理。</p>
 <h3 id=哪些事情适合在中间件中做>哪些事情适合在中间件中做<a hidden class=anchor aria-hidden=true href=#哪些事情适合在中间件中做>#</a></h3>
 <p>以较流行的开源 go 框架 chi 为例：</p>
-<pre><code>compress.go
+<pre tabindex=0><code>compress.go
   =&gt; 对 http 的 response body 进行压缩处理
 heartbeat.go
   =&gt; 设置一个特殊的路由，例如 /ping，/healthcheck，用来给 load balancer 一类的前置服务进行探活

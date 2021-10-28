@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="小白都能快速上手的Vim配置">
 <meta property="og:description" content="Desc Text.">
 <meta property="og:type" content="article">
@@ -76,14 +76,14 @@ February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 </header>
 <div class=post-content>
 <h1 id=首先把所有的vim相关的都删除>首先把所有的vim相关的都删除。<a hidden class=anchor aria-hidden=true href=#首先把所有的vim相关的都删除>#</a></h1>
-<pre><code>cd
+<pre tabindex=0><code>cd
 
 rm -rf .vim*
 </code></pre><h1 id=创建自己的vimrc>创建自己的.vimrc<a hidden class=anchor aria-hidden=true href=#创建自己的vimrc>#</a></h1>
-<pre><code>vim .vimrc
+<pre tabindex=0><code>vim .vimrc
 </code></pre><h1 id=一些基本的设置>一些基本的设置<a hidden class=anchor aria-hidden=true href=#一些基本的设置>#</a></h1>
 <p>在.vimrc中添加下面的代码</p>
-<pre><code>&quot; basic set
+<pre tabindex=0><code>&quot; basic set
 set number
 set noswapfile
 set encoding=utf-8
@@ -120,13 +120,13 @@ syntax on
 </code></pre><p>有了上面的设置，会让你的vim更好用一些。</p>
 <p>每个参数的含义，可以看下阮一峰写的<a href=https://www.ruanyifeng.com/blog/2018/09/vimrc.html>vim配置入门</a></p>
 <h1 id=安装vim-plug>安装vim-plug<a hidden class=anchor aria-hidden=true href=#安装vim-plug>#</a></h1>
-<pre><code>curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+<pre tabindex=0><code>curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 </code></pre><p>我是用vim-plug来管理vim的插件配置的，用起来比较简单。</p>
 <p>它的思路是这样的，把github的vim配置clone下来，然后加载。</p>
 <h1 id=安装一些插件>安装一些插件<a hidden class=anchor aria-hidden=true href=#安装一些插件>#</a></h1>
 <p>在.vimrc中继续添加下面的代码</p>
-<pre><code>&quot; Plugs
+<pre tabindex=0><code>&quot; Plugs
 call plug#begin()
 Plug 'luochen1990/rainbow'
 Plug 'jiangmiao/auto-pairs'
@@ -161,12 +161,12 @@ call plug#end()
 <h1 id=插件的自定义设置>插件的自定义设置<a hidden class=anchor aria-hidden=true href=#插件的自定义设置>#</a></h1>
 <p>安装了这么多插件，一般可能会自定义一下，有些插件都提供了一些变量，我们可以通过let g:xxx的方式去自定义</p>
 <p>这些设置也是在vimrc中，要在插件安装的下面</p>
-<pre><code>&quot; plug settings
+<pre tabindex=0><code>&quot; plug settings
 let g:rainbow_active=1
 </code></pre><h1 id=keymap的设置>keymap的设置<a hidden class=anchor aria-hidden=true href=#keymap的设置>#</a></h1>
 <p>我们可以设置一些快捷键加快操作。</p>
 <p>vim 有一个leader键，这个键的作用是按下之后，再按别的键，触发一些命令。 之所以有这个leader键，就是为了防止用户自己的快捷键，覆盖了默认的。 vim默认的leader键是|,也就是enter上面那个中竖线。</p>
-<pre><code>&quot; key map 
+<pre tabindex=0><code>&quot; key map 
 nnoremap &lt;silent&gt; &lt;c-m&gt; :Mru&lt;cr&gt;
 nnoremap &lt;silent&gt; &lt;c-p&gt; :call fzf#Open()&lt;cr&gt;
 nnoremap &lt;silent&gt; &lt;leader&gt;t :TagbarToggle&lt;cr&gt;
@@ -175,7 +175,7 @@ nnoremap &lt;silent&gt; &lt;leader&gt;f :NERDTreeFind&lt;cr&gt;
 nnoremap &lt;silent&gt; &lt;leader&gt;c :call lv#Term()&lt;cr&gt;
 </code></pre><h1 id=如果你想和我的一样>如果你想和我的一样<a hidden class=anchor aria-hidden=true href=#如果你想和我的一样>#</a></h1>
 <p>参考这个github项目：https://github.com/zhenfeng-zhu/vim</p>
-<pre><code>git clone --recursive https://github.com/zhenfeng-zhu/vim.git ~/.vim
+<pre tabindex=0><code>git clone --recursive https://github.com/zhenfeng-zhu/vim.git ~/.vim
 
 ln -s ~/.vim/init.vim ~/.vimrc
 </code></pre><p>然后就可以愉快的自己定制了。</p>

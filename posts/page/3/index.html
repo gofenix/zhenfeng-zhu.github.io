@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -64,6 +64,23 @@
 </div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+mysql的学习
+</h2>
+</header>
+<section class=entry-content>
+<p>SQL条件语句 IF if(exp1, exp2, exp3)
+exp1是条件，条件为true的话，是exp2，否则是exp3
+case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNULL IFNULL(exp1, exp2)
+在exp1的值不为null的情况下，返回exp1，如果exp1位null，返回exp2的值。...</p>
+</section>
+<footer class=entry-footer>
+April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to mysql的学习" href=https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -270,30 +287,6 @@ December 1, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to mysql" href=https://zhenfeng-zhu.github.io/posts/mysql/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-graphql
-</h2>
-</header>
-<section class=entry-content>
-<p>graphql经常被认为是聚焦于前端的技术。
-核心概念 SDL：schema definition language（模式定义语言） 如：
-type Person{ name: String! age: Int! } 这个类型有两个字段，name和age，他们的类型是String和Int。！的意思代表他们是必需的。
-type Post{ title: String! author: Person! } 接下来的Post也有两个字段，其中Person也是可以作为一个类型。
-也可以这样，在Person中添加一个post：
-type Person{ name: String! age: Int! posts: [Post!]! } 通过Query获取数据 基本查询 客户端发送下面的数据给服务器
-{ allPersons { name } } allPersons是根字段（root field），它下面的成为查询的payload，这里仅包含了一个name。
-服务器返回的结果会是这样的：
-{ "allPersons": [ { "name": "Johnny" }, { "name": "Sarah" }, { "name": "Alice" } ] } 可以看到只返回了name字段，age字段是不会返回的。
-如果使用如下的payload就会返回：
-{ allPersons { name age } } 还可以查询posts中的title：...</p>
-</section>
-<footer class=entry-footer>
-November 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to graphql" href=https://zhenfeng-zhu.github.io/posts/graphql/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/page/2/>« Prev Page</a>
@@ -311,6 +304,7 @@ November 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </button>
 </a>
+<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>

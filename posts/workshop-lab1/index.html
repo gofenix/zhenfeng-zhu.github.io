@@ -27,7 +27,7 @@ $ docker swarm init  如果运行此命令出错，加上 &ndash;advertise-addr 
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="译：openfaas-workshop-Lab1">
 <meta property="og:description" content="今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。
 目前已经有一批优秀的serverless架构开源项目，OpenFaas就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力serverless的发展。
@@ -135,7 +135,7 @@ June 25, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <h3 id=设置一个单节点的docker-swarm>设置一个单节点的Docker Swarm<a hidden class=anchor aria-hidden=true href=#设置一个单节点的docker-swarm>#</a></h3>
 <p>OpenFaas在Docker Swarm和Kubernetes上工作。因为Docker Swarm很容易设置，所以在此Workshop中我们使用Docker Swarm。在文档中有他们两个的指南。</p>
 <p>在你的笔记本或虚拟机中设置一个单节点的Docker Swarm：</p>
-<pre><code>$ docker swarm init
+<pre tabindex=0><code>$ docker swarm init
 </code></pre><blockquote>
 <p>如果运行此命令出错，加上 &ndash;advertise-addr 你的IP 参数。</p>
 </blockquote>
@@ -146,11 +146,11 @@ June 25, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <p>备注：Docker Hub也可以设置为自动构建镜像。</p>
 </blockquote>
 <p>打开一个终端或者Git Bash窗口，然后使用上面注册的用户名登陆Docker Hub。</p>
-<pre><code>$ docker login
+<pre tabindex=0><code>$ docker login
 </code></pre><h3 id=openfaas-cli>OpenFaas CLI<a hidden class=anchor aria-hidden=true href=#openfaas-cli>#</a></h3>
 <p>你可以在mac上使用brew或者在Linu和mac上使用一个集成脚本来安装OpenFaas CLI。</p>
 <p>在Mac或Linux上终端中输入：</p>
-<pre><code>$ curl -sL cli.openfaas.com | sudo sh
+<pre tabindex=0><code>$ curl -sL cli.openfaas.com | sudo sh
 </code></pre><p>对于windows平台，从<a href=https://github.com/openfaas/faas-cli>releases page</a>中下载最新的的faas-cli.exe。你可以把它放在一个local文件夹或者在C:\Windows\路径中，这样它就可以在命令行中使用。</p>
 <blockquote>
 <p>如果你是一个高级Windows用户，把CLI放在你自定义的文件夹中，然后把此文件夹添加到环境变量。</p>
@@ -158,18 +158,18 @@ June 25, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <p>我们将会使用faas-创建新函数的脚手架，build，deploy和invoke函数。你可以从faas-cli —help中找到这些命令。</p>
 <p>测试faas-cli</p>
 <p>打开一个终端或Git Bash窗口，然后输入：</p>
-<pre><code>$ faas-cli help
+<pre tabindex=0><code>$ faas-cli help
 $ faas-cli version
 </code></pre><h3 id=部署openfaas>部署OpenFaas<a hidden class=anchor aria-hidden=true href=#部署openfaas>#</a></h3>
 <p>发布OpenFaas的说明文档修改了很多次，因为我们努力使他简单。接下来将会在60秒左右的时间使得OpenFaas部署起来。</p>
 <ul>
 <li>首先clone项目</li>
 </ul>
-<pre><code>git clone https://github.com/openfaas/faas
+<pre tabindex=0><code>git clone https://github.com/openfaas/faas
 </code></pre><ul>
 <li>然后使用git检出到最新版本</li>
 </ul>
-<pre><code>$ cd faas &amp;&amp; \
+<pre tabindex=0><code>$ cd faas &amp;&amp; \
   git checkout master
 </code></pre><blockquote>
 <p>备注：你也可以在<a href=https://github.com/openfaas/faas/releases>project release page</a>中找到最新导入release版本。</p>
@@ -177,11 +177,11 @@ $ faas-cli version
 <ul>
 <li>现在使用Docker Swarm部署stack</li>
 </ul>
-<pre><code>$  ./deploy_stack.sh
+<pre tabindex=0><code>$  ./deploy_stack.sh
 </code></pre><p>你现在应该已经把OpenFaas部署了。</p>
 <p>如果你现在在一个共享WIFI连接中，它将会需要几分钟时间拉取镜像并启动。</p>
 <p>在此屏幕上检查服务是否显示为1/1:</p>
-<pre><code>$ docker service ls
+<pre tabindex=0><code>$ docker service ls
 </code></pre><p>如果你期间有遇到任何问题，请查阅Docker Swarm的 <a href=https://github.com/openfaas/faas/blob/master/guide/deployment_swarm.md>部署指南</a>。</p>
 <p>现在进入<a href=https://github.com/openfaas/workshop/blob/master/lab2.md>Lab 2</a>。</p>
 <h1 id=未完待续>未完待续<a hidden class=anchor aria-hidden=true href=#未完待续>#</a></h1>

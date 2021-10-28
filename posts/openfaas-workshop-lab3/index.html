@@ -20,7 +20,7 @@ $ faas-cli new --list Languages available as templates: - csharp - dockerfile - 
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="openfaas-workshop-lab3">
 <meta property="og:description" content="Lab3 - 函数的介绍 在开始本实验之前，创建一个新文件夹：
 $ mkdir -p lab3 \ && cd lab3 创建一个新函数 创建函数有两种方式：
@@ -87,7 +87,7 @@ June 28, 2018&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Lucas
 <h1 id=lab3---函数的介绍>Lab3 - 函数的介绍<a hidden class=anchor aria-hidden=true href=#lab3---函数的介绍>#</a></h1>
 <p></p>
 <p>在开始本实验之前，创建一个新文件夹：</p>
-<pre><code>$ mkdir -p lab3 \
+<pre tabindex=0><code>$ mkdir -p lab3 \
    &amp;&amp; cd lab3
 </code></pre><h2 id=创建一个新函数>创建一个新函数<a hidden class=anchor aria-hidden=true href=#创建一个新函数>#</a></h2>
 <p>创建函数有两种方式：</p>
@@ -99,13 +99,13 @@ June 28, 2018&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Lucas
 </ul>
 <h3 id=生成一个新函数>生成一个新函数<a hidden class=anchor aria-hidden=true href=#生成一个新函数>#</a></h3>
 <p>在使用模板创建一个新函数之前，首先确认你已经从 Github 上拉下来<a href=https://github.com/openfaas/templates>模板文件</a>：</p>
-<pre><code>$ faas-cli template pull
+<pre tabindex=0><code>$ faas-cli template pull
 
 Fetch templates from repository: https://github.com/openfaas/templates.git
  Attempting to expand templates from https://github.com/openfaas/templates.git
  Fetched 11 template(s) : [csharp dockerfile go go-armhf node node-arm64 node-armhf python python-armhf python3 ruby]
 </code></pre><p>之后找到可用的语言：</p>
-<pre><code>$ faas-cli new --list
+<pre tabindex=0><code>$ faas-cli new --list
 Languages available as templates:
 - csharp
 - dockerfile
@@ -132,11 +132,11 @@ the &quot;Dockerfile&quot; lang type in your YAML file.
 <ul>
 <li>函数脚手架</li>
 </ul>
-<pre><code>$ faas-cli new --lang python3 hello-openfaas --prefix=&quot;&lt;your-docker-username-here&gt;&quot;
+<pre tabindex=0><code>$ faas-cli new --lang python3 hello-openfaas --prefix=&quot;&lt;your-docker-username-here&gt;&quot;
 </code></pre><p>—prefix 参数将会把<code>hello-openfaas.yml</code>文件里<code>image:</code> 变量中的 prefix 更新为你的 docker hub 的账户。OpenFaas 的镜像<code>image: functions/hello-openfaas</code>里的参数将会是<code>--prefix="functions"</code>。</p>
 <p>如果你不想指定 prefix，那么在创建函数之后可以通过修改 YAML 文件。</p>
 <p>这将会在文件夹中创建 3 个文件：</p>
-<pre><code>./hello-openfaas.yml
+<pre tabindex=0><code>./hello-openfaas.yml
 ./hello-openfaas
 ./hello-openfaas/handler.py
 ./hello-openfaas/requirements.txt
@@ -171,7 +171,7 @@ the &quot;Dockerfile&quot; lang type in your YAML file.
 </ul>
 <p>请记住，网关的 URL 是可以在 YAML 文件中 provider 下的 gateway 字段覆写，或者是在 CLI 中使用—gateway 参数或是环境变量的的 OPENFAAS_URL。</p>
 <p>如下是<code>handler.py</code>文件的内容：</p>
-<pre><code>def handle(req):
+<pre tabindex=0><code>def handle(req):
     &quot;&quot;&quot;handle a request to the function
     Args:
         req (str): request body
@@ -180,15 +180,15 @@ the &quot;Dockerfile&quot; lang type in your YAML file.
     return req
 </code></pre><p>这个函数返回输入的值，和 echo 函数很像。</p>
 <p>将返回值修改为<code>Hello OpenFaaS</code>，如：</p>
-<pre><code>    return &quot;Hello OpenFaaS&quot;
+<pre tabindex=0><code>    return &quot;Hello OpenFaaS&quot;
 </code></pre><p>任何返回给标准输出的值随后都会被返回给调用的程序。或者说是一个 print()语句和显示的结果和调用的程序流程相似。</p>
 <p>这是本地的开发流程：</p>
-<pre><code>$ faas-cli build -f ./hello-openfaas.yml
+<pre tabindex=0><code>$ faas-cli build -f ./hello-openfaas.yml
 $ faas-cli push -f ./hello-openfaas.yml
 $ faas-cli deploy -f ./hello-openfaas.yml
 </code></pre><p>接下来通过 UI，CLI，curk 或者其他的程序去调用函数。</p>
 <p>这些函数都会被分配一个路由，比如：</p>
-<pre><code>http://127.0.0.1:8080/function/&lt;function_name&gt;
+<pre tabindex=0><code>http://127.0.0.1:8080/function/&lt;function_name&gt;
 http://127.0.0.1:8080/function/figlet
 http://127.0.0.1:8080/function/hello-openfaas
 </code></pre><blockquote>
@@ -201,26 +201,26 @@ http://127.0.0.1:8080/function/hello-openfaas
 <p>使用 faas-cli invoke 测试函数，更多的命令请参考 faas-cli invoke &ndash;help</p>
 <h3 id=例子发现宇航员>例子：发现宇航员<a hidden class=anchor aria-hidden=true href=#例子发现宇航员>#</a></h3>
 <p>我们将会创建一个叫 astronaut-finder 函数，这个函数会从国际空间站上拉取一个随机的宇航员的名字。</p>
-<pre><code>$ faas-cli new --lang python3 astronaut-finder --prefix=&quot;&lt;your-docker-username-here&gt;&quot;
+<pre tabindex=0><code>$ faas-cli new --lang python3 astronaut-finder --prefix=&quot;&lt;your-docker-username-here&gt;&quot;
 </code></pre><p>这会为我们创建三个文件：</p>
-<pre><code>./astronaut-finder/handler.py
+<pre tabindex=0><code>./astronaut-finder/handler.py
 </code></pre><p>该函数的 handler —— 你会得到一个原始的请求 req 对象，而且会在控制台上打印结果。</p>
-<pre><code>./astronaut-finder/requirements.txt
+<pre tabindex=0><code>./astronaut-finder/requirements.txt
 </code></pre><p>在这个文件中列出你想要安装的 pip 模块，比如 requests 或 urllib</p>
-<pre><code>./astronaut-finder.yml
+<pre tabindex=0><code>./astronaut-finder.yml
 </code></pre><p>这个文件用于管理函数——在里面有函数名，docker 镜像和其他自定义的字段。</p>
 <ul>
 <li>Edit <code>./astronaut-finder/requirements.txt</code></li>
 <li>修改<code>./astronaut-finder/requirements.txt</code></li>
 </ul>
-<pre><code>requests
+<pre tabindex=0><code>requests
 </code></pre><p>这告诉函数，他需要使用一个名叫 requests 的第三方包用于使用 http 请求网站。</p>
 <ul>
 <li>写函数代码：</li>
 </ul>
 <p>我们将会从 <a href=http://api.open-notify.org/astros.json>http://api.open-notify.org/astros.json</a>拉取数据</p>
 <p>这是返回结果的例子：</p>
-<pre><code class=language-on data-lang=on>{
+<pre tabindex=0><code class=language-on data-lang=on>{
   &quot;number&quot;: 6,
   &quot;people&quot;: [
     { &quot;craft&quot;: &quot;ISS&quot;, &quot;name&quot;: &quot;Alexander Misurkin&quot; },
@@ -233,7 +233,7 @@ http://127.0.0.1:8080/function/hello-openfaas
   &quot;message&quot;: &quot;success&quot;
 }
 </code></pre><p>更新 handler.py：</p>
-<pre><code>import requests
+<pre tabindex=0><code>import requests
 import random
 
 def handle(req):
@@ -247,22 +247,22 @@ def handle(req):
 <p>备注：在这个例子中我们不需要使用 req 参数，但是必须确保他在函数头里。</p>
 </blockquote>
 <p>现在构建函数：</p>
-<pre><code>$ faas-cli build -f ./astronaut-finder.yml
+<pre tabindex=0><code>$ faas-cli build -f ./astronaut-finder.yml
 </code></pre><blockquote>
 <p>提示：试着将 astronaut-finder.yml 重命名为 stack.yml，然后就可以使用 faas-cli build。</p>
 <p>stack.yml 是 CLI 的默认命名。</p>
 </blockquote>
 <p>部署函数：</p>
-<pre><code>$ faas-cli deploy -f ./astronaut-finder.yml
+<pre tabindex=0><code>$ faas-cli deploy -f ./astronaut-finder.yml
 </code></pre><p>调用函数</p>
-<pre><code>$ echo | faas-cli invoke astronaut-finder
+<pre tabindex=0><code>$ echo | faas-cli invoke astronaut-finder
 Anton Shkaplerov is in space
 
 $ echo | faas-cli invoke astronaut-finder
 Joe Acaba is in space
 </code></pre><h2 id=故障排除找到容器的日志>故障排除：找到容器的日志<a hidden class=anchor aria-hidden=true href=#故障排除找到容器的日志>#</a></h2>
 <p>通过容器的日志你可以找到函数每次调用的高级别的信息：</p>
-<pre><code>$ docker service logs -f astronaut-finder
+<pre tabindex=0><code>$ docker service logs -f astronaut-finder
 astronaut-finder.1.1e1ujtsijf6b@nuc    | 2018/02/21 14:53:25 Forking fprocess.
 astronaut-finder.1.1e1ujtsijf6b@nuc    | 2018/02/21 14:53:26 Wrote 18 Bytes - Duration: 0.063269 seconds
 </code></pre><h2 id=故障排除使用-write_debug-详细输出>故障排除：使用 write_debug 详细输出<a hidden class=anchor aria-hidden=true href=#故障排除使用-write_debug-详细输出>#</a></h2>
@@ -286,7 +286,7 @@ astronaut-finder.1.1e1ujtsijf6b@nuc    | 2018/02/21 14:53:26 Wrote 18 Bytes - Du
       <span style=color:#f92672>write_debug</span>: <span style=color:#66d9ef>true</span>
 </code></pre></div><p>现在再次使用<code>faas-cli deploy -f ./astronaut-finder.yml</code>部署。</p>
 <p>调用函数，然后观察函数的返回：</p>
-<pre><code>$ docker service logs -f astronaut-finder
+<pre tabindex=0><code>$ docker service logs -f astronaut-finder
 astronaut-finder.1.1e1ujtsijf6b@nuc    | 2018/02/21 14:53:25 Forking fprocess.
 astronaut-finder.1.szobw9pt3m60@nuc    | 2018/02/26 14:49:57 Query  
 astronaut-finder.1.szobw9pt3m60@nuc    | 2018/02/26 14:49:57 Path  /function/hello-openfaas
@@ -295,13 +295,13 @@ astronaut-finder.1.1e1ujtsijf6b@nuc    | 2018/02/21 14:53:26 Duration: 0.063269 
 </code></pre><h3 id=管理多个函数>管理多个函数<a hidden class=anchor aria-hidden=true href=#管理多个函数>#</a></h3>
 <p>CLI 的 YAML 文件也可以把函数打组为一个 stack 里，当在几个相关联的函数工作时是很有用的。</p>
 <p>看一下如何生成两个函数：</p>
-<pre><code>$ faas-cli new --lang python3 first
+<pre tabindex=0><code>$ faas-cli new --lang python3 first
 </code></pre><p>第二个函数使用&ndash;apend 标志：</p>
-<pre><code>$ faas-cli new --lang python3 second --append=./first.yml
+<pre tabindex=0><code>$ faas-cli new --lang python3 second --append=./first.yml
 </code></pre><p>为了方便我们把 first.yml 重命名为 example.yml。</p>
-<pre><code>$ mv first.yml example.yml
+<pre tabindex=0><code>$ mv first.yml example.yml
 </code></pre><p>现在看一下文件：</p>
-<pre><code>provider:
+<pre tabindex=0><code>provider:
   name: faas
   gateway: http://127.0.0.1:8080
 
@@ -330,7 +330,7 @@ functions:
 <p>你也可以在使用<code>faas-cli -f https://....</code>将函数栈部署在 https 上。</p>
 <h3 id=使用自定义模板>使用自定义模板<a hidden class=anchor aria-hidden=true href=#使用自定义模板>#</a></h3>
 <p>如果你有自己的语言模板或者是从社区中找到的模板，比如 PHP。你可以使用下面的命令添加进来：</p>
-<pre><code>$ faas-cli template pull https://github.com/itscaro/openfaas-template-php
+<pre tabindex=0><code>$ faas-cli template pull https://github.com/itscaro/openfaas-template-php
 
 ...
 
@@ -342,16 +342,16 @@ $ faas-cli new --list | grep php
 <h3 id=自定义二进制文件为函数可选>自定义二进制文件为函数（可选）<a hidden class=anchor aria-hidden=true href=#自定义二进制文件为函数可选>#</a></h3>
 <p>自定义二进制文件或者容器也可以被作为函数，但是大部分时间里使用语言模板文件应该可以涵盖大多数情况。</p>
 <p>通过使用 dockerfile 语言，可以用自定义二进制或者 Dockerfile 创建一个新函数函数：</p>
-<pre><code>$ faas-cli new --lang dockerfile sorter --prefix=&quot;&lt;your-docker-username-here&gt;&quot;
+<pre tabindex=0><code>$ faas-cli new --lang dockerfile sorter --prefix=&quot;&lt;your-docker-username-here&gt;&quot;
 </code></pre><p>你将会看到 sorter 文件夹和 sorter.yml 文件被创建。</p>
 <p>编辑 sorter/Docerfile，更新设置 fprocess 的那一行。让我们改变他为内置 bash 的 sort 命令。我们可以用这个命令对字符串按照字母数字顺序排序。</p>
-<pre><code>ENV fprocess=&quot;sort&quot;
+<pre tabindex=0><code>ENV fprocess=&quot;sort&quot;
 </code></pre><p>构建，推送和部署函数：</p>
-<pre><code>$ faas-cli build -f sorter.yml \
+<pre tabindex=0><code>$ faas-cli build -f sorter.yml \
   &amp;&amp; faas-cli push -f sorter.yml \
   &amp;&amp; faas-cli deploy -f sorter.yml
 </code></pre><p>从 UI 或者 CLI 中调用函数：</p>
-<pre><code>$ echo -n '
+<pre tabindex=0><code>$ echo -n '
 elephant
 zebra
 horse

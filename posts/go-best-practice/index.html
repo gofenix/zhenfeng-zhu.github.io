@@ -23,7 +23,7 @@ var usersMap map[string]*User 如果users的描述性都不够用，那么usersM
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="go-best-practice">
 <meta property="og:description" content=" 短变量名称在声明和上次使用之间的距离很短时效果很好。 长变量名称需要证明自己的合理性; 名称越长，需要提供的价值越高。冗长的名称与页面上的重量相比，信号量较小。 请勿在变量名称中包含类型名称。 常量应该描述它们持有的值，而不是该如何使用。 对于循环和分支使用单字母变量，参数和返回值使用单个字，函数和包级别声明使用多个单词 方法、接口和包使用单个词。 请记住，包的名称是调用者用来引用名称的一部分，因此要好好利用这一点。  变量的名称应描述其内容，而不是内容的类型。
 典型错误：
@@ -104,7 +104,7 @@ November 7, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </ul>
 <p>变量的名称应描述其内容，而不是内容的类型。</p>
 <p>典型错误：</p>
-<pre><code>var usersMap map[string]*User
+<pre tabindex=0><code>var usersMap map[string]*User
 </code></pre><p>如果<code>users</code>的描述性都不够用，那么<code>usersMap</code>也不会。</p>
 <p><strong>声明变量但没有初始化时，请使用var。</strong></p>
 <p><strong>在声明和初始化时，使用:=。</strong></p>

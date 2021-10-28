@@ -37,7 +37,7 @@ sudo
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="kubernetes">
 <meta property="og:description" content="docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。
 docker镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
@@ -196,12 +196,12 @@ October 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 </ul>
 <p>这种使用方法，就是所谓的“声明式API”。这种API对应的编排对象和服务对象，都是k8s项目中的API对象。</p>
 <h2 id=简单使用>简单使用<a hidden class=anchor aria-hidden=true href=#简单使用>#</a></h2>
-<pre><code>$ kubectl create -f 我的配置文件
+<pre tabindex=0><code>$ kubectl create -f 我的配置文件
 </code></pre><p>pod就是k8s世界中的应用，而一个应用可以由多个容器组成。</p>
 <p>使用一个API对象管理另一个API对象的方法，叫控制器模式。</p>
 <p>每个API对象都有一个metadata字段，这个字段是API对象的标识，即元数据。主要用到的是labels，spec.selector.matchLabels就是k8s过滤的规则。与labels同层级的是annotations，这是由k8s所感兴趣的，而不是用户。</p>
 <p>一个k8s的API对象都有metadata和spec两个部分。前者放的是对象的元数据，对所有API对象来讲，这部分的字段和格式基本一样；而后者存放的是属于这个对象独有的定义，用来描述它所要表达的功能。</p>
-<pre><code>$ kubectl create -f nginx-deployment.yaml
+<pre tabindex=0><code>$ kubectl create -f nginx-deployment.yaml
 
 $ kubectl get pods -l app=nginx
 NAME                                READY     STATUS    RESTARTS   AGE
@@ -274,7 +274,7 @@ $ kubectl apply -f nginx-deployment.yaml
         - <span style=color:#f92672>containerPort</span>: <span style=color:#ae81ff>80</span>
 
 </code></pre></div><p>然后使用kubectl create命令在Kubernetes中创建一个Deployment对象：</p>
-<pre><code>$ kubectl create -f nginx.yaml
+<pre tabindex=0><code>$ kubectl create -f nginx.yaml
 </code></pre><p>这样两个Nginx pod就运行起来了。</p>
 <p>如果要更新的话，只需要修改yaml文件，然后使用kubectl apply命令更新，触发了滚动更新。</p>
 <p>这个apply命令就是声明式API。</p>

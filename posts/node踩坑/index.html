@@ -19,7 +19,7 @@ import { a } from &#34;./module&#34;; 所以自己也想要这么写，但是每
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="node踩坑">
 <meta property="og:description" content="module 首先第一个就是es6的module。
 看到别人写的
@@ -84,9 +84,9 @@ May 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <h1 id=module>module<a hidden class=anchor aria-hidden=true href=#module>#</a></h1>
 <p>首先第一个就是es6的module。</p>
 <p>看到别人写的</p>
-<pre><code>import { a } from &quot;./module&quot;;
+<pre tabindex=0><code>import { a } from &quot;./module&quot;;
 </code></pre><p>所以自己也想要这么写，但是每次运行的时候都会报错。</p>
-<pre><code>// demo2.js
+<pre tabindex=0><code>// demo2.js
 export const a = &quot;hello&quot;;
 
 //demo1.js
@@ -95,7 +95,7 @@ import { a } from &quot;./demo2&quot;;
 function hello() {
   console.log(a);
 }
-</code></pre><pre><code>zhuzhenfengdeMacBook-Pro :: node/node-example » node demo1.js
+</code></pre><pre tabindex=0><code>zhuzhenfengdeMacBook-Pro :: node/node-example » node demo1.js
 /Users/zhuzhenfeng/Documents/github/node/node-example/demo1.js:1
 (function (exports, require, module, __filename, __dirname) { import { a } from &quot;./demo2&quot;;
                                                                      ^
@@ -115,7 +115,7 @@ zhuzhenfengdeMacBook-Pro :: node/node-example »
 </code></pre><p>后来仔细查了资料之后，才发现，node现在还不能这么使用。</p>
 <p>如下是解决的办法。</p>
 <p>给每个js文件都以mjs命名。</p>
-<pre><code>// module.js
+<pre tabindex=0><code>// module.js
 export const a = &quot;hello&quot;;
 
 // useModule.js
@@ -126,7 +126,7 @@ function hello() {
 }
 
 hello();
-</code></pre><pre><code>zhuzhenfengdeMacBook-Pro :: node/node-example » node --experimental-modules useModule.mjs
+</code></pre><pre tabindex=0><code>zhuzhenfengdeMacBook-Pro :: node/node-example » node --experimental-modules useModule.mjs
 (node:15282) ExperimentalWarning: The ESM module loader is experimental.
 hello
 zhuzhenfengdeMacBook-Pro :: node/node-example »

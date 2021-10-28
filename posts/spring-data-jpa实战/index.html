@@ -18,7 +18,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="Spring Data Jpa实战">
 <meta property="og:description" content="为了解决抽象各个Java实体基本的“增删改查”操作，我们通常会以泛型的方式封装一个模板Dao来进行抽象简化，但是这样依然不是很方便，我们需要针对每个实体编写一个继承自泛型模板Dao的接口，再编写该接口的实现。虽然一些基础的数据访问已经可以得到很好的复用，但是在代码结构上针对每个实体都会有一堆Dao的接口和实现。
 由于模板Dao的实现，使得这些具体实体的Dao层已经变的非常“薄”，有一些具体实体的Dao实现可能完全就是对模板Dao的简单代理，并且往往这样的实现类可能会出现在很多实体上。Spring-data-jpa的出现正可以让这样一个已经很“薄”的数据访问层变成只是一层接口的编写方式。
@@ -148,7 +148,7 @@ March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 
 <span style=color:#f92672>&lt;/project&gt;</span>
 </code></pre></div><h3 id=12-applicationproperties>1.2 application.properties<a hidden class=anchor aria-hidden=true href=#12-applicationproperties>#</a></h3>
-<pre><code class=language-properties data-lang=properties>spring.datasource.url=jdbc:mysql://localhost:3306/test
+<pre tabindex=0><code class=language-properties data-lang=properties>spring.datasource.url=jdbc:mysql://localhost:3306/test
 spring.datasource.username=root
 spring.datasource.password=root
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
@@ -163,7 +163,7 @@ spring.jpa.properties.hibernate.hbm2ddl.auto=create-drop
 </ul>
 <h2 id=2-实体类>2 实体类<a hidden class=anchor aria-hidden=true href=#2-实体类>#</a></h2>
 <p>创建一个User实体，包含id（主键）、name（姓名）、age（年龄）属性，通过ORM框架其会被映射到数据库表中，由于配置了<code>hibernate.hbm2ddl.auto</code>，在应用启动的时候框架会自动去数据库中创建对应的表。</p>
-<pre><code>@Data
+<pre tabindex=0><code>@Data
 @NoArgsConstructor
 @Entity
 public class Users {
@@ -184,7 +184,7 @@ public class Users {
 }
 </code></pre><h2 id=3-repository>3 repository<a hidden class=anchor aria-hidden=true href=#3-repository>#</a></h2>
 <p>针对User实体创建对应的<code>Repository</code>接口实现对该实体的数据访问：</p>
-<pre><code>@Repository
+<pre tabindex=0><code>@Repository
 public interface UsersRepository extends JpaRepository&lt;Users, Long&gt; {
     Users findByName(String name);
     Users findByNameAndAge(String name, Integer age);
@@ -202,7 +202,7 @@ public interface UsersRepository extends JpaRepository&lt;Users, Long&gt; {
 <p>它们分别实现了按name查询User实体和按name和age查询User实体，可以看到我们这里没有任何类SQL语句就完成了两个条件查询方法。这就是Spring-data-jpa的一大特性：<strong>通过解析方法名创建查询</strong>。</p>
 <p>除了通过解析方法名来创建查询外，它也提供通过使用@Query 注解来创建查询，您只需要编写JPQL语句，并通过类似“:name”来映射@Param指定的参数，就像例子中的第三个findUser函数一样。</p>
 <h2 id=4-单元测试>4 单元测试<a hidden class=anchor aria-hidden=true href=#4-单元测试>#</a></h2>
-<pre><code>@RunWith(SpringRunner.class)
+<pre tabindex=0><code>@RunWith(SpringRunner.class)
 @SpringBootTest
 public class JpaDemoApplicationTests {
 

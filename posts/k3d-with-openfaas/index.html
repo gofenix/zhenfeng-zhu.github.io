@@ -21,7 +21,7 @@ kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gatew
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="K3d With Openfaas">
 <meta property="og:description" content="openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
 安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
@@ -90,36 +90,36 @@ March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <h1 id=openfaas>openfaas<a hidden class=anchor aria-hidden=true href=#openfaas>#</a></h1>
 <p><a href=https://github.com/openfaas/workshop/blob/master/lab1b.md>https://github.com/openfaas/workshop/blob/master/lab1b.md</a></p>
 <h2 id=安装docker>安装docker<a hidden class=anchor aria-hidden=true href=#安装docker>#</a></h2>
-<pre><code>brew install homebrew/cask/docker
+<pre tabindex=0><code>brew install homebrew/cask/docker
 </code></pre><h2 id=安装单节点k8s>安装单节点K8S<a hidden class=anchor aria-hidden=true href=#安装单节点k8s>#</a></h2>
-<pre><code>brew install k3d
+<pre tabindex=0><code>brew install k3d
 </code></pre><p>配置单节点K8S集群</p>
-<pre><code>k3d cluster create CLUSTER_NAME
+<pre tabindex=0><code>k3d cluster create CLUSTER_NAME
 
 k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context
 
 kubectl get pods --all-namespaces
 
 </code></pre><h2 id=安装arkade>安装arkade<a hidden class=anchor aria-hidden=true href=#安装arkade>#</a></h2>
-<pre><code>curl -SLsf https://dl.get-arkade.dev/ | sudo sh
+<pre tabindex=0><code>curl -SLsf https://dl.get-arkade.dev/ | sudo sh
 </code></pre><h2 id=安装openfaas客户端-faas-cli>安装openfaas客户端 faas-cli<a hidden class=anchor aria-hidden=true href=#安装openfaas客户端-faas-cli>#</a></h2>
-<pre><code>brew install faas-cli
+<pre tabindex=0><code>brew install faas-cli
 </code></pre><h2 id=安装openfaas-server端>安装openfaas server端<a hidden class=anchor aria-hidden=true href=#安装openfaas-server端>#</a></h2>
-<pre><code>arkade install openfaas
+<pre tabindex=0><code>arkade install openfaas
 </code></pre><p>配置openfaas的ui界面</p>
-<pre><code>kubectl rollout status -n openfaas deploy/gateway
+<pre tabindex=0><code>kubectl rollout status -n openfaas deploy/gateway
 
 kubectl port-forward svc/gateway -n openfaas 8080:8080
 </code></pre><p>这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。</p>
 <p>但是当你打开页面的时候，要输入密码，那就需要下面的操作：</p>
-<pre><code># This command retrieves your password
+<pre tabindex=0><code># This command retrieves your password
 PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=&quot;{.data.basic-auth-password}&quot; | base64 --decode; echo)
 
 # This command logs in and saves a file to ~/.openfaas/config.yml
 echo -n $PASSWORD | faas-cli login --username admin --password-stdin
 
 </code></pre><p>或者直接在命令行输入，拿到密码：</p>
-<pre><code>echo $(kubectl get secret -n openfaas basic-auth -o jsonpath=&quot;{.data.basic-auth-password}&quot; | base64 --decode; echo)
+<pre tabindex=0><code>echo $(kubectl get secret -n openfaas basic-auth -o jsonpath=&quot;{.data.basic-auth-password}&quot; | base64 --decode; echo)
 </code></pre><p>用户名是admin，密码输入到浏览器里即可。</p>
 </div>
 <footer class=post-footer>

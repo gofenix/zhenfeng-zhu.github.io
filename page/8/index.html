@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <meta property="og:title" content="Go Data">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Go Data">
@@ -59,6 +59,24 @@
 </nav>
 </header>
 <main class=main>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Spring Boot启动原理分析
+</h2>
+</header>
+<section class=entry-content>
+<p>Spring Boot启动原理分析 我们在开发spring boot应用的时候，一般会遇到如下的启动类：
+@SpringBootApplication public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } } 从这段代码可以看出，注解@SpringBootApplication和SpringApplication.run()是比较重要的两个东西。
+1 @SpringApplication注解 @Target(ElementType.TYPE) @Retention(RetentionPolicy.RUNTIME) @Documented @Inherited @SpringBootConfiguration @EnableAutoConfiguration @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class), @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) }) public @interface SpringBootApplication { ... } 在这段代码里，比较重要的只有三个注解：
+@Configuration（@SpringBootConfiguration点开查看发现里面还是应用了@Configuration） @EnableAutoConfiguration @ComponentScan 其实，我们使用这三个注解来修饰springboot的启动类也可以正常运行,如下所示：
+@ComponentScan @EnableAutoConfiguration @Configuration public class DemoApplication { public static void main(String[] args) { SpringApplication....</p>
+</section>
+<footer class=entry-footer>
+March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Spring Boot启动原理分析" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -244,42 +262,6 @@ pojo类：这是普通的java类，具有一部分的get和set方法。 dto类�
 March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to 领域实体类" href=https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-docker
-</h2>
-</header>
-<section class=entry-content>
-<p>docker常用命令 docker 获取镜像
-docker pull
-新建并启动
-docker run
-列出镜像
-docker image ls
-docker images
-删除虚悬镜像
-docker image prune
-删除本地镜像
-docker iamge rm
-查看应用信息
-docker logs
-dockerfile 一般步骤： 在一个目录里，新建一个文件，命名为Dockerfile 在Dockerfile的目录内，执行docker build 常用指令 FROM 指定基础镜像，且是第一条命令
-RUN 执行命令
-shell格式
-exec格式
-COPY和ADD指令是复制文件
-CMD指令和RUN类似，容器启动命令
-shell格式
-exec格式
-参数列表格式
-ENV 设置环境变量...</p>
-</section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to docker" href=https://zhenfeng-zhu.github.io/posts/docker/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

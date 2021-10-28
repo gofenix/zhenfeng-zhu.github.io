@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <meta property="og:title" content="Go Data">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-07-23T09:33:18+08:00">
+<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Go Data">
@@ -59,6 +59,25 @@
 </nav>
 </header>
 <main class=main>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Github Action自动部署blog
+</h2>
+</header>
+<section class=entry-content>
+<p>之前我采用的方式是两个github repo的方式：
+一个叫hugo-blog，用于存放blog的源文件
+一个叫zhenfeng-zhu.github.io，用于存放生成之后的文件
+然后通过写一个shell脚本，将生成之后的文件推向zhenfeng-zhu.github.io仓库中，同时将blog的源文件也做了一个backup。后来使用了一个github action的方式， 就不用在两个仓库中进行折腾，一切都由github action来做了。
+方案 设置workflow 首先创建一个.github/workflows/gh-pages.yml
+name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: 'latest' # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets....</p>
+</section>
+<footer class=entry-footer>
+February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Github Action自动部署blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -256,23 +275,6 @@ parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, 
 April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to hive常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-mysql的学习
-</h2>
-</header>
-<section class=entry-content>
-<p>SQL条件语句 IF if(exp1, exp2, exp3)
-exp1是条件，条件为true的话，是exp2，否则是exp3
-case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNULL IFNULL(exp1, exp2)
-在exp1的值不为null的情况下，返回exp1，如果exp1位null，返回exp2的值。...</p>
-</section>
-<footer class=entry-footer>
-April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to mysql的学习" href=https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

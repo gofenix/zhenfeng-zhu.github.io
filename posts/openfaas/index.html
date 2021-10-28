@@ -28,7 +28,7 @@ $ faas-cli new --list $ faas-cli build -f ./hello-openfaas.yml $ faas-cli push -
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="openfaas">
 <meta property="og:description" content="对于mac环境来讲，首先安装新版docker:
 brew cask install docker 然后启动docker。
@@ -109,30 +109,30 @@ June 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </header>
 <div class=post-content>
 <p>对于mac环境来讲，首先安装新版docker:</p>
-<pre><code>brew cask install docker
+<pre tabindex=0><code>brew cask install docker
 </code></pre><p>然后启动docker。</p>
 <p>命令行登陆docker hub</p>
-<pre><code>docker login
+<pre tabindex=0><code>docker login
 </code></pre><p>启动docker swarm</p>
-<pre><code>docker swarm init
+<pre tabindex=0><code>docker swarm init
 </code></pre><p>安装faas-cli</p>
-<pre><code>brew install faas-cli
+<pre tabindex=0><code>brew install faas-cli
 </code></pre><p>clone下来代码：</p>
-<pre><code>git clone https://github.com/openfaas/faas
+<pre tabindex=0><code>git clone https://github.com/openfaas/faas
 </code></pre><p>然后执行</p>
-<pre><code>./deploy_stack.sh
+<pre tabindex=0><code>./deploy_stack.sh
 </code></pre><p>部署一些示例</p>
-<pre><code>faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml
+<pre tabindex=0><code>faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml
 </code></pre><p>使用浏览器打开 http://127.0.0.1:8080 就可以看到ui界面了。</p>
 <p>安装grafana进行监控</p>
-<pre><code>docker service create -d \
+<pre tabindex=0><code>docker service create -d \
 --name=grafana \
 --publish=3000:3000 \
 --network=func_functions \
 stefanprodan/faas-grafana:4.6.3
 </code></pre><p>浏览器打开： http://127.0.0.1:3000 登陆admin admin 查看。</p>
 <p>常用命令：</p>
-<pre><code>$ faas-cli new --list
+<pre tabindex=0><code>$ faas-cli new --list
 $ faas-cli build -f ./hello-openfaas.yml
 $ faas-cli push -f ./hello-openfaas.yml
 $ faas-cli deploy -f ./hello-openfaas.yml

@@ -22,7 +22,7 @@ const cluster = require('cluster'); const http = require('http'); const numCPUs 
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="node的cluster">
 <meta property="og:description" content="我们知道js是运行单线程的，也就是说一个node进程只能运行在一个cpu上。那么如果用node来做web server的话，就无法享受到多核运算的好处。
 一个问题就是：
@@ -92,7 +92,7 @@ May 5, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <div class=post-content>
 <p>我们知道js是运行单线程的，也就是说一个node进程只能运行在一个cpu上。那么如果用node来做web server的话，就无法享受到多核运算的好处。</p>
 <p>一个问题就是：</p>
-<pre><code>如何榨干服务器资源，利用多核CPU的并发优势。
+<pre tabindex=0><code>如何榨干服务器资源，利用多核CPU的并发优势。
 </code></pre><p>node官方提供的解决方案是cluster。</p>
 <h2 id=1-cluster是什么>1 cluster是什么<a hidden class=anchor aria-hidden=true href=#1-cluster是什么>#</a></h2>
 <p>简单来说：</p>
@@ -108,7 +108,7 @@ May 5, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 <li>worker进程的数量一般根据服务器的cpu核数来决定，这样就可以完美利用多核资源。</li>
 </ul>
 <p>以下是官方文档的一个例子：</p>
-<pre><code>const cluster = require('cluster');
+<pre tabindex=0><code>const cluster = require('cluster');
 const http = require('http');
 const numCPUs = require('os').cpus().length;
 
@@ -133,7 +133,7 @@ if (cluster.isMaster) {
 
     console.log(`工作进程 ${process.pid} 已启动`);
 }
-</code></pre><pre><code>% node cluster.js
+</code></pre><pre tabindex=0><code>% node cluster.js
 主进程 16391 正在运行
 工作进程 16394 已启动
 工作进程 16393 已启动
@@ -177,7 +177,7 @@ if (cluster.isMaster) {
 </ol>
 <h2 id=3-进程间通讯ipc>3 进程间通讯（IPC）<a hidden class=anchor aria-hidden=true href=#3-进程间通讯ipc>#</a></h2>
 <p>虽然每个 Worker 进程是相对独立的，但是它们之间始终还是需要通讯的，叫进程间通讯（IPC）。</p>
-<pre><code>if (cluster.isMaster) {
+<pre tabindex=0><code>if (cluster.isMaster) {
   const worker = cluster.fork();
   worker.send('hi there');
 

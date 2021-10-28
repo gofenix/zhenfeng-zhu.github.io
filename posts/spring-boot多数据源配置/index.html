@@ -20,7 +20,7 @@ spring.datasource.primary.url=jdbc:mysql://localhost:3306/test spring.datasource
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="spring boot多数据源配置">
 <meta property="og:description" content="spring boot多数据源配置 在单数据源的情况下，Spring Boot的配置非常简单，只需要在application.properties文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数据库拆分或是引入其他数据库，从而我们需要配置多个数据源。
 1 准备 1.1 禁止DataSourceAutoConfiguration 首先要将spring boot自带的DataSourceAutoConfiguration禁掉，因为它会读取application.properties文件的spring.datasource.*属性并自动配置单数据源。在@SpringBootApplication注解中添加exclude属性即可：
@@ -89,7 +89,7 @@ March 24, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
 <h2 id=1-准备>1 准备<a hidden class=anchor aria-hidden=true href=#1-准备>#</a></h2>
 <h3 id=11-禁止datasourceautoconfiguration>1.1 禁止DataSourceAutoConfiguration<a hidden class=anchor aria-hidden=true href=#11-禁止datasourceautoconfiguration>#</a></h3>
 <p>首先要将spring boot自带的<code>DataSourceAutoConfiguration</code>禁掉，因为它会读取<code>application.properties</code>文件的<code>spring.datasource.*</code>属性并自动配置单数据源。在<code>@SpringBootApplication</code>注解中添加<code>exclude</code>属性即可：</p>
-<pre><code>@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+<pre tabindex=0><code>@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JpaDemoApplication.class, args);
@@ -97,7 +97,7 @@ public class DemoApplication {
 }
 </code></pre><h3 id=12-配置数据库连接>1.2 配置数据库连接<a hidden class=anchor aria-hidden=true href=#12-配置数据库连接>#</a></h3>
 <p>然后在<code>application.properties</code>中配置多数据源连接信息：</p>
-<pre><code class=language-properties data-lang=properties>spring.datasource.primary.url=jdbc:mysql://localhost:3306/test
+<pre tabindex=0><code class=language-properties data-lang=properties>spring.datasource.primary.url=jdbc:mysql://localhost:3306/test
 spring.datasource.primary.username=root
 spring.datasource.primary.password=root
 spring.datasource.primary.driver-class-name=com.mysql.jdbc.Driver
@@ -108,7 +108,7 @@ spring.datasource.secondary.password=root
 spring.datasource.secondary.driver-class-name=com.mysql.jdbc.Driver
 </code></pre><h3 id=13-手段创建数据源>1.3 手段创建数据源<a hidden class=anchor aria-hidden=true href=#13-手段创建数据源>#</a></h3>
 <p>由于我们禁掉了自动数据源配置，因些下一步就需要手动将这些数据源创建出来：</p>
-<pre><code>@Configuration
+<pre tabindex=0><code>@Configuration
 public class DataSourceConfig {
 
     @Bean(name = &quot;primaryDataSource&quot;)
@@ -129,7 +129,7 @@ public class DataSourceConfig {
 </code></pre><h2 id=2-jdbctemplate多数据源>2 jdbcTemplate多数据源<a hidden class=anchor aria-hidden=true href=#2-jdbctemplate多数据源>#</a></h2>
 <h3 id=21-jdbctemplate的数据源配置>2.1 jdbcTemplate的数据源配置<a hidden class=anchor aria-hidden=true href=#21-jdbctemplate的数据源配置>#</a></h3>
 <p>新建jdbcTemplate的数据源配置：</p>
-<pre><code>@Configuration
+<pre tabindex=0><code>@Configuration
 public class JdbcTemplateConfig {
     @Bean(name = &quot;primaryJdbcTemplate&quot;)
     public JdbcTemplate primaryJdbcTemplate(
@@ -145,7 +145,7 @@ public class JdbcTemplateConfig {
 }
 </code></pre><h3 id=22-单元测试>2.2 单元测试<a hidden class=anchor aria-hidden=true href=#22-单元测试>#</a></h3>
 <p>然后编写单元测试用例：</p>
-<pre><code>@RunWith(SpringRunner.class)
+<pre tabindex=0><code>@RunWith(SpringRunner.class)
 @SpringBootTest
 public class JpaDemoApplicationTests {
     @Autowired
@@ -181,7 +181,7 @@ public class JpaDemoApplicationTests {
 </code></pre><h2 id=3-mybatis多数据源配置>3 mybatis多数据源配置<a hidden class=anchor aria-hidden=true href=#3-mybatis多数据源配置>#</a></h2>
 <h3 id=31-自定义sqlsessionfactory>3.1 自定义SqlSessionFactory<a hidden class=anchor aria-hidden=true href=#31-自定义sqlsessionfactory>#</a></h3>
 <p>新建两个mybatis的SqlSessionFactory配置：</p>
-<pre><code>@Configuration
+<pre tabindex=0><code>@Configuration
 @MapperScan(basePackages = {&quot;com.example.jpademo.primary.mapper&quot;}, sqlSessionFactoryRef = &quot;sqlSessionFactory1&quot;)
 public class MybatisPrimaryConfig {
     @Autowired
@@ -205,7 +205,7 @@ public class MybatisPrimaryConfig {
 }
 </code></pre><p>这样，<code>com.example.jpademo.primary.mapper</code>包下的所有mapper就会用<code>sqlSessionFactory1</code>。同理可以创建</p>
 <p><code>sqlSessionFactory2</code>：</p>
-<pre><code>@Configuration
+<pre tabindex=0><code>@Configuration
 @MapperScan(basePackages = {&quot;com.example.jpademo.secondary.mapper&quot;}, sqlSessionFactoryRef = &quot;sqlSessionFactory2&quot;)
 public class MybatisSecondaryConfig {
     @Autowired
@@ -229,13 +229,13 @@ public class MybatisSecondaryConfig {
 }
 </code></pre><h3 id=32-mapper和实体类>3.2 mapper和实体类<a hidden class=anchor aria-hidden=true href=#32-mapper和实体类>#</a></h3>
 <p>然后编写mapper和实体类：</p>
-<pre><code>@Data
+<pre tabindex=0><code>@Data
 public class User {
     private Integer id;
     private String name;
     private Integer age;
 }
-</code></pre><pre><code>package com.example.jpademo.primary.mapper;
+</code></pre><pre tabindex=0><code>package com.example.jpademo.primary.mapper;
 
 import com.example.jpademo.domain.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -249,7 +249,7 @@ public interface UserMapper1 {
     @Select(&quot;select * from users where id=#{id}&quot;)
     User findById(@Param(&quot;id&quot;) Integer id);
 }
-</code></pre><pre><code>package com.example.jpademo.secondary.mapper;
+</code></pre><pre tabindex=0><code>package com.example.jpademo.secondary.mapper;
 
 import com.example.jpademo.domain.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -264,7 +264,7 @@ public interface UserMapper2 {
 }
 </code></pre><h3 id=33-单元测试>3.3 单元测试<a hidden class=anchor aria-hidden=true href=#33-单元测试>#</a></h3>
 <p>编写单元测试用例：</p>
-<pre><code>@RunWith(SpringRunner.class)
+<pre tabindex=0><code>@RunWith(SpringRunner.class)
 @SpringBootTest
 public class JpaDemoApplicationTests {
 

@@ -21,7 +21,7 @@ client_golang是Prometheus的客户端。
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="gateway-reading">
 <meta property="og:description" content="OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
  UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
@@ -99,7 +99,7 @@ August 1, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Lucas
 <p>从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。</p>
 <h2 id=源码分析>源码分析<a hidden class=anchor aria-hidden=true href=#源码分析>#</a></h2>
 <h3 id=依赖>依赖<a hidden class=anchor aria-hidden=true href=#依赖>#</a></h3>
-<pre><code>github.com/gorilla/mux
+<pre tabindex=0><code>github.com/gorilla/mux
 
 github.com/nats-io/go-nats-streaming
 github.com/nats-io/go-nats
@@ -191,7 +191,7 @@ github.com/prometheus/client_golang
 </ul>
 <h3 id=基本的安全验证>基本的安全验证<a hidden class=anchor aria-hidden=true href=#基本的安全验证>#</a></h3>
 <p>如果配置了开启基本安全验证，会从磁盘中读取密钥：</p>
-<pre><code>var credentials *types.BasicAuthCredentials
+<pre tabindex=0><code>var credentials *types.BasicAuthCredentials
 
 if config.UseBasicAuth {
 	var readErr error
@@ -213,7 +213,7 @@ if config.UseBasicAuth {
 <li>ListFunctions</li>
 <li>ScaleFunction</li>
 </ul>
-<pre><code>if credentials != nil {
+<pre tabindex=0><code>if credentials != nil {
 	faasHandlers.UpdateFunction =
 			handlers.DecorateWithBasicAuth(faasHandlers.UpdateFunction, credentials)
 	faasHandlers.DeleteFunction =
@@ -231,7 +231,7 @@ if config.UseBasicAuth {
 <li>然后给请求头上设置一个字段<code>WWW-Authenticate</code>，值为<code>Basic realm="Restricted"</code></li>
 <li>如果校验失败，则返回错误，成功的话调用next方法继续进入下一个handler。</li>
 </ol>
-<pre><code>// DecorateWithBasicAuth enforces basic auth as a middleware with given credentials
+<pre tabindex=0><code>// DecorateWithBasicAuth enforces basic auth as a middleware with given credentials
 func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCredentials) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		user, password, ok := r.BasicAuth()
@@ -257,7 +257,7 @@ func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCr
 <li>DeleteFunction</li>
 <li>UpdateFunction</li>
 </ul>
-<pre><code>faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+<pre tabindex=0><code>faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
 	faasHandlers.ListFunctions = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
 	faasHandlers.DeployFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
 	faasHandlers.DeleteFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
@@ -290,7 +290,7 @@ func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCr
 <p>打印日志</p>
 </li>
 </ol>
-<pre><code>// MakeForwardingProxyHandler create a handler which forwards HTTP requests
+<pre tabindex=0><code>// MakeForwardingProxyHandler create a handler which forwards HTTP requests
 func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers []HTTPNotifier, baseURLResolver BaseURLResolver) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		baseURL := baseURLResolver.Resolve(r)
@@ -314,7 +314,7 @@ func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers [
 <li>实例化用于异步处理的Request对象</li>
 <li>调用canQueueRequests.Queue(req)，将请求发布到队列中</li>
 </ol>
-<pre><code>// MakeQueuedProxy accepts work onto a queue
+<pre tabindex=0><code>// MakeQueuedProxy accepts work onto a queue
 func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueRequests queue.CanQueueRequests) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
@@ -370,11 +370,11 @@ func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueReque
 </ul>
 <h5 id=手动指定伸缩的值>手动指定伸缩的值<a hidden class=anchor aria-hidden=true href=#手动指定伸缩的值>#</a></h5>
 <p>可以从这句代码中发现，调用这个路由，转发给了provider处理。</p>
-<pre><code>r.HandleFunc(&quot;/system/scale-function/{name:[-a-zA-Z_0-9]+}&quot;, faasHandlers.ScaleFunction).Methods(http.MethodPost)
+<pre tabindex=0><code>r.HandleFunc(&quot;/system/scale-function/{name:[-a-zA-Z_0-9]+}&quot;, faasHandlers.ScaleFunction).Methods(http.MethodPost)
 </code></pre><h5 id=处理alertmanager的伸缩请求>处理AlertManager的伸缩请求<a hidden class=anchor aria-hidden=true href=#处理alertmanager的伸缩请求>#</a></h5>
 <p>Prometheus将监控指标发给AlertManager之后，会触发AlterManager调用<code>/system/alert</code>接口，这个接口的handler是由<code>handlers.MakeAlertHandler</code>方法生成。</p>
 <p>MakeAlertHandler方法接收的参数是ServiceQuery。ServiceQuery是一个接口，它有两个函数，用来get或者ser最大的副本数。Gateway中实现这个接口的类是ExternalServiceQuery，这个实现类是在plugin包中，我们也可以直接定制这个实现类，用来实现满足特定条件。</p>
-<pre><code>// ServiceQuery provides interface for replica querying/setting
+<pre tabindex=0><code>// ServiceQuery provides interface for replica querying/setting
 type ServiceQuery interface {
 	GetReplicas(service string) (response ServiceQueryResponse, err error)
 	SetReplicas(service string, count uint64) error
@@ -397,14 +397,14 @@ type ExternalServiceQuery struct {
 </li>
 </ul>
 <p>MakeAlertHandler的函数主要是从<code>http.Request</code>中读取body，然后反序列化成<code>PrometheusAlert</code>对象：</p>
-<pre><code>// PrometheusAlert as produced by AlertManager
+<pre tabindex=0><code>// PrometheusAlert as produced by AlertManager
 type PrometheusAlert struct {
 	Status   string                 `json:&quot;status&quot;`
 	Receiver string                 `json:&quot;receiver&quot;`
 	Alerts   []PrometheusInnerAlert `json:&quot;alerts&quot;`
 }
 </code></pre><p>可以发现，这个Alerts是一个数组对象，所以可以是对多个函数进行缩放。反序列化之后，调用<code>handleAlerts</code>方法，而<code>handleAlerts</code>对Alerts进行遍历，针对每个Alerts调用了<code>scaleService</code>方法。<code>scaleService</code>才是真正处理伸缩服务的函数。</p>
-<pre><code>func scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error {
+<pre tabindex=0><code>func scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error {
 	var err error
 	serviceName := alert.Labels.FunctionName
 
@@ -436,7 +436,7 @@ type PrometheusAlert struct {
 <li>
 <p>计算新的副本数</p>
 <p>新副本数的计算方法是根据<code>com.openfaas.scale.factor</code>计算步长：</p>
-<pre><code>step := uint64((float64(maxReplicas) / 100) * float64(scalingFactor))
+<pre tabindex=0><code>step := uint64((float64(maxReplicas) / 100) * float64(scalingFactor))
 </code></pre></li>
 <li>
 <p>设置为新的副本数</p>
@@ -451,7 +451,7 @@ type PrometheusAlert struct {
 </li>
 <li>
 <p>config：<code>ScalingConfig</code>的对象：</p>
-<pre><code>// ScalingConfig for scaling behaviours
+<pre tabindex=0><code>// ScalingConfig for scaling behaviours
 type ScalingConfig struct {
 	MaxPollCount         uint              // 查到的最大数量
 	FunctionPollInterval time.Duration     // 函数调用时间间隔
@@ -466,7 +466,7 @@ type ScalingConfig struct {
 <li>为了加快函数的启动速度，如果缓存中可以获该得函数，且函数的副本数大于0，满足条件，return即可。</li>
 <li>如果不满足上一步，就会调用<code>SetReplicas</code>方法设置副本数，并更新FunctionCache的缓存。</li>
 </ul>
-<pre><code>// MakeScalingHandler creates handler which can scale a function from
+<pre tabindex=0><code>// MakeScalingHandler creates handler which can scale a function from
 // zero to 1 replica(s).
 func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config ScalingConfig) http.HandlerFunc {
 	cache := FunctionCache{
@@ -501,7 +501,7 @@ func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config
 }
 </code></pre><h3 id=监控>监控<a hidden class=anchor aria-hidden=true href=#监控>#</a></h3>
 <p>监控是一个定时任务，开启了一个新协程，利用go的ticker.C的间隔不停的去调用<code>/system/functions</code>接口。反序列化到MetricOptions对象中。</p>
-<pre><code>func AttachExternalWatcher(endpointURL url.URL, metricsOptions MetricOptions, label string, interval time.Duration) {
+<pre tabindex=0><code>func AttachExternalWatcher(endpointURL url.URL, metricsOptions MetricOptions, label string, interval time.Duration) {
 	ticker := time.NewTicker(interval)
 	quit := make(chan struct{})
 	proxyClient := // 省略创建一个http.Client对象

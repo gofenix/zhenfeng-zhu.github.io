@@ -21,7 +21,7 @@ FROM docker.finogeeks.club/base/alpine MAINTAINER &#34;zhuzhenfeng@finogeeks.clu
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.86.0">
+<meta name=generator content="Hugo 0.88.1">
 <meta property="og:title" content="golang踩坑">
 <meta property="og:description" content="一  x509 error when using HTTPS inside a Docker container
  因为docker中没有CA证书。
@@ -93,14 +93,14 @@ August 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </blockquote>
 <p>因为docker中没有CA证书。</p>
 <p>普通的镜像解决办法</p>
-<pre><code>FROM ubuntu:14.04.1
+<pre tabindex=0><code>FROM ubuntu:14.04.1
 
 RUN apt-get update
 RUN apt-get install -y ca-certificates
 
 CMD curl https://www.google.com
 </code></pre><p>如果是alpine的参考这个：</p>
-<pre><code>FROM docker.finogeeks.club/base/alpine
+<pre tabindex=0><code>FROM docker.finogeeks.club/base/alpine
 MAINTAINER &quot;zhuzhenfeng@finogeeks.club&quot;
 
 RUN set -ex \
