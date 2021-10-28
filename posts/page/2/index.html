@@ -23,7 +23,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
+<meta property="og:updated_time" content="2021-10-28T10:11:41+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -64,6 +64,21 @@
 </div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+小白都能快速上手的Vim配置
+</h2>
+</header>
+<section class=entry-content>
+<p>首先把所有的vim相关的都删除。 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc中添加下面的代码
+" basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set backspace=eol,start,indent set laststatus=2 set colorcolumn=80 set cursorline set linebreak set autoindent set ignorecase set smartcase set ruler set diffopt+=internal,indent-heuristic,algorithm:patience set showcmd set clipboard^=unnamed,unnamedplus set showmode set mouse=a set tabstop=2 set shiftwidth=4 set expandtab set softtabstop=2 set showmatch set incsearch set nobackup set autoread set wildmenu set wildmode=longest:list,full set nofoldenable filetype plugin indent on syntax on 有了上面的设置，会让你的vim更好用一些。...</p>
+</section>
+<footer class=entry-footer>
+February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to 小白都能快速上手的Vim配置" href=https://zhenfeng-zhu.github.io/posts/vim/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -255,31 +270,6 @@ zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum comma
 November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to Geth" href=https://zhenfeng-zhu.github.io/posts/geth/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-hive常用函数
-</h2>
-</header>
-<section class=entry-content>
-<p>json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path)
-解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。
-path 就是 ‘$.字段名’。
-如果该字段的 value 也是 json，就可以一直点下去。
-如果该字段的 value 是数组，就可以用 ‘$.字段名[0]'，类似这样下标的形式去访问。
-explode explode(array)
-经常和 lateral view 一起使用，将数组中的元素拆分成多行显示。
-substr substr(string A, int start, int len)
-返回字符串 A 从 start 位置开始，长度为 len 的字符串
-json_tuple json_tuple(string json_string, col1, col2, …)
-经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。
-parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)...</p>
-</section>
-<footer class=entry-footer>
-April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to hive常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

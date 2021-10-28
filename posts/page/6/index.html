@@ -23,7 +23,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
+<meta property="og:updated_time" content="2021-10-28T10:11:41+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -64,6 +64,24 @@
 </div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+openfaas-workshop-lab4
+</h2>
+</header>
+<section class=entry-content>
+<p>Lab 4 - 深入函数 在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：
+$ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be able to control how a function behaves at runtime, we can do that in at least two ways:
+控制函数在运行时的行为很有用，我们至少可以通过两种方式来实现：
+在部署时 在部署时设置环境变量 我们在 Lab3 时用了 write_debug 来做——你也可以在这里设置你想要的任何自定义的环境变量。例如：如果你想为 hello world 函数配置一种语言，可以引入一个 spoken_language 变量。
+使用 HTTP 上下文——querystring / headers 使用 querystring 和 HTTP headers 另一个更为动态的选项是可以在每个请求级别上进行修改，即使用 querystrings 和 HTTP headers，这两者都可以通过 faas-cli 或者 curl 传递。...</p>
+</section>
+<footer class=entry-footer>
+July 2, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to openfaas-workshop-lab4" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -286,29 +304,6 @@ elasticsearch
 May 20, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to elasticsearch" href=https://zhenfeng-zhu.github.io/posts/elasticsearch/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-git常用操作
-</h2>
-</header>
-<section class=entry-content>
-<p>整理一下常用的git操作，不用再到处找了。
-git放弃本地修改，强制更新 git fetch --all git reset --hard origin/master git修改远程仓库地址 git remote set-url origin url cherry-pick 当你通过一番挣扎终于搞定一个bug,顺手提交到 git 服务器,心里一阵暗爽. 这时发现你当前所在的分支是 master !!!
-这个分支不是开发者用来提交代码的,可惜现在剁手也晚了.
-先切换到master git checkout master git log 复制提交的commit id
-切换到dev, cherry-pick
-git checkout dev git cherry-pic ${commit_id} 常用开发流程 git checkout -b feature1
-git commit之后，进行rebase
-git pull –rebase
-gca!
-git rvm...</p>
-</section>
-<footer class=entry-footer>
-May 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to git常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

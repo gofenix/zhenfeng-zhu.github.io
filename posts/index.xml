@@ -5,9 +5,22 @@
     <link>https://zhenfeng-zhu.github.io/posts/</link>
     <description>Recent content in Posts on Go Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 17 Oct 2021 23:08:51 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Oct 2021 10:11:41 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Crystal1</title>
+      <title>Crystal Roadmap</title>
+      <link>https://zhenfeng-zhu.github.io/posts/crystal_roadmap/</link>
+      <pubDate>Thu, 28 Oct 2021 10:11:41 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/crystal_roadmap/</guid>
+      <description>This roadmap defines the things that we want to have in the language and plan to do.
+Language Stuff that has to do with the language syntax, semantic and runtime.
+Concurrency Finalize multithreading support, so fibers can run on multiple threads.
+Windows support Finalize support for Windows platform. The compiler already works, but some stdlib features like concurrency support are still missing. Ongoing efforts on #5430.
+Type system review Make a review and possible formalisation of Crystal&amp;rsquo;s type system, with a strong emphasis on generics, type restrictions and the meta-model in general.</description>
+    </item>
+    
+    <item>
+      <title>Crystal 1.2版本更新说明</title>
       <link>https://zhenfeng-zhu.github.io/posts/crystal1.2/</link>
       <pubDate>Sun, 17 Oct 2021 23:08:51 +0800</pubDate>
       
@@ -1518,19 +1531,6 @@ IAM角色 类似于用户，可以被分配权限。
 CIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
 IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
 十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://zhenfeng-zhu.github.io/posts/crystal_roadmap/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhenfeng-zhu.github.io/posts/crystal_roadmap/</guid>
-      <description>#! https://zhuanlan.zhihu.com/p/426634841
-roadmap  title: &amp;ldquo;Crystal_roadmap&amp;rdquo; date: 2021-10-28T10:11:41+08:00 This roadmap defines the things that we want to have in the language and plan to do.
-Language Stuff that has to do with the language syntax, semantic and runtime.
-Concurrency Finalize multithreading support, so fibers can run on multiple threads.
-Windows support Finalize support for Windows platform. The compiler already works, but some stdlib features like concurrency support are still missing. Ongoing efforts on #5430.</description>
     </item>
     
     <item>

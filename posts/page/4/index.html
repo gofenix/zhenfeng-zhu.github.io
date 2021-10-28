@@ -23,7 +23,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
+<meta property="og:updated_time" content="2021-10-28T10:11:41+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -64,6 +64,53 @@
 </div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+mysql
+</h2>
+</header>
+<section class=entry-content>
+<p>MySQL基本架构 客户端
+server层
+连接器：管理连接，权限验证
+查询缓存：命中规则，直接返回结果 8.0之后全部删除了这个模块
+分析器：词法分析，语法分析
+优化器：执行计划生成，索引选择
+执行器：操作引擎，返回结果
+存储引擎：存储数据，提供读写接口
+数据库中的长连接指连接成功之后，如果客户端持续有请求，则一直使用同一个连接。短连接是指每次执行完很少的几次查询之后就断开连接，下次再重新建立。
+如果全部使用长连接，会导致mysql内存涨的很快，可能出现OOM，因此要定期断开长连接，或者在执行一个比较大的操作之后，执行mysql_reset_connection重置一下。
+日志系统 redo log重做日志 redo log是innodb引擎特有的。物理日志，记录的是某个数据页上做了什么修改。循环写入。
+WAL技术：Write-Ahead Logging：关键点就是先写日志，再写磁盘。当一条记录更新时，先把记录写到redolog中，更新到内存，这时这个更新操作就成功了。然后innodb引擎就会在适当的时候，将这个操作记录更新到磁盘中。因此在数据库异常重启的时候，之前的提交的记录不会丢失。
+binlog归档日志 binlog是server层实现的，所有的引擎都可以使用。binlog是逻辑日志，记录的是这个语句的原始逻辑。binlog是写到一定大小后，切换下一个，不会覆盖以前的日志。
+因此一个update操作就是：
+找到该行
+判断数据页是否在内存中，如果是返回行数据，否则从磁盘读入到内存中。
+将值进行更新，写入新行
+新行更新到内存
+写入redolog，处于prepare阶段
+写入binlog
+提交事务，处于commit阶段。
+这个就是两阶段提交。
+事务隔离 Isolation：隔离性
+脏读，幻读，不可重复读
+隔离的越严实，效率越低。
+SQL的标准隔离级别：
+读未提交：一个事务没提交的时候，它做的变更就能被别的事务看到
+读提交：一个事务提交之后，做的变更才能被其他事务看到
+可重复读：一个事务执行时看到的数据，总是跟这个事务启动时看到的数据时一致的。
+串行化：顾名思义，对于同一行记录，写会加写锁，读也会加读锁。当读写锁冲突时，后访问的事务，必须等前一个事务完成。
+在实现的时候，数据库会创建一个视图，访问的时候以视图的逻辑结果为准。
+可重复读，这个视图是在事务启动时创建，整个事务存在期间都用这个视图。 读提交，这个视图在每个sql语句开始执行的时候创建 读未提交直接返回记录的最新值，没有视图的概念。 串行化是用加锁的方式。 mysql在每条记录更新的时候，都会记录一条回滚操作，记录上的最新值都可以通过回滚操作，得到前一个状态的值。当没有事务需要用到回滚日志时，就会被删除。所以不建议使用长事务，这样会占用存储空间和锁。
+mysql启动事务的方式
+显式启动：begin或者start transaction。配套的提交语句是commit，回滚语句是rollback。 set autocommit=0这个命令会将这个线程的自动提交关闭。意味着如果只执行一个select语句，事务就启动了，而且不会自动关闭，除非主动执行commit或者rollback，或者断开连接。 因此一般set autocommit=1，打开显示启动的模式。...</p>
+</section>
+<footer class=entry-footer>
+December 1, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to mysql" href=https://zhenfeng-zhu.github.io/posts/mysql/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -288,25 +335,6 @@ dive-into-redis
 August 20, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-golang踩坑
-</h2>
-</header>
-<section class=entry-content>
-<p>一 x509 error when using HTTPS inside a Docker container
-因为docker中没有CA证书。
-普通的镜像解决办法
-FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是alpine的参考这个：
-FROM docker.finogeeks.club/base/alpine MAINTAINER "zhuzhenfeng@finogeeks.club" RUN set -ex \ && apk add --no-cache ca-certificates COPY src/wallet/wallet /opt/wallet ENTRYPOINT /opt/wallet 二 panic: runtime error: invalid memory address or nil pointer dereference [signal 0xb code=0x1 addr=0x38 pc=0x26df]
-“An error is returned if caused by client policy (such as CheckRedirect), or if there was an HTTP protocol error....</p>
-</section>
-<footer class=entry-footer>
-August 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to golang踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

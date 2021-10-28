@@ -23,7 +23,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-10-17T23:08:51+08:00">
+<meta property="og:updated_time" content="2021-10-28T10:11:41+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -64,6 +64,29 @@
 </div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+git常用操作
+</h2>
+</header>
+<section class=entry-content>
+<p>整理一下常用的git操作，不用再到处找了。
+git放弃本地修改，强制更新 git fetch --all git reset --hard origin/master git修改远程仓库地址 git remote set-url origin url cherry-pick 当你通过一番挣扎终于搞定一个bug,顺手提交到 git 服务器,心里一阵暗爽. 这时发现你当前所在的分支是 master !!!
+这个分支不是开发者用来提交代码的,可惜现在剁手也晚了.
+先切换到master git checkout master git log 复制提交的commit id
+切换到dev, cherry-pick
+git checkout dev git cherry-pic ${commit_id} 常用开发流程 git checkout -b feature1
+git commit之后，进行rebase
+git pull –rebase
+gca!
+git rvm...</p>
+</section>
+<footer class=entry-footer>
+May 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to git常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -251,40 +274,6 @@ April 4, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
 March 25, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to 关于时间管理" href=https://zhenfeng-zhu.github.io/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-一致性哈希算法
-</h2>
-</header>
-<section class=entry-content>
-<p>当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：
-如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。
-1 hash取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。
-可以将传入的key按照 $$ index=hash(key) % N $$ 这样来计算出需要存放的节点。
-这样可以满足数据的均匀分配，但是这个算法的容错性和扩展性比较差。比如增加或者删除一个节点的时候，所有的key都要重新计算，显然这样的成本比较高，为此需要一个算法来满足均匀的同时也要有良好的容错性和扩展性。
-2 一致性hash算法 一致性hash算法是将所有的哈希值构成了一个环，其范围是0~2^32-1。如图：
-之后将各个服务器节点散列到这个环上，可以用节点的IP，hostname这样唯一性的字段作为key进行hash。散列之后如下：
-之后需要将数据定位到对应的节点上，使用同样的hash函数将key也映射到这个环上。
-这样就按照顺时针方向就可以将k1定位到N1节点，k2定位到N3节点，k3定位到N2节点。
-2.1 容错性 假设N1宕机了：
-依然根据顺时针方向，k2和k3保持不变，只有k1被重新映射到了N3。这样就很好的保证了容错性，当一个节点宕机时只会影响到少部分数据。
-2.2 扩展性 当新增一个节点时：
-在N2和N3之间新增了一个节点N4，这时受影响的数据只有k3，其余的数据也是保持不变。
-2.3 虚拟节点 到目前为止，该算法也有一些问题：
-当节点较少的时候可能出现数据不均匀的情况：
-这样会导致大部分数据都在N1节点，只有少量的数据在N2节点。
-为了解决这个问题，一致性哈希算法引入了虚拟节点。
-将每一个节点进行多次哈希，生成的节点放置在环上成为虚拟节点。
-计算时可以在 IP 后加上编号来生成哈希值。
-这样只需要在原有的基础上多一步由虚拟节点映射到实际节点的步骤即可让少量节点也能满足均匀性。
-3 参考 https://crossoverjie.top/2018/01/08/Consistent-Hash/#more...</p>
-</section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to 一致性哈希算法" href=https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

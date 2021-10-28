@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://zhenfeng-zhu.github.io/posts/crystal1.2/</loc>
-    <lastmod>2021-10-17T23:08:51+08:00</lastmod>
+    <loc>https://zhenfeng-zhu.github.io/posts/crystal_roadmap/</loc>
+    <lastmod>2021-10-28T10:11:41+08:00</lastmod>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/</loc>
-    <lastmod>2021-10-17T23:08:51+08:00</lastmod>
+    <lastmod>2021-10-28T10:11:41+08:00</lastmod>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/</loc>
+    <lastmod>2021-10-28T10:11:41+08:00</lastmod>
+  </url><url>
+    <loc>https://zhenfeng-zhu.github.io/posts/crystal1.2/</loc>
     <lastmod>2021-10-17T23:08:51+08:00</lastmod>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/</loc>
@@ -262,8 +265,6 @@
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/aws-md/</loc>
     <lastmod>2018-03-22T14:04:09+00:00</lastmod>
-  </url><url>
-    <loc>https://zhenfeng-zhu.github.io/posts/crystal_roadmap/</loc>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/</loc>
   </url><url>
