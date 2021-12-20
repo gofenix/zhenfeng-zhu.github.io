@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>nats简介 | Go Data</title>
+<title>nats简介 | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="nats是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC和爱立信等公司都有在使用。
 核心基于EventMachine开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向MessageBus发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用nats streaming可以做到持久化，缓存等功能。
@@ -17,7 +17,7 @@ NATS 设计目标
  高吞吐量的消息分散 —— 少数的生产者需要将数据发送给很多的消费者。 寻址和发现 —— 将数据发送给特定的应用实例，设备或者用户，也可用于发现并连接到基础架构中的实例，设备或用户。 命令和控制（控制面板）—— 向程序或设备发送指令，并从程序/设备中接收状态，如SCADA，卫星遥感，物联网等。 负载均衡 —— 主要应用于程序会生成大量的请求，且可动态伸缩程序实例。 N路可扩展性 —— 通信基础架构能够充分利用go的高效并发/调度机制，以增强水平和垂直的扩展性。 位置透明 —— 程序在各个地理位置上分布者大量实例，且你无法了解到程序之间的端点配置详情，及他们所生产或消费的数据。 容错  使用nats-streaming的附加场景有：
  从特定时间或顺序消费 持久性 有保证的消息投递  NATS消息传递模型  发布订阅 请求回复 排队  NATS的特点 nats的独特功能有：
  纯净的pub-sub 集群模式的server 订阅者的自动裁剪 基于文本的协议 多种服务质量  最多一次投递 至少一次投递   持久 缓存  ">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/nats/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -62,7 +62,7 @@ NATS 设计目标
  从特定时间或顺序消费 持久性 有保证的消息投递  NATS消息传递模型  发布订阅 请求回复 排队  NATS的特点 nats的独特功能有：
  纯净的pub-sub 集群模式的server 订阅者的自动裁剪 基于文本的协议 多种服务质量  最多一次投递 至少一次投递   持久 缓存  ">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"nats简介","item":"https://zhenfeng-zhu.github.io/posts/nats/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"nats简介","name":"nats简介","description":"nats是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC和爱立信等公司都有在使用。\n核心基于EventMachine开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向MessageBus发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒8-11百万个消息，整个程序很 …","keywords":[],"articleBody":"nats是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC和爱立信等公司都有在使用。\n核心基于EventMachine开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向MessageBus发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用nats streaming可以做到持久化，缓存等功能。\nNATS server nats提供了一个go编写的轻量级服务器。发行版包括二进制和docker镜像\nNATS clients\nnats官方提供的客户端有Go，Node，Ruby，Java，C，C＃，NGINX等。\nNATS 设计目标\n核心原则是性能，可伸缩和易用性。\n 高效 始终在线和可用 非常轻巧 支持多种质量的服务 支持各种消息传递模型和使用场景  NATS 使用场景 nats是一个简单且强大的消息系统，为支持现代云原生架构设计。由于可伸缩性的复杂性，nats旨在容易使用和实现，且能提供多种质量的服务。\n一些适用nats的场景有：\n 高吞吐量的消息分散 —— 少数的生产者需要将数据发送给很多的消费者。 寻址和发现 —— 将数据发送给特定的应用实例，设备或者用户，也可用于发现并连接到基础架构中的实例，设备或用户。 命令和控制（控制面板）—— 向程序或设备发送指令，并从程序/设备中接收状态，如SCADA，卫星遥感，物联网等。 负载均衡 —— 主要应用于程序会生成大量的请求，且可动态伸缩程序实例。 N路可扩展性 —— 通信基础架构能够充分利用go的高效并发/调度机制，以增强水平和垂直的扩展性。 位置透明 —— 程序在各个地理位置上分布者大量实例，且你无法了解到程序之间的端点配置详情，及他们所生产或消费的数据。 容错  使用nats-streaming的附加场景有：\n 从特定时间或顺序消费 持久性 有保证的消息投递  NATS消息传递模型  发布订阅 请求回复 排队  NATS的特点 nats的独特功能有：\n 纯净的pub-sub 集群模式的server 订阅者的自动裁剪 基于文本的协议 多种服务质量  最多一次投递 至少一次投递   持久 缓存  ","wordCount":"60","inLanguage":"en","datePublished":"2018-07-30T11:15:39Z","dateModified":"2018-07-30T11:15:39Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/nats/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"nats简介","name":"nats简介","description":"nats是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC和爱立信等公司都有在使用。\n核心基于EventMachine开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向MessageBus发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒8-11百万个消息，整个程序很 …","keywords":[],"articleBody":"nats是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC和爱立信等公司都有在使用。\n核心基于EventMachine开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向MessageBus发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用nats streaming可以做到持久化，缓存等功能。\nNATS server nats提供了一个go编写的轻量级服务器。发行版包括二进制和docker镜像\nNATS clients\nnats官方提供的客户端有Go，Node，Ruby，Java，C，C＃，NGINX等。\nNATS 设计目标\n核心原则是性能，可伸缩和易用性。\n 高效 始终在线和可用 非常轻巧 支持多种质量的服务 支持各种消息传递模型和使用场景  NATS 使用场景 nats是一个简单且强大的消息系统，为支持现代云原生架构设计。由于可伸缩性的复杂性，nats旨在容易使用和实现，且能提供多种质量的服务。\n一些适用nats的场景有：\n 高吞吐量的消息分散 —— 少数的生产者需要将数据发送给很多的消费者。 寻址和发现 —— 将数据发送给特定的应用实例，设备或者用户，也可用于发现并连接到基础架构中的实例，设备或用户。 命令和控制（控制面板）—— 向程序或设备发送指令，并从程序/设备中接收状态，如SCADA，卫星遥感，物联网等。 负载均衡 —— 主要应用于程序会生成大量的请求，且可动态伸缩程序实例。 N路可扩展性 —— 通信基础架构能够充分利用go的高效并发/调度机制，以增强水平和垂直的扩展性。 位置透明 —— 程序在各个地理位置上分布者大量实例，且你无法了解到程序之间的端点配置详情，及他们所生产或消费的数据。 容错  使用nats-streaming的附加场景有：\n 从特定时间或顺序消费 持久性 有保证的消息投递  NATS消息传递模型  发布订阅 请求回复 排队  NATS的特点 nats的独特功能有：\n 纯净的pub-sub 集群模式的server 订阅者的自动裁剪 基于文本的协议 多种服务质量  最多一次投递 至少一次投递   持久 缓存  ","wordCount":"60","inLanguage":"en","datePublished":"2018-07-30T11:15:39Z","dateModified":"2018-07-30T11:15:39Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/nats/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -72,7 +72,7 @@ NATS 设计目标
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -101,7 +101,7 @@ NATS 设计目标
 nats简介
 </h1>
 <div class=post-meta>
-July 30, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+July 30, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -188,10 +188,10 @@ July 30, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <a target=_blank rel="noopener noreferrer" aria-label="share nats简介 on telegram" href="https://telegram.me/share/url?text=nats%e7%ae%80%e4%bb%8b&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fnats%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

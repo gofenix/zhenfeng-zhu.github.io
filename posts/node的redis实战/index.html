@@ -3,13 +3,13 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>node的redis实战 | Go Data</title>
+<title>node的redis实战 | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="Node.js Redis客户端模块 为了追新，这里我使用的yarn，毕竟我是HDD（面向热点编程）编程实践者。
 模块安装
 yarn add redis 模块使用实例
 const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on(&#34;error&#34;, function (err) { console.log(&#34;Error &#34; + err); }); client.set(&#34;string key&#34;, &#34;string val&#34;, redis.print); client.hset(&#34;hash key&#34;, &#34;hashtest 1&#34;, &#34;some value&#34;, redis.print); client.hset([&#34;hash key&#34;, &#34;hashtest 2&#34;, &#34;some other value&#34;], redis.print); client.hkeys(&#34;hash key&#34;, function (err, replies) { console.log(replies.length + &#34; replies:&#34;); replies.forEach(function (reply, i) { console.log(&#34; &#34; + i + &#34;: &#34; + reply); }); client.">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -38,7 +38,7 @@ const redis = require('redis') const client = redis.createClient('6379', '127.0.
 yarn add redis 模块使用实例
 const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on(&#34;error&#34;, function (err) { console.log(&#34;Error &#34; + err); }); client.set(&#34;string key&#34;, &#34;string val&#34;, redis.print); client.hset(&#34;hash key&#34;, &#34;hashtest 1&#34;, &#34;some value&#34;, redis.print); client.hset([&#34;hash key&#34;, &#34;hashtest 2&#34;, &#34;some other value&#34;], redis.print); client.hkeys(&#34;hash key&#34;, function (err, replies) { console.log(replies.length + &#34; replies:&#34;); replies.forEach(function (reply, i) { console.log(&#34; &#34; + i + &#34;: &#34; + reply); }); client.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"node的redis实战","item":"https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"node的redis实战","name":"node的redis实战","description":"Node.js Redis客户端模块 为了追新，这里我使用的yarn，毕竟我是HDD（面向热点编程）编程实践者。\n模块安装\nyarn add redis 模块使用实例\nconst redis = require(\u0026#39;redis\u0026#39;) const client = redis.createClient(\u0026#39;6379\u0026#39;, \u0026#39;127.0.0.1\u0026#39;) …","keywords":[],"articleBody":"Node.js Redis客户端模块 为了追新，这里我使用的yarn，毕竟我是HDD（面向热点编程）编程实践者。\n模块安装\nyarn add redis 模块使用实例\nconst redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on(\"error\", function (err) { console.log(\"Error \" + err); }); client.set(\"string key\", \"string val\", redis.print); client.hset(\"hash key\", \"hashtest 1\", \"some value\", redis.print); client.hset([\"hash key\", \"hashtest 2\", \"some other value\"], redis.print); client.hkeys(\"hash key\", function (err, replies) { console.log(replies.length + \" replies:\"); replies.forEach(function (reply, i) { console.log(\" \" + i + \": \" + reply); }); client.quit(); }); 输出的结果如下所示：\n➜ node-example git:(master) ✗ node redis-demo.js Reply: OK Reply: 0 Reply: 0 2 replies: 0: hashtest 1 1: hashtest 2 Promises\n如果是使用node 8或者之上的话，使用node的util.promisify来将请求变成promise的。\nconst {promisify}=require('util') const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') const getAsync=promisify(client.get).bind(client) function getFoo(){ return getAsync('foo').then(res = { console.log(res) }) } getFoo() 发送命令\n每个redis命令都会通过client对象的一个函数暴露，所有这些函数都会有一个args数组选项和一个callback回调函数。\n字符串操作\nset key value\nget key\n哈希操作\nhmset key field1 value1\nhget key field1 value1\n列表操作\nlpush key value1 value2\nlrange key 0 n\n集合操作\nsadd key member1 member2\nsmembers key\n有序集合操作\nzadd key index value\nzrange key 0 n\n","wordCount":"161","inLanguage":"en","datePublished":"2018-04-13T10:00:12Z","dateModified":"2018-04-13T10:00:12Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"node的redis实战","name":"node的redis实战","description":"Node.js Redis客户端模块 为了追新，这里我使用的yarn，毕竟我是HDD（面向热点编程）编程实践者。\n模块安装\nyarn add redis 模块使用实例\nconst redis = require(\u0026#39;redis\u0026#39;) const client = redis.createClient(\u0026#39;6379\u0026#39;, \u0026#39;127.0.0.1\u0026#39;) …","keywords":[],"articleBody":"Node.js Redis客户端模块 为了追新，这里我使用的yarn，毕竟我是HDD（面向热点编程）编程实践者。\n模块安装\nyarn add redis 模块使用实例\nconst redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on(\"error\", function (err) { console.log(\"Error \" + err); }); client.set(\"string key\", \"string val\", redis.print); client.hset(\"hash key\", \"hashtest 1\", \"some value\", redis.print); client.hset([\"hash key\", \"hashtest 2\", \"some other value\"], redis.print); client.hkeys(\"hash key\", function (err, replies) { console.log(replies.length + \" replies:\"); replies.forEach(function (reply, i) { console.log(\" \" + i + \": \" + reply); }); client.quit(); }); 输出的结果如下所示：\n➜ node-example git:(master) ✗ node redis-demo.js Reply: OK Reply: 0 Reply: 0 2 replies: 0: hashtest 1 1: hashtest 2 Promises\n如果是使用node 8或者之上的话，使用node的util.promisify来将请求变成promise的。\nconst {promisify}=require('util') const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') const getAsync=promisify(client.get).bind(client) function getFoo(){ return getAsync('foo').then(res = { console.log(res) }) } getFoo() 发送命令\n每个redis命令都会通过client对象的一个函数暴露，所有这些函数都会有一个args数组选项和一个callback回调函数。\n字符串操作\nset key value\nget key\n哈希操作\nhmset key field1 value1\nhget key field1 value1\n列表操作\nlpush key value1 value2\nlrange key 0 n\n集合操作\nsadd key member1 member2\nsmembers key\n有序集合操作\nzadd key index value\nzrange key 0 n\n","wordCount":"161","inLanguage":"en","datePublished":"2018-04-13T10:00:12Z","dateModified":"2018-04-13T10:00:12Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -48,7 +48,7 @@ const redis = require('redis') const client = redis.createClient('6379', '127.0.
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -77,7 +77,7 @@ const redis = require('redis') const client = redis.createClient('6379', '127.0.
 node的redis实战
 </h1>
 <div class=post-meta>
-April 13, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+April 13, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -170,10 +170,10 @@ getFoo()
 <a target=_blank rel="noopener noreferrer" aria-label="share node的redis实战 on telegram" href="https://telegram.me/share/url?text=node%e7%9a%84redis%e5%ae%9e%e6%88%98&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fnode%25E7%259A%2584redis%25E5%25AE%259E%25E6%2588%2598%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

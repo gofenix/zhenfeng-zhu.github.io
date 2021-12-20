@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>技术栈 | Go Data</title>
+<title>技术栈 | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
 技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。
@@ -26,7 +26,7 @@
  规则引擎  在规则引擎中，都是一个个规则。
  DSL  领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。
  Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -89,7 +89,7 @@
  DSL  领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。
  Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"技术栈","item":"https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"技术栈","name":"技术栈","description":"创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。\n技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。 …","keywords":[],"articleBody":"创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。\n技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。\n rancher  rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。\n aws  近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。\n kotlin  之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。\n guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。\n需要我们编写AppModule.java去手动配置哪个类注入哪个类。\n rxjava  rxjava我都没有找到一个系统的教程，不知道该从哪里学习。\n vertx  vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。\n ES6  node代码中都是用es6来写的，async和await现在也会用了。\n express  想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。\n typescript  还没它去写东西，可能下周会用它来写个机器人。\n貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。\n知识面扩展  监控  grafana+Prometheus+graylog去做可视化和日志的监控。\n对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。\n FSM状态机  机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。\n 网关  网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。\n我们使用的是kong，在这里kong加上一些插件，相当好用。\n 规则引擎  在规则引擎中，都是一个个规则。\n DSL  领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。\n Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。\n未来可能要接触  go  ","wordCount":"42","inLanguage":"en","datePublished":"2018-04-05T09:49:06Z","dateModified":"2018-04-05T09:49:06Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"技术栈","name":"技术栈","description":"创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。\n技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。 …","keywords":[],"articleBody":"创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。\n技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。\n rancher  rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。\n aws  近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。\n kotlin  之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。\n guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。\n需要我们编写AppModule.java去手动配置哪个类注入哪个类。\n rxjava  rxjava我都没有找到一个系统的教程，不知道该从哪里学习。\n vertx  vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。\n ES6  node代码中都是用es6来写的，async和await现在也会用了。\n express  想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。\n typescript  还没它去写东西，可能下周会用它来写个机器人。\n貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。\n知识面扩展  监控  grafana+Prometheus+graylog去做可视化和日志的监控。\n对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。\n FSM状态机  机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。\n 网关  网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。\n我们使用的是kong，在这里kong加上一些插件，相当好用。\n 规则引擎  在规则引擎中，都是一个个规则。\n DSL  领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。\n Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。\n未来可能要接触  go  ","wordCount":"42","inLanguage":"en","datePublished":"2018-04-05T09:49:06Z","dateModified":"2018-04-05T09:49:06Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -99,7 +99,7 @@
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -128,7 +128,7 @@
 技术栈
 </h1>
 <div class=post-meta>
-April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -235,10 +235,10 @@ April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <a target=_blank rel="noopener noreferrer" aria-label="share 技术栈 on telegram" href="https://telegram.me/share/url?text=%e6%8a%80%e6%9c%af%e6%a0%88&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2f%25E6%258A%2580%25E6%259C%25AF%25E6%25A0%2588%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

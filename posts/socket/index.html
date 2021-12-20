@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>socket | Go Data</title>
+<title>socket | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="Socket 网络模型 osi七层模型  应用层 表示层 会话层 传输层 网络层 数据链路层 物理层  对应的tcpip就是  应用层  dns http   传输层  icmp tcp udp   ip层  ipv4 ipv6   mac层  arp vlan   物理层  Ethernet    为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
 二层到四层，即mac、ip和传输等层都是Linux内核中处理。应用层的如浏览器、Nginx和Tomcat等都是用户态的。
@@ -14,7 +14,7 @@ TCP和UDP的区别  tcp是面向连接的，udp是面向无连接的 tcp提供�
 所谓的可靠，也是两端的数据结构做的事情。不丢失其实是数据结构在“点名”，顺序到达是数据结构在“排序”，面向数据流其实是数据结构将零散的包，按照顺序捏成一个流发给应用层。
 所谓的流量控制和拥塞控制，其实就是根据收到的对端的网络包，调整两端的数据结构状态。
 socket函数 int socket(int domain, int type, int protocol) socket函数用于创建一个socket文件描述符。">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/socket/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -53,7 +53,7 @@ TCP和UDP的区别  tcp是面向连接的，udp是面向无连接的 tcp提供�
 所谓的流量控制和拥塞控制，其实就是根据收到的对端的网络包，调整两端的数据结构状态。
 socket函数 int socket(int domain, int type, int protocol) socket函数用于创建一个socket文件描述符。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"socket","item":"https://zhenfeng-zhu.github.io/posts/socket/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"socket","name":"socket","description":"Socket 网络模型 osi七层模型  应用层 表示层 会话层 传输层 网络层 数据链路层 物理层  对应的tcpip就是  应用层  dns http   传输层  icmp tcp udp   ip层  ipv4 ipv6   mac层  arp vlan   物理层  Ethernet    为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的 …","keywords":[],"articleBody":"Socket 网络模型 osi七层模型  应用层 表示层 会话层 传输层 网络层 数据链路层 物理层  对应的tcpip就是  应用层  dns http   传输层  icmp tcp udp   ip层  ipv4 ipv6   mac层  arp vlan   物理层  Ethernet    为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。\n二层到四层，即mac、ip和传输等层都是Linux内核中处理。应用层的如浏览器、Nginx和Tomcat等都是用户态的。\n传输层的tcp和udp里都有端口的概念，不同应用监听不同的段即可。\n应用层和内核的互通机制，就是通过socket系统调用。其实socket哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是socket。\nTCP和UDP的区别  tcp是面向连接的，udp是面向无连接的 tcp提供可靠交付，无差错、不丢失、不重复、并且按序到达。udp不提供可靠交付，可能丢失，不按顺序。 tcp是面向字节流的，发送的是一个流，无头无尾。udp是数据报文的，一个一个发送。 tcp可以提供流量控制和拥塞控制，可以防止对端被压垮，也防止网络被压垮。  所谓的连接，指两端的数据结构状态的协同，两边状态对的上，符合tcp协议的规则，就认为连接是存在的，否则就是断掉的。\n所谓的建立连接，其实是为了在客户端和服务端维护连接，而建立一定的数据结构来维护双方交互的状态。并用这样的数据结构来保证面向连接的特性。tcp无法左右中间的任何通路，也没有什么虚拟的连接。\n所谓的可靠，也是两端的数据结构做的事情。不丢失其实是数据结构在“点名”，顺序到达是数据结构在“排序”，面向数据流其实是数据结构将零散的包，按照顺序捏成一个流发给应用层。\n所谓的流量控制和拥塞控制，其实就是根据收到的对端的网络包，调整两端的数据结构状态。\nsocket函数 int socket(int domain, int type, int protocol) socket函数用于创建一个socket文件描述符。\n domain  使用什么ip层的协议。AF_INET标识ipv4，AF_INET6标识ipv6。   type  socket的类型。 SOCK_STREAM，tcp流的 SOCK_DGRAM，udp报文的 SOCK_RAW，可以直接操作ip层，或非tcp和udp类型的   protocol  协议 IPPROTO_TCP, IPPROTO_UDP    ","wordCount":"60","inLanguage":"en","datePublished":"2019-08-26T06:54:14.652Z","dateModified":"2019-08-26T06:54:14.652Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/socket/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"socket","name":"socket","description":"Socket 网络模型 osi七层模型  应用层 表示层 会话层 传输层 网络层 数据链路层 物理层  对应的tcpip就是  应用层  dns http   传输层  icmp tcp udp   ip层  ipv4 ipv6   mac层  arp vlan   物理层  Ethernet    为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的 …","keywords":[],"articleBody":"Socket 网络模型 osi七层模型  应用层 表示层 会话层 传输层 网络层 数据链路层 物理层  对应的tcpip就是  应用层  dns http   传输层  icmp tcp udp   ip层  ipv4 ipv6   mac层  arp vlan   物理层  Ethernet    为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。\n二层到四层，即mac、ip和传输等层都是Linux内核中处理。应用层的如浏览器、Nginx和Tomcat等都是用户态的。\n传输层的tcp和udp里都有端口的概念，不同应用监听不同的段即可。\n应用层和内核的互通机制，就是通过socket系统调用。其实socket哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是socket。\nTCP和UDP的区别  tcp是面向连接的，udp是面向无连接的 tcp提供可靠交付，无差错、不丢失、不重复、并且按序到达。udp不提供可靠交付，可能丢失，不按顺序。 tcp是面向字节流的，发送的是一个流，无头无尾。udp是数据报文的，一个一个发送。 tcp可以提供流量控制和拥塞控制，可以防止对端被压垮，也防止网络被压垮。  所谓的连接，指两端的数据结构状态的协同，两边状态对的上，符合tcp协议的规则，就认为连接是存在的，否则就是断掉的。\n所谓的建立连接，其实是为了在客户端和服务端维护连接，而建立一定的数据结构来维护双方交互的状态。并用这样的数据结构来保证面向连接的特性。tcp无法左右中间的任何通路，也没有什么虚拟的连接。\n所谓的可靠，也是两端的数据结构做的事情。不丢失其实是数据结构在“点名”，顺序到达是数据结构在“排序”，面向数据流其实是数据结构将零散的包，按照顺序捏成一个流发给应用层。\n所谓的流量控制和拥塞控制，其实就是根据收到的对端的网络包，调整两端的数据结构状态。\nsocket函数 int socket(int domain, int type, int protocol) socket函数用于创建一个socket文件描述符。\n domain  使用什么ip层的协议。AF_INET标识ipv4，AF_INET6标识ipv6。   type  socket的类型。 SOCK_STREAM，tcp流的 SOCK_DGRAM，udp报文的 SOCK_RAW，可以直接操作ip层，或非tcp和udp类型的   protocol  协议 IPPROTO_TCP, IPPROTO_UDP    ","wordCount":"60","inLanguage":"en","datePublished":"2019-08-26T06:54:14.652Z","dateModified":"2019-08-26T06:54:14.652Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/socket/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -63,7 +63,7 @@ socket函数 int socket(int domain, int type, int protocol) socket函数用于�
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -92,7 +92,7 @@ socket函数 int socket(int domain, int type, int protocol) socket函数用于�
 socket
 </h1>
 <div class=post-meta>
-August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -210,10 +210,10 @@ August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <a target=_blank rel="noopener noreferrer" aria-label="share socket on telegram" href="https://telegram.me/share/url?text=socket&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fsocket%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

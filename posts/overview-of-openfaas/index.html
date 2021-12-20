@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>overview-of-openfaas | Go Data</title>
+<title>overview-of-openfaas | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="OpenFaaS概览  无服务器函数变得简单。
  函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。   API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。
@@ -14,7 +14,7 @@
 函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。
  Python示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +&#34; => &#34; + str(r.status_code)) handler.py
  Node.js示例：  &#34;use strict&#34; module.exports = (callback, context) => { callback(null, {&#34;message&#34;: &#34;You said: &#34; + context}) } handler.">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -53,7 +53,7 @@
  Python示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +&#34; => &#34; + str(r.status_code)) handler.py
  Node.js示例：  &#34;use strict&#34; module.exports = (callback, context) => { callback(null, {&#34;message&#34;: &#34;You said: &#34; + context}) } handler.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"overview-of-openfaas","item":"https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"overview-of-openfaas","name":"overview-of-openfaas","description":"OpenFaaS概览  无服务器函数变得简单。\n 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通 …","keywords":[],"articleBody":"OpenFaaS概览  无服务器函数变得简单。\n 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。   API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。\n 命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。\n可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。\n CLI实际上是API网关的一个RESTful客户端。\n 在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI\n函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。\n Python示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +\" = \" + str(r.status_code)) handler.py\n Node.js示例：  \"use strict\" module.exports = (callback, context) = { callback(null, {\"message\": \"You said: \" + context}) } handler.js\n在Github仓库中提供了一系列编程语言的其他示例函数 。\n","wordCount":"67","inLanguage":"en","datePublished":"2018-07-26T17:41:33Z","dateModified":"2018-07-26T17:41:33Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"overview-of-openfaas","name":"overview-of-openfaas","description":"OpenFaaS概览  无服务器函数变得简单。\n 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通 …","keywords":[],"articleBody":"OpenFaaS概览  无服务器函数变得简单。\n 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。   API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。\n 命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。\n可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。\n CLI实际上是API网关的一个RESTful客户端。\n 在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI\n函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。\n Python示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +\" = \" + str(r.status_code)) handler.py\n Node.js示例：  \"use strict\" module.exports = (callback, context) = { callback(null, {\"message\": \"You said: \" + context}) } handler.js\n在Github仓库中提供了一系列编程语言的其他示例函数 。\n","wordCount":"67","inLanguage":"en","datePublished":"2018-07-26T17:41:33Z","dateModified":"2018-07-26T17:41:33Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -63,7 +63,7 @@
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -92,7 +92,7 @@
 overview-of-openfaas
 </h1>
 <div class=post-meta>
-July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -171,10 +171,10 @@ module.exports = (callback, context) =&gt; {
 <a target=_blank rel="noopener noreferrer" aria-label="share overview-of-openfaas on telegram" href="https://telegram.me/share/url?text=overview-of-openfaas&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2foverview-of-openfaas%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

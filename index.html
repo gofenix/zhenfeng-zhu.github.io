@@ -3,10 +3,10 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>Go Data</title>
+<title>Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -19,7 +19,7 @@
 <meta name=generator content="Hugo 0.91.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
-<meta property="og:title" content="Go Data">
+<meta property="og:title" content="Awesome Fenix">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
@@ -27,9 +27,9 @@
 <meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta name=twitter:title content="Go Data">
+<meta name=twitter:title content="Awesome Fenix">
 <meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"Go Data","url":"https://zhenfeng-zhu.github.io","description":"Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod","thumbnailUrl":"https://zhenfeng-zhu.github.io/favicon.ico","sameAs":["https://github.com/zhenfeng-zhu","index.xml"]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"Awesome Fenix","url":"https://zhenfeng-zhu.github.io","description":"Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod","thumbnailUrl":"https://zhenfeng-zhu.github.io/favicon.ico","sameAs":["https://github.com/zhenfeng-zhu","index.xml"]}</script>
 </head>
 <body class=list id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -39,7 +39,7 @@
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -90,7 +90,7 @@ axios：用来做http请求 cheerio：用来解析html 观察目标网页的格�
 抓取网页信息 const cheerio = require('cheerio').default const axios = require('axios').default async function getData() { const data = await (await axios.get('https://www.8btc.com/web3.0', { headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36' } })).data const $ = cheerio.load(data) let list = [] $('#news > div.articles-list').find('.article-info').each( (item, elem) => { const href = $(elem).find('> a').attr('href') const title = $(elem)....</p>
 </section>
 <footer class=entry-footer>
-December 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+December 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to How to Crawl a Web in Nodejs" href=https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/></a>
 </article>
@@ -108,7 +108,7 @@ Windows support Finalize support for Windows platform. The compiler already work
 Type system review Make a review and possible formalisation of Crystal’s type system, with a strong emphasis on generics, type restrictions and the meta-model in general....</p>
 </section>
 <footer class=entry-footer>
-October 28, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+October 28, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Crystal Roadmap" href=https://zhenfeng-zhu.github.io/posts/crystal_roadmap/></a>
 </article>
@@ -128,7 +128,7 @@ Crystal 1.2版本更新说明
 语言变化 现在可以将泛型类的子类分配给父类的实例：...</p>
 </section>
 <footer class=entry-footer>
-October 17, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+October 17, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Crystal 1.2版本更新说明" href=https://zhenfeng-zhu.github.io/posts/crystal1.2/></a>
 </article>
@@ -149,7 +149,7 @@ eg.
 def gen_blogs(m) do m |> File....</p>
 </section>
 <footer class=entry-footer>
-July 23, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
+July 23, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to 如何从零开始写一个静态网站生成器" href=https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/></a>
 </article>
@@ -173,7 +173,7 @@ I.e.
 Status - 函数是否准备好运行。在状态显示就绪之前，您将无法从用户界面调用该函数。 Replicas - 在集群中运行的函数的副本数量。 Image - 发布到 Docker Hub 或 Docker 存储库的 Docker 镜像名称和版本。 Invocation count - 这显示了函数被调用的次数，并且每 5 秒更新一次。 多次点击 Invoke ，就可以看到 Invocation count 在递增。...</p>
 </section>
 <footer class=entry-footer>
-March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Openfaas Workshop Lab2" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/></a>
 </article>
@@ -189,7 +189,7 @@ Linux export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/rel
 在笔记本电脑上创建本地集群 k3s 和 k3d 如果您的计算机上有 Docker，那么您可以使用 Rancher Labs 的 k3d。它安装了一个名为 k3s 的 Kubernetes 轻量级版本，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的计算机上工作。...</p>
 </section>
 <footer class=entry-footer>
-March 30, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
+March 30, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Openfaas Workshop Lab1b" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/></a>
 </article>
@@ -210,7 +210,7 @@ Docker CE for Mac Edge Edition For Windows
 注意：所有步骤请使用Git Bash：不要尝试使用PowerShell，WSL或Bash for Windows。...</p>
 </section>
 <footer class=entry-footer>
-March 30, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+March 30, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Openfaas Workshop Lab1" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/></a>
 </article>
@@ -231,7 +231,7 @@ Docker CE for Mac/Windows Edge edition Docker CE for Linux 注意：作为最后
 讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。...</p>
 </section>
 <footer class=entry-footer>
-March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
+March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Openfaas Workshop" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop/></a>
 </article>
@@ -246,7 +246,7 @@ Streaming 101
 ...</p>
 </section>
 <footer class=entry-footer>
-March 26, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+March 26, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Streaming 101" href=https://zhenfeng-zhu.github.io/posts/streaming-101/></a>
 </article>
@@ -265,7 +265,7 @@ kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gatew
 # This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{....</p>
 </section>
 <footer class=entry-footer>
-March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to K3d With Openfaas" href=https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/></a>
 </article>
@@ -275,7 +275,7 @@ March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </nav>
 </footer>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

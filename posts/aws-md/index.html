@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>aws.md | Go Data</title>
+<title>aws.md | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="一些基础概念
 EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。
@@ -14,7 +14,7 @@ IAM角色 类似于用户，可以被分配权限。
 CIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
 IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
 十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/aws-md/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -53,7 +53,7 @@ CIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标
 IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
 十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"aws.md","item":"https://zhenfeng-zhu.github.io/posts/aws-md/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"aws.md","name":"aws.md","description":"一些基础概念\nEC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。\nVPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。\n子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可 …","keywords":[],"articleBody":"一些基础概念\nEC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。\nVPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。\n子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。\nIAM角色 类似于用户，可以被分配权限。\n安全组 控制连接到此EC2实例的流量，或者是控制对外暴露的端口。\nCIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。\nIPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。\n十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。\n","wordCount":"17","inLanguage":"en","datePublished":"2018-03-22T14:04:09Z","dateModified":"2018-03-22T14:04:09Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/aws-md/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"aws.md","name":"aws.md","description":"一些基础概念\nEC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。\nVPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。\n子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可 …","keywords":[],"articleBody":"一些基础概念\nEC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。\nVPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。\n子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。\nIAM角色 类似于用户，可以被分配权限。\n安全组 控制连接到此EC2实例的流量，或者是控制对外暴露的端口。\nCIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。\nIPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。\n十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。\n","wordCount":"17","inLanguage":"en","datePublished":"2018-03-22T14:04:09Z","dateModified":"2018-03-22T14:04:09Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/aws-md/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -63,7 +63,7 @@ IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：�
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -92,7 +92,7 @@ IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：�
 aws.md
 </h1>
 <div class=post-meta>
-March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -139,10 +139,10 @@ March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <a target=_blank rel="noopener noreferrer" aria-label="share aws.md on telegram" href="https://telegram.me/share/url?text=aws.md&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2faws-md%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

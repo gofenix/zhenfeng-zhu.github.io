@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>kafka | Go Data</title>
+<title>kafka | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="启动zookeeper
 bin/zookeeper-server-start.sh config/zookeeper.properties 启动kafka
@@ -14,7 +14,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --f
 echo -e &#34;zhisheng\ntian&#34; > test.txt ls
 zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e &#34;zhisheng\ntian&#34; > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器
 bin/connect-standalone.sh config/connect-standalone.">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/kafka/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -53,7 +53,7 @@ echo -e &#34;zhisheng\ntian&#34; > test.txt ls
 zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e &#34;zhisheng\ntian&#34; > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器
 bin/connect-standalone.sh config/connect-standalone.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"kafka","item":"https://zhenfeng-zhu.github.io/posts/kafka/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"kafka","name":"kafka","description":"启动zookeeper\nbin/zookeeper-server-start.sh config/zookeeper.properties 启动kafka\nbin/kafka-server-start.sh config/server.properties 创建一个主题\nbin/kafka-topics.sh --create --zookeeper …","keywords":[],"articleBody":"启动zookeeper\nbin/zookeeper-server-start.sh config/zookeeper.properties 启动kafka\nbin/kafka-server-start.sh config/server.properties 创建一个主题\nbin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者\nbin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者\nbin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect\necho -e \"zhisheng\\ntian\"  test.txt ls\nzhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e \"zhisheng\\ntian\"  test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器\nbin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties 然后发现多了一个文件\n/Users/zhuzhenfeng/Documents/software/kafka_2.12-1.1.0 [kafka_2.12-1.1.0] ls 18:25:38 LICENSE NOTICE bin config libs logs site-docs test.sink.txt test.txt [kafka_2.12-1.1.0] 然后消费\n bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic connect-test --from-beginning {\"schema\":{\"type\":\"string\",\"optional\":false},\"payload\":\"zhisheng\"} {\"schema\":{\"type\":\"string\",\"optional\":false},\"payload\":\"tian\"} {\"schema\":{\"type\":\"string\",\"optional\":false},\"payload\":\"sd\"} {\"schema\":{\"type\":\"string\",\"optional\":false},\"payload\":\"sdafasdfasdfdsa\"} ","wordCount":"100","inLanguage":"en","datePublished":"2018-06-21T17:49:46Z","dateModified":"2018-06-21T17:49:46Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/kafka/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"kafka","name":"kafka","description":"启动zookeeper\nbin/zookeeper-server-start.sh config/zookeeper.properties 启动kafka\nbin/kafka-server-start.sh config/server.properties 创建一个主题\nbin/kafka-topics.sh --create --zookeeper …","keywords":[],"articleBody":"启动zookeeper\nbin/zookeeper-server-start.sh config/zookeeper.properties 启动kafka\nbin/kafka-server-start.sh config/server.properties 创建一个主题\nbin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者\nbin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者\nbin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect\necho -e \"zhisheng\\ntian\"  test.txt ls\nzhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e \"zhisheng\\ntian\"  test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器\nbin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties 然后发现多了一个文件\n/Users/zhuzhenfeng/Documents/software/kafka_2.12-1.1.0 [kafka_2.12-1.1.0] ls 18:25:38 LICENSE NOTICE bin config libs logs site-docs test.sink.txt test.txt [kafka_2.12-1.1.0] 然后消费\n bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic connect-test --from-beginning {\"schema\":{\"type\":\"string\",\"optional\":false},\"payload\":\"zhisheng\"} {\"schema\":{\"type\":\"string\",\"optional\":false},\"payload\":\"tian\"} {\"schema\":{\"type\":\"string\",\"optional\":false},\"payload\":\"sd\"} {\"schema\":{\"type\":\"string\",\"optional\":false},\"payload\":\"sdafasdfasdfdsa\"} ","wordCount":"100","inLanguage":"en","datePublished":"2018-06-21T17:49:46Z","dateModified":"2018-06-21T17:49:46Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/kafka/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -63,7 +63,7 @@ bin/connect-standalone.sh config/connect-standalone.">
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -92,7 +92,7 @@ bin/connect-standalone.sh config/connect-standalone.">
 kafka
 </h1>
 <div class=post-meta>
-June 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+June 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -159,10 +159,10 @@ LICENSE       NOTICE        bin           config        libs          logs      
 <a target=_blank rel="noopener noreferrer" aria-label="share kafka on telegram" href="https://telegram.me/share/url?text=kafka&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fkafka%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

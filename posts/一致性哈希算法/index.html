@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>一致性哈希算法 | Go Data</title>
+<title>一致性哈希算法 | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：
 如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。
@@ -26,7 +26,7 @@
 计算时可以在 IP 后加上编号来生成哈希值。
 这样只需要在原有的基础上多一步由虚拟节点映射到实际节点的步骤即可让少量节点也能满足均匀性。
 3 参考 https://crossoverjie.top/2018/01/08/Consistent-Hash/#more">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -89,7 +89,7 @@
 这样只需要在原有的基础上多一步由虚拟节点映射到实际节点的步骤即可让少量节点也能满足均匀性。
 3 参考 https://crossoverjie.top/2018/01/08/Consistent-Hash/#more">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"一致性哈希算法","item":"https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"一致性哈希算法","name":"一致性哈希算法","description":"当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：\n如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。\n1 hash取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。\n可以将传入的key按照 $$ index=hash(key) % N $$ 这样来计算出需要存放的节点。\n这样可以满足数据的均 …","keywords":[],"articleBody":"当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：\n如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。\n1 hash取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。\n可以将传入的key按照 $$ index=hash(key) % N $$ 这样来计算出需要存放的节点。\n这样可以满足数据的均匀分配，但是这个算法的容错性和扩展性比较差。比如增加或者删除一个节点的时候，所有的key都要重新计算，显然这样的成本比较高，为此需要一个算法来满足均匀的同时也要有良好的容错性和扩展性。\n2 一致性hash算法 一致性hash算法是将所有的哈希值构成了一个环，其范围是0~2^32-1。如图：\n之后将各个服务器节点散列到这个环上，可以用节点的IP，hostname这样唯一性的字段作为key进行hash。散列之后如下：\n之后需要将数据定位到对应的节点上，使用同样的hash函数将key也映射到这个环上。\n这样就按照顺时针方向就可以将k1定位到N1节点，k2定位到N3节点，k3定位到N2节点。\n2.1 容错性 假设N1宕机了：\n依然根据顺时针方向，k2和k3保持不变，只有k1被重新映射到了N3。这样就很好的保证了容错性，当一个节点宕机时只会影响到少部分数据。\n2.2 扩展性 当新增一个节点时：\n在N2和N3之间新增了一个节点N4，这时受影响的数据只有k3，其余的数据也是保持不变。\n2.3 虚拟节点 到目前为止，该算法也有一些问题：\n当节点较少的时候可能出现数据不均匀的情况：\n这样会导致大部分数据都在N1节点，只有少量的数据在N2节点。\n为了解决这个问题，一致性哈希算法引入了虚拟节点。\n将每一个节点进行多次哈希，生成的节点放置在环上成为虚拟节点。\n计算时可以在 IP 后加上编号来生成哈希值。\n这样只需要在原有的基础上多一步由虚拟节点映射到实际节点的步骤即可让少量节点也能满足均匀性。\n3 参考 https://crossoverjie.top/2018/01/08/Consistent-Hash/#more\n","wordCount":"41","inLanguage":"en","datePublished":"2018-03-24T19:03:58Z","dateModified":"2018-03-24T19:03:58Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"一致性哈希算法","name":"一致性哈希算法","description":"当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：\n如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。\n1 hash取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。\n可以将传入的key按照 $$ index=hash(key) % N $$ 这样来计算出需要存放的节点。\n这样可以满足数据的均 …","keywords":[],"articleBody":"当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：\n如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。\n1 hash取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。\n可以将传入的key按照 $$ index=hash(key) % N $$ 这样来计算出需要存放的节点。\n这样可以满足数据的均匀分配，但是这个算法的容错性和扩展性比较差。比如增加或者删除一个节点的时候，所有的key都要重新计算，显然这样的成本比较高，为此需要一个算法来满足均匀的同时也要有良好的容错性和扩展性。\n2 一致性hash算法 一致性hash算法是将所有的哈希值构成了一个环，其范围是0~2^32-1。如图：\n之后将各个服务器节点散列到这个环上，可以用节点的IP，hostname这样唯一性的字段作为key进行hash。散列之后如下：\n之后需要将数据定位到对应的节点上，使用同样的hash函数将key也映射到这个环上。\n这样就按照顺时针方向就可以将k1定位到N1节点，k2定位到N3节点，k3定位到N2节点。\n2.1 容错性 假设N1宕机了：\n依然根据顺时针方向，k2和k3保持不变，只有k1被重新映射到了N3。这样就很好的保证了容错性，当一个节点宕机时只会影响到少部分数据。\n2.2 扩展性 当新增一个节点时：\n在N2和N3之间新增了一个节点N4，这时受影响的数据只有k3，其余的数据也是保持不变。\n2.3 虚拟节点 到目前为止，该算法也有一些问题：\n当节点较少的时候可能出现数据不均匀的情况：\n这样会导致大部分数据都在N1节点，只有少量的数据在N2节点。\n为了解决这个问题，一致性哈希算法引入了虚拟节点。\n将每一个节点进行多次哈希，生成的节点放置在环上成为虚拟节点。\n计算时可以在 IP 后加上编号来生成哈希值。\n这样只需要在原有的基础上多一步由虚拟节点映射到实际节点的步骤即可让少量节点也能满足均匀性。\n3 参考 https://crossoverjie.top/2018/01/08/Consistent-Hash/#more\n","wordCount":"41","inLanguage":"en","datePublished":"2018-03-24T19:03:58Z","dateModified":"2018-03-24T19:03:58Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -99,7 +99,7 @@
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -128,7 +128,7 @@
 一致性哈希算法
 </h1>
 <div class=post-meta>
-March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -198,10 +198,10 @@ $$
 <a target=_blank rel="noopener noreferrer" aria-label="share 一致性哈希算法 on telegram" href="https://telegram.me/share/url?text=%e4%b8%80%e8%87%b4%e6%80%a7%e5%93%88%e5%b8%8c%e7%ae%97%e6%b3%95&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2f%25E4%25B8%2580%25E8%2587%25B4%25E6%2580%25A7%25E5%2593%2588%25E5%25B8%258C%25E7%25AE%2597%25E6%25B3%2595%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

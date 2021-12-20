@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>hive常用函数 | Go Data</title>
+<title>hive常用函数 | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="json 字符串处理  get_json_object lateral_view explode substr json_tuple  get_json_object get_json_object(string json_string, string path)
 解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。
@@ -17,7 +17,7 @@ substr substr(string A, int start, int len)
 json_tuple json_tuple(string json_string, col1, col2, &mldr;)
 经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。
 parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -62,7 +62,7 @@ json_tuple json_tuple(string json_string, col1, col2, &mldr;)
 经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。
 parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"hive常用函数","item":"https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"hive常用函数","name":"hive常用函数","description":"json 字符串处理  get_json_object lateral_view explode substr json_tuple  get_json_object get_json_object(string json_string, string path)\n解析 json 字符串 json_string，返回 path 指定的内容。 …","keywords":[],"articleBody":"json 字符串处理  get_json_object lateral_view explode substr json_tuple  get_json_object get_json_object(string json_string, string path)\n解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。\npath 就是 ‘$.字段名’。\n如果该字段的 value 也是 json，就可以一直点下去。\n如果该字段的 value 是数组，就可以用 ‘$.字段名[0]'，类似这样下标的形式去访问。\nexplode explode(array)\n经常和 lateral view 一起使用，将数组中的元素拆分成多行显示。\nsubstr substr(string A, int start, int len)\n返回字符串 A 从 start 位置开始，长度为 len 的字符串\njson_tuple json_tuple(string json_string, col1, col2, …)\n经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。\nparse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)\n返回 url 中的指定部分，如 host，path，query 等等。\npartToExtract 是个枚举值：HOST, PATH, QUERY, REF, PROTOCOL, AUTHORITY, FILE, and USERINFO。\nregex_replace regex_extract(string a, string b, string c)\n将字符串 a 中符合正在表达式 b 的部分替换为 c\njson_to_struct json_to_struct(json, ‘array 或者 map 等’)\nunion_map union_map(map(k, v))\nlateral view from_unix_time from_unix_time(unix 时间戳, ‘yyyyMMddHH’)\nrow_number row_number() over (partition by 字段 a order by 计算项 b desc ) rank\nhive 中的分组和组内排序\n rank 是排序的别名 partition by： 类似于 hive 的建表，分区的意思 order by： 排序，默认是升序，加 desc 降序  这个意思就是按字段 a 分区，对计算项 b 进行降序排列\n这个是经常用到计算分区中的排序问题。\ncoalesce 非空查找函数\ncoalesce(v1, v2, v3, …)\n返回参数中的第一个非空值，如果所有值都是 NULL，返回 NULL\n","wordCount":"160","inLanguage":"en","datePublished":"2020-04-16T17:59:03+08:00","dateModified":"2020-04-16T17:59:03+08:00","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"hive常用函数","name":"hive常用函数","description":"json 字符串处理  get_json_object lateral_view explode substr json_tuple  get_json_object get_json_object(string json_string, string path)\n解析 json 字符串 json_string，返回 path 指定的内容。 …","keywords":[],"articleBody":"json 字符串处理  get_json_object lateral_view explode substr json_tuple  get_json_object get_json_object(string json_string, string path)\n解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。\npath 就是 ‘$.字段名’。\n如果该字段的 value 也是 json，就可以一直点下去。\n如果该字段的 value 是数组，就可以用 ‘$.字段名[0]'，类似这样下标的形式去访问。\nexplode explode(array)\n经常和 lateral view 一起使用，将数组中的元素拆分成多行显示。\nsubstr substr(string A, int start, int len)\n返回字符串 A 从 start 位置开始，长度为 len 的字符串\njson_tuple json_tuple(string json_string, col1, col2, …)\n经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。\nparse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)\n返回 url 中的指定部分，如 host，path，query 等等。\npartToExtract 是个枚举值：HOST, PATH, QUERY, REF, PROTOCOL, AUTHORITY, FILE, and USERINFO。\nregex_replace regex_extract(string a, string b, string c)\n将字符串 a 中符合正在表达式 b 的部分替换为 c\njson_to_struct json_to_struct(json, ‘array 或者 map 等’)\nunion_map union_map(map(k, v))\nlateral view from_unix_time from_unix_time(unix 时间戳, ‘yyyyMMddHH’)\nrow_number row_number() over (partition by 字段 a order by 计算项 b desc ) rank\nhive 中的分组和组内排序\n rank 是排序的别名 partition by： 类似于 hive 的建表，分区的意思 order by： 排序，默认是升序，加 desc 降序  这个意思就是按字段 a 分区，对计算项 b 进行降序排列\n这个是经常用到计算分区中的排序问题。\ncoalesce 非空查找函数\ncoalesce(v1, v2, v3, …)\n返回参数中的第一个非空值，如果所有值都是 NULL，返回 NULL\n","wordCount":"160","inLanguage":"en","datePublished":"2020-04-16T17:59:03+08:00","dateModified":"2020-04-16T17:59:03+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -72,7 +72,7 @@ parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, 
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -101,7 +101,7 @@ parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, 
 hive常用函数
 </h1>
 <div class=post-meta>
-April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -185,10 +185,10 @@ April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 <a target=_blank rel="noopener noreferrer" aria-label="share hive常用函数 on telegram" href="https://telegram.me/share/url?text=hive%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fhive%25E5%25B8%25B8%25E7%2594%25A8%25E5%2587%25BD%25E6%2595%25B0%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

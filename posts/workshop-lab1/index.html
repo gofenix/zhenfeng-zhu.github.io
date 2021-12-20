@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>译：openfaas-workshop-Lab1 | Go Data</title>
+<title>译：openfaas-workshop-Lab1 | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。
 目前已经有一批优秀的serverless架构开源项目，OpenFaas就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力serverless的发展。
@@ -17,7 +17,7 @@ Lab1 - OpenFaas的准备工作 OpenFaas可以在Docker Swarm和Kubernetes的过�
  设置一个单节点的Docker Swarm OpenFaas在Docker Swarm和Kubernetes上工作。因为Docker Swarm很容易设置，所以在此Workshop中我们使用Docker Swarm。在文档中有他们两个的指南。
 在你的笔记本或虚拟机中设置一个单节点的Docker Swarm：
 $ docker swarm init  如果运行此命令出错，加上 &ndash;advertise-addr 你的IP 参数。">
-<meta name=author content="Lucas">
+<meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/workshop-lab1/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
@@ -62,7 +62,7 @@ Lab1 - OpenFaas的准备工作 OpenFaas可以在Docker Swarm和Kubernetes的过�
 在你的笔记本或虚拟机中设置一个单节点的Docker Swarm：
 $ docker swarm init  如果运行此命令出错，加上 &ndash;advertise-addr 你的IP 参数。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"译：openfaas-workshop-Lab1","item":"https://zhenfeng-zhu.github.io/posts/workshop-lab1/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"译：openfaas-workshop-Lab1","name":"译：openfaas-workshop-Lab1","description":"今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话 …","keywords":[],"articleBody":"今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。\n目前已经有一批优秀的serverless架构开源项目，OpenFaas就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力serverless的发展。\n这是一个自学研讨会，学习如何构建、部署和运行OpenFaas 函数。\nLab1 - OpenFaas的准备工作 OpenFaas可以在Docker Swarm和Kubernetes的过几个主要平台之上运行。在此教程里，我们将会在的您本地电脑使用Docker Swarm来入门。\n预备条件 Docker Mac\n Docker CE for Mac Edge Edition  Windows\n 仅针对windows10 专业版或企业版 安装Docker CE for Windows 安装Git Bash   备注：所有步骤中请使用Git Bash：不要尝试使用WSL或Bash for Windows。\n Linux - Ubuntu 或 Debian\n Docker CE for Linux   你可以从Docker Store中安装Docker CE\n 设置一个单节点的Docker Swarm OpenFaas在Docker Swarm和Kubernetes上工作。因为Docker Swarm很容易设置，所以在此Workshop中我们使用Docker Swarm。在文档中有他们两个的指南。\n在你的笔记本或虚拟机中设置一个单节点的Docker Swarm：\n$ docker swarm init  如果运行此命令出错，加上 –advertise-addr 你的IP 参数。\n Docker Hub 注册一个Docker Hub账号。Docker Hub允许你在互联网中发布自己的Docker镜像来用于多节点集群或社区共享。在Workshop中我们使用Docker Hub发布函数。\n你可以在这里注册：Docker Hub\n 备注：Docker Hub也可以设置为自动构建镜像。\n 打开一个终端或者Git Bash窗口，然后使用上面注册的用户名登陆Docker Hub。\n$ docker login OpenFaas CLI 你可以在mac上使用brew或者在Linu和mac上使用一个集成脚本来安装OpenFaas CLI。\n在Mac或Linux上终端中输入：\n$ curl -sL cli.openfaas.com | sudo sh 对于windows平台，从releases page中下载最新的的faas-cli.exe。你可以把它放在一个local文件夹或者在C:\\Windows\\路径中，这样它就可以在命令行中使用。\n 如果你是一个高级Windows用户，把CLI放在你自定义的文件夹中，然后把此文件夹添加到环境变量。\n 我们将会使用faas-创建新函数的脚手架，build，deploy和invoke函数。你可以从faas-cli —help中找到这些命令。\n测试faas-cli\n打开一个终端或Git Bash窗口，然后输入：\n$ faas-cli help $ faas-cli version 部署OpenFaas 发布OpenFaas的说明文档修改了很多次，因为我们努力使他简单。接下来将会在60秒左右的时间使得OpenFaas部署起来。\n 首先clone项目  git clone https://github.com/openfaas/faas  然后使用git检出到最新版本  $ cd faas \u0026\u0026 \\ git checkout master  备注：你也可以在project release page中找到最新导入release版本。\n  现在使用Docker Swarm部署stack  $ ./deploy_stack.sh 你现在应该已经把OpenFaas部署了。\n如果你现在在一个共享WIFI连接中，它将会需要几分钟时间拉取镜像并启动。\n在此屏幕上检查服务是否显示为1/1:\n$ docker service ls 如果你期间有遇到任何问题，请查阅Docker Swarm的 部署指南。\n现在进入Lab 2。\n未完待续 ","wordCount":"137","inLanguage":"en","datePublished":"2018-06-25T18:04:09Z","dateModified":"2018-06-25T18:04:09Z","author":{"@type":"Person","name":"Lucas"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/workshop-lab1/"},"publisher":{"@type":"Organization","name":"Go Data","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"译：openfaas-workshop-Lab1","name":"译：openfaas-workshop-Lab1","description":"今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话 …","keywords":[],"articleBody":"今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。\n目前已经有一批优秀的serverless架构开源项目，OpenFaas就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力serverless的发展。\n这是一个自学研讨会，学习如何构建、部署和运行OpenFaas 函数。\nLab1 - OpenFaas的准备工作 OpenFaas可以在Docker Swarm和Kubernetes的过几个主要平台之上运行。在此教程里，我们将会在的您本地电脑使用Docker Swarm来入门。\n预备条件 Docker Mac\n Docker CE for Mac Edge Edition  Windows\n 仅针对windows10 专业版或企业版 安装Docker CE for Windows 安装Git Bash   备注：所有步骤中请使用Git Bash：不要尝试使用WSL或Bash for Windows。\n Linux - Ubuntu 或 Debian\n Docker CE for Linux   你可以从Docker Store中安装Docker CE\n 设置一个单节点的Docker Swarm OpenFaas在Docker Swarm和Kubernetes上工作。因为Docker Swarm很容易设置，所以在此Workshop中我们使用Docker Swarm。在文档中有他们两个的指南。\n在你的笔记本或虚拟机中设置一个单节点的Docker Swarm：\n$ docker swarm init  如果运行此命令出错，加上 –advertise-addr 你的IP 参数。\n Docker Hub 注册一个Docker Hub账号。Docker Hub允许你在互联网中发布自己的Docker镜像来用于多节点集群或社区共享。在Workshop中我们使用Docker Hub发布函数。\n你可以在这里注册：Docker Hub\n 备注：Docker Hub也可以设置为自动构建镜像。\n 打开一个终端或者Git Bash窗口，然后使用上面注册的用户名登陆Docker Hub。\n$ docker login OpenFaas CLI 你可以在mac上使用brew或者在Linu和mac上使用一个集成脚本来安装OpenFaas CLI。\n在Mac或Linux上终端中输入：\n$ curl -sL cli.openfaas.com | sudo sh 对于windows平台，从releases page中下载最新的的faas-cli.exe。你可以把它放在一个local文件夹或者在C:\\Windows\\路径中，这样它就可以在命令行中使用。\n 如果你是一个高级Windows用户，把CLI放在你自定义的文件夹中，然后把此文件夹添加到环境变量。\n 我们将会使用faas-创建新函数的脚手架，build，deploy和invoke函数。你可以从faas-cli —help中找到这些命令。\n测试faas-cli\n打开一个终端或Git Bash窗口，然后输入：\n$ faas-cli help $ faas-cli version 部署OpenFaas 发布OpenFaas的说明文档修改了很多次，因为我们努力使他简单。接下来将会在60秒左右的时间使得OpenFaas部署起来。\n 首先clone项目  git clone https://github.com/openfaas/faas  然后使用git检出到最新版本  $ cd faas \u0026\u0026 \\ git checkout master  备注：你也可以在project release page中找到最新导入release版本。\n  现在使用Docker Swarm部署stack  $ ./deploy_stack.sh 你现在应该已经把OpenFaas部署了。\n如果你现在在一个共享WIFI连接中，它将会需要几分钟时间拉取镜像并启动。\n在此屏幕上检查服务是否显示为1/1:\n$ docker service ls 如果你期间有遇到任何问题，请查阅Docker Swarm的 部署指南。\n现在进入Lab 2。\n未完待续 ","wordCount":"137","inLanguage":"en","datePublished":"2018-06-25T18:04:09Z","dateModified":"2018-06-25T18:04:09Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/workshop-lab1/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -72,7 +72,7 @@ $ docker swarm init  如果运行此命令出错，加上 &ndash;advertise-addr 
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://zhenfeng-zhu.github.io accesskey=h title="Go Data (Alt + H)">Go Data</a>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -101,7 +101,7 @@ $ docker swarm init  如果运行此命令出错，加上 &ndash;advertise-addr 
 译：openfaas-workshop-Lab1
 </h1>
 <div class=post-meta>
-June 25, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+June 25, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
 <div class=post-content>
@@ -213,10 +213,10 @@ $ faas-cli version
 <a target=_blank rel="noopener noreferrer" aria-label="share 译：openfaas-workshop-Lab1 on telegram" href="https://telegram.me/share/url?text=%e8%af%91%ef%bc%9aopenfaas-workshop-Lab1&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fworkshop-lab1%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
-</footer>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Go Data</a></span>
+<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>
