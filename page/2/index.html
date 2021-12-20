@@ -62,6 +62,25 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+K3d With Openfaas
+</h2>
+</header>
+<section class=entry-content>
+<p>openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
+安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
+k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面
+kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。
+但是当你打开页面的时候，要输入密码，那就需要下面的操作：
+# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{....</p>
+</section>
+<footer class=entry-footer>
+March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to K3d With Openfaas" href=https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 换一种方式思考
 </h2>
 </header>
@@ -242,21 +261,6 @@ CDN部署在服务器器上的机房，用户在请求时，从距离自己最�
 November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to 大型网站发展历程" href=https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-Geth 私链
-</h2>
-</header>
-<section class=entry-content>
-<p>在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。
-genesis.json { "config": { "chainId": 10, "homesteadBlock": 0, "eip155Block": 0, "eip158Block": 0 }, "coinbase" : "0x0000000000000000000000000000000000000000", "difficulty" : "0x40000", "extraData" : "", "gasLimit" : "0xffffffff", "nonce" : "0x0000000000000042", "mixhash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "timestamp" : "0x00", "alloc": { } } 参数 描述 nonce nonce就是一个64位随机数，用于挖矿 mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度 alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以 coinbase 矿工的账号，随便填 timestamp 设置创世块的时间戳 parentHash 上一个区块的hash值，因为是创世块，所以这个值是0 extraData 附加信息，随便填，可以填你的个性信息 gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。 config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1....</p>
-</section>
-<footer class=entry-footer>
-November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to Geth 私链" href=https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

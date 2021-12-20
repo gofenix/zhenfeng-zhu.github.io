@@ -79,7 +79,7 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-How to Crawl a Web in Nodejs
+轻服务nodejs助力爬虫web3
 </h2>
 </header>
 <section class=entry-content>
@@ -92,7 +92,7 @@ axios：用来做http请求 cheerio：用来解析html 观察目标网页的格�
 <footer class=entry-footer>
 December 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to How to Crawl a Web in Nodejs" href=https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/></a>
+<a class=entry-link aria-label="post link to 轻服务nodejs助力爬虫web3" href=https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -131,6 +131,26 @@ Crystal 1.2版本更新说明
 October 17, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Crystal 1.2版本更新说明" href=https://zhenfeng-zhu.github.io/posts/crystal1.2/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+如何理解可观测性
+</h2>
+</header>
+<section class=entry-content>
+<p>可观测性 可观测性 ≠ 监控 核心不同
+监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分析。 维度不同
+监控是从外围的角度，通过各种指标（机器 CPU、负载、网络等维度）来判断整个系统的执行情况。 可观测性则在上述外部指标基础上，以应用内的各个维度来展开推测，通过二者的数据结合来真实的反应应用的运行情况。 展现的信息不同
+有些系统在正常运行时十分稳定，但是一到高并发就会出现问题，此时监控只能汇报问题出现的状况，而可观测性可以很好的通过图形化的方式告知我们问题的原因，不用我们通过经验来猜测。 可观测性打破了开发和运维的原有问题解决方式，不再是运维发现问题开发解决，而是以开发为中心。
+监控数据来源 端上访问
+用户体验监控 web 页面的白屏时间 dom 元素/资源加载耗时 文档网络耗时 app 卡顿率 崩溃率 热启动加载时长 日志 端到端 用户端到后端的请求状况，访问量、成功率、响应时间等。 还需要端上所处的地区、网络环境、响应状态码 可用率 访问是否可用、响应耗时长短的一些指标和 cdn、dns 等公共资源有关系。 应用程序
+执行情况 资源消耗 vm 指标监控 容量 服务关系 应用日志 健康情况 业务监控...</p>
+</section>
+<footer class=entry-footer>
+October 15, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to 如何理解可观测性" href=https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -249,25 +269,6 @@ Streaming 101
 March 26, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Streaming 101" href=https://zhenfeng-zhu.github.io/posts/streaming-101/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-K3d With Openfaas
-</h2>
-</header>
-<section class=entry-content>
-<p>openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
-安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
-k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面
-kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。
-但是当你打开页面的时候，要输入密码，那就需要下面的操作：
-# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{....</p>
-</section>
-<footer class=entry-footer>
-March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to K3d With Openfaas" href=https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

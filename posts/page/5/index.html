@@ -67,6 +67,24 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+基于以太坊的Parity联盟链部署
+</h2>
+</header>
+<section class=entry-content>
+<p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity是可以构建出一个基于PoA共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
+部署联盟链 parity的文档：https://wiki.parity.io/Demo-PoA-tutorial
+安装 首先是下载parity，在mac下是直接brew安装即可。
+brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
+// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0节点：...</p>
+</section>
+<footer class=entry-footer>
+August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to 基于以太坊的Parity联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 dive-into-redis
 </h2>
 </header>
@@ -291,28 +309,6 @@ July 30, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to nats简介" href=https://zhenfeng-zhu.github.io/posts/nats/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-overview-of-openfaas
-</h2>
-</header>
-<section class=entry-content>
-<p>OpenFaaS概览 无服务器函数变得简单。
-函数监视器 你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。 API网关/UI门户 API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。 API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。
-命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
-可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。
-CLI实际上是API网关的一个RESTful客户端。
-在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI
-函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。
-Python示例： import requests def handle(req): r = requests.get(req, timeout = 1) print(req +" => " + str(r.status_code)) handler.py
-Node.js示例： "use strict" module.exports = (callback, context) => { callback(null, {"message": "You said: " + context}) } handler....</p>
-</section>
-<footer class=entry-footer>
-July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to overview-of-openfaas" href=https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/page/4/>« Prev Page</a>
@@ -330,7 +326,6 @@ July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </button>
 </a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>

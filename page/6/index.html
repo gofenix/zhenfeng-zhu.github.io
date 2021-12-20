@@ -62,6 +62,28 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+overview-of-openfaas
+</h2>
+</header>
+<section class=entry-content>
+<p>OpenFaaS概览 无服务器函数变得简单。
+函数监视器 你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。 API网关/UI门户 API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。 API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。
+命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
+可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。
+CLI实际上是API网关的一个RESTful客户端。
+在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI
+函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。
+Python示例： import requests def handle(req): r = requests.get(req, timeout = 1) print(req +" => " + str(r.status_code)) handler.py
+Node.js示例： "use strict" module.exports = (callback, context) => { callback(null, {"message": "You said: " + context}) } handler....</p>
+</section>
+<footer class=entry-footer>
+July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to overview-of-openfaas" href=https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 OpenFaaS on Rancher 2.0
 </h2>
 </header>
@@ -247,49 +269,6 @@ The method is executed by specifying the asynchronous operation that needs to be
 June 2, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to 译：vertx-kotlin-coroutine" href=https://zhenfeng-zhu.github.io/posts/vertx-kotlin-coroutine/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-小议async/await和coroutine
-</h2>
-</header>
-<section class=entry-content>
-<p>Being happy doesn’t mean that everything is perfect. It means that you decided to look beyond the imperfections.
-后端编程，涉及最多的就是并发。简单理解就是：
-并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行多个任务。可以理解为一个是manage，一个是run。
-并发一般特指IO，IO是独立于CPU的设备，IO设备通常远远慢于CPU，所以我们引入了并发的概念，让CPU可以一次性发起多个IO操作而不用等待IO设备做完一个操作再做令一个。原理就是非阻塞操作+事件通知。
-硬件底层上我其实不关心，主要就是在写程序上，如何简单的去写并发的代码。在语法层面上对并发做的比较好的，很适合做服务端，比如go，比如node，又比如某些函数式语言。我最近最近主要使用的是node和kotlin。
-那么在写并发代码的时候，就会时不时的想这样一个问题：
-一个问题 当代码遇到一个“暂时不能完成”的流程时（例如建立一个tcp链接，可能需要5ms才能建立），他不想阻塞在这里睡眠，想暂时离开现场去干点别的事情（例如看看另外一个已经建立的链接是否可以收包了）。问题是：离开现场后，当你回来的时候，上下文还像你走的时候吗？
-跳转离开，在任何语言里都有2种最基本的方法：1）从当前函数返回； 2）调用一个新的函数。 前者会把上下文中的局部变量和函数参数全部摧毁，除非他返回前把这些变量找个别的地方保存起来；后者则能保护住整个上下文的内存（除了协程切换后会摧毁一些寄存器），而且跳转回来也是常规方法：函数返回。
-在写node的时候，基本上是无脑上async/await。每次看到回调函数的时候，强迫症就犯了，总是想方设法将那个方法转成promise，然后使用await获得结果。无脑尝试了bluebird和node的util，虽然有些是很好用的，但是有的还是无法达到我预期的。靠着无脑的async/await，实现了很多功能，代码写起来也是快的飞起，但是只顾着做业务而不深入思考的话，是一个不好的表现，所以我就停下来搜了很多async/await的东西，特别是从阮一峰老师那里收获了很多。
-js异步编程 因为js是单线程，所以异步编程对js特别重要。
-实现异步主要有如下几种：
-回调函数
-callback，英语直译就是重新调用。
-所谓的回调函数就是把任务的第二段单独写在一个函数里面，等到重新执行这个任务的时候，直接调用这个函数。
-回调本身没问题，但是就怕多重嵌套。
-promise
-promise是一种新的写法，把回调函数的横向嵌套，用then的形式改成纵向的加载。
-协程
-协程就是比线程更小的单位。
-执行过程大致如下：
-第一步，协程A开始执行。
-第二步，协程A执行到一半，进入暂停，执行权转移到协程B。
-第三步，（一段时间后）协程B交还执行权。
-第四步，协程A恢复执行。
-后面再展开说协程。
-很明显，在go火起来之后，很多编程语言都在往协程上靠，因为协程很好的将异步的写法转化成了同步的写法，降低了心智负担。js当然也不落后。
-js的异步写法的演进
-generator
-es6增加了generator函数，就是协程的一种实现，最大特点就是使用yield关键字就是用来交出函数的执行权。
-function* gen(x){ var y = yield x + 2; return y; } 不同于普通函数的地方在于调用generator函数的时候，不返回结果，而是会返回一个内部的指针。调用指针的next方法，会移动内部指针（即执行异步任务的第一段），遇到的yield语句就交出执行权，执行别的代码。下次再调用该函数指针的next方法，就继续执行到该函数的下一个yield语句。...</p>
-</section>
-<footer class=entry-footer>
-May 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to 小议async/await和coroutine" href=https://zhenfeng-zhu.github.io/posts/async/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

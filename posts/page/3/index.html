@@ -67,6 +67,21 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+Geth 私链
+</h2>
+</header>
+<section class=entry-content>
+<p>在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。
+genesis.json { "config": { "chainId": 10, "homesteadBlock": 0, "eip155Block": 0, "eip158Block": 0 }, "coinbase" : "0x0000000000000000000000000000000000000000", "difficulty" : "0x40000", "extraData" : "", "gasLimit" : "0xffffffff", "nonce" : "0x0000000000000042", "mixhash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "timestamp" : "0x00", "alloc": { } } 参数 描述 nonce nonce就是一个64位随机数，用于挖矿 mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度 alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以 coinbase 矿工的账号，随便填 timestamp 设置创世块的时间戳 parentHash 上一个区块的hash值，因为是创世块，所以这个值是0 extraData 附加信息，随便填，可以填你的个性信息 gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。 config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1....</p>
+</section>
+<footer class=entry-footer>
+November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to Geth 私链" href=https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 Geth
 </h2>
 </header>
@@ -239,28 +254,6 @@ August 27, 2019&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to crystal简介" href=https://zhenfeng-zhu.github.io/posts/crystal%E7%AE%80%E4%BB%8B/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-socket
-</h2>
-</header>
-<section class=entry-content>
-<p>Socket 网络模型 osi七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的tcpip就是 应用层 dns http 传输层 icmp tcp udp ip层 ipv4 ipv6 mac层 arp vlan 物理层 Ethernet 为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
-二层到四层，即mac、ip和传输等层都是Linux内核中处理。应用层的如浏览器、Nginx和Tomcat等都是用户态的。
-传输层的tcp和udp里都有端口的概念，不同应用监听不同的段即可。
-应用层和内核的互通机制，就是通过socket系统调用。其实socket哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是socket。
-TCP和UDP的区别 tcp是面向连接的，udp是面向无连接的 tcp提供可靠交付，无差错、不丢失、不重复、并且按序到达。udp不提供可靠交付，可能丢失，不按顺序。 tcp是面向字节流的，发送的是一个流，无头无尾。udp是数据报文的，一个一个发送。 tcp可以提供流量控制和拥塞控制，可以防止对端被压垮，也防止网络被压垮。 所谓的连接，指两端的数据结构状态的协同，两边状态对的上，符合tcp协议的规则，就认为连接是存在的，否则就是断掉的。
-所谓的建立连接，其实是为了在客户端和服务端维护连接，而建立一定的数据结构来维护双方交互的状态。并用这样的数据结构来保证面向连接的特性。tcp无法左右中间的任何通路，也没有什么虚拟的连接。
-所谓的可靠，也是两端的数据结构做的事情。不丢失其实是数据结构在“点名”，顺序到达是数据结构在“排序”，面向数据流其实是数据结构将零散的包，按照顺序捏成一个流发给应用层。
-所谓的流量控制和拥塞控制，其实就是根据收到的对端的网络包，调整两端的数据结构状态。
-socket函数 int socket(int domain, int type, int protocol) socket函数用于创建一个socket文件描述符。...</p>
-</section>
-<footer class=entry-footer>
-August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/page/2/>« Prev Page</a>
@@ -278,7 +271,6 @@ August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </button>
 </a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>

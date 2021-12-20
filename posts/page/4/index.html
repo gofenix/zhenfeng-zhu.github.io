@@ -67,6 +67,28 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+socket
+</h2>
+</header>
+<section class=entry-content>
+<p>Socket 网络模型 osi七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的tcpip就是 应用层 dns http 传输层 icmp tcp udp ip层 ipv4 ipv6 mac层 arp vlan 物理层 Ethernet 为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
+二层到四层，即mac、ip和传输等层都是Linux内核中处理。应用层的如浏览器、Nginx和Tomcat等都是用户态的。
+传输层的tcp和udp里都有端口的概念，不同应用监听不同的段即可。
+应用层和内核的互通机制，就是通过socket系统调用。其实socket哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是socket。
+TCP和UDP的区别 tcp是面向连接的，udp是面向无连接的 tcp提供可靠交付，无差错、不丢失、不重复、并且按序到达。udp不提供可靠交付，可能丢失，不按顺序。 tcp是面向字节流的，发送的是一个流，无头无尾。udp是数据报文的，一个一个发送。 tcp可以提供流量控制和拥塞控制，可以防止对端被压垮，也防止网络被压垮。 所谓的连接，指两端的数据结构状态的协同，两边状态对的上，符合tcp协议的规则，就认为连接是存在的，否则就是断掉的。
+所谓的建立连接，其实是为了在客户端和服务端维护连接，而建立一定的数据结构来维护双方交互的状态。并用这样的数据结构来保证面向连接的特性。tcp无法左右中间的任何通路，也没有什么虚拟的连接。
+所谓的可靠，也是两端的数据结构做的事情。不丢失其实是数据结构在“点名”，顺序到达是数据结构在“排序”，面向数据流其实是数据结构将零散的包，按照顺序捏成一个流发给应用层。
+所谓的流量控制和拥塞控制，其实就是根据收到的对端的网络包，调整两端的数据结构状态。
+socket函数 int socket(int domain, int type, int protocol) socket函数用于创建一个socket文件描述符。...</p>
+</section>
+<footer class=entry-footer>
+August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 go进阶
 </h2>
 </header>
@@ -328,24 +350,6 @@ August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-基于以太坊的Parity联盟链部署
-</h2>
-</header>
-<section class=entry-content>
-<p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity是可以构建出一个基于PoA共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
-部署联盟链 parity的文档：https://wiki.parity.io/Demo-PoA-tutorial
-安装 首先是下载parity，在mac下是直接brew安装即可。
-brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
-// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0节点：...</p>
-</section>
-<footer class=entry-footer>
-August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to 基于以太坊的Parity联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/page/3/>« Prev Page</a>
@@ -363,7 +367,6 @@ August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 <button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </button>
 </a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>

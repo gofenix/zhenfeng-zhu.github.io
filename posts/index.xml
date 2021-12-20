@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 20 Dec 2021 09:58:58 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>How to Crawl a Web in Nodejs</title>
+      <title>轻服务nodejs助力爬虫web3</title>
       <link>https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/</link>
       <pubDate>Mon, 20 Dec 2021 09:58:58 +0800</pubDate>
       
@@ -45,6 +45,21 @@ Type system review Make a review and possible formalisation of Crystal&amp;rsquo
 与 Windows 相关，也与 ARM64 架构相关，我们修复了一个重要的代码生成错误。我们现在处于将 aarch64 平台提升到 Tier 1 的条件，预计很快就会支持。这也与带有 M1 芯片组的 macOS 相关：从这个版本开始，我们包含一个适用于 x86 和 M1 mac 的通用 macOS 包。
 我们发现 Windows 和 M1 的 mac 上出现的两个错误来自 LLVM 11 和 12。我们预计该修复将随最近发布的 LLVM 13 一起提供。Crystal 1.2.0 与 LLVM 12 兼容，尽管我们建议不要使用 LLVM 11 和 12.
 语言变化 现在可以将泛型类的子类分配给父类的实例：</description>
+    </item>
+    
+    <item>
+      <title>如何理解可观测性</title>
+      <link>https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/</link>
+      <pubDate>Fri, 15 Oct 2021 09:45:38 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/</guid>
+      <description>可观测性 可观测性 ≠ 监控   核心不同
+ 监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分析。    维度不同
+ 监控是从外围的角度，通过各种指标（机器 CPU、负载、网络等维度）来判断整个系统的执行情况。 可观测性则在上述外部指标基础上，以应用内的各个维度来展开推测，通过二者的数据结合来真实的反应应用的运行情况。    展现的信息不同
+ 有些系统在正常运行时十分稳定，但是一到高并发就会出现问题，此时监控只能汇报问题出现的状况，而可观测性可以很好的通过图形化的方式告知我们问题的原因，不用我们通过经验来猜测。    可观测性打破了开发和运维的原有问题解决方式，不再是运维发现问题开发解决，而是以开发为中心。
+监控数据来源   端上访问
+ 用户体验监控  web 页面的白屏时间 dom 元素/资源加载耗时 文档网络耗时 app 卡顿率 崩溃率 热启动加载时长   日志 端到端  用户端到后端的请求状况，访问量、成功率、响应时间等。 还需要端上所处的地区、网络环境、响应状态码   可用率  访问是否可用、响应耗时长短的一些指标和 cdn、dns 等公共资源有关系。      应用程序
+ 执行情况 资源消耗 vm 指标监控 容量 服务关系 应用日志 健康情况    业务监控</description>
     </item>
     
     <item>
@@ -1544,22 +1559,6 @@ IAM角色 类似于用户，可以被分配权限。
 CIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
 IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
 十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/</guid>
-      <description>#! https://zhuanlan.zhihu.com/p/421703318
- title: &amp;ldquo;如何理解可观测性&amp;rdquo; date: 2021-10-15T09:45:38+08:00
- 可观测性 可观测性 ≠ 监控   核心不同
- 监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分析。    维度不同
- 监控是从外围的角度，通过各种指标（机器 CPU、负载、网络等维度）来判断整个系统的执行情况。 可观测性则在上述外部指标基础上，以应用内的各个维度来展开推测，通过二者的数据结合来真实的反应应用的运行情况。    展现的信息不同
- 有些系统在正常运行时十分稳定，但是一到高并发就会出现问题，此时监控只能汇报问题出现的状况，而可观测性可以很好的通过图形化的方式告知我们问题的原因，不用我们通过经验来猜测。    可观测性打破了开发和运维的原有问题解决方式，不再是运维发现问题开发解决，而是以开发为中心。
-监控数据来源   端上访问
- 用户体验监控  web 页面的白屏时间 dom 元素/资源加载耗时 文档网络耗时 app 卡顿率 崩溃率 热启动加载时长   日志 端到端  用户端到后端的请求状况，访问量、成功率、响应时间等。 还需要端上所处的地区、网络环境、响应状态码   可用率  访问是否可用、响应耗时长短的一些指标和 cdn、dns 等公共资源有关系。      应用程序</description>
     </item>
     
     <item>
