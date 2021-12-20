@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-10-28T10:11:41+08:00">
+<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -64,6 +64,32 @@
 </div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+go进阶
+</h2>
+</header>
+<section class=entry-content>
+<p>Diagnostics go提供了一系列诊断逻辑和性能问题的工具。
+profiling分析 tracing跟踪 debuging调试 运行时统计信息和事件 Profiling profiling信息可以在go test或者net/http/pprof包的时候使用。
+runtime/pprof包有：
+cpu 主动消费cpu周期所花费的时间，不包括睡眠或者io等待 heap 报告内存分配采样； 当前或历史内存使用状况 检测内存泄露 threadcreate 报告创建新的系统线程 goroutine 当前所有协程的堆栈跟踪 block 显示goroutine阻塞等待同步原语的位置。 默认不开启，使用runtime.SetBlockProfileRate启用 mutex 报告锁竞争。 如果认为自己的程序因为互斥锁导致cpu不能充分利用的时候，使用这个。 默认也是不开启，使用 runtime.SetMutexProfileFraction 启用。 其他可用的的性能分析工具
+Linux使用https://perf.wiki.kernel.org/index.php/Tutorial，perf可以分析cgo/SWIG代码和系统内核。
+mac上使用 https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/ 就足够了。
+分析线上处于生产状态服务
+在生产上分析程序也是没问题的，但是开启某些指标会增加成本。
+可视化分析数据
+go 提供了很多可视化的工具，参考https://blog.golang.org/profiling-go-programs
+也可以创建自定义的profil文件：参考https://golang.org/pkg/runtime/pprof/#Profile
+也可以自定义修改pprof程序监听的端口和路径，参考：
+package main import ( "log" "net/http" "net/http/pprof" ) func main() { mux := http....</p>
+</section>
+<footer class=entry-footer>
+August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to go进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -319,22 +345,6 @@ brew tap paritytech/paritytech brew install parity 创世区块 创世区块的�
 August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to 基于以太坊的Parity联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-dive-into-redis
-</h2>
-</header>
-<section class=entry-content>
-<p>redis持久化，
-机制有两种：
-快照：全量备份，二进制序列化，存储紧凑 AOF日志：连续的增量备份，内存数据修改的文本 ...</p>
-</section>
-<footer class=entry-footer>
-August 20, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

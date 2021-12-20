@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <meta property="og:title" content="Go Data">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-10-28T10:11:41+08:00">
+<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Go Data">
@@ -59,6 +59,24 @@
 </nav>
 </header>
 <main class=main>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+OpenFaaS on Rancher 2.0
+</h2>
+</header>
+<section class=entry-content>
+<p>这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。
+下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：
+https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be
+这里是创建栈的compose.yml文件：
+version: "2" services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config....</p>
+</section>
+<footer class=entry-footer>
+July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to OpenFaaS on Rancher 2.0" href=https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -272,33 +290,6 @@ function* gen(x){ var y = yield x + 2; return y; } 不同于普通函数的地�
 May 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to 小议async/await和coroutine" href=https://zhenfeng-zhu.github.io/posts/async/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-elasticsearch
-</h2>
-</header>
-<section class=entry-content>
-<p>以前没有好好学的东西，现在在工作中慢慢的补回来了。
-基础概念 索引 es是将数据存储在一个或者多个索引（index）中。
-索引就像是数据库。
-文档 文档是es的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。
-文档就像数据库中的一条条记录。
-类型 每个文档都有一个类型与之相对应。
-类型就像数据库中的表。
-映射 所有文档在被写入到es中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。
-节点 单个es服务实例就是一个节点。
-集群 多个协同工作的es节点的集合就是集群。
-分片 es将数据分散到多个物理的Lucene索引上，这些物理Lucene索引被称为分片。
-副本 副本就是每个分片都做冗余处理，一个宕机之后，不影响服务。
-快速入门 安装 es的安装很简单，我这里使用的是mac，下载下来zip包，解压即可使用。
-[elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ./bin/elasticsearch Java HotSpot(TM) 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release. [2018-05-20T17:18:37,619][INFO ][o.e.n.Node ] [] initializing ....</p>
-</section>
-<footer class=entry-footer>
-May 20, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to elasticsearch" href=https://zhenfeng-zhu.github.io/posts/elasticsearch/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

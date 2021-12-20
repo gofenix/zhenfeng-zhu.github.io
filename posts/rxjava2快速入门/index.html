@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.0">
 <meta property="og:title" content="RxJava2快速入门">
 <meta property="og:description" content="RxJava2快速入门 引入依赖 compile 'io.reactivex.rxjava2:rxjava:2.0.1' 写法 简单版本 	private static void helloSimple() { Consumer<String> consumer = new Consumer<String>() { @Override public void accept(String s) throws Exception { System.out.println(&#34;consumer accept is &#34; + s); } }; Observable.just(&#34;hello world&#34;).subscribe(consumer); } 复杂版本 	private static void helloComplex() { Observer<String> observer = new Observer<String>() { @Override public void onSubscribe(Disposable d) { System.out.println(&#34;onSubscribe: &#34; + d); } @Override public void onNext(String s) { System.out.println(&#34;onNext: &#34; + s); } @Override public void onError(Throwable e) { System.">
 <meta property="og:type" content="article">

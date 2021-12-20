@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.0">
 <meta property="og:title" content="同步一个 fork">
 <meta property="og:description" content="具体方法 Configuring a remote for a fork  给 fork 配置一个 remote 主要使用 git remote -v 查看远程状态。  git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)  添加一个将被同步给 fork 远程的上游仓库  git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git  再次查看状态确认是否配置成功。  git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push) Syncing a fork  从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master git fetch upstream  git fetch upstream # remote: Counting objects: 75, done.">
 <meta property="og:type" content="article">

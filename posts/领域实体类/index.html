@@ -17,7 +17,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.0">
 <meta property="og:title" content="领域实体类">
 <meta property="og:description" content="在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。
  pojo类：这是普通的java类，具有一部分的get和set方法。 dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo类：vo有两种说法，一种是view object，一种是value object。 po类：persisent object 持久对象。和pojo类一样，也是只有get set方法，但是这种类一般是用于持久层。 bo类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在domain包，或者entity包里。再细分一下的话，可以把dto类单独提取到一个包里。">

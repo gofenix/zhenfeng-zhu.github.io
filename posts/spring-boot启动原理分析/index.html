@@ -20,7 +20,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.0">
 <meta property="og:title" content="Spring Boot启动原理分析">
 <meta property="og:description" content="Spring Boot启动原理分析 我们在开发spring boot应用的时候，一般会遇到如下的启动类：
 @SpringBootApplication public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } } 从这段代码可以看出，注解@SpringBootApplication和SpringApplication.run()是比较重要的两个东西。
@@ -153,7 +153,7 @@ public class MockConfiguration{
 public class MockConfiguration{
 	@Bean
 	public MockService mockService(){
-      return new MockServiceImpl();
+    	return new MockServiceImpl();
 	}
 }
 </code></pre><p>任何一个标注了@Bean的方法，其返回值将作为一个bean定义注册到Spring的IoC容器，方法名将默认成该bean定义的id。</p>

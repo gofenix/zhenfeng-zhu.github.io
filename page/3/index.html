@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.91.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <meta property="og:title" content="Go Data">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-10-28T10:11:41+08:00">
+<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Go Data">
@@ -59,6 +59,28 @@
 </nav>
 </header>
 <main class=main>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+Geth
+</h2>
+</header>
+<section class=entry-content>
+<p>Geth简介 go-ethereum
+go-ethereum客户端通常被称为geth，它是个命令行界面，执行在Go上实现的完整以太坊节点。通过安装和运行geth，可以参与到以太坊前台实时网络并进行以下操作：
+挖掘真的以太币 在不同地址间转移资金 创建合约，发送交易 探索区块历史 及很多其他 网站: http://ethereum.github.io/go-ethereum/
+Github: https://github.com/ethereum/go-ethereum
+维基百科: https://github.com/ethereum/go-ethereum/wiki/geth
+Gitter: https://gitter.im/ethereum/go-ethereum
+mac下安装geth 首先安装homebrew， 使用brew安装即可。在安装geth的时候，会将go也安装上。 brew tap ethereum/ethereum brew install ethereum 在命令行输入geth —help，如果出现
+zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum command line interface Copyright 2013-2017 The go-ethereum Authors USAGE: geth [options] command [command options] [arguments...] VERSION: 1.7.3-unstable-eea996e4 证明安装成功。
+使用Geth 打开终端，输入以下命令，以开发的方式启动geth...</p>
+</section>
+<footer class=entry-footer>
+November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
+</footer>
+<a class=entry-link aria-label="post link to Geth" href=https://zhenfeng-zhu.github.io/posts/geth/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
@@ -233,32 +255,6 @@ socket函数 int socket(int domain, int type, int protocol) socket函数用于�
 August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
 </footer>
 <a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-go进阶
-</h2>
-</header>
-<section class=entry-content>
-<p>Diagnostics go提供了一系列诊断逻辑和性能问题的工具。
-profiling分析 tracing跟踪 debuging调试 运行时统计信息和事件 Profiling profiling信息可以在go test或者net/http/pprof包的时候使用。
-runtime/pprof包有：
-cpu 主动消费cpu周期所花费的时间，不包括睡眠或者io等待 heap 报告内存分配采样； 当前或历史内存使用状况 检测内存泄露 threadcreate 报告创建新的系统线程 goroutine 当前所有协程的堆栈跟踪 block 显示goroutine阻塞等待同步原语的位置。 默认不开启，使用runtime.SetBlockProfileRate启用 mutex 报告锁竞争。 如果认为自己的程序因为互斥锁导致cpu不能充分利用的时候，使用这个。 默认也是不开启，使用 runtime.SetMutexProfileFraction 启用。 其他可用的的性能分析工具
-Linux使用https://perf.wiki.kernel.org/index.php/Tutorial，perf可以分析cgo/SWIG代码和系统内核。
-mac上使用 https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/ 就足够了。
-分析线上处于生产状态服务
-在生产上分析程序也是没问题的，但是开启某些指标会增加成本。
-可视化分析数据
-go 提供了很多可视化的工具，参考https://blog.golang.org/profiling-go-programs
-也可以创建自定义的profil文件：参考https://golang.org/pkg/runtime/pprof/#Profile
-也可以自定义修改pprof程序监听的端口和路径，参考：
-package main import ( "log" "net/http" "net/http/pprof" ) func main() { mux := http....</p>
-</section>
-<footer class=entry-footer>
-August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Lucas
-</footer>
-<a class=entry-link aria-label="post link to go进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

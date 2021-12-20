@@ -5,7 +5,20 @@
     <link>https://zhenfeng-zhu.github.io/posts/</link>
     <description>Recent content in Posts on Go Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 28 Oct 2021 10:11:41 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Dec 2021 09:58:58 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Crawl a Web in Nodejs</title>
+      <link>https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/</link>
+      <pubDate>Mon, 20 Dec 2021 09:58:58 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/</guid>
+      <description>周末的时候，写了一个简单的小项目，用来抓取web3的文章，然后存到本地。最后选取了公司对外的轻服务：https://qingfuwu.cn/docs/nodejs/
+整项目用到了两个库
+ axios：用来做http请求 cheerio：用来解析html  观察目标网页的格式 我们以巴比特为例：https://www.8btc.com/web3.0，打开控制台，定位到正文的div，可以发现是 article-list。
+右键复制一下selector，然后在代码中这样实现就可以了。
+抓取网页信息 const cheerio = require(&amp;#39;cheerio&amp;#39;).default const axios = require(&amp;#39;axios&amp;#39;).default async function getData() { const data = await (await axios.get(&amp;#39;https://www.8btc.com/web3.0&amp;#39;, { headers: { &amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36&amp;#39; } })).data const $ = cheerio.load(data) let list = [] $(&amp;#39;#news &amp;gt; div.articles-list&amp;#39;).find(&amp;#39;.article-info&amp;#39;).each( (item, elem) =&amp;gt; { const href = $(elem).find(&amp;#39;&amp;gt; a&amp;#39;).attr(&amp;#39;href&amp;#39;) const title = $(elem).</description>
+    </item>
+    
     <item>
       <title>Crystal Roadmap</title>
       <link>https://zhenfeng-zhu.github.io/posts/crystal_roadmap/</link>
