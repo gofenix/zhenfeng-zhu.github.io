@@ -24,7 +24,8 @@
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript><meta property="og:title" content="socket">
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="socket">
 <meta property="og:description" content="Socket 网络模型 osi 七层模型  应用层 表示层 会话层 传输层 网络层 数据链路层 物理层  对应的 tcpip 就是  应用层  dns http   传输层  icmp tcp udp   ip 层  ipv4 ipv6   mac 层  arp vlan   物理层  Ethernet    为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
 二层到四层，即 mac、ip 和传输等层都是 Linux 内核中处理。应用层的如浏览器、Nginx 和 Tomcat 等都是用户态的。
 传输层的 tcp 和 udp 里都有端口的概念，不同应用监听不同的段即可。

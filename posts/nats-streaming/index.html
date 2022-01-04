@@ -27,7 +27,8 @@ NATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 g
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript><meta property="og:title" content="NATS streaming">
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="NATS streaming">
 <meta property="og:description" content="市面上常见到的和 Nats 功能类似的消息通信系统有：
 ActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：
 可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：NATS 简介

@@ -28,7 +28,8 @@ interface User{ void login(); void logout(); } 在 java 中，继承的类必须
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript><meta property="og:title" content="Go 语言体会">
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="Go 语言体会">
 <meta property="og:description" content="最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。
  语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置  我最早听说协程，是在大三找实习的时候，那个时候面试会问线程和进程的关系，问的深一些就是协程和线程的区别。游戏公司基本都用 lua，看了 lua 的资料后，对协程有了一些自己的了解，随后就是在做 Unity 相关的开发，在 unity 中使用了很多的协程，但是在 unity 中使用的协程好像跟主流的不太一样，在看了 go 之后，豁然开朗。
 goroutine 使用的内存比线程更少，go 在运行的时候会自动在配置的一组逻辑处理器上调度执行。比如：

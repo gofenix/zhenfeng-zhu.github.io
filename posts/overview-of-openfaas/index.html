@@ -26,7 +26,8 @@
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript><meta property="og:title" content="overview-of-openfaas">
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="overview-of-openfaas">
 <meta property="og:description" content="OpenFaaS 概览  无服务器函数变得简单。
  函数监视器  你可以通过添加函数监视器 (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。 函数监视器是允许 HTTP 请求通过 STDIN 转发到目标进程的入口点。响应会从你应用写入 STDOUT 返回给调用者。  API 网关/UI 门户  API 网关为你的函数提供外部路由，并通过 Prometheus 收集云原生指标。 你的 API 网关将会根据需求更改 Docker Swarm 或 Kubernetes API 中的服务副本数来实现伸缩性。 UI 是允许你在浏览器中调用函数或者根据需要创建新的函数。   API 网关是一个 RESTful 形式的微服务，你可以在这里查看Swagger 文档。
  命令行 Docker 中的任何容器或者进程都可以是 FaaS 中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。

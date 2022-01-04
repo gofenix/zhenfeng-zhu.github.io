@@ -27,7 +27,8 @@ echo -n &#34;&#34; | faas-cli invoke long-task echo -n &#34;&#34; | faas-cli inv
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript><meta property="og:title" content="Openfaas Workshop Lab7">
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="Openfaas Workshop Lab7">
 <meta property="og:description" content="实验 7&ndash;异步函数 在开始这个实验之前，为你的文件创建一个新的文件夹。
 $ mkdir -p lab7 \ && cd lab7 同步与异步地调用一个函数 当你同步调用一个函数时，一个连接会通过网关连接到你的函数，并且在整个执行过程中保持开放。同步调用是*阻塞的，所以你应该看到你的客户端暂停，变得不活跃，直到该函数完成其任务。
  网关使用的路由是。/function/<function_name>。 你必须等待，直到它完成 你在调用后得到结果 你知道它是通过还是失败  异步任务以类似的方式运行，但有一些区别。

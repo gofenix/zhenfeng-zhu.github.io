@@ -30,7 +30,8 @@ NATS 设计目标
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript><meta property="og:title" content="nats 简介">
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="nats 简介">
 <meta property="og:description" content="nats 是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC 和爱立信等公司都有在使用。
 核心基于 EventMachine 开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向 MessageBus 发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用 nats streaming 可以做到持久化，缓存等功能。
 NATS server nats 提供了一个 go 编写的轻量级服务器。发行版包括二进制和 docker 镜像

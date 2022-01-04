@@ -39,7 +39,8 @@ const {startWith, when, goto, stay, stop} = botkit.">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript><meta property="og:title" content="谈谈聊天机器人框架的实现原理">
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="谈谈聊天机器人框架的实现原理">
 <meta property="og:description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
 聊天机器人  聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
  我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。

@@ -26,7 +26,8 @@ client_golang 是 Prometheus 的客户端。
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript><meta property="og:title" content="gateway-reading">
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="gateway-reading">
 <meta property="og:description" content="OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
  UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。
 源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。
