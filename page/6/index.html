@@ -119,13 +119,17 @@ version: "2" services: alertmanager: image: functions/alertmanager:latest labels
 </h2>
 </header>
 <section class=entry-content>
-<p>Lab 4 - 深入函数 在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：
-$ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be able to control how a function behaves at runtime, we can do that in at least two ways:
-控制函数在运行时的行为很有用，我们至少可以通过两种方式来实现：
-在部署时 在部署时设置环境变量 我们在 Lab3 时用了 write_debug 来做——你也可以在这里设置你想要的任何自定义的环境变量。例如：如果你想为 hello world 函数配置一种语言，可以引入一个 spoken_language 变量。
-使用 HTTP 上下文——querystring / headers 使用 querystring 和 HTTP headers 另一个更为动态的选项是可以在每个请求级别上进行修改，即使用 querystrings 和 HTTP headers，这两者都可以通过 faas-cli 或者 curl 传递。...</p>
+<p>实验 4–更深入地使用函数 在开始本实验之前，为你的文件创建一个新的文件夹。由于本实验是建立在早期实验的基础上的，所以请复制 lab3。
+$ cp -r lab3 lab4\ && cd lab4 通过环境变量注入配置 能够控制一个函数在运行时的行为方式是很有用的，我们至少可以通过两种方式来实现这一点。
+在部署时 *在部署时设置环境变量
+我们在Lab 3中用write_debug做了这个 - 你也可以在这里设置任何你想要的自定义环境变量 - 例如，如果你想为你的hello world函数配置一种语言，你可以引入一个spoken_language变量。
+使用 HTTP 上下文–querystring / headers *使用 querystring 和 HTTP headers
+另一个更动态的、可以在每个请求层面上改变的选项是使用查询字符串和 HTTP 头信息，两者都可以通过faas-cli或curl传递。
+这些头信息通过环境变量暴露出来，所以它们很容易在你的函数中被使用。所以任何头信息都以Http_为前缀，所有-连字符都被替换成_下划线。
+让我们用 querystring 和一个列出所有环境变量的函数来试试。
+使用 BusyBox 的内置命令，部署一个打印环境变量的函数。 faas-cli deploy --name env --fprocess="env" --image="function/alpine:latest" 用一个查询字符串调用该函数。 $ echo "" | faas-cli invoke env --query workshop=1 PATH=/usr/local/bin:/usr/local/bin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_Connection=close Http_Content_Type=text/plain Http_X_Call_Id=cdbed396-a20a-43fe-9123-1d5a122c976d Http_X_Forwarded_For=10....</p>
 </section>
-<footer class=entry-footer><span title="2018-07-02 09:32:59 +0000 UTC">July 2, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<footer class=entry-footer><span title="2018-07-02 09:32:59 +0000 UTC">July 2, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to openfaas-workshop-lab4" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/></a>
 </article>
 <article class=post-entry>
@@ -145,11 +149,11 @@ $ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be
 </h2>
 </header>
 <section class=entry-content>
-<p>Lab3 - 函数的介绍 在开始本实验之前，创建一个新文件夹：
-$ mkdir -p lab3 \ && cd lab3 创建一个新函数 创建函数有两种方式：
-使用内置的或社区提供的代码末班创建一个函数脚手架（默认） 将现有的二进制文件作为函数（高级） 生成一个新函数 在使用模板创建一个新函数之前，首先确认你已经从 Github 上拉下来模板文件：
-$ faas-cli template pull Fetch templates from repository: https://github.com/openfaas/templates.git Attempting to expand templates from https://github.com/openfaas/templates.git Fetched 11 template(s) : [csharp dockerfile go go-armhf node node-arm64 node-armhf python python-armhf python3 ruby] 之后找到可用的语言：
-$ faas-cli new --list Languages available as templates: - csharp - dockerfile - go - go-armhf - node - node-arm64 - node-armhf - python - python-armhf - python3 - ruby Or alternatively create a folder containing a Dockerfile, then pick the "Dockerfile" lang type in your YAML file....</p>
+<p>实验 3–函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab3\`s && cd lab3 创建一个新的函数 有两种方法来创建一个新的函数。
+使用一个内置的或社区的代码模板建立一个函数（默认情况下） 使用一个现有的二进制文件并将其作为你的函数（高级） 构建或生成一个新函数 在用模板创建新函数之前，请确保你从 GitHub 上提取了模板。
+$ faas-cli template pull Fetch templates from repository: https://github.com/openfaas/templates.git Attempting to expand templates from https://github.com/openfaas/templates.git 2021/08/25 15:58:10 Fetched 13 template(s) : [csharp dockerfile go java11 java11-vert-x node node12 node14 php7 python python3 python3-debian ruby] from https://github.com/openfaas/templates.git 之后，要想知道哪些语言是可用的，请键入。
+$ faas-cli new --list Languages available as templates: - csharp - dockerfile - go - java11 - java11-vert-x - node - node12 - node14 - php7 - python - python3 - python3-debian - ruby 或者创建一个包含Dockerfile的文件夹，然后在 YAML 文件中选择 Dockerfile语言类型。...</p>
 </section>
 <footer class=entry-footer><span title="2018-06-28 17:29:56 +0000 UTC">June 28, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to openfaas-workshop-lab3" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab3/></a>

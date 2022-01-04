@@ -5,14 +5,14 @@
 <meta name=robots content="index, follow">
 <title>Openfaas Workshop | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="openfaas-研讨会 这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。
-在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。
-最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。
-其他语言
- 日本語 中文  要求 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1
- 函数将用 Python 编写，因此有编程或脚本经验者优先 安装推荐的代码编辑器/IDE VSCode Windows 安装 Git Bash 首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux  Docker:
- Docker CE for Mac/Windows Edge edition Docker CE for Linux   注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会
- 讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。">
+<meta name=description content="openfaas-workshop 这是一个自定进度的研讨会，学习如何使用 OpenFaaS 构建、部署和运行无服务器函数。
+在这个工作坊中，你将首先把 OpenFaaS 部署到你的笔记本电脑或使用 Docker for Mac 或 Windows 的远程集群。然后你将对 OpenFaaS 的用户界面、CLI 和函数商店进行测试。在用 Python 构建、部署和调用你自己的无服务器函数之后，你将继续学习以下内容：用 pip 管理依赖关系，通过安全秘密处理 API 令牌，用 Prometheus 监控函数，异步调用函数以及将函数连接起来创建应用程序。实验的高潮是让你创建自己的 GitHub 机器人，可以自动响应问题。同样的方法可以通过 IFTTT.com 连接到在线事件流&ndash;这将使你能够建立机器人、自动回复器以及与社交媒体和物联网设备的集成。
+最后，实验室涵盖了更多的高级主题，并给出了进一步学习的建议。
+译文
+ 日本語 简体中文  免费学习，作为 GitHub 赞助商表示感谢 OpenFaaS 连同这些材料都是免费提供的，需要时间和精力来维护。
+ 成为OpenFaaS on GitHub的赞助商。  要求 我们在Lab 1中讲解了如何安装这些需求。请在参加讲师指导的研讨会之前做Lab 1。
+ 函数将用 Python 语言编写，所以有编程或脚本经验者优先。 安装推荐的代码编辑器/IDE VSCode 对于 Windows，安装Git Bash 首选的操作系统。MacOS, Windows 10 Pro/Enterprise, Ubuntu Linux  Docker。
+ Docker CE for Mac/Windows 边缘版。 Docker CE for Linux   注意：作为最后的手段，如果你有一台不兼容的 PC，你可以在https://labs.">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop/>
 <link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
@@ -29,14 +29,14 @@
 <style>#theme-toggle,.top-link{display:none}</style>
 <style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
 </noscript><meta property="og:title" content="Openfaas Workshop">
-<meta property="og:description" content="openfaas-研讨会 这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。
-在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。
-最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。
-其他语言
- 日本語 中文  要求 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1
- 函数将用 Python 编写，因此有编程或脚本经验者优先 安装推荐的代码编辑器/IDE VSCode Windows 安装 Git Bash 首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux  Docker:
- Docker CE for Mac/Windows Edge edition Docker CE for Linux   注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会
- 讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。">
+<meta property="og:description" content="openfaas-workshop 这是一个自定进度的研讨会，学习如何使用 OpenFaaS 构建、部署和运行无服务器函数。
+在这个工作坊中，你将首先把 OpenFaaS 部署到你的笔记本电脑或使用 Docker for Mac 或 Windows 的远程集群。然后你将对 OpenFaaS 的用户界面、CLI 和函数商店进行测试。在用 Python 构建、部署和调用你自己的无服务器函数之后，你将继续学习以下内容：用 pip 管理依赖关系，通过安全秘密处理 API 令牌，用 Prometheus 监控函数，异步调用函数以及将函数连接起来创建应用程序。实验的高潮是让你创建自己的 GitHub 机器人，可以自动响应问题。同样的方法可以通过 IFTTT.com 连接到在线事件流&ndash;这将使你能够建立机器人、自动回复器以及与社交媒体和物联网设备的集成。
+最后，实验室涵盖了更多的高级主题，并给出了进一步学习的建议。
+译文
+ 日本語 简体中文  免费学习，作为 GitHub 赞助商表示感谢 OpenFaaS 连同这些材料都是免费提供的，需要时间和精力来维护。
+ 成为OpenFaaS on GitHub的赞助商。  要求 我们在Lab 1中讲解了如何安装这些需求。请在参加讲师指导的研讨会之前做Lab 1。
+ 函数将用 Python 语言编写，所以有编程或脚本经验者优先。 安装推荐的代码编辑器/IDE VSCode 对于 Windows，安装Git Bash 首选的操作系统。MacOS, Windows 10 Pro/Enterprise, Ubuntu Linux  Docker。
+ Docker CE for Mac/Windows 边缘版。 Docker CE for Linux   注意：作为最后的手段，如果你有一台不兼容的 PC，你可以在https://labs.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/openfaas-workshop/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-03-30T09:53:12+08:00">
@@ -44,16 +44,16 @@
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Openfaas Workshop">
-<meta name=twitter:description content="openfaas-研讨会 这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。
-在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。
-最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。
-其他语言
- 日本語 中文  要求 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1
- 函数将用 Python 编写，因此有编程或脚本经验者优先 安装推荐的代码编辑器/IDE VSCode Windows 安装 Git Bash 首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux  Docker:
- Docker CE for Mac/Windows Edge edition Docker CE for Linux   注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会
- 讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。">
+<meta name=twitter:description content="openfaas-workshop 这是一个自定进度的研讨会，学习如何使用 OpenFaaS 构建、部署和运行无服务器函数。
+在这个工作坊中，你将首先把 OpenFaaS 部署到你的笔记本电脑或使用 Docker for Mac 或 Windows 的远程集群。然后你将对 OpenFaaS 的用户界面、CLI 和函数商店进行测试。在用 Python 构建、部署和调用你自己的无服务器函数之后，你将继续学习以下内容：用 pip 管理依赖关系，通过安全秘密处理 API 令牌，用 Prometheus 监控函数，异步调用函数以及将函数连接起来创建应用程序。实验的高潮是让你创建自己的 GitHub 机器人，可以自动响应问题。同样的方法可以通过 IFTTT.com 连接到在线事件流&ndash;这将使你能够建立机器人、自动回复器以及与社交媒体和物联网设备的集成。
+最后，实验室涵盖了更多的高级主题，并给出了进一步学习的建议。
+译文
+ 日本語 简体中文  免费学习，作为 GitHub 赞助商表示感谢 OpenFaaS 连同这些材料都是免费提供的，需要时间和精力来维护。
+ 成为OpenFaaS on GitHub的赞助商。  要求 我们在Lab 1中讲解了如何安装这些需求。请在参加讲师指导的研讨会之前做Lab 1。
+ 函数将用 Python 语言编写，所以有编程或脚本经验者优先。 安装推荐的代码编辑器/IDE VSCode 对于 Windows，安装Git Bash 首选的操作系统。MacOS, Windows 10 Pro/Enterprise, Ubuntu Linux  Docker。
+ Docker CE for Mac/Windows 边缘版。 Docker CE for Linux   注意：作为最后的手段，如果你有一台不兼容的 PC，你可以在https://labs.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Openfaas Workshop","item":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop","name":"Openfaas Workshop","description":"openfaas-研讨会 这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。\n在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。\n最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。\n其他语言\n 日本語 中文  要求 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1\n 函数将用 Python 编写，因此有编程或脚本经验者优先 安装推荐的代码编辑器/IDE VSCode Windows 安装 Git Bash 首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux  Docker:\n Docker CE for Mac/Windows Edge edition Docker CE for Linux   注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会\n 讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。","keywords":[],"articleBody":"openfaas-研讨会 这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。\n在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。\n最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。\n其他语言\n 日本語 中文  要求 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1\n 函数将用 Python 编写，因此有编程或脚本经验者优先 安装推荐的代码编辑器/IDE VSCode Windows 安装 Git Bash 首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux  Docker:\n Docker CE for Mac/Windows Edge edition Docker CE for Linux   注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会\n 讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。\n选择你的路径 在实验室 1 中，您将选择您的路径，然后在整个实验室中寻找您的容器编排器所需的任何特殊命令。\nKubernetes 您还可以使用 OpenFaaS 了解 Kubernetes 上的 Serverless。\nOpenFaaS 社区的建议是，您可以在生产中运行 Kubernetes，但是所有知识都是相通的，并且功能不必重建。\n实验 1 - OpenFaaS 准备  安装先决条件 使用 Kubernetes 建立单节点集群 Docker Hub 帐户 OpenFaaS CLI 部署 OpenFaaS  实验 2 - 测试  使用 UI 门户 通过函数商店部署 学习 CLI 通过 Prometheus 监控  实验 3 - 函数介绍  生成新函数的脚手架 构建 astronaut-finder 函数 通过pip添加依赖 疑难解答：找到容器的日志 疑难解答：通过write_debug查看输出 使用自定义和第三方语言模板 在模板商店发现社区模板  实验 4 - 深入了解函数  通过环境变量注入  部署时使用 yaml 动态使用 http 上下文 - querystring / headers 等   安全：只读文件系统 利用日志 创建工作流  客户端使用调用链 从一个函数中调用另一个函数    实验 5 - 构建一个 GitHub bot  构建 issue-bot - GitHub Issues 自动响应程序\n  获取 GitHub 账户 通过 ngrok 内网穿透 为issue-bot创建 gou 从 GitHub 接收 webhooks 部署情感分析函数 通过 GitHub API 应用标签 完成函数  实验 6 - 函数中的 HTML  从一个函数中生成且返回基本的 HTML 从磁盘中读取并返回一个静态的 HTML 文件 与其他函数协作  实验 7 - 异步函数  同步调用 vs 异步调用 查看 queue-worker 的日志 使用 X-Callback-Url  实验 8 - 高级特性 - 超时  通过 read_timeout 调节超时时间 适应长时间运行函数  实验 9 - 高级特性 - 自动扩容  实操自动扩容  最小和最大副本的一些见解 访问本地的 Prometheus 执行 Prometheus 查询 使用 curl 调用函数 观察自动扩容    实验 10 - 高级特性 - Secrets  issue-bot 使用秘钥  通过 faas-cli 创建 Kubernetes 秘钥 在函数中访问秘钥    实验 11 - 高级特性 - 信任 HMAC  对使用 HMAC 的函数信任  您可以从第一个实验实验 1开始\n停止/清理 你可以在这里找到如何停止和删除 OpenFaaS\n下一步 如果你在一个讲师指导的研讨会，并且已经完成了实验，你可能想回到实验，edit/alter 代码，或者进行一些你自己的实验。\n以下是后续任务/主题的一些想法：\nOpenFaaS Cloud 尝试 OpenFaaS 的多用户托管体验——要么在社区集群上，要么托管自己的 OpenFaaS 云。\n Docs: OpenFaaS Cloud  TLS  在 Kubernetes 入口在网关上启用 HTTPS  CI/CD 设置 Jenkins，Google Cloud Build 或 GitLab，并使用 OpenFaaS CLI 构建和部署您自己的函数：\n CI/CD 简介  存储 / 数据库   尝试使用 Minio 开源对象存储\n  使用 Mongo 尝试 OpenFaaS 存储数据\n  仪表盘 / 监控  探索在 Prometheus 可用的指标  额外的博客文章和教程   OpenFaaS 博客上的教程\n  社区博客帖子\n  附录 附录 中包含一些附加内容。\n致谢 感谢 @iyovcheva, @BurtonR, @johnmccabe, @laurentgrangeau, @stefanprodan, @kenfdev, @templum \u0026 @rgee0 对实验的贡献、测试和翻译。\n","wordCount":"317","inLanguage":"en","datePublished":"2021-03-30T09:53:12+08:00","dateModified":"2021-03-30T09:53:12+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop","name":"Openfaas Workshop","description":"openfaas-workshop 这是一个自定进度的研讨会，学习如何使用 OpenFaaS 构建、部署和运行无服务器函数。\n在这个工作坊中，你将首先把 OpenFaaS 部署到你的笔记本电脑或使用 Docker for Mac 或 Windows 的远程集群。然后你将对 OpenFaaS 的用户界面、CLI 和函数商店进行测试。在用 Python 构建、部署和调用你自己的无服务器函数之后，你将继续学习以下内容：用 pip 管理依赖关系，通过安全秘密处理 API 令牌，用 Prometheus 监控函数，异步调用函数以及将函数连接起来创建应用程序。实验的高潮是让你创建自己的 GitHub 机器人，可以自动响应问题。同样的方法可以通过 IFTTT.com 连接到在线事件流\u0026ndash;这将使你能够建立机器人、自动回复器以及与社交媒体和物联网设备的集成。\n最后，实验室涵盖了更多的高级主题，并给出了进一步学习的建议。\n译文\n 日本語 简体中文  免费学习，作为 GitHub 赞助商表示感谢 OpenFaaS 连同这些材料都是免费提供的，需要时间和精力来维护。\n 成为OpenFaaS on GitHub的赞助商。  要求 我们在Lab 1中讲解了如何安装这些需求。请在参加讲师指导的研讨会之前做Lab 1。\n 函数将用 Python 语言编写，所以有编程或脚本经验者优先。 安装推荐的代码编辑器/IDE VSCode 对于 Windows，安装Git Bash 首选的操作系统。MacOS, Windows 10 Pro/Enterprise, Ubuntu Linux  Docker。\n Docker CE for Mac/Windows 边缘版。 Docker CE for Linux   注意：作为最后的手段，如果你有一台不兼容的 PC，你可以在https://labs.","keywords":[],"articleBody":"openfaas-workshop 这是一个自定进度的研讨会，学习如何使用 OpenFaaS 构建、部署和运行无服务器函数。\n在这个工作坊中，你将首先把 OpenFaaS 部署到你的笔记本电脑或使用 Docker for Mac 或 Windows 的远程集群。然后你将对 OpenFaaS 的用户界面、CLI 和函数商店进行测试。在用 Python 构建、部署和调用你自己的无服务器函数之后，你将继续学习以下内容：用 pip 管理依赖关系，通过安全秘密处理 API 令牌，用 Prometheus 监控函数，异步调用函数以及将函数连接起来创建应用程序。实验的高潮是让你创建自己的 GitHub 机器人，可以自动响应问题。同样的方法可以通过 IFTTT.com 连接到在线事件流–这将使你能够建立机器人、自动回复器以及与社交媒体和物联网设备的集成。\n最后，实验室涵盖了更多的高级主题，并给出了进一步学习的建议。\n译文\n 日本語 简体中文  免费学习，作为 GitHub 赞助商表示感谢 OpenFaaS 连同这些材料都是免费提供的，需要时间和精力来维护。\n 成为OpenFaaS on GitHub的赞助商。  要求 我们在Lab 1中讲解了如何安装这些需求。请在参加讲师指导的研讨会之前做Lab 1。\n 函数将用 Python 语言编写，所以有编程或脚本经验者优先。 安装推荐的代码编辑器/IDE VSCode 对于 Windows，安装Git Bash 首选的操作系统。MacOS, Windows 10 Pro/Enterprise, Ubuntu Linux  Docker。\n Docker CE for Mac/Windows 边缘版。 Docker CE for Linux   注意：作为最后的手段，如果你有一台不兼容的 PC，你可以在https://labs.play-with-docker.com/ 上运行该研讨会。\n 教员指导的研讨会 如果你正在参加一个由教师指导的研讨会，那么我们将分享一个链接，以加入 OpenFaaS Slack 社区。使用研讨会的指定频道来讨论评论、问题和建议。\n挑选你的轨道 在实验室 1 中，你将选择你的轨道，然后在整个实验室中注意你的轨道的容器协调器所需的任何特殊命令。\nKubernetes 你也可以使用 OpenFaaS 学习 Kubernetes 上的 Serverless。\nOpenFaaS 社区的建议是，你在生产中运行 Kubernetes，但你能的所有知识都是可以转移的，函数也不必重新构建。\nLab 1 - Prepare for OpenFaaS  安装前提条件 用 Kubernetes 建立一个单节点集群 Docker Hub 账户 OpenFaaS CLI 部署 OpenFaaS  Lab 2 - Test things out  使用 UI 门户 通过函数商店进行部署 了解 CLI 的情况 用 Prometheus 查找指标  Lab 3 - Introduction to Functions  架构或生成一个新的函数 建立 astronaut-finder 函数 用pip添加依赖性 故障排除：找到容器的日志 故障排除：用write_debug进行粗略输出 使用自定义和第三方语言模板 使用模板商店发现社区模板  Lab 4 - Go deeper with functions  通过环境变量注入配置 *在部署时使用 yaml  动态地使用 HTTP 上下文–查询字符串/头信息等   安全性：只读的文件系统 利用日志 创建工作流  在客户端串联函数 *从另一个函数中调用一个函数    Lab 5 - Create a GitHub bot  建立 issue-bot–GitHub 问题的自动回复者\n  获得一个 GitHub 账户 用 ngrok 建立一个隧道 创建一个 webhook 接收器issue-bot。 接收来自 GitHub 的 webhooks 部署 SentimentAnalysis 函数 通过 GitHub 的 API 应用标签 完成函数  Lab 6 - HTML for your functions  从一个函数生成并返回基本的 HTML 从磁盘读取并返回一个静态 HTML 文件 与其他函数协作  Lab 7 - Asynchronous Functions   同步地与异步地调用一个函数\n  查看队列工作者的日志\n  在 requestbin 和 ngrok 中使用X-Callback-Url。\n  Lab 8 - Advanced Feature - Timeouts  用read_timeout调整超时时间 适应更长的运行函数  Lab 9 - Advanced Feature - Auto-scaling  查看自动缩放的操作  关于最小和最大复制的一些见解 发现并访问本地 Prometheus 执行和普罗米修斯查询 使用 curl 调用一个函数 观察自动缩放的启动    Lab 10 - Advanced Feature - Secrets  调整 issue-bot 以使用一个秘密  用 faas-cli 创建一个 Kubernetes 秘密 在函数中访问秘密    Lab 11 - Advanced feature - Trust with HMAC  使用 HMAC 对函数应用信任  你可以从第一个实验室Lab 1开始。\n拆解/清理 你可以找到如何停止和删除 OpenFaaS这里\n接下来的步骤 如果你在一个教师指导的研讨会上，并且已经完成了实验，你可能想回到实验室，编辑/修改代码和值，或者进行一些你自己的实验。\n以下是一些后续任务/主题的想法。\nOpenFaaS 云 试试 OpenFaaS 的多用户管理体验–在社区集群上，或者通过托管你自己的 OpenFaaS 云。\n Docs: OpenFaaS Cloud  TLS  用 Kubernetes Ingress 在你的网关上启用 HTTPS  CI/CD 设置 Jenkins、Google Cloud Build 或 GitLab，使用 OpenFaaS CLI 构建和部署你自己的函数。\n CI/CD 介绍  存储/数据库   用 Minio 尝试开源对象存储\n  尝试用 Mongo 存储数据的 OpenFaaS\n  仪器仪表/监控  探索 Prometheus 中可用的指标  其他博文和教程   OpenFaaS 博客上的教程\n  社区博客文章\n  附录 附录包含一些额外的内容。\nAcknowledgements 感谢@iyovcheva, @BurtonR, @johnmccabe, @laurentgrangeau, @stefanprodan, @kenfdev, @templum \u0026 @rgee0 对实验室的贡献、测试和翻译。\n","wordCount":"331","inLanguage":"en","datePublished":"2021-03-30T09:53:12+08:00","dateModified":"2021-03-30T09:53:12+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -101,59 +101,61 @@ Openfaas Workshop
 </summary>
 <div class=inner><ul>
 <li>
-<a href=#openfaas-%e7%a0%94%e8%ae%a8%e4%bc%9a aria-label=openfaas-研讨会>openfaas-研讨会</a><ul>
+<a href=#openfaas-workshop aria-label=openfaas-workshop>openfaas-workshop</a><ul>
+<li>
+<a href=#%e5%85%8d%e8%b4%b9%e5%ad%a6%e4%b9%a0%e4%bd%9c%e4%b8%ba-github-%e8%b5%9e%e5%8a%a9%e5%95%86%e8%a1%a8%e7%a4%ba%e6%84%9f%e8%b0%a2 aria-label="免费学习，作为 GitHub 赞助商表示感谢">免费学习，作为 GitHub 赞助商表示感谢</a></li>
 <li>
 <a href=#%e8%a6%81%e6%b1%82 aria-label=要求>要求</a></li>
 <li>
-<a href=#%e8%ae%b2%e5%b8%88%e4%b8%bb%e5%af%bc%e7%9a%84%e7%a0%94%e8%ae%a8%e4%bc%9a aria-label=讲师主导的研讨会>讲师主导的研讨会</a></li>
+<a href=#%e6%95%99%e5%91%98%e6%8c%87%e5%af%bc%e7%9a%84%e7%a0%94%e8%ae%a8%e4%bc%9a aria-label=教员指导的研讨会>教员指导的研讨会</a></li>
 <li>
-<a href=#%e9%80%89%e6%8b%a9%e4%bd%a0%e7%9a%84%e8%b7%af%e5%be%84 aria-label=选择你的路径>选择你的路径</a><ul>
+<a href=#%e6%8c%91%e9%80%89%e4%bd%a0%e7%9a%84%e8%bd%a8%e9%81%93 aria-label=挑选你的轨道>挑选你的轨道</a><ul>
 <li>
 <a href=#kubernetes aria-label=Kubernetes>Kubernetes</a></li></ul>
 </li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-1---openfaas-%e5%87%86%e5%a4%87lab1md aria-label="实验 1 - OpenFaaS 准备"><a href=./lab1.md>实验 1 - OpenFaaS 准备</a></a></li>
+<a href=#lab-1---prepare-for-openfaaslab1md aria-label="Lab 1 - Prepare for OpenFaaS"><a href=./lab1.md>Lab 1 - Prepare for OpenFaaS</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-2---%e6%b5%8b%e8%af%95lab2md aria-label="实验 2 - 测试"><a href=./lab2.md>实验 2 - 测试</a></a></li>
+<a href=#lab-2---test-things-outlab2md aria-label="Lab 2 - Test things out"><a href=./lab2.md>Lab 2 - Test things out</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-3---%e5%87%bd%e6%95%b0%e4%bb%8b%e7%bb%8dlab3md aria-label="实验 3 - 函数介绍"><a href=./lab3.md>实验 3 - 函数介绍</a></a></li>
+<a href=#lab-3---introduction-to-functionslab3md aria-label="Lab 3 - Introduction to Functions"><a href=./lab3.md>Lab 3 - Introduction to Functions</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-4---%e6%b7%b1%e5%85%a5%e4%ba%86%e8%a7%a3%e5%87%bd%e6%95%b0lab4md aria-label="实验 4 - 深入了解函数"><a href=./lab4.md>实验 4 - 深入了解函数</a></a></li>
+<a href=#lab-4---go-deeper-with-functionslab4md aria-label="Lab 4 - Go deeper with functions"><a href=./lab4.md>Lab 4 - Go deeper with functions</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-5---%e6%9e%84%e5%bb%ba%e4%b8%80%e4%b8%aa-github-botlab5md aria-label="实验 5 - 构建一个 GitHub bot"><a href=./lab5.md>实验 5 - 构建一个 GitHub bot</a></a></li>
+<a href=#lab-5---create-a-github-botlab5md aria-label="Lab 5 - Create a GitHub bot"><a href=./lab5.md>Lab 5 - Create a GitHub bot</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-6---%e5%87%bd%e6%95%b0%e4%b8%ad%e7%9a%84-htmllab6md aria-label="实验 6 - 函数中的 HTML"><a href=./lab6.md>实验 6 - 函数中的 HTML</a></a></li>
+<a href=#lab-6---html-for-your-functionslab6md aria-label="Lab 6 - HTML for your functions"><a href=./lab6.md>Lab 6 - HTML for your functions</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-7---%e5%bc%82%e6%ad%a5%e5%87%bd%e6%95%b0lab7md aria-label="实验 7 - 异步函数"><a href=./lab7.md>实验 7 - 异步函数</a></a></li>
+<a href=#lab-7---asynchronous-functionslab7md aria-label="Lab 7 - Asynchronous Functions"><a href=./lab7.md>Lab 7 - Asynchronous Functions</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-8---%e9%ab%98%e7%ba%a7%e7%89%b9%e6%80%a7---%e8%b6%85%e6%97%b6lab8md aria-label="实验 8 - 高级特性 - 超时"><a href=./lab8.md>实验 8 - 高级特性 - 超时</a></a></li>
+<a href=#lab-8---advanced-feature---timeoutslab8md aria-label="Lab 8 - Advanced Feature - Timeouts"><a href=./lab8.md>Lab 8 - Advanced Feature - Timeouts</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-9---%e9%ab%98%e7%ba%a7%e7%89%b9%e6%80%a7---%e8%87%aa%e5%8a%a8%e6%89%a9%e5%ae%b9lab9md aria-label="实验 9 - 高级特性 - 自动扩容"><a href=./lab9.md>实验 9 - 高级特性 - 自动扩容</a></a></li>
+<a href=#lab-9---advanced-feature---auto-scalinglab9md aria-label="Lab 9 - Advanced Feature - Auto-scaling"><a href=./lab9.md>Lab 9 - Advanced Feature - Auto-scaling</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-10---%e9%ab%98%e7%ba%a7%e7%89%b9%e6%80%a7---secretslab10md aria-label="实验 10 - 高级特性 - Secrets"><a href=./lab10.md>实验 10 - 高级特性 - Secrets</a></a></li>
+<a href=#lab-10---advanced-feature---secretslab10md aria-label="Lab 10 - Advanced Feature - Secrets"><a href=./lab10.md>Lab 10 - Advanced Feature - Secrets</a></a></li>
 <li>
-<a href=#%e5%ae%9e%e9%aa%8c-11---%e9%ab%98%e7%ba%a7%e7%89%b9%e6%80%a7---%e4%bf%a1%e4%bb%bb-hmaclab11md aria-label="实验 11 - 高级特性 - 信任 HMAC"><a href=./lab11.md>实验 11 - 高级特性 - 信任 HMAC</a></a></li>
+<a href=#lab-11---advanced-feature---trust-with-hmaclab11md aria-label="Lab 11 - Advanced feature - Trust with HMAC"><a href=./lab11.md>Lab 11 - Advanced feature - Trust with HMAC</a></a></li>
 <li>
-<a href=#%e5%81%9c%e6%ad%a2%e6%b8%85%e7%90%86 aria-label=停止/清理>停止/清理</a></li>
+<a href=#%e6%8b%86%e8%a7%a3%e6%b8%85%e7%90%86 aria-label=拆解/清理>拆解/清理</a></li>
 <li>
-<a href=#%e4%b8%8b%e4%b8%80%e6%ad%a5 aria-label=下一步>下一步</a><ul>
+<a href=#%e6%8e%a5%e4%b8%8b%e6%9d%a5%e7%9a%84%e6%ad%a5%e9%aa%a4 aria-label=接下来的步骤>接下来的步骤</a><ul>
 <li>
-<a href=#openfaas-cloud aria-label="OpenFaaS Cloud">OpenFaaS Cloud</a></li>
+<a href=#openfaas-%e4%ba%91 aria-label="OpenFaaS 云">OpenFaaS 云</a></li>
 <li>
 <a href=#tls aria-label=TLS>TLS</a></li>
 <li>
 <a href=#cicd aria-label=CI/CD>CI/CD</a></li>
 <li>
-<a href=#%e5%ad%98%e5%82%a8--%e6%95%b0%e6%8d%ae%e5%ba%93 aria-label="存储 / 数据库">存储 / 数据库</a></li>
+<a href=#%e5%ad%98%e5%82%a8%e6%95%b0%e6%8d%ae%e5%ba%93 aria-label=存储/数据库>存储/数据库</a></li>
 <li>
-<a href=#%e4%bb%aa%e8%a1%a8%e7%9b%98--%e7%9b%91%e6%8e%a7 aria-label="仪表盘 / 监控">仪表盘 / 监控</a></li>
+<a href=#%e4%bb%aa%e5%99%a8%e4%bb%aa%e8%a1%a8%e7%9b%91%e6%8e%a7 aria-label=仪器仪表/监控>仪器仪表/监控</a></li>
 <li>
-<a href=#%e9%a2%9d%e5%a4%96%e7%9a%84%e5%8d%9a%e5%ae%a2%e6%96%87%e7%ab%a0%e5%92%8c%e6%95%99%e7%a8%8b aria-label=额外的博客文章和教程>额外的博客文章和教程</a></li>
+<a href=#%e5%85%b6%e4%bb%96%e5%8d%9a%e6%96%87%e5%92%8c%e6%95%99%e7%a8%8b aria-label=其他博文和教程>其他博文和教程</a></li>
 <li>
 <a href=#%e9%99%84%e5%bd%95 aria-label=附录>附录</a></li></ul>
 </li>
 <li>
-<a href=#%e8%87%b4%e8%b0%a2 aria-label=致谢>致谢</a>
+<a href=#acknowledgements aria-label=Acknowledgements>Acknowledgements</a>
 </li>
 </ul>
 </li>
@@ -161,183 +163,194 @@ Openfaas Workshop
 </div>
 </details>
 </div>
-<div class=post-content><h1 id=openfaas-研讨会>openfaas-研讨会<a hidden class=anchor aria-hidden=true href=#openfaas-研讨会>#</a></h1>
-<p>这是一个自定进度的研讨会，用于学习如何使用 OpenFaaS 构建、部署和运行无服务器功能。</p>
+<div class=post-content><h1 id=openfaas-workshop>openfaas-workshop<a hidden class=anchor aria-hidden=true href=#openfaas-workshop>#</a></h1>
+<p>这是一个自定进度的研讨会，学习如何使用 OpenFaaS 构建、部署和运行无服务器函数。</p>
 <p><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
 </p>
-<p>在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。</p>
-<p>最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。</p>
-<p><strong>其他语言</strong></p>
+<p>在这个工作坊中，你将首先把 OpenFaaS 部署到你的笔记本电脑或使用 Docker for Mac 或 Windows 的远程集群。然后你将对 OpenFaaS 的用户界面、CLI 和函数商店进行测试。在用 Python 构建、部署和调用你自己的无服务器函数之后，你将继续学习以下内容：用 pip 管理依赖关系，通过安全秘密处理 API 令牌，用 Prometheus 监控函数，异步调用函数以及将函数连接起来创建应用程序。实验的高潮是让你创建自己的 GitHub 机器人，可以自动响应问题。同样的方法可以通过 IFTTT.com 连接到在线事件流&ndash;这将使你能够建立机器人、自动回复器以及与社交媒体和物联网设备的集成。</p>
+<p>最后，实验室涵盖了更多的高级主题，并给出了进一步学习的建议。</p>
+<p><strong>译文</strong></p>
 <ul>
 <li><a href=./translations/ja>日本語</a></li>
-<li><a href=./translations/zh>中文</a></li>
+<li><a href=./translations/cn>简体中文</a></li>
+</ul>
+<h2 id=免费学习作为-github-赞助商表示感谢>免费学习，作为 GitHub 赞助商表示感谢<a hidden class=anchor aria-hidden=true href=#免费学习作为-github-赞助商表示感谢>#</a></h2>
+<p>OpenFaaS 连同这些材料都是免费提供的，需要时间和精力来维护。</p>
+<ul>
+<li>成为<a href=https://github.com/sponsor/openfaas>OpenFaaS on GitHub</a>的赞助商。</li>
 </ul>
 <h2 id=要求>要求<a hidden class=anchor aria-hidden=true href=#要求>#</a></h2>
-<p>我们将介绍如何在<a href=./lab1.md>Lab 1</a>中安装这些要求。请在参加讲师指导的研讨会之前完成<a href=./lab1.md>Lab 1</a></p>
+<p>我们在<a href=./lab1.md>Lab 1</a>中讲解了如何安装这些需求。请在参加讲师指导的研讨会之前做<a href=./lab1.md>Lab 1</a>。</p>
 <ul>
-<li>函数将用 Python 编写，因此有编程或脚本经验者优先</li>
+<li>函数将用 Python 语言编写，所以有编程或脚本经验者优先。</li>
 <li>安装推荐的代码编辑器/IDE <a href=https://code.visualstudio.com/download>VSCode</a></li>
-<li>Windows 安装 <a href=https://git-scm.com/downloads>Git Bash</a></li>
-<li>首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux</li>
+<li>对于 Windows，安装<a href=https://git-scm.com/downloads>Git Bash</a></li>
+<li>首选的操作系统。MacOS, Windows 10 Pro/Enterprise, Ubuntu Linux</li>
 </ul>
-<p>Docker:</p>
+<p>Docker。</p>
 <ul>
-<li>Docker CE for <a href=https://store.docker.com/editions/community/docker-ce-desktop-mac>Mac</a>/<a href=https://store.docker.com/editions/community/docker-ce-desktop-windows>Windows</a> <strong>Edge edition</strong></li>
+<li>Docker CE for <a href=https://store.docker.com/editions/community/docker-ce-desktop-mac>Mac</a>/<a href=https://store.docker.com/editions/community/docker-ce-desktop-windows>Windows</a> <strong>边缘版</strong>。</li>
 <li>Docker CE for Linux</li>
 </ul>
 <blockquote>
-<p>注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会</p>
+<p>注意：作为最后的手段，如果你有一台不兼容的 PC，你可以在<a href=https://labs.play-with-docker.com/>https://labs.play-with-docker.com/</a> 上运行该研讨会。</p>
 </blockquote>
-<h2 id=讲师主导的研讨会>讲师主导的研讨会<a hidden class=anchor aria-hidden=true href=#讲师主导的研讨会>#</a></h2>
-<p>如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。</p>
-<h2 id=选择你的路径>选择你的路径<a hidden class=anchor aria-hidden=true href=#选择你的路径>#</a></h2>
-<p>在实验室 1 中，您将选择您的路径，然后在整个实验室中寻找您的容器编排器所需的任何特殊命令。</p>
+<h2 id=教员指导的研讨会>教员指导的研讨会<a hidden class=anchor aria-hidden=true href=#教员指导的研讨会>#</a></h2>
+<p>如果你正在参加一个由教师指导的研讨会，那么我们将分享一个链接，以加入 OpenFaaS Slack 社区。使用研讨会的指定频道来讨论评论、问题和建议。</p>
+<h2 id=挑选你的轨道>挑选你的轨道<a hidden class=anchor aria-hidden=true href=#挑选你的轨道>#</a></h2>
+<p>在实验室 1 中，你将选择你的轨道，然后在整个实验室中注意你的轨道的容器协调器所需的任何特殊命令。</p>
 <h3 id=kubernetes>Kubernetes<a hidden class=anchor aria-hidden=true href=#kubernetes>#</a></h3>
-<p>您还可以使用 OpenFaaS 了解 Kubernetes 上的 Serverless。</p>
-<p>OpenFaaS 社区的建议是，您可以在生产中运行 Kubernetes，但是所有知识都是相通的，并且功能不必重建。</p>
-<h2 id=实验-1---openfaas-准备lab1md><a href=./lab1.md>实验 1 - OpenFaaS 准备</a><a hidden class=anchor aria-hidden=true href=#实验-1---openfaas-准备lab1md>#</a></h2>
+<p>你也可以使用 OpenFaaS 学习 Kubernetes 上的 Serverless。</p>
+<p>OpenFaaS 社区的建议是，你在生产中运行 Kubernetes，但你能的所有知识都是可以转移的，函数也不必重新构建。</p>
+<h2 id=lab-1---prepare-for-openfaaslab1md><a href=./lab1.md>Lab 1 - Prepare for OpenFaaS</a><a hidden class=anchor aria-hidden=true href=#lab-1---prepare-for-openfaaslab1md>#</a></h2>
 <ul>
-<li>安装先决条件</li>
-<li>使用 Kubernetes 建立单节点集群</li>
-<li>Docker Hub 帐户</li>
+<li>安装前提条件</li>
+<li>用 Kubernetes 建立一个单节点集群</li>
+<li>Docker Hub 账户</li>
 <li>OpenFaaS CLI</li>
 <li>部署 OpenFaaS</li>
 </ul>
-<h2 id=实验-2---测试lab2md><a href=./lab2.md>实验 2 - 测试</a><a hidden class=anchor aria-hidden=true href=#实验-2---测试lab2md>#</a></h2>
+<h2 id=lab-2---test-things-outlab2md><a href=./lab2.md>Lab 2 - Test things out</a><a hidden class=anchor aria-hidden=true href=#lab-2---test-things-outlab2md>#</a></h2>
 <ul>
 <li>使用 UI 门户</li>
-<li>通过函数商店部署</li>
-<li>学习 CLI</li>
-<li>通过 Prometheus 监控</li>
+<li>通过函数商店进行部署</li>
+<li>了解 CLI 的情况</li>
+<li>用 Prometheus 查找指标</li>
 </ul>
-<h2 id=实验-3---函数介绍lab3md><a href=./lab3.md>实验 3 - 函数介绍</a><a hidden class=anchor aria-hidden=true href=#实验-3---函数介绍lab3md>#</a></h2>
+<h2 id=lab-3---introduction-to-functionslab3md><a href=./lab3.md>Lab 3 - Introduction to Functions</a><a hidden class=anchor aria-hidden=true href=#lab-3---introduction-to-functionslab3md>#</a></h2>
 <ul>
-<li>生成新函数的脚手架</li>
-<li>构建 astronaut-finder 函数</li>
-<li>通过<code>pip</code>添加依赖</li>
-<li>疑难解答：找到容器的日志</li>
-<li>疑难解答：通过<code>write_debug</code>查看输出</li>
+<li>架构或生成一个新的函数</li>
+<li>建立 astronaut-finder 函数</li>
+<li>用<code>pip</code>添加依赖性</li>
+<li>故障排除：找到容器的日志</li>
+<li>故障排除：用<code>write_debug</code>进行粗略输出</li>
 <li>使用自定义和第三方语言模板</li>
-<li>在模板商店发现社区模板</li>
+<li>使用模板商店发现社区模板</li>
 </ul>
-<h2 id=实验-4---深入了解函数lab4md><a href=./lab4.md>实验 4 - 深入了解函数</a><a hidden class=anchor aria-hidden=true href=#实验-4---深入了解函数lab4md>#</a></h2>
+<h2 id=lab-4---go-deeper-with-functionslab4md><a href=./lab4.md>Lab 4 - Go deeper with functions</a><a hidden class=anchor aria-hidden=true href=#lab-4---go-deeper-with-functionslab4md>#</a></h2>
 <ul>
-<li><a href=lab4.md#inject-configuration-through-environmental-variables>通过环境变量注入</a>
+<li><a href=lab4.md#inject-configuration-through-environmental-variables>通过环境变量注入配置</a>
+*在部署时使用 yaml
 <ul>
-<li>部署时使用 yaml</li>
-<li>动态使用 http 上下文 - querystring / headers 等</li>
+<li>动态地使用 HTTP 上下文&ndash;查询字符串/头信息等</li>
 </ul>
 </li>
-<li>安全：只读文件系统</li>
+<li>安全性：只读的文件系统</li>
 <li><a href=lab4.md#making-use-of-logging>利用日志</a></li>
-<li><a href=lab4.md#create-workflows>创建工作流</a>
+<li><a href=lab4.md#creat-workflows>创建工作流</a>
 <ul>
-<li>客户端使用调用链</li>
-<li>从一个函数中调用另一个函数</li>
+<li>在客户端串联函数
+*从另一个函数中调用一个函数</li>
 </ul>
 </li>
 </ul>
-<h2 id=实验-5---构建一个-github-botlab5md><a href=./lab5.md>实验 5 - 构建一个 GitHub bot</a><a hidden class=anchor aria-hidden=true href=#实验-5---构建一个-github-botlab5md>#</a></h2>
+<h2 id=lab-5---create-a-github-botlab5md><a href=./lab5.md>Lab 5 - Create a GitHub bot</a><a hidden class=anchor aria-hidden=true href=#lab-5---create-a-github-botlab5md>#</a></h2>
 <blockquote>
-<p>构建 <code>issue-bot</code> - GitHub Issues 自动响应程序</p>
+<p>建立 <code>issue-bot</code>&ndash;GitHub 问题的自动回复者</p>
 </blockquote>
 <ul>
-<li>获取 GitHub 账户</li>
-<li>通过 ngrok 内网穿透</li>
-<li>为<code>issue-bot</code>创建 gou</li>
-<li>从 GitHub 接收 webhooks</li>
-<li>部署情感分析函数</li>
-<li>通过 GitHub API 应用标签</li>
+<li>获得一个 GitHub 账户</li>
+<li>用 ngrok 建立一个隧道</li>
+<li>创建一个 webhook 接收器<code>issue-bot</code>。</li>
+<li>接收来自 GitHub 的 webhooks</li>
+<li>部署 SentimentAnalysis 函数</li>
+<li>通过 GitHub 的 API 应用标签</li>
 <li>完成函数</li>
 </ul>
-<h2 id=实验-6---函数中的-htmllab6md><a href=./lab6.md>实验 6 - 函数中的 HTML</a><a hidden class=anchor aria-hidden=true href=#实验-6---函数中的-htmllab6md>#</a></h2>
+<h2 id=lab-6---html-for-your-functionslab6md><a href=./lab6.md>Lab 6 - HTML for your functions</a><a hidden class=anchor aria-hidden=true href=#lab-6---html-for-your-functionslab6md>#</a></h2>
 <ul>
-<li>从一个函数中生成且返回基本的 HTML</li>
-<li>从磁盘中读取并返回一个静态的 HTML 文件</li>
+<li>从一个函数生成并返回基本的 HTML</li>
+<li>从磁盘读取并返回一个静态 HTML 文件</li>
 <li>与其他函数协作</li>
 </ul>
-<h2 id=实验-7---异步函数lab7md><a href=./lab7.md>实验 7 - 异步函数</a><a hidden class=anchor aria-hidden=true href=#实验-7---异步函数lab7md>#</a></h2>
+<h2 id=lab-7---asynchronous-functionslab7md><a href=./lab7.md>Lab 7 - Asynchronous Functions</a><a hidden class=anchor aria-hidden=true href=#lab-7---asynchronous-functionslab7md>#</a></h2>
 <ul>
-<li>同步调用 vs 异步调用</li>
-<li>查看 queue-worker 的日志</li>
-<li>使用 X-Callback-Url</li>
+<li>
+<p>同步地与异步地调用一个函数</p>
+</li>
+<li>
+<p>查看队列工作者的日志</p>
+</li>
+<li>
+<p>在 requestbin 和 ngrok 中使用<code>X-Callback-Url</code>。</p>
+</li>
 </ul>
-<h2 id=实验-8---高级特性---超时lab8md><a href=./lab8.md>实验 8 - 高级特性 - 超时</a><a hidden class=anchor aria-hidden=true href=#实验-8---高级特性---超时lab8md>#</a></h2>
+<h2 id=lab-8---advanced-feature---timeoutslab8md><a href=./lab8.md>Lab 8 - Advanced Feature - Timeouts</a><a hidden class=anchor aria-hidden=true href=#lab-8---advanced-feature---timeoutslab8md>#</a></h2>
 <ul>
-<li>通过 read_timeout 调节超时时间</li>
-<li>适应长时间运行函数</li>
+<li>用<code>read_timeout</code>调整超时时间</li>
+<li>适应更长的运行函数</li>
 </ul>
-<h2 id=实验-9---高级特性---自动扩容lab9md><a href=./lab9.md>实验 9 - 高级特性 - 自动扩容</a><a hidden class=anchor aria-hidden=true href=#实验-9---高级特性---自动扩容lab9md>#</a></h2>
+<h2 id=lab-9---advanced-feature---auto-scalinglab9md><a href=./lab9.md>Lab 9 - Advanced Feature - Auto-scaling</a><a hidden class=anchor aria-hidden=true href=#lab-9---advanced-feature---auto-scalinglab9md>#</a></h2>
 <ul>
-<li>实操自动扩容
+<li>查看自动缩放的操作
 <ul>
-<li>最小和最大副本的一些见解</li>
-<li>访问本地的 Prometheus</li>
-<li>执行 Prometheus 查询</li>
-<li>使用 curl 调用函数</li>
-<li>观察自动扩容</li>
+<li>关于最小和最大复制的一些见解</li>
+<li>发现并访问本地 Prometheus</li>
+<li>执行和普罗米修斯查询</li>
+<li>使用 curl 调用一个函数</li>
+<li>观察自动缩放的启动</li>
 </ul>
 </li>
 </ul>
-<h2 id=实验-10---高级特性---secretslab10md><a href=./lab10.md>实验 10 - 高级特性 - Secrets</a><a hidden class=anchor aria-hidden=true href=#实验-10---高级特性---secretslab10md>#</a></h2>
+<h2 id=lab-10---advanced-feature---secretslab10md><a href=./lab10.md>Lab 10 - Advanced Feature - Secrets</a><a hidden class=anchor aria-hidden=true href=#lab-10---advanced-feature---secretslab10md>#</a></h2>
 <ul>
-<li>issue-bot 使用秘钥
+<li>调整 issue-bot 以使用一个秘密
 <ul>
-<li>通过 faas-cli 创建 Kubernetes 秘钥</li>
-<li>在函数中访问秘钥</li>
+<li>用 faas-cli 创建一个 Kubernetes 秘密</li>
+<li>在函数中访问秘密</li>
 </ul>
 </li>
 </ul>
-<h2 id=实验-11---高级特性---信任-hmaclab11md><a href=./lab11.md>实验 11 - 高级特性 - 信任 HMAC</a><a hidden class=anchor aria-hidden=true href=#实验-11---高级特性---信任-hmaclab11md>#</a></h2>
+<h2 id=lab-11---advanced-feature---trust-with-hmaclab11md><a href=./lab11.md>Lab 11 - Advanced feature - Trust with HMAC</a><a hidden class=anchor aria-hidden=true href=#lab-11---advanced-feature---trust-with-hmaclab11md>#</a></h2>
 <ul>
-<li>对使用 HMAC 的函数信任</li>
+<li>使用 HMAC 对函数应用信任</li>
 </ul>
-<p>您可以从第一个实验<a href=lab1.md>实验 1</a>开始</p>
-<h2 id=停止清理>停止/清理<a hidden class=anchor aria-hidden=true href=#停止清理>#</a></h2>
-<p>你可以在<a href=https://docs.openfaas.com/deployment/troubleshooting/#uninstall-openfaas>这里</a>找到如何停止和删除 OpenFaaS</p>
-<h2 id=下一步>下一步<a hidden class=anchor aria-hidden=true href=#下一步>#</a></h2>
-<p>如果你在一个讲师指导的研讨会，并且已经完成了实验，你可能想回到实验，edit/alter 代码，或者进行一些你自己的实验。</p>
-<p>以下是后续任务/主题的一些想法：</p>
-<h3 id=openfaas-cloud>OpenFaaS Cloud<a hidden class=anchor aria-hidden=true href=#openfaas-cloud>#</a></h3>
-<p>尝试 OpenFaaS 的多用户托管体验——要么在社区集群上，要么托管自己的 OpenFaaS 云。</p>
+<p>你可以从第一个实验室<a href=lab1.md>Lab 1</a>开始。</p>
+<h2 id=拆解清理>拆解/清理<a hidden class=anchor aria-hidden=true href=#拆解清理>#</a></h2>
+<p>你可以找到如何停止和删除 OpenFaaS<a href=https://docs.openfaas.com/deployment/troubleshooting/#uninstall-openfaas>这里</a></p>
+<h2 id=接下来的步骤>接下来的步骤<a hidden class=anchor aria-hidden=true href=#接下来的步骤>#</a></h2>
+<p>如果你在一个教师指导的研讨会上，并且已经完成了实验，你可能想回到实验室，编辑/修改代码和值，或者进行一些你自己的实验。</p>
+<p>以下是一些后续任务/主题的想法。</p>
+<h3 id=openfaas-云>OpenFaaS 云<a hidden class=anchor aria-hidden=true href=#openfaas-云>#</a></h3>
+<p>试试 OpenFaaS 的多用户管理体验&ndash;在社区集群上，或者通过托管你自己的 OpenFaaS 云。</p>
 <ul>
 <li><a href=https://docs.openfaas.com/openfaas-cloud/intro/>Docs: OpenFaaS Cloud</a></li>
 </ul>
 <h3 id=tls>TLS<a hidden class=anchor aria-hidden=true href=#tls>#</a></h3>
 <ul>
-<li><a href=https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/>在 Kubernetes 入口在网关上启用 HTTPS</a></li>
+<li><a href=https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/>用 Kubernetes Ingress 在你的网关上启用 HTTPS</a></li>
 </ul>
 <h3 id=cicd>CI/CD<a hidden class=anchor aria-hidden=true href=#cicd>#</a></h3>
-<p>设置 Jenkins，Google Cloud Build 或 GitLab，并使用 OpenFaaS CLI 构建和部署您自己的函数：</p>
+<p>设置 Jenkins、Google Cloud Build 或 GitLab，使用 OpenFaaS CLI 构建和部署你自己的函数。</p>
 <ul>
-<li><a href=https://docs.openfaas.com/reference/cicd/intro/>CI/CD 简介</a></li>
+<li><a href=https://docs.openfaas.com/reference/cicd/intro/>CI/CD 介绍</a></li>
 </ul>
-<h3 id=存储--数据库>存储 / 数据库<a hidden class=anchor aria-hidden=true href=#存储--数据库>#</a></h3>
+<h3 id=存储数据库>存储/数据库<a hidden class=anchor aria-hidden=true href=#存储数据库>#</a></h3>
 <ul>
 <li>
-<p><a href=https://blog.alexellis.io/openfaas-storage-for-your-functions/>尝试使用 Minio 开源对象存储</a></p>
+<p><a href=https://blog.alexellis.io/openfaas-storage-for-your-functions/>用 Minio 尝试开源对象存储</a></p>
 </li>
 <li>
-<p><a href=https://blog.alexellis.io/serverless-databases-with-openfaas-and-mongo/>使用 Mongo 尝试 OpenFaaS 存储数据</a></p>
+<p><a href=https://blog.alexellis.io/serverless-databases-with-openfaas-and-mongo/>尝试用 Mongo 存储数据的 OpenFaaS</a></p>
 </li>
 </ul>
-<h3 id=仪表盘--监控>仪表盘 / 监控<a hidden class=anchor aria-hidden=true href=#仪表盘--监控>#</a></h3>
+<h3 id=仪器仪表监控>仪器仪表/监控<a hidden class=anchor aria-hidden=true href=#仪器仪表监控>#</a></h3>
 <ul>
-<li><a href=https://docs.openfaas.com/architecture/metrics/#monitoring-functions>探索在 Prometheus 可用的指标</a></li>
+<li><a href=https://docs.openfaas.com/architecture/metrics/#monitoring-functions>探索 Prometheus 中可用的指标</a></li>
 </ul>
-<h3 id=额外的博客文章和教程>额外的博客文章和教程<a hidden class=anchor aria-hidden=true href=#额外的博客文章和教程>#</a></h3>
+<h3 id=其他博文和教程>其他博文和教程<a hidden class=anchor aria-hidden=true href=#其他博文和教程>#</a></h3>
 <ul>
 <li>
 <p><a href=https://www.openfaas.com/blog/>OpenFaaS 博客上的教程</a></p>
 </li>
 <li>
-<p><a href=https://github.com/openfaas/faas/blob/master/community.md>社区博客帖子</a></p>
+<p><a href=https://github.com/openfaas/faas/blob/master/community.md>社区博客文章</a></p>
 </li>
 </ul>
 <h3 id=附录>附录<a hidden class=anchor aria-hidden=true href=#附录>#</a></h3>
-<p><a href=./appendix.md>附录</a> 中包含一些附加内容。</p>
-<h2 id=致谢>致谢<a hidden class=anchor aria-hidden=true href=#致谢>#</a></h2>
-<p>感谢 @iyovcheva, @BurtonR, @johnmccabe, @laurentgrangeau, @stefanprodan, @kenfdev, @templum & @rgee0 对实验的贡献、测试和翻译。</p>
+<p><a href=./appendix.md>附录</a>包含一些额外的内容。</p>
+<h2 id=acknowledgements>Acknowledgements<a hidden class=anchor aria-hidden=true href=#acknowledgements>#</a></h2>
+<p>感谢@iyovcheva, @BurtonR, @johnmccabe, @laurentgrangeau, @stefanprodan, @kenfdev, @templum & @rgee0 对实验室的贡献、测试和翻译。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
