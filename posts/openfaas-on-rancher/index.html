@@ -5,8 +5,8 @@
 <meta name=robots content="index, follow">
 <title>OpenFaaS on Rancher 2.0 | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。
-下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：
+<meta name=description content="这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。
+下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：
 https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be
 这里是创建栈的compose.yml文件：
 version: &#34;2&#34; services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config.">
@@ -20,10 +20,10 @@ version: &#34;2&#34; services: alertmanager: image: functions/alertmanager:lates
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="OpenFaaS on Rancher 2.0">
-<meta property="og:description" content="这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。
-下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：
+<meta property="og:description" content="这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。
+下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：
 https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be
 这里是创建栈的compose.yml文件：
 version: &#34;2&#34; services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config.">
@@ -35,13 +35,13 @@ version: &#34;2&#34; services: alertmanager: image: functions/alertmanager:lates
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="OpenFaaS on Rancher 2.0">
-<meta name=twitter:description content="这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。
-下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：
+<meta name=twitter:description content="这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。
+下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：
 https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be
 这里是创建栈的compose.yml文件：
 version: &#34;2&#34; services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"OpenFaaS on Rancher 2.0","item":"https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"OpenFaaS on Rancher 2.0","name":"OpenFaaS on Rancher 2.0","description":"这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。\n下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：\nhttps://www.youtube.com/watch?v=kX8mXv5d1qg\u0026amp;amp;feature=youtu.be\n这里是创建栈 …","keywords":[],"articleBody":"这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。\n下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：\nhttps://www.youtube.com/watch?v=kX8mXv5d1qg\u0026feature=youtu.be\n这里是创建栈的compose.yml文件：\nversion: \"2\" services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config.file=/etc/prometheus/prometheus.yml, -storage.local.path=/prometheus, -storage.local.memory-chunks=10000, '--alertmanager.url=http://alertmanager:9093'] image: kenfdev/prometheus:latest-cattle labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 我在Rancher 2.0中找到一个比较酷的点是compose.yml文件中的变量都可以在UI中进行配置，如下图所示：\n新的faas-rancher项目已经转换为使用Rancher的v3版本的API，而且基本上已经通过了测试。欢迎贡献和反馈。\n","wordCount":"96","inLanguage":"en","datePublished":"2018-07-26T09:50:46Z","dateModified":"2018-07-26T09:50:46Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"OpenFaaS on Rancher 2.0","name":"OpenFaaS on Rancher 2.0","description":"这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。\n下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：\nhttps://www.youtube.com/watch?v=kX8mXv5d1qg\u0026amp;amp;feature=youtu.be …","keywords":[],"articleBody":"这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。\n下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：\nhttps://www.youtube.com/watch?v=kX8mXv5d1qg\u0026feature=youtu.be\n这里是创建栈的compose.yml文件：\nversion: \"2\" services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config.file=/etc/prometheus/prometheus.yml, -storage.local.path=/prometheus, -storage.local.memory-chunks=10000, '--alertmanager.url=http://alertmanager:9093'] image: kenfdev/prometheus:latest-cattle labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 我在 Rancher 2.0 中找到一个比较酷的点是compose.yml文件中的变量都可以在 UI 中进行配置，如下图所示：\n新的faas-rancher项目已经转换为使用 Rancher 的 v3 版本的 API，而且基本上已经通过了测试。欢迎贡献和反馈。\n","wordCount":"113","inLanguage":"en","datePublished":"2018-07-26T09:50:46Z","dateModified":"2018-07-26T09:50:46Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -58,6 +58,11 @@ version: &#34;2&#34; services: alertmanager: image: functions/alertmanager:lates
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -83,9 +88,18 @@ OpenFaaS on Rancher 2.0
 July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner>
+</div>
+</details>
+</div>
 <div class=post-content>
-<p>这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。</p>
-<p>下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：</p>
+<p>这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。</p>
+<p>下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：</p>
 <p><a href="https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be">https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be</a></p>
 <p>这里是创建栈的<code>compose.yml</code>文件：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>version</span>: <span style=color:#e6db74>&#34;2&#34;</span>
@@ -137,9 +151,9 @@ July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
     <span style=color:#f92672>stdin_open</span>: <span style=color:#66d9ef>true</span>
     <span style=color:#f92672>tty</span>: <span style=color:#66d9ef>true</span>
     <span style=color:#f92672>scale</span>: <span style=color:#ae81ff>1</span>
-</code></pre></div><p>我在Rancher 2.0中找到一个比较酷的点是<code>compose.yml</code>文件中的变量都可以在UI中进行配置，如下图所示：</p>
+</code></pre></div><p>我在 Rancher 2.0 中找到一个比较酷的点是<code>compose.yml</code>文件中的变量都可以在 UI 中进行配置，如下图所示：</p>
 <p><img src=https://cdn-images-1.medium.com/max/800/1*EBWsJ76oelqjtXIFozZSkQ.png alt></p>
-<p>新的<a href=https://github.com/kenfdev/faas-rancher/tree/v3>faas-rancher</a>项目已经转换为使用Rancher的v3版本的API，而且基本上已经通过了测试。欢迎贡献和反馈。</p>
+<p>新的<a href=https://github.com/kenfdev/faas-rancher/tree/v3>faas-rancher</a>项目已经转换为使用 Rancher 的 v3 版本的 API，而且基本上已经通过了测试。欢迎贡献和反馈。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -171,7 +185,7 @@ July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

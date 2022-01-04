@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
+<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -46,6 +46,11 @@
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
 <li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
+<li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
 </a>
@@ -67,20 +72,52 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-基于以太坊的Parity联盟链部署
+谈谈聊天机器人框架的实现原理
 </h2>
 </header>
 <section class=entry-content>
-<p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity是可以构建出一个基于PoA共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
-部署联盟链 parity的文档：https://wiki.parity.io/Demo-PoA-tutorial
-安装 首先是下载parity，在mac下是直接brew安装即可。
-brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
-// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0节点：...</p>
+<p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
+聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
+我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。
+机器人开发框架 作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。
+然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。
+使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。
+实现方式 webhook 事件回调 FSM 状态机 workflow 工作流 最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。
+那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。
+可能有人不是很懂有限状态机，这里做一下简单说明。
+有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。
+有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
+可以总结为：f(state, action) => state’
+也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。
+可以认为状态机是图灵完备的。
+我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
+我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。
+特点是：
+人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限 示例：
+const {startWith, when, goto, stay, stop} = botkit....</p>
 </section>
 <footer class=entry-footer>
 August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to 基于以太坊的Parity联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
+<a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+基于以太坊的 Parity 联盟链部署
+</h2>
+</header>
+<section class=entry-content>
+<p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity 是可以构建出一个基于 PoA 共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
+部署联盟链 parity 的文档：https://wiki.parity.io/Demo-PoA-tutorial
+安装 首先是下载 parity，在 mac 下是直接 brew 安装即可。
+brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
+// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0 节点：...</p>
+</section>
+<footer class=entry-footer>
+August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to 基于以太坊的 Parity 联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -89,9 +126,9 @@ dive-into-redis
 </h2>
 </header>
 <section class=entry-content>
-<p>redis持久化，
+<p>redis 持久化，
 机制有两种：
-快照：全量备份，二进制序列化，存储紧凑 AOF日志：连续的增量备份，内存数据修改的文本 ...</p>
+快照：全量备份，二进制序列化，存储紧凑 AOF 日志：连续的增量备份，内存数据修改的文本 ...</p>
 </section>
 <footer class=entry-footer>
 August 20, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -101,21 +138,21 @@ August 20, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-golang踩坑
+golang 踩坑
 </h2>
 </header>
 <section class=entry-content>
 <p>一 x509 error when using HTTPS inside a Docker container
-因为docker中没有CA证书。
+因为 docker 中没有 CA 证书。
 普通的镜像解决办法
-FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是alpine的参考这个：
+FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是 alpine 的参考这个：
 FROM docker.finogeeks.club/base/alpine MAINTAINER "zhuzhenfeng@finogeeks.club" RUN set -ex \ && apk add --no-cache ca-certificates COPY src/wallet/wallet /opt/wallet ENTRYPOINT /opt/wallet 二 panic: runtime error: invalid memory address or nil pointer dereference [signal 0xb code=0x1 addr=0x38 pc=0x26df]
 “An error is returned if caused by client policy (such as CheckRedirect), or if there was an HTTP protocol error....</p>
 </section>
 <footer class=entry-footer>
 August 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to golang踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a>
+<a class=entry-link aria-label="post link to golang 踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -142,17 +179,16 @@ August 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 自己动手写区块链
 这里提供两个教程，一个是书，一个是视频。其中视频和书是对应的，不清楚是不是同一个作者。
 Blockchain Tutorial
-私有区块链，我们一起GO
+私有区块链，我们一起 GO
 以太坊开发
 由于我是专注于后端的开发，现在的技术栈是
 node go 正式进入以太坊的开发。这是我这段时间接触到的一些资源：
-go-ethereum：也就是geth，官方的go版本的客户端
+go-ethereum：也就是 geth，官方的 go 版本的客户端
 solidity：智能合约编程语言
-truffle：智能合约的编程框架，基于nodejs
+truffle：智能合约的编程框架，基于 nodejs
 Ganache：启动了多个节点本地私链
 Rinkeby：以太坊测试链
-Etherscan：以太坊区块链浏览器，可以查询交易
-MetaMask：chrome的钱包插件...</p>
+Etherscan：以太坊区块链浏览器，可以查询交易...</p>
 </section>
 <footer class=entry-footer>
 August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
@@ -167,12 +203,12 @@ August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </header>
 <section class=entry-content>
 <p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
-首先先把go的依赖下载下来：
-go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从github上拉下来代码。
+首先先把 go 的依赖下载下来：
+go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从 github 上拉下来代码。
 账户 以太坊的地址在离线状态下也可以创建到。
 创建账户有两种方式：
 以公钥和私钥的形式创建 func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return "", nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println("address: ", address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println("privateKey: ", privateKey) return address, nil } 这种方式一般用的比较少。
-以keystore的形式创建 keystore会创建一个文件，这个文件如下所示：
+以 keystore 的形式创建 keystore 会创建一个文件，这个文件如下所示：
 { "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p>
 </section>
 <footer class=entry-footer>
@@ -187,19 +223,18 @@ contract
 </h2>
 </header>
 <section class=entry-content>
-<p>类型 Solidity是静态类型的语言。
-值类型 bool int/uint fixed/unfixed address balance和transfer send call, callcode和delegatecall byte bytes 和 string 十六进制hex"0012" enum function 引用类型 数组
+<p>类型 Solidity 是静态类型的语言。
+值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex"0012" enum function 引用类型 数组
 uint[]
 结构体
 struct
 映射
 mapping(key => value)
 单元和全局变量 以太币的单位
-在数字后面加上 wei、 finney、 szabo 或 ether。默认是wei
+在数字后面加上 wei、 finney、 szabo 或 ether。默认是 wei
 时间单位
 数字后面带有 seconds、 minutes、 hours、 days、 weeks 和 years。默认是秒。
-区块和交易
-block.blockhash(uint blockNumber) returns (bytes32)：指定区块的区块哈希。 block.coinbase (address): 挖出当前区块的矿工地址 block....</p>
+区块和交易...</p>
 </section>
 <footer class=entry-footer>
 August 3, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
@@ -213,12 +248,12 @@ faas-provider
 </h2>
 </header>
 <section class=entry-content>
-<p>faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。
-faas-provider OpenFaaS官方提供了两套后台provider：
+<p>faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。
+faas-provider OpenFaaS 官方提供了两套后台 provider：
 Docker Swarm Kubernetes 这两者在部署和调用函数的时候流程图如下：
 部署一个函数
 调用一个函数
-provider要提供的一些API有：
+provider 要提供的一些 API 有：
 List / Create / Delete 一个函数 /system/functions
 方法: GET / POST / DELETE
 获取一个函数 /system/function/{name:[-a-zA-Z_0-9]+}
@@ -227,8 +262,8 @@ List / Create / Delete 一个函数 /system/functions
 方法: POST
 调用一个函数 /function/{name:[-a-zA-Z_0-9]+}
 方法: POST
-在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。
-// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc("/system/functions", handlers.FunctionReader).Methods("GET") r.HandleFunc("/system/functions", handlers....</p>
+在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。
+// Serve load your handlers into the correct OpenFaaS route spec....</p>
 </section>
 <footer class=entry-footer>
 August 1, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
@@ -242,15 +277,15 @@ gateway-reading
 </h2>
 </header>
 <section class=entry-content>
-<p>OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
-UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
-源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。
-go-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。
-client_golang是Prometheus的客户端。
-项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test....</p>
+<p>OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
+UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。
+源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。
+go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。
+client_golang 是 Prometheus 的客户端。
+项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test....</p>
 </section>
 <footer class=entry-footer>
-August 1, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
+August 1, 2018&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to gateway-reading" href=https://zhenfeng-zhu.github.io/posts/gateway-reading/></a>
 </article>
@@ -261,53 +296,18 @@ NATS streaming
 </h2>
 </header>
 <section class=entry-content>
-<p>市面上常见到的和Nats功能类似的消息通信系统有：
-ActiveMQ（Java编写）、KafKa（Scala编写）、RabbitMq（Ruby编写）、Nats（之前是Ruby编写现已修改为Go）、Redis（C语言编写）、Kestrel（Scala编写不常用）、NSQ（Go语言编写），这些消息通信系统在Broker吞吐量方面的比较：
-可以看到NATS的吞吐量特别高， NATS原来是使用Ruby编写，可以实现每秒150k消息，后来使用Go语言重写，能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于NATS的详细介绍，请参考上篇文章：NATS简介
-NATS Streaming NATS Streaming是由NATS驱动的数据流系统，也是由go语言写成的，在保证吞吐量和时延的基础上，解决了Nats消息投递一致性的问题。nats streaming可以和核心nats平台无缝嵌入，扩展和互动。
-功能 除了nats平台的一些功能，nats streaming还支持以下的：
-增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅 使用 首先安装nats-streaming-server服务，有多种方式，这里介绍两种：
-homebrew
-直接在命令行启动
-brew install nats-streaming-server go get
-这种方式可以让我们直接运行源码启动
-go get github.com/nats-io/nats-streaming-server 启动nats-streaming-server
-有三种启动方式
-直接启动
-nats-streaming-server 开启nats监控的启动
-nats-streaming-server -m 8222 源码方式启动
-cd $GOPATH/src/github.com/nats-io/nats-streaming-server go run nats-streaming-server.go 客户端 直接下载go的客户端
-go get github.com/nats-io/go-nats-streaming 运行发布者...</p>
+<p>市面上常见到的和 Nats 功能类似的消息通信系统有：
+ActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：
+可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：NATS 简介
+NATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 go 语言写成的，在保证吞吐量和时延的基础上，解决了 Nats 消息投递一致性的问题。nats streaming 可以和核心 nats 平台无缝嵌入，扩展和互动。
+功能 除了 nats 平台的一些功能，nats streaming 还支持以下的：
+增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅 使用 首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：
+homebrew...</p>
 </section>
 <footer class=entry-footer>
 July 30, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to NATS streaming" href=https://zhenfeng-zhu.github.io/posts/nats-streaming/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-nats简介
-</h2>
-</header>
-<section class=entry-content>
-<p>nats是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC和爱立信等公司都有在使用。
-核心基于EventMachine开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向MessageBus发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用nats streaming可以做到持久化，缓存等功能。
-NATS server nats提供了一个go编写的轻量级服务器。发行版包括二进制和docker镜像
-NATS clients
-nats官方提供的客户端有Go，Node，Ruby，Java，C，C＃，NGINX等。
-NATS 设计目标
-核心原则是性能，可伸缩和易用性。
-高效 始终在线和可用 非常轻巧 支持多种质量的服务 支持各种消息传递模型和使用场景 NATS 使用场景 nats是一个简单且强大的消息系统，为支持现代云原生架构设计。由于可伸缩性的复杂性，nats旨在容易使用和实现，且能提供多种质量的服务。
-一些适用nats的场景有：
-高吞吐量的消息分散 —— 少数的生产者需要将数据发送给很多的消费者。 寻址和发现 —— 将数据发送给特定的应用实例，设备或者用户，也可用于发现并连接到基础架构中的实例，设备或用户。 命令和控制（控制面板）—— 向程序或设备发送指令，并从程序/设备中接收状态，如SCADA，卫星遥感，物联网等。 负载均衡 —— 主要应用于程序会生成大量的请求，且可动态伸缩程序实例。 N路可扩展性 —— 通信基础架构能够充分利用go的高效并发/调度机制，以增强水平和垂直的扩展性。 位置透明 —— 程序在各个地理位置上分布者大量实例，且你无法了解到程序之间的端点配置详情，及他们所生产或消费的数据。 容错 使用nats-streaming的附加场景有：
-从特定时间或顺序消费 持久性 有保证的消息投递 NATS消息传递模型 发布订阅 请求回复 排队 NATS的特点 nats的独特功能有：
-纯净的pub-sub 集群模式的server 订阅者的自动裁剪 基于文本的协议 多种服务质量 最多一次投递 至少一次投递 持久 缓存 ...</p>
-</section>
-<footer class=entry-footer>
-July 30, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to nats简介" href=https://zhenfeng-zhu.github.io/posts/nats/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
@@ -316,7 +316,7 @@ July 30, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </nav>
 </footer>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

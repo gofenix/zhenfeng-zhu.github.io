@@ -5,8 +5,8 @@
 <meta name=robots content="index, follow">
 <title>领域实体类 | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。
- pojo类：这是普通的java类，具有一部分的get和set方法。 dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo类：vo有两种说法，一种是view object，一种是value object。 po类：persisent object 持久对象。和pojo类一样，也是只有get set方法，但是这种类一般是用于持久层。 bo类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在domain包，或者entity包里。再细分一下的话，可以把dto类单独提取到一个包里。">
+<meta name=description content="在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。
+ pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -17,10 +17,10 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="领域实体类">
-<meta property="og:description" content="在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。
- pojo类：这是普通的java类，具有一部分的get和set方法。 dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo类：vo有两种说法，一种是view object，一种是value object。 po类：persisent object 持久对象。和pojo类一样，也是只有get set方法，但是这种类一般是用于持久层。 bo类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在domain包，或者entity包里。再细分一下的话，可以把dto类单独提取到一个包里。">
+<meta property="og:description" content="在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。
+ pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -29,10 +29,10 @@
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="领域实体类">
-<meta name=twitter:description content="在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。
- pojo类：这是普通的java类，具有一部分的get和set方法。 dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo类：vo有两种说法，一种是view object，一种是value object。 po类：persisent object 持久对象。和pojo类一样，也是只有get set方法，但是这种类一般是用于持久层。 bo类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在domain包，或者entity包里。再细分一下的话，可以把dto类单独提取到一个包里。">
+<meta name=twitter:description content="在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。
+ pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"领域实体类","item":"https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"领域实体类","name":"领域实体类","description":"在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。\n pojo类：这是普通的java类，具有一部分的get和set方法。 dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo类：vo有两种说法，一种是view …","keywords":[],"articleBody":"在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。\n pojo类：这是普通的java类，具有一部分的get和set方法。 dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo类：vo有两种说法，一种是view object，一种是value object。 po类：persisent object 持久对象。和pojo类一样，也是只有get set方法，但是这种类一般是用于持久层。 bo类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在domain包，或者entity包里。再细分一下的话，可以把dto类单独提取到一个包里。\n","wordCount":"18","inLanguage":"en","datePublished":"2018-03-24T17:53:42Z","dateModified":"2018-03-24T17:53:42Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"领域实体类","name":"领域实体类","description":"在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。\n pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo  …","keywords":[],"articleBody":"在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。\n pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。  根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。\n","wordCount":"49","inLanguage":"en","datePublished":"2018-03-24T17:53:42Z","dateModified":"2018-03-24T17:53:42Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -49,6 +49,11 @@
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -74,24 +79,33 @@
 March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner>
+</div>
+</details>
+</div>
 <div class=post-content>
-<p>在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。</p>
+<p>在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。</p>
 <ul>
-<li>pojo类：这是普通的java类，具有一部分的get和set方法。</li>
-<li>dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。</li>
-<li>vo类：vo有两种说法，一种是view object，一种是value object。</li>
-<li>po类：persisent object 持久对象。和pojo类一样，也是只有get set方法，但是这种类一般是用于持久层。</li>
-<li>bo类：business object，业务对象，表示应用程序领域内事物的所有实体类。</li>
-<li>do类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。</li>
+<li>pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。</li>
+<li>dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。</li>
+<li>vo 类：vo 有两种说法，一种是 view object，一种是 value object。</li>
+<li>po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。</li>
+<li>bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。</li>
+<li>do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。</li>
 </ul>
-<p>根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在domain包，或者entity包里。再细分一下的话，可以把dto类单独提取到一个包里。</p>
+<p>根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>
 <span class=title>« Prev Page</span>
 <br>
-<span>RxJava2快速入门</span>
+<span>RxJava2 快速入门</span>
 </a>
 <a class=next href=https://zhenfeng-zhu.github.io/posts/docker/>
 <span class=title>Next Page »</span>
@@ -116,7 +130,7 @@ March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

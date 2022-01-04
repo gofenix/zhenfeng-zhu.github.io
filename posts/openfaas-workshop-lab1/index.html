@@ -7,7 +7,7 @@
 <meta name=keywords content>
 <meta name=description content="实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。
 任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。
-先决条件： 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
+先决条件 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
 Docker For Mac
  Docker CE for Mac Edge Edition  For Windows
  仅支持 Windows 10 Pro 或 Enterprise 安装 Docker CE for Windows   请确保通过使用 Windows 任务栏通知区域中的 Docker 菜单来使用Linux容器 Docker 守护进程。
@@ -23,11 +23,11 @@ Docker For Mac
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="Openfaas Workshop Lab1">
 <meta property="og:description" content="实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。
 任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。
-先决条件： 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
+先决条件 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
 Docker For Mac
  Docker CE for Mac Edge Edition  For Windows
  仅支持 Windows 10 Pro 或 Enterprise 安装 Docker CE for Windows   请确保通过使用 Windows 任务栏通知区域中的 Docker 菜单来使用Linux容器 Docker 守护进程。
@@ -43,14 +43,14 @@ Docker For Mac
 <meta name=twitter:title content="Openfaas Workshop Lab1">
 <meta name=twitter:description content="实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。
 任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。
-先决条件： 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
+先决条件 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
 Docker For Mac
  Docker CE for Mac Edge Edition  For Windows
  仅支持 Windows 10 Pro 或 Enterprise 安装 Docker CE for Windows   请确保通过使用 Windows 任务栏通知区域中的 Docker 菜单来使用Linux容器 Docker 守护进程。
   安装 Git Bash  当您安装 git bash 时，请选择以下选项：“安装 UNIX 命令”和“使用真实类型的字体”。
  注意：所有步骤请使用Git Bash：不要尝试使用PowerShell，WSL或Bash for Windows。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Openfaas Workshop Lab1","item":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop Lab1","name":"Openfaas Workshop Lab1","description":"实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。\n任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。\n先决条件： 让我们安装 Docker，OpenFaaS CLI …","keywords":[],"articleBody":"实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。\n任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。\n先决条件： 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。\nDocker For Mac\n Docker CE for Mac Edge Edition  For Windows\n 仅支持 Windows 10 Pro 或 Enterprise 安装 Docker CE for Windows   请确保通过使用 Windows 任务栏通知区域中的 Docker 菜单来使用Linux容器 Docker 守护进程。\n  安装 Git Bash  当您安装 git bash 时，请选择以下选项：“安装 UNIX 命令”和“使用真实类型的字体”。\n 注意：所有步骤请使用Git Bash：不要尝试使用PowerShell，WSL或Bash for Windows。\n Linux - Ubuntu 或 Debian\n Docker CE for Linux   您可以从Docker Store上安装 Docker CE。\n 注意：作为最后的手段，如果您的电脑不兼容，您可以在 https://labs.play-with-docker.com/ 上运行研讨会\nOpenFaaS CLI 您可以使用官方 bash 脚本安装 OpenFaaS CLI，“brew”也可以使用，但可能会落后一两个版本。\n使用 MacOS 或 Linux 在终端中运行以下操作：\n$ curl -sLSf https://cli.openfaas.com | sudo sh 对于 Windows，在Git Bash中运行：\n$ curl -sLSf https://cli.openfaas.com | sh  如果遇到任何问题，您可以从发布页面手动下载最新的faas-cli.exe。您可以将其放在本地目录或C:\\Windows\\路径中，以便从命令提示符中获得。\n 我们将使用faas-cli来构建新函数、构建、部署和调用函数。您可以使用faas-cli--help找到可用的 cli 命令。\n测试 faas-cli。打开终端或 Git Bash 窗口并键入：\n$ faas-cli help $ faas-cli version 配置 Docker Hub 注册一个 Docker Hub 帐户。Docker Hub 允许您在互联网上发布 Docker 镜像，以便在多节点集群上使用或与更广泛的社区共享。我们将在研讨会期间使用 Docker Hub 发布我们的函数。\n你可以在这里注册: Docker Hub\n打开终端或 Git Bash 窗口，并使用上面注册的用户名登录 Docker Hub。\n$ docker login  注意：来自社区的提示-如果您在 Windows 机器上运行此命令时出错，请单击任务栏中的 Docker for Windows 图标，然后登录 Docker，而不是登录/创建 Docker ID。\n  设置 OpenFaaS 前缀  OpenFaaS 镜像存储在 Docker 注册表或 Docker Hub 中，我们可以设置一个环境变量，以便您的用户名自动添加到您创建的新函数中。这将为您在研讨会期间节省一些时间。\n编辑 ~/.bashrc 或 ~/.bash_profile - 如果文件不存在就创建一个\n现在添加以下内容-根据上面看到的更改 URL。\nexport OPENFAAS_PREFIX=\"\" # Populate with your Docker Hub username 设置单节点集群 实验室使用 Kubernetes，OpenFaaS 社区不再支持 Swarm。一些实验将使用 faasd ，但是您可能需要更改命令，当使用 faasd 时，我们不为研讨会提供支持。\n Kubernetes: 实验 1b  ","wordCount":"195","inLanguage":"en","datePublished":"2021-03-30T09:54:25+08:00","dateModified":"2021-03-30T09:54:25+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop Lab1","name":"Openfaas Workshop Lab1","description":"实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。\n任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。\n先决条件 让我们安装 Docker，OpenFaaS CLI …","keywords":[],"articleBody":"实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。\n任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。\n先决条件 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。\nDocker For Mac\n Docker CE for Mac Edge Edition  For Windows\n 仅支持 Windows 10 Pro 或 Enterprise 安装 Docker CE for Windows   请确保通过使用 Windows 任务栏通知区域中的 Docker 菜单来使用Linux容器 Docker 守护进程。\n  安装 Git Bash  当您安装 git bash 时，请选择以下选项：“安装 UNIX 命令”和“使用真实类型的字体”。\n 注意：所有步骤请使用Git Bash：不要尝试使用PowerShell，WSL或Bash for Windows。\n Linux - Ubuntu 或 Debian\n Docker CE for Linux   您可以从Docker Store上安装 Docker CE。\n 注意：作为最后的手段，如果您的电脑不兼容，您可以在 https://labs.play-with-docker.com/ 上运行研讨会\nOpenFaaS CLI 您可以使用官方 bash 脚本安装 OpenFaaS CLI，“brew”也可以使用，但可能会落后一两个版本。\n使用 MacOS 或 Linux 在终端中运行以下操作：\n$ curl -sLSf https://cli.openfaas.com | sudo sh 对于 Windows，在Git Bash中运行：\n$ curl -sLSf https://cli.openfaas.com | sh  如果遇到任何问题，您可以从发布页面手动下载最新的faas-cli.exe。您可以将其放在本地目录或C:\\Windows\\路径中，以便从命令提示符中获得。\n 我们将使用faas-cli来构建新函数、构建、部署和调用函数。您可以使用faas-cli--help找到可用的 cli 命令。\n测试 faas-cli。打开终端或 Git Bash 窗口并键入：\n$ faas-cli help $ faas-cli version 配置 Docker Hub 注册一个 Docker Hub 帐户。Docker Hub 允许您在互联网上发布 Docker 镜像，以便在多节点集群上使用或与更广泛的社区共享。我们将在研讨会期间使用 Docker Hub 发布我们的函数。\n你可以在这里注册: Docker Hub\n打开终端或 Git Bash 窗口，并使用上面注册的用户名登录 Docker Hub。\n$ docker login  注意：来自社区的提示-如果您在 Windows 机器上运行此命令时出错，请单击任务栏中的 Docker for Windows 图标，然后登录 Docker，而不是登录/创建 Docker ID。\n  设置 OpenFaaS 前缀  OpenFaaS 镜像存储在 Docker 注册表或 Docker Hub 中，我们可以设置一个环境变量，以便您的用户名自动添加到您创建的新函数中。这将为您在研讨会期间节省一些时间。\n编辑 ~/.bashrc 或 ~/.bash_profile - 如果文件不存在就创建一个\n现在添加以下内容-根据上面看到的更改 URL。\nexport OPENFAAS_PREFIX=\"\" # Populate with your Docker Hub username 设置单节点集群 实验室使用 Kubernetes，OpenFaaS 社区不再支持 Swarm。一些实验将使用 faasd ，但是您可能需要更改命令，当使用 faasd 时，我们不为研讨会提供支持。\n Kubernetes: 实验 1b  ","wordCount":"195","inLanguage":"en","datePublished":"2021-03-30T09:54:25+08:00","dateModified":"2021-03-30T09:54:25+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -67,6 +67,11 @@ Docker For Mac
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -92,12 +97,33 @@ Openfaas Workshop Lab1
 March 30, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#%e5%ae%9e%e9%aa%8c-1---openfaas-%e5%87%86%e5%a4%87 aria-label="实验 1 - OpenFaaS 准备">实验 1 - OpenFaaS 准备</a><ul>
+<li>
+<a href=#%e5%85%88%e5%86%b3%e6%9d%a1%e4%bb%b6 aria-label=先决条件>先决条件</a><ul>
+<li>
+<a href=#docker aria-label=Docker>Docker</a></li><li>
+<a href=#openfaas-cli aria-label="OpenFaaS CLI">OpenFaaS CLI</a></li></ul>
+</li><li>
+<a href=#%e9%85%8d%e7%bd%ae-docker-hub aria-label="配置 Docker Hub">配置 Docker Hub</a><ul>
+<li>
+<a href=#%e8%ae%be%e7%bd%ae%e5%8d%95%e8%8a%82%e7%82%b9%e9%9b%86%e7%be%a4 aria-label=设置单节点集群>设置单节点集群</a></li></ul>
+</li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
 <h1 id=实验-1---openfaas-准备>实验 1 - OpenFaaS 准备<a hidden class=anchor aria-hidden=true href=#实验-1---openfaas-准备>#</a></h1>
 <p></p>
 <p>OpenFaaS 需要一个<a href=https://kubernetes.io>Kubernetes</a> 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。</p>
 <p>任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用<code>faas-cli</code>工具链构建的。</p>
-<h2 id=先决条件>先决条件：<a hidden class=anchor aria-hidden=true href=#先决条件>#</a></h2>
+<h2 id=先决条件>先决条件<a hidden class=anchor aria-hidden=true href=#先决条件>#</a></h2>
 <p>让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。</p>
 <h3 id=docker>Docker<a hidden class=anchor aria-hidden=true href=#docker>#</a></h3>
 <p>For Mac</p>
@@ -191,7 +217,7 @@ $ faas-cli version
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

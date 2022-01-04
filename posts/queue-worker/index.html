@@ -5,12 +5,11 @@
 <meta name=robots content="index, follow">
 <title>queue-worker | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="queue-worker源码分析 异步函数和同步函数 在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
+<meta name=description content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
  网关的路由是：/function/<function_name> 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：
- 网关的路由是：/async-function/<function_name> 客户端获得202的即时响应码 从queue-worker中调用函数 默认情况下，结果是被丢弃的。  查看queue-worker的日志 docker service logs -f func_queue-worker 利用requestbin和X-Callback-Url获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
- 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个url，queue-worker会报告函数的成功或失败。 requestbin会创建一个新的bin，这是互联网的一个url地址，可以从这里获取函数的结果。  源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats和go-nats-streaming是nats和nats-streaming的go版本的客户端。
-faas这个依赖其实是只用到了queue包下面的types.go文件。这个文件是定义了异步请求的Request结构体和一个CanQueueRequests接口。如下所示：
-package queue import &#34;net/url&#34; import &#34;net/http&#34; // Request for asynchronous processing type Request struct { Header http.Header Body []byte Method string QueryString string Function string CallbackURL *url.URL `json:&#34;CallbackUrl&#34;` } // CanQueueRequests can take on asynchronous requests type CanQueueRequests interface { Queue(req *Request) error } 从这里我们就可以明白作者的设计思路，只要是实现了这个CanQueueRequests接口，就可以作为一个queue-worker。">
+ 网关的路由是：/async-function/<function_name> 客户端获得 202 的即时响应码 从 queue-worker 中调用函数 默认情况下，结果是被丢弃的。  查看 queue-worker 的日志 docker service logs -f func_queue-worker 利用 requestbin 和 X-Callback-Url 获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
+ 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。  源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。
+faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/queue-worker/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -21,14 +20,13 @@ package queue import &#34;net/url&#34; import &#34;net/http&#34; // Request for 
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="queue-worker">
-<meta property="og:description" content="queue-worker源码分析 异步函数和同步函数 在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
+<meta property="og:description" content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
  网关的路由是：/function/<function_name> 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：
- 网关的路由是：/async-function/<function_name> 客户端获得202的即时响应码 从queue-worker中调用函数 默认情况下，结果是被丢弃的。  查看queue-worker的日志 docker service logs -f func_queue-worker 利用requestbin和X-Callback-Url获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
- 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个url，queue-worker会报告函数的成功或失败。 requestbin会创建一个新的bin，这是互联网的一个url地址，可以从这里获取函数的结果。  源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats和go-nats-streaming是nats和nats-streaming的go版本的客户端。
-faas这个依赖其实是只用到了queue包下面的types.go文件。这个文件是定义了异步请求的Request结构体和一个CanQueueRequests接口。如下所示：
-package queue import &#34;net/url&#34; import &#34;net/http&#34; // Request for asynchronous processing type Request struct { Header http.Header Body []byte Method string QueryString string Function string CallbackURL *url.URL `json:&#34;CallbackUrl&#34;` } // CanQueueRequests can take on asynchronous requests type CanQueueRequests interface { Queue(req *Request) error } 从这里我们就可以明白作者的设计思路，只要是实现了这个CanQueueRequests接口，就可以作为一个queue-worker。">
+ 网关的路由是：/async-function/<function_name> 客户端获得 202 的即时响应码 从 queue-worker 中调用函数 默认情况下，结果是被丢弃的。  查看 queue-worker 的日志 docker service logs -f func_queue-worker 利用 requestbin 和 X-Callback-Url 获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
+ 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。  源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。
+faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/queue-worker/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -37,14 +35,13 @@ package queue import &#34;net/url&#34; import &#34;net/http&#34; // Request for 
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="queue-worker">
-<meta name=twitter:description content="queue-worker源码分析 异步函数和同步函数 在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
+<meta name=twitter:description content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
  网关的路由是：/function/<function_name> 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：
- 网关的路由是：/async-function/<function_name> 客户端获得202的即时响应码 从queue-worker中调用函数 默认情况下，结果是被丢弃的。  查看queue-worker的日志 docker service logs -f func_queue-worker 利用requestbin和X-Callback-Url获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
- 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个url，queue-worker会报告函数的成功或失败。 requestbin会创建一个新的bin，这是互联网的一个url地址，可以从这里获取函数的结果。  源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats和go-nats-streaming是nats和nats-streaming的go版本的客户端。
-faas这个依赖其实是只用到了queue包下面的types.go文件。这个文件是定义了异步请求的Request结构体和一个CanQueueRequests接口。如下所示：
-package queue import &#34;net/url&#34; import &#34;net/http&#34; // Request for asynchronous processing type Request struct { Header http.Header Body []byte Method string QueryString string Function string CallbackURL *url.URL `json:&#34;CallbackUrl&#34;` } // CanQueueRequests can take on asynchronous requests type CanQueueRequests interface { Queue(req *Request) error } 从这里我们就可以明白作者的设计思路，只要是实现了这个CanQueueRequests接口，就可以作为一个queue-worker。">
+ 网关的路由是：/async-function/<function_name> 客户端获得 202 的即时响应码 从 queue-worker 中调用函数 默认情况下，结果是被丢弃的。  查看 queue-worker 的日志 docker service logs -f func_queue-worker 利用 requestbin 和 X-Callback-Url 获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
+ 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。  源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。
+faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"queue-worker","item":"https://zhenfeng-zhu.github.io/posts/queue-worker/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"queue-worker","name":"queue-worker","description":"queue-worker源码分析 异步函数和同步函数 在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。\n 网关的路由是：/function/\u0026amp;lt;function_name\u0026amp;gt; 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：\n 网关的路由 …","keywords":[],"articleBody":"queue-worker源码分析 异步函数和同步函数 在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。\n 网关的路由是：/function/ 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：\n 网关的路由是：/async-function/ 客户端获得202的即时响应码 从queue-worker中调用函数 默认情况下，结果是被丢弃的。  查看queue-worker的日志 docker service logs -f func_queue-worker 利用requestbin和X-Callback-Url获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：\n 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个url，queue-worker会报告函数的成功或失败。 requestbin会创建一个新的bin，这是互联网的一个url地址，可以从这里获取函数的结果。  源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats和go-nats-streaming是nats和nats-streaming的go版本的客户端。\nfaas这个依赖其实是只用到了queue包下面的types.go文件。这个文件是定义了异步请求的Request结构体和一个CanQueueRequests接口。如下所示：\npackage queue import \"net/url\" import \"net/http\" // Request for asynchronous processing type Request struct { Header http.Header Body []byte Method string QueryString string Function string CallbackURL *url.URL `json:\"CallbackUrl\"` } // CanQueueRequests can take on asynchronous requests type CanQueueRequests interface { Queue(req *Request) error } 从这里我们就可以明白作者的设计思路，只要是实现了这个CanQueueRequests接口，就可以作为一个queue-worker。\n接口实现类NatsQueue 接口的实现类NatsQueue是在handler包里。它的属性都是nats中常用到的，包括clientId，clusterId，url，连接，主题等，如下所示：\n// NatsQueue queue for work type NatsQueue struct { nc stan.Conn // nats的连接 ClientID string // nats的clientId ClusterID string // nats的clusterId NATSURL string // nats的URL Topic string // 主题 } 它的queue方法也很简单，主要做了两件事儿：\n 解析传入的Request对象，并转为json对象out 将out发布到队列里  // Queue request for processing func (q *NatsQueue) Queue(req *queue.Request) error { var err error fmt.Printf(\"NatsQueue - submitting request: %s.\\n\", req.Function) out, err := json.Marshal(req) if err != nil { log.Println(err) } err = q.nc.Publish(q.Topic, out) return err } go语言没有构造方法，所以NatsQueue还用于创建NatsQueue的实例的方法，这里就成为工厂方法。这个工厂方法主要就是从配置文件中读取环境变量的值，然后创建一个nats的连接，相当于给NatsQueue的对象的每个属性进行赋值。\nfunc CreateNatsQueue(address string, port int, clientConfig NatsConfig) (*NatsQueue, error) { queue1 := NatsQueue{} var err error natsURL := fmt.Sprintf(\"nats://%s:%d\", address, port) log.Printf(\"Opening connection to %s\\n\", natsURL) clientID := clientConfig.GetClientID() clusterID := \"faas-cluster\" nc, err := stan.Connect(clusterID, clientID, stan.NatsURL(natsURL)) queue1.nc = nc return \u0026queue1, err } 这个CreateNatsQueue方法是Gateway项目中进行调用，我们可以在Gateway项目的main.go中找到，如果Gateway的配置开启了异步函数支持，就会调用该方法，创建一个NatsQueue对象，然后把函数放到队列中，这里就不深入讲解：\nif config.UseNATS() { log.Println(\"Async enabled: Using NATS Streaming.\") natsQueue, queueErr := natsHandler.CreateNatsQueue(*config.NATSAddress, *config.NATSPort, natsHandler.DefaultNatsConfig{}) if queueErr != nil { log.Fatalln(queueErr) } faasHandlers.QueuedProxy = handlers.MakeQueuedProxy(metricsOptions, true, natsQueue) faasHandlers.AsyncReport = handlers.MakeAsyncReport(metricsOptions) } 到这里，我相信读者也了解到，Gateway其实就是一个发布者，将异步请求扔到队列里。接下来肯定要有一个订阅者将请求消费处理。\n订阅者处理 我们都知道，nats streaming的订阅者订阅到消息之后，会把消息扔给一个回调函数去处理。queue-worker的订阅者实现也是这样，它的实现并不复杂，所有逻辑都在main.go的中。\n我们先看回调函数mcb都做了什么：\n 首先当然是将消息体反序列化成上面说到的用于异步处理的Request对象。 构造http请求的url和querystring，url的格式如下： functionURL := fmt.Sprintf(“http://%s%s:8080/%s”, req.Function, config.FunctionSuffix, queryString) 设置http的header，并以post的形式向functionURL发起请求。 如果请求失败，设置返回状态码为http.StatusServiceUnavailable，并分别处理CallbackURL是否存在的情况。 如果请求成功，同样也是要分别处理CallbackURL是否存在的情况。  当然在这个callback中会根据一些环境变量的存在，选择是否打印日志出来。\nmcb := func(msg *stan.Msg) { i++ printMsg(msg, i) started := time.Now() req := queue.Request{} unmarshalErr := json.Unmarshal(msg.Data, \u0026req) if unmarshalErr != nil { log.Printf(\"Unmarshal error: %s with data %s\", unmarshalErr, msg.Data) return } fmt.Printf(\"Request for %s.\\n\", req.Function) if config.DebugPrintBody { fmt.Println(string(req.Body)) } queryString := \"\" if len(req.QueryString)  0 { queryString = fmt.Sprintf(\"?%s\", strings.TrimLeft(req.QueryString, \"?\")) } functionURL := fmt.Sprintf(\"http://%s%s:8080/%s\", req.Function, config.FunctionSuffix, queryString) request, err := http.NewRequest(http.MethodPost, functionURL, bytes.NewReader(req.Body)) defer request.Body.Close() copyHeaders(request.Header, \u0026req.Header) res, err := client.Do(request) var status int var functionResult []byte if err != nil { status = http.StatusServiceUnavailable log.Println(err) timeTaken := time.Since(started).Seconds() if req.CallbackURL != nil { log.Printf(\"Callback to: %s\\n\", req.CallbackURL.String()) resultStatusCode, resultErr := postResult(\u0026client, res, functionResult, req.CallbackURL.String()) if resultErr != nil { log.Println(resultErr) } else { log.Printf(\"Posted result: %d\", resultStatusCode) } } statusCode, reportErr := postReport(\u0026client, req.Function, status, timeTaken, config.GatewayAddress) if reportErr != nil { log.Println(reportErr) } else { log.Printf(\"Posting report - %d\\n\", statusCode) } return } if res.Body != nil { defer res.Body.Close() resData, err := ioutil.ReadAll(res.Body) functionResult = resData if err != nil { log.Println(err) } if config.WriteDebug { fmt.Println(string(functionResult)) } else { fmt.Printf(\"Wrote %d Bytes\\n\", len(string(functionResult))) } } timeTaken := time.Since(started).Seconds() fmt.Println(res.Status) if req.CallbackURL != nil { log.Printf(\"Callback to: %s\\n\", req.CallbackURL.String()) resultStatusCode, resultErr := postResult(\u0026client, res, functionResult, req.CallbackURL.String()) if resultErr != nil { log.Println(resultErr) } else { log.Printf(\"Posted result: %d\", resultStatusCode) } } statusCode, reportErr := postReport(\u0026client, req.Function, res.StatusCode, timeTaken, config.GatewayAddress) if reportErr != nil { log.Println(reportErr) } else { log.Printf(\"Posting report - %d\\n\", statusCode) } } postResult函数是用来处理callbackURL存在的情况，在这个函数中将结果，以post请求调用callbackURL发送出去。\npostReport函数用来处理callbackURL不存在的情况，这里是将结果发到Gateway网关的\"http://\" + gatewayAddress + \":8088/system/async-report\"中，我们之后就可以从这个url里查询异步函数的执行结果了。\n总结 本文主要分析了NATS Streaming版本的queue worker的实现，通过分析源码我们可以看到OpenFaaS在架构的设计很有考究，充分的考虑到了可扩展性，通过定义接口规范，使得开发者很容易实现自定义。\n","wordCount":"497","inLanguage":"en","datePublished":"2018-09-06T16:23:12Z","dateModified":"2018-09-06T16:23:12Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/queue-worker/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"queue-worker","name":"queue-worker","description":"queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。\n 网关的路由是：/function/\u0026amp;lt;function_name\u0026amp;gt; 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：\n 网关的路由 …","keywords":[],"articleBody":"queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。\n 网关的路由是：/function/ 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：\n 网关的路由是：/async-function/ 客户端获得 202 的即时响应码 从 queue-worker 中调用函数 默认情况下，结果是被丢弃的。  查看 queue-worker 的日志 docker service logs -f func_queue-worker 利用 requestbin 和 X-Callback-Url 获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：\n 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。  源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。\nfaas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：\npackage queue import \"net/url\" import \"net/http\" // Request for asynchronous processing type Request struct { Header http.Header Body []byte Method string QueryString string Function string CallbackURL *url.URL `json:\"CallbackUrl\"` } // CanQueueRequests can take on asynchronous requests type CanQueueRequests interface { Queue(req *Request) error } 从这里我们就可以明白作者的设计思路，只要是实现了这个 CanQueueRequests 接口，就可以作为一个 queue-worker。\n接口实现类 NatsQueue 接口的实现类 NatsQueue 是在 handler 包里。它的属性都是 nats 中常用到的，包括 clientId，clusterId，url，连接，主题等，如下所示：\n// NatsQueue queue for work type NatsQueue struct { nc stan.Conn // nats的连接 ClientID string // nats的clientId ClusterID string // nats的clusterId NATSURL string // nats的URL Topic string // 主题 } 它的 queue 方法也很简单，主要做了两件事儿：\n 解析传入的 Request 对象，并转为 json 对象 out 将 out 发布到队列里  // Queue request for processing func (q *NatsQueue) Queue(req *queue.Request) error { var err error fmt.Printf(\"NatsQueue - submitting request: %s.\\n\", req.Function) out, err := json.Marshal(req) if err != nil { log.Println(err) } err = q.nc.Publish(q.Topic, out) return err } go 语言没有构造方法，所以 NatsQueue 还用于创建 NatsQueue 的实例的方法，这里就成为工厂方法。这个工厂方法主要就是从配置文件中读取环境变量的值，然后创建一个 nats 的连接，相当于给 NatsQueue 的对象的每个属性进行赋值。\nfunc CreateNatsQueue(address string, port int, clientConfig NatsConfig) (*NatsQueue, error) { queue1 := NatsQueue{} var err error natsURL := fmt.Sprintf(\"nats://%s:%d\", address, port) log.Printf(\"Opening connection to %s\\n\", natsURL) clientID := clientConfig.GetClientID() clusterID := \"faas-cluster\" nc, err := stan.Connect(clusterID, clientID, stan.NatsURL(natsURL)) queue1.nc = nc return \u0026queue1, err } 这个 CreateNatsQueue 方法是 Gateway 项目中进行调用，我们可以在 Gateway 项目的 main.go 中找到，如果 Gateway 的配置开启了异步函数支持，就会调用该方法，创建一个 NatsQueue 对象，然后把函数放到队列中，这里就不深入讲解：\nif config.UseNATS() { log.Println(\"Async enabled: Using NATS Streaming.\") natsQueue, queueErr := natsHandler.CreateNatsQueue(*config.NATSAddress, *config.NATSPort, natsHandler.DefaultNatsConfig{}) if queueErr != nil { log.Fatalln(queueErr) } faasHandlers.QueuedProxy = handlers.MakeQueuedProxy(metricsOptions, true, natsQueue) faasHandlers.AsyncReport = handlers.MakeAsyncReport(metricsOptions) } 到这里，我相信读者也了解到，Gateway 其实就是一个发布者，将异步请求扔到队列里。接下来肯定要有一个订阅者将请求消费处理。\n订阅者处理 我们都知道，nats streaming 的订阅者订阅到消息之后，会把消息扔给一个回调函数去处理。queue-worker 的订阅者实现也是这样，它的实现并不复杂，所有逻辑都在 main.go 的中。\n我们先看回调函数 mcb 都做了什么：\n 首先当然是将消息体反序列化成上面说到的用于异步处理的 Request 对象。 构造 http 请求的 url 和 querystring，url 的格式如下： functionURL := fmt.Sprintf(“http://%s%s:8080/%s”, req.Function, config.FunctionSuffix, queryString) 设置 http 的 header，并以 post 的形式向 functionURL 发起请求。 如果请求失败，设置返回状态码为http.StatusServiceUnavailable，并分别处理 CallbackURL 是否存在的情况。 如果请求成功，同样也是要分别处理 CallbackURL 是否存在的情况。  当然在这个 callback 中会根据一些环境变量的存在，选择是否打印日志出来。\nmcb := func(msg *stan.Msg) { i++ printMsg(msg, i) started := time.Now() req := queue.Request{} unmarshalErr := json.Unmarshal(msg.Data, \u0026req) if unmarshalErr != nil { log.Printf(\"Unmarshal error: %s with data %s\", unmarshalErr, msg.Data) return } fmt.Printf(\"Request for %s.\\n\", req.Function) if config.DebugPrintBody { fmt.Println(string(req.Body)) } queryString := \"\" if len(req.QueryString)  0 { queryString = fmt.Sprintf(\"?%s\", strings.TrimLeft(req.QueryString, \"?\")) } functionURL := fmt.Sprintf(\"http://%s%s:8080/%s\", req.Function, config.FunctionSuffix, queryString) request, err := http.NewRequest(http.MethodPost, functionURL, bytes.NewReader(req.Body)) defer request.Body.Close() copyHeaders(request.Header, \u0026req.Header) res, err := client.Do(request) var status int var functionResult []byte if err != nil { status = http.StatusServiceUnavailable log.Println(err) timeTaken := time.Since(started).Seconds() if req.CallbackURL != nil { log.Printf(\"Callback to: %s\\n\", req.CallbackURL.String()) resultStatusCode, resultErr := postResult(\u0026client, res, functionResult, req.CallbackURL.String()) if resultErr != nil { log.Println(resultErr) } else { log.Printf(\"Posted result: %d\", resultStatusCode) } } statusCode, reportErr := postReport(\u0026client, req.Function, status, timeTaken, config.GatewayAddress) if reportErr != nil { log.Println(reportErr) } else { log.Printf(\"Posting report - %d\\n\", statusCode) } return } if res.Body != nil { defer res.Body.Close() resData, err := ioutil.ReadAll(res.Body) functionResult = resData if err != nil { log.Println(err) } if config.WriteDebug { fmt.Println(string(functionResult)) } else { fmt.Printf(\"Wrote %d Bytes\\n\", len(string(functionResult))) } } timeTaken := time.Since(started).Seconds() fmt.Println(res.Status) if req.CallbackURL != nil { log.Printf(\"Callback to: %s\\n\", req.CallbackURL.String()) resultStatusCode, resultErr := postResult(\u0026client, res, functionResult, req.CallbackURL.String()) if resultErr != nil { log.Println(resultErr) } else { log.Printf(\"Posted result: %d\", resultStatusCode) } } statusCode, reportErr := postReport(\u0026client, req.Function, res.StatusCode, timeTaken, config.GatewayAddress) if reportErr != nil { log.Println(reportErr) } else { log.Printf(\"Posting report - %d\\n\", statusCode) } } postResult函数是用来处理 callbackURL 存在的情况，在这个函数中将结果，以 post 请求调用 callbackURL 发送出去。\npostReport函数用来处理 callbackURL 不存在的情况，这里是将结果发到 Gateway 网关的\"http://\" + gatewayAddress + \":8088/system/async-report\"中，我们之后就可以从这个 url 里查询异步函数的执行结果了。\n总结 本文主要分析了 NATS Streaming 版本的 queue worker 的实现，通过分析源码我们可以看到 OpenFaaS 在架构的设计很有考究，充分的考虑到了可扩展性，通过定义接口规范，使得开发者很容易实现自定义。\n","wordCount":"621","inLanguage":"en","datePublished":"2018-09-06T16:23:12Z","dateModified":"2018-09-06T16:23:12Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/queue-worker/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -61,6 +58,11 @@ package queue import &#34;net/url&#34; import &#34;net/http&#34; // Request for 
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -86,10 +88,30 @@ queue-worker
 September 6, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#queue-worker-%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90 aria-label="queue-worker 源码分析">queue-worker 源码分析</a><ul>
+<li>
+<a href=#%e5%bc%82%e6%ad%a5%e5%87%bd%e6%95%b0%e5%92%8c%e5%90%8c%e6%ad%a5%e5%87%bd%e6%95%b0 aria-label=异步函数和同步函数><strong>异步函数和同步函数</strong></a></li><li>
+<a href=#%e6%9f%a5%e7%9c%8b-queue-worker-%e7%9a%84%e6%97%a5%e5%bf%97 aria-label="查看 queue-worker 的日志"><strong>查看 queue-worker 的日志</strong></a></li><li>
+<a href=#%e5%88%a9%e7%94%a8-requestbin-%e5%92%8c-x-callback-url-%e8%8e%b7%e5%8f%96%e5%bc%82%e6%ad%a5%e5%87%bd%e6%95%b0%e7%9a%84%e7%bb%93%e6%9e%9c aria-label="利用 requestbin 和 X-Callback-Url 获取异步函数的结果"><strong>利用 requestbin 和 X-Callback-Url 获取异步函数的结果</strong></a></li><li>
+<a href=#%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90 aria-label=源码分析><strong>源码分析</strong></a></li><li>
+<a href=#%e4%be%9d%e8%b5%96%e9%a1%b9 aria-label=依赖项><strong>依赖项</strong></a></li><li>
+<a href=#%e6%8e%a5%e5%8f%a3%e5%ae%9e%e7%8e%b0%e7%b1%bb-natsqueue aria-label="接口实现类 NatsQueue"><strong>接口实现类 NatsQueue</strong></a></li><li>
+<a href=#%e8%ae%a2%e9%98%85%e8%80%85%e5%a4%84%e7%90%86 aria-label=订阅者处理><strong>订阅者处理</strong></a></li><li>
+<a href=#%e6%80%bb%e7%bb%93 aria-label=总结><strong>总结</strong></a></li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
-<h1 id=queue-worker源码分析>queue-worker源码分析<a hidden class=anchor aria-hidden=true href=#queue-worker源码分析>#</a></h1>
+<h1 id=queue-worker-源码分析>queue-worker 源码分析<a hidden class=anchor aria-hidden=true href=#queue-worker-源码分析>#</a></h1>
 <h2 id=异步函数和同步函数><strong>异步函数和同步函数</strong><a hidden class=anchor aria-hidden=true href=#异步函数和同步函数>#</a></h2>
-<p>在OpenFaaS中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。</p>
+<p>在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。</p>
 <ul>
 <li>网关的路由是：<code>/function/&lt;function_name></code></li>
 <li>必须等待</li>
@@ -99,35 +121,35 @@ September 6, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 <p>异步函数会有一些差异：</p>
 <ul>
 <li>网关的路由是：<code>/async-function/&lt;function_name></code></li>
-<li>客户端获得202的即时响应码</li>
-<li>从queue-worker中调用函数</li>
+<li>客户端获得 202 的即时响应码</li>
+<li>从 queue-worker 中调用函数</li>
 <li>默认情况下，结果是被丢弃的。</li>
 </ul>
-<h2 id=查看queue-worker的日志><strong>查看queue-worker的日志</strong><a hidden class=anchor aria-hidden=true href=#查看queue-worker的日志>#</a></h2>
+<h2 id=查看-queue-worker-的日志><strong>查看 queue-worker 的日志</strong><a hidden class=anchor aria-hidden=true href=#查看-queue-worker-的日志>#</a></h2>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>docker service logs -f func_queue-worker
-</code></pre></div><h2 id=利用requestbin和x-callback-url获取异步函数的结果><strong>利用requestbin和X-Callback-Url获取异步函数的结果</strong><a hidden class=anchor aria-hidden=true href=#利用requestbin和x-callback-url获取异步函数的结果>#</a></h2>
+</code></pre></div><h2 id=利用-requestbin-和-x-callback-url-获取异步函数的结果><strong>利用 requestbin 和 X-Callback-Url 获取异步函数的结果</strong><a hidden class=anchor aria-hidden=true href=#利用-requestbin-和-x-callback-url-获取异步函数的结果>#</a></h2>
 <p>如果需要获得异步函数的结果，有两个方法：</p>
 <ul>
 <li>更改代码，将结果返回给端点或者消息系统</li>
 <li>利用内置的回调
-内置的回调将会允许函数提供一个url，queue-worker会报告函数的成功或失败。
-requestbin会创建一个新的bin，这是互联网的一个url地址，可以从这里获取函数的结果。</li>
+内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。
+requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。</li>
 </ul>
 <p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fuzvzbcz2vj30k00b3aar.jpg alt></p>
 <p><img src=https://ws3.sinaimg.cn/large/006tNbRwgy1fuzvztfu66j30k00b2757.jpg alt></p>
 <p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fuzw08o8w3j30k00b1aay.jpg alt></p>
 <h2 id=源码分析><strong>源码分析</strong><a hidden class=anchor aria-hidden=true href=#源码分析>#</a></h2>
 <h2 id=依赖项><strong>依赖项</strong><a hidden class=anchor aria-hidden=true href=#依赖项>#</a></h2>
-<pre tabindex=0><code>github.com/nats-io/go-nats-streaming
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>github.com/nats-io/go-nats-streaming
 github.com/nats-io/go-nats
 
 github.com/openfaas/faas
-</code></pre><p>go-nats和go-nats-streaming是nats和nats-streaming的go版本的客户端。</p>
-<p>faas这个依赖其实是只用到了queue包下面的types.go文件。这个文件是定义了异步请求的Request结构体和一个CanQueueRequests接口。如下所示：</p>
-<pre tabindex=0><code>package queue
+</code></pre></div><p>go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。</p>
+<p>faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package queue
 
-import &quot;net/url&quot;
-import &quot;net/http&quot;
+import &#34;net/url&#34;
+import &#34;net/http&#34;
 
 // Request for asynchronous processing
 type Request struct {
@@ -136,17 +158,17 @@ type Request struct {
     Method      string
     QueryString string
     Function    string
-    CallbackURL *url.URL `json:&quot;CallbackUrl&quot;`
+    CallbackURL *url.URL `json:&#34;CallbackUrl&#34;`
 }
 
 // CanQueueRequests can take on asynchronous requests
 type CanQueueRequests interface {
     Queue(req *Request) error
 }
-</code></pre><p>从这里我们就可以明白作者的设计思路，只要是实现了这个CanQueueRequests接口，就可以作为一个queue-worker。</p>
-<h2 id=接口实现类natsqueue><strong>接口实现类NatsQueue</strong><a hidden class=anchor aria-hidden=true href=#接口实现类natsqueue>#</a></h2>
-<p>接口的实现类NatsQueue是在handler包里。它的属性都是nats中常用到的，包括clientId，clusterId，url，连接，主题等，如下所示：</p>
-<pre tabindex=0><code>// NatsQueue queue for work
+</code></pre></div><p>从这里我们就可以明白作者的设计思路，只要是实现了这个 CanQueueRequests 接口，就可以作为一个 queue-worker。</p>
+<h2 id=接口实现类-natsqueue><strong>接口实现类 NatsQueue</strong><a hidden class=anchor aria-hidden=true href=#接口实现类-natsqueue>#</a></h2>
+<p>接口的实现类 NatsQueue 是在 handler 包里。它的属性都是 nats 中常用到的，包括 clientId，clusterId，url，连接，主题等，如下所示：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// NatsQueue queue for work
 type NatsQueue struct {
     nc        stan.Conn    // nats的连接
     ClientID  string       // nats的clientId
@@ -154,16 +176,16 @@ type NatsQueue struct {
     NATSURL   string       // nats的URL
     Topic     string       // 主题
 }
-</code></pre><p>它的queue方法也很简单，主要做了两件事儿：</p>
+</code></pre></div><p>它的 queue 方法也很简单，主要做了两件事儿：</p>
 <ol>
-<li>解析传入的Request对象，并转为json对象out</li>
-<li>将out发布到队列里</li>
+<li>解析传入的 Request 对象，并转为 json 对象 out</li>
+<li>将 out 发布到队列里</li>
 </ol>
-<pre tabindex=0><code>// Queue request for processing
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// Queue request for processing
 func (q *NatsQueue) Queue(req *queue.Request) error {
     var err error
 
-    fmt.Printf(&quot;NatsQueue - submitting request: %s.\n&quot;, req.Function)
+    fmt.Printf(&#34;NatsQueue - submitting request: %s.\n&#34;, req.Function)
 
     out, err := json.Marshal(req)
     if err != nil {
@@ -174,24 +196,24 @@ func (q *NatsQueue) Queue(req *queue.Request) error {
 
     return err
 }
-</code></pre><p>go语言没有构造方法，所以NatsQueue还用于创建NatsQueue的实例的方法，这里就成为工厂方法。这个工厂方法主要就是从配置文件中读取环境变量的值，然后创建一个nats的连接，相当于给NatsQueue的对象的每个属性进行赋值。</p>
-<pre tabindex=0><code>func CreateNatsQueue(address string, port int, clientConfig NatsConfig) (*NatsQueue, error) {
+</code></pre></div><p>go 语言没有构造方法，所以 NatsQueue 还用于创建 NatsQueue 的实例的方法，这里就成为工厂方法。这个工厂方法主要就是从配置文件中读取环境变量的值，然后创建一个 nats 的连接，相当于给 NatsQueue 的对象的每个属性进行赋值。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func CreateNatsQueue(address string, port int, clientConfig NatsConfig) (*NatsQueue, error) {
     queue1 := NatsQueue{}
     var err error
-    natsURL := fmt.Sprintf(&quot;nats://%s:%d&quot;, address, port)
-    log.Printf(&quot;Opening connection to %s\n&quot;, natsURL)
+    natsURL := fmt.Sprintf(&#34;nats://%s:%d&#34;, address, port)
+    log.Printf(&#34;Opening connection to %s\n&#34;, natsURL)
 
     clientID := clientConfig.GetClientID()
-    clusterID := &quot;faas-cluster&quot;
+    clusterID := &#34;faas-cluster&#34;
 
     nc, err := stan.Connect(clusterID, clientID, stan.NatsURL(natsURL))
     queue1.nc = nc
 
     return &amp;queue1, err
 }
-</code></pre><p>这个CreateNatsQueue方法是Gateway项目中进行调用，我们可以在Gateway项目的main.go中找到，如果Gateway的配置开启了异步函数支持，就会调用该方法，创建一个NatsQueue对象，然后把函数放到队列中，这里就不深入讲解：</p>
-<pre tabindex=0><code>if config.UseNATS() {
-        log.Println(&quot;Async enabled: Using NATS Streaming.&quot;)
+</code></pre></div><p>这个 CreateNatsQueue 方法是 Gateway 项目中进行调用，我们可以在 Gateway 项目的 main.go 中找到，如果 Gateway 的配置开启了异步函数支持，就会调用该方法，创建一个 NatsQueue 对象，然后把函数放到队列中，这里就不深入讲解：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>if config.UseNATS() {
+        log.Println(&#34;Async enabled: Using NATS Streaming.&#34;)
         natsQueue, queueErr := natsHandler.CreateNatsQueue(*config.NATSAddress, *config.NATSPort, natsHandler.DefaultNatsConfig{})
         if queueErr != nil {
             log.Fatalln(queueErr)
@@ -200,20 +222,20 @@ func (q *NatsQueue) Queue(req *queue.Request) error {
         faasHandlers.QueuedProxy = handlers.MakeQueuedProxy(metricsOptions, true, natsQueue)
         faasHandlers.AsyncReport = handlers.MakeAsyncReport(metricsOptions)
 }
-</code></pre><p>到这里，我相信读者也了解到，Gateway其实就是一个发布者，将异步请求扔到队列里。接下来肯定要有一个订阅者将请求消费处理。</p>
+</code></pre></div><p>到这里，我相信读者也了解到，Gateway 其实就是一个发布者，将异步请求扔到队列里。接下来肯定要有一个订阅者将请求消费处理。</p>
 <h2 id=订阅者处理><strong>订阅者处理</strong><a hidden class=anchor aria-hidden=true href=#订阅者处理>#</a></h2>
-<p>我们都知道，nats streaming的订阅者订阅到消息之后，会把消息扔给一个回调函数去处理。queue-worker的订阅者实现也是这样，它的实现并不复杂，所有逻辑都在main.go的中。</p>
-<p>我们先看回调函数mcb都做了什么：</p>
+<p>我们都知道，nats streaming 的订阅者订阅到消息之后，会把消息扔给一个回调函数去处理。queue-worker 的订阅者实现也是这样，它的实现并不复杂，所有逻辑都在 main.go 的中。</p>
+<p>我们先看回调函数 mcb 都做了什么：</p>
 <ol>
-<li>首先当然是将消息体反序列化成上面说到的用于异步处理的Request对象。</li>
-<li>构造http请求的url和querystring，url的格式如下：
+<li>首先当然是将消息体反序列化成上面说到的用于异步处理的 Request 对象。</li>
+<li>构造 http 请求的 url 和 querystring，url 的格式如下：
 functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, config.FunctionSuffix, queryString)</li>
-<li>设置http的header，并以post的形式向functionURL发起请求。</li>
-<li>如果请求失败，设置返回状态码为<code>http.StatusServiceUnavailable</code>，并分别处理CallbackURL是否存在的情况。</li>
-<li>如果请求成功，同样也是要分别处理CallbackURL是否存在的情况。</li>
+<li>设置 http 的 header，并以 post 的形式向 functionURL 发起请求。</li>
+<li>如果请求失败，设置返回状态码为<code>http.StatusServiceUnavailable</code>，并分别处理 CallbackURL 是否存在的情况。</li>
+<li>如果请求成功，同样也是要分别处理 CallbackURL 是否存在的情况。</li>
 </ol>
-<p>当然在这个callback中会根据一些环境变量的存在，选择是否打印日志出来。</p>
-<pre tabindex=0><code>mcb := func(msg *stan.Msg) {
+<p>当然在这个 callback 中会根据一些环境变量的存在，选择是否打印日志出来。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>mcb := func(msg *stan.Msg) {
         i++
 
         printMsg(msg, i)
@@ -224,22 +246,22 @@ functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, conf
         unmarshalErr := json.Unmarshal(msg.Data, &amp;req)
 
         if unmarshalErr != nil {
-            log.Printf(&quot;Unmarshal error: %s with data %s&quot;, unmarshalErr, msg.Data)
+            log.Printf(&#34;Unmarshal error: %s with data %s&#34;, unmarshalErr, msg.Data)
             return
         }
 
-        fmt.Printf(&quot;Request for %s.\n&quot;, req.Function)
+        fmt.Printf(&#34;Request for %s.\n&#34;, req.Function)
 
         if config.DebugPrintBody {
             fmt.Println(string(req.Body))
         }
 
-        queryString := &quot;&quot;
+        queryString := &#34;&#34;
         if len(req.QueryString) &gt; 0 {
-            queryString = fmt.Sprintf(&quot;?%s&quot;, strings.TrimLeft(req.QueryString, &quot;?&quot;))
+            queryString = fmt.Sprintf(&#34;?%s&#34;, strings.TrimLeft(req.QueryString, &#34;?&#34;))
         }
 
-        functionURL := fmt.Sprintf(&quot;http://%s%s:8080/%s&quot;, req.Function, config.FunctionSuffix, queryString)
+        functionURL := fmt.Sprintf(&#34;http://%s%s:8080/%s&#34;, req.Function, config.FunctionSuffix, queryString)
 
         request, err := http.NewRequest(http.MethodPost, functionURL, bytes.NewReader(req.Body))
         defer request.Body.Close()
@@ -257,13 +279,13 @@ functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, conf
             timeTaken := time.Since(started).Seconds()
 
             if req.CallbackURL != nil {
-                log.Printf(&quot;Callback to: %s\n&quot;, req.CallbackURL.String())
+                log.Printf(&#34;Callback to: %s\n&#34;, req.CallbackURL.String())
 
                 resultStatusCode, resultErr := postResult(&amp;client, res, functionResult, req.CallbackURL.String())
                 if resultErr != nil {
                     log.Println(resultErr)
                 } else {
-                    log.Printf(&quot;Posted result: %d&quot;, resultStatusCode)
+                    log.Printf(&#34;Posted result: %d&#34;, resultStatusCode)
                 }
             }
 
@@ -271,7 +293,7 @@ functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, conf
             if reportErr != nil {
                 log.Println(reportErr)
             } else {
-                log.Printf(&quot;Posting report - %d\n&quot;, statusCode)
+                log.Printf(&#34;Posting report - %d\n&#34;, statusCode)
             }
             return
         }
@@ -289,7 +311,7 @@ functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, conf
             if config.WriteDebug {
                 fmt.Println(string(functionResult))
             } else {
-                fmt.Printf(&quot;Wrote %d Bytes\n&quot;, len(string(functionResult)))
+                fmt.Printf(&#34;Wrote %d Bytes\n&#34;, len(string(functionResult)))
             }
         }
 
@@ -298,12 +320,12 @@ functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, conf
         fmt.Println(res.Status)
 
         if req.CallbackURL != nil {
-            log.Printf(&quot;Callback to: %s\n&quot;, req.CallbackURL.String())
+            log.Printf(&#34;Callback to: %s\n&#34;, req.CallbackURL.String())
             resultStatusCode, resultErr := postResult(&amp;client, res, functionResult, req.CallbackURL.String())
             if resultErr != nil {
                 log.Println(resultErr)
             } else {
-                log.Printf(&quot;Posted result: %d&quot;, resultStatusCode)
+                log.Printf(&#34;Posted result: %d&#34;, resultStatusCode)
             }
         }
 
@@ -312,13 +334,13 @@ functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, conf
         if reportErr != nil {
             log.Println(reportErr)
         } else {
-            log.Printf(&quot;Posting report - %d\n&quot;, statusCode)
+            log.Printf(&#34;Posting report - %d\n&#34;, statusCode)
         }
 }
-</code></pre><p><code>postResult</code>函数是用来处理callbackURL存在的情况，在这个函数中将结果，以post请求调用callbackURL发送出去。</p>
-<p><code>postReport</code>函数用来处理callbackURL不存在的情况，这里是将结果发到Gateway网关的<code>"http://" + gatewayAddress + ":8088/system/async-report"</code>中，我们之后就可以从这个url里查询异步函数的执行结果了。</p>
+</code></pre></div><p><code>postResult</code>函数是用来处理 callbackURL 存在的情况，在这个函数中将结果，以 post 请求调用 callbackURL 发送出去。</p>
+<p><code>postReport</code>函数用来处理 callbackURL 不存在的情况，这里是将结果发到 Gateway 网关的<code>"http://" + gatewayAddress + ":8088/system/async-report"</code>中，我们之后就可以从这个 url 里查询异步函数的执行结果了。</p>
 <h2 id=总结><strong>总结</strong><a hidden class=anchor aria-hidden=true href=#总结>#</a></h2>
-<p>本文主要分析了NATS Streaming版本的queue worker的实现，通过分析源码我们可以看到OpenFaaS在架构的设计很有考究，充分的考虑到了可扩展性，通过定义接口规范，使得开发者很容易实现自定义。</p>
+<p>本文主要分析了 NATS Streaming 版本的 queue worker 的实现，通过分析源码我们可以看到 OpenFaaS 在架构的设计很有考究，充分的考虑到了可扩展性，通过定义接口规范，使得开发者很容易实现自定义。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -350,7 +372,7 @@ functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, conf
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

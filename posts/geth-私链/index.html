@@ -5,8 +5,8 @@
 <meta name=robots content="index, follow">
 <title>Geth 私链 | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。
-genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#34;: 0, &#34;eip155Block&#34;: 0, &#34;eip158Block&#34;: 0 }, &#34;coinbase&#34; : &#34;0x0000000000000000000000000000000000000000&#34;, &#34;difficulty&#34; : &#34;0x40000&#34;, &#34;extraData&#34; : &#34;&#34;, &#34;gasLimit&#34; : &#34;0xffffffff&#34;, &#34;nonce&#34; : &#34;0x0000000000000042&#34;, &#34;mixhash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;parentHash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;timestamp&#34; : &#34;0x00&#34;, &#34;alloc&#34;: { } }    参数 描述     nonce nonce就是一个64位随机数，用于挖矿   mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash   difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的hash值，因为是创世块，所以这个值是0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.">
+<meta name=description content="在上一篇文章《Geth 入门》中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。
+genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#34;: 0, &#34;eip155Block&#34;: 0, &#34;eip158Block&#34;: 0 }, &#34;coinbase&#34; : &#34;0x0000000000000000000000000000000000000000&#34;, &#34;difficulty&#34; : &#34;0x40000&#34;, &#34;extraData&#34; : &#34;&#34;, &#34;gasLimit&#34; : &#34;0xffffffff&#34;, &#34;nonce&#34; : &#34;0x0000000000000042&#34;, &#34;mixhash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;parentHash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;timestamp&#34; : &#34;0x00&#34;, &#34;alloc&#34;: { } }    参数 描述     nonce nonce 就是一个 64 位随机数，用于挖矿   mixhash 与 nonce 配合用于挖矿，由上一个区块的一部分生成的 hash   difficulty 设置当前区块的难度，如果难度过大，cpu 挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的 hash 值，因为是创世块，所以这个值是 0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对 GAS 的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的 json 文件中，缺少 config 部分。看到这个信息，我们不需要把 geth 退回到 v1.">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -17,10 +17,10 @@ genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#3
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="Geth 私链">
-<meta property="og:description" content="在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。
-genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#34;: 0, &#34;eip155Block&#34;: 0, &#34;eip158Block&#34;: 0 }, &#34;coinbase&#34; : &#34;0x0000000000000000000000000000000000000000&#34;, &#34;difficulty&#34; : &#34;0x40000&#34;, &#34;extraData&#34; : &#34;&#34;, &#34;gasLimit&#34; : &#34;0xffffffff&#34;, &#34;nonce&#34; : &#34;0x0000000000000042&#34;, &#34;mixhash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;parentHash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;timestamp&#34; : &#34;0x00&#34;, &#34;alloc&#34;: { } }    参数 描述     nonce nonce就是一个64位随机数，用于挖矿   mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash   difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的hash值，因为是创世块，所以这个值是0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.">
+<meta property="og:description" content="在上一篇文章《Geth 入门》中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。
+genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#34;: 0, &#34;eip155Block&#34;: 0, &#34;eip158Block&#34;: 0 }, &#34;coinbase&#34; : &#34;0x0000000000000000000000000000000000000000&#34;, &#34;difficulty&#34; : &#34;0x40000&#34;, &#34;extraData&#34; : &#34;&#34;, &#34;gasLimit&#34; : &#34;0xffffffff&#34;, &#34;nonce&#34; : &#34;0x0000000000000042&#34;, &#34;mixhash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;parentHash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;timestamp&#34; : &#34;0x00&#34;, &#34;alloc&#34;: { } }    参数 描述     nonce nonce 就是一个 64 位随机数，用于挖矿   mixhash 与 nonce 配合用于挖矿，由上一个区块的一部分生成的 hash   difficulty 设置当前区块的难度，如果难度过大，cpu 挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的 hash 值，因为是创世块，所以这个值是 0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对 GAS 的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的 json 文件中，缺少 config 部分。看到这个信息，我们不需要把 geth 退回到 v1.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -29,10 +29,10 @@ genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#3
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Geth 私链">
-<meta name=twitter:description content="在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。
-genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#34;: 0, &#34;eip155Block&#34;: 0, &#34;eip158Block&#34;: 0 }, &#34;coinbase&#34; : &#34;0x0000000000000000000000000000000000000000&#34;, &#34;difficulty&#34; : &#34;0x40000&#34;, &#34;extraData&#34; : &#34;&#34;, &#34;gasLimit&#34; : &#34;0xffffffff&#34;, &#34;nonce&#34; : &#34;0x0000000000000042&#34;, &#34;mixhash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;parentHash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;timestamp&#34; : &#34;0x00&#34;, &#34;alloc&#34;: { } }    参数 描述     nonce nonce就是一个64位随机数，用于挖矿   mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash   difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的hash值，因为是创世块，所以这个值是0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.">
+<meta name=twitter:description content="在上一篇文章《Geth 入门》中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。
+genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#34;: 0, &#34;eip155Block&#34;: 0, &#34;eip158Block&#34;: 0 }, &#34;coinbase&#34; : &#34;0x0000000000000000000000000000000000000000&#34;, &#34;difficulty&#34; : &#34;0x40000&#34;, &#34;extraData&#34; : &#34;&#34;, &#34;gasLimit&#34; : &#34;0xffffffff&#34;, &#34;nonce&#34; : &#34;0x0000000000000042&#34;, &#34;mixhash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;parentHash&#34; : &#34;0x0000000000000000000000000000000000000000000000000000000000000000&#34;, &#34;timestamp&#34; : &#34;0x00&#34;, &#34;alloc&#34;: { } }    参数 描述     nonce nonce 就是一个 64 位随机数，用于挖矿   mixhash 与 nonce 配合用于挖矿，由上一个区块的一部分生成的 hash   difficulty 设置当前区块的难度，如果难度过大，cpu 挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的 hash 值，因为是创世块，所以这个值是 0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对 GAS 的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的 json 文件中，缺少 config 部分。看到这个信息，我们不需要把 geth 退回到 v1.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Geth 私链","item":"https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Geth 私链","name":"Geth 私链","description":"在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。\ngenesis.json { \u0026amp;#34;config\u0026amp;#34;: { \u0026amp;#34;chainId\u0026amp;#34;: 10, \u0026amp;#34;homesteadBlock\u0026amp;#34;: 0, \u0026amp;#34;eip155Block\u0026amp;#34;: 0, …","keywords":[],"articleBody":"在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。\ngenesis.json { \"config\": { \"chainId\": 10, \"homesteadBlock\": 0, \"eip155Block\": 0, \"eip158Block\": 0 }, \"coinbase\" : \"0x0000000000000000000000000000000000000000\", \"difficulty\" : \"0x40000\", \"extraData\" : \"\", \"gasLimit\" : \"0xffffffff\", \"nonce\" : \"0x0000000000000042\", \"mixhash\" : \"0x0000000000000000000000000000000000000000000000000000000000000000\", \"parentHash\" : \"0x0000000000000000000000000000000000000000000000000000000000000000\", \"timestamp\" : \"0x00\", \"alloc\": { } }    参数 描述     nonce nonce就是一个64位随机数，用于挖矿   mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash   difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的hash值，因为是创世块，所以这个值是0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.5版本，而是需要加上config部分。    创建创世区块 打开终端，输入以下命令，在当前目录下创建创世区块。\ngeth --datadir \"./\" init genesis.json 可以发现在当前目录新增了两个文件夹：\n geth中保存的是区块链的相关数据 keystore中保存的是该链条中的用户信息  启动私链 geth --datadir \"./\" --nodiscover console 2geth.log  --datadir：代表以太坊私链的创世区块的地址 --nodiscover：私链不要让公链上的节点发现  也可将此命令写入一个shell文件中，每次启动的时候执行脚本就可以了。\n输入此命令后，就可以进入到geth的控制台中了，在这里可以进行挖矿，智能合约的编写。\n","wordCount":"96","inLanguage":"en","datePublished":"2020-11-20T15:59:22+08:00","dateModified":"2020-11-20T15:59:22+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Geth 私链","name":"Geth 私链","description":"在上一篇文章《Geth 入门》中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。\ngenesis.json { \u0026amp;#34;config\u0026amp;#34;: { \u0026amp;#34;chainId\u0026amp;#34;: 10, \u0026amp;#34;homesteadBlock\u0026amp;#34;: 0, \u0026amp;#34;eip155Block\u0026amp;#34;: 0, …","keywords":[],"articleBody":"在上一篇文章《Geth 入门》中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。\ngenesis.json { \"config\": { \"chainId\": 10, \"homesteadBlock\": 0, \"eip155Block\": 0, \"eip158Block\": 0 }, \"coinbase\" : \"0x0000000000000000000000000000000000000000\", \"difficulty\" : \"0x40000\", \"extraData\" : \"\", \"gasLimit\" : \"0xffffffff\", \"nonce\" : \"0x0000000000000042\", \"mixhash\" : \"0x0000000000000000000000000000000000000000000000000000000000000000\", \"parentHash\" : \"0x0000000000000000000000000000000000000000000000000000000000000000\", \"timestamp\" : \"0x00\", \"alloc\": { } }    参数 描述     nonce nonce 就是一个 64 位随机数，用于挖矿   mixhash 与 nonce 配合用于挖矿，由上一个区块的一部分生成的 hash   difficulty 设置当前区块的难度，如果难度过大，cpu 挖矿就很难，这里设置较小难度   alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以   coinbase 矿工的账号，随便填   timestamp 设置创世块的时间戳   parentHash 上一个区块的 hash 值，因为是创世块，所以这个值是 0   extraData 附加信息，随便填，可以填你的个性信息   gasLimit 该值设置对 GAS 的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。   config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的 json 文件中，缺少 config 部分。看到这个信息，我们不需要把 geth 退回到 v1.5 版本，而是需要加上 config 部分。    创建创世区块 打开终端，输入以下命令，在当前目录下创建创世区块。\ngeth --datadir \"./\" init genesis.json 可以发现在当前目录新增了两个文件夹：\n geth 中保存的是区块链的相关数据 keystore 中保存的是该链条中的用户信息  启动私链 geth --datadir \"./\" --nodiscover console 2geth.log  --datadir：代表以太坊私链的创世区块的地址 --nodiscover：私链不要让公链上的节点发现  也可将此命令写入一个 shell 文件中，每次启动的时候执行脚本就可以了。\n输入此命令后，就可以进入到 geth 的控制台中了，在这里可以进行挖矿，智能合约的编写。\n","wordCount":"127","inLanguage":"en","datePublished":"2020-11-20T15:59:22+08:00","dateModified":"2020-11-20T15:59:22+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -49,6 +49,11 @@ genesis.json { &#34;config&#34;: { &#34;chainId&#34;: 10, &#34;homesteadBlock&#3
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -74,8 +79,20 @@ Geth 私链
 November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#genesisjson aria-label=genesis.json>genesis.json</a></li><li>
+<a href=#%e5%88%9b%e5%bb%ba%e5%88%9b%e4%b8%96%e5%8c%ba%e5%9d%97 aria-label=创建创世区块>创建创世区块</a></li><li>
+<a href=#%e5%90%af%e5%8a%a8%e7%a7%81%e9%93%be aria-label=启动私链>启动私链</a></li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
-<p>在上一篇文章<a href=https://github.com/zhenfeng-zhu/articles/issues/1>《Geth入门》</a>中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。</p>
+<p>在上一篇文章<a href=https://github.com/zhenfeng-zhu/articles/issues/1>《Geth 入门》</a>中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。</p>
 <h2 id=genesisjson>genesis.json<a hidden class=anchor aria-hidden=true href=#genesisjson>#</a></h2>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
     <span style=color:#f92672>&#34;config&#34;</span>: {
@@ -104,15 +121,15 @@ November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <tbody>
 <tr>
 <td>nonce</td>
-<td>nonce就是一个64位随机数，用于挖矿</td>
+<td>nonce 就是一个 64 位随机数，用于挖矿</td>
 </tr>
 <tr>
 <td>mixhash</td>
-<td>与nonce配合用于挖矿，由上一个区块的一部分生成的hash</td>
+<td>与 nonce 配合用于挖矿，由上一个区块的一部分生成的 hash</td>
 </tr>
 <tr>
 <td>difficulty</td>
-<td>设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度</td>
+<td>设置当前区块的难度，如果难度过大，cpu 挖矿就很难，这里设置较小难度</td>
 </tr>
 <tr>
 <td>alloc</td>
@@ -128,7 +145,7 @@ November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </tr>
 <tr>
 <td>parentHash</td>
-<td>上一个区块的hash值，因为是创世块，所以这个值是0</td>
+<td>上一个区块的 hash 值，因为是创世块，所以这个值是 0</td>
 </tr>
 <tr>
 <td>extraData</td>
@@ -136,30 +153,30 @@ November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </tr>
 <tr>
 <td>gasLimit</td>
-<td>该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。</td>
+<td>该值设置对 GAS 的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。</td>
 </tr>
 <tr>
 <td>config</td>
-<td>Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1.5版本，而是需要加上config部分。</td>
+<td>Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的 json 文件中，缺少 config 部分。看到这个信息，我们不需要把 geth 退回到 v1.5 版本，而是需要加上 config 部分。</td>
 </tr>
 </tbody>
 </table>
 <h2 id=创建创世区块>创建创世区块<a hidden class=anchor aria-hidden=true href=#创建创世区块>#</a></h2>
 <p>打开终端，输入以下命令，在当前目录下创建创世区块。</p>
-<pre tabindex=0><code>geth --datadir &quot;./&quot; init genesis.json
-</code></pre><p>可以发现在当前目录新增了两个文件夹：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>geth --datadir &#34;./&#34; init genesis.json
+</code></pre></div><p>可以发现在当前目录新增了两个文件夹：</p>
 <ul>
-<li>geth中保存的是区块链的相关数据</li>
-<li>keystore中保存的是该链条中的用户信息</li>
+<li>geth 中保存的是区块链的相关数据</li>
+<li>keystore 中保存的是该链条中的用户信息</li>
 </ul>
 <h2 id=启动私链>启动私链<a hidden class=anchor aria-hidden=true href=#启动私链>#</a></h2>
-<pre tabindex=0><code>geth --datadir &quot;./&quot; --nodiscover console 2&gt;&gt;geth.log
-</code></pre><ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>geth --datadir &#34;./&#34; --nodiscover console 2&gt;&gt;geth.log
+</code></pre></div><ul>
 <li><code>--datadir</code>：代表以太坊私链的创世区块的地址</li>
 <li><code>--nodiscover</code>：私链不要让公链上的节点发现</li>
 </ul>
-<p>也可将此命令写入一个shell文件中，每次启动的时候执行脚本就可以了。</p>
-<p>输入此命令后，就可以进入到geth的控制台中了，在这里可以进行挖矿，智能合约的编写。</p>
+<p>也可将此命令写入一个 shell 文件中，每次启动的时候执行脚本就可以了。</p>
+<p>输入此命令后，就可以进入到 geth 的控制台中了，在这里可以进行挖矿，智能合约的编写。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -191,7 +208,7 @@ November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

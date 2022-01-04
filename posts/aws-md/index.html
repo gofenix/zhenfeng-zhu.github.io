@@ -6,14 +6,14 @@
 <title>aws.md | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="一些基础概念
-EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。
-VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。
-子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。
-IAM角色 类似于用户，可以被分配权限。
-安全组 控制连接到此EC2实例的流量，或者是控制对外暴露的端口。
-CIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
-IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
-十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。">
+EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux 或者 windows）。
+VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个 VPC。
+子网 一个 VPC 里可以有多个子网。比如某机构的一个 VPC 可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。
+IAM 角色 类似于用户，可以被分配权限。
+安全组 控制连接到此 EC2 实例的流量，或者是控制对外暴露的端口。
+CIDR CIDR 主要是一个按位的、基于前缀的，用于解释 IP 地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
+IPv4 的 CIDR 地址块的表示方法和 IPv4 地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在 0 到 32 之间的一个数字：A.B.C.D/N。点分十进制的部分和 IPv4 地址一样是一个被分成四个八位位组的 32 位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
+十进制部分有时会被省略，因此，/20 就表示一个前缀长度是 20 的 CIDR 地址块。如果一个 IP 地址的前 N 位与一个 CIDR 地址块的前缀是相同的话，那么就说这个地址属于这个 CIDR 地址块，也可以说是与 CIDR 地址块的前缀匹配。所以，要理解 CIDR，就要把地址写成二进制的形式。">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/aws-md/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -24,17 +24,17 @@ IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：�
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="aws.md">
 <meta property="og:description" content="一些基础概念
-EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。
-VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。
-子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。
-IAM角色 类似于用户，可以被分配权限。
-安全组 控制连接到此EC2实例的流量，或者是控制对外暴露的端口。
-CIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
-IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
-十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。">
+EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux 或者 windows）。
+VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个 VPC。
+子网 一个 VPC 里可以有多个子网。比如某机构的一个 VPC 可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。
+IAM 角色 类似于用户，可以被分配权限。
+安全组 控制连接到此 EC2 实例的流量，或者是控制对外暴露的端口。
+CIDR CIDR 主要是一个按位的、基于前缀的，用于解释 IP 地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
+IPv4 的 CIDR 地址块的表示方法和 IPv4 地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在 0 到 32 之间的一个数字：A.B.C.D/N。点分十进制的部分和 IPv4 地址一样是一个被分成四个八位位组的 32 位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
+十进制部分有时会被省略，因此，/20 就表示一个前缀长度是 20 的 CIDR 地址块。如果一个 IP 地址的前 N 位与一个 CIDR 地址块的前缀是相同的话，那么就说这个地址属于这个 CIDR 地址块，也可以说是与 CIDR 地址块的前缀匹配。所以，要理解 CIDR，就要把地址写成二进制的形式。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/aws-md/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -44,16 +44,16 @@ IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：�
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="aws.md">
 <meta name=twitter:description content="一些基础概念
-EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。
-VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。
-子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。
-IAM角色 类似于用户，可以被分配权限。
-安全组 控制连接到此EC2实例的流量，或者是控制对外暴露的端口。
-CIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
-IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
-十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。">
+EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux 或者 windows）。
+VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个 VPC。
+子网 一个 VPC 里可以有多个子网。比如某机构的一个 VPC 可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。
+IAM 角色 类似于用户，可以被分配权限。
+安全组 控制连接到此 EC2 实例的流量，或者是控制对外暴露的端口。
+CIDR CIDR 主要是一个按位的、基于前缀的，用于解释 IP 地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
+IPv4 的 CIDR 地址块的表示方法和 IPv4 地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在 0 到 32 之间的一个数字：A.B.C.D/N。点分十进制的部分和 IPv4 地址一样是一个被分成四个八位位组的 32 位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
+十进制部分有时会被省略，因此，/20 就表示一个前缀长度是 20 的 CIDR 地址块。如果一个 IP 地址的前 N 位与一个 CIDR 地址块的前缀是相同的话，那么就说这个地址属于这个 CIDR 地址块，也可以说是与 CIDR 地址块的前缀匹配。所以，要理解 CIDR，就要把地址写成二进制的形式。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"aws.md","item":"https://zhenfeng-zhu.github.io/posts/aws-md/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"aws.md","name":"aws.md","description":"一些基础概念\nEC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。\nVPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。\n子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可 …","keywords":[],"articleBody":"一些基础概念\nEC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。\nVPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。\n子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。\nIAM角色 类似于用户，可以被分配权限。\n安全组 控制连接到此EC2实例的流量，或者是控制对外暴露的端口。\nCIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。\nIPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。\n十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。\n","wordCount":"17","inLanguage":"en","datePublished":"2018-03-22T14:04:09Z","dateModified":"2018-03-22T14:04:09Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/aws-md/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"aws.md","name":"aws.md","description":"一些基础概念\nEC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux 或者 windows）。\nVPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个 VPC。\n子网 一个 VPC 里可以有多个子网。比如某机构的一个 VPC 可以办公网和生产网段，或者内网和外 …","keywords":[],"articleBody":"一些基础概念\nEC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux 或者 windows）。\nVPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个 VPC。\n子网 一个 VPC 里可以有多个子网。比如某机构的一个 VPC 可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。\nIAM 角色 类似于用户，可以被分配权限。\n安全组 控制连接到此 EC2 实例的流量，或者是控制对外暴露的端口。\nCIDR CIDR 主要是一个按位的、基于前缀的，用于解释 IP 地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。\nIPv4 的 CIDR 地址块的表示方法和 IPv4 地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在 0 到 32 之间的一个数字：A.B.C.D/N。点分十进制的部分和 IPv4 地址一样是一个被分成四个八位位组的 32 位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。\n十进制部分有时会被省略，因此，/20 就表示一个前缀长度是 20 的 CIDR 地址块。如果一个 IP 地址的前 N 位与一个 CIDR 地址块的前缀是相同的话，那么就说这个地址属于这个 CIDR 地址块，也可以说是与 CIDR 地址块的前缀匹配。所以，要理解 CIDR，就要把地址写成二进制的形式。\n","wordCount":"59","inLanguage":"en","datePublished":"2018-03-22T14:04:09Z","dateModified":"2018-03-22T14:04:09Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/aws-md/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -70,6 +70,11 @@ IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：�
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -95,29 +100,44 @@ aws.md
 March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#ec2 aria-label=EC2>EC2</a></li><li>
+<a href=#vpc aria-label=VPC>VPC</a></li><li>
+<a href=#%e5%ad%90%e7%bd%91 aria-label=子网>子网</a></li><li>
+<a href=#iam-%e8%a7%92%e8%89%b2 aria-label="IAM 角色">IAM 角色</a></li><li>
+<a href=#%e5%ae%89%e5%85%a8%e7%bb%84 aria-label=安全组>安全组</a></li><li>
+<a href=#cidr aria-label=CIDR>CIDR</a></li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
 <p>一些基础概念</p>
 <h2 id=ec2>EC2<a hidden class=anchor aria-hidden=true href=#ec2>#</a></h2>
-<p>云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。</p>
+<p>云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux 或者 windows）。</p>
 <h2 id=vpc>VPC<a hidden class=anchor aria-hidden=true href=#vpc>#</a></h2>
-<p>Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。</p>
+<p>Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个 VPC。</p>
 <h2 id=子网>子网<a hidden class=anchor aria-hidden=true href=#子网>#</a></h2>
-<p>一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。</p>
-<h2 id=iam角色>IAM角色<a hidden class=anchor aria-hidden=true href=#iam角色>#</a></h2>
+<p>一个 VPC 里可以有多个子网。比如某机构的一个 VPC 可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。</p>
+<h2 id=iam-角色>IAM 角色<a hidden class=anchor aria-hidden=true href=#iam-角色>#</a></h2>
 <p>类似于用户，可以被分配权限。</p>
 <h2 id=安全组>安全组<a hidden class=anchor aria-hidden=true href=#安全组>#</a></h2>
-<p>控制连接到此EC2实例的流量，或者是控制对外暴露的端口。</p>
+<p>控制连接到此 EC2 实例的流量，或者是控制对外暴露的端口。</p>
 <h2 id=cidr>CIDR<a hidden class=anchor aria-hidden=true href=#cidr>#</a></h2>
-<p>CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。</p>
-<p>IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。</p>
-<p>十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。</p>
+<p>CIDR 主要是一个按位的、基于前缀的，用于解释 IP 地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。</p>
+<p>IPv4 的 CIDR 地址块的表示方法和 IPv4 地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在 0 到 32 之间的一个数字：A.B.C.D/N。点分十进制的部分和 IPv4 地址一样是一个被分成四个八位位组的 32 位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。</p>
+<p>十进制部分有时会被省略，因此，/20 就表示一个前缀长度是 20 的 CIDR 地址块。如果一个 IP 地址的前 N 位与一个 CIDR 地址块的前缀是相同的话，那么就说这个地址属于这个 CIDR 地址块，也可以说是与 CIDR 地址块的前缀匹配。所以，要理解 CIDR，就要把地址写成二进制的形式。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/java-memory-thread/>
 <span class=title>« Prev Page</span>
 <br>
-<span>Java内存模型和线程</span>
+<span>Java 内存模型和线程</span>
 </a>
 <a class=next href=https://zhenfeng-zhu.github.io/posts/hello-world/>
 <span class=title>Next Page »</span>
@@ -142,7 +162,7 @@ March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

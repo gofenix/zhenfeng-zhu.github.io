@@ -3,16 +3,16 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>Guice快速入门 | Awesome Fenix</title>
+<title>Guice 快速入门 | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="Guice快速入门 接手的新项目主要是使用kotlin+vert.x来写的，使用gradle构建，依赖注入框架使用了guice。这段时间都是在熟悉代码的过程，恶补一些知识。
-guice是谷歌推出的一个轻量级的依赖注入框架，当然spring也可以实现依赖注入，只是spring太庞大了。
-1 基本使用 引入依赖 使用gradle或者maven，引入guice。
+<meta name=description content="Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。
+guice 是谷歌推出的一个轻量级的依赖注入框架，当然 spring 也可以实现依赖注入，只是 spring 太庞大了。
+1 基本使用 引入依赖 使用 gradle 或者 maven，引入 guice。
 maven:
 <dependency> <groupId>com.google.inject</groupId> <artifactId>guice</artifactId> <version>4.1.0</version> </dependency> Gradle:
 compile &#34;com.google.inject:guice:4.1.0&#34; 项目骨架 首先需要一个业务接口，包含一个方法来执行业务逻辑，它的实现非常简单：
 package com.learning.guice; public interface UserService { void process(); } package com.learning.guice; public class UserServiceImpl implements UserService { @Override public void process() { System.out.println(&#34;我需要做一些业务逻辑&#34;); } } 然后写一个日志的接口：
-package com.learning.guice; public interface LogService { void log(String msg); } package com.learning.guice; public class LogServiceImpl implements LogService { @Override public void log(String msg) { System.out.println(&#34;------LOG: &#34; + msg); } } 最后是一个系统接口和相应的实现，在实现中使用了业务接口和日志接口处理业务逻辑和打印日志信息：">
+package com.learning.guice; public interface LogService { void log(String msg); } package com.">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -23,16 +23,16 @@ package com.learning.guice; public interface LogService { void log(String msg); 
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
-<meta property="og:title" content="Guice快速入门">
-<meta property="og:description" content="Guice快速入门 接手的新项目主要是使用kotlin+vert.x来写的，使用gradle构建，依赖注入框架使用了guice。这段时间都是在熟悉代码的过程，恶补一些知识。
-guice是谷歌推出的一个轻量级的依赖注入框架，当然spring也可以实现依赖注入，只是spring太庞大了。
-1 基本使用 引入依赖 使用gradle或者maven，引入guice。
+<meta name=generator content="Hugo 0.91.2">
+<meta property="og:title" content="Guice 快速入门">
+<meta property="og:description" content="Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。
+guice 是谷歌推出的一个轻量级的依赖注入框架，当然 spring 也可以实现依赖注入，只是 spring 太庞大了。
+1 基本使用 引入依赖 使用 gradle 或者 maven，引入 guice。
 maven:
 <dependency> <groupId>com.google.inject</groupId> <artifactId>guice</artifactId> <version>4.1.0</version> </dependency> Gradle:
 compile &#34;com.google.inject:guice:4.1.0&#34; 项目骨架 首先需要一个业务接口，包含一个方法来执行业务逻辑，它的实现非常简单：
 package com.learning.guice; public interface UserService { void process(); } package com.learning.guice; public class UserServiceImpl implements UserService { @Override public void process() { System.out.println(&#34;我需要做一些业务逻辑&#34;); } } 然后写一个日志的接口：
-package com.learning.guice; public interface LogService { void log(String msg); } package com.learning.guice; public class LogServiceImpl implements LogService { @Override public void log(String msg) { System.out.println(&#34;------LOG: &#34; + msg); } } 最后是一个系统接口和相应的实现，在实现中使用了业务接口和日志接口处理业务逻辑和打印日志信息：">
+package com.learning.guice; public interface LogService { void log(String msg); } package com.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -40,17 +40,17 @@ package com.learning.guice; public interface LogService { void log(String msg); 
 <meta property="article:modified_time" content="2018-03-24T17:57:15+00:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta name=twitter:title content="Guice快速入门">
-<meta name=twitter:description content="Guice快速入门 接手的新项目主要是使用kotlin+vert.x来写的，使用gradle构建，依赖注入框架使用了guice。这段时间都是在熟悉代码的过程，恶补一些知识。
-guice是谷歌推出的一个轻量级的依赖注入框架，当然spring也可以实现依赖注入，只是spring太庞大了。
-1 基本使用 引入依赖 使用gradle或者maven，引入guice。
+<meta name=twitter:title content="Guice 快速入门">
+<meta name=twitter:description content="Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。
+guice 是谷歌推出的一个轻量级的依赖注入框架，当然 spring 也可以实现依赖注入，只是 spring 太庞大了。
+1 基本使用 引入依赖 使用 gradle 或者 maven，引入 guice。
 maven:
 <dependency> <groupId>com.google.inject</groupId> <artifactId>guice</artifactId> <version>4.1.0</version> </dependency> Gradle:
 compile &#34;com.google.inject:guice:4.1.0&#34; 项目骨架 首先需要一个业务接口，包含一个方法来执行业务逻辑，它的实现非常简单：
 package com.learning.guice; public interface UserService { void process(); } package com.learning.guice; public class UserServiceImpl implements UserService { @Override public void process() { System.out.println(&#34;我需要做一些业务逻辑&#34;); } } 然后写一个日志的接口：
-package com.learning.guice; public interface LogService { void log(String msg); } package com.learning.guice; public class LogServiceImpl implements LogService { @Override public void log(String msg) { System.out.println(&#34;------LOG: &#34; + msg); } } 最后是一个系统接口和相应的实现，在实现中使用了业务接口和日志接口处理业务逻辑和打印日志信息：">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Guice快速入门","item":"https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Guice快速入门","name":"Guice快速入门","description":"Guice快速入门 接手的新项目主要是使用kotlin+vert.x来写的，使用gradle构建，依赖注入框架使用了guice。这段时间都是在熟悉代码的过程，恶补一些知识。\nguice是谷歌推出的一个轻量级的依赖注入框架，当然spring也可以实现依赖注入，只是spring太庞大了。\n1 基本使用 引入依赖 使用gradle或者maven，引入guice。 …","keywords":[],"articleBody":"Guice快速入门 接手的新项目主要是使用kotlin+vert.x来写的，使用gradle构建，依赖注入框架使用了guice。这段时间都是在熟悉代码的过程，恶补一些知识。\nguice是谷歌推出的一个轻量级的依赖注入框架，当然spring也可以实现依赖注入，只是spring太庞大了。\n1 基本使用 引入依赖 使用gradle或者maven，引入guice。\nmaven:\n com.google.inject guice 4.1.0  Gradle:\ncompile \"com.google.inject:guice:4.1.0\" 项目骨架 首先需要一个业务接口，包含一个方法来执行业务逻辑，它的实现非常简单：\npackage com.learning.guice; public interface UserService { void process(); } package com.learning.guice; public class UserServiceImpl implements UserService { @Override public void process() { System.out.println(\"我需要做一些业务逻辑\"); } } 然后写一个日志的接口：\npackage com.learning.guice; public interface LogService { void log(String msg); } package com.learning.guice; public class LogServiceImpl implements LogService { @Override public void log(String msg) { System.out.println(\"------LOG: \" + msg); } } 最后是一个系统接口和相应的实现，在实现中使用了业务接口和日志接口处理业务逻辑和打印日志信息：\npackage com.learning.guice; public interface Application { void work(); } package com.learning.guice; import com.google.inject.Inject; public class MyApp implements Application { private UserService userService; private LogService logService; @Inject public MyApp(UserService userService, LogService logService) { this.userService = userService; this.logService = logService; } @Override public void work() { userService.process(); logService.log(\"程序正常运行\"); } } 配置依赖注入 guice是使用java代码来配置依赖。继承AbstractModule类，并重写其中的config方法。在config方法中，调用AbstractModule类中提供的方法来配置依赖关系。最常用的是bind(接口).to(实现类)。\npackage com.learning.guice; import com.google.inject.AbstractModule; public class MyAppModule extends AbstractModule { @Override protected void configure() { bind(LogService.class).to(LogServiceImpl.class); bind(UserService.class).to(UserServiceImpl.class); bind(Application.class).to(MyApp.class); } } 单元测试 guice配置完之后，我们需要调用Guice.createInjector方法传入配置类来创建一个注入器，然后使用注入器中的getInstance方法获取目标类。\npackage com.learning.guice; import com.google.inject.Guice; import com.google.inject.Injector; import org.junit.BeforeClass; import org.junit.Test; public class MyAppTest { private static Injector injector; @BeforeClass public static void init(){ injector= Guice.createInjector(new MyAppModule()); } @Test public void testMyApp(){ Application application=injector.getInstance(Application.class); application.work(); } } 程序执行结果是：\n/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java -ea -... 我需要做一些业务逻辑 ------LOG: 程序正常运行 Process finished with exit code 0 2 基本概念 2.1 Bingdings 绑定   链式绑定\n在绑定依赖的时候不仅可以将父类和子类绑定，还可以将子类和子类的子类进行绑定。\npublic class BillingModule extends AbstractModule { @Override protected void configure() { bind(TransactionLog.class).to(DatabaseTransactionLog.class); bind(DatabaseTransactionLog.class).to(MySqlDatabaseTransactionLog.class); } } 在这种情况下，injector 会把所有 TransactionLog 替换为 MySqlDatabaseTransactionLog。\n  注解绑定\n当我们需要将多个同一类型的对象注入不同对象的时候，就需要使用注解区分这些依赖了。最简单的办法就是使用@Named注解进行区分。\n首先需要在要注入的地方添加@Named注解。\npublic class RealBillingService implements BillingService { @Inject public RealBillingService(@Named(\"Checkout\") CreditCardProcessor processor, TransactionLog transactionLog) { ... } 然后在绑定中添加annotatedWith方法指定@Named中指定的名称。由于编译器无法检查字符串，所以Guice官方建议我们保守地使用这种方式。\nbind(CreditCardProcessor.class) .annotatedWith(Names.named(\"Checkout\")) .to(CheckoutCreditCardProcessor.class);   实例绑定\n有时候需要直接注入一个对象的实例，而不是从依赖关系中解析。如果我们要注入基本类型的话只能这么做。\nbind(String.class) .annotatedWith(Names.named(\"JDBC URL\")) .toInstance(\"jdbc:mysql://localhost/pizza\"); bind(Integer.class) .annotatedWith(Names.named(\"login timeout seconds\")) .toInstance(10);   @Privides方法\n当一个对象很复杂，无法使用简单的构造器来生成的时候，我们可以使用@Provides方法，也就是在配置类中生成一个注解了@Provides的方法。在该方法中我们可以编写任意代码来构造对象。\n@Provides方法也可以应用@Named和自定义注解，还可以注入其他依赖，Guice会在调用方法之前注入需要的对象。\npublic class BillingModule extends AbstractModule { @Override protected void configure() { ... } @Provides TransactionLog provideTransactionLog() { DatabaseTransactionLog transactionLog = new DatabaseTransactionLog(); transactionLog.setJdbcUrl(\"jdbc:mysql://localhost/pizza\"); transactionLog.setThreadPoolSize(30); return transactionLog; } }   Provider绑定\n如果项目中存在多个比较复杂的对象需要构建，使用@Provide方法会让配置类变得比较乱。我们可以使用Guice提供的Provider接口将复杂的代码放到单独的类中。办法很简单，实现Provider接口的get方法即可。在Provider类中，我们可以使用@Inject任意注入对象。\npublic class DatabaseTransactionLogProvider implements Provider { private final Connection connection; @Inject public DatabaseTransactionLogProvider(Connection connection) { this.connection = connection; } public TransactionLog get() { DatabaseTransactionLog transactionLog = new DatabaseTransactionLog(); transactionLog.setConnection(connection); return transactionLog; } } 然后在config方法中，调用.toProvider方法：\npublic class BillingModule extends AbstractModule { @Override protected void configure() { bind(TransactionLog.class) .toProvider(DatabaseTransactionLogProvider.class); } }   无目标绑定\n无目标绑定没有to子句\n  构造器绑定\n某些场景下，你能需要把某个类型绑定到任意一个构造函数上。以下情况会有这种需求：1、 @Inject 注解无法被应用到目标构造函数；2、目标类是一个第三方类；3、目标类有多个构造函数参与DI。\n为了解决这个问题，guice 提供了 toConstructor()绑定 ，它需要你指定要使用的确切的某个目标构造函数，并处理 “constructor annot be found” 异常：\npublic class BillingModule extends AbstractModule { @Override protected void configure() { try { bind(TransactionLog.class).toConstructor( DatabaseTransactionLog.class.getConstructor(DatabaseConnection.class)); } catch (NoSuchMethodException e) { addError(e); } } }   内置绑定\n除了显示绑定和即时绑定 just-in-time bindings，剩下的绑定都属于injector的内置绑定。这些绑定只能由injector自己创建，不允许外部调用。\n  即时绑定\n当 injector 需要某一个类型的实例的时候，它需要获取一个绑定。在Module类中的绑定叫做显式绑定，只要他们可用，injector 就会在任何时候使用它们。如果需要某一类型的实例，但是又没有显式绑定，那么injector将会试图创建一个即时绑定（Just-in-time Bindings），也被称为JIT绑定 或 隐式绑定。\n  2.2 作用域 默认情况下Guice会在每次注入的时候创建一个新对象。如果希望创建一个单例依赖的话，可以在实现类上应用@Singleton注解。\n@Singleton public class InMemoryTransactionLog implements TransactionLog { /* everything here should be threadsafe! */ } 或者也可以在配置类中指定。\nbind(TransactionLog.class).to(InMemoryTransactionLog.class).in(Singleton.class); 在@Provides方法中也可以指定单例。\n@Provides @Singleton TransactionLog provideTransactionLog() { ... } 如果一个类型上存在多个冲突的作用域，Guice会使用bind()方法中指定的作用域。如果不想使用注解的作用域，可以在bind()方法中将对象绑定为Scopes.NO_SCOPE。\nGuice和它的扩展提供了很多作用域，和spring一样，有单例Singleton，Session作用域SessionScoped，Request请求作用域RequestScoped等等。我们可以根据需要选择合适的作用域。\n2.3 注入 guice的注入和spring类似，而且还做了一些扩展。\n  构造器注入\n使用 @Inject 注解标记类的构造方法，这个构造方法需要接受类依赖作为参数。大多数构造子将会把接收到的参数分派给内部成员变量。\n  方法注入\nGuice 可以向标注了 @Inject 的方法中注入依赖。依赖项以参数的形式传给方法，Guice 会在调用注入方法前完成依赖项的构建。注入方法可以有任意数量的参数，并且方法名对注入操作不会有任何影响。\n  字段注入\n使用 @Inject 注解标记字段。这是最简洁的注入方式。\n注意：不能给final字段加@Inject注解。\n  可选注入\n有的时候，可能需要一个依赖项存在则进行注入，不存在则不注入。此时可以使用方法注入或字段注入来做这件事，当依赖项不可用的时候Guice 就会忽略这些注入。如果你需要配置可选注入的话，使用 @Inject(optional = true) 注解就可以了。\n  按需注入\n方法注入和字段注入可以可以用来初始化现有实例，你可以使用 Injector.injectMembers。\n这个不常用。\n  静态注入\n不建议使用静态注入。\n  自动注入\nGuice 会对以下情形做自动注入：\n 在绑定语句里，通过 toInstance() 注入实例。 在绑定语句里，通过 toProvider() 注入 Provider 实例。这些对象会在注入器创建的时候被创建并注入容器。如果它们需要满足其他启动注入，Guice 会在它们被使用前将他们注入进去。    2.4 AOP guice的aop功能较弱，时间原因还没研究透，后续继续写。\n","wordCount":"466","inLanguage":"en","datePublished":"2018-03-24T17:57:15Z","dateModified":"2018-03-24T17:57:15Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+package com.learning.guice; public interface LogService { void log(String msg); } package com.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Guice 快速入门","item":"https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Guice 快速入门","name":"Guice 快速入门","description":"Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。\nguice 是谷歌推出的一个轻量级的依赖注入框架，当然 spring 也可以实现依赖注入，只是 spring 太庞大了。\n1 基本使用 引入依赖 使用 gradle …","keywords":[],"articleBody":"Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。\nguice 是谷歌推出的一个轻量级的依赖注入框架，当然 spring 也可以实现依赖注入，只是 spring 太庞大了。\n1 基本使用 引入依赖 使用 gradle 或者 maven，引入 guice。\nmaven:\n com.google.inject guice 4.1.0  Gradle:\ncompile \"com.google.inject:guice:4.1.0\" 项目骨架 首先需要一个业务接口，包含一个方法来执行业务逻辑，它的实现非常简单：\npackage com.learning.guice; public interface UserService { void process(); } package com.learning.guice; public class UserServiceImpl implements UserService { @Override public void process() { System.out.println(\"我需要做一些业务逻辑\"); } } 然后写一个日志的接口：\npackage com.learning.guice; public interface LogService { void log(String msg); } package com.learning.guice; public class LogServiceImpl implements LogService { @Override public void log(String msg) { System.out.println(\"------LOG: \" + msg); } } 最后是一个系统接口和相应的实现，在实现中使用了业务接口和日志接口处理业务逻辑和打印日志信息：\npackage com.learning.guice; public interface Application { void work(); } package com.learning.guice; import com.google.inject.Inject; public class MyApp implements Application { private UserService userService; private LogService logService; @Inject public MyApp(UserService userService, LogService logService) { this.userService = userService; this.logService = logService; } @Override public void work() { userService.process(); logService.log(\"程序正常运行\"); } } 配置依赖注入 guice 是使用 java 代码来配置依赖。继承 AbstractModule 类，并重写其中的 config 方法。在 config 方法中，调用 AbstractModule 类中提供的方法来配置依赖关系。最常用的是 bind(接口).to(实现类)。\npackage com.learning.guice; import com.google.inject.AbstractModule; public class MyAppModule extends AbstractModule { @Override protected void configure() { bind(LogService.class).to(LogServiceImpl.class); bind(UserService.class).to(UserServiceImpl.class); bind(Application.class).to(MyApp.class); } } 单元测试 guice 配置完之后，我们需要调用 Guice.createInjector 方法传入配置类来创建一个注入器，然后使用注入器中的 getInstance 方法获取目标类。\npackage com.learning.guice; import com.google.inject.Guice; import com.google.inject.Injector; import org.junit.BeforeClass; import org.junit.Test; public class MyAppTest { private static Injector injector; @BeforeClass public static void init(){ injector= Guice.createInjector(new MyAppModule()); } @Test public void testMyApp(){ Application application=injector.getInstance(Application.class); application.work(); } } 程序执行结果是：\n/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java -ea -... 我需要做一些业务逻辑 ------LOG: 程序正常运行 Process finished with exit code 0 2 基本概念 2.1 Bingdings 绑定   链式绑定\n在绑定依赖的时候不仅可以将父类和子类绑定，还可以将子类和子类的子类进行绑定。\npublic class BillingModule extends AbstractModule { @Override protected void configure() { bind(TransactionLog.class).to(DatabaseTransactionLog.class); bind(DatabaseTransactionLog.class).to(MySqlDatabaseTransactionLog.class); } } 在这种情况下，injector 会把所有 TransactionLog 替换为 MySqlDatabaseTransactionLog。\n  注解绑定\n当我们需要将多个同一类型的对象注入不同对象的时候，就需要使用注解区分这些依赖了。最简单的办法就是使用@Named 注解进行区分。\n首先需要在要注入的地方添加@Named 注解。\npublic class RealBillingService implements BillingService { @Inject public RealBillingService(@Named(\"Checkout\") CreditCardProcessor processor, TransactionLog transactionLog) { ... } 然后在绑定中添加 annotatedWith 方法指定@Named 中指定的名称。由于编译器无法检查字符串，所以 Guice 官方建议我们保守地使用这种方式。\nbind(CreditCardProcessor.class) .annotatedWith(Names.named(\"Checkout\")) .to(CheckoutCreditCardProcessor.class);   实例绑定\n有时候需要直接注入一个对象的实例，而不是从依赖关系中解析。如果我们要注入基本类型的话只能这么做。\nbind(String.class) .annotatedWith(Names.named(\"JDBC URL\")) .toInstance(\"jdbc:mysql://localhost/pizza\"); bind(Integer.class) .annotatedWith(Names.named(\"login timeout seconds\")) .toInstance(10);   @Privides 方法\n当一个对象很复杂，无法使用简单的构造器来生成的时候，我们可以使用@Provides 方法，也就是在配置类中生成一个注解了@Provides 的方法。在该方法中我们可以编写任意代码来构造对象。\n@Provides 方法也可以应用@Named 和自定义注解，还可以注入其他依赖，Guice 会在调用方法之前注入需要的对象。\npublic class BillingModule extends AbstractModule { @Override protected void configure() { ... } @Provides TransactionLog provideTransactionLog() { DatabaseTransactionLog transactionLog = new DatabaseTransactionLog(); transactionLog.setJdbcUrl(\"jdbc:mysql://localhost/pizza\"); transactionLog.setThreadPoolSize(30); return transactionLog; } }   Provider 绑定\n如果项目中存在多个比较复杂的对象需要构建，使用@Provide 方法会让配置类变得比较乱。我们可以使用 Guice 提供的 Provider 接口将复杂的代码放到单独的类中。办法很简单，实现 Provider接口的 get 方法即可。在 Provider 类中，我们可以使用@Inject 任意注入对象。\npublic class DatabaseTransactionLogProvider implements Provider { private final Connection connection; @Inject public DatabaseTransactionLogProvider(Connection connection) { this.connection = connection; } public TransactionLog get() { DatabaseTransactionLog transactionLog = new DatabaseTransactionLog(); transactionLog.setConnection(connection); return transactionLog; } } 然后在 config 方法中，调用.toProvider 方法：\npublic class BillingModule extends AbstractModule { @Override protected void configure() { bind(TransactionLog.class) .toProvider(DatabaseTransactionLogProvider.class); } }   无目标绑定\n无目标绑定没有 to 子句\n  构造器绑定\n某些场景下，你能需要把某个类型绑定到任意一个构造函数上。以下情况会有这种需求：1、 @Inject 注解无法被应用到目标构造函数；2、目标类是一个第三方类；3、目标类有多个构造函数参与 DI。\n为了解决这个问题，guice 提供了 toConstructor()绑定 ，它需要你指定要使用的确切的某个目标构造函数，并处理 “constructor annot be found” 异常：\npublic class BillingModule extends AbstractModule { @Override protected void configure() { try { bind(TransactionLog.class).toConstructor( DatabaseTransactionLog.class.getConstructor(DatabaseConnection.class)); } catch (NoSuchMethodException e) { addError(e); } } }   内置绑定\n除了显示绑定和即时绑定 just-in-time bindings，剩下的绑定都属于 injector 的内置绑定。这些绑定只能由 injector 自己创建，不允许外部调用。\n  即时绑定\n当 injector 需要某一个类型的实例的时候，它需要获取一个绑定。在 Module 类中的绑定叫做显式绑定，只要他们可用，injector 就会在任何时候使用它们。如果需要某一类型的实例，但是又没有显式绑定，那么 injector 将会试图创建一个即时绑定（Just-in-time Bindings），也被称为 JIT 绑定 或 隐式绑定。\n  2.2 作用域 默认情况下 Guice 会在每次注入的时候创建一个新对象。如果希望创建一个单例依赖的话，可以在实现类上应用@Singleton 注解。\n@Singleton public class InMemoryTransactionLog implements TransactionLog { /* everything here should be threadsafe! */ } 或者也可以在配置类中指定。\nbind(TransactionLog.class).to(InMemoryTransactionLog.class).in(Singleton.class); 在@Provides方法中也可以指定单例。\n@Provides @Singleton TransactionLog provideTransactionLog() { ... } 如果一个类型上存在多个冲突的作用域，Guice 会使用 bind()方法中指定的作用域。如果不想使用注解的作用域，可以在 bind()方法中将对象绑定为 Scopes.NO_SCOPE。\nGuice 和它的扩展提供了很多作用域，和 spring 一样，有单例 Singleton，Session 作用域 SessionScoped，Request 请求作用域 RequestScoped 等等。我们可以根据需要选择合适的作用域。\n2.3 注入 guice 的注入和 spring 类似，而且还做了一些扩展。\n  构造器注入\n使用 @Inject 注解标记类的构造方法，这个构造方法需要接受类依赖作为参数。大多数构造子将会把接收到的参数分派给内部成员变量。\n  方法注入\nGuice 可以向标注了 @Inject 的方法中注入依赖。依赖项以参数的形式传给方法，Guice 会在调用注入方法前完成依赖项的构建。注入方法可以有任意数量的参数，并且方法名对注入操作不会有任何影响。\n  字段注入\n使用 @Inject 注解标记字段。这是最简洁的注入方式。\n注意：不能给 final 字段加@Inject 注解。\n  可选注入\n有的时候，可能需要一个依赖项存在则进行注入，不存在则不注入。此时可以使用方法注入或字段注入来做这件事，当依赖项不可用的时候 Guice 就会忽略这些注入。如果你需要配置可选注入的话，使用 @Inject(optional = true) 注解就可以了。\n  按需注入\n方法注入和字段注入可以可以用来初始化现有实例，你可以使用 Injector.injectMembers。\n这个不常用。\n  静态注入\n不建议使用静态注入。\n  自动注入\nGuice 会对以下情形做自动注入：\n 在绑定语句里，通过 toInstance() 注入实例。 在绑定语句里，通过 toProvider() 注入 Provider 实例。这些对象会在注入器创建的时候被创建并注入容器。如果它们需要满足其他启动注入，Guice 会在它们被使用前将他们注入进去。    2.4 AOP guice 的 aop 功能较弱，时间原因还没研究透，后续继续写。\n","wordCount":"565","inLanguage":"en","datePublished":"2018-03-24T17:57:15Z","dateModified":"2018-03-24T17:57:15Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -67,6 +67,11 @@ package com.learning.guice; public interface LogService { void log(String msg); 
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -86,30 +91,56 @@ package com.learning.guice; public interface LogService { void log(String msg); 
 <a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a>
 </div>
 <h1 class=post-title>
-Guice快速入门
+Guice 快速入门
 </h1>
 <div class=post-meta>
 March 24, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#guice-%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8 aria-label="Guice 快速入门">Guice 快速入门</a><ul>
+<li>
+<a href=#1-%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8 aria-label="1 基本使用">1 基本使用</a><ul>
+<li>
+<a href=#%e5%bc%95%e5%85%a5%e4%be%9d%e8%b5%96 aria-label=引入依赖>引入依赖</a></li><li>
+<a href=#%e9%a1%b9%e7%9b%ae%e9%aa%a8%e6%9e%b6 aria-label=项目骨架>项目骨架</a></li><li>
+<a href=#%e9%85%8d%e7%bd%ae%e4%be%9d%e8%b5%96%e6%b3%a8%e5%85%a5 aria-label=配置依赖注入>配置依赖注入</a></li><li>
+<a href=#%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95 aria-label=单元测试>单元测试</a></li></ul>
+</li><li>
+<a href=#2-%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5 aria-label="2 基本概念">2 基本概念</a><ul>
+<li>
+<a href=#21-bingdings-%e7%bb%91%e5%ae%9a aria-label="2.1 Bingdings 绑定">2.1 Bingdings 绑定</a></li><li>
+<a href=#22-%e4%bd%9c%e7%94%a8%e5%9f%9f aria-label="2.2 作用域">2.2 作用域</a></li><li>
+<a href=#23-%e6%b3%a8%e5%85%a5 aria-label="2.3 注入">2.3 注入</a></li><li>
+<a href=#24-aop aria-label="2.4 AOP">2.4 AOP</a></li></ul>
+</li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
-<h1 id=guice快速入门>Guice快速入门<a hidden class=anchor aria-hidden=true href=#guice快速入门>#</a></h1>
-<p>接手的新项目主要是使用kotlin+vert.x来写的，使用gradle构建，依赖注入框架使用了guice。这段时间都是在熟悉代码的过程，恶补一些知识。</p>
-<p>guice是谷歌推出的一个轻量级的依赖注入框架，当然spring也可以实现依赖注入，只是spring太庞大了。</p>
+<h1 id=guice-快速入门>Guice 快速入门<a hidden class=anchor aria-hidden=true href=#guice-快速入门>#</a></h1>
+<p>接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。</p>
+<p>guice 是谷歌推出的一个轻量级的依赖注入框架，当然 spring 也可以实现依赖注入，只是 spring 太庞大了。</p>
 <h2 id=1-基本使用>1 基本使用<a hidden class=anchor aria-hidden=true href=#1-基本使用>#</a></h2>
 <h3 id=引入依赖>引入依赖<a hidden class=anchor aria-hidden=true href=#引入依赖>#</a></h3>
-<p>使用gradle或者maven，引入guice。</p>
+<p>使用 gradle 或者 maven，引入 guice。</p>
 <p>maven:</p>
-<pre tabindex=0><code>&lt;dependency&gt;
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>&lt;dependency&gt;
     &lt;groupId&gt;com.google.inject&lt;/groupId&gt;
     &lt;artifactId&gt;guice&lt;/artifactId&gt;
     &lt;version&gt;4.1.0&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre><p>Gradle:</p>
-<pre tabindex=0><code>compile &quot;com.google.inject:guice:4.1.0&quot;
-</code></pre><h3 id=项目骨架>项目骨架<a hidden class=anchor aria-hidden=true href=#项目骨架>#</a></h3>
+</code></pre></div><p>Gradle:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>compile &#34;com.google.inject:guice:4.1.0&#34;
+</code></pre></div><h3 id=项目骨架>项目骨架<a hidden class=anchor aria-hidden=true href=#项目骨架>#</a></h3>
 <p>首先需要一个业务接口，包含一个方法来执行业务逻辑，它的实现非常简单：</p>
-<pre tabindex=0><code>package com.learning.guice;
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package com.learning.guice;
 public interface UserService {
     void process();
 }
@@ -119,11 +150,11 @@ package com.learning.guice;
 public class UserServiceImpl implements UserService {
     @Override
     public void process() {
-        System.out.println(&quot;我需要做一些业务逻辑&quot;);
+        System.out.println(&#34;我需要做一些业务逻辑&#34;);
     }
 }
-</code></pre><p>然后写一个日志的接口：</p>
-<pre tabindex=0><code>package com.learning.guice;
+</code></pre></div><p>然后写一个日志的接口：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package com.learning.guice;
 public interface LogService {
     void log(String msg);
 }
@@ -132,11 +163,11 @@ package com.learning.guice;
 public class LogServiceImpl implements LogService {
     @Override
     public void log(String msg) {
-        System.out.println(&quot;------LOG: &quot; + msg);
+        System.out.println(&#34;------LOG: &#34; + msg);
     }
 }
-</code></pre><p>最后是一个系统接口和相应的实现，在实现中使用了业务接口和日志接口处理业务逻辑和打印日志信息：</p>
-<pre tabindex=0><code>package com.learning.guice;
+</code></pre></div><p>最后是一个系统接口和相应的实现，在实现中使用了业务接口和日志接口处理业务逻辑和打印日志信息：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package com.learning.guice;
 public interface Application {
     void work();
 }
@@ -157,12 +188,12 @@ public class MyApp implements Application {
     @Override
     public void work() {
         userService.process();
-        logService.log(&quot;程序正常运行&quot;);
+        logService.log(&#34;程序正常运行&#34;);
     }
 }
-</code></pre><h3 id=配置依赖注入>配置依赖注入<a hidden class=anchor aria-hidden=true href=#配置依赖注入>#</a></h3>
-<p>guice是使用java代码来配置依赖。继承AbstractModule类，并重写其中的config方法。在config方法中，调用AbstractModule类中提供的方法来配置依赖关系。最常用的是bind(接口).to(实现类)。</p>
-<pre tabindex=0><code>package com.learning.guice;
+</code></pre></div><h3 id=配置依赖注入>配置依赖注入<a hidden class=anchor aria-hidden=true href=#配置依赖注入>#</a></h3>
+<p>guice 是使用 java 代码来配置依赖。继承 AbstractModule 类，并重写其中的 config 方法。在 config 方法中，调用 AbstractModule 类中提供的方法来配置依赖关系。最常用的是 bind(接口).to(实现类)。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package com.learning.guice;
 
 import com.google.inject.AbstractModule;
 
@@ -175,9 +206,9 @@ public class MyAppModule extends AbstractModule {
         bind(Application.class).to(MyApp.class);
     }
 }
-</code></pre><h3 id=单元测试>单元测试<a hidden class=anchor aria-hidden=true href=#单元测试>#</a></h3>
-<p>guice配置完之后，我们需要调用Guice.createInjector方法传入配置类来创建一个注入器，然后使用注入器中的getInstance方法获取目标类。</p>
-<pre tabindex=0><code>package com.learning.guice;
+</code></pre></div><h3 id=单元测试>单元测试<a hidden class=anchor aria-hidden=true href=#单元测试>#</a></h3>
+<p>guice 配置完之后，我们需要调用 Guice.createInjector 方法传入配置类来创建一个注入器，然后使用注入器中的 getInstance 方法获取目标类。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package com.learning.guice;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -198,58 +229,58 @@ public class MyAppTest {
         application.work();
     }
 }
-</code></pre><p>程序执行结果是：</p>
-<pre tabindex=0><code>/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java -ea -...
+</code></pre></div><p>程序执行结果是：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java -ea -...
 我需要做一些业务逻辑
 ------LOG: 程序正常运行
 
 Process finished with exit code 0
-</code></pre><h2 id=2-基本概念>2 基本概念<a hidden class=anchor aria-hidden=true href=#2-基本概念>#</a></h2>
+</code></pre></div><h2 id=2-基本概念>2 基本概念<a hidden class=anchor aria-hidden=true href=#2-基本概念>#</a></h2>
 <h3 id=21-bingdings-绑定>2.1 Bingdings 绑定<a hidden class=anchor aria-hidden=true href=#21-bingdings-绑定>#</a></h3>
 <ul>
 <li>
 <p>链式绑定</p>
 <p>在绑定依赖的时候不仅可以将父类和子类绑定，还可以将子类和子类的子类进行绑定。</p>
-<pre tabindex=0><code>public class BillingModule extends AbstractModule {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>public class BillingModule extends AbstractModule {
   @Override 
   protected void configure() {
     bind(TransactionLog.class).to(DatabaseTransactionLog.class);
     bind(DatabaseTransactionLog.class).to(MySqlDatabaseTransactionLog.class);
   }
 }
-</code></pre><p>在这种情况下，injector 会把所有 TransactionLog 替换为 MySqlDatabaseTransactionLog。</p>
+</code></pre></div><p>在这种情况下，injector 会把所有 TransactionLog 替换为 MySqlDatabaseTransactionLog。</p>
 </li>
 <li>
 <p>注解绑定</p>
-<p>当我们需要将多个同一类型的对象注入不同对象的时候，就需要使用注解区分这些依赖了。最简单的办法就是使用@Named注解进行区分。</p>
-<p>首先需要在要注入的地方添加@Named注解。</p>
-<pre tabindex=0><code>public class RealBillingService implements BillingService {
+<p>当我们需要将多个同一类型的对象注入不同对象的时候，就需要使用注解区分这些依赖了。最简单的办法就是使用@Named 注解进行区分。</p>
+<p>首先需要在要注入的地方添加@Named 注解。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>public class RealBillingService implements BillingService {
 
   @Inject
-  public RealBillingService(@Named(&quot;Checkout&quot;) CreditCardProcessor processor,
+  public RealBillingService(@Named(&#34;Checkout&#34;) CreditCardProcessor processor,
       TransactionLog transactionLog) {
     ...
   }
-</code></pre><p>然后在绑定中添加annotatedWith方法指定@Named中指定的名称。由于编译器无法检查字符串，所以Guice官方建议我们保守地使用这种方式。</p>
-<pre tabindex=0><code>bind(CreditCardProcessor.class)
-        .annotatedWith(Names.named(&quot;Checkout&quot;))
+</code></pre></div><p>然后在绑定中添加 annotatedWith 方法指定@Named 中指定的名称。由于编译器无法检查字符串，所以 Guice 官方建议我们保守地使用这种方式。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>bind(CreditCardProcessor.class)
+        .annotatedWith(Names.named(&#34;Checkout&#34;))
         .to(CheckoutCreditCardProcessor.class);
-</code></pre></li>
+</code></pre></div></li>
 <li>
 <p>实例绑定</p>
 <p>有时候需要直接注入一个对象的实例，而不是从依赖关系中解析。如果我们要注入基本类型的话只能这么做。</p>
-<pre tabindex=0><code>bind(String.class)
-        .annotatedWith(Names.named(&quot;JDBC URL&quot;))
-        .toInstance(&quot;jdbc:mysql://localhost/pizza&quot;);
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>bind(String.class)
+        .annotatedWith(Names.named(&#34;JDBC URL&#34;))
+        .toInstance(&#34;jdbc:mysql://localhost/pizza&#34;);
 bind(Integer.class)
-        .annotatedWith(Names.named(&quot;login timeout seconds&quot;))
+        .annotatedWith(Names.named(&#34;login timeout seconds&#34;))
         .toInstance(10);
-</code></pre></li>
+</code></pre></div></li>
 <li>
-<p>@Privides方法</p>
-<p>当一个对象很复杂，无法使用简单的构造器来生成的时候，我们可以使用@Provides方法，也就是在配置类中生成一个注解了@Provides的方法。在该方法中我们可以编写任意代码来构造对象。</p>
-<p>@Provides方法也可以应用@Named和自定义注解，还可以注入其他依赖，Guice会在调用方法之前注入需要的对象。</p>
-<pre tabindex=0><code>public class BillingModule extends AbstractModule {
+<p>@Privides 方法</p>
+<p>当一个对象很复杂，无法使用简单的构造器来生成的时候，我们可以使用@Provides 方法，也就是在配置类中生成一个注解了@Provides 的方法。在该方法中我们可以编写任意代码来构造对象。</p>
+<p>@Provides 方法也可以应用@Named 和自定义注解，还可以注入其他依赖，Guice 会在调用方法之前注入需要的对象。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>public class BillingModule extends AbstractModule {
   @Override
   protected void configure() {
     ...
@@ -258,16 +289,16 @@ bind(Integer.class)
   @Provides
   TransactionLog provideTransactionLog() {
     DatabaseTransactionLog transactionLog = new DatabaseTransactionLog();
-    transactionLog.setJdbcUrl(&quot;jdbc:mysql://localhost/pizza&quot;);
+    transactionLog.setJdbcUrl(&#34;jdbc:mysql://localhost/pizza&#34;);
     transactionLog.setThreadPoolSize(30);
     return transactionLog;
   }
 }
-</code></pre></li>
+</code></pre></div></li>
 <li>
-<p>Provider绑定</p>
-<p>如果项目中存在多个比较复杂的对象需要构建，使用@Provide方法会让配置类变得比较乱。我们可以使用Guice提供的Provider接口将复杂的代码放到单独的类中。办法很简单，实现Provider接口的get方法即可。在Provider类中，我们可以使用@Inject任意注入对象。</p>
-<pre tabindex=0><code>public class DatabaseTransactionLogProvider implements Provider&lt;TransactionLog&gt; {
+<p>Provider 绑定</p>
+<p>如果项目中存在多个比较复杂的对象需要构建，使用@Provide 方法会让配置类变得比较乱。我们可以使用 Guice 提供的 Provider 接口将复杂的代码放到单独的类中。办法很简单，实现 Provider接口的 get 方法即可。在 Provider 类中，我们可以使用@Inject 任意注入对象。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>public class DatabaseTransactionLogProvider implements Provider&lt;TransactionLog&gt; {
   private final Connection connection;
 
   @Inject
@@ -281,24 +312,24 @@ bind(Integer.class)
     return transactionLog;
   }
 }
-</code></pre><p>然后在config方法中，调用.toProvider方法：</p>
-<pre tabindex=0><code>public class BillingModule extends AbstractModule {
+</code></pre></div><p>然后在 config 方法中，调用.toProvider 方法：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>public class BillingModule extends AbstractModule {
   @Override
   protected void configure() {
     bind(TransactionLog.class)
         .toProvider(DatabaseTransactionLogProvider.class);
   }
 }
-</code></pre></li>
+</code></pre></div></li>
 <li>
 <p>无目标绑定</p>
-<p>无目标绑定没有to子句</p>
+<p>无目标绑定没有 to 子句</p>
 </li>
 <li>
 <p>构造器绑定</p>
-<p>某些场景下，你能需要把某个类型绑定到任意一个构造函数上。以下情况会有这种需求：1、 @Inject 注解无法被应用到目标构造函数；2、目标类是一个第三方类；3、目标类有多个构造函数参与DI。</p>
+<p>某些场景下，你能需要把某个类型绑定到任意一个构造函数上。以下情况会有这种需求：1、 @Inject 注解无法被应用到目标构造函数；2、目标类是一个第三方类；3、目标类有多个构造函数参与 DI。</p>
 <p>为了解决这个问题，guice 提供了 toConstructor()绑定 ，它需要你指定要使用的确切的某个目标构造函数，并处理 &ldquo;constructor annot be found&rdquo; 异常：</p>
-<pre tabindex=0><code>public class BillingModule extends AbstractModule {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>public class BillingModule extends AbstractModule {
   @Override 
   protected void configure() {
     try {
@@ -309,33 +340,33 @@ bind(Integer.class)
     }
   }
 }
-</code></pre></li>
+</code></pre></div></li>
 <li>
 <p>内置绑定</p>
-<p>除了显示绑定和即时绑定 just-in-time bindings，剩下的绑定都属于injector的内置绑定。这些绑定只能由injector自己创建，不允许外部调用。</p>
+<p>除了显示绑定和即时绑定 just-in-time bindings，剩下的绑定都属于 injector 的内置绑定。这些绑定只能由 injector 自己创建，不允许外部调用。</p>
 </li>
 <li>
 <p>即时绑定</p>
-<p>当 injector 需要某一个类型的实例的时候，它需要获取一个绑定。在Module类中的绑定叫做显式绑定，只要他们可用，injector 就会在任何时候使用它们。如果需要某一类型的实例，但是又没有显式绑定，那么injector将会试图创建一个即时绑定（Just-in-time Bindings），也被称为JIT绑定 或 隐式绑定。</p>
+<p>当 injector 需要某一个类型的实例的时候，它需要获取一个绑定。在 Module 类中的绑定叫做显式绑定，只要他们可用，injector 就会在任何时候使用它们。如果需要某一类型的实例，但是又没有显式绑定，那么 injector 将会试图创建一个即时绑定（Just-in-time Bindings），也被称为 JIT 绑定 或 隐式绑定。</p>
 </li>
 </ul>
 <h3 id=22-作用域>2.2 作用域<a hidden class=anchor aria-hidden=true href=#22-作用域>#</a></h3>
-<p>默认情况下Guice会在每次注入的时候创建一个新对象。如果希望创建一个单例依赖的话，可以在实现类上应用@Singleton注解。</p>
-<pre tabindex=0><code>@Singleton
+<p>默认情况下 Guice 会在每次注入的时候创建一个新对象。如果希望创建一个单例依赖的话，可以在实现类上应用@Singleton 注解。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>@Singleton
 public class InMemoryTransactionLog implements TransactionLog {
   /* everything here should be threadsafe! */
 }
-</code></pre><p>或者也可以在配置类中指定。</p>
-<pre tabindex=0><code>bind(TransactionLog.class).to(InMemoryTransactionLog.class).in(Singleton.class);
-</code></pre><p>在<code>@Provides</code>方法中也可以指定单例。</p>
-<pre tabindex=0><code>@Provides @Singleton
+</code></pre></div><p>或者也可以在配置类中指定。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>bind(TransactionLog.class).to(InMemoryTransactionLog.class).in(Singleton.class);
+</code></pre></div><p>在<code>@Provides</code>方法中也可以指定单例。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>@Provides @Singleton
   TransactionLog provideTransactionLog() {
     ...
   }
-</code></pre><p>如果一个类型上存在多个冲突的作用域，Guice会使用bind()方法中指定的作用域。如果不想使用注解的作用域，可以在bind()方法中将对象绑定为Scopes.NO_SCOPE。</p>
-<p>Guice和它的扩展提供了很多作用域，和spring一样，有单例Singleton，Session作用域SessionScoped，Request请求作用域RequestScoped等等。我们可以根据需要选择合适的作用域。</p>
+</code></pre></div><p>如果一个类型上存在多个冲突的作用域，Guice 会使用 bind()方法中指定的作用域。如果不想使用注解的作用域，可以在 bind()方法中将对象绑定为 Scopes.NO_SCOPE。</p>
+<p>Guice 和它的扩展提供了很多作用域，和 spring 一样，有单例 Singleton，Session 作用域 SessionScoped，Request 请求作用域 RequestScoped 等等。我们可以根据需要选择合适的作用域。</p>
 <h3 id=23-注入>2.3 注入<a hidden class=anchor aria-hidden=true href=#23-注入>#</a></h3>
-<p>guice的注入和spring类似，而且还做了一些扩展。</p>
+<p>guice 的注入和 spring 类似，而且还做了一些扩展。</p>
 <ul>
 <li>
 <p>构造器注入</p>
@@ -348,11 +379,11 @@ public class InMemoryTransactionLog implements TransactionLog {
 <li>
 <p>字段注入</p>
 <p>使用 @Inject 注解标记字段。这是最简洁的注入方式。</p>
-<p>注意：不能给final字段加@Inject注解。</p>
+<p>注意：不能给 final 字段加@Inject 注解。</p>
 </li>
 <li>
 <p>可选注入</p>
-<p>有的时候，可能需要一个依赖项存在则进行注入，不存在则不注入。此时可以使用方法注入或字段注入来做这件事，当依赖项不可用的时候Guice 就会忽略这些注入。如果你需要配置可选注入的话，使用 @Inject(optional = true) 注解就可以了。</p>
+<p>有的时候，可能需要一个依赖项存在则进行注入，不存在则不注入。此时可以使用方法注入或字段注入来做这件事，当依赖项不可用的时候 Guice 就会忽略这些注入。如果你需要配置可选注入的话，使用 @Inject(optional = true) 注解就可以了。</p>
 </li>
 <li>
 <p>按需注入</p>
@@ -373,39 +404,39 @@ public class InMemoryTransactionLog implements TransactionLog {
 </li>
 </ul>
 <h3 id=24-aop>2.4 AOP<a hidden class=anchor aria-hidden=true href=#24-aop>#</a></h3>
-<p>guice的aop功能较弱，时间原因还没研究透，后续继续写。</p>
+<p>guice 的 aop 功能较弱，时间原因还没研究透，后续继续写。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/>
 <span class=title>« Prev Page</span>
 <br>
-<span>Reactive微服务</span>
+<span>Reactive 微服务</span>
 </a>
 <a class=next href=https://zhenfeng-zhu.github.io/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>
 <span class=title>Next Page »</span>
 <br>
-<span>kotlin快速入门</span>
+<span>kotlin 快速入门</span>
 </a>
 </nav>
 <div class=share-buttons>
-<a target=_blank rel="noopener noreferrer" aria-label="share Guice快速入门 on twitter" href="https://twitter.com/intent/tweet/?text=Guice%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f&hashtags="><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg>
+<a target=_blank rel="noopener noreferrer" aria-label="share Guice 快速入门 on twitter" href="https://twitter.com/intent/tweet/?text=Guice%20%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f&hashtags="><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg>
 </a>
-<a target=_blank rel="noopener noreferrer" aria-label="share Guice快速入门 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f&title=Guice%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8&summary=Guice%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8&source=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg>
+<a target=_blank rel="noopener noreferrer" aria-label="share Guice 快速入门 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f&title=Guice%20%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8&summary=Guice%20%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8&source=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg>
 </a>
-<a target=_blank rel="noopener noreferrer" aria-label="share Guice快速入门 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f&title=Guice%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg>
+<a target=_blank rel="noopener noreferrer" aria-label="share Guice 快速入门 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f&title=Guice%20%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg>
 </a>
-<a target=_blank rel="noopener noreferrer" aria-label="share Guice快速入门 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg>
+<a target=_blank rel="noopener noreferrer" aria-label="share Guice 快速入门 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg>
 </a>
-<a target=_blank rel="noopener noreferrer" aria-label="share Guice快速入门 on whatsapp" href="https://api.whatsapp.com/send?text=Guice%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8%20-%20https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg>
+<a target=_blank rel="noopener noreferrer" aria-label="share Guice 快速入门 on whatsapp" href="https://api.whatsapp.com/send?text=Guice%20%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8%20-%20https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg>
 </a>
-<a target=_blank rel="noopener noreferrer" aria-label="share Guice快速入门 on telegram" href="https://telegram.me/share/url?text=Guice%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
+<a target=_blank rel="noopener noreferrer" aria-label="share Guice 快速入门 on telegram" href="https://telegram.me/share/url?text=Guice%20%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fguice%25E5%25BF%25AB%25E9%2580%259F%25E5%2585%25A5%25E9%2597%25A8%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
 </a>
 </div>
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

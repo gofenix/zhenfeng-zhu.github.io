@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
+<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -46,6 +46,11 @@
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
 <li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
+<li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
 </a>
@@ -67,19 +72,39 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+nats 简介
+</h2>
+</header>
+<section class=entry-content>
+<p>nats 是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC 和爱立信等公司都有在使用。
+核心基于 EventMachine 开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向 MessageBus 发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用 nats streaming 可以做到持久化，缓存等功能。
+NATS server nats 提供了一个 go 编写的轻量级服务器。发行版包括二进制和 docker 镜像
+NATS clients
+nats 官方提供的客户端有 Go，Node，Ruby，Java，C，C＃，NGINX 等。
+NATS 设计目标
+核心原则是性能，可伸缩和易用性。
+高效 始终在线和可用 非常轻巧 支持多种质量的服务 支持各种消息传递模型和使用场景 NATS 使用场景 nats 是一个简单且强大的消息系统，为支持现代云原生架构设计。由于可伸缩性的复杂性，nats 旨在容易使用和实现，且能提供多种质量的服务。
+一些适用 nats 的场景有：
+高吞吐量的消息分散 —— 少数的生产者需要将数据发送给很多的消费者。 寻址和发现 —— 将数据发送给特定的应用实例，设备或者用户，也可用于发现并连接到基础架构中的实例，设备或用户。 命令和控制（控制面板）—— 向程序或设备发送指令，并从程序/设备中接收状态，如 SCADA，卫星遥感，物联网等。 负载均衡 —— 主要应用于程序会生成大量的请求，且可动态伸缩程序实例。 N 路可扩展性 —— 通信基础架构能够充分利用 go 的高效并发/调度机制，以增强水平和垂直的扩展性。 位置透明 —— 程序在各个地理位置上分布者大量实例，且你无法了解到程序之间的端点配置详情，及他们所生产或消费的数据。 容错 使用 nats-streaming 的附加场景有：...</p>
+</section>
+<footer class=entry-footer>
+July 30, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to nats 简介" href=https://zhenfeng-zhu.github.io/posts/nats/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 overview-of-openfaas
 </h2>
 </header>
 <section class=entry-content>
-<p>OpenFaaS概览 无服务器函数变得简单。
-函数监视器 你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。 API网关/UI门户 API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。 API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。
-命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
-可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。
-CLI实际上是API网关的一个RESTful客户端。
-在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI
-函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。
-Python示例： import requests def handle(req): r = requests.get(req, timeout = 1) print(req +" => " + str(r.status_code)) handler.py
-Node.js示例： "use strict" module.exports = (callback, context) => { callback(null, {"message": "You said: " + context}) } handler....</p>
+<p>OpenFaaS 概览 无服务器函数变得简单。
+函数监视器 你可以通过添加函数监视器 (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。 函数监视器是允许 HTTP 请求通过 STDIN 转发到目标进程的入口点。响应会从你应用写入 STDOUT 返回给调用者。 API 网关/UI 门户 API 网关为你的函数提供外部路由，并通过 Prometheus 收集云原生指标。 你的 API 网关将会根据需求更改 Docker Swarm 或 Kubernetes API 中的服务副本数来实现伸缩性。 UI 是允许你在浏览器中调用函数或者根据需要创建新的函数。 API 网关是一个 RESTful 形式的微服务，你可以在这里查看Swagger 文档。
+命令行 Docker 中的任何容器或者进程都可以是 FaaS 中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
+可以从 Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个 Dockerfile。
+CLI 实际上是 API 网关的一个 RESTful 客户端。
+在配置好 OpenFaaS 之后，你可以在这里开始学习 CLI开始学习 CLI...</p>
 </section>
 <footer class=entry-footer>
 July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -93,8 +118,8 @@ OpenFaaS on Rancher 2.0
 </h2>
 </header>
 <section class=entry-content>
-<p>这是一篇关于如何在Rancher 2.0上创建OpenFaaS栈的文章。我假设你已经准备好了Rancher 2.0集群，如果没有请按照官方文档创建一个。
-下面的视频展示了如何创建OpenFaaS栈，并在实际中使用：
+<p>这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。
+下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：
 https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be
 这里是创建栈的compose.yml文件：
 version: "2" services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config....</p>
@@ -162,20 +187,17 @@ June 28, 2018&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix
 </header>
 <section class=entry-content>
 <p>今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。
-目前已经有一批优秀的serverless架构开源项目，OpenFaas就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力serverless的发展。
-这是一个自学研讨会，学习如何构建、部署和运行OpenFaas 函数。
-Lab1 - OpenFaas的准备工作 OpenFaas可以在Docker Swarm和Kubernetes的过几个主要平台之上运行。在此教程里，我们将会在的您本地电脑使用Docker Swarm来入门。
+目前已经有一批优秀的 serverless 架构开源项目，OpenFaas 就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力 serverless 的发展。
+这是一个自学研讨会，学习如何构建、部署和运行 OpenFaas 函数。
+Lab1 - OpenFaas 的准备工作 OpenFaas 可以在 Docker Swarm 和 Kubernetes 的过几个主要平台之上运行。在此教程里，我们将会在的您本地电脑使用 Docker Swarm 来入门。
 预备条件 Docker Mac
 Docker CE for Mac Edge Edition Windows
-仅针对windows10 专业版或企业版 安装Docker CE for Windows 安装Git Bash 备注：所有步骤中请使用Git Bash：不要尝试使用WSL或Bash for Windows。
+仅针对 windows10 专业版或企业版 安装Docker CE for Windows 安装Git Bash 备注：所有步骤中请使用 Git Bash：不要尝试使用 WSL 或 Bash for Windows。
 Linux - Ubuntu 或 Debian
-Docker CE for Linux 你可以从Docker Store中安装Docker CE
-设置一个单节点的Docker Swarm OpenFaas在Docker Swarm和Kubernetes上工作。因为Docker Swarm很容易设置，所以在此Workshop中我们使用Docker Swarm。在文档中有他们两个的指南。
-在你的笔记本或虚拟机中设置一个单节点的Docker Swarm：
-$ docker swarm init 如果运行此命令出错，加上 –advertise-addr 你的IP 参数。...</p>
+Docker CE for Linux 你可以从Docker Store中安装 Docker CE...</p>
 </section>
 <footer class=entry-footer>
-June 25, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+June 25, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to 译：openfaas-workshop-Lab1" href=https://zhenfeng-zhu.github.io/posts/workshop-lab1/></a>
 </article>
@@ -186,19 +208,19 @@ openfaas
 </h2>
 </header>
 <section class=entry-content>
-<p>对于mac环境来讲，首先安装新版docker:
-brew cask install docker 然后启动docker。
-命令行登陆docker hub
-docker login 启动docker swarm
-docker swarm init 安装faas-cli
-brew install faas-cli clone下来代码：
+<p>对于 mac 环境来讲，首先安装新版 docker:
+brew cask install docker 然后启动 docker。
+命令行登陆 docker hub
+docker login 启动 docker swarm
+docker swarm init 安装 faas-cli
+brew install faas-cli clone 下来代码：
 git clone https://github.com/openfaas/faas 然后执行
 ./deploy_stack.sh 部署一些示例
-faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到ui界面了。
-安装grafana进行监控
-docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆admin admin 查看。
+faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。
+安装 grafana 进行监控
+docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
 常用命令：
-$ faas-cli new --list $ faas-cli build -f ./hello-openfaas.yml $ faas-cli push -f ./hello-openfaas.yml $ faas-cli deploy -f ....</p>
+$ faas-cli new --list $ faas-cli build -f ....</p>
 </section>
 <footer class=entry-footer>
 June 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -212,7 +234,7 @@ java-reactive-web
 </h2>
 </header>
 <section class=entry-content>
-<p>Spring web mvc： 传统servlet web
+<p>Spring web mvc： 传统 servlet web
 spring web flux： Reactive web
 编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程
 In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow....</p>
@@ -229,51 +251,19 @@ kafka
 </h2>
 </header>
 <section class=entry-content>
-<p>启动zookeeper
-bin/zookeeper-server-start.sh config/zookeeper.properties 启动kafka
+<p>启动 zookeeper
+bin/zookeeper-server-start.sh config/zookeeper.properties 启动 kafka
 bin/kafka-server-start.sh config/server.properties 创建一个主题
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect
 echo -e "zhisheng\ntian" > test.txt ls
-zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e "zhisheng\ntian" > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器
-bin/connect-standalone.sh config/connect-standalone....</p>
+zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e "zhisheng\ntian" > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器...</p>
 </section>
 <footer class=entry-footer>
 June 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to kafka" href=https://zhenfeng-zhu.github.io/posts/kafka/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-译：vertx-kotlin-coroutine
-</h2>
-</header>
-<section class=entry-content>
-<p>尝试翻译vertx的文档。尊重原文，部分使用自己的理解。
-Vert.x的kotlin协程提供了async/await或者和go类似的channel。这使得你能够以熟悉的顺序风格写垂直代码。
-vertx-lang-kotlin-coroutines集成了kotlin协程，用于执行异步操作和处理事件。这样就能够以同步代码的模型编写代码，而且不会阻塞内核线程。
-简介 vert.x与许多旧的应用平台相比的一个主要优势是它几乎完全是非阻塞的（内核线程）。这允许基于vert.x的程序使用极少数的内核线程处理大量的并发（例如：许多连接和消息），可以获得更好的伸缩性。
-vert.x的非阻塞特性形成了非阻塞API。非阻塞API可以采用多种形式来实现，包括回调函数，promise，fibers或者响应式扩展。vert.x的核心API使用回调函数的风格，但是它也支持其他模型，如RxJava 1和2。
-在某些情况下，使用异步的API编程可能比使用经典的顺序代码风格更具有挑战性，特别是需要按照顺序完成若干操作。另外，使用异步API时，错误的传播也更为复杂。
-vertx-lang-kotlin-coroutines使用协程。协程是非常轻量级的线程，而且不与底层的内核线程对应。所以当协程需要“阻塞”时，它会暂停并释放当前的内核线程，使得另一个协程可以处理事件。
-vertx-lang-kotlin-coroutines使用kotlinx.coroutines来实现协程。
-vertx-lang-kotlin-coroutines目前仅适用于kotlin，而且是kotlin1.1的一个实验特性。
-从一个vertx.x的contex中启动协程 导入io.vertx.kotlin.coroutines.VertxCoroutine，launch（协程生成器）方法中允许运行一段代码作为可以暂停的协程：
-val vertx = Vertx.vertx() vertx.deployVerticle(ExampleVerticle()) launch(vertx.dispatcher()) { val timerId = awaitEvent&lt;Long> { handler -> vertx.setTimer(1000, handler) } println("Event fired from timer with id ${timerId}") } vertx.dispatcher()返回一个使用vert.x的事件循环执行协程的disptacher。
-awaitEvent函数暂停协程的执行直到定时器触发为止，并使用赋给handler的值恢复协程。
-有关handlers，events和事件流的更多细节，将在下一节中给出。
-继承CoroutineVerticle 你可以将代码部署为io.vertx.kotlin.coroutines.CoroutineVerticle的实例，这是kotlin协程的专用类型。你应该重载verticle的start()方法，stop()方法的重载是可选的：
-class MyVerticle : CoroutineVerticle() { suspend override fun start() { // ... } } 获得一次性的异步结果 vert.x的许多异步操作都采用Handler&lt;AsyncResult>作为最后一个参数。一个例子就是使用vert.x的mongo client执行对象检索，或者是发送一个事件总线消息之后等待回复。
-这是通过awaitResult方法来实现，它返回一个值或者抛出一个异常。
-协程会一直处于暂停的状态知道事件被处理，并且这时没有内核线程被阻塞。
-The method is executed by specifying the asynchronous operation that needs to be executed in the form of a block that is passed to the handler at run-time....</p>
-</section>
-<footer class=entry-footer>
-June 2, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to 译：vertx-kotlin-coroutine" href=https://zhenfeng-zhu.github.io/posts/vertx-kotlin-coroutine/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
@@ -282,7 +272,7 @@ June 2, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
 </nav>
 </footer>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

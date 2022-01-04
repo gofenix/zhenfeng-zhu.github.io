@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
+<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -46,6 +46,11 @@
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
 <li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
+<li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
 </a>
@@ -67,45 +72,48 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-小议async/await和coroutine
+译：vertx-kotlin-coroutine
+</h2>
+</header>
+<section class=entry-content>
+<p>尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。
+Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。
+vertx-lang-kotlin-coroutines 集成了 kotlin 协程，用于执行异步操作和处理事件。这样就能够以同步代码的模型编写代码，而且不会阻塞内核线程。
+简介 vert.x 与许多旧的应用平台相比的一个主要优势是它几乎完全是非阻塞的（内核线程）。这允许基于 vert.x 的程序使用极少数的内核线程处理大量的并发（例如：许多连接和消息），可以获得更好的伸缩性。
+vert.x 的非阻塞特性形成了非阻塞 API。非阻塞 API 可以采用多种形式来实现，包括回调函数，promise，fibers 或者响应式扩展。vert.x 的核心 API 使用回调函数的风格，但是它也支持其他模型，如 RxJava 1 和 2。
+在某些情况下，使用异步的 API 编程可能比使用经典的顺序代码风格更具有挑战性，特别是需要按照顺序完成若干操作。另外，使用异步 API 时，错误的传播也更为复杂。
+vertx-lang-kotlin-coroutines 使用协程。协程是非常轻量级的线程，而且不与底层的内核线程对应。所以当协程需要“阻塞”时，它会暂停并释放当前的内核线程，使得另一个协程可以处理事件。
+vertx-lang-kotlin-coroutines 使用 kotlinx.coroutines 来实现协程。
+vertx-lang-kotlin-coroutines 目前仅适用于 kotlin，而且是 kotlin1.1 的一个实验特性。
+从一个 vertx.x 的 contex 中启动协程 导入 io.vertx.kotlin.coroutines.VertxCoroutine，launch（协程生成器）方法中允许运行一段代码作为可以暂停的协程：
+val vertx = Vertx.vertx() vertx.deployVerticle(ExampleVerticle()) launch(vertx.dispatcher()) { val timerId = awaitEvent&lt;Long> { handler -> vertx....</p>
+</section>
+<footer class=entry-footer>
+June 2, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to 译：vertx-kotlin-coroutine" href=https://zhenfeng-zhu.github.io/posts/vertx-kotlin-coroutine/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+小议 async/await 和 coroutine
 </h2>
 </header>
 <section class=entry-content>
 <p>Being happy doesn’t mean that everything is perfect. It means that you decided to look beyond the imperfections.
 后端编程，涉及最多的就是并发。简单理解就是：
-并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行多个任务。可以理解为一个是manage，一个是run。
-并发一般特指IO，IO是独立于CPU的设备，IO设备通常远远慢于CPU，所以我们引入了并发的概念，让CPU可以一次性发起多个IO操作而不用等待IO设备做完一个操作再做令一个。原理就是非阻塞操作+事件通知。
-硬件底层上我其实不关心，主要就是在写程序上，如何简单的去写并发的代码。在语法层面上对并发做的比较好的，很适合做服务端，比如go，比如node，又比如某些函数式语言。我最近最近主要使用的是node和kotlin。
+并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行多个任务。可以理解为一个是 manage，一个是 run。
+并发一般特指 IO，IO 是独立于 CPU 的设备，IO 设备通常远远慢于 CPU，所以我们引入了并发的概念，让 CPU 可以一次性发起多个 IO 操作而不用等待 IO 设备做完一个操作再做令一个。原理就是非阻塞操作+事件通知。
+硬件底层上我其实不关心，主要就是在写程序上，如何简单的去写并发的代码。在语法层面上对并发做的比较好的，很适合做服务端，比如 go，比如 node，又比如某些函数式语言。我最近最近主要使用的是 node 和 kotlin。
 那么在写并发代码的时候，就会时不时的想这样一个问题：
-一个问题 当代码遇到一个“暂时不能完成”的流程时（例如建立一个tcp链接，可能需要5ms才能建立），他不想阻塞在这里睡眠，想暂时离开现场去干点别的事情（例如看看另外一个已经建立的链接是否可以收包了）。问题是：离开现场后，当你回来的时候，上下文还像你走的时候吗？
-跳转离开，在任何语言里都有2种最基本的方法：1）从当前函数返回； 2）调用一个新的函数。 前者会把上下文中的局部变量和函数参数全部摧毁，除非他返回前把这些变量找个别的地方保存起来；后者则能保护住整个上下文的内存（除了协程切换后会摧毁一些寄存器），而且跳转回来也是常规方法：函数返回。
-在写node的时候，基本上是无脑上async/await。每次看到回调函数的时候，强迫症就犯了，总是想方设法将那个方法转成promise，然后使用await获得结果。无脑尝试了bluebird和node的util，虽然有些是很好用的，但是有的还是无法达到我预期的。靠着无脑的async/await，实现了很多功能，代码写起来也是快的飞起，但是只顾着做业务而不深入思考的话，是一个不好的表现，所以我就停下来搜了很多async/await的东西，特别是从阮一峰老师那里收获了很多。
-js异步编程 因为js是单线程，所以异步编程对js特别重要。
-实现异步主要有如下几种：
-回调函数
-callback，英语直译就是重新调用。
-所谓的回调函数就是把任务的第二段单独写在一个函数里面，等到重新执行这个任务的时候，直接调用这个函数。
-回调本身没问题，但是就怕多重嵌套。
-promise
-promise是一种新的写法，把回调函数的横向嵌套，用then的形式改成纵向的加载。
-协程
-协程就是比线程更小的单位。
-执行过程大致如下：
-第一步，协程A开始执行。
-第二步，协程A执行到一半，进入暂停，执行权转移到协程B。
-第三步，（一段时间后）协程B交还执行权。
-第四步，协程A恢复执行。
-后面再展开说协程。
-很明显，在go火起来之后，很多编程语言都在往协程上靠，因为协程很好的将异步的写法转化成了同步的写法，降低了心智负担。js当然也不落后。
-js的异步写法的演进
-generator
-es6增加了generator函数，就是协程的一种实现，最大特点就是使用yield关键字就是用来交出函数的执行权。
-function* gen(x){ var y = yield x + 2; return y; } 不同于普通函数的地方在于调用generator函数的时候，不返回结果，而是会返回一个内部的指针。调用指针的next方法，会移动内部指针（即执行异步任务的第一段），遇到的yield语句就交出执行权，执行别的代码。下次再调用该函数指针的next方法，就继续执行到该函数的下一个yield语句。...</p>
+一个问题 当代码遇到一个“暂时不能完成”的流程时（例如建立一个 tcp 链接，可能需要 5ms 才能建立），他不想阻塞在这里睡眠，想暂时离开现场去干点别的事情（例如看看另外一个已经建立的链接是否可以收包了）。问题是：离开现场后，当你回来的时候，上下文还像你走的时候吗？
+跳转离开，在任何语言里都有 2 种最基本的方法：1）从当前函数返回； 2）调用一个新的函数。 前者会把上下文中的局部变量和函数参数全部摧毁，除非他返回前把这些变量找个别的地方保存起来；后者则能保护住整个上下文的内存（除了协程切换后会摧毁一些寄存器），而且跳转回来也是常规方法：函数返回。
+在写 node 的时候，基本上是无脑上 async/await。每次看到回调函数的时候，强迫症就犯了，总是想方设法将那个方法转成 promise，然后使用 await 获得结果。无脑尝试了 bluebird 和 node 的 util，虽然有些是很好用的，但是有的还是无法达到我预期的。靠着无脑的 async/await，实现了很多功能，代码写起来也是快的飞起，但是只顾着做业务而不深入思考的话，是一个不好的表现，所以我就停下来搜了很多 async/await 的东西，特别是从阮一峰老师那里收获了很多。...</p>
 </section>
 <footer class=entry-footer>
-May 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+May 21, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to 小议async/await和coroutine" href=https://zhenfeng-zhu.github.io/posts/async/></a>
+<a class=entry-link aria-label="post link to 小议 async/await 和 coroutine" href=https://zhenfeng-zhu.github.io/posts/async/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -115,39 +123,39 @@ elasticsearch
 </header>
 <section class=entry-content>
 <p>以前没有好好学的东西，现在在工作中慢慢的补回来了。
-基础概念 索引 es是将数据存储在一个或者多个索引（index）中。
+基础概念 索引 es 是将数据存储在一个或者多个索引（index）中。
 索引就像是数据库。
-文档 文档是es的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。
+文档 文档是 es 的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。
 文档就像数据库中的一条条记录。
 类型 每个文档都有一个类型与之相对应。
 类型就像数据库中的表。
-映射 所有文档在被写入到es中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。
-节点 单个es服务实例就是一个节点。
-集群 多个协同工作的es节点的集合就是集群。
-分片 es将数据分散到多个物理的Lucene索引上，这些物理Lucene索引被称为分片。
+映射 所有文档在被写入到 es 中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。
+节点 单个 es 服务实例就是一个节点。
+集群 多个协同工作的 es 节点的集合就是集群。
+分片 es 将数据分散到多个物理的 Lucene 索引上，这些物理 Lucene 索引被称为分片。
 副本 副本就是每个分片都做冗余处理，一个宕机之后，不影响服务。
-快速入门 安装 es的安装很简单，我这里使用的是mac，下载下来zip包，解压即可使用。
-[elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ./bin/elasticsearch Java HotSpot(TM) 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release. [2018-05-20T17:18:37,619][INFO ][o.e.n.Node ] [] initializing ....</p>
+快速入门 安装 es 的安装很简单，我这里使用的是 mac，下载下来 zip 包，解压即可使用。
+[elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ./bin/elasticsearch Java HotSpot(TM) 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9....</p>
 </section>
 <footer class=entry-footer>
-May 20, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
+May 20, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to elasticsearch" href=https://zhenfeng-zhu.github.io/posts/elasticsearch/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-git常用操作
+git 常用操作
 </h2>
 </header>
 <section class=entry-content>
-<p>整理一下常用的git操作，不用再到处找了。
-git放弃本地修改，强制更新 git fetch --all git reset --hard origin/master git修改远程仓库地址 git remote set-url origin url cherry-pick 当你通过一番挣扎终于搞定一个bug,顺手提交到 git 服务器,心里一阵暗爽. 这时发现你当前所在的分支是 master !!!
+<p>整理一下常用的 git 操作，不用再到处找了。
+git 放弃本地修改，强制更新 git fetch --all git reset --hard origin/master git 修改远程仓库地址 git remote set-url origin url cherry-pick 当你通过一番挣扎终于搞定一个 bug,顺手提交到 git 服务器,心里一阵暗爽. 这时发现你当前所在的分支是 master !!!
 这个分支不是开发者用来提交代码的,可惜现在剁手也晚了.
-先切换到master git checkout master git log 复制提交的commit id
-切换到dev, cherry-pick
+先切换到 master git checkout master git log 复制提交的 commit id
+切换到 dev, cherry-pick
 git checkout dev git cherry-pic ${commit_id} 常用开发流程 git checkout -b feature1
-git commit之后，进行rebase
+git commit 之后，进行 rebase
 git pull –rebase
 gca!
 git rvm...</p>
@@ -155,76 +163,74 @@ git rvm...</p>
 <footer class=entry-footer>
 May 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to git常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
+<a class=entry-link aria-label="post link to git 常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-node的cluster
+node 的 cluster
 </h2>
 </header>
 <section class=entry-content>
-<p>我们知道js是运行单线程的，也就是说一个node进程只能运行在一个cpu上。那么如果用node来做web server的话，就无法享受到多核运算的好处。
+<p>我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。
 一个问题就是：
-如何榨干服务器资源，利用多核CPU的并发优势。 node官方提供的解决方案是cluster。
-1 cluster是什么 简单来说：
+如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。
+1 cluster 是什么 简单来说：
 在服务器上同时启动多个进程。 每个进程都跑的是同一份源码。 这些进程可以同时监听一个端口。 其中：
-负责启动其他进程的叫做master进程，不做具体工作，只负责启动其他进程。 其他被启动的叫worker进程。他们接收请求，对外提供服务。 worker进程的数量一般根据服务器的cpu核数来决定，这样就可以完美利用多核资源。 以下是官方文档的一个例子：
-const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i &lt; numCPUs; i++) { cluster.fork(); } cluster.on('exit', (worker, code, signal) => { console.log(`工作进程 ${worker.process.pid} 已退出`); }); } else { // 工作进程可以共享任何 TCP 连接。 // 在本例子中，共享的是一个 HTTP 服务器。 http....</p>
+负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。 以下是官方文档的一个例子：
+const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i &lt; numCPUs; i++) { cluster....</p>
 </section>
 <footer class=entry-footer>
 May 5, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to node的cluster" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/></a>
+<a class=entry-link aria-label="post link to node 的 cluster" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-node踩坑
+node 踩坑
 </h2>
 </header>
 <section class=entry-content>
-<p>module 首先第一个就是es6的module。
+<p>module 首先第一个就是 es6 的 module。
 看到别人写的
 import { a } from "./module"; 所以自己也想要这么写，但是每次运行的时候都会报错。
-// demo2.js export const a = "hello"; //demo1.js import { a } from "./demo2"; function hello() { console.log(a); } zhuzhenfengdeMacBook-Pro :: node/node-example » node demo1.js /Users/zhuzhenfeng/Documents/github/node/node-example/demo1.js:1 (function (exports, require, module, __filename, __dirname) { import { a } from "./demo2"; ^ SyntaxError: Unexpected token { at new Script (vm.js:74:7) at createScript (vm.js:246:10) at Object.runInThisContext (vm.js:298:10) at Module._compile (internal/modules/cjs/loader.js:646:28) at Object.Module._extensions..js (internal/modules/cjs/loader.js:689:10) at Module....</p>
+// demo2.js export const a = "hello"; //demo1.js import { a } from "./demo2"; function hello() { console.log(a); } zhuzhenfengdeMacBook-Pro :: node/node-example » node demo1.js /Users/zhuzhenfeng/Documents/github/node/node-example/demo1.js:1 (function (exports, require, module, __filename, __dirname) { import { a } from "./demo2"; ^ SyntaxError: Unexpected token { at new Script (vm.js:74:7) at createScript (vm.js:246:10) at Object.runInThisContext (vm.js:298:10) at Module._compile (internal/modules/cjs/loader.js:646:28) at Object....</p>
 </section>
 <footer class=entry-footer>
 May 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to node踩坑" href=https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/></a>
+<a class=entry-link aria-label="post link to node 踩坑" href=https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-node学习笔记
+node 学习笔记
 </h2>
 </header>
 <section class=entry-content>
-<p>写node也有一段时间了，整理一下学习笔记，共同进步
-什么是node？ 首先看一下什么是node.js
-Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效 Node.js 的包管理器 npm，是全球最大的开源库生态系统 模块系统是node最基本也是最常用的。一般可以分为四类：
-原生模块 文件模块 第三方模块 自定义模块 node社区崇尚DRY文化，即Don’t repeate yourself。这种文化使得node的生态异常繁荣，同样也由于某些包的质量低下引来了一些诟病。
-谈谈自定义模块 我们在写node程序的时候，一般都是在写自定义模块。
+<p>写 node 也有一段时间了，整理一下学习笔记，共同进步
+什么是 node 首先看一下什么是 node.js
+Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效 Node.js 的包管理器 npm，是全球最大的开源库生态系统 模块系统是 node 最基本也是最常用的。一般可以分为四类：
+原生模块 文件模块 第三方模块 自定义模块 node 社区崇尚 DRY 文化，即 Don’t repeate yourself。这种文化使得 node 的生态异常繁荣，同样也由于某些包的质量低下引来了一些诟病。
+谈谈自定义模块 我们在写 node 程序的时候，一般都是在写自定义模块。
 创建模块
 // b.js function FunA(){ return "hello world"; } // 暴露方法FunA module.exports = FunA; 加载模块
-// a.js const FunA=require('./b.js'); // 运行FunA const name=FunA(); console.log(name); 在做模块到处的时候有两种方式：
-module.exports
-module.exports 就 Node....</p>
+// a.js const FunA=require('....</p>
 </section>
 <footer class=entry-footer>
 April 22, 2018&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to node学习笔记" href=https://zhenfeng-zhu.github.io/posts/node-learning/></a>
+<a class=entry-link aria-label="post link to node 学习笔记" href=https://zhenfeng-zhu.github.io/posts/node-learning/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-node的redis实战
+node 的 redis 实战
 </h2>
 </header>
 <section class=entry-content>
-<p>Node.js Redis客户端模块 为了追新，这里我使用的yarn，毕竟我是HDD（面向热点编程）编程实践者。
+<p>Node.js Redis 客户端模块 为了追新，这里我使用的 yarn，毕竟我是 HDD（面向热点编程）编程实践者。
 模块安装
 yarn add redis 模块使用实例
 const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on("error", function (err) { console.log("Error " + err); }); client.set("string key", "string val", redis.print); client.hset("hash key", "hashtest 1", "some value", redis.print); client.hset(["hash key", "hashtest 2", "some other value"], redis.print); client.hkeys("hash key", function (err, replies) { console.log(replies.length + " replies:"); replies.forEach(function (reply, i) { console.log(" " + i + ": " + reply); }); client....</p>
@@ -232,27 +238,27 @@ const redis = require('redis') const client = redis.createClient('6379', '127.0.
 <footer class=entry-footer>
 April 13, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to node的redis实战" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/></a>
+<a class=entry-link aria-label="post link to node 的 redis 实战" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-谈谈web框架
+谈谈 web 框架
 </h2>
 </header>
 <section class=entry-content>
-<p>这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对web框架的理解。自己了解的也不是很多，也请多多指教。
-写程序免不了要做web相关的，现在由于前后端的分离，后端一般只提供rest接口，前端一般使用node来做渲染。在之前使用jsp那一套的时候，基本上都要写html+js的前端的一套，也要写后端java的CRUD。
-我理解的web框架中，大致是分为这么两类：
-router框架 mvc框架 mvc类框架 mvc，初级程序员面试笔试的时候必考的一个知识点。model-view-controller，即模型-视图-控制器。
-m，模型主要用于封装与应用程序相关的数据以及对数据的处理方法。 v，在 View 中一般没有程序上的逻辑。为了实现 View 上的刷新功能，View 需要访问它监视的数据模型（Model），因此应该事先在被它监视的数据那里注册。 c，用于控制应用程序的流程。 我了解比较多的mvc框架是spring mvc。spring、spring mvc和spring boot等，他们并不是一个概念，也不是仅仅用于web开发。但是在这里我就不分那么细，统一用spring来代替。这里所说的spring都是指狭义上的web开发方面。
-在做web开发的时候，项目目录一般是这样的：
-$ tree [16:23:43] . ├── mvnw ├── mvnw.cmd ├── pom.xml └── src ├── main │ ├── java │ │ └── com │ │ └── example │ │ └── demo │ │ └── DemoApplication.java │ └── resources │ ├── application.properties │ ├── static │ └── templates └── test └── java └── com └── example └── demo └── DemoApplicationTests....</p>
+<p>这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对 web 框架的理解。自己了解的也不是很多，也请多多指教。
+写程序免不了要做 web 相关的，现在由于前后端的分离，后端一般只提供 rest 接口，前端一般使用 node 来做渲染。在之前使用 jsp 那一套的时候，基本上都要写 html+js 的前端的一套，也要写后端 java 的 CRUD。
+我理解的 web 框架中，大致是分为这么两类：
+router 框架 mvc 框架 mvc 类框架 mvc，初级程序员面试笔试的时候必考的一个知识点。model-view-controller，即模型-视图-控制器。
+m，模型主要用于封装与应用程序相关的数据以及对数据的处理方法。 v，在 View 中一般没有程序上的逻辑。为了实现 View 上的刷新功能，View 需要访问它监视的数据模型（Model），因此应该事先在被它监视的数据那里注册。 c，用于控制应用程序的流程。 我了解比较多的 mvc 框架是 spring mvc。spring、spring mvc 和 spring boot 等，他们并不是一个概念，也不是仅仅用于 web 开发。但是在这里我就不分那么细，统一用 spring 来代替。这里所说的 spring 都是指狭义上的 web 开发方面。
+在做 web 开发的时候，项目目录一般是这样的：
+$ tree [16:23:43] . ├── mvnw ├── mvnw.cmd ├── pom.xml └── src ├── main │ ├── java │ │ └── com │ │ └── example │ │ └── demo │ │ └── DemoApplication....</p>
 </section>
 <footer class=entry-footer>
 April 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to 谈谈web框架" href=https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/></a>
+<a class=entry-link aria-label="post link to 谈谈 web 框架" href=https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -262,45 +268,18 @@ April 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </header>
 <section class=entry-content>
 <p>创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
-技术栈 Docker docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。
-rancher rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。
-aws 近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。
-kotlin 之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。
-guice 这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。
-需要我们编写AppModule.java去手动配置哪个类注入哪个类。
-rxjava rxjava我都没有找到一个系统的教程，不知道该从哪里学习。
-vertx vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。
-ES6 node代码中都是用es6来写的，async和await现在也会用了。
-express 想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。
-typescript 还没它去写东西，可能下周会用它来写个机器人。
-貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。
-知识面扩展 监控 grafana+Prometheus+graylog去做可视化和日志的监控。
-对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。
-FSM状态机 机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。
-网关 网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。
-我们使用的是kong，在这里kong加上一些插件，相当好用。
-规则引擎 在规则引擎中，都是一个个规则。
-DSL 领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。
-Key Transparency 谷歌的一个公钥管理库，保证了无法被篡改。...</p>
+技术栈 Docker docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。
+rancher rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。
+aws 近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。
+kotlin 之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。
+guice 这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。
+需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。
+rxjava rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。...</p>
 </section>
 <footer class=entry-footer>
 April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to 技术栈" href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-同步一个 fork
-</h2>
-</header>
-<section class=entry-content>
-<p>具体方法 Configuring a remote for a fork 给 fork 配置一个 remote 主要使用 git remote -v 查看远程状态。 git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) 添加一个将被同步给 fork 远程的上游仓库 git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git 再次查看状态确认是否配置成功。 git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push) Syncing a fork 从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master git fetch upstream git fetch upstream # remote: Counting objects: 75, done....</p>
-</section>
-<footer class=entry-footer>
-April 4, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to 同步一个 fork" href=https://zhenfeng-zhu.github.io/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
@@ -309,7 +288,7 @@ April 4, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </nav>
 </footer>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

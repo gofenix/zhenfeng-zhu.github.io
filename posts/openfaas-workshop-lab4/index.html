@@ -20,7 +20,7 @@ $ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="openfaas-workshop-lab4">
 <meta property="og:description" content="Lab 4 - 深入函数 在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：
 $ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be able to control how a function behaves at runtime, we can do that in at least two ways:
@@ -41,7 +41,7 @@ $ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be
 在部署时  在部署时设置环境变量  我们在 Lab3 时用了 write_debug 来做——你也可以在这里设置你想要的任何自定义的环境变量。例如：如果你想为 hello world 函数配置一种语言，可以引入一个 spoken_language 变量。
 使用 HTTP 上下文——querystring / headers  使用 querystring 和 HTTP headers  另一个更为动态的选项是可以在每个请求级别上进行修改，即使用 querystrings 和 HTTP headers，这两者都可以通过 faas-cli 或者 curl 传递。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"openfaas-workshop-lab4","item":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"openfaas-workshop-lab4","name":"openfaas-workshop-lab4","description":"Lab 4 - 深入函数 在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：\n$ cp -r lab3 lab4 \\ \u0026amp;amp;\u0026amp;amp; cd lab4 通过环境变量注入配置 It is useful to be able to control how a function behaves at runtime, we can …","keywords":[],"articleBody":"Lab 4 - 深入函数 在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：\n$ cp -r lab3 lab4 \\ \u0026\u0026 cd lab4 通过环境变量注入配置 It is useful to be able to control how a function behaves at runtime, we can do that in at least two ways:\n控制函数在运行时的行为很有用，我们至少可以通过两种方式来实现：\n在部署时  在部署时设置环境变量  我们在 Lab3 时用了 write_debug 来做——你也可以在这里设置你想要的任何自定义的环境变量。例如：如果你想为 hello world 函数配置一种语言，可以引入一个 spoken_language 变量。\n使用 HTTP 上下文——querystring / headers  使用 querystring 和 HTTP headers  另一个更为动态的选项是可以在每个请求级别上进行修改，即使用 querystrings 和 HTTP headers，这两者都可以通过 faas-cli 或者 curl 传递。\n这些 headers 通过环境变量暴露出来，因此你可以很容易的在函数中使用。所有的 header 都以 Http*为前缀，并且所有的-都被替换为了*下划线\n让我们用一个 querystring 和一个列出所有环境变量的函数来尝试一下：\n 部署一个函数，此函数使用内置的 BusyBox 命令来打印环境变量  $ faas-cli deploy --name env --fprocess=\"env\" --image=\"functions/alpine:latest\" --network=func_functions  用一个 querystring 去调用函数：  $ echo \"\" | faas-cli invoke env --query workshop=1 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_Connection=close Http_Content_Type=text/plain Http_X_Call_Id=cdbed396-a20a-43fe-9123-1d5a122c976d Http_X_Forwarded_For=10.255.0.2 Http_X_Start_Time=1519729562486546741 Http_User_Agent=Go-http-client/1.1 Http_Accept_Encoding=gzip Http_Method=POST Http_ContentLength=-1 Http_Path=/function/env ... Http_Query=workshop=1 ... 在 python 代码中，你应该输入 os.getenv(“Http_Query”)\n 现在用一个 header 调用函数：  $ echo \"\" | curl http://127.0.0.1:8080/function/env --header \"X-Output-Mode: json\" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_X_Call_Id=8e597bcf-614f-4ca5-8f2e-f345d660db5e Http_X_Forwarded_For=10.255.0.2 Http_X_Start_Time=1519729577415481886 Http_Accept=*/* Http_Accept_Encoding=gzip Http_Connection=close Http_User_Agent=curl/7.55.1 Http_Method=GET Http_ContentLength=0 Http_Path=/function/env ... Http_X_Output_Mode=json ... 在 python 代码中，你应该输入 os.getenv(“Http_X_Outout_Mode”)。\n你可以看到，当 Http_Method 是 POST 方法时， 所有的其他 HTTP 上下文也被提供了出来，比如 Content-Length，User_Agent， Cookies 和其他 HTTP 请求中应有的参数。\n利用日志 OpenFaaS 的 watchdog 是通过标准 IO 流的 stdin 和 stdout 处理 HTTP 请求和读取 HTTP 响应。这意味着作为一个函数的进程不需要知道任何 web 和 HTTP 的信息。\n一个有趣的情况是当函数以非零的退出且 stderr 不为空。默认情况下，函数的 stdout/stderr 被合并了，且 stderr 不会被打印到日志里。\n让我们使用 Lab3 的函数 hello-openfaas 验证一下。\n修改 handler.py 为：\nimport sys import json def handle(req): sys.stderr.write(\"This should be an error message.\\n\") return json.dumps({\"Hello\": \"OpenFaaS\"}) 构建并部署：\n$ faas-cli build -f hello-openfaas.yml \\  \u0026\u0026 faas-cli push -f hello-openfaas.yml \\  \u0026\u0026 faas-cli deploy -f hello-openfaas.yml 然后调用函数：\n$ echo | faas-cli invoke hello-openfaas 你应该可以看到合并之后的输出：\nThis should be an error message. {\"Hello\": \"OpenFaaS\"}  说明：如果使用docker service logs hello-openfaas检查容器的日志，你应该看不到 stderr 输出。\n 在这个例子中，我们需要函数返回一个可被解析的合法 JSON。不幸的是日志信息使得输出不可用，所以我们需要重定向 stderr 的信息到容器的日志中。OpenFaaS 提供了一个解决方案即：只返回 stdout，因此你可以打印日志的错误信息并且保证函数的返回是清晰的。\n为了达到目的，你应该使用combine_output参数：\n让我们尝试一下。打开hello-openfaas.yaml文件，然后添加下面这几行：\nenvironment: combine_output: false 推送部署并调用函数。\n输出应该是：\n{\"Hello\": \"OpenFaaS\"} 检查容易的 stderr 日志。你应该可以看到如下类似的消息：\nhello-openfaas.1.2xtrr2ckkkth@linuxkit-025000000001 | 2018/04/03 08:35:24 stderr: This should be an error message. 创建工作流程 在某些情况下，将一个函数的输出作为另一个函数的输入是很有用的。通过客户端或者 API 网关都可以实现。\n在客户端的函数链 你可以使用 curl，faas-cli 或者你自己的其他代码将一个函数的结果传给另一个函数。这是一个例子：\n优点：\n requires no code - can be done with CLI programs 无需代码——可以使用 CLI 程序完成 fast for development and testing 快速开发测试 easy to model in code 易于在代码中建模  缺点：\n additional latency - each function goes back to the server 额外的延迟——每个函数都要返回到服务器 chatty (more messages) 繁琐（更多的消息）  例子：\n  从函数商店中部署一个 Nodeinfo 函数\n  把 NodeInfo 的输出传给 Markdown。\n  $ echo -n \"\" | faas-cli invoke nodeinfo | faas-cli invoke func_markdown Hostname: 64767782518c\nPlatform: linux Arch: x64 CPU count: 4 Uptime: 1121466\n你现在将会看到 NodeInfo 函数的输出被 HTML 标签装饰了。\n客户端函数链的另一个例子是生成一个图片，然后把它传给另一个加水印的函数。\n从一个函数中调用另一个函数 最简单的函数间调用是通过 OpenFaaS 的 API 网关做一个 HTTP 调用。这个调用是不用知道外部域名或 IP 地址，他可以简单通过 DNS 条目把 API 网关作为一个 gateway。\n在一个函数中访问 API 网关服务时，最好使用环境变量来配置主机名，这是很重要的，原因有两个——名字可能会改变，并且在 Kubernetes 中有时需要后缀\n优点：\n  函数可以直接使用对方\n  因为是在同一网络中互相访问，延迟较低\n  缺点：\n 需要一个 HTTP 请求的库  例子：\n在 Lab3 中，我们介绍了 requests 包并且使用它去调用 ISS 获取一个宇航员的名字。我们可以使用相同的技术调用部署在 OpenFaaS 中的其他函数。\n 打开函数商店然后部署Sentiment Analysis函数。  Sentiment Analysis 函数将会告诉你任意一个句子的主动性和倾向（积极性评级）。这个函数的结果是一个格式化的 JSON，如下面例子所示：\n$ echo -n \"California is great, it's always sunny there.\" | faas-cli invoke sentimentanalysis {\"polarity\": 0.8, \"sentence_count\": 1, \"subjectivity\": 0.75} 这个结果显示我们的测试句子非常有主动性（75%）且很积极（80%）。这两个字段的值在-1.00 和 1.00 之间。\n下面的代码被用于在任何一个函数中调用 Sentiment Analysis函数：\n test_sentence = \"California is great, it's always sunny there.\" r = requests.get(\"http://gateway:8080/function/sentimentanalysis\", text= test_sentence) 或者通过一个环境变量：\n gateway_hostname = os.getenv(\"gateway_hostname\", \"gateway\") # uses a default of \"gateway\" for when \"gateway_hostname\" is not set test_sentence = \"California is great, it's always sunny there.\" r = requests.get(\"http://\" + gateway_hostname + \":8080/function/sentimentanalysis\", text= test_sentence) 因为结果总是 JSON 格式的，所示我们可以使用.json()转化响应。\n result = r.json() if result[\"polarity\"]  0.45: return \"That was probably positive\" else: return \"That was neutral or negative\" 现在创建一个 Python 函数，然后合并在一起：\nimport os import requests import sys def handle(req): \"\"\"handle a request to the function Args: req (str): request body \"\"\" gateway_hostname = os.getenv(\"gateway_hostname\", \"gateway\") # uses a default of \"gateway\" for when \"gateway_hostname\" is not set test_sentence = req r = requests.get(\"http://\" + gateway_hostname + \":8080/function/sentimentanalysis\", data= test_sentence) if r.status_code != 200: sys.exit(\"Error with sentimentanalysis, expected: %d, got: %d\\n\" % (200, r.status_code)) result = r.json() if result[\"polarity\"]  0.45: return \"That was probably positive\" else: return \"That was neutral or negative\"  记得把 requests 添加到 requirements.txt 文件里  说明：你不需要修改 SentimentAnalysis 函数的源码，我们已经把它部署了，可以通过 API 网关获取。\n现在进入 Lab 5。\n","wordCount":"616","inLanguage":"en","datePublished":"2018-07-02T09:32:59Z","dateModified":"2018-07-02T09:32:59Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"openfaas-workshop-lab4","name":"openfaas-workshop-lab4","description":"Lab 4 - 深入函数 在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：\n$ cp -r lab3 lab4 \\ \u0026amp;amp;\u0026amp;amp; cd lab4 通过环境变量注入配置 It is useful to be able to control how a function behaves at runtime, we can …","keywords":[],"articleBody":"Lab 4 - 深入函数 在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：\n$ cp -r lab3 lab4 \\ \u0026\u0026 cd lab4 通过环境变量注入配置 It is useful to be able to control how a function behaves at runtime, we can do that in at least two ways:\n控制函数在运行时的行为很有用，我们至少可以通过两种方式来实现：\n在部署时  在部署时设置环境变量  我们在 Lab3 时用了 write_debug 来做——你也可以在这里设置你想要的任何自定义的环境变量。例如：如果你想为 hello world 函数配置一种语言，可以引入一个 spoken_language 变量。\n使用 HTTP 上下文——querystring / headers  使用 querystring 和 HTTP headers  另一个更为动态的选项是可以在每个请求级别上进行修改，即使用 querystrings 和 HTTP headers，这两者都可以通过 faas-cli 或者 curl 传递。\n这些 headers 通过环境变量暴露出来，因此你可以很容易的在函数中使用。所有的 header 都以 Http*为前缀，并且所有的-都被替换为了*下划线\n让我们用一个 querystring 和一个列出所有环境变量的函数来尝试一下：\n 部署一个函数，此函数使用内置的 BusyBox 命令来打印环境变量  $ faas-cli deploy --name env --fprocess=\"env\" --image=\"functions/alpine:latest\" --network=func_functions  用一个 querystring 去调用函数：  $ echo \"\" | faas-cli invoke env --query workshop=1 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_Connection=close Http_Content_Type=text/plain Http_X_Call_Id=cdbed396-a20a-43fe-9123-1d5a122c976d Http_X_Forwarded_For=10.255.0.2 Http_X_Start_Time=1519729562486546741 Http_User_Agent=Go-http-client/1.1 Http_Accept_Encoding=gzip Http_Method=POST Http_ContentLength=-1 Http_Path=/function/env ... Http_Query=workshop=1 ... 在 python 代码中，你应该输入 os.getenv(“Http_Query”)\n 现在用一个 header 调用函数：  $ echo \"\" | curl http://127.0.0.1:8080/function/env --header \"X-Output-Mode: json\" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_X_Call_Id=8e597bcf-614f-4ca5-8f2e-f345d660db5e Http_X_Forwarded_For=10.255.0.2 Http_X_Start_Time=1519729577415481886 Http_Accept=*/* Http_Accept_Encoding=gzip Http_Connection=close Http_User_Agent=curl/7.55.1 Http_Method=GET Http_ContentLength=0 Http_Path=/function/env ... Http_X_Output_Mode=json ... 在 python 代码中，你应该输入 os.getenv(“Http_X_Outout_Mode”)。\n你可以看到，当 Http_Method 是 POST 方法时， 所有的其他 HTTP 上下文也被提供了出来，比如 Content-Length，User_Agent， Cookies 和其他 HTTP 请求中应有的参数。\n利用日志 OpenFaaS 的 watchdog 是通过标准 IO 流的 stdin 和 stdout 处理 HTTP 请求和读取 HTTP 响应。这意味着作为一个函数的进程不需要知道任何 web 和 HTTP 的信息。\n一个有趣的情况是当函数以非零的退出且 stderr 不为空。默认情况下，函数的 stdout/stderr 被合并了，且 stderr 不会被打印到日志里。\n让我们使用 Lab3 的函数 hello-openfaas 验证一下。\n修改 handler.py 为：\nimport sys import json def handle(req): sys.stderr.write(\"This should be an error message.\\n\") return json.dumps({\"Hello\": \"OpenFaaS\"}) 构建并部署：\n$ faas-cli build -f hello-openfaas.yml \\  \u0026\u0026 faas-cli push -f hello-openfaas.yml \\  \u0026\u0026 faas-cli deploy -f hello-openfaas.yml 然后调用函数：\n$ echo | faas-cli invoke hello-openfaas 你应该可以看到合并之后的输出：\nThis should be an error message. {\"Hello\": \"OpenFaaS\"}  说明：如果使用docker service logs hello-openfaas检查容器的日志，你应该看不到 stderr 输出。\n 在这个例子中，我们需要函数返回一个可被解析的合法 JSON。不幸的是日志信息使得输出不可用，所以我们需要重定向 stderr 的信息到容器的日志中。OpenFaaS 提供了一个解决方案即：只返回 stdout，因此你可以打印日志的错误信息并且保证函数的返回是清晰的。\n为了达到目的，你应该使用combine_output参数：\n让我们尝试一下。打开hello-openfaas.yaml文件，然后添加下面这几行：\nenvironment: combine_output: false 推送部署并调用函数。\n输出应该是：\n{\"Hello\": \"OpenFaaS\"} 检查容易的 stderr 日志。你应该可以看到如下类似的消息：\nhello-openfaas.1.2xtrr2ckkkth@linuxkit-025000000001 | 2018/04/03 08:35:24 stderr: This should be an error message. 创建工作流程 在某些情况下，将一个函数的输出作为另一个函数的输入是很有用的。通过客户端或者 API 网关都可以实现。\n在客户端的函数链 你可以使用 curl，faas-cli 或者你自己的其他代码将一个函数的结果传给另一个函数。这是一个例子：\n优点：\n requires no code - can be done with CLI programs 无需代码——可以使用 CLI 程序完成 fast for development and testing 快速开发测试 easy to model in code 易于在代码中建模  缺点：\n additional latency - each function goes back to the server 额外的延迟——每个函数都要返回到服务器 chatty (more messages) 繁琐（更多的消息）  例子：\n  从函数商店中部署一个 Nodeinfo 函数\n  把 NodeInfo 的输出传给 Markdown。\n  $ echo -n \"\" | faas-cli invoke nodeinfo | faas-cli invoke func_markdown Hostname: 64767782518c\nPlatform: linux Arch: x64 CPU count: 4 Uptime: 1121466\n你现在将会看到 NodeInfo 函数的输出被 HTML 标签装饰了。\n客户端函数链的另一个例子是生成一个图片，然后把它传给另一个加水印的函数。\n从一个函数中调用另一个函数 最简单的函数间调用是通过 OpenFaaS 的 API 网关做一个 HTTP 调用。这个调用是不用知道外部域名或 IP 地址，他可以简单通过 DNS 条目把 API 网关作为一个 gateway。\n在一个函数中访问 API 网关服务时，最好使用环境变量来配置主机名，这是很重要的，原因有两个——名字可能会改变，并且在 Kubernetes 中有时需要后缀\n优点：\n  函数可以直接使用对方\n  因为是在同一网络中互相访问，延迟较低\n  缺点：\n 需要一个 HTTP 请求的库  例子：\n在 Lab3 中，我们介绍了 requests 包并且使用它去调用 ISS 获取一个宇航员的名字。我们可以使用相同的技术调用部署在 OpenFaaS 中的其他函数。\n 打开函数商店然后部署Sentiment Analysis函数。  Sentiment Analysis 函数将会告诉你任意一个句子的主动性和倾向（积极性评级）。这个函数的结果是一个格式化的 JSON，如下面例子所示：\n$ echo -n \"California is great, it's always sunny there.\" | faas-cli invoke sentimentanalysis {\"polarity\": 0.8, \"sentence_count\": 1, \"subjectivity\": 0.75} 这个结果显示我们的测试句子非常有主动性（75%）且很积极（80%）。这两个字段的值在-1.00 和 1.00 之间。\n下面的代码被用于在任何一个函数中调用 Sentiment Analysis函数：\ntest_sentence = \"California is great, it's always sunny there.\" r = requests.get(\"http://gateway:8080/function/sentimentanalysis\", text= test_sentence) 或者通过一个环境变量：\ngateway_hostname = os.getenv(\"gateway_hostname\", \"gateway\") # uses a default of \"gateway\" for when \"gateway_hostname\" is not set test_sentence = \"California is great, it's always sunny there.\" r = requests.get(\"http://\" + gateway_hostname + \":8080/function/sentimentanalysis\", text= test_sentence) 因为结果总是 JSON 格式的，所示我们可以使用.json()转化响应。\nresult = r.json() if result[\"polarity\"]  0.45: return \"That was probably positive\" else: return \"That was neutral or negative\" 现在创建一个 Python 函数，然后合并在一起：\nimport os import requests import sys def handle(req): \"\"\"handle a request to the function Args: req (str): request body \"\"\" gateway_hostname = os.getenv(\"gateway_hostname\", \"gateway\") # uses a default of \"gateway\" for when \"gateway_hostname\" is not set test_sentence = req r = requests.get(\"http://\" + gateway_hostname + \":8080/function/sentimentanalysis\", data= test_sentence) if r.status_code != 200: sys.exit(\"Error with sentimentanalysis, expected: %d, got: %d\\n\" % (200, r.status_code)) result = r.json() if result[\"polarity\"]  0.45: return \"That was probably positive\" else: return \"That was neutral or negative\"  记得把 requests 添加到 requirements.txt 文件里  说明：你不需要修改 SentimentAnalysis 函数的源码，我们已经把它部署了，可以通过 API 网关获取。\n现在进入 Lab 5。\n","wordCount":"616","inLanguage":"en","datePublished":"2018-07-02T09:32:59Z","dateModified":"2018-07-02T09:32:59Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -58,6 +58,11 @@ $ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -83,13 +88,36 @@ openfaas-workshop-lab4
 July 2, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#lab-4---%e6%b7%b1%e5%85%a5%e5%87%bd%e6%95%b0 aria-label="Lab 4 - 深入函数">Lab 4 - 深入函数</a><ul>
+<li>
+<a href=#%e9%80%9a%e8%bf%87%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f%e6%b3%a8%e5%85%a5%e9%85%8d%e7%bd%ae aria-label=通过环境变量注入配置>通过环境变量注入配置</a><ul>
+<li>
+<a href=#%e5%9c%a8%e9%83%a8%e7%bd%b2%e6%97%b6 aria-label=在部署时>在部署时</a></li><li>
+<a href=#%e4%bd%bf%e7%94%a8-http-%e4%b8%8a%e4%b8%8b%e6%96%87querystring--headers aria-label="使用 HTTP 上下文——querystring / headers">使用 HTTP 上下文——querystring / headers</a></li></ul>
+</li><li>
+<a href=#%e5%88%a9%e7%94%a8%e6%97%a5%e5%bf%97 aria-label=利用日志>利用日志</a></li><li>
+<a href=#%e5%88%9b%e5%bb%ba%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b aria-label=创建工作流程>创建工作流程</a><ul>
+<li>
+<a href=#%e5%9c%a8%e5%ae%a2%e6%88%b7%e7%ab%af%e7%9a%84%e5%87%bd%e6%95%b0%e9%93%be aria-label=在客户端的函数链>在客户端的函数链</a></li><li>
+<a href=#%e4%bb%8e%e4%b8%80%e4%b8%aa%e5%87%bd%e6%95%b0%e4%b8%ad%e8%b0%83%e7%94%a8%e5%8f%a6%e4%b8%80%e4%b8%aa%e5%87%bd%e6%95%b0 aria-label=从一个函数中调用另一个函数>从一个函数中调用另一个函数</a></li></ul>
+</li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
 <h1 id=lab-4---深入函数>Lab 4 - 深入函数<a hidden class=anchor aria-hidden=true href=#lab-4---深入函数>#</a></h1>
 <p></p>
 <p>在开始本实验之前，创建一个新的文件夹，把 lab3 的文件拷贝到 lab4 里：</p>
-<pre tabindex=0><code>$ cp -r lab3 lab4 \
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ cp -r lab3 lab4 \
    &amp;&amp; cd lab4
-</code></pre><h2 id=通过环境变量注入配置>通过环境变量注入配置<a hidden class=anchor aria-hidden=true href=#通过环境变量注入配置>#</a></h2>
+</code></pre></div><h2 id=通过环境变量注入配置>通过环境变量注入配置<a hidden class=anchor aria-hidden=true href=#通过环境变量注入配置>#</a></h2>
 <p>It is useful to be able to control how a function behaves at runtime, we can do that in at least two ways:</p>
 <p>控制函数在运行时的行为很有用，我们至少可以通过两种方式来实现：</p>
 <h3 id=在部署时>在部署时<a hidden class=anchor aria-hidden=true href=#在部署时>#</a></h3>
@@ -107,11 +135,11 @@ July 2, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 <ul>
 <li>部署一个函数，此函数使用内置的 BusyBox 命令来打印环境变量</li>
 </ul>
-<pre tabindex=0><code>$ faas-cli deploy --name env --fprocess=&quot;env&quot; --image=&quot;functions/alpine:latest&quot; --network=func_functions
-</code></pre><ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ faas-cli deploy --name env --fprocess=&#34;env&#34; --image=&#34;functions/alpine:latest&#34; --network=func_functions
+</code></pre></div><ul>
 <li>用一个 querystring 去调用函数：</li>
 </ul>
-<pre tabindex=0><code>$ echo &quot;&quot; | faas-cli invoke env --query workshop=1
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ echo &#34;&#34; | faas-cli invoke env --query workshop=1
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=05e8db360c5a
 fprocess=env
@@ -129,11 +157,11 @@ Http_Path=/function/env
 ...
 Http_Query=workshop=1
 ...
-</code></pre><p>在 python 代码中，你应该输入 os.getenv(&ldquo;Http_Query&rdquo;)</p>
+</code></pre></div><p>在 python 代码中，你应该输入 os.getenv(&ldquo;Http_Query&rdquo;)</p>
 <ul>
 <li>现在用一个 header 调用函数：</li>
 </ul>
-<pre tabindex=0><code>$ echo &quot;&quot; | curl http://127.0.0.1:8080/function/env --header &quot;X-Output-Mode: json&quot;
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ echo &#34;&#34; | curl http://127.0.0.1:8080/function/env --header &#34;X-Output-Mode: json&#34;
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=05e8db360c5a
 fprocess=env
@@ -151,30 +179,30 @@ Http_Path=/function/env
 ...
 Http_X_Output_Mode=json
 ...
-</code></pre><p>在 python 代码中，你应该输入 os.getenv(&ldquo;Http_X_Outout_Mode&rdquo;)。</p>
+</code></pre></div><p>在 python 代码中，你应该输入 os.getenv(&ldquo;Http_X_Outout_Mode&rdquo;)。</p>
 <p>你可以看到，当 Http_Method 是 POST 方法时， 所有的其他 HTTP 上下文也被提供了出来，比如 Content-Length，<code>User_Agent</code>， Cookies 和其他 HTTP 请求中应有的参数。</p>
 <h2 id=利用日志>利用日志<a hidden class=anchor aria-hidden=true href=#利用日志>#</a></h2>
 <p>OpenFaaS 的 watchdog 是通过标准 IO 流的 stdin 和 stdout 处理 HTTP 请求和读取 HTTP 响应。这意味着作为一个函数的进程不需要知道任何 web 和 HTTP 的信息。</p>
 <p>一个有趣的情况是当函数以非零的退出且 stderr 不为空。默认情况下，函数的 stdout/stderr 被合并了，且 stderr 不会被打印到日志里。</p>
 <p>让我们使用 Lab3 的函数 hello-openfaas 验证一下。</p>
 <p>修改 handler.py 为：</p>
-<pre tabindex=0><code>import sys
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>import sys
 import json
 
 def handle(req):
 
-    sys.stderr.write(&quot;This should be an error message.\n&quot;)
-    return json.dumps({&quot;Hello&quot;: &quot;OpenFaaS&quot;})
-</code></pre><p>构建并部署：</p>
+    sys.stderr.write(&#34;This should be an error message.\n&#34;)
+    return json.dumps({&#34;Hello&#34;: &#34;OpenFaaS&#34;})
+</code></pre></div><p>构建并部署：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ faas-cli build -f hello-openfaas.yml <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>  <span style=color:#f92672>&amp;&amp;</span> faas-cli push -f hello-openfaas.yml <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>  <span style=color:#f92672>&amp;&amp;</span> faas-cli deploy -f hello-openfaas.yml
 </code></pre></div><p>然后调用函数：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ echo | faas-cli invoke hello-openfaas
 </code></pre></div><p>你应该可以看到合并之后的输出：</p>
-<pre tabindex=0><code>This should be an error message.
-{&quot;Hello&quot;: &quot;OpenFaaS&quot;}
-</code></pre><blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>This should be an error message.
+{&#34;Hello&#34;: &#34;OpenFaaS&#34;}
+</code></pre></div><blockquote>
 <p>说明：如果使用<code>docker service logs hello-openfaas</code>检查容器的日志，你应该看不到 stderr 输出。</p>
 </blockquote>
 <p>在这个例子中，我们需要函数返回一个可被解析的合法 JSON。不幸的是日志信息使得输出不可用，所以我们需要重定向 stderr 的信息到容器的日志中。OpenFaaS 提供了一个解决方案即：只返回 stdout，因此你可以打印日志的错误信息并且保证函数的返回是清晰的。</p>
@@ -184,10 +212,10 @@ def handle(req):
       <span style=color:#f92672>combine_output</span>: <span style=color:#66d9ef>false</span>
 </code></pre></div><p>推送部署并调用函数。</p>
 <p>输出应该是：</p>
-<pre tabindex=0><code>{&quot;Hello&quot;: &quot;OpenFaaS&quot;}
-</code></pre><p>检查容易的 stderr 日志。你应该可以看到如下类似的消息：</p>
-<pre tabindex=0><code>hello-openfaas.1.2xtrr2ckkkth@linuxkit-025000000001    | 2018/04/03 08:35:24 stderr: This should be an error message.
-</code></pre><h2 id=创建工作流程>创建工作流程<a hidden class=anchor aria-hidden=true href=#创建工作流程>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>{&#34;Hello&#34;: &#34;OpenFaaS&#34;}
+</code></pre></div><p>检查容易的 stderr 日志。你应该可以看到如下类似的消息：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>hello-openfaas.1.2xtrr2ckkkth@linuxkit-025000000001    | 2018/04/03 08:35:24 stderr: This should be an error message.
+</code></pre></div><h2 id=创建工作流程>创建工作流程<a hidden class=anchor aria-hidden=true href=#创建工作流程>#</a></h2>
 <p>在某些情况下，将一个函数的输出作为另一个函数的输入是很有用的。通过客户端或者 API 网关都可以实现。</p>
 <h3 id=在客户端的函数链>在客户端的函数链<a hidden class=anchor aria-hidden=true href=#在客户端的函数链>#</a></h3>
 <p>你可以使用 curl，faas-cli 或者你自己的其他代码将一个函数的结果传给另一个函数。这是一个例子：</p>
@@ -251,44 +279,44 @@ Uptime: 1121466&lt;/p&gt;
 <span style=color:#f92672>{</span><span style=color:#e6db74>&#34;polarity&#34;</span>: 0.8, <span style=color:#e6db74>&#34;sentence_count&#34;</span>: 1, <span style=color:#e6db74>&#34;subjectivity&#34;</span>: 0.75<span style=color:#f92672>}</span>
 </code></pre></div><p>这个结果显示我们的测试句子非常有主动性（75%）且很积极（80%）。这两个字段的值在-1.00 和 1.00 之间。</p>
 <p>下面的代码被用于在任何一个函数中调用 <em>Sentiment Analysis</em>函数：</p>
-<pre tabindex=0><code>    test_sentence = &quot;California is great, it's always sunny there.&quot;
-    r = requests.get(&quot;http://gateway:8080/function/sentimentanalysis&quot;, text= test_sentence)
-</code></pre><p>或者通过一个环境变量：</p>
-<pre tabindex=0><code>    gateway_hostname = os.getenv(&quot;gateway_hostname&quot;, &quot;gateway&quot;) # uses a default of &quot;gateway&quot; for when &quot;gateway_hostname&quot; is not set
-    test_sentence = &quot;California is great, it's always sunny there.&quot;
-    r = requests.get(&quot;http://&quot; + gateway_hostname + &quot;:8080/function/sentimentanalysis&quot;, text= test_sentence)
-</code></pre><p>因为结果总是 JSON 格式的，所示我们可以使用.json()转化响应。</p>
-<pre tabindex=0><code>    result = r.json()
-    if result[&quot;polarity&quot;] &gt; 0.45:
-       return &quot;That was probably positive&quot;
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>    test_sentence = &#34;California is great, it&#39;s always sunny there.&#34;
+    r = requests.get(&#34;http://gateway:8080/function/sentimentanalysis&#34;, text= test_sentence)
+</code></pre></div><p>或者通过一个环境变量：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>    gateway_hostname = os.getenv(&#34;gateway_hostname&#34;, &#34;gateway&#34;) # uses a default of &#34;gateway&#34; for when &#34;gateway_hostname&#34; is not set
+    test_sentence = &#34;California is great, it&#39;s always sunny there.&#34;
+    r = requests.get(&#34;http://&#34; + gateway_hostname + &#34;:8080/function/sentimentanalysis&#34;, text= test_sentence)
+</code></pre></div><p>因为结果总是 JSON 格式的，所示我们可以使用.json()转化响应。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>    result = r.json()
+    if result[&#34;polarity&#34;] &gt; 0.45:
+       return &#34;That was probably positive&#34;
     else:
-        return &quot;That was neutral or negative&quot;
-</code></pre><p>现在创建一个 Python 函数，然后合并在一起：</p>
-<pre tabindex=0><code>import os
+        return &#34;That was neutral or negative&#34;
+</code></pre></div><p>现在创建一个 Python 函数，然后合并在一起：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>import os
 import requests
 import sys
 
 def handle(req):
-    &quot;&quot;&quot;handle a request to the function
+    &#34;&#34;&#34;handle a request to the function
     Args:
         req (str): request body
-    &quot;&quot;&quot;
+    &#34;&#34;&#34;
 
-    gateway_hostname = os.getenv(&quot;gateway_hostname&quot;, &quot;gateway&quot;) # uses a default of &quot;gateway&quot; for when &quot;gateway_hostname&quot; is not set
+    gateway_hostname = os.getenv(&#34;gateway_hostname&#34;, &#34;gateway&#34;) # uses a default of &#34;gateway&#34; for when &#34;gateway_hostname&#34; is not set
 
     test_sentence = req
 
-    r = requests.get(&quot;http://&quot; + gateway_hostname + &quot;:8080/function/sentimentanalysis&quot;, data= test_sentence)
+    r = requests.get(&#34;http://&#34; + gateway_hostname + &#34;:8080/function/sentimentanalysis&#34;, data= test_sentence)
 
     if r.status_code != 200:
-        sys.exit(&quot;Error with sentimentanalysis, expected: %d, got: %d\n&quot; % (200, r.status_code))
+        sys.exit(&#34;Error with sentimentanalysis, expected: %d, got: %d\n&#34; % (200, r.status_code))
 
     result = r.json()
-    if result[&quot;polarity&quot;] &gt; 0.45:
-        return &quot;That was probably positive&quot;
+    if result[&#34;polarity&#34;] &gt; 0.45:
+        return &#34;That was probably positive&#34;
     else:
-        return &quot;That was neutral or negative&quot;
-</code></pre><ul>
+        return &#34;That was neutral or negative&#34;
+</code></pre></div><ul>
 <li>记得把 requests 添加到 requirements.txt 文件里</li>
 </ul>
 <p>说明：你不需要修改 SentimentAnalysis 函数的源码，我们已经把它部署了，可以通过 API 网关获取。</p>
@@ -324,7 +352,7 @@ def handle(req):
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

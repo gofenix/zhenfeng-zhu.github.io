@@ -5,7 +5,7 @@
 <meta name=robots content="index, follow">
 <title>java-reactive-web | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="Spring web mvc： 传统servlet web
+<meta name=description content="Spring web mvc： 传统 servlet web
 spring web flux： Reactive web
  编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程
 In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow.">
@@ -19,9 +19,9 @@ In computing, reactive programming is a declarative programming paradigm co
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="java-reactive-web">
-<meta property="og:description" content="Spring web mvc： 传统servlet web
+<meta property="og:description" content="Spring web mvc： 传统 servlet web
 spring web flux： Reactive web
  编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程
 In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow.">
@@ -33,12 +33,12 @@ In computing, reactive programming is a declarative programming paradigm co
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="java-reactive-web">
-<meta name=twitter:description content="Spring web mvc： 传统servlet web
+<meta name=twitter:description content="Spring web mvc： 传统 servlet web
 spring web flux： Reactive web
  编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程
 In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"java-reactive-web","item":"https://zhenfeng-zhu.github.io/posts/java-reactive-web/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"java-reactive-web","name":"java-reactive-web","description":"Spring web mvc： 传统servlet web\nspring web flux： Reactive web\n 编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程\nIn computing, …","keywords":[],"articleBody":"Spring web mvc： 传统servlet web\nspring web flux： Reactive web\n 编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程\nIn computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow.\n实现框架   RxJava\nReactiveX is a library for composing asynchronous and event-based programs by using observable sequences.\n这种就是推的模式\nint[] a=[1, 2, 3] for(int i: a){ } package com.reactive.demo.reactivedemo; import java.util.Observable; /** * todo * * @author zhuzhenfeng * @date 2018/6/23 */ public class ObserverPatternDemo { public static void main(String[] args) { MyObservable observable = new MyObservable(); // 1 observable n个observer observable.addObserver((o, value) - { System.out.println(\"1 收到数据更新\" + value); }); observable.addObserver((o, value) - { System.out.println(\"2 收到数据更新\" + value); }); observable.setChanged(); observable.notifyObservers(\"hello world\");// push data 发布数据 } public static class MyObservable extends Observable { @Override protected synchronized void setChanged() { super.setChanged(); } } } /Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java \"- 2 收到数据更新hello world 1 收到数据更新hello world Process finished with exit code 0 当时不阻塞，后续回调。非阻塞基本上采用callback的形式。\n对于java来讲，异步代表切换了线程。\n当前的实现： 同步+非阻塞\n如果是切换了线程，代表是异步 的非阻塞，一般是gui程序的。\n  Reactor\n  特性  异步 非阻塞 事件驱动 可能有背压 backpressure 防止回调地狱   Reactive 使用场景 Long Live 模式： netty的io连接（rpc） timeout\nshort live模式：不太适合Reactive web，因为这是等待。只是会快速返回，但是并不会给你真正的结果。短频快的连接，不太有用武之地。\n http http超时时间  Reactive 理解误区 web：快速响应\n200 Q-200 T - 50T\n1-50\nTomcat connector thread pool(200)-reactive thread pool(50)\nio连接从Tomcat-Reactive\n连接\nReactive thread pool（50）\n不太适合web请求。\nwebflux其实并不会提升性能。\n少量的线程，少量的内存来做更好的伸缩性，而并不是为了提升更好的性能。使用Reactive只会是使单位时间内接受请求的数量增加，单位时间内的处理请求的数量下降。\n","wordCount":"249","inLanguage":"en","datePublished":"2018-06-23T15:05:32Z","dateModified":"2018-06-23T15:05:32Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/java-reactive-web/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"java-reactive-web","name":"java-reactive-web","description":"Spring web mvc： 传统 servlet web\nspring web flux： Reactive web\n 编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程\nIn computing, …","keywords":[],"articleBody":"Spring web mvc： 传统 servlet web\nspring web flux： Reactive web\n 编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程\nIn computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow.\n实现框架   RxJava\nReactiveX is a library for composing asynchronous and event-based programs by using observable sequences.\n这种就是推的模式\nint[] a=[1, 2, 3] for(int i: a){ } package com.reactive.demo.reactivedemo; import java.util.Observable; /** * todo * * @author zhuzhenfeng * @date 2018/6/23 */ public class ObserverPatternDemo { public static void main(String[] args) { MyObservable observable = new MyObservable(); // 1 observable n个observer observable.addObserver((o, value) - { System.out.println(\"1 收到数据更新\" + value); }); observable.addObserver((o, value) - { System.out.println(\"2 收到数据更新\" + value); }); observable.setChanged(); observable.notifyObservers(\"hello world\");// push data 发布数据 } public static class MyObservable extends Observable { @Override protected synchronized void setChanged() { super.setChanged(); } } } /Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java \"- 2 收到数据更新hello world 1 收到数据更新hello world Process finished with exit code 0 当时不阻塞，后续回调。非阻塞基本上采用 callback 的形式。\n对于 java 来讲，异步代表切换了线程。\n当前的实现： 同步+非阻塞\n如果是切换了线程，代表是异步 的非阻塞，一般是 gui 程序的。\n  Reactor\n  特性  异步 非阻塞 事件驱动 可能有背压 backpressure 防止回调地狱  Reactive 使用场景 Long Live 模式： netty 的 io 连接（rpc） timeout\nshort live 模式：不太适合 Reactive web，因为这是等待。只是会快速返回，但是并不会给你真正的结果。短频快的连接，不太有用武之地。\n http http 超时时间  Reactive 理解误区 web：快速响应\n200 Q-200 T - 50T\n1-50\nTomcat connector thread pool(200)-reactive thread pool(50)\nio 连接从 Tomcat-Reactive\n连接\nReactive thread pool（50）\n不太适合 web 请求。\nwebflux 其实并不会提升性能。\n少量的线程，少量的内存来做更好的伸缩性，而并不是为了提升更好的性能。使用 Reactive 只会是使单位时间内接受请求的数量增加，单位时间内的处理请求的数量下降。\n","wordCount":"269","inLanguage":"en","datePublished":"2018-06-23T15:05:32Z","dateModified":"2018-06-23T15:05:32Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/java-reactive-web/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -55,6 +55,11 @@ In computing, reactive programming is a declarative programming paradigm co
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -80,8 +85,24 @@ java-reactive-web
 June 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#reactive-%e6%a6%82%e5%bf%b5 aria-label="Reactive 概念">Reactive 概念</a><ul>
+<li>
+<a href=#%e5%ae%9e%e7%8e%b0%e6%a1%86%e6%9e%b6 aria-label=实现框架>实现框架</a></li><li>
+<a href=#%e7%89%b9%e6%80%a7 aria-label=特性>特性</a></li></ul>
+</li><li>
+<a href=#reactive-%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af aria-label="Reactive 使用场景">Reactive 使用场景</a></li><li>
+<a href=#reactive-%e7%90%86%e8%a7%a3%e8%af%af%e5%8c%ba aria-label="Reactive 理解误区">Reactive 理解误区</a></li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
-<p>Spring web mvc： 传统servlet web</p>
+<p>Spring web mvc： 传统 servlet web</p>
 <p>spring web flux： Reactive web</p>
 <ul>
 <li>编程模式： non-blocking 非阻塞
@@ -105,12 +126,12 @@ June 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 <p>RxJava</p>
 <p>ReactiveX is a library for composing asynchronous and event-based programs by using observable sequences.</p>
 <p>这种就是推的模式</p>
-<pre tabindex=0><code>int[] a=[1, 2, 3]
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>int[] a=[1, 2, 3]
 
 for(int i: a){
 
 }
-</code></pre><pre tabindex=0><code>package com.reactive.demo.reactivedemo;
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package com.reactive.demo.reactivedemo;
 
 import java.util.Observable;
 
@@ -127,16 +148,16 @@ public class ObserverPatternDemo {
         // 1 observable   n个observer
 
         observable.addObserver((o, value) -&gt; {
-            System.out.println(&quot;1 收到数据更新&quot; + value);
+            System.out.println(&#34;1 收到数据更新&#34; + value);
         });
 
         observable.addObserver((o, value) -&gt; {
-            System.out.println(&quot;2 收到数据更新&quot; + value);
+            System.out.println(&#34;2 收到数据更新&#34; + value);
         });
 
         observable.setChanged();
 
-        observable.notifyObservers(&quot;hello world&quot;);//  push data 发布数据
+        observable.notifyObservers(&#34;hello world&#34;);//  push data 发布数据
 
 
     }
@@ -148,15 +169,15 @@ public class ObserverPatternDemo {
         }
     }
 }
-</code></pre><pre tabindex=0><code>/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java &quot;-
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java &#34;-
 2 收到数据更新hello world
 1 收到数据更新hello world
 
 Process finished with exit code 0
-</code></pre><p>当时不阻塞，后续回调。非阻塞基本上采用callback的形式。</p>
-<p>对于java来讲，异步代表切换了线程。</p>
+</code></pre></div><p>当时不阻塞，后续回调。非阻塞基本上采用 callback 的形式。</p>
+<p>对于 java 来讲，异步代表切换了线程。</p>
 <p>当前的实现： 同步+非阻塞</p>
-<p>如果是切换了线程，代表是异步 的非阻塞，一般是gui程序的。</p>
+<p>如果是切换了线程，代表是异步 的非阻塞，一般是 gui 程序的。</p>
 </li>
 <li>
 <p>Reactor</p>
@@ -169,27 +190,26 @@ Process finished with exit code 0
 <li>事件驱动</li>
 <li>可能有背压 backpressure</li>
 <li>防止回调地狱</li>
-<li></li>
 </ul>
 <h1 id=reactive-使用场景>Reactive 使用场景<a hidden class=anchor aria-hidden=true href=#reactive-使用场景>#</a></h1>
-<p>Long Live 模式： netty的io连接（rpc） timeout</p>
-<p>short live模式：不太适合Reactive web，因为这是等待。只是会快速返回，但是并不会给你真正的结果。短频快的连接，不太有用武之地。</p>
+<p>Long Live 模式： netty 的 io 连接（rpc） timeout</p>
+<p>short live 模式：不太适合 Reactive web，因为这是等待。只是会快速返回，但是并不会给你真正的结果。短频快的连接，不太有用武之地。</p>
 <ul>
 <li>http</li>
-<li>http超时时间</li>
+<li>http 超时时间</li>
 </ul>
 <h1 id=reactive-理解误区>Reactive 理解误区<a hidden class=anchor aria-hidden=true href=#reactive-理解误区>#</a></h1>
 <p>web：快速响应</p>
 <p>200 Q->200 T -> 50T</p>
 <p>1-50</p>
 <p>Tomcat connector thread pool(200)->reactive thread pool(50)</p>
-<p>io连接从Tomcat->Reactive</p>
+<p>io 连接从 Tomcat->Reactive</p>
 <p>连接</p>
 <p>Reactive thread pool（50）</p>
-<p>不太适合web请求。</p>
-<p>webflux其实并不会提升性能。</p>
+<p>不太适合 web 请求。</p>
+<p>webflux 其实并不会提升性能。</p>
 <p><img src=http://ww1.sinaimg.cn/large/b831e4c7gy1fsl9ian4ezj20ma0g7tg4.jpg alt></p>
-<p>少量的线程，少量的内存来做更好的伸缩性，而并不是为了提升更好的性能。使用Reactive只会是使单位时间内接受请求的数量增加，单位时间内的处理请求的数量下降。</p>
+<p>少量的线程，少量的内存来做更好的伸缩性，而并不是为了提升更好的性能。使用 Reactive 只会是使单位时间内接受请求的数量增加，单位时间内的处理请求的数量下降。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -221,7 +241,7 @@ Process finished with exit code 0
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

@@ -5,23 +5,13 @@
 <meta name=robots content="index, follow">
 <title>NATS streaming | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="市面上常见到的和Nats功能类似的消息通信系统有：
-ActiveMQ（Java编写）、KafKa（Scala编写）、RabbitMq（Ruby编写）、Nats（之前是Ruby编写现已修改为Go）、Redis（C语言编写）、Kestrel（Scala编写不常用）、NSQ（Go语言编写），这些消息通信系统在Broker吞吐量方面的比较：
-可以看到NATS的吞吐量特别高， NATS原来是使用Ruby编写，可以实现每秒150k消息，后来使用Go语言重写，能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于NATS的详细介绍，请参考上篇文章：NATS简介
-NATS Streaming NATS Streaming是由NATS驱动的数据流系统，也是由go语言写成的，在保证吞吐量和时延的基础上，解决了Nats消息投递一致性的问题。nats streaming可以和核心nats平台无缝嵌入，扩展和互动。
-功能 除了nats平台的一些功能，nats streaming还支持以下的：
- 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅  使用 首先安装nats-streaming-server服务，有多种方式，这里介绍两种：
-  homebrew
-直接在命令行启动
-brew install nats-streaming-server   go get
-这种方式可以让我们直接运行源码启动
-go get github.com/nats-io/nats-streaming-server   启动nats-streaming-server
-有三种启动方式
-  直接启动
-nats-streaming-server   开启nats监控的启动
-nats-streaming-server -m 8222   源码方式启动
-cd $GOPATH/src/github.com/nats-io/nats-streaming-server go run nats-streaming-server.go   客户端 直接下载go的客户端
-go get github.com/nats-io/go-nats-streaming 运行发布者">
+<meta name=description content="市面上常见到的和 Nats 功能类似的消息通信系统有：
+ActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：
+可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：NATS 简介
+NATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 go 语言写成的，在保证吞吐量和时延的基础上，解决了 Nats 消息投递一致性的问题。nats streaming 可以和核心 nats 平台无缝嵌入，扩展和互动。
+功能 除了 nats 平台的一些功能，nats streaming 还支持以下的：
+ 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅  使用 首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：
+  homebrew">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/nats-streaming/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -32,25 +22,15 @@ go get github.com/nats-io/go-nats-streaming 运行发布者">
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="NATS streaming">
-<meta property="og:description" content="市面上常见到的和Nats功能类似的消息通信系统有：
-ActiveMQ（Java编写）、KafKa（Scala编写）、RabbitMq（Ruby编写）、Nats（之前是Ruby编写现已修改为Go）、Redis（C语言编写）、Kestrel（Scala编写不常用）、NSQ（Go语言编写），这些消息通信系统在Broker吞吐量方面的比较：
-可以看到NATS的吞吐量特别高， NATS原来是使用Ruby编写，可以实现每秒150k消息，后来使用Go语言重写，能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于NATS的详细介绍，请参考上篇文章：NATS简介
-NATS Streaming NATS Streaming是由NATS驱动的数据流系统，也是由go语言写成的，在保证吞吐量和时延的基础上，解决了Nats消息投递一致性的问题。nats streaming可以和核心nats平台无缝嵌入，扩展和互动。
-功能 除了nats平台的一些功能，nats streaming还支持以下的：
- 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅  使用 首先安装nats-streaming-server服务，有多种方式，这里介绍两种：
-  homebrew
-直接在命令行启动
-brew install nats-streaming-server   go get
-这种方式可以让我们直接运行源码启动
-go get github.com/nats-io/nats-streaming-server   启动nats-streaming-server
-有三种启动方式
-  直接启动
-nats-streaming-server   开启nats监控的启动
-nats-streaming-server -m 8222   源码方式启动
-cd $GOPATH/src/github.com/nats-io/nats-streaming-server go run nats-streaming-server.go   客户端 直接下载go的客户端
-go get github.com/nats-io/go-nats-streaming 运行发布者">
+<meta property="og:description" content="市面上常见到的和 Nats 功能类似的消息通信系统有：
+ActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：
+可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：NATS 简介
+NATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 go 语言写成的，在保证吞吐量和时延的基础上，解决了 Nats 消息投递一致性的问题。nats streaming 可以和核心 nats 平台无缝嵌入，扩展和互动。
+功能 除了 nats 平台的一些功能，nats streaming 还支持以下的：
+ 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅  使用 首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：
+  homebrew">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/nats-streaming/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -59,25 +39,15 @@ go get github.com/nats-io/go-nats-streaming 运行发布者">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="NATS streaming">
-<meta name=twitter:description content="市面上常见到的和Nats功能类似的消息通信系统有：
-ActiveMQ（Java编写）、KafKa（Scala编写）、RabbitMq（Ruby编写）、Nats（之前是Ruby编写现已修改为Go）、Redis（C语言编写）、Kestrel（Scala编写不常用）、NSQ（Go语言编写），这些消息通信系统在Broker吞吐量方面的比较：
-可以看到NATS的吞吐量特别高， NATS原来是使用Ruby编写，可以实现每秒150k消息，后来使用Go语言重写，能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于NATS的详细介绍，请参考上篇文章：NATS简介
-NATS Streaming NATS Streaming是由NATS驱动的数据流系统，也是由go语言写成的，在保证吞吐量和时延的基础上，解决了Nats消息投递一致性的问题。nats streaming可以和核心nats平台无缝嵌入，扩展和互动。
-功能 除了nats平台的一些功能，nats streaming还支持以下的：
- 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅  使用 首先安装nats-streaming-server服务，有多种方式，这里介绍两种：
-  homebrew
-直接在命令行启动
-brew install nats-streaming-server   go get
-这种方式可以让我们直接运行源码启动
-go get github.com/nats-io/nats-streaming-server   启动nats-streaming-server
-有三种启动方式
-  直接启动
-nats-streaming-server   开启nats监控的启动
-nats-streaming-server -m 8222   源码方式启动
-cd $GOPATH/src/github.com/nats-io/nats-streaming-server go run nats-streaming-server.go   客户端 直接下载go的客户端
-go get github.com/nats-io/go-nats-streaming 运行发布者">
+<meta name=twitter:description content="市面上常见到的和 Nats 功能类似的消息通信系统有：
+ActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：
+可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：NATS 简介
+NATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 go 语言写成的，在保证吞吐量和时延的基础上，解决了 Nats 消息投递一致性的问题。nats streaming 可以和核心 nats 平台无缝嵌入，扩展和互动。
+功能 除了 nats 平台的一些功能，nats streaming 还支持以下的：
+ 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅  使用 首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：
+  homebrew">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"NATS streaming","item":"https://zhenfeng-zhu.github.io/posts/nats-streaming/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"NATS streaming","name":"NATS streaming","description":"市面上常见到的和Nats功能类似的消息通信系统有：\nActiveMQ（Java编写）、KafKa（Scala编写）、RabbitMq（Ruby编写）、Nats（之前是Ruby编写现已修改为Go）、Redis（C语言编写）、Kestrel（Scala编写不常用）、NSQ（Go语言编写），这些消息通信系统在Broker吞吐量方面的比较：\n可以看到NATS的吞吐量 …","keywords":[],"articleBody":"市面上常见到的和Nats功能类似的消息通信系统有：\nActiveMQ（Java编写）、KafKa（Scala编写）、RabbitMq（Ruby编写）、Nats（之前是Ruby编写现已修改为Go）、Redis（C语言编写）、Kestrel（Scala编写不常用）、NSQ（Go语言编写），这些消息通信系统在Broker吞吐量方面的比较：\n可以看到NATS的吞吐量特别高， NATS原来是使用Ruby编写，可以实现每秒150k消息，后来使用Go语言重写，能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于NATS的详细介绍，请参考上篇文章：NATS简介\nNATS Streaming NATS Streaming是由NATS驱动的数据流系统，也是由go语言写成的，在保证吞吐量和时延的基础上，解决了Nats消息投递一致性的问题。nats streaming可以和核心nats平台无缝嵌入，扩展和互动。\n功能 除了nats平台的一些功能，nats streaming还支持以下的：\n 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅  使用 首先安装nats-streaming-server服务，有多种方式，这里介绍两种：\n  homebrew\n直接在命令行启动\nbrew install nats-streaming-server   go get\n这种方式可以让我们直接运行源码启动\ngo get github.com/nats-io/nats-streaming-server   启动nats-streaming-server\n有三种启动方式\n  直接启动\nnats-streaming-server   开启nats监控的启动\nnats-streaming-server -m 8222   源码方式启动\ncd $GOPATH/src/github.com/nats-io/nats-streaming-server go run nats-streaming-server.go   客户端 直接下载go的客户端\ngo get github.com/nats-io/go-nats-streaming 运行发布者\ncd $GOPATH/src/github.com/nats-io/go-nats-streaming/examples/stan-pub go run main.go foo \"msg one\" go run main.go foo \"msg two\" go run main.go foo \"msg three\" 如下图所示：\n运行订阅者\ncd $GOPATH/src/github.com/nats-io/go-nats-streaming/examples/stan-sub go run main.go --all -c test-cluster -id myID foo 实例 首先在本地启动nats-streaming-server，然后下面的代码展示了发布订阅的过程：\npackage main import ( \"github.com/nats-io/go-nats-streaming\" \"github.com/nats-io/go-nats-streaming/pb\" \"log\" \"strconv\" \"time\" ) func main() { var clusterId string = \"test-cluster\" var clientId string = \"test-client\" sc, err := stan.Connect(clusterId, clientId, stan.NatsURL(\"nats://localhost:4222\")) if err != nil { log.Fatal(err) return } // 开启一个协程，不停的生产数据 go func() { m := 0 for { m++ sc.Publish(\"foo1\", []byte(\"hello message \"+strconv.Itoa(m))) time.Sleep(time.Second) } }() // 消费数据 i := 0 mcb := func(msg *stan.Msg) { i++ log.Println(i, \"----\", msg.Subject, msg) } startOpt := stan.StartAt(pb.StartPosition_LastReceived) //_, err = sc.QueueSubscribe(\"foo1\", \"\", mcb, startOpt) // 也可以用queue subscribe _, err = sc.Subscribe(\"foo1\", mcb, startOpt) if err != nil { sc.Close() log.Fatal(err) } // 创建一个channel，阻塞着 signalChan := make(chan int) 运行结果如下：\n2018/07/30 18:04:01 2 ---- foo1 sequence:546 subject:\"foo1\" data:\"hello message 1\" timestamp:1532945041825538757 2018/07/30 18:04:02 3 ---- foo1 sequence:547 subject:\"foo1\" data:\"hello message 2\" timestamp:1532945042828881383 2018/07/30 18:04:03 4 ---- foo1 sequence:548 subject:\"foo1\" data:\"hello message 3\" timestamp:1532945043833360222 2018/07/30 18:04:04 5 ---- foo1 sequence:549 subject:\"foo1\" data:\"hello message 4\" timestamp:1532945044833810697 2018/07/30 18:04:05 6 ---- foo1 sequence:550 subject:\"foo1\" data:\"hello message 5\" timestamp:1532945045838056450 2018/07/30 18:04:06 7 ---- foo1 sequence:551 subject:\"foo1\" data:\"hello message 6\" timestamp:1532945046838585417 2018/07/30 18:04:07 8 ---- foo1 sequence:552 subject:\"foo1\" data:\"hello message 7\" timestamp:1532945047840775810 源码在：https://github.com/zhenfeng-zhu/nats-demo\n总结 NATS Streaming的高级功能类似于 Apache Kafka 的功能，但当你考虑简单性而非复杂性时前者更优。由于 NATS Streaming 相对来说是一项新技术，与 Apache Kafka 相比，它在某些领域需要改进，尤其是为负载均衡场景提供更好的解决方案。\n","wordCount":"286","inLanguage":"en","datePublished":"2018-07-30T14:51:26Z","dateModified":"2018-07-30T14:51:26Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/nats-streaming/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"NATS streaming","name":"NATS streaming","description":"市面上常见到的和 Nats 功能类似的消息通信系统有：\nActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较： …","keywords":[],"articleBody":"市面上常见到的和 Nats 功能类似的消息通信系统有：\nActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：\n可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：NATS 简介\nNATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 go 语言写成的，在保证吞吐量和时延的基础上，解决了 Nats 消息投递一致性的问题。nats streaming 可以和核心 nats 平台无缝嵌入，扩展和互动。\n功能 除了 nats 平台的一些功能，nats streaming 还支持以下的：\n 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅  使用 首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：\n  homebrew\n直接在命令行启动\nbrew install nats-streaming-server   go get\n这种方式可以让我们直接运行源码启动\ngo get github.com/nats-io/nats-streaming-server   启动 nats-streaming-server\n有三种启动方式\n  直接启动\nnats-streaming-server   开启 nats 监控的启动\nnats-streaming-server -m 8222   源码方式启动\ncd $GOPATH/src/github.com/nats-io/nats-streaming-server go run nats-streaming-server.go   客户端 直接下载 go 的客户端\ngo get github.com/nats-io/go-nats-streaming 运行发布者\ncd $GOPATH/src/github.com/nats-io/go-nats-streaming/examples/stan-pub go run main.go foo \"msg one\" go run main.go foo \"msg two\" go run main.go foo \"msg three\" 如下图所示：\n运行订阅者\ncd $GOPATH/src/github.com/nats-io/go-nats-streaming/examples/stan-sub go run main.go --all -c test-cluster -id myID foo 实例 首先在本地启动 nats-streaming-server，然后下面的代码展示了发布订阅的过程：\npackage main import ( \"github.com/nats-io/go-nats-streaming\" \"github.com/nats-io/go-nats-streaming/pb\" \"log\" \"strconv\" \"time\" ) func main() { var clusterId string = \"test-cluster\" var clientId string = \"test-client\" sc, err := stan.Connect(clusterId, clientId, stan.NatsURL(\"nats://localhost:4222\")) if err != nil { log.Fatal(err) return } // 开启一个协程，不停的生产数据 go func() { m := 0 for { m++ sc.Publish(\"foo1\", []byte(\"hello message \"+strconv.Itoa(m))) time.Sleep(time.Second) } }() // 消费数据 i := 0 mcb := func(msg *stan.Msg) { i++ log.Println(i, \"----\", msg.Subject, msg) } startOpt := stan.StartAt(pb.StartPosition_LastReceived) //_, err = sc.QueueSubscribe(\"foo1\", \"\", mcb, startOpt) // 也可以用queue subscribe _, err = sc.Subscribe(\"foo1\", mcb, startOpt) if err != nil { sc.Close() log.Fatal(err) } // 创建一个channel，阻塞着 signalChan := make(chan int) 运行结果如下：\n2018/07/30 18:04:01 2 ---- foo1 sequence:546 subject:\"foo1\" data:\"hello message 1\" timestamp:1532945041825538757 2018/07/30 18:04:02 3 ---- foo1 sequence:547 subject:\"foo1\" data:\"hello message 2\" timestamp:1532945042828881383 2018/07/30 18:04:03 4 ---- foo1 sequence:548 subject:\"foo1\" data:\"hello message 3\" timestamp:1532945043833360222 2018/07/30 18:04:04 5 ---- foo1 sequence:549 subject:\"foo1\" data:\"hello message 4\" timestamp:1532945044833810697 2018/07/30 18:04:05 6 ---- foo1 sequence:550 subject:\"foo1\" data:\"hello message 5\" timestamp:1532945045838056450 2018/07/30 18:04:06 7 ---- foo1 sequence:551 subject:\"foo1\" data:\"hello message 6\" timestamp:1532945046838585417 2018/07/30 18:04:07 8 ---- foo1 sequence:552 subject:\"foo1\" data:\"hello message 7\" timestamp:1532945047840775810 源码在：https://github.com/zhenfeng-zhu/nats-demo\n总结 NATS Streaming 的高级功能类似于 Apache Kafka 的功能，但当你考虑简单性而非复杂性时前者更优。由于 NATS Streaming 相对来说是一项新技术，与 Apache Kafka 相比，它在某些领域需要改进，尤其是为负载均衡场景提供更好的解决方案。\n","wordCount":"336","inLanguage":"en","datePublished":"2018-07-30T14:51:26Z","dateModified":"2018-07-30T14:51:26Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/nats-streaming/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -94,6 +64,11 @@ go get github.com/nats-io/go-nats-streaming 运行发布者">
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -119,16 +94,33 @@ NATS streaming
 July 30, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#nats-streaming aria-label="NATS Streaming">NATS Streaming</a><ul>
+<li>
+<a href=#%e5%8a%9f%e8%83%bd aria-label=功能>功能</a></li><li>
+<a href=#%e4%bd%bf%e7%94%a8 aria-label=使用>使用</a></li><li>
+<a href=#%e5%ae%a2%e6%88%b7%e7%ab%af aria-label=客户端>客户端</a></li><li>
+<a href=#%e5%ae%9e%e4%be%8b aria-label=实例>实例</a></li></ul>
+</li><li>
+<a href=#%e6%80%bb%e7%bb%93 aria-label=总结>总结</a></li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
-<p>市面上常见到的和Nats功能类似的消息通信系统有：</p>
-<p>ActiveMQ（Java编写）、KafKa（Scala编写）、RabbitMq（Ruby编写）、Nats（之前是Ruby编写现已修改为Go）、Redis（C语言编写）、Kestrel（Scala编写不常用）、NSQ（Go语言编写），这些消息通信系统在Broker吞吐量方面的比较：</p>
+<p>市面上常见到的和 Nats 功能类似的消息通信系统有：</p>
+<p>ActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：</p>
 <p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1fts2j6kv9mj20mv0c8aa8.jpg alt></p>
-<p>可以看到NATS的吞吐量特别高， NATS原来是使用Ruby编写，可以实现每秒150k消息，后来使用Go语言重写，能够达到每秒8-11百万个消息，整个程序很小只有3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于NATS的详细介绍，请参考上篇文章：<a href=https://zhuanlan.zhihu.com/p/40871363>NATS简介</a></p>
+<p>可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：<a href=https://zhuanlan.zhihu.com/p/40871363>NATS 简介</a></p>
 <h2 id=nats-streaming>NATS Streaming<a hidden class=anchor aria-hidden=true href=#nats-streaming>#</a></h2>
-<p>NATS Streaming是由NATS驱动的数据流系统，也是由go语言写成的，在保证吞吐量和时延的基础上，解决了Nats消息投递一致性的问题。nats streaming可以和核心nats平台无缝嵌入，扩展和互动。</p>
+<p>NATS Streaming 是由 NATS 驱动的数据流系统，也是由 go 语言写成的，在保证吞吐量和时延的基础上，解决了 Nats 消息投递一致性的问题。nats streaming 可以和核心 nats 平台无缝嵌入，扩展和互动。</p>
 <p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1fts2wctrfzj20tk0r8afy.jpg alt></p>
 <h3 id=功能>功能<a hidden class=anchor aria-hidden=true href=#功能>#</a></h3>
-<p>除了nats平台的一些功能，nats streaming还支持以下的：</p>
+<p>除了 nats 平台的一些功能，nats streaming 还支持以下的：</p>
 <ul>
 <li>增强的消息协议</li>
 <li>消息/事件持久化</li>
@@ -139,72 +131,72 @@ July 30, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 <li>持久订阅</li>
 </ul>
 <h3 id=使用>使用<a hidden class=anchor aria-hidden=true href=#使用>#</a></h3>
-<p>首先安装nats-streaming-server服务，有多种方式，这里介绍两种：</p>
+<p>首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：</p>
 <ul>
 <li>
 <p>homebrew</p>
 <p>直接在命令行启动</p>
-<pre tabindex=0><code>brew install nats-streaming-server
-</code></pre></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>brew install nats-streaming-server
+</code></pre></div></li>
 <li>
 <p>go get</p>
 <p>这种方式可以让我们直接运行源码启动</p>
-<pre tabindex=0><code>go get github.com/nats-io/nats-streaming-server
-</code></pre></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>go get github.com/nats-io/nats-streaming-server
+</code></pre></div></li>
 </ul>
-<p>启动nats-streaming-server</p>
+<p>启动 nats-streaming-server</p>
 <p>有三种启动方式</p>
 <ul>
 <li>
 <p>直接启动</p>
-<pre tabindex=0><code>nats-streaming-server
-</code></pre></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>nats-streaming-server
+</code></pre></div></li>
 <li>
-<p>开启nats监控的启动</p>
-<pre tabindex=0><code>nats-streaming-server -m 8222
-</code></pre></li>
+<p>开启 nats 监控的启动</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>nats-streaming-server -m 8222
+</code></pre></div></li>
 <li>
 <p>源码方式启动</p>
-<pre tabindex=0><code>cd $GOPATH/src/github.com/nats-io/nats-streaming-server
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>cd $GOPATH/src/github.com/nats-io/nats-streaming-server
 
 go run nats-streaming-server.go
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 <h3 id=客户端>客户端<a hidden class=anchor aria-hidden=true href=#客户端>#</a></h3>
-<p>直接下载go的客户端</p>
-<pre tabindex=0><code>go get github.com/nats-io/go-nats-streaming
-</code></pre><p>运行发布者</p>
-<pre tabindex=0><code>cd $GOPATH/src/github.com/nats-io/go-nats-streaming/examples/stan-pub
+<p>直接下载 go 的客户端</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>go get github.com/nats-io/go-nats-streaming
+</code></pre></div><p>运行发布者</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>cd $GOPATH/src/github.com/nats-io/go-nats-streaming/examples/stan-pub
 
-go run main.go foo &quot;msg one&quot;
+go run main.go foo &#34;msg one&#34;
 
-go run main.go foo &quot;msg two&quot;
+go run main.go foo &#34;msg two&#34;
 
-go run main.go foo &quot;msg three&quot;
-</code></pre><p>如下图所示：</p>
+go run main.go foo &#34;msg three&#34;
+</code></pre></div><p>如下图所示：</p>
 <p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1ftrx4gytrhj20q50g0juj.jpg alt></p>
 <p>运行订阅者</p>
-<pre tabindex=0><code>cd $GOPATH/src/github.com/nats-io/go-nats-streaming/examples/stan-sub
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>cd $GOPATH/src/github.com/nats-io/go-nats-streaming/examples/stan-sub
 
 go run main.go --all -c test-cluster -id myID foo
-</code></pre><p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1ftrx8h85rpj20qq0fu41n.jpg alt></p>
+</code></pre></div><p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1ftrx8h85rpj20qq0fu41n.jpg alt></p>
 <h3 id=实例>实例<a hidden class=anchor aria-hidden=true href=#实例>#</a></h3>
-<p>首先在本地启动nats-streaming-server，然后下面的代码展示了发布订阅的过程：</p>
-<pre tabindex=0><code>package main
+<p>首先在本地启动 nats-streaming-server，然后下面的代码展示了发布订阅的过程：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package main
 
 import (
-	&quot;github.com/nats-io/go-nats-streaming&quot;
-	&quot;github.com/nats-io/go-nats-streaming/pb&quot;
-	&quot;log&quot;
-	&quot;strconv&quot;
-	&quot;time&quot;
+	&#34;github.com/nats-io/go-nats-streaming&#34;
+	&#34;github.com/nats-io/go-nats-streaming/pb&#34;
+	&#34;log&#34;
+	&#34;strconv&#34;
+	&#34;time&#34;
 )
 
 func main() {
-	var clusterId string = &quot;test-cluster&quot;
-	var clientId string = &quot;test-client&quot;
+	var clusterId string = &#34;test-cluster&#34;
+	var clientId string = &#34;test-client&#34;
 
-	sc, err := stan.Connect(clusterId, clientId, stan.NatsURL(&quot;nats://localhost:4222&quot;))
+	sc, err := stan.Connect(clusterId, clientId, stan.NatsURL(&#34;nats://localhost:4222&#34;))
 	if err != nil {
 		log.Fatal(err)
 		return
@@ -215,7 +207,7 @@ func main() {
 		m := 0
 		for {
 			m++
-			sc.Publish(&quot;foo1&quot;, []byte(&quot;hello message &quot;+strconv.Itoa(m)))
+			sc.Publish(&#34;foo1&#34;, []byte(&#34;hello message &#34;+strconv.Itoa(m)))
 			time.Sleep(time.Second)
 		}
 
@@ -225,11 +217,11 @@ func main() {
 	i := 0
 	mcb := func(msg *stan.Msg) {
 		i++
-		log.Println(i, &quot;----&gt;&quot;, msg.Subject, msg)
+		log.Println(i, &#34;----&gt;&#34;, msg.Subject, msg)
 	}
 	startOpt := stan.StartAt(pb.StartPosition_LastReceived)
-	//_, err = sc.QueueSubscribe(&quot;foo1&quot;, &quot;&quot;, mcb, startOpt)   // 也可以用queue subscribe
-	_, err = sc.Subscribe(&quot;foo1&quot;, mcb, startOpt)
+	//_, err = sc.QueueSubscribe(&#34;foo1&#34;, &#34;&#34;, mcb, startOpt)   // 也可以用queue subscribe
+	_, err = sc.Subscribe(&#34;foo1&#34;, mcb, startOpt)
 	if err != nil {
 		sc.Close()
 		log.Fatal(err)
@@ -239,17 +231,17 @@ func main() {
 	signalChan := make(chan int)
 	&lt;-signalChan
 }
-</code></pre><p>运行结果如下：</p>
-<pre tabindex=0><code>2018/07/30 18:04:01 2 ----&gt; foo1 sequence:546 subject:&quot;foo1&quot; data:&quot;hello message 1&quot; timestamp:1532945041825538757 
-2018/07/30 18:04:02 3 ----&gt; foo1 sequence:547 subject:&quot;foo1&quot; data:&quot;hello message 2&quot; timestamp:1532945042828881383 
-2018/07/30 18:04:03 4 ----&gt; foo1 sequence:548 subject:&quot;foo1&quot; data:&quot;hello message 3&quot; timestamp:1532945043833360222 
-2018/07/30 18:04:04 5 ----&gt; foo1 sequence:549 subject:&quot;foo1&quot; data:&quot;hello message 4&quot; timestamp:1532945044833810697 
-2018/07/30 18:04:05 6 ----&gt; foo1 sequence:550 subject:&quot;foo1&quot; data:&quot;hello message 5&quot; timestamp:1532945045838056450 
-2018/07/30 18:04:06 7 ----&gt; foo1 sequence:551 subject:&quot;foo1&quot; data:&quot;hello message 6&quot; timestamp:1532945046838585417 
-2018/07/30 18:04:07 8 ----&gt; foo1 sequence:552 subject:&quot;foo1&quot; data:&quot;hello message 7&quot; timestamp:1532945047840775810 
-</code></pre><p>源码在：<a href=https://github.com/zhenfeng-zhu/nats-demo>https://github.com/zhenfeng-zhu/nats-demo</a></p>
+</code></pre></div><p>运行结果如下：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>2018/07/30 18:04:01 2 ----&gt; foo1 sequence:546 subject:&#34;foo1&#34; data:&#34;hello message 1&#34; timestamp:1532945041825538757 
+2018/07/30 18:04:02 3 ----&gt; foo1 sequence:547 subject:&#34;foo1&#34; data:&#34;hello message 2&#34; timestamp:1532945042828881383 
+2018/07/30 18:04:03 4 ----&gt; foo1 sequence:548 subject:&#34;foo1&#34; data:&#34;hello message 3&#34; timestamp:1532945043833360222 
+2018/07/30 18:04:04 5 ----&gt; foo1 sequence:549 subject:&#34;foo1&#34; data:&#34;hello message 4&#34; timestamp:1532945044833810697 
+2018/07/30 18:04:05 6 ----&gt; foo1 sequence:550 subject:&#34;foo1&#34; data:&#34;hello message 5&#34; timestamp:1532945045838056450 
+2018/07/30 18:04:06 7 ----&gt; foo1 sequence:551 subject:&#34;foo1&#34; data:&#34;hello message 6&#34; timestamp:1532945046838585417 
+2018/07/30 18:04:07 8 ----&gt; foo1 sequence:552 subject:&#34;foo1&#34; data:&#34;hello message 7&#34; timestamp:1532945047840775810 
+</code></pre></div><p>源码在：<a href=https://github.com/zhenfeng-zhu/nats-demo>https://github.com/zhenfeng-zhu/nats-demo</a></p>
 <h2 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h2>
-<p>NATS Streaming的高级功能类似于 Apache Kafka 的功能，但当你考虑简单性而非复杂性时前者更优。由于 NATS Streaming 相对来说是一项新技术，与 Apache Kafka 相比，它在某些领域需要改进，尤其是为负载均衡场景提供更好的解决方案。</p>
+<p>NATS Streaming 的高级功能类似于 Apache Kafka 的功能，但当你考虑简单性而非复杂性时前者更优。由于 NATS Streaming 相对来说是一项新技术，与 Apache Kafka 相比，它在某些领域需要改进，尤其是为负载均衡场景提供更好的解决方案。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -261,7 +253,7 @@ func main() {
 <a class=next href=https://zhenfeng-zhu.github.io/posts/nats/>
 <span class=title>Next Page »</span>
 <br>
-<span>nats简介</span>
+<span>nats 简介</span>
 </a>
 </nav>
 <div class=share-buttons>
@@ -281,7 +273,7 @@ func main() {
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

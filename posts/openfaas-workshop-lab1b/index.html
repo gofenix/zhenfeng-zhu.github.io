@@ -18,7 +18,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="Openfaas Workshop Lab1b">
 <meta property="og:description" content="实验 1 - 使用 Kubernetes 设置 OpenFaaS 安装 kubectl 使用下面的说明或官方文档为您的操作系统安装kubectl。
  Linux  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  MacOS  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  Windows  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/windows/amd64/kubectl.exe chmod +x kubectl.exe mkdir -p $HOME/bin/ mv kubectl $HOME/bin/ 设置 Kubernetes 集群 您可以在使用 Kubernetes 时遵循实验，但您可能需要在此过程中进行一些小的更改。网关的服务地址从http://gateway:8080 更改为http://gateway.openfaas:8080。尽可能记录这些差异，并在每个实验室提供替代方案。
@@ -53,6 +53,11 @@
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
 <li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
+<li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
 </a>
@@ -77,6 +82,43 @@ Openfaas Workshop Lab1b
 March 30, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#%e5%ae%9e%e9%aa%8c-1---%e4%bd%bf%e7%94%a8-kubernetes-%e8%ae%be%e7%bd%ae-openfaas aria-label="实验 1 - 使用 Kubernetes 设置 OpenFaaS">实验 1 - 使用 Kubernetes 设置 OpenFaaS</a><ul>
+<li>
+<a href=#%e5%ae%89%e8%a3%85-kubectl aria-label="安装 kubectl">安装 <code>kubectl</code></a></li><li>
+<a href=#%e8%ae%be%e7%bd%ae-kubernetes-%e9%9b%86%e7%be%a4 aria-label="设置 Kubernetes 集群">设置 Kubernetes 集群</a><ul>
+<li>
+<a href=#%e5%9c%a8%e7%ac%94%e8%ae%b0%e6%9c%ac%e7%94%b5%e8%84%91%e4%b8%8a%e5%88%9b%e5%bb%ba%e6%9c%ac%e5%9c%b0%e9%9b%86%e7%be%a4 aria-label=在笔记本电脑上创建本地集群>在笔记本电脑上创建本地集群</a><ul>
+<li>
+<a href=#_k3s-%e5%92%8c-k3d_ aria-label="k3s 和 k3d"><em>k3s 和 k3d</em></a></li><li>
+<a href=#_docker-for-mac_ aria-label="Docker for Mac"><em>Docker for Mac</em></a></li><li>
+<a href=#_%e4%bd%bf%e7%94%a8-minikube_ aria-label="使用 Minikube"><em>使用 Minikube</em></a></li></ul>
+</li><li>
+<a href=#%e5%9c%a8%e4%ba%91%e4%b8%8a%e5%88%9b%e5%bb%ba%e8%bf%9c%e7%a8%8b%e9%9b%86%e7%be%a4 aria-label=在云上创建远程集群>在云上创建远程集群</a><ul>
+<li>
+<a href=#_%e5%9c%a8-digitalocean-%e4%b8%8a%e8%bf%90%e8%a1%8c-kubernetes-%e6%9c%8d%e5%8a%a1_ aria-label="在 DigitalOcean 上运行 Kubernetes 服务"><em>在 DigitalOcean 上运行 Kubernetes 服务</em></a></li><li>
+<a href=#_run-on-gke-google-kubernetes-engine_ aria-label="Run on GKE (Google Kubernetes Engine)"><em>Run on GKE (Google Kubernetes Engine)</em></a></li></ul>
+</li></ul>
+</li><li>
+<a href=#%e9%83%a8%e7%bd%b2-openfaas aria-label="部署 OpenFaaS">部署 OpenFaaS</a><ul>
+<li>
+<a href=#%e5%ae%89%e8%a3%85-openfaas aria-label="安装 OpenFaaS">安装 OpenFaaS</a><ul>
+<li>
+<a href=#arkade aria-label=arkade><code>arkade</code></a></li><li>
+<a href=#helm-%e9%ab%98%e7%ba%a7 aria-label="helm (高级)">helm (高级)</a></li></ul>
+</li><li>
+<a href=#%e7%99%bb%e5%bd%95-openfaas-gateway aria-label="登录 OpenFaaS gateway">登录 OpenFaaS gateway</a></li><li>
+<a href=#%e6%b0%b8%e4%b9%85%e4%bf%9d%e5%ad%98%e6%82%a8%e7%9a%84-openfaas-url aria-label="永久保存您的 OpenFaaS URL">永久保存您的 OpenFaaS URL</a></li></ul>
+</li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
 <h1 id=实验-1---使用-kubernetes-设置-openfaas>实验 1 - 使用 Kubernetes 设置 OpenFaaS<a hidden class=anchor aria-hidden=true href=#实验-1---使用-kubernetes-设置-openfaas>#</a></h1>
 <p></p>
@@ -139,8 +181,8 @@ mv kubectl $HOME/bin/
 <p>现在通过如下命令启动 Minikube</p>
 </li>
 </ul>
-<pre tabindex=0><code>$ minikube start
-</code></pre><p>Minikube VM 通过一个仅限主机的 IP 地址暴露给主机系统。通过<code>minikube ip</code>检测这个 IP。
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ minikube start
+</code></pre></div><p>Minikube VM 通过一个仅限主机的 IP 地址暴露给主机系统。通过<code>minikube ip</code>检测这个 IP。
 这是稍后将用于网关 URL 的 IP。</p>
 <blockquote>
 <p>注意： Minikube 还需要一个 Hypervisor，如 VirtualBox 或 Hyperkit（在 MacOS 上）。请遵循 Minikube 说明和文档</p>
@@ -221,10 +263,10 @@ $ gcloud config set compute/zone us-central1-a
 </span><span style=color:#ae81ff></span>--clusterrole<span style=color:#f92672>=</span>cluster-admin <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>--user<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>gcloud config get-value core/account<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
 </code></pre></div><p>现在验证 <code>kubectl</code> 已经被配置到了 GKE 集群：</p>
-<pre tabindex=0><code>$ kubectl get nodes
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ kubectl get nodes
 NAME                                   STATUS    ROLES     AGE       VERSION
 gke-name-default-pool-eceef152-qjmt   Ready     &lt;none&gt;    1h        v1.10.7-gke.2
-</code></pre><h2 id=部署-openfaas>部署 OpenFaaS<a hidden class=anchor aria-hidden=true href=#部署-openfaas>#</a></h2>
+</code></pre></div><h2 id=部署-openfaas>部署 OpenFaaS<a hidden class=anchor aria-hidden=true href=#部署-openfaas>#</a></h2>
 <p>部署 OpenFaaS 的说明会不时更改，因为我们努力让这变得更容易。</p>
 <h3 id=安装-openfaas>安装 OpenFaaS<a hidden class=anchor aria-hidden=true href=#安装-openfaas>#</a></h3>
 <p>有三种安装 OpenFaaS 的方法，您可以选择对您和您的团队有意义的方法。在这个研讨会中，我们将使用官方安装程序<code>arkade</code>。</p>
@@ -320,7 +362,7 @@ echo -n $PASSWORD | faas-cli login --username admin --password-stdin
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

@@ -5,28 +5,21 @@
 <meta name=robots content="index, follow">
 <title>kubernetes | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。
-docker镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
+<meta name=description content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。
+docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
 解决了应用打包的根本性问题。
 容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理
  容器本身没有价值，有价值的是“容器编排”。
  原理 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。
-在创建一个容器进程的时候，指定了这个进程所需要启动的一组Namespace参数，这样容器就只能看到当前Namespace所限定的资源、文件、设备、状态或配置。
-Cgroups主要作用是为一个进程组设置资源上限，如CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
-因此，一个正在运行的Docker容器，其实就是一个启用了多个Namespace的应用进程，而这个进程能够使用的资源是由Cgroups来限制。
+在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。
+Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
+因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。
 挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。
- 启动Namespace配置 设置Cgroups参数 切换进程根目录rootf  docker镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的rootfs。AuFS，所以就有了共享层，镜像不用那么大。
-一个进程，可以选择加入到某个进程已有的 Namespace当中，从而达到进入这个进程所在的容器的目的，这正是docker exec的实现原理。
-volume机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
-主要依赖Linux依赖三大技术：  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如CPU、内存、IO设备等，然后安装一个新的操作系统。
-docker是利用Linux的Namespace原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。
-不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被Namespace化的，如时间。
-kubernetes要解决的问题
-编排？调度？容器云？集群管理？
- master  kube-apiserver：API服务 kube-scheduler：调度 kube-controller-manager：编排   node  kubelet：同容器运行时打交道。依赖于CRI（container runtime interface容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。    etcd  运行在大规模集群中的各种任务之间，实际存在各种各样的关系。这些关系的处理，才是作业编排和管理系统最困难的地方。
-sudo
- 首先，通过一个编排对象，如pod，job或cronjob等，来描述你试图管理的应用； 然后，再为它定义一些服务对象，如service，secret，autoscaler等。这些对象，会负责具体的平台级功能。  这种使用方法，就是所谓的“声明式API”。这种API对应的编排对象和服务对象，都是k8s项目中的API对象。
-简单使用 $ kubectl create -f 我的配置文件 pod就是k8s世界中的应用，而一个应用可以由多个容器组成。">
+ 启动 Namespace 配置 设置 Cgroups 参数 切换进程根目录 rootf  docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。
+一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。
+volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
+主要依赖 Linux 依赖三大技术  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。
+docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/kubernetes/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -37,30 +30,23 @@ sudo
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="kubernetes">
-<meta property="og:description" content="docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。
-docker镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
+<meta property="og:description" content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。
+docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
 解决了应用打包的根本性问题。
 容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理
  容器本身没有价值，有价值的是“容器编排”。
  原理 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。
-在创建一个容器进程的时候，指定了这个进程所需要启动的一组Namespace参数，这样容器就只能看到当前Namespace所限定的资源、文件、设备、状态或配置。
-Cgroups主要作用是为一个进程组设置资源上限，如CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
-因此，一个正在运行的Docker容器，其实就是一个启用了多个Namespace的应用进程，而这个进程能够使用的资源是由Cgroups来限制。
+在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。
+Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
+因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。
 挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。
- 启动Namespace配置 设置Cgroups参数 切换进程根目录rootf  docker镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的rootfs。AuFS，所以就有了共享层，镜像不用那么大。
-一个进程，可以选择加入到某个进程已有的 Namespace当中，从而达到进入这个进程所在的容器的目的，这正是docker exec的实现原理。
-volume机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
-主要依赖Linux依赖三大技术：  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如CPU、内存、IO设备等，然后安装一个新的操作系统。
-docker是利用Linux的Namespace原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。
-不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被Namespace化的，如时间。
-kubernetes要解决的问题
-编排？调度？容器云？集群管理？
- master  kube-apiserver：API服务 kube-scheduler：调度 kube-controller-manager：编排   node  kubelet：同容器运行时打交道。依赖于CRI（container runtime interface容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。    etcd  运行在大规模集群中的各种任务之间，实际存在各种各样的关系。这些关系的处理，才是作业编排和管理系统最困难的地方。
-sudo
- 首先，通过一个编排对象，如pod，job或cronjob等，来描述你试图管理的应用； 然后，再为它定义一些服务对象，如service，secret，autoscaler等。这些对象，会负责具体的平台级功能。  这种使用方法，就是所谓的“声明式API”。这种API对应的编排对象和服务对象，都是k8s项目中的API对象。
-简单使用 $ kubectl create -f 我的配置文件 pod就是k8s世界中的应用，而一个应用可以由多个容器组成。">
+ 启动 Namespace 配置 设置 Cgroups 参数 切换进程根目录 rootf  docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。
+一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。
+volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
+主要依赖 Linux 依赖三大技术  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。
+docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/kubernetes/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -69,30 +55,23 @@ sudo
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="kubernetes">
-<meta name=twitter:description content="docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。
-docker镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
+<meta name=twitter:description content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。
+docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
 解决了应用打包的根本性问题。
 容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理
  容器本身没有价值，有价值的是“容器编排”。
  原理 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。
-在创建一个容器进程的时候，指定了这个进程所需要启动的一组Namespace参数，这样容器就只能看到当前Namespace所限定的资源、文件、设备、状态或配置。
-Cgroups主要作用是为一个进程组设置资源上限，如CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
-因此，一个正在运行的Docker容器，其实就是一个启用了多个Namespace的应用进程，而这个进程能够使用的资源是由Cgroups来限制。
+在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。
+Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
+因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。
 挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。
- 启动Namespace配置 设置Cgroups参数 切换进程根目录rootf  docker镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的rootfs。AuFS，所以就有了共享层，镜像不用那么大。
-一个进程，可以选择加入到某个进程已有的 Namespace当中，从而达到进入这个进程所在的容器的目的，这正是docker exec的实现原理。
-volume机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
-主要依赖Linux依赖三大技术：  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如CPU、内存、IO设备等，然后安装一个新的操作系统。
-docker是利用Linux的Namespace原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。
-不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被Namespace化的，如时间。
-kubernetes要解决的问题
-编排？调度？容器云？集群管理？
- master  kube-apiserver：API服务 kube-scheduler：调度 kube-controller-manager：编排   node  kubelet：同容器运行时打交道。依赖于CRI（container runtime interface容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。    etcd  运行在大规模集群中的各种任务之间，实际存在各种各样的关系。这些关系的处理，才是作业编排和管理系统最困难的地方。
-sudo
- 首先，通过一个编排对象，如pod，job或cronjob等，来描述你试图管理的应用； 然后，再为它定义一些服务对象，如service，secret，autoscaler等。这些对象，会负责具体的平台级功能。  这种使用方法，就是所谓的“声明式API”。这种API对应的编排对象和服务对象，都是k8s项目中的API对象。
-简单使用 $ kubectl create -f 我的配置文件 pod就是k8s世界中的应用，而一个应用可以由多个容器组成。">
+ 启动 Namespace 配置 设置 Cgroups 参数 切换进程根目录 rootf  docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。
+一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。
+volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
+主要依赖 Linux 依赖三大技术  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。
+docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"kubernetes","item":"https://zhenfeng-zhu.github.io/posts/kubernetes/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"kubernetes","name":"kubernetes","description":"docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。\ndocker镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。\n解决了应用打包的根本性问题。\n容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理\n 容器本 …","keywords":[],"articleBody":"docker 利用Linux的cgroups和namespace，构建一个沙箱运行环境。\ndocker镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。\n解决了应用打包的根本性问题。\n容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理\n 容器本身没有价值，有价值的是“容器编排”。\n 原理 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。\n在创建一个容器进程的时候，指定了这个进程所需要启动的一组Namespace参数，这样容器就只能看到当前Namespace所限定的资源、文件、设备、状态或配置。\nCgroups主要作用是为一个进程组设置资源上限，如CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。\n因此，一个正在运行的Docker容器，其实就是一个启用了多个Namespace的应用进程，而这个进程能够使用的资源是由Cgroups来限制。\n挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。\n 启动Namespace配置 设置Cgroups参数 切换进程根目录rootf  docker镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的rootfs。AuFS，所以就有了共享层，镜像不用那么大。\n一个进程，可以选择加入到某个进程已有的 Namespace当中，从而达到进入这个进程所在的容器的目的，这正是docker exec的实现原理。\nvolume机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。\n主要依赖Linux依赖三大技术：  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如CPU、内存、IO设备等，然后安装一个新的操作系统。\ndocker是利用Linux的Namespace原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。\n不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被Namespace化的，如时间。\nkubernetes要解决的问题\n编排？调度？容器云？集群管理？\n master  kube-apiserver：API服务 kube-scheduler：调度 kube-controller-manager：编排   node  kubelet：同容器运行时打交道。依赖于CRI（container runtime interface容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。    etcd  运行在大规模集群中的各种任务之间，实际存在各种各样的关系。这些关系的处理，才是作业编排和管理系统最困难的地方。\nsudo\n 首先，通过一个编排对象，如pod，job或cronjob等，来描述你试图管理的应用； 然后，再为它定义一些服务对象，如service，secret，autoscaler等。这些对象，会负责具体的平台级功能。  这种使用方法，就是所谓的“声明式API”。这种API对应的编排对象和服务对象，都是k8s项目中的API对象。\n简单使用 $ kubectl create -f 我的配置文件 pod就是k8s世界中的应用，而一个应用可以由多个容器组成。\n使用一个API对象管理另一个API对象的方法，叫控制器模式。\n每个API对象都有一个metadata字段，这个字段是API对象的标识，即元数据。主要用到的是labels，spec.selector.matchLabels就是k8s过滤的规则。与labels同层级的是annotations，这是由k8s所感兴趣的，而不是用户。\n一个k8s的API对象都有metadata和spec两个部分。前者放的是对象的元数据，对所有API对象来讲，这部分的字段和格式基本一样；而后者存放的是属于这个对象独有的定义，用来描述它所要表达的功能。\n$ kubectl create -f nginx-deployment.yaml $ kubectl get pods -l app=nginx NAME READY STATUS RESTARTS AGE nginx-deployment-67594d6bf6-9gdvr 1/1 Running 0 10m nginx-deployment-67594d6bf6-v6j7w 1/1 Running 0 10m $ kubectl describe pod nginx-deployment-67594d6bf6-9gdvr Name: nginx-deployment-67594d6bf6-9gdvr Namespace: default Priority: 0 PriorityClassName:  Node: node-1/10.168.0.3 Start Time: Thu, 16 Aug 2018 08:48:42 +0000 Labels: app=nginx pod-template-hash=2315082692 Annotations:  Status: Running IP: 10.32.0.23 Controlled By: ReplicaSet/nginx-deployment-67594d6bf6 ... Events: Type Reason Age From Message ---- ------ ---- ---- ------- Normal Scheduled 1m default-scheduler Successfully assigned default/nginx-deployment-67594d6bf6-9gdvr to node-1 Normal Pulling 25s kubelet, node-1 pulling image \"nginx:1.7.9\" Normal Pulled 17s kubelet, node-1 Successfully pulled image \"nginx:1.7.9\" Normal Created 17s kubelet, node-1 Created container Normal Started 17s kubelet, node-1 Started container $ kubectl apply -f nginx-deployment.yaml # 修改 nginx-deployment.yaml 的内容 $ kubectl apply -f nginx-deployment.yaml 在命令行中，所有 key-value 格式的参数，都使用“=“而不是”：“表示。\n在k8s执行过程中，对API对象的所有重要操作，都会被记录在这个对象的events中。\n在线业务\nDeployment\nStatefunSet\nDaemonSet\n离线业务\nJob\nrestartPolicy在job对象里只被允许设置为never和onFailure；而在Deployment对象中，只被允许设置为always。\n声明式API和Kubernetes编程范式 创建一个两个Nginx容器的步骤：\n首先写一个Deployment的yaml文件：\napiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: selector: matchLabels: app: nginx replicas: 2 template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx ports: - containerPort: 80 然后使用kubectl create命令在Kubernetes中创建一个Deployment对象：\n$ kubectl create -f nginx.yaml 这样两个Nginx pod就运行起来了。\n如果要更新的话，只需要修改yaml文件，然后使用kubectl apply命令更新，触发了滚动更新。\n这个apply命令就是声明式API。\nistio项目中，最根本的组件是运行在每个pod里的envoy容器。这个代理服务以sidecar容器的方式，把整个pod的进出流量接管下来。istio的控制层的pilot组件，通过调用每个envoy的API，实现微服务的治理。\n利用Kubernetes的Admission Control，也叫：Initializer，先创建一个Pod，然后istio就是在pod的yaml给Kubernetes之后，自动加上envoy的配置。\n 所谓的声明式，指的就是我只需要提交一个定义好的API对象来声明我所期望的状态是什么样子。 其次，声明式API允许有多个API写端，以PATCH的方式对API对象进行修改，而无需关心原始的YAML文件的内容。 最后，Kubernetes基于对API对象的增删改查，在无需外界干预的情况下，完成对实际状态和期望状态的调谐。  一个API对象在etcd中完整路径是由：group（API组），version（API版本）和Resource（API资源类型）三个部分组成的。\napiVersion: batch/v2 kind: CronJob batch是组，v2是版本，CronJob是类型。\n对于核心API对象：Pod，Node等，不需要group的。非核心对象是需要组。\n匹配规则就是：\n/apis/batch/v2/CronJob\n  首先yaml文件被提交给了APIServer\n过滤，授权，超时处理或审计等\n  进入路由流程\n根据yaml，按照匹配规则去找\n  根据定义，按照yaml中的字段，创建一个对象\n  进行Amission和Validation。\n  把验证过的对象，序列化存到etcd中\n  RBAC 基于角色的控制\nrole：角色，一组规则，定义Kubernetes API对象的操作权限\nsubject：被作用者，可以是人，也可以是机器，也可以是Kubernetes定义的用户\nrolebinding：定义被作用者和角色的绑定关系\nServiceAccount，会被自动创建分配一个secret对象。\n所谓角色就是一组权限规则列表，而我们分配这些权限的方式，就是通过创建rolebinding对象，将被作用者和权限列表进行绑定。\n另外，与之对应的ClusterRole和ClusterRoleBinding，则是Kubernetes集群级别的Role和RoleBinding，它们的作用范围不受Namespace限制。\n尽管被作用者有很多种（如User、Group），但在我们平常使用的时候，最普遍的还是ServiceAccount。\n网络模型 Veth Pair 常常被用作连接不同 Network Namespace的网线。veth pair虚拟设备。总是以两张虚拟网卡形式成对出现。并且，从一个网卡中发出的数据包，可以直接出现在另一张网卡上，哪怕这两个网卡在不同的network Namespace里。\n一旦一张虚拟网卡被插在网桥上，他就会变成该网桥的从设备。从设备会降级成为网桥的一个端口，不能处理数据包，只能接收流入的数据包交给对应的网桥。\n两个容器的虚拟网卡都插在宿主机的一个网桥上，这个网桥就扮演一个交换机的角色。当两个容器进行网络交互时，从一个容器的发出请求到宿主机，由于Veth Pair 的机制，另一个容器就看到有数据流入。\n因此默认情况下，被限制在network Namespace的容器进程，实际就是通过veth pair设备+宿主机网桥的方式，实现了跟其他容器的数据交换。\n跨主通信，需要有一个集群公用的网桥，所有容器都连接到该网桥上，就可以相互通信，这就是overlay network（覆盖网络）\n","wordCount":"290","inLanguage":"en","datePublished":"2018-10-08T15:29:21Z","dateModified":"2018-10-08T15:29:21Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/kubernetes/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"kubernetes","name":"kubernetes","description":"docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。\ndocker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。\n解决了应用打包的根本性问题。\n容器编排 对 Docker 容器的一系列定义、配置和创建动作的管 …","keywords":[],"articleBody":"docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。\ndocker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。\n解决了应用打包的根本性问题。\n容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理\n 容器本身没有价值，有价值的是“容器编排”。\n 原理 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。\n在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。\nCgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。\n因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。\n挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。\n 启动 Namespace 配置 设置 Cgroups 参数 切换进程根目录 rootf  docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。\n一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。\nvolume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。\n主要依赖 Linux 依赖三大技术  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。\ndocker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。\n不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被 Namespace 化的，如时间。\nkubernetes 要解决的问题\n编排？调度？容器云？集群管理？\n master  kube-apiserver：API 服务 kube-scheduler：调度 kube-controller-manager：编排   node  kubelet：同容器运行时打交道。依赖于 CRI（container runtime interface 容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。   etcd  运行在大规模集群中的各种任务之间，实际存在各种各样的关系。这些关系的处理，才是作业编排和管理系统最困难的地方。\nsudo\n 首先，通过一个编排对象，如 pod，job 或 cronjob 等，来描述你试图管理的应用； 然后，再为它定义一些服务对象，如 service，secret，autoscaler 等。这些对象，会负责具体的平台级功能。  这种使用方法，就是所谓的“声明式 API”。这种 API 对应的编排对象和服务对象，都是 k8s 项目中的 API 对象。\n简单使用 $ kubectl create -f 我的配置文件 pod 就是 k8s 世界中的应用，而一个应用可以由多个容器组成。\n使用一个 API 对象管理另一个 API 对象的方法，叫控制器模式。\n每个 API 对象都有一个 metadata 字段，这个字段是 API 对象的标识，即元数据。主要用到的是 labels，spec.selector.matchLabels 就是 k8s 过滤的规则。与 labels 同层级的是 annotations，这是由 k8s 所感兴趣的，而不是用户。\n一个 k8s 的 API 对象都有 metadata 和 spec 两个部分。前者放的是对象的元数据，对所有 API 对象来讲，这部分的字段和格式基本一样；而后者存放的是属于这个对象独有的定义，用来描述它所要表达的功能。\n$ kubectl create -f nginx-deployment.yaml $ kubectl get pods -l app=nginx NAME READY STATUS RESTARTS AGE nginx-deployment-67594d6bf6-9gdvr 1/1 Running 0 10m nginx-deployment-67594d6bf6-v6j7w 1/1 Running 0 10m $ kubectl describe pod nginx-deployment-67594d6bf6-9gdvr Name: nginx-deployment-67594d6bf6-9gdvr Namespace: default Priority: 0 PriorityClassName:  Node: node-1/10.168.0.3 Start Time: Thu, 16 Aug 2018 08:48:42 +0000 Labels: app=nginx pod-template-hash=2315082692 Annotations:  Status: Running IP: 10.32.0.23 Controlled By: ReplicaSet/nginx-deployment-67594d6bf6 ... Events: Type Reason Age From Message ---- ------ ---- ---- ------- Normal Scheduled 1m default-scheduler Successfully assigned default/nginx-deployment-67594d6bf6-9gdvr to node-1 Normal Pulling 25s kubelet, node-1 pulling image \"nginx:1.7.9\" Normal Pulled 17s kubelet, node-1 Successfully pulled image \"nginx:1.7.9\" Normal Created 17s kubelet, node-1 Created container Normal Started 17s kubelet, node-1 Started container $ kubectl apply -f nginx-deployment.yaml # 修改 nginx-deployment.yaml 的内容 $ kubectl apply -f nginx-deployment.yaml 在命令行中，所有 key-value 格式的参数，都使用“=“而不是”：“表示。\n在 k8s 执行过程中，对 API 对象的所有重要操作，都会被记录在这个对象的 events 中。\n在线业务\nDeployment\nStatefunSet\nDaemonSet\n离线业务\nJob\nrestartPolicy 在 job 对象里只被允许设置为 never 和 onFailure；而在 Deployment 对象中，只被允许设置为 always。\n声明式 API 和 Kubernetes 编程范式 创建一个两个 Nginx 容器的步骤：\n首先写一个 Deployment 的 yaml 文件：\napiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: selector: matchLabels: app: nginx replicas: 2 template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx ports: - containerPort: 80 然后使用 kubectl create 命令在 Kubernetes 中创建一个 Deployment 对象：\n$ kubectl create -f nginx.yaml 这样两个 Nginx pod 就运行起来了。\n如果要更新的话，只需要修改 yaml 文件，然后使用 kubectl apply 命令更新，触发了滚动更新。\n这个 apply 命令就是声明式 API。\nistio 项目中，最根本的组件是运行在每个 pod 里的 envoy 容器。这个代理服务以 sidecar 容器的方式，把整个 pod 的进出流量接管下来。istio 的控制层的 pilot 组件，通过调用每个 envoy 的 API，实现微服务的治理。\n利用 Kubernetes 的 Admission Control，也叫：Initializer，先创建一个 Pod，然后 istio 就是在 pod 的 yaml 给 Kubernetes 之后，自动加上 envoy 的配置。\n 所谓的声明式，指的就是我只需要提交一个定义好的 API 对象来声明我所期望的状态是什么样子。 其次，声明式 API 允许有多个 API 写端，以 PATCH 的方式对 API 对象进行修改，而无需关心原始的 YAML 文件的内容。 最后，Kubernetes 基于对 API 对象的增删改查，在无需外界干预的情况下，完成对实际状态和期望状态的调谐。  一个 API 对象在 etcd 中完整路径是由：group（API 组），version（API 版本）和 Resource（API 资源类型）三个部分组成的。\napiVersion: batch/v2 kind: CronJob batch 是组，v2 是版本，CronJob 是类型。\n对于核心 API 对象：Pod，Node 等，不需要 group 的。非核心对象是需要组。\n匹配规则就是：\n/apis/batch/v2/CronJob\n  首先 yaml 文件被提交给了 APIServer\n过滤，授权，超时处理或审计等\n  进入路由流程\n根据 yaml，按照匹配规则去找\n  根据定义，按照 yaml 中的字段，创建一个对象\n  进行 Amission 和 Validation。\n  把验证过的对象，序列化存到 etcd 中\n  RBAC 基于角色的控制\nrole：角色，一组规则，定义 Kubernetes API 对象的操作权限\nsubject：被作用者，可以是人，也可以是机器，也可以是 Kubernetes 定义的用户\nrolebinding：定义被作用者和角色的绑定关系\nServiceAccount，会被自动创建分配一个 secret 对象。\n所谓角色就是一组权限规则列表，而我们分配这些权限的方式，就是通过创建 rolebinding 对象，将被作用者和权限列表进行绑定。\n另外，与之对应的 ClusterRole 和 ClusterRoleBinding，则是 Kubernetes 集群级别的 Role 和 RoleBinding，它们的作用范围不受 Namespace 限制。\n尽管被作用者有很多种（如 User、Group），但在我们平常使用的时候，最普遍的还是 ServiceAccount。\n网络模型 Veth Pair 常常被用作连接不同 Network Namespace 的网线。veth pair 虚拟设备。总是以两张虚拟网卡形式成对出现。并且，从一个网卡中发出的数据包，可以直接出现在另一张网卡上，哪怕这两个网卡在不同的 network Namespace 里。\n一旦一张虚拟网卡被插在网桥上，他就会变成该网桥的从设备。从设备会降级成为网桥的一个端口，不能处理数据包，只能接收流入的数据包交给对应的网桥。\n两个容器的虚拟网卡都插在宿主机的一个网桥上，这个网桥就扮演一个交换机的角色。当两个容器进行网络交互时，从一个容器的发出请求到宿主机，由于 Veth Pair 的机制，另一个容器就看到有数据流入。\n因此默认情况下，被限制在 network Namespace 的容器进程，实际就是通过 veth pair 设备+宿主机网桥的方式，实现了跟其他容器的数据交换。\n跨主通信，需要有一个集群公用的网桥，所有容器都连接到该网桥上，就可以相互通信，这就是 overlay network（覆盖网络）\n","wordCount":"520","inLanguage":"en","datePublished":"2018-10-08T15:29:21Z","dateModified":"2018-10-08T15:29:21Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/kubernetes/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -109,6 +88,11 @@ sudo
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -131,13 +115,35 @@ sudo
 kubernetes
 </h1>
 <div class=post-meta>
-October 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
+October 8, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><ul><li>
+<a href=#docker aria-label=docker>docker</a></li><li>
+<a href=#docker-%e9%95%9c%e5%83%8f aria-label="docker 镜像">docker 镜像</a></li><li>
+<a href=#%e5%ae%b9%e5%99%a8%e7%bc%96%e6%8e%92 aria-label=容器编排>容器编排</a></li><li>
+<a href=#%e5%8e%9f%e7%90%86 aria-label=原理>原理</a></li><li>
+<a href=#%e4%b8%bb%e8%a6%81%e4%be%9d%e8%b5%96-linux-%e4%be%9d%e8%b5%96%e4%b8%89%e5%a4%a7%e6%8a%80%e6%9c%af aria-label="主要依赖 Linux 依赖三大技术">主要依赖 Linux 依赖三大技术</a></li><li>
+<a href=#%e5%92%8c%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%af%94%e8%be%83 aria-label=和虚拟机比较>和虚拟机比较</a></li></ul>
+<li>
+<a href=#%e7%ae%80%e5%8d%95%e4%bd%bf%e7%94%a8 aria-label=简单使用>简单使用</a><ul>
+<li>
+<a href=#%e5%a3%b0%e6%98%8e%e5%bc%8f-api-%e5%92%8c-kubernetes-%e7%bc%96%e7%a8%8b%e8%8c%83%e5%bc%8f aria-label="声明式 API 和 Kubernetes 编程范式">声明式 API 和 Kubernetes 编程范式</a></li><li>
+<a href=#rbac aria-label=RBAC>RBAC</a></li><li>
+<a href=#%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b aria-label=网络模型>网络模型</a></li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
 <h3 id=docker>docker<a hidden class=anchor aria-hidden=true href=#docker>#</a></h3>
-<p>利用Linux的cgroups和namespace，构建一个沙箱运行环境。</p>
-<h3 id=docker镜像>docker镜像<a hidden class=anchor aria-hidden=true href=#docker镜像>#</a></h3>
+<p>利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。</p>
+<h3 id=docker-镜像>docker 镜像<a hidden class=anchor aria-hidden=true href=#docker-镜像>#</a></h3>
 <p>其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。</p>
 <p>解决了应用打包的根本性问题。</p>
 <h3 id=容器编排>容器编排<a hidden class=anchor aria-hidden=true href=#容器编排>#</a></h3>
@@ -147,43 +153,42 @@ October 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </blockquote>
 <h3 id=原理>原理<a hidden class=anchor aria-hidden=true href=#原理>#</a></h3>
 <p>容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。</p>
-<p>在创建一个容器进程的时候，指定了这个进程所需要启动的一组Namespace参数，这样容器就只能看到当前Namespace所限定的资源、文件、设备、状态或配置。</p>
-<p>Cgroups主要作用是为一个进程组设置资源上限，如CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。</p>
-<p>因此，一个正在运行的Docker容器，其实就是一个启用了多个Namespace的应用进程，而这个进程能够使用的资源是由Cgroups来限制。</p>
+<p>在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。</p>
+<p>Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。</p>
+<p>因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。</p>
 <p>挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。</p>
 <ul>
-<li>启动Namespace配置</li>
-<li>设置Cgroups参数</li>
-<li>切换进程根目录rootf</li>
+<li>启动 Namespace 配置</li>
+<li>设置 Cgroups 参数</li>
+<li>切换进程根目录 rootf</li>
 </ul>
-<p>docker镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的rootfs。AuFS，所以就有了共享层，镜像不用那么大。</p>
-<p>一个进程，可以选择加入到某个进程已有的 Namespace当中，从而达到进入这个进程所在的容器的目的，这正是docker exec的实现原理。</p>
-<p>volume机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。</p>
-<h3 id=主要依赖linux依赖三大技术>主要依赖Linux依赖三大技术：<a hidden class=anchor aria-hidden=true href=#主要依赖linux依赖三大技术>#</a></h3>
+<p>docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。</p>
+<p>一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。</p>
+<p>volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。</p>
+<h3 id=主要依赖-linux-依赖三大技术>主要依赖 Linux 依赖三大技术<a hidden class=anchor aria-hidden=true href=#主要依赖-linux-依赖三大技术>#</a></h3>
 <ul>
 <li>Namespace</li>
 <li>Cgroups</li>
 <li>rootfs</li>
 </ul>
 <h3 id=和虚拟机比较>和虚拟机比较<a hidden class=anchor aria-hidden=true href=#和虚拟机比较>#</a></h3>
-<p>虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如CPU、内存、IO设备等，然后安装一个新的操作系统。</p>
-<p>docker是利用Linux的Namespace原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。</p>
-<p>不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被Namespace化的，如时间。</p>
-<p>kubernetes要解决的问题</p>
+<p>虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。</p>
+<p>docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。</p>
+<p>不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被 Namespace 化的，如时间。</p>
+<p>kubernetes 要解决的问题</p>
 <p>编排？调度？容器云？集群管理？</p>
 <p><img src=https://ws3.sinaimg.cn/large/006tNbRwgy1fw117whrc6j31hc0u0gq5.jpg alt></p>
 <ul>
 <li>master
 <ul>
-<li>kube-apiserver：API服务</li>
+<li>kube-apiserver：API 服务</li>
 <li>kube-scheduler：调度</li>
 <li>kube-controller-manager：编排</li>
 </ul>
 </li>
 <li>node
 <ul>
-<li>kubelet：同容器运行时打交道。依赖于CRI（container runtime interface容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。</li>
-<li></li>
+<li>kubelet：同容器运行时打交道。依赖于 CRI（container runtime interface 容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。</li>
 </ul>
 </li>
 <li>etcd</li>
@@ -191,17 +196,17 @@ October 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 <p>运行在大规模集群中的各种任务之间，实际存在各种各样的关系。这些关系的处理，才是作业编排和管理系统最困难的地方。</p>
 <p>sudo</p>
 <ul>
-<li>首先，通过一个编排对象，如pod，job或cronjob等，来描述你试图管理的应用；</li>
-<li>然后，再为它定义一些服务对象，如service，secret，autoscaler等。这些对象，会负责具体的平台级功能。</li>
+<li>首先，通过一个编排对象，如 pod，job 或 cronjob 等，来描述你试图管理的应用；</li>
+<li>然后，再为它定义一些服务对象，如 service，secret，autoscaler 等。这些对象，会负责具体的平台级功能。</li>
 </ul>
-<p>这种使用方法，就是所谓的“声明式API”。这种API对应的编排对象和服务对象，都是k8s项目中的API对象。</p>
+<p>这种使用方法，就是所谓的“声明式 API”。这种 API 对应的编排对象和服务对象，都是 k8s 项目中的 API 对象。</p>
 <h2 id=简单使用>简单使用<a hidden class=anchor aria-hidden=true href=#简单使用>#</a></h2>
-<pre tabindex=0><code>$ kubectl create -f 我的配置文件
-</code></pre><p>pod就是k8s世界中的应用，而一个应用可以由多个容器组成。</p>
-<p>使用一个API对象管理另一个API对象的方法，叫控制器模式。</p>
-<p>每个API对象都有一个metadata字段，这个字段是API对象的标识，即元数据。主要用到的是labels，spec.selector.matchLabels就是k8s过滤的规则。与labels同层级的是annotations，这是由k8s所感兴趣的，而不是用户。</p>
-<p>一个k8s的API对象都有metadata和spec两个部分。前者放的是对象的元数据，对所有API对象来讲，这部分的字段和格式基本一样；而后者存放的是属于这个对象独有的定义，用来描述它所要表达的功能。</p>
-<pre tabindex=0><code>$ kubectl create -f nginx-deployment.yaml
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ kubectl create -f 我的配置文件
+</code></pre></div><p>pod 就是 k8s 世界中的应用，而一个应用可以由多个容器组成。</p>
+<p>使用一个 API 对象管理另一个 API 对象的方法，叫控制器模式。</p>
+<p>每个 API 对象都有一个 metadata 字段，这个字段是 API 对象的标识，即元数据。主要用到的是 labels，spec.selector.matchLabels 就是 k8s 过滤的规则。与 labels 同层级的是 annotations，这是由 k8s 所感兴趣的，而不是用户。</p>
+<p>一个 k8s 的 API 对象都有 metadata 和 spec 两个部分。前者放的是对象的元数据，对所有 API 对象来讲，这部分的字段和格式基本一样；而后者存放的是属于这个对象独有的定义，用来描述它所要表达的功能。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ kubectl create -f nginx-deployment.yaml
 
 $ kubectl get pods -l app=nginx
 NAME                                READY     STATUS    RESTARTS   AGE
@@ -229,8 +234,8 @@ Events:
   ----     ------                  ----               ----               -------
   
   Normal   Scheduled               1m                 default-scheduler  Successfully assigned default/nginx-deployment-67594d6bf6-9gdvr to node-1
-  Normal   Pulling                 25s                kubelet, node-1    pulling image &quot;nginx:1.7.9&quot;
-  Normal   Pulled                  17s                kubelet, node-1    Successfully pulled image &quot;nginx:1.7.9&quot;
+  Normal   Pulling                 25s                kubelet, node-1    pulling image &#34;nginx:1.7.9&#34;
+  Normal   Pulled                  17s                kubelet, node-1    Successfully pulled image &#34;nginx:1.7.9&#34;
   Normal   Created                 17s                kubelet, node-1    Created container
   Normal   Started                 17s                kubelet, node-1    Started container
 
@@ -241,18 +246,18 @@ $ kubectl apply -f nginx-deployment.yaml
 
 $ kubectl apply -f nginx-deployment.yaml
 
-</code></pre><p>在命令行中，所有 key-value 格式的参数，都使用“=“而不是”：“表示。</p>
-<p>在k8s执行过程中，对API对象的所有重要操作，都会被记录在这个对象的events中。</p>
+</code></pre></div><p>在命令行中，所有 key-value 格式的参数，都使用“=“而不是”：“表示。</p>
+<p>在 k8s 执行过程中，对 API 对象的所有重要操作，都会被记录在这个对象的 events 中。</p>
 <p>在线业务</p>
 <p>Deployment</p>
 <p>StatefunSet</p>
 <p>DaemonSet</p>
 <p>离线业务</p>
 <p>Job</p>
-<p>restartPolicy在job对象里只被允许设置为never和onFailure；而在Deployment对象中，只被允许设置为always。</p>
-<h3 id=声明式api和kubernetes编程范式>声明式API和Kubernetes编程范式<a hidden class=anchor aria-hidden=true href=#声明式api和kubernetes编程范式>#</a></h3>
-<p>创建一个两个Nginx容器的步骤：</p>
-<p>首先写一个Deployment的yaml文件：</p>
+<p>restartPolicy 在 job 对象里只被允许设置为 never 和 onFailure；而在 Deployment 对象中，只被允许设置为 always。</p>
+<h3 id=声明式-api-和-kubernetes-编程范式>声明式 API 和 Kubernetes 编程范式<a hidden class=anchor aria-hidden=true href=#声明式-api-和-kubernetes-编程范式>#</a></h3>
+<p>创建一个两个 Nginx 容器的步骤：</p>
+<p>首先写一个 Deployment 的 yaml 文件：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>apps/v1</span>
 <span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Deployment</span>
 <span style=color:#f92672>metadata</span>:
@@ -273,61 +278,61 @@ $ kubectl apply -f nginx-deployment.yaml
         <span style=color:#f92672>ports</span>:
         - <span style=color:#f92672>containerPort</span>: <span style=color:#ae81ff>80</span>
 
-</code></pre></div><p>然后使用kubectl create命令在Kubernetes中创建一个Deployment对象：</p>
-<pre tabindex=0><code>$ kubectl create -f nginx.yaml
-</code></pre><p>这样两个Nginx pod就运行起来了。</p>
-<p>如果要更新的话，只需要修改yaml文件，然后使用kubectl apply命令更新，触发了滚动更新。</p>
-<p>这个apply命令就是声明式API。</p>
+</code></pre></div><p>然后使用 kubectl create 命令在 Kubernetes 中创建一个 Deployment 对象：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ kubectl create -f nginx.yaml
+</code></pre></div><p>这样两个 Nginx pod 就运行起来了。</p>
+<p>如果要更新的话，只需要修改 yaml 文件，然后使用 kubectl apply 命令更新，触发了滚动更新。</p>
+<p>这个 apply 命令就是声明式 API。</p>
 <p><img src=https://ws1.sinaimg.cn/large/006tNbRwgy1fwzjwny2o8j31hc0u0abg.jpg alt></p>
-<p>istio项目中，最根本的组件是运行在每个pod里的envoy容器。这个代理服务以sidecar容器的方式，把整个pod的进出流量接管下来。istio的控制层的pilot组件，通过调用每个envoy的API，实现微服务的治理。</p>
-<p>利用Kubernetes的Admission Control，也叫：Initializer，先创建一个Pod，然后istio就是在pod的yaml给Kubernetes之后，自动加上envoy的配置。</p>
+<p>istio 项目中，最根本的组件是运行在每个 pod 里的 envoy 容器。这个代理服务以 sidecar 容器的方式，把整个 pod 的进出流量接管下来。istio 的控制层的 pilot 组件，通过调用每个 envoy 的 API，实现微服务的治理。</p>
+<p>利用 Kubernetes 的 Admission Control，也叫：Initializer，先创建一个 Pod，然后 istio 就是在 pod 的 yaml 给 Kubernetes 之后，自动加上 envoy 的配置。</p>
 <ul>
-<li>所谓的声明式，指的就是我只需要提交一个定义好的API对象来声明我所期望的状态是什么样子。</li>
-<li>其次，声明式API允许有多个API写端，以PATCH的方式对API对象进行修改，而无需关心原始的YAML文件的内容。</li>
-<li>最后，Kubernetes基于对API对象的增删改查，在无需外界干预的情况下，完成对实际状态和期望状态的调谐。</li>
+<li>所谓的声明式，指的就是我只需要提交一个定义好的 API 对象来声明我所期望的状态是什么样子。</li>
+<li>其次，声明式 API 允许有多个 API 写端，以 PATCH 的方式对 API 对象进行修改，而无需关心原始的 YAML 文件的内容。</li>
+<li>最后，Kubernetes 基于对 API 对象的增删改查，在无需外界干预的情况下，完成对实际状态和期望状态的调谐。</li>
 </ul>
-<p>一个API对象在etcd中完整路径是由：group（API组），version（API版本）和Resource（API资源类型）三个部分组成的。</p>
+<p>一个 API 对象在 etcd 中完整路径是由：group（API 组），version（API 版本）和 Resource（API 资源类型）三个部分组成的。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>batch/v2</span>
 <span style=color:#f92672>kind</span>: <span style=color:#ae81ff>CronJob</span>
-</code></pre></div><p>batch是组，v2是版本，CronJob是类型。</p>
-<p>对于核心API对象：Pod，Node等，不需要group的。非核心对象是需要组。</p>
+</code></pre></div><p>batch 是组，v2 是版本，CronJob 是类型。</p>
+<p>对于核心 API 对象：Pod，Node 等，不需要 group 的。非核心对象是需要组。</p>
 <p>匹配规则就是：</p>
 <p>/apis/batch/v2/CronJob</p>
 <ul>
 <li>
-<p>首先yaml文件被提交给了APIServer</p>
+<p>首先 yaml 文件被提交给了 APIServer</p>
 <p>过滤，授权，超时处理或审计等</p>
 </li>
 <li>
 <p>进入路由流程</p>
-<p>根据yaml，按照匹配规则去找</p>
+<p>根据 yaml，按照匹配规则去找</p>
 </li>
 <li>
-<p>根据定义，按照yaml中的字段，创建一个对象</p>
+<p>根据定义，按照 yaml 中的字段，创建一个对象</p>
 </li>
 <li>
-<p>进行Amission和Validation。</p>
+<p>进行 Amission 和 Validation。</p>
 </li>
 <li>
-<p>把验证过的对象，序列化存到etcd中</p>
+<p>把验证过的对象，序列化存到 etcd 中</p>
 </li>
 </ul>
 <h3 id=rbac>RBAC<a hidden class=anchor aria-hidden=true href=#rbac>#</a></h3>
 <p>基于角色的控制</p>
-<p>role：角色，一组规则，定义Kubernetes API对象的操作权限</p>
-<p>subject：被作用者，可以是人，也可以是机器，也可以是Kubernetes定义的用户</p>
+<p>role：角色，一组规则，定义 Kubernetes API 对象的操作权限</p>
+<p>subject：被作用者，可以是人，也可以是机器，也可以是 Kubernetes 定义的用户</p>
 <p>rolebinding：定义被作用者和角色的绑定关系</p>
-<p>ServiceAccount，会被自动创建分配一个secret对象。</p>
-<p>所谓角色就是一组权限规则列表，而我们分配这些权限的方式，就是通过创建rolebinding对象，将被作用者和权限列表进行绑定。</p>
-<p>另外，与之对应的ClusterRole和ClusterRoleBinding，则是Kubernetes集群级别的Role和RoleBinding，它们的作用范围不受Namespace限制。</p>
-<p>尽管被作用者有很多种（如User、Group），但在我们平常使用的时候，最普遍的还是ServiceAccount。</p>
+<p>ServiceAccount，会被自动创建分配一个 secret 对象。</p>
+<p>所谓角色就是一组权限规则列表，而我们分配这些权限的方式，就是通过创建 rolebinding 对象，将被作用者和权限列表进行绑定。</p>
+<p>另外，与之对应的 ClusterRole 和 ClusterRoleBinding，则是 Kubernetes 集群级别的 Role 和 RoleBinding，它们的作用范围不受 Namespace 限制。</p>
+<p>尽管被作用者有很多种（如 User、Group），但在我们平常使用的时候，最普遍的还是 ServiceAccount。</p>
 <h3 id=网络模型>网络模型<a hidden class=anchor aria-hidden=true href=#网络模型>#</a></h3>
-<p>Veth Pair 常常被用作连接不同 Network Namespace的网线。veth pair虚拟设备。总是以两张虚拟网卡形式成对出现。并且，从一个网卡中发出的数据包，可以直接出现在另一张网卡上，哪怕这两个网卡在不同的network Namespace里。</p>
+<p>Veth Pair 常常被用作连接不同 Network Namespace 的网线。veth pair 虚拟设备。总是以两张虚拟网卡形式成对出现。并且，从一个网卡中发出的数据包，可以直接出现在另一张网卡上，哪怕这两个网卡在不同的 network Namespace 里。</p>
 <p>一旦一张虚拟网卡被插在网桥上，他就会变成该网桥的从设备。从设备会降级成为网桥的一个端口，不能处理数据包，只能接收流入的数据包交给对应的网桥。</p>
-<p>两个容器的虚拟网卡都插在宿主机的一个网桥上，这个网桥就扮演一个交换机的角色。当两个容器进行网络交互时，从一个容器的发出请求到宿主机，由于Veth Pair 的机制，另一个容器就看到有数据流入。</p>
-<p>因此默认情况下，被限制在network Namespace的容器进程，实际就是通过veth pair设备+宿主机网桥的方式，实现了跟其他容器的数据交换。</p>
+<p>两个容器的虚拟网卡都插在宿主机的一个网桥上，这个网桥就扮演一个交换机的角色。当两个容器进行网络交互时，从一个容器的发出请求到宿主机，由于 Veth Pair 的机制，另一个容器就看到有数据流入。</p>
+<p>因此默认情况下，被限制在 network Namespace 的容器进程，实际就是通过 veth pair 设备+宿主机网桥的方式，实现了跟其他容器的数据交换。</p>
 <p><img src=https://ws1.sinaimg.cn/large/006tNbRwgy1fwzjwayfppj31bn0rngn5.jpg alt=img></p>
-<p>跨主通信，需要有一个集群公用的网桥，所有容器都连接到该网桥上，就可以相互通信，这就是overlay network（覆盖网络）</p>
+<p>跨主通信，需要有一个集群公用的网桥，所有容器都连接到该网桥上，就可以相互通信，这就是 overlay network（覆盖网络）</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -359,7 +364,7 @@ $ kubectl apply -f nginx-deployment.yaml
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

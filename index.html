@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <meta property="og:title" content="Awesome Fenix">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
+<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Awesome Fenix">
@@ -46,6 +46,11 @@
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -73,26 +78,42 @@
 </ul>
 </p>
 </section>
-<footer class=entry-footer><div class=social-icons><a href=https://github.com/zhenfeng-zhu target=_blank rel="noopener noreferrer me" title=Github><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a href=index.xml target=_blank rel="noopener noreferrer me" title="Rs s"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div>
+<footer class=entry-footer><div class=social-icons><a href=https://github.com/zhenfeng-zhu target=_blank rel="noopener noreferrer me" title=Github><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a href=index.xml target=_blank rel="noopener noreferrer me" title=Rss><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div>
 </footer>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-轻服务nodejs助力爬虫web3
+Blockchain 数据结构分析
 </h2>
 </header>
 <section class=entry-content>
-<p>周末的时候，写了一个简单的小项目，用来抓取web3的文章，然后存到本地。最后选取了公司对外的轻服务：https://qingfuwu.cn/docs/nodejs/
+<p>区块 想要了解区块到底是什么，最简单快捷的方法就是分析它的数据结构，以 bitcoin 种的区块为例：
+{ "hash":"00000000000000000018b0a6ae560fa33c469b6528bc9e0fb0c669319a186c33", "confirmations":1009, "strippedsize":956228, "size":1112639, "weight":3981323, "height":514095, "version":536870912, "versionHex":"20000000", "merkleroot":"5f8f8e053fd4c0c3175c10ac5189c15e6ba218909319850936fe54934dcbfeac", "tx":[ // ... 　], "time":1521380124, "mediantime":1521377506, "nonce":3001236454, "bits":"17514a49", "difficulty":3462542391191.563, "chainwork":"0000000000000000000000000000000000000000014d2b41a340e60b72292430", "previousblockhash":"000000000000000000481ab128418847dc25db4dafec464baa5a33e66490990b", "nextblockhash":"0000000000000000000c74966205813839ad1c6d55d75f95c9c5f821db9c3510" } 在这个 Block 的结构体中，previousblockhash 和 merkleroot 是两个最重要的字段；前者是一个哈希指针，它其实是前一个 Block 的哈希，通过 previousblockhash 我们能递归地找到全部的 Block，也就是整条主链，后者是一个 Merkle 树的根，Merkle 树中包含整个 Block 中的全部交易，通过保存 merkleroot，我们可以保证当前 Block 中任意交易都不会被修改。 Ethereum 的区块链模型虽然与 Bitcoin 有非常大的不同，但是它的 Block 结构中也有着类似的信息：
+{ "jsonrpc":"2.0", "result":{ "author":"0x00d8ae40d9a06d0e7a2877b62e32eb959afbe16d", "difficulty":"0x785042b0", "extraData":"0x414952412f7630", "gasLimit":"0x47b784", "gasUsed":"0x44218a", "hash":"0x4de91e4af8d135e061d50ddd6d0d6f4119cd0f7062ebe8ff2d79c5af0e8344b9", "logsBloom":"0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "miner":"0x00d8ae40d9a06d0e7a2877b62e32eb959afbe16d", "mixHash":"0xb8155224974967443d8b83e484402fb6e1e18ff69a8fc5acdda32f2bcc6dd443", "nonce":"0xad14fb6803147c7c", "number":"0x2000f1", "parentHash":"0x31919e2bf29306778f50bbc376bd490a7d056ddfd5b1f615752e79f32c7f1a38", "receiptsRoot":"0xa2a7af5e3b9e1bbb6252ba82a09302321b8f0eea7ec8e3bb977401e4f473e672", "sealFields":[ "0xa0b8155224974967443d8b83e484402fb6e1e18ff69a8fc5acdda32f2bcc6dd443", "0x88ad14fb6803147c7c" ], "sha3Uncles":"0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347", "size":"0x276", "stateRoot":"0x87e7e54cf229003014f453d64f0344e2ba4fc7ee3b95c7dd2642cca389fa1efe", "timestamp":"0x5a10968a", "totalDifficulty":"0x1804de0c47ffe1", "transactions":[....</p>
+</section>
+<footer class=entry-footer>
+January 4, 2022&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to Blockchain 数据结构分析" href=https://zhenfeng-zhu.github.io/posts/blockchain-schema/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+轻服务 nodejs 助力爬虫 web3
+</h2>
+</header>
+<section class=entry-content>
+<p>周末的时候，写了一个简单的小项目，用来抓取 web3 的文章，然后存到本地。最后选取了公司对外的轻服务：https://qingfuwu.cn/docs/nodejs/
 整项目用到了两个库
-axios：用来做http请求 cheerio：用来解析html 观察目标网页的格式 我们以巴比特为例：https://www.8btc.com/web3.0，打开控制台，定位到正文的div，可以发现是 article-list。
-右键复制一下selector，然后在代码中这样实现就可以了。
-抓取网页信息 const cheerio = require('cheerio').default const axios = require('axios').default async function getData() { const data = await (await axios.get('https://www.8btc.com/web3.0', { headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36' } })).data const $ = cheerio.load(data) let list = [] $('#news > div.articles-list').find('.article-info').each( (item, elem) => { const href = $(elem).find('> a').attr('href') const title = $(elem)....</p>
+axios：用来做 http 请求 cheerio：用来解析 html 观察目标网页的格式 我们以巴比特为例：https://www.8btc.com/web3.0，打开控制台，定位到正文的 div，可以发现是 article-list。
+右键复制一下 selector，然后在代码中这样实现就可以了。
+抓取网页信息 const cheerio = require('cheerio').default const axios = require('axios').default async function getData() { const data = await (await axios.get('https://www.8btc.com/web3.0', { headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36' } })).data const $ = cheerio.load(data) let list = [] $('#news > div.articles-list').find('.article-info').each( (item, elem) => { const href = $(elem)....</p>
 </section>
 <footer class=entry-footer>
 December 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to 轻服务nodejs助力爬虫web3" href=https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/></a>
+<a class=entry-link aria-label="post link to 轻服务 nodejs 助力爬虫 web3" href=https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -115,7 +136,7 @@ October 28, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-Crystal 1.2版本更新说明
+Crystal 1.2 版本更新说明
 </h2>
 </header>
 <section class=entry-content>
@@ -130,7 +151,7 @@ Crystal 1.2版本更新说明
 <footer class=entry-footer>
 October 17, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to Crystal 1.2版本更新说明" href=https://zhenfeng-zhu.github.io/posts/crystal1.2/></a>
+<a class=entry-link aria-label="post link to Crystal 1.2 版本更新说明" href=https://zhenfeng-zhu.github.io/posts/crystal1.2/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -222,7 +243,7 @@ Openfaas Workshop Lab1
 <section class=entry-content>
 <p>实验 1 - OpenFaaS 准备 OpenFaaS 需要一个Kubernetes 集群来操作。您可以使用单节点集群或多节点集群，无论是在笔记本电脑上还是在云中。
 任何 OpenFaaS 函数的基本基元都是 Docker 镜像，它是使用faas-cli工具链构建的。
-先决条件： 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
+先决条件 让我们安装 Docker，OpenFaaS CLI 并设置 Kubernetes。
 Docker For Mac
 Docker CE for Mac Edge Edition For Windows
 仅支持 Windows 10 Pro 或 Enterprise 安装 Docker CE for Windows 请确保通过使用 Windows 任务栏通知区域中的 Docker 菜单来使用Linux容器 Docker 守护进程。
@@ -245,7 +266,7 @@ Openfaas Workshop
 在这个研讨会中，您首先将 OpenFaaS 部署到您的笔记本电脑或带有 Docker for Mac 或 Windows 的远程集群中。然后，您将使用 OpenFaaS 用户界面、CLI 和函数商店来完成最基本的使用。构建完成后，在 Python 中部署调用自己的无服务器函数，您将继续学习以下主题：使用 pip 管理依赖关系、通过安全机密处理应用编程接口令牌、使用 Prometheus 监控函数、异步调用函数以及将函数链接在一起创建应用程序。实验中让人兴奋的是可以让您创建自己的 GitHub 机器人，它可以自动响应问题。同样的方法也可以通过 IFTTT.com 连接到在线事件流，这将使您能够构建机器人、自动响应器以及与社交媒体和物联网设备的集成。
 最后，这些实验也涵盖了更高级的主题，并为进一步学习提供建议。
 其他语言
-日本語 中文 要求： 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1
+日本語 中文 要求 我们将介绍如何在Lab 1中安装这些要求。请在参加讲师指导的研讨会之前完成Lab 1
 函数将用 Python 编写，因此有编程或脚本经验者优先 安装推荐的代码编辑器/IDE VSCode Windows 安装 Git Bash 首选操作系统： MacOS，Windows 10Pro/Enterprise，Ubuntu Linux Docker:
 Docker CE for Mac/Windows Edge edition Docker CE for Linux 注意：作为最后的手段，如果您有不兼容的 PC，您可以在https://labs.play-with-docker.com/.上运行研讨会
 讲师主导的研讨会 如果你参加了一个由讲师领导的研讨会，那么将会通过一个链接来加入 OpenFaaS Slack 社区。使用研讨会指定的渠道讨论意见、问题和建议。...</p>
@@ -255,28 +276,13 @@ March 30, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
 <a class=entry-link aria-label="post link to Openfaas Workshop" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-Streaming 101
-</h2>
-</header>
-<section class=entry-content>
-<p> 有效的复杂系统总是从简单
-...</p>
-</section>
-<footer class=entry-footer>
-March 26, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to Streaming 101" href=https://zhenfeng-zhu.github.io/posts/streaming-101/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=next href=https://zhenfeng-zhu.github.io/page/2/>Next Page »</a>
 </nav>
 </footer>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

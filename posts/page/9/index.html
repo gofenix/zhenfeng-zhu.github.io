@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
+<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -46,6 +46,11 @@
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
 <li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
+<li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
 </a>
@@ -67,7 +72,28 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-kotlin快速入门
+Guice 快速入门
+</h2>
+</header>
+<section class=entry-content>
+<p>Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。
+guice 是谷歌推出的一个轻量级的依赖注入框架，当然 spring 也可以实现依赖注入，只是 spring 太庞大了。
+1 基本使用 引入依赖 使用 gradle 或者 maven，引入 guice。
+maven:
+&lt;dependency> &lt;groupId>com.google.inject&lt;/groupId> &lt;artifactId>guice&lt;/artifactId> &lt;version>4.1.0&lt;/version> &lt;/dependency> Gradle:
+compile "com.google.inject:guice:4.1.0" 项目骨架 首先需要一个业务接口，包含一个方法来执行业务逻辑，它的实现非常简单：
+package com.learning.guice; public interface UserService { void process(); } package com.learning.guice; public class UserServiceImpl implements UserService { @Override public void process() { System.out.println("我需要做一些业务逻辑"); } } 然后写一个日志的接口：
+package com.learning.guice; public interface LogService { void log(String msg); } package com....</p>
+</section>
+<footer class=entry-footer>
+March 24, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to Guice 快速入门" href=https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
+kotlin 快速入门
 </h2>
 </header>
 <section class=entry-content>
@@ -79,21 +105,21 @@ fun printSum(a: Int, b: Int) { println("sum of $aand $bis ${a + b}") } 变量定
 <footer class=entry-footer>
 March 24, 2018&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to kotlin快速入门" href=https://zhenfeng-zhu.github.io/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
+<a class=entry-link aria-label="post link to kotlin 快速入门" href=https://zhenfeng-zhu.github.io/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-RxJava2快速入门
+RxJava2 快速入门
 </h2>
 </header>
 <section class=entry-content>
-<p>RxJava2快速入门 引入依赖 compile 'io.reactivex.rxjava2:rxjava:2.0.1' 写法 简单版本 private static void helloSimple() { Consumer&lt;String> consumer = new Consumer&lt;String>() { @Override public void accept(String s) throws Exception { System.out.println("consumer accept is " + s); } }; Observable.just("hello world").subscribe(consumer); } 复杂版本 private static void helloComplex() { Observer&lt;String> observer = new Observer&lt;String>() { @Override public void onSubscribe(Disposable d) { System.out.println("onSubscribe: " + d); } @Override public void onNext(String s) { System.out.println("onNext: " + s); } @Override public void onError(Throwable e) { System....</p>
+<p>RxJava2 快速入门 引入依赖 compile 'io.reactivex.rxjava2:rxjava:2.0.1' 写法 简单版本 private static void helloSimple() { Consumer&lt;String> consumer = new Consumer&lt;String>() { @Override public void accept(String s) throws Exception { System.out.println("consumer accept is " + s); } }; Observable.just("hello world").subscribe(consumer); } 复杂版本 private static void helloComplex() { Observer&lt;String> observer = new Observer&lt;String>() { @Override public void onSubscribe(Disposable d) { System.out.println("onSubscribe: " + d); } @Override public void onNext(String s) { System.out.println("onNext: " + s); } @Override public void onError(Throwable e) { System....</p>
 </section>
 <footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
+March 24, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to RxJava2快速入门" href=https://zhenfeng-zhu.github.io/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
+<a class=entry-link aria-label="post link to RxJava2 快速入门" href=https://zhenfeng-zhu.github.io/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -102,8 +128,8 @@ March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </h2>
 </header>
 <section class=entry-content>
-<p>在看项目代码的时候，发现了entity包和dto包，里面都是只保存数据的类，仔细查了资料，才发现java对于只保存数据的类有好几个分类。
-pojo类：这是普通的java类，具有一部分的get和set方法。 dto类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo类：vo有两种说法，一种是view object，一种是value object。 po类：persisent object 持久对象。和pojo类一样，也是只有get set方法，但是这种类一般是用于持久层。 bo类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。 根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在domain包，或者entity包里。再细分一下的话，可以把dto类单独提取到一个包里。...</p>
+<p>在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。
+pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。 根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。...</p>
 </section>
 <footer class=entry-footer>
 March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -117,7 +143,7 @@ docker
 </h2>
 </header>
 <section class=entry-content>
-<p>docker常用命令 docker 获取镜像
+<p>docker 常用命令 docker 获取镜像
 docker pull
 新建并启动
 docker run
@@ -130,16 +156,11 @@ docker image prune
 docker iamge rm
 查看应用信息
 docker logs
-dockerfile 一般步骤： 在一个目录里，新建一个文件，命名为Dockerfile 在Dockerfile的目录内，执行docker build 常用指令 FROM 指定基础镜像，且是第一条命令
+dockerfile 一般步骤 在一个目录里，新建一个文件，命名为 Dockerfile 在 Dockerfile 的目录内，执行 docker build 常用指令 FROM 指定基础镜像，且是第一条命令
 RUN 执行命令
-shell格式
-exec格式
-COPY和ADD指令是复制文件
-CMD指令和RUN类似，容器启动命令
-shell格式
-exec格式
-参数列表格式
-ENV 设置环境变量...</p>
+shell 格式
+exec 格式
+COPY 和 ADD 指令是复制文件...</p>
 </section>
 <footer class=entry-footer>
 March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -155,7 +176,7 @@ express
 <section class=entry-content>
 <p>Express 快速入门 安装 npm init npm install --save express hello world var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序
 node app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。
-express程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
+express 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
 express --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
 DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。...</p>
 </section>
@@ -171,14 +192,14 @@ March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </h2>
 </header>
 <section class=entry-content>
-<p>一直没有机会写2017的年终总结，想到去年写的新的一年的计划，好像自己都没有按照计划来做，而且写的计划也不知道写到哪里去了。
+<p>一直没有机会写 2017 的年终总结，想到去年写的新的一年的计划，好像自己都没有按照计划来做，而且写的计划也不知道写到哪里去了。
 站在现在的时间点去审视过去的一年，这个本命年还是发生了很多对自己的未来有着比较大影响的的事情。房子+女朋友+新工作，这些事情突然的涌现出来，搞得自己有些手忙脚乱。
 梳理一下自己的收获吧：
-首先当然是结识了一帮小伙伴，我们一起打农药，一起调bug，一起奋战双十一。
-在技术上也有了一定的提升，关键是自己的视野上有了很大的变化，不再是像当初大学的时候，不知道自己在做什么。这里对我影响比较大的一个是phodal，看了他写的博客和书之后，对自己的触动很大，感觉他懂得很多东西，知识面很广，而且能够写出来，扩大了自己的影响力，所以我就想着自己能不能模仿他。另外一个就是田哥了，我觉得他是我认识的同龄人中，比较有自己想法的一个人，打进acm world final的人就是不一样，他看问题的角度比较新颖，而且归纳总结能力很强，给了我一些在编程上的指点，让我少走了很多弯路。
-也很感谢自己的几个室友，让我不再感到孤单。自从刘巍来了深圳之后，11I更欢乐了，也更污了。我们经常在家里煮火锅吃，吃的特别爽，以至于现在我都不想去火锅店里吃，总觉得在家吃的比较爽。
+首先当然是结识了一帮小伙伴，我们一起打农药，一起调 bug，一起奋战双十一。
+在技术上也有了一定的提升，关键是自己的视野上有了很大的变化，不再是像当初大学的时候，不知道自己在做什么。这里对我影响比较大的一个是 phodal，看了他写的博客和书之后，对自己的触动很大，感觉他懂得很多东西，知识面很广，而且能够写出来，扩大了自己的影响力，所以我就想着自己能不能模仿他。另外一个就是田哥了，我觉得他是我认识的同龄人中，比较有自己想法的一个人，打进 acm world final 的人就是不一样，他看问题的角度比较新颖，而且归纳总结能力很强，给了我一些在编程上的指点，让我少走了很多弯路。
+也很感谢自己的几个室友，让我不再感到孤单。自从刘巍来了深圳之后，11I 更欢乐了，也更污了。我们经常在家里煮火锅吃，吃的特别爽，以至于现在我都不想去火锅店里吃，总觉得在家吃的比较爽。
 女朋友，出乎我的意料，现在想想还是感觉活在梦里，略过略过。
-至于买房，没买之前的想法盲目乐观，后来算了一下，要是在深圳买房的话，我每个月的房贷是2万多，关键是首付还不一定能搞得出来。还是建议在北上广深工作的人，有机会现在老家的省会一类的城市，先搞一套，以后可以置换，能上车的时候早点上车，也是相当于变相攒钱了。对于不会投资或者创业的朋友，有时候辛辛苦苦干一年之后算一下，不知不觉中，自己的钱都不知道花在了哪里，如果有房贷的话，等用的时候说不定卖掉还能赚一些钱。
+至于买房，没买之前的想法盲目乐观，后来算了一下，要是在深圳买房的话，我每个月的房贷是 2 万多，关键是首付还不一定能搞得出来。还是建议在北上广深工作的人，有机会现在老家的省会一类的城市，先搞一套，以后可以置换，能上车的时候早点上车，也是相当于变相攒钱了。对于不会投资或者创业的朋友，有时候辛辛苦苦干一年之后算一下，不知不觉中，自己的钱都不知道花在了哪里，如果有房贷的话，等用的时候说不定卖掉还能赚一些钱。
 感觉自己换公司还是挺戏剧化的，当时也没想着真的就换工作吧，只是想投投简历，然后去面试一波看看自己的水平怎么样。总觉得自己在招银的舒适区待的太久了，没有什么激情了。同时自己也想出来试试，万一公司上市，摇身一变成为富翁了。当然这是白日梦了，路还是要一步一步的走的。
 总感觉自己想了很多东西，但是就是写不出来，自己讲故事的能力还是要提升一些。...</p>
 </section>
@@ -190,50 +211,24 @@ March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-Java内存模型和线程
+Java 内存模型和线程
 </h2>
 </header>
 <section class=entry-content>
-<p>java内存模型和线程 并发不一定依赖多线程，但是在java里面谈论并发，大多与线程脱不开关系。
+<p>java 内存模型和线程 并发不一定依赖多线程，但是在 java 里面谈论并发，大多与线程脱不开关系。
 线程是大多是面试都会问到的问题。我们都知道，线程是比进程更轻量级的调度单位，线程之间可以共享内存。之前面试的时候，也是这样回答，迷迷糊糊，没有一个清晰的概念。
-大学的学习的时候，写C和C++，自己都没有用过多线程，看过一个Windows编程的书，里面讲多线程的时候，一大堆大写的字母，看着一点都不爽，也是惭愧。后来的实习，写unity，unity的C#使用的是协程。只有在做了java后端之后，才知道线程到底是怎么用的。了解了java内存模型之后，仔细看了一些资料，对java线程有了更深入的认识，整理写成这篇文章，用来以后参考。
-1 Java内存模型 Java虚拟机规范试图定义一种java内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让java程序在各种平台下都能达到一致性内存访问的效果。
-java内存模型的主要目标是定义程序中各个变量的访问规则，即在虚拟机中将变量存储到内存和从内存中取出变量的底层细节。（这里所说的变量包括了实例字段、静态字段和数组等，但不包括局部变量与方法参数，因为这些是线程私有的，不被共享。）
-1.1 主内存和工作内存 java规定所有的变量都存储在主内存。每条线程有自己的工作内存。
+大学的学习的时候，写 C 和 C++，自己都没有用过多线程，看过一个 Windows 编程的书，里面讲多线程的时候，一大堆大写的字母，看着一点都不爽，也是惭愧。后来的实习，写 unity，unity 的 C#使用的是协程。只有在做了 java 后端之后，才知道线程到底是怎么用的。了解了java 内存模型之后，仔细看了一些资料，对 java 线程有了更深入的认识，整理写成这篇文章，用来以后参考。
+1 Java 内存模型 Java 虚拟机规范试图定义一种 java 内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让 java 程序在各种平台下都能达到一致性内存访问的效果。
+java 内存模型的主要目标是定义程序中各个变量的访问规则，即在虚拟机中将变量存储到内存和从内存中取出变量的底层细节。（这里所说的变量包括了实例字段、静态字段和数组等，但不包括局部变量与方法参数，因为这些是线程私有的，不被共享。）
+1.1 主内存和工作内存 java 规定所有的变量都存储在主内存。每条线程有自己的工作内存。
 线程的工作内存中的变量是主内存中该变量的副本，线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同线程间也无法直接访问对方工作内存中的变量，线程间变量值的传递需要通过主内存来完成。
-1.2 内存之间的交互 关于主内存和工作内存之间的具体交互协议，java内存模型定义了8中操作来完成，虚拟机实现的时候必须保证每个操作都是原子的，不可分割的（对于long和double有例外）
-lock锁定：作用于主内存变量，代表一个变量是一条线程独占。 unlock解锁：作用于主内存变量，把锁定的变量解锁。 read读取：作用于主内存变量，把变量值从主内存传到线程的工作内存中，供load使用。 load载入：作用工作内存变量，把上一个read到的值放入到工作内存中的变量中。 use使用：作用于工作内存变量，把工作内存中的一个变量的值传递给执行引擎。 assign：作用于工作内存变量，把执行引擎执行过的值赋给工作内存中的变量。 store存储：作用于工作内存变量，把工作内存中的变量值传给主内存，供write使用。 这些操作要满足一定的规则。
-1.3 volatile volatile可以说是java的最轻量级的同步机制。
-当一个变量被定义为volatile之后，他就具备两种特性：
-保证此变量对所有线程都是可见的
-这里的可见性是指当一个线程修改了某变量的值，新值对于其他线程来讲是立即得知的。而普通变量做不到，因为普通变量需要传递到主内存中才可以做到这点。
-禁止指令重排
-对于普通变量来说，仅仅会保证在该方法的执行过程中所有依赖赋值结果的地方都能获取到正确的结果，而不能保证变量赋值操作的顺序与程序代码中的执性顺序一致。
-若用volatile修饰变量，在编译时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。
-volatile对于单个的共享变量的读/写具有原子性，但是像num++这种复合操作，volatile无法保证其原子性。
-1.4 long和double long和double是一个64位的数据类型。
-虚拟机允许将没有被volatile修饰的64位变量的读写操作分为两次32位的操作来进行。因此当多个线程操作一个没有声明为volatile的long或者double变量，可能出现操作半个变量的情况。
-但是这种情况是罕见的，一般商用的虚拟机都是讲long和double的读写当成原子操作进行的，所以在写代码时不需要将long和double专门声明为volatile。
-1.5 原子性、可见性和有序性 java的内存模型是围绕着在并发过程中如何处理原子性、可见性和有序性。
-原子性
-基本数据类型的访问读写是剧本原子性的。
-如果需要一个更大范围的原子性保证，java提供了lock和unlock操作，对应于写代码时就是synchronized关键字，因此在synchronized块之间的操作也是具备原子性的。
-可见性
-可见性是指当一个线程修改到了一个共享变量的值，其他的线程能够立即得知这个修改。共享变量的读写都是通过主内存作为媒介来处理可见性的。
-volatile的特殊规则保证了新值可以立即同步到主内存，每次使用前立即从主内存刷新。
-synchronized同步块的可见性是由”对于一个变量unlock操作之前，必须先把此变量同步回内存中“来实现的。
-final的可见性是指被final修饰的字段在构造器中一旦初始化完成，并且构造器没有把this的引用传递出去，那么在其他线程中就能看见final字段的值。
-有序性
-如果在本线程内观察，所有的操作都是有序的；如果在一个线程内观察另一个线程，所有的操作都是无序的。 volatile关键字本身就包含了禁止指令重排的语义，而synchronized则是由“一个变量在同一时刻只允许一条线程对其进行lock操作”这条规则来实现有序性的。
-1.6 先行发生原则 如果java内存模型中的所有有序性都是靠着volatile和synchronized来完成，那有些操作将会变得很繁琐，但是我们在写java并发代码的时候没有感受到这一点，都是因为java有一个“先行发生”原则。
-先行发生是java内存模型中定义的两项操作之间的偏序关系，如果说操作A先发生于操作B，其实就是说在发生B之前，A产生的影响都能被B观察到，这里的影响包括修改了内存中共享变量的值、发送了消息、调用了方法等等。
-程序次序规则
-在一个线程内，按程序代码控制流顺序执行。...</p>
+1.2 内存之间的交互 关于主内存和工作内存之间的具体交互协议，java 内存模型定义了 8 中操作来完成，虚拟机实现的时候必须保证每个操作都是原子的，不可分割的（对于 long 和 double 有例外）
+lock 锁定：作用于主内存变量，代表一个变量是一条线程独占。 unlock 解锁：作用于主内存变量，把锁定的变量解锁。 read 读取：作用于主内存变量，把变量值从主内存传到线程的工作内存中，供 load 使用。 load 载入：作用工作内存变量，把上一个 read 到的值放入到工作内存中的变量中。 use 使用：作用于工作内存变量，把工作内存中的一个变量的值传递给执行引擎。 assign：作用于工作内存变量，把执行引擎执行过的值赋给工作内存中的变量。 store 存储：作用于工作内存变量，把工作内存中的变量值传给主内存，供 write 使用。 这些操作要满足一定的规则。...</p>
 </section>
 <footer class=entry-footer>
-March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+March 22, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to Java内存模型和线程" href=https://zhenfeng-zhu.github.io/posts/java-memory-thread/></a>
+<a class=entry-link aria-label="post link to Java 内存模型和线程" href=https://zhenfeng-zhu.github.io/posts/java-memory-thread/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -243,14 +238,14 @@ aws.md
 </header>
 <section class=entry-content>
 <p>一些基础概念
-EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux或者windows）。
-VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个VPC。
-子网 一个VPC里可以有多个子网。比如某机构的一个VPC可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。
-IAM角色 类似于用户，可以被分配权限。
-安全组 控制连接到此EC2实例的流量，或者是控制对外暴露的端口。
-CIDR CIDR主要是一个按位的、基于前缀的，用于解释IP地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
-IPv4的CIDR地址块的表示方法和IPv4地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在0到32之间的一个数字：A.B.C.D/N。点分十进制的部分和IPv4地址一样是一个被分成四个八位位组的32位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
-十进制部分有时会被省略，因此，/20就表示一个前缀长度是20的CIDR地址块。如果一个IP地址的前N位与一个CIDR地址块的前缀是相同的话，那么就说这个地址属于这个CIDR地址块，也可以说是与CIDR地址块的前缀匹配。所以，要理解CIDR，就要把地址写成二进制的形式。...</p>
+EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux 或者 windows）。
+VPC Virtual Private Cloud。可以理解成数据中心，机房。对于灾备或者双活需要的，可以创建两个 VPC。
+子网 一个 VPC 里可以有多个子网。比如某机构的一个 VPC 可以办公网和生产网段，或者内网和外网。一般外网可以被访问，内网的话可以是数据库的服务器之类的。
+IAM 角色 类似于用户，可以被分配权限。
+安全组 控制连接到此 EC2 实例的流量，或者是控制对外暴露的端口。
+CIDR CIDR 主要是一个按位的、基于前缀的，用于解释 IP 地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
+IPv4 的 CIDR 地址块的表示方法和 IPv4 地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在 0 到 32 之间的一个数字：A.B.C.D/N。点分十进制的部分和 IPv4 地址一样是一个被分成四个八位位组的 32 位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
+十进制部分有时会被省略，因此，/20 就表示一个前缀长度是 20 的 CIDR 地址块。如果一个 IP 地址的前 N 位与一个 CIDR 地址块的前缀是相同的话，那么就说这个地址属于这个 CIDR 地址块，也可以说是与 CIDR 地址块的前缀匹配。所以，要理解 CIDR，就要把地址写成二进制的形式。...</p>
 </section>
 <footer class=entry-footer>
 March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -281,7 +276,7 @@ Deploy to remote sites $ hexo deploy More info: Deployment...</p>
 </nav>
 </footer>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

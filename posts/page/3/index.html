@@ -16,14 +16,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
+<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -46,6 +46,11 @@
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
 <li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
+<li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
 </a>
@@ -67,12 +72,44 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+大型网站发展历程
+</h2>
+</header>
+<section class=entry-content>
+<p>前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。
+code less, play more!
+前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有庞大的用户，高并发的访问，海量的数据；大型网站都是从小型网站发展而来。网站的价值在于它能给用户提供什么家宅，在于网站能做什么，而不在于它是怎么做的，所以网站在小的时候就去追求网站的架构是舍本逐末，得不偿失的。小型网站最需要做的就是为用户提供更好的服务来创造价值，得到用户认可，活下去，野蛮生长。
+大型网站软件系统的特点 高并发，大流量 高可用 海量数据 用户分布广泛，网络情况复杂 安全环境恶劣 需求快速变更，发布平频繁 渐进式发展 大型网站的发展历程 初始阶段的网站架构
+最开始没有多少人访问，所以应用程序，数据库，文件都在同一台机器上。
+应用服务器和数据服务分离
+应用和数据分离之后，一般需要三台服务器。应用服务器，文件服务器和数据库服务器，这三种服务器对于硬件要求各不相同。
+应用服务器：更强大的 CPU 数据库服务器：更快速的磁盘和更大的内存 文件服务器：容量更大的硬盘 使用缓存改善性能
+网站的访问也遵循二八定律：80%的业务集中在 20%的数据上。因此可以把这一小部分数据缓存在内存中，减少数据库的访问压力。
+网站的缓存可以分为两种：
+本地缓存：缓存在应用服务器上。本地缓存访问速度快，但是受制于内存限制，缓存数量有限，而且也会出现和应用程序争抢内存的情况。 远程分布式缓存：以集群的方式，缓存在大内存的专用缓存服务器。可以在理论上做到不受内存容量限制。 使用应用服务器集群提高并发能力
+当一台服务器的处理能力和存储空间不足的时候，不要企图更换更强大的服务器。对于大型网站来说，不管多么强大的服务器，都满足不了网站持续增长的业务需求。此时就可以考虑集群的方式，通过负载均衡调度服务器，可以将来自用户的请求分发到应用服务器集群中的任何一台服务器上。
+数据库读写分离
+使用缓存后，大部分的数据读操作访问都可以不通过数据库完成，但是仍有部分读操作（如缓存过期，缓存不命中）和全部的写操作需要访问数据库。
+目前大部分数据库都提供主从热备的功能，在写数据的时候，访问主库，主库通过主从复制机制将数据更新同步至从数据库，在读的时候就可以通过从数据库获取数据。
+使用反向代理和 CDN 加速网站响应
+在《web 性能权威指南》中有讲到，网站性能的瓶颈，大部分时间都浪费在 TCP 的握手和传输上。因此可以通过 CDN 和反向代理的方式来加快响应。
+CDN 和反向代理的本质都是通过缓存，不同的主要是：
+CDN 部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。 使用分布式文件系统和分布式数据库系统...</p>
+</section>
+<footer class=entry-footer>
+November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to 大型网站发展历程" href=https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 Geth 私链
 </h2>
 </header>
 <section class=entry-content>
-<p>在上一篇文章《Geth入门》中，主要讲了开发环境下以太坊geth客户端的使用。今天简单说下私链的配置。
-genesis.json { "config": { "chainId": 10, "homesteadBlock": 0, "eip155Block": 0, "eip158Block": 0 }, "coinbase" : "0x0000000000000000000000000000000000000000", "difficulty" : "0x40000", "extraData" : "", "gasLimit" : "0xffffffff", "nonce" : "0x0000000000000042", "mixhash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "timestamp" : "0x00", "alloc": { } } 参数 描述 nonce nonce就是一个64位随机数，用于挖矿 mixhash 与nonce配合用于挖矿，由上一个区块的一部分生成的hash difficulty 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度 alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以 coinbase 矿工的账号，随便填 timestamp 设置创世块的时间戳 parentHash 上一个区块的hash值，因为是创世块，所以这个值是0 extraData 附加信息，随便填，可以填你的个性信息 gasLimit 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。 config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的json文件中，缺少config部分。看到这个信息，我们不需要把geth退回到v1....</p>
+<p>在上一篇文章《Geth 入门》中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。
+genesis.json { "config": { "chainId": 10, "homesteadBlock": 0, "eip155Block": 0, "eip158Block": 0 }, "coinbase" : "0x0000000000000000000000000000000000000000", "difficulty" : "0x40000", "extraData" : "", "gasLimit" : "0xffffffff", "nonce" : "0x0000000000000042", "mixhash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "timestamp" : "0x00", "alloc": { } } 参数 描述 nonce nonce 就是一个 64 位随机数，用于挖矿 mixhash 与 nonce 配合用于挖矿，由上一个区块的一部分生成的 hash difficulty 设置当前区块的难度，如果难度过大，cpu 挖矿就很难，这里设置较小难度 alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以 coinbase 矿工的账号，随便填 timestamp 设置创世块的时间戳 parentHash 上一个区块的 hash 值，因为是创世块，所以这个值是 0 extraData 附加信息，随便填，可以填你的个性信息 gasLimit 该值设置对 GAS 的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。 config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的 json 文件中，缺少 config 部分。看到这个信息，我们不需要把 geth 退回到 v1....</p>
 </section>
 <footer class=entry-footer>
 November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -86,15 +123,14 @@ Geth
 </h2>
 </header>
 <section class=entry-content>
-<p>Geth简介 go-ethereum
-go-ethereum客户端通常被称为geth，它是个命令行界面，执行在Go上实现的完整以太坊节点。通过安装和运行geth，可以参与到以太坊前台实时网络并进行以下操作：
+<p>Geth 简介 go-ethereum
+go-ethereum 客户端通常被称为 geth，它是个命令行界面，执行在 Go 上实现的完整以太坊节点。通过安装和运行 geth，可以参与到以太坊前台实时网络并进行以下操作：
 挖掘真的以太币 在不同地址间转移资金 创建合约，发送交易 探索区块历史 及很多其他 网站: http://ethereum.github.io/go-ethereum/
 Github: https://github.com/ethereum/go-ethereum
 维基百科: https://github.com/ethereum/go-ethereum/wiki/geth
 Gitter: https://gitter.im/ethereum/go-ethereum
-mac下安装geth 首先安装homebrew， 使用brew安装即可。在安装geth的时候，会将go也安装上。 brew tap ethereum/ethereum brew install ethereum 在命令行输入geth —help，如果出现
-zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum command line interface Copyright 2013-2017 The go-ethereum Authors USAGE: geth [options] command [command options] [arguments...] VERSION: 1.7.3-unstable-eea996e4 证明安装成功。
-使用Geth 打开终端，输入以下命令，以开发的方式启动geth...</p>
+mac 下安装 geth 首先安装 homebrew， 使用 brew 安装即可。在安装 geth 的时候，会将 go 也安装上。 brew tap ethereum/ethereum brew install ethereum 在命令行输入 geth —help，如果出现
+zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum command line interface Copyright 2013-2017 The go-ethereum Authors USAGE: geth [options] command [command options] [arguments....</p>
 </section>
 <footer class=entry-footer>
 November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -104,7 +140,7 @@ November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-hive常用函数
+hive 常用函数
 </h2>
 </header>
 <section class=entry-content>
@@ -124,24 +160,24 @@ parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, 
 <footer class=entry-footer>
 April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to hive常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a>
+<a class=entry-link aria-label="post link to hive 常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-mysql的学习
+mysql 的学习
 </h2>
 </header>
 <section class=entry-content>
-<p>SQL条件语句 IF if(exp1, exp2, exp3)
-exp1是条件，条件为true的话，是exp2，否则是exp3
+<p>SQL 条件语句 IF if(exp1, exp2, exp3)
+exp1 是条件，条件为 true 的话，是 exp2，否则是 exp3
 case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNULL IFNULL(exp1, exp2)
-在exp1的值不为null的情况下，返回exp1，如果exp1位null，返回exp2的值。...</p>
+在 exp1 的值不为 null 的情况下，返回 exp1，如果 exp1 位 null，返回 exp2 的值。...</p>
 </section>
 <footer class=entry-footer>
 April 16, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to mysql的学习" href=https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/></a>
+<a class=entry-link aria-label="post link to mysql 的学习" href=https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -158,9 +194,9 @@ OLAP 由三个基本的分析操作组成：上卷（roll-up）、钻取（drill
 传统行式数据库中，处于同一行中的数据总是被物理的存在一起。列式数据库总是将同一列的数据存储在一起，不同列的数据分开存储。
 行式数据库：mysql，pg
 列式数据库：vertica，druid
-OLAP的关键特征 大多是读请求 数据总是以相当大的批（>1000w）进行写入 不修改已经添加的数据 每次查询都从数据库中读取大量的行，但是同时又仅需要少量的列 宽表，即每个表包含大量的列 较少的查询（通常每台服务器每秒数百个查询或更少） 对于简单的查询，允许延迟大约50ms 列中的数据相对较小：数字和短字符串 处理单个查询时需要高吞吐量（每个服务器每秒高达数十亿行） 事务不是必须的 对数据一致性要求低 每一个查询除了一个大表外都很小 查询结果明显小于数据源，换句话说，数据被过滤或者聚合之后能够被放在单台服务器的内存中 列式数据库更适合OLAP场景 Input/Output 分析类的查询，通常只需要读取表的一小部分列。 数据总是打包成批量读取，列压缩更容易 IO降低了 CPU 由于执行一个查询需要处理大量的行，因此在整个向量上执行所有操作将比在每一行上执行所有操作更加高效。同时这将有助于实现一个几乎没有调用成本的查询引擎。
-向量引擎 代码生成 为了提高CPU效率，查询语言必须是声明型的(SQL或MDX)， 或者至少一个向量(J，K)。 查询应该只包含隐式循环，允许进行优化。
-clickhouse的独特功能 真正的列式数据库管理系统 ...</p>
+OLAP 的关键特征 大多是读请求 数据总是以相当大的批（>1000w）进行写入 不修改已经添加的数据 每次查询都从数据库中读取大量的行，但是同时又仅需要少量的列 宽表，即每个表包含大量的列 较少的查询（通常每台服务器每秒数百个查询或更少） 对于简单的查询，允许延迟大约 50ms 列中的数据相对较小：数字和短字符串 处理单个查询时需要高吞吐量（每个服务器每秒高达数十亿行） 事务不是必须的 对数据一致性要求低 每一个查询除了一个大表外都很小 查询结果明显小于数据源，换句话说，数据被过滤或者聚合之后能够被放在单台服务器的内存中 列式数据库更适合 OLAP 场景 Input/Output 分析类的查询，通常只需要读取表的一小部分列。 数据总是打包成批量读取，列压缩更容易 IO 降低了 CPU 由于执行一个查询需要处理大量的行，因此在整个向量上执行所有操作将比在每一行上执行所有操作更加高效。同时这将有助于实现一个几乎没有调用成本的查询引擎。
+向量引擎 代码生成 为了提高 CPU 效率，查询语言必须是声明型的(SQL 或 MDX)， 或者至少一个向量(J，K)。 查询应该只包含隐式循环，允许进行优化。
+clickhouse 的独特功能 真正的列式数据库管理系统 ...</p>
 </section>
 <footer class=entry-footer>
 October 12, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -170,7 +206,7 @@ October 12, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-每日学习2
+每日学习 2
 </h2>
 </header>
 <section class=entry-content>
@@ -179,7 +215,7 @@ October 12, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <footer class=entry-footer>
 September 29, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to 每日学习2" href=https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/></a>
+<a class=entry-link aria-label="post link to 每日学习 2" href=https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -188,8 +224,8 @@ September 29, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </h2>
 </header>
 <section class=entry-content>
-<p>开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理？ 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里可能有相同名称的变量，必须找到正确的那个，这个过程就是引用消解。 函数引用消解 命名空间引用消解 左值和右值 左值取的是变量的地址或者说是变量的引用，获得地址之后，我们就可以把新值写进去。 右值就是我们常说的值。 不是所有的表达式都能生成一个合格的左值。 属性计算 上下文分析或者说语义分析的一种算法。 属性文法的主要思路是计算机科学的重要开拓者，是在上下文无关文法的基础上做了一些增强，使之可以计算属性值。 过程 类型和作用域解析 类型的消解 引用的消解和S属性的类型推导 做类型检查 做一些语义合法性检查 趣谈Linux操作系统 Namespace技术：内部创业公司应该独立运营 为了隔离不同类型的资源，Linux内核里面有如下几种不同类型的namespace：
-UTS，表示不同的namespace可以配置不同的hostname User，可以配置不同的用户和组 Mount，文件系统挂载点是隔离的 PID，有完全独立的pid Network，有独立的网络协议栈 ...</p>
+<p>开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里可能有相同名称的变量，必须找到正确的那个，这个过程就是引用消解。 函数引用消解 命名空间引用消解 左值和右值 左值取的是变量的地址或者说是变量的引用，获得地址之后，我们就可以把新值写进去。 右值就是我们常说的值。 不是所有的表达式都能生成一个合格的左值。 属性计算 上下文分析或者说语义分析的一种算法。 属性文法的主要思路是计算机科学的重要开拓者，是在上下文无关文法的基础上做了一些增强，使之可以计算属性值。 过程 类型和作用域解析 类型的消解 引用的消解和 S 属性的类型推导 做类型检查 做一些语义合法性检查 趣谈 Linux 操作系统 Namespace 技术：内部创业公司应该独立运营 为了隔离不同类型的资源，Linux 内核里面有如下几种不同类型的 namespace：
+UTS，表示不同的 namespace 可以配置不同的 hostname User，可以配置不同的用户和组 Mount，文件系统挂载点是隔离的 PID，有完全独立的 pid Network，有独立的网络协议栈 ...</p>
 </section>
 <footer class=entry-footer>
 September 29, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -210,8 +246,7 @@ tmux detach 恢复
 tmux attach-session -t your-session-name 或者 tmux a -t your-session-name 关闭
 kill-server kill-session kill-window kill-pane tmux kill-session -t your-session-name tmux kill-server 查看
 tmux list-session tmux ls tmux 的基础配置 prefix 是 tmux 的前缀键，默认是 ctrl+b 。只有按下前缀键，才会激活 tmux，然后再按其他的键进行 tmux 操作。这样可以避免与其他应用的快捷键进行冲突。
-配置前缀 需要去tmux.conf中去配置
-分屏 水平分屏：prefix+"，前缀键加引号 垂直分屏：prefix+%，前缀键加百分号...</p>
+配置前缀 需要去 tmux.conf 中去配置...</p>
 </section>
 <footer class=entry-footer>
 August 28, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -221,7 +256,7 @@ August 28, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-crystal开发环境
+crystal 开发环境
 </h2>
 </header>
 <section class=entry-content>
@@ -234,25 +269,7 @@ $ git clone https://github.com/crystal-lang-tools/scry.git $ cd scry $ shards bu
 <footer class=entry-footer>
 August 27, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to crystal开发环境" href=https://zhenfeng-zhu.github.io/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-crystal简介
-</h2>
-</header>
-<section class=entry-content>
-<p>关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。
-Fast as C, Slick as Ruby
-语法 crystal 的语法和 Ruby 比较类似。
-# A very basic HTTP server require "http/server" server = HTTP::Server.new do |context| context.response.content_type = "text/plain" context.response.print "Hello world, got #{context.request.path}!" end puts "Listening on http://127.0.0.1:8080" server.listen(8080) 类型系统 crystal 的一大卖点就是静态类型系统，但是写起来又和脚本语言类似。
-def shout(x) # Notice that both Int32 and String respond_to `to_s` x.to_s.upcase end foo = ENV["FOO"]? || 10 typeof(foo) # => (Int32 | String) typeof(shout(foo)) # => String 空引用检查 crystal 可以在编译的时候检查空引用，避免出现空指针异常。...</p>
-</section>
-<footer class=entry-footer>
-August 27, 2019&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to crystal简介" href=https://zhenfeng-zhu.github.io/posts/crystal%E7%AE%80%E4%BB%8B/></a>
+<a class=entry-link aria-label="post link to crystal 开发环境" href=https://zhenfeng-zhu.github.io/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
@@ -261,7 +278,7 @@ August 27, 2019&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </nav>
 </footer>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

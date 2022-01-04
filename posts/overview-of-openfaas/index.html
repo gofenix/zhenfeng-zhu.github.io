@@ -5,15 +5,12 @@
 <meta name=robots content="index, follow">
 <title>overview-of-openfaas | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="OpenFaaS概览  无服务器函数变得简单。
- 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。   API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。
- 命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
-可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。
- CLI实际上是API网关的一个RESTful客户端。
- 在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI
-函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。
- Python示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +&#34; => &#34; + str(r.status_code)) handler.py
- Node.js示例：  &#34;use strict&#34; module.exports = (callback, context) => { callback(null, {&#34;message&#34;: &#34;You said: &#34; + context}) } handler.">
+<meta name=description content="OpenFaaS 概览  无服务器函数变得简单。
+ 函数监视器  你可以通过添加函数监视器 (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。 函数监视器是允许 HTTP 请求通过 STDIN 转发到目标进程的入口点。响应会从你应用写入 STDOUT 返回给调用者。  API 网关/UI 门户  API 网关为你的函数提供外部路由，并通过 Prometheus 收集云原生指标。 你的 API 网关将会根据需求更改 Docker Swarm 或 Kubernetes API 中的服务副本数来实现伸缩性。 UI 是允许你在浏览器中调用函数或者根据需要创建新的函数。   API 网关是一个 RESTful 形式的微服务，你可以在这里查看Swagger 文档。
+ 命令行 Docker 中的任何容器或者进程都可以是 FaaS 中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
+可以从 Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个 Dockerfile。
+ CLI 实际上是 API 网关的一个 RESTful 客户端。
+ 在配置好 OpenFaaS 之后，你可以在这里开始学习 CLI开始学习 CLI">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -24,17 +21,14 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="overview-of-openfaas">
-<meta property="og:description" content="OpenFaaS概览  无服务器函数变得简单。
- 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。   API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。
- 命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
-可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。
- CLI实际上是API网关的一个RESTful客户端。
- 在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI
-函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。
- Python示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +&#34; => &#34; + str(r.status_code)) handler.py
- Node.js示例：  &#34;use strict&#34; module.exports = (callback, context) => { callback(null, {&#34;message&#34;: &#34;You said: &#34; + context}) } handler.">
+<meta property="og:description" content="OpenFaaS 概览  无服务器函数变得简单。
+ 函数监视器  你可以通过添加函数监视器 (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。 函数监视器是允许 HTTP 请求通过 STDIN 转发到目标进程的入口点。响应会从你应用写入 STDOUT 返回给调用者。  API 网关/UI 门户  API 网关为你的函数提供外部路由，并通过 Prometheus 收集云原生指标。 你的 API 网关将会根据需求更改 Docker Swarm 或 Kubernetes API 中的服务副本数来实现伸缩性。 UI 是允许你在浏览器中调用函数或者根据需要创建新的函数。   API 网关是一个 RESTful 形式的微服务，你可以在这里查看Swagger 文档。
+ 命令行 Docker 中的任何容器或者进程都可以是 FaaS 中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
+可以从 Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个 Dockerfile。
+ CLI 实际上是 API 网关的一个 RESTful 客户端。
+ 在配置好 OpenFaaS 之后，你可以在这里开始学习 CLI开始学习 CLI">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -43,17 +37,14 @@
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="overview-of-openfaas">
-<meta name=twitter:description content="OpenFaaS概览  无服务器函数变得简单。
- 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。   API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。
- 命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
-可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。
- CLI实际上是API网关的一个RESTful客户端。
- 在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI
-函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。
- Python示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +&#34; => &#34; + str(r.status_code)) handler.py
- Node.js示例：  &#34;use strict&#34; module.exports = (callback, context) => { callback(null, {&#34;message&#34;: &#34;You said: &#34; + context}) } handler.">
+<meta name=twitter:description content="OpenFaaS 概览  无服务器函数变得简单。
+ 函数监视器  你可以通过添加函数监视器 (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。 函数监视器是允许 HTTP 请求通过 STDIN 转发到目标进程的入口点。响应会从你应用写入 STDOUT 返回给调用者。  API 网关/UI 门户  API 网关为你的函数提供外部路由，并通过 Prometheus 收集云原生指标。 你的 API 网关将会根据需求更改 Docker Swarm 或 Kubernetes API 中的服务副本数来实现伸缩性。 UI 是允许你在浏览器中调用函数或者根据需要创建新的函数。   API 网关是一个 RESTful 形式的微服务，你可以在这里查看Swagger 文档。
+ 命令行 Docker 中的任何容器或者进程都可以是 FaaS 中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。
+可以从 Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个 Dockerfile。
+ CLI 实际上是 API 网关的一个 RESTful 客户端。
+ 在配置好 OpenFaaS 之后，你可以在这里开始学习 CLI开始学习 CLI">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"overview-of-openfaas","item":"https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"overview-of-openfaas","name":"overview-of-openfaas","description":"OpenFaaS概览  无服务器函数变得简单。\n 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通 …","keywords":[],"articleBody":"OpenFaaS概览  无服务器函数变得简单。\n 函数监视器  你可以通过添加函数监视器 (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。 函数监视器是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。  API网关/UI门户  API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。 你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。 UI是允许你在浏览器中调用函数或者根据需要创建新的函数。   API网关是一个RESTful形式的微服务，你可以在这里查看Swagger文档。\n 命令行 Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。\n可以从Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。\n CLI实际上是API网关的一个RESTful客户端。\n 在配置好OpenFaaS之后，你可以在这里开始学习CLI开始学习CLI\n函数示例 你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。\n Python示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +\" = \" + str(r.status_code)) handler.py\n Node.js示例：  \"use strict\" module.exports = (callback, context) = { callback(null, {\"message\": \"You said: \" + context}) } handler.js\n在Github仓库中提供了一系列编程语言的其他示例函数 。\n","wordCount":"67","inLanguage":"en","datePublished":"2018-07-26T17:41:33Z","dateModified":"2018-07-26T17:41:33Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"overview-of-openfaas","name":"overview-of-openfaas","description":"OpenFaaS 概览  无服务器函数变得简单。\n 函数监视器  你可以通过添加函数监视器 (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。 函数监视器是允许 HTTP 请求通过 STDIN 转发到目标进程的入口点。响应会从你应用写入 STDOUT 返回给调用者。  API 网关/UI 门户  API 网关为你的函 …","keywords":[],"articleBody":"OpenFaaS 概览  无服务器函数变得简单。\n 函数监视器  你可以通过添加函数监视器 (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。 函数监视器是允许 HTTP 请求通过 STDIN 转发到目标进程的入口点。响应会从你应用写入 STDOUT 返回给调用者。  API 网关/UI 门户  API 网关为你的函数提供外部路由，并通过 Prometheus 收集云原生指标。 你的 API 网关将会根据需求更改 Docker Swarm 或 Kubernetes API 中的服务副本数来实现伸缩性。 UI 是允许你在浏览器中调用函数或者根据需要创建新的函数。   API 网关是一个 RESTful 形式的微服务，你可以在这里查看Swagger 文档。\n 命令行 Docker 中的任何容器或者进程都可以是 FaaS 中的一个无服务器函数。使用FaaS CLI ，你可以快速的部署函数。\n可以从 Node.js, Python, Go 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个 Dockerfile。\n CLI 实际上是 API 网关的一个 RESTful 客户端。\n 在配置好 OpenFaaS 之后，你可以在这里开始学习 CLI开始学习 CLI\n函数示例 你可以通过 使用 FaaS-CLI 和其内置的模板创建新函数，也可以在 Docker 中使用 Windows 或 Linux 的二进制文件。\n Python 示例：  import requests def handle(req): r = requests.get(req, timeout = 1) print(req +\" = \" + str(r.status_code)) handler.py\n Node.js 示例：  \"use strict\" module.exports = (callback, context) = { callback(null, {\"message\": \"You said: \" + context}) } handler.js\n在 Github 仓库中提供了一系列编程语言的其他示例函数 。\n","wordCount":"118","inLanguage":"en","datePublished":"2018-07-26T17:41:33Z","dateModified":"2018-07-26T17:41:33Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -70,6 +61,11 @@
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -95,61 +91,77 @@ overview-of-openfaas
 July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#openfaas-%e6%a6%82%e8%a7%88 aria-label="OpenFaaS 概览">OpenFaaS 概览</a><ul>
+<li>
+<a href=#%e5%87%bd%e6%95%b0%e7%9b%91%e8%a7%86%e5%99%a8 aria-label=函数监视器>函数监视器</a></li><li>
+<a href=#api-%e7%bd%91%e5%85%b3ui-%e9%97%a8%e6%88%b7 aria-label="API 网关/UI 门户">API 网关/UI 门户</a></li><li>
+<a href=#%e5%91%bd%e4%bb%a4%e8%a1%8c aria-label=命令行>命令行</a></li><li>
+<a href=#%e5%87%bd%e6%95%b0%e7%a4%ba%e4%be%8b aria-label=函数示例>函数示例</a></li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
-<h2 id=openfaas概览>OpenFaaS概览<a hidden class=anchor aria-hidden=true href=#openfaas概览>#</a></h2>
+<h2 id=openfaas-概览>OpenFaaS 概览<a hidden class=anchor aria-hidden=true href=#openfaas-概览>#</a></h2>
 <blockquote>
 <p>无服务器函数变得简单。</p>
 </blockquote>
 <p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1ftucj00kylj20xc0j511g.jpg alt></p>
 <h3 id=函数监视器>函数监视器<a hidden class=anchor aria-hidden=true href=#函数监视器>#</a></h3>
 <ul>
-<li>你可以通过添加<em>函数监视器</em> (一个小型的Golang HTTP服务)把任何一个Docker镜像变成无服务器函数。</li>
-<li><em>函数监视器</em>是允许HTTP请求通过STDIN转发到目标进程的入口点。响应会从你应用写入STDOUT返回给调用者。</li>
+<li>你可以通过添加<em>函数监视器</em> (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。</li>
+<li><em>函数监视器</em>是允许 HTTP 请求通过 STDIN 转发到目标进程的入口点。响应会从你应用写入 STDOUT 返回给调用者。</li>
 </ul>
-<h3 id=api网关ui门户>API网关/UI门户<a hidden class=anchor aria-hidden=true href=#api网关ui门户>#</a></h3>
+<h3 id=api-网关ui-门户>API 网关/UI 门户<a hidden class=anchor aria-hidden=true href=#api-网关ui-门户>#</a></h3>
 <ul>
-<li>API网关为你的函数提供外部路由，并通过Prometheus收集云原生指标。</li>
-<li>你的API网关将会根据需求更改Docker Swarm 或 Kubernetes API中的服务副本数来实现伸缩性。</li>
-<li>UI是允许你在浏览器中调用函数或者根据需要创建新的函数。</li>
+<li>API 网关为你的函数提供外部路由，并通过 Prometheus 收集云原生指标。</li>
+<li>你的 API 网关将会根据需求更改 Docker Swarm 或 Kubernetes API 中的服务副本数来实现伸缩性。</li>
+<li>UI 是允许你在浏览器中调用函数或者根据需要创建新的函数。</li>
 </ul>
 <blockquote>
-<p>API网关是一个RESTful形式的微服务，你可以在这里查看<a href=https://github.com/openfaas/faas/tree/master/api-docs>Swagger文档</a>。</p>
+<p>API 网关是一个 RESTful 形式的微服务，你可以在这里查看<a href=https://github.com/openfaas/faas/tree/master/api-docs>Swagger 文档</a>。</p>
 </blockquote>
 <h3 id=命令行>命令行<a hidden class=anchor aria-hidden=true href=#命令行>#</a></h3>
-<p>Docker中的任何容器或者进程都可以是FaaS中的一个无服务器函数。使用<a href=http://github.com/openfaas/faas-cli>FaaS CLI</a> ，你可以快速的部署函数。</p>
-<p>可以从Node.js, Python, <a href=https://blog.alexellis.io/serverless-golang-with-openfaas/>Go</a> 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个Dockerfile。</p>
+<p>Docker 中的任何容器或者进程都可以是 FaaS 中的一个无服务器函数。使用<a href=http://github.com/openfaas/faas-cli>FaaS CLI</a> ，你可以快速的部署函数。</p>
+<p>可以从 Node.js, Python, <a href=https://blog.alexellis.io/serverless-golang-with-openfaas/>Go</a> 或者更多的语言模板中创建新的函数。如果你无法找到一个合适的模板，甚至可以使用一个 Dockerfile。</p>
 <blockquote>
-<p>CLI实际上是API网关的一个RESTful客户端。</p>
+<p>CLI 实际上是 API 网关的一个 RESTful 客户端。</p>
 </blockquote>
-<p>在配置好OpenFaaS之后，你可以在这里开始学习CLI<a href=https://blog.alexellis.io/quickstart-openfaas-cli/>开始学习CLI</a></p>
+<p>在配置好 OpenFaaS 之后，你可以在这里开始学习 CLI<a href=https://blog.alexellis.io/quickstart-openfaas-cli/>开始学习 CLI</a></p>
 <h3 id=函数示例>函数示例<a hidden class=anchor aria-hidden=true href=#函数示例>#</a></h3>
-<p>你可以通过 使用FaaS-CLI和其内置的模板创建新函数，也可以在Docker中使用Windows或Linux的二进制文件。</p>
+<p>你可以通过 使用 FaaS-CLI 和其内置的模板创建新函数，也可以在 Docker 中使用 Windows 或 Linux 的二进制文件。</p>
 <ul>
-<li>Python示例：</li>
+<li>Python 示例：</li>
 </ul>
-<pre tabindex=0><code>import requests
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>import requests
 
 def handle(req):
     r =  requests.get(req, timeout = 1)
-    print(req +&quot; =&gt; &quot; + str(r.status_code))
-</code></pre><p><em>handler.py</em></p>
+    print(req +&#34; =&gt; &#34; + str(r.status_code))
+</code></pre></div><p><em>handler.py</em></p>
 <ul>
-<li>Node.js示例：</li>
+<li>Node.js 示例：</li>
 </ul>
-<pre tabindex=0><code>&quot;use strict&quot;
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>&#34;use strict&#34;
 
 module.exports = (callback, context) =&gt; {
-    callback(null, {&quot;message&quot;: &quot;You said: &quot; + context})
+    callback(null, {&#34;message&#34;: &#34;You said: &#34; + context})
 }
-</code></pre><p><em>handler.js</em></p>
-<p>在Github仓库中提供了一系列编程语言的其他<a href=https://github.com/openfaas/faas/tree/master/sample-functions>示例函数</a> 。</p>
+</code></pre></div><p><em>handler.js</em></p>
+<p>在 Github 仓库中提供了一系列编程语言的其他<a href=https://github.com/openfaas/faas/tree/master/sample-functions>示例函数</a> 。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/nats/>
 <span class=title>« Prev Page</span>
 <br>
-<span>nats简介</span>
+<span>nats 简介</span>
 </a>
 <a class=next href=https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/>
 <span class=title>Next Page »</span>
@@ -174,7 +186,7 @@ module.exports = (callback, context) =&gt; {
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

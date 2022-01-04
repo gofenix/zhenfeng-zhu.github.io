@@ -6,26 +6,13 @@
 <title>技术栈 | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
-技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。
- rancher  rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。
- aws  近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。
- kotlin  之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。
- guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。
-需要我们编写AppModule.java去手动配置哪个类注入哪个类。
- rxjava  rxjava我都没有找到一个系统的教程，不知道该从哪里学习。
- vertx  vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。
- ES6  node代码中都是用es6来写的，async和await现在也会用了。
- express  想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。
- typescript  还没它去写东西，可能下周会用它来写个机器人。
-貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。
-知识面扩展  监控  grafana+Prometheus+graylog去做可视化和日志的监控。
-对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。
- FSM状态机  机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。
- 网关  网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。
-我们使用的是kong，在这里kong加上一些插件，相当好用。
- 规则引擎  在规则引擎中，都是一个个规则。
- DSL  领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。
- Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。">
+技术栈  Docker  docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。
+ rancher  rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。
+ aws  近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。
+ kotlin  之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。
+ guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。
+需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。
+ rxjava  rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -36,29 +23,16 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="技术栈">
 <meta property="og:description" content="创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
-技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。
- rancher  rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。
- aws  近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。
- kotlin  之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。
- guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。
-需要我们编写AppModule.java去手动配置哪个类注入哪个类。
- rxjava  rxjava我都没有找到一个系统的教程，不知道该从哪里学习。
- vertx  vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。
- ES6  node代码中都是用es6来写的，async和await现在也会用了。
- express  想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。
- typescript  还没它去写东西，可能下周会用它来写个机器人。
-貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。
-知识面扩展  监控  grafana+Prometheus+graylog去做可视化和日志的监控。
-对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。
- FSM状态机  机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。
- 网关  网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。
-我们使用的是kong，在这里kong加上一些插件，相当好用。
- 规则引擎  在规则引擎中，都是一个个规则。
- DSL  领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。
- Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。">
+技术栈  Docker  docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。
+ rancher  rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。
+ aws  近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。
+ kotlin  之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。
+ guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。
+需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。
+ rxjava  rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -68,28 +42,15 @@
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="技术栈">
 <meta name=twitter:description content="创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
-技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。
- rancher  rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。
- aws  近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。
- kotlin  之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。
- guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。
-需要我们编写AppModule.java去手动配置哪个类注入哪个类。
- rxjava  rxjava我都没有找到一个系统的教程，不知道该从哪里学习。
- vertx  vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。
- ES6  node代码中都是用es6来写的，async和await现在也会用了。
- express  想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。
- typescript  还没它去写东西，可能下周会用它来写个机器人。
-貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。
-知识面扩展  监控  grafana+Prometheus+graylog去做可视化和日志的监控。
-对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。
- FSM状态机  机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。
- 网关  网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。
-我们使用的是kong，在这里kong加上一些插件，相当好用。
- 规则引擎  在规则引擎中，都是一个个规则。
- DSL  领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。
- Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。">
+技术栈  Docker  docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。
+ rancher  rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。
+ aws  近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。
+ kotlin  之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。
+ guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。
+需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。
+ rxjava  rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"技术栈","item":"https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"技术栈","name":"技术栈","description":"创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。\n技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。 …","keywords":[],"articleBody":"创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。\n技术栈  Docker  docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。\n rancher  rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。\n aws  近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。\n kotlin  之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。\n guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。\n需要我们编写AppModule.java去手动配置哪个类注入哪个类。\n rxjava  rxjava我都没有找到一个系统的教程，不知道该从哪里学习。\n vertx  vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。\n ES6  node代码中都是用es6来写的，async和await现在也会用了。\n express  想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。\n typescript  还没它去写东西，可能下周会用它来写个机器人。\n貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。\n知识面扩展  监控  grafana+Prometheus+graylog去做可视化和日志的监控。\n对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。\n FSM状态机  机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。\n 网关  网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。\n我们使用的是kong，在这里kong加上一些插件，相当好用。\n 规则引擎  在规则引擎中，都是一个个规则。\n DSL  领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。\n Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。\n未来可能要接触  go  ","wordCount":"42","inLanguage":"en","datePublished":"2018-04-05T09:49:06Z","dateModified":"2018-04-05T09:49:06Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"技术栈","name":"技术栈","description":"创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。\n技术栈  Docker  docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose …","keywords":[],"articleBody":"创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。\n技术栈  Docker  docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。\n rancher  rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。\n aws  近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。\n kotlin  之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。\n guice  这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。\n需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。\n rxjava  rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。\n vertx  vertx+Reactive 编程的方式相当考验心智，自己脑子中的编程方式还没转过来。\n ES6  node 代码中都是用 es6 来写的，async 和 await 现在也会用了。\n express  想到自己大学的时候看过 node 的书，里面讲的就是 express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得 express 特别简单易上手。\n typescript  还没它去写东西，可能下周会用它来写个机器人。\n貌似自己已经完全抛弃了 spring+java 的那一套东西，没机会用到。\n知识面扩展  监控  grafana+Prometheus+graylog 去做可视化和日志的监控。\n对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。\n FSM 状态机  机器人的框架使用的是 FSM 状态机来管理，以前做游戏的时候接触过。\n 网关  网关现在已经是微服务架构中的标配了，用它来做一些限流，LB 和日志收集等等。\n我们使用的是 kong，在这里 kong 加上一些插件，相当好用。\n 规则引擎  在规则引擎中，都是一个个规则。\n DSL  领域特定语言，在规则引擎和机器人的时候，就用了 DSL。我现在的理解就是 DSL 就是用编程语言实现的一些函数。\n Key Transparency  谷歌的一个公钥管理库，保证了无法被篡改。\n未来可能要接触  go  ","wordCount":"112","inLanguage":"en","datePublished":"2018-04-05T09:49:06Z","dateModified":"2018-04-05T09:49:06Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -106,6 +67,11 @@
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -131,66 +97,80 @@
 April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#%e6%8a%80%e6%9c%af%e6%a0%88 aria-label=技术栈>技术栈</a><ul>
+<li>
+<a href=#%e7%9f%a5%e8%af%86%e9%9d%a2%e6%89%a9%e5%b1%95 aria-label=知识面扩展>知识面扩展</a></li><li>
+<a href=#%e6%9c%aa%e6%9d%a5%e5%8f%af%e8%83%bd%e8%a6%81%e6%8e%a5%e8%a7%a6 aria-label=未来可能要接触>未来可能要接触</a></li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
 <p>创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。</p>
 <h1 id=技术栈>技术栈<a hidden class=anchor aria-hidden=true href=#技术栈>#</a></h1>
 <ul>
 <li>Docker</li>
 </ul>
-<p>docker是一个容器，以前就看过docker相关的东西，但是没有仔细研究，docker的命令会用一些，在工作中使用了，看了一本docker的书，能够编写docker的compose文件。</p>
+<p>docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。</p>
 <ul>
 <li>rancher</li>
 </ul>
-<p>rancher是一个做容器管理的。我们把主机添加到rancher中，他就可以自动做到LB，服务的发现编排。我们部署的时候只需要编写catalog，他就可以自动发现docker应用，然后拉取镜像，部署到相关的机器上，很是方便。</p>
+<p>rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。</p>
 <ul>
 <li>aws</li>
 </ul>
-<p>近期主要是对aws的进行公司服务的部署，搭建一套rancher的环境。aws的服务特别多，ec2是实例主机，就和虚拟机一样，VPC就像机房，ec2依托于VPC而存在，在这基础上又了解了子网、DHCP弹性IP等等。</p>
+<p>近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。</p>
 <ul>
 <li>kotlin</li>
 </ul>
-<p>之前自己用kotlin开发过一个博客，对kotlin的感觉是有些东西写的很爽，但是还是觉得java好用一些，对kotlin的态度是用不用都无所谓。</p>
+<p>之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。</p>
 <ul>
 <li>guice</li>
 </ul>
-<p>这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju斯。只是一个依赖注入框架，只是单纯的去做DI，比spring更轻量级一些。</p>
-<p>需要我们编写AppModule.java去手动配置哪个类注入哪个类。</p>
+<p>这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。</p>
+<p>需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。</p>
 <ul>
 <li>rxjava</li>
 </ul>
-<p>rxjava我都没有找到一个系统的教程，不知道该从哪里学习。</p>
+<p>rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。</p>
 <ul>
 <li>vertx</li>
 </ul>
-<p>vertx+Reactive编程的方式相当考验心智，自己脑子中的编程方式还没转过来。</p>
+<p>vertx+Reactive 编程的方式相当考验心智，自己脑子中的编程方式还没转过来。</p>
 <ul>
 <li>ES6</li>
 </ul>
-<p>node代码中都是用es6来写的，async和await现在也会用了。</p>
+<p>node 代码中都是用 es6 来写的，async 和 await 现在也会用了。</p>
 <ul>
 <li>express</li>
 </ul>
-<p>想到自己大学的时候看过node的书，里面讲的就是express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得express特别简单易上手。</p>
+<p>想到自己大学的时候看过 node 的书，里面讲的就是 express，只是自己当时没想明白，现在看的回调多了，算是熟悉了他这种的编程模式，所以觉得 express 特别简单易上手。</p>
 <ul>
 <li>typescript</li>
 </ul>
 <p>还没它去写东西，可能下周会用它来写个机器人。</p>
-<p>貌似自己已经完全抛弃了spring+java的那一套东西，没机会用到。</p>
+<p>貌似自己已经完全抛弃了 spring+java 的那一套东西，没机会用到。</p>
 <h2 id=知识面扩展>知识面扩展<a hidden class=anchor aria-hidden=true href=#知识面扩展>#</a></h2>
 <ul>
 <li>监控</li>
 </ul>
-<p>grafana+Prometheus+graylog去做可视化和日志的监控。</p>
+<p>grafana+Prometheus+graylog 去做可视化和日志的监控。</p>
 <p>对于业务的数据，需要在代码层面进行埋点，把要监控的数据传给普罗米修斯。</p>
 <ul>
-<li>FSM状态机</li>
+<li>FSM 状态机</li>
 </ul>
-<p>机器人的框架使用的是FSM状态机来管理，以前做游戏的时候接触过。</p>
+<p>机器人的框架使用的是 FSM 状态机来管理，以前做游戏的时候接触过。</p>
 <ul>
 <li>网关</li>
 </ul>
-<p>网关现在已经是微服务架构中的标配了，用它来做一些限流，LB和日志收集等等。</p>
-<p>我们使用的是kong，在这里kong加上一些插件，相当好用。</p>
+<p>网关现在已经是微服务架构中的标配了，用它来做一些限流，LB 和日志收集等等。</p>
+<p>我们使用的是 kong，在这里 kong 加上一些插件，相当好用。</p>
 <ul>
 <li>规则引擎</li>
 </ul>
@@ -198,7 +178,7 @@ April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <ul>
 <li>DSL</li>
 </ul>
-<p>领域特定语言，在规则引擎和机器人的时候，就用了DSL。我现在的理解就是DSL就是用编程语言实现的一些函数。</p>
+<p>领域特定语言，在规则引擎和机器人的时候，就用了 DSL。我现在的理解就是 DSL 就是用编程语言实现的一些函数。</p>
 <ul>
 <li>Key Transparency</li>
 </ul>
@@ -213,7 +193,7 @@ April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <a class=prev href=https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/>
 <span class=title>« Prev Page</span>
 <br>
-<span>谈谈web框架</span>
+<span>谈谈 web 框架</span>
 </a>
 <a class=next href=https://zhenfeng-zhu.github.io/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/>
 <span class=title>Next Page »</span>
@@ -238,7 +218,7 @@ April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

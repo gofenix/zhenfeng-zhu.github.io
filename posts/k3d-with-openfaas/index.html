@@ -6,11 +6,9 @@
 <title>K3d With Openfaas | Awesome Fenix</title>
 <meta name=keywords content>
 <meta name=description content="openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
-安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
-k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面
-kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。
-但是当你打开页面的时候，要输入密码，那就需要下面的操作：
-# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=&#34;{.">
+安装 docker brew install homebrew/cask/docker 安装单节点 K8S brew install k3d 配置单节点 K8S 集群
+k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装 arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装 openfaas 客户端 faas-cli brew install faas-cli 安装 openfaas server 端 arkade install openfaas 配置 openfaas 的 ui 界面
+kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到 openfaas 的 ui 界面了。">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -21,14 +19,12 @@ kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gatew
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="K3d With Openfaas">
 <meta property="og:description" content="openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
-安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
-k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面
-kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。
-但是当你打开页面的时候，要输入密码，那就需要下面的操作：
-# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=&#34;{.">
+安装 docker brew install homebrew/cask/docker 安装单节点 K8S brew install k3d 配置单节点 K8S 集群
+k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装 arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装 openfaas 客户端 faas-cli brew install faas-cli 安装 openfaas server 端 arkade install openfaas 配置 openfaas 的 ui 界面
+kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到 openfaas 的 ui 界面了。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -38,13 +34,11 @@ kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gatew
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="K3d With Openfaas">
 <meta name=twitter:description content="openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
-安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
-k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面
-kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。
-但是当你打开页面的时候，要输入密码，那就需要下面的操作：
-# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=&#34;{.">
+安装 docker brew install homebrew/cask/docker 安装单节点 K8S brew install k3d 配置单节点 K8S 集群
+k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装 arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装 openfaas 客户端 faas-cli brew install faas-cli 安装 openfaas server 端 arkade install openfaas 配置 openfaas 的 ui 界面
+kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到 openfaas 的 ui 界面了。">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"K3d With Openfaas","item":"https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"K3d With Openfaas","name":"K3d With Openfaas","description":"openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md\n安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群\nk3d cluster create CLUSTER_NAME …","keywords":[],"articleBody":"openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md\n安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群\nk3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面\nkubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。\n但是当你打开页面的时候，要输入密码，那就需要下面的操作：\n# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=\"{.data.basic-auth-password}\" | base64 --decode; echo) # This command logs in and saves a file to ~/.openfaas/config.yml echo -n $PASSWORD | faas-cli login --username admin --password-stdin 或者直接在命令行输入，拿到密码：\necho $(kubectl get secret -n openfaas basic-auth -o jsonpath=\"{.data.basic-auth-password}\" | base64 --decode; echo) 用户名是admin，密码输入到浏览器里即可。\n","wordCount":"111","inLanguage":"en","datePublished":"2021-03-10T20:09:11+08:00","dateModified":"2021-03-10T20:09:11+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"K3d With Openfaas","name":"K3d With Openfaas","description":"openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md\n安装 docker brew install homebrew/cask/docker 安装单节点 K8S brew install k3d 配置单节点 K8S 集群\nk3d cluster create …","keywords":[],"articleBody":"openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md\n安装 docker brew install homebrew/cask/docker 安装单节点 K8S brew install k3d 配置单节点 K8S 集群\nk3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装 arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装 openfaas 客户端 faas-cli brew install faas-cli 安装 openfaas server 端 arkade install openfaas 配置 openfaas 的 ui 界面\nkubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到 openfaas 的 ui 界面了。\n但是当你打开页面的时候，要输入密码，那就需要下面的操作：\n# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=\"{.data.basic-auth-password}\" | base64 --decode; echo) # This command logs in and saves a file to ~/.openfaas/config.yml echo -n $PASSWORD | faas-cli login --username admin --password-stdin 或者直接在命令行输入，拿到密码：\necho $(kubectl get secret -n openfaas basic-auth -o jsonpath=\"{.data.basic-auth-password}\" | base64 --decode; echo) 用户名是 admin，密码输入到浏览器里即可。\n","wordCount":"129","inLanguage":"en","datePublished":"2021-03-10T20:09:11+08:00","dateModified":"2021-03-10T20:09:11+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/k3d-with-openfaas/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -61,6 +55,11 @@ kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gatew
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -86,41 +85,58 @@ K3d With Openfaas
 March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#openfaas aria-label=openfaas>openfaas</a><ul>
+<li>
+<a href=#%e5%ae%89%e8%a3%85-docker aria-label="安装 docker">安装 docker</a></li><li>
+<a href=#%e5%ae%89%e8%a3%85%e5%8d%95%e8%8a%82%e7%82%b9-k8s aria-label="安装单节点 K8S">安装单节点 K8S</a></li><li>
+<a href=#%e5%ae%89%e8%a3%85-arkade aria-label="安装 arkade">安装 arkade</a></li><li>
+<a href=#%e5%ae%89%e8%a3%85-openfaas-%e5%ae%a2%e6%88%b7%e7%ab%af-faas-cli aria-label="安装 openfaas 客户端 faas-cli">安装 openfaas 客户端 faas-cli</a></li><li>
+<a href=#%e5%ae%89%e8%a3%85-openfaas-server-%e7%ab%af aria-label="安装 openfaas server 端">安装 openfaas server 端</a></li></ul>
+</li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
 <h1 id=openfaas>openfaas<a hidden class=anchor aria-hidden=true href=#openfaas>#</a></h1>
 <p><a href=https://github.com/openfaas/workshop/blob/master/lab1b.md>https://github.com/openfaas/workshop/blob/master/lab1b.md</a></p>
-<h2 id=安装docker>安装docker<a hidden class=anchor aria-hidden=true href=#安装docker>#</a></h2>
-<pre tabindex=0><code>brew install homebrew/cask/docker
-</code></pre><h2 id=安装单节点k8s>安装单节点K8S<a hidden class=anchor aria-hidden=true href=#安装单节点k8s>#</a></h2>
-<pre tabindex=0><code>brew install k3d
-</code></pre><p>配置单节点K8S集群</p>
-<pre tabindex=0><code>k3d cluster create CLUSTER_NAME
+<h2 id=安装-docker>安装 docker<a hidden class=anchor aria-hidden=true href=#安装-docker>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>brew install homebrew/cask/docker
+</code></pre></div><h2 id=安装单节点-k8s>安装单节点 K8S<a hidden class=anchor aria-hidden=true href=#安装单节点-k8s>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>brew install k3d
+</code></pre></div><p>配置单节点 K8S 集群</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>k3d cluster create CLUSTER_NAME
 
 k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context
 
 kubectl get pods --all-namespaces
 
-</code></pre><h2 id=安装arkade>安装arkade<a hidden class=anchor aria-hidden=true href=#安装arkade>#</a></h2>
-<pre tabindex=0><code>curl -SLsf https://dl.get-arkade.dev/ | sudo sh
-</code></pre><h2 id=安装openfaas客户端-faas-cli>安装openfaas客户端 faas-cli<a hidden class=anchor aria-hidden=true href=#安装openfaas客户端-faas-cli>#</a></h2>
-<pre tabindex=0><code>brew install faas-cli
-</code></pre><h2 id=安装openfaas-server端>安装openfaas server端<a hidden class=anchor aria-hidden=true href=#安装openfaas-server端>#</a></h2>
-<pre tabindex=0><code>arkade install openfaas
-</code></pre><p>配置openfaas的ui界面</p>
-<pre tabindex=0><code>kubectl rollout status -n openfaas deploy/gateway
+</code></pre></div><h2 id=安装-arkade>安装 arkade<a hidden class=anchor aria-hidden=true href=#安装-arkade>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>curl -SLsf https://dl.get-arkade.dev/ | sudo sh
+</code></pre></div><h2 id=安装-openfaas-客户端-faas-cli>安装 openfaas 客户端 faas-cli<a hidden class=anchor aria-hidden=true href=#安装-openfaas-客户端-faas-cli>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>brew install faas-cli
+</code></pre></div><h2 id=安装-openfaas-server-端>安装 openfaas server 端<a hidden class=anchor aria-hidden=true href=#安装-openfaas-server-端>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>arkade install openfaas
+</code></pre></div><p>配置 openfaas 的 ui 界面</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>kubectl rollout status -n openfaas deploy/gateway
 
 kubectl port-forward svc/gateway -n openfaas 8080:8080
-</code></pre><p>这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。</p>
+</code></pre></div><p>这样就可以在浏览器里输入 127.0.0.1:8080 进入到 openfaas 的 ui 界面了。</p>
 <p>但是当你打开页面的时候，要输入密码，那就需要下面的操作：</p>
-<pre tabindex=0><code># This command retrieves your password
-PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=&quot;{.data.basic-auth-password}&quot; | base64 --decode; echo)
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain># This command retrieves your password
+PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath=&#34;{.data.basic-auth-password}&#34; | base64 --decode; echo)
 
 # This command logs in and saves a file to ~/.openfaas/config.yml
 echo -n $PASSWORD | faas-cli login --username admin --password-stdin
 
-</code></pre><p>或者直接在命令行输入，拿到密码：</p>
-<pre tabindex=0><code>echo $(kubectl get secret -n openfaas basic-auth -o jsonpath=&quot;{.data.basic-auth-password}&quot; | base64 --decode; echo)
-</code></pre><p>用户名是admin，密码输入到浏览器里即可。</p>
+</code></pre></div><p>或者直接在命令行输入，拿到密码：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>echo $(kubectl get secret -n openfaas basic-auth -o jsonpath=&#34;{.data.basic-auth-password}&#34; | base64 --decode; echo)
+</code></pre></div><p>用户名是 admin，密码输入到浏览器里即可。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -152,7 +168,7 @@ echo -n $PASSWORD | faas-cli login --username admin --password-stdin
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

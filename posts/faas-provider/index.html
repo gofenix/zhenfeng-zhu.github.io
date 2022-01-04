@@ -5,12 +5,12 @@
 <meta name=robots content="index, follow">
 <title>faas-provider | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。
-faas-provider OpenFaaS官方提供了两套后台provider：
+<meta name=description content="faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。
+faas-provider OpenFaaS 官方提供了两套后台 provider：
  Docker Swarm Kubernetes  这两者在部署和调用函数的时候流程图如下：
 部署一个函数
 调用一个函数
-provider要提供的一些API有：
+provider 要提供的一些 API 有：
  List / Create / Delete 一个函数  /system/functions
 方法: GET / POST / DELETE
  获取一个函数  /system/function/{name:[-a-zA-Z_0-9]+}
@@ -19,8 +19,8 @@ provider要提供的一些API有：
 方法: POST
  调用一个函数  /function/{name:[-a-zA-Z_0-9]+}
 方法: POST
-在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。
-// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc(&#34;/system/functions&#34;, handlers.FunctionReader).Methods(&#34;GET&#34;) r.HandleFunc(&#34;/system/functions&#34;, handlers.">
+在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。
+// Serve load your handlers into the correct OpenFaaS route spec.">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/faas-provider/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -31,14 +31,14 @@ provider要提供的一些API有：
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="faas-provider">
-<meta property="og:description" content="faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。
-faas-provider OpenFaaS官方提供了两套后台provider：
+<meta property="og:description" content="faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。
+faas-provider OpenFaaS 官方提供了两套后台 provider：
  Docker Swarm Kubernetes  这两者在部署和调用函数的时候流程图如下：
 部署一个函数
 调用一个函数
-provider要提供的一些API有：
+provider 要提供的一些 API 有：
  List / Create / Delete 一个函数  /system/functions
 方法: GET / POST / DELETE
  获取一个函数  /system/function/{name:[-a-zA-Z_0-9]+}
@@ -47,8 +47,8 @@ provider要提供的一些API有：
 方法: POST
  调用一个函数  /function/{name:[-a-zA-Z_0-9]+}
 方法: POST
-在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。
-// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc(&#34;/system/functions&#34;, handlers.FunctionReader).Methods(&#34;GET&#34;) r.HandleFunc(&#34;/system/functions&#34;, handlers.">
+在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。
+// Serve load your handlers into the correct OpenFaaS route spec.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/faas-provider/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -57,12 +57,12 @@ provider要提供的一些API有：
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="faas-provider">
-<meta name=twitter:description content="faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。
-faas-provider OpenFaaS官方提供了两套后台provider：
+<meta name=twitter:description content="faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。
+faas-provider OpenFaaS 官方提供了两套后台 provider：
  Docker Swarm Kubernetes  这两者在部署和调用函数的时候流程图如下：
 部署一个函数
 调用一个函数
-provider要提供的一些API有：
+provider 要提供的一些 API 有：
  List / Create / Delete 一个函数  /system/functions
 方法: GET / POST / DELETE
  获取一个函数  /system/function/{name:[-a-zA-Z_0-9]+}
@@ -71,10 +71,10 @@ provider要提供的一些API有：
 方法: POST
  调用一个函数  /function/{name:[-a-zA-Z_0-9]+}
 方法: POST
-在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。
-// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc(&#34;/system/functions&#34;, handlers.FunctionReader).Methods(&#34;GET&#34;) r.HandleFunc(&#34;/system/functions&#34;, handlers.">
+在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。
+// Serve load your handlers into the correct OpenFaaS route spec.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"faas-provider","item":"https://zhenfeng-zhu.github.io/posts/faas-provider/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"faas-provider","name":"faas-provider","description":"faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。\nfaas-provider OpenFaaS官方提供了两套后台provider：\n Docker Swarm Kubernetes  这两者在部署和调用函数的时候流程图如下：\n部署一个函数\n调用一个函数\nprovider要提供的一些API有：\n List …","keywords":[],"articleBody":"faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。\nfaas-provider OpenFaaS官方提供了两套后台provider：\n Docker Swarm Kubernetes  这两者在部署和调用函数的时候流程图如下：\n部署一个函数\n调用一个函数\nprovider要提供的一些API有：\n List / Create / Delete 一个函数  /system/functions\n方法: GET / POST / DELETE\n 获取一个函数  /system/function/{name:[-a-zA-Z_0-9]+}\n方法: GET\n 伸缩一个函数  /system/scale-function/{name:[-a-zA-Z_0-9]+}\n方法: POST\n 调用一个函数  /function/{name:[-a-zA-Z_0-9]+}\n方法: POST\n在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。\n// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc(\"/system/functions\", handlers.FunctionReader).Methods(\"GET\") r.HandleFunc(\"/system/functions\", handlers.DeployHandler).Methods(\"POST\") r.HandleFunc(\"/system/functions\", handlers.DeleteHandler).Methods(\"DELETE\") r.HandleFunc(\"/system/functions\", handlers.UpdateHandler).Methods(\"PUT\") r.HandleFunc(\"/system/function/{name:[-a-zA-Z_0-9]+}\", handlers.ReplicaReader).Methods(\"GET\") r.HandleFunc(\"/system/scale-function/{name:[-a-zA-Z_0-9]+}\", handlers.ReplicaUpdater).Methods(\"POST\") r.HandleFunc(\"/function/{name:[-a-zA-Z_0-9]+}\", handlers.FunctionProxy) r.HandleFunc(\"/function/{name:[-a-zA-Z_0-9]+}/\", handlers.FunctionProxy) r.HandleFunc(\"/system/info\", handlers.InfoHandler).Methods(\"GET\") if config.EnableHealth { r.HandleFunc(\"/healthz\", handlers.Health).Methods(\"GET\") } // 省略 } 因此在自定义的provider，只需实现FaaSHandlers中的几个路由处理函数即可。这几个handler是：\n// FaaSHandlers provide handlers for OpenFaaS type FaaSHandlers struct { FunctionReader http.HandlerFunc DeployHandler http.HandlerFunc DeleteHandler http.HandlerFunc ReplicaReader http.HandlerFunc FunctionProxy http.HandlerFunc ReplicaUpdater http.HandlerFunc // Optional: Update an existing function UpdateHandler http.HandlerFunc Health http.HandlerFunc InfoHandler http.HandlerFunc } 我们以官方实现的faas-netes为例，讲解一下这几个hander的实现过程。\nfaas-netes 我们看下在faas-netes的中的FaaSHandlers实现：\nbootstrapHandlers := bootTypes.FaaSHandlers{ FunctionProxy: handlers.MakeProxy(functionNamespace, cfg.ReadTimeout), DeleteHandler: handlers.MakeDeleteHandler(functionNamespace, clientset), DeployHandler: handlers.MakeDeployHandler(functionNamespace, clientset, deployConfig), FunctionReader: handlers.MakeFunctionReader(functionNamespace, clientset), ReplicaReader: handlers.MakeReplicaReader(functionNamespace, clientset), ReplicaUpdater: handlers.MakeReplicaUpdater(functionNamespace, clientset), UpdateHandler: handlers.MakeUpdateHandler(functionNamespace, clientset), Health: handlers.MakeHealthHandler(), InfoHandler: handlers.MakeInfoHandler(version.BuildVersion(), version.GitCommit), } 因为是Kubernetes上的provider实现，所以这些函数都带有一个namespace的参数。\nFunctionProxy 这里最重要的就是FunctionProxy，它主要负责调用函数。这个handler其实也是起到了一个代理转发的作用，在这个函数中，只接受get和post。调用函数只接受post和get请求\n  创建一个http的client对象\n  只处理get和post请求。\n  组装代理转发的watchdog的地址\nurl := forwardReq.ToURL(fmt.Sprintf(\"%s.%s\", service, functionNamespace), watchdogPort) 所以最后请求的格式就会形如：\nhttp://函数名.namespace:监视器的端口/路径   将请求发出去\n  设置http响应的头\n  ReplicaReader和ReplicaUpdater 这两个是和副本数相关的，所以放在一起对比讲解。这两个的实现依赖于Kubernetes的客户端，获取代码如下：\nclientset, err := kubernetes.NewForConfig(config) 这个config主要满足以下几个条件就行：\nConfig{ // TODO: switch to using cluster DNS. Host: \"https://\" + net.JoinHostPort(host, port), BearerToken: string(token), TLSClientConfig: tlsClientConfig, } Kubernetes的所有操作都可以通过rest api来完成，这两个handler也是通过调用Kubernetes的api来做的。\nReplicaReader MakeReplicaReader函数是获取当前的副本数：\n  通过mux从路由中获取到name参数\n  调用getService方法获取副本数，getService的核心代码就一句：\nitem, err := clientset.ExtensionsV1beta1().Deployments(functionNamespace).Get(functionName, getOpts)   序列化之后，把结果返回\n  ReplicaUpdater MakeReplicaUpdater是解析从gateway传过来的post请求，调用k8s的API设置副本数。\n  从请求中取出body\n  首先获取该函数的已部署的deployment对象\n  然后将deployment的副本数量设置为应设数量，这样做的目的是为了仅仅修改副本数，而不修改别的属性。\n_, err = clientset.ExtensionsV1beta1().Deployments(functionNamespace).Update(deployment)    注：mux做路由的时候，如果成功的时候不对w做任何处理，是会默认状态码为200，空字符串。\n DeleteHandler，DeployHandler，FunctionReader和UpdateHandler 这几个都是对函数的操作，其实就是调用一下Kubernetes的API进行操作。\n这几个是核心的几句代码：\nclientset.ExtensionsV1beta1().Deployments(functionNamespace).Delete(request.FunctionName, opts) deploy := clientset.Extensions().Deployments(functionNamespace) res, err := clientset.ExtensionsV1beta1().Deployments(functionNamespace).List(listOpts) _, updateErr := clientset.CoreV1().Services(functionNamespace).Update(service) 总结 官方还提供了一个faas-swarm，其实现思路也是这样，操作swarm的api来做对容器的操作。至于如何调用一个函数，都是在函数的watchdog中实现。\n","wordCount":"235","inLanguage":"en","datePublished":"2018-08-01T19:53:23Z","dateModified":"2018-08-01T19:53:23Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/faas-provider/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"faas-provider","name":"faas-provider","description":"faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。\nfaas-provider OpenFaaS 官方提供了两套后台 provider：\n Docker Swarm Kubernetes  这两者在部署和调用函数的时候流程图如下：\n部署一个函数\n调用一个函数\nprovider 要提供的一些 API  …","keywords":[],"articleBody":"faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。\nfaas-provider OpenFaaS 官方提供了两套后台 provider：\n Docker Swarm Kubernetes  这两者在部署和调用函数的时候流程图如下：\n部署一个函数\n调用一个函数\nprovider 要提供的一些 API 有：\n List / Create / Delete 一个函数  /system/functions\n方法: GET / POST / DELETE\n 获取一个函数  /system/function/{name:[-a-zA-Z_0-9]+}\n方法: GET\n 伸缩一个函数  /system/scale-function/{name:[-a-zA-Z_0-9]+}\n方法: POST\n 调用一个函数  /function/{name:[-a-zA-Z_0-9]+}\n方法: POST\n在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。\n// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking. func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) { r.HandleFunc(\"/system/functions\", handlers.FunctionReader).Methods(\"GET\") r.HandleFunc(\"/system/functions\", handlers.DeployHandler).Methods(\"POST\") r.HandleFunc(\"/system/functions\", handlers.DeleteHandler).Methods(\"DELETE\") r.HandleFunc(\"/system/functions\", handlers.UpdateHandler).Methods(\"PUT\") r.HandleFunc(\"/system/function/{name:[-a-zA-Z_0-9]+}\", handlers.ReplicaReader).Methods(\"GET\") r.HandleFunc(\"/system/scale-function/{name:[-a-zA-Z_0-9]+}\", handlers.ReplicaUpdater).Methods(\"POST\") r.HandleFunc(\"/function/{name:[-a-zA-Z_0-9]+}\", handlers.FunctionProxy) r.HandleFunc(\"/function/{name:[-a-zA-Z_0-9]+}/\", handlers.FunctionProxy) r.HandleFunc(\"/system/info\", handlers.InfoHandler).Methods(\"GET\") if config.EnableHealth { r.HandleFunc(\"/healthz\", handlers.Health).Methods(\"GET\") } // 省略 } 因此在自定义的 provider，只需实现 FaaSHandlers 中的几个路由处理函数即可。这几个 handler 是：\n// FaaSHandlers provide handlers for OpenFaaS type FaaSHandlers struct { FunctionReader http.HandlerFunc DeployHandler http.HandlerFunc DeleteHandler http.HandlerFunc ReplicaReader http.HandlerFunc FunctionProxy http.HandlerFunc ReplicaUpdater http.HandlerFunc // Optional: Update an existing function UpdateHandler http.HandlerFunc Health http.HandlerFunc InfoHandler http.HandlerFunc } 我们以官方实现的 faas-netes 为例，讲解一下这几个 hander 的实现过程。\nfaas-netes 我们看下在 faas-netes 的中的 FaaSHandlers 实现：\nbootstrapHandlers := bootTypes.FaaSHandlers{ FunctionProxy: handlers.MakeProxy(functionNamespace, cfg.ReadTimeout), DeleteHandler: handlers.MakeDeleteHandler(functionNamespace, clientset), DeployHandler: handlers.MakeDeployHandler(functionNamespace, clientset, deployConfig), FunctionReader: handlers.MakeFunctionReader(functionNamespace, clientset), ReplicaReader: handlers.MakeReplicaReader(functionNamespace, clientset), ReplicaUpdater: handlers.MakeReplicaUpdater(functionNamespace, clientset), UpdateHandler: handlers.MakeUpdateHandler(functionNamespace, clientset), Health: handlers.MakeHealthHandler(), InfoHandler: handlers.MakeInfoHandler(version.BuildVersion(), version.GitCommit), } 因为是 Kubernetes 上的 provider 实现，所以这些函数都带有一个 namespace 的参数。\nFunctionProxy 这里最重要的就是 FunctionProxy，它主要负责调用函数。这个 handler 其实也是起到了一个代理转发的作用，在这个函数中，只接受 get 和 post。调用函数只接受 post 和 get 请求\n  创建一个 http 的 client 对象\n  只处理 get 和 post 请求。\n  组装代理转发的 watchdog 的地址\nurl := forwardReq.ToURL(fmt.Sprintf(\"%s.%s\", service, functionNamespace), watchdogPort) 所以最后请求的格式就会形如：\nhttp://函数名.namespace:监视器的端口/路径   将请求发出去\n  设置 http 响应的头\n  ReplicaReader 和 ReplicaUpdater 这两个是和副本数相关的，所以放在一起对比讲解。这两个的实现依赖于 Kubernetes 的客户端，获取代码如下：\nclientset, err := kubernetes.NewForConfig(config) 这个 config 主要满足以下几个条件就行：\nConfig{ // TODO: switch to using cluster DNS. Host: \"https://\" + net.JoinHostPort(host, port), BearerToken: string(token), TLSClientConfig: tlsClientConfig, } Kubernetes 的所有操作都可以通过 rest api 来完成，这两个 handler 也是通过调用 Kubernetes 的 api 来做的。\nReplicaReader MakeReplicaReader函数是获取当前的副本数：\n  通过 mux 从路由中获取到 name 参数\n  调用 getService 方法获取副本数，getService 的核心代码就一句：\nitem, err := clientset.ExtensionsV1beta1().Deployments(functionNamespace).Get(functionName, getOpts)   序列化之后，把结果返回\n  ReplicaUpdater MakeReplicaUpdater是解析从 gateway 传过来的 post 请求，调用 k8s 的 API 设置副本数。\n  从请求中取出 body\n  首先获取该函数的已部署的 deployment 对象\n  然后将 deployment 的副本数量设置为应设数量，这样做的目的是为了仅仅修改副本数，而不修改别的属性。\n_, err = clientset.ExtensionsV1beta1().Deployments(functionNamespace).Update(deployment)    注：mux 做路由的时候，如果成功的时候不对 w 做任何处理，是会默认状态码为 200，空字符串。\n DeleteHandler，DeployHandler，FunctionReader 和 UpdateHandler 这几个都是对函数的操作，其实就是调用一下 Kubernetes 的 API 进行操作。\n这几个是核心的几句代码：\nclientset.ExtensionsV1beta1().Deployments(functionNamespace).Delete(request.FunctionName, opts) deploy := clientset.Extensions().Deployments(functionNamespace) res, err := clientset.ExtensionsV1beta1().Deployments(functionNamespace).List(listOpts) _, updateErr := clientset.CoreV1().Services(functionNamespace).Update(service) 总结 官方还提供了一个 faas-swarm，其实现思路也是这样，操作 swarm 的 api 来做对容器的操作。至于如何调用一个函数，都是在函数的 watchdog 中实现。\n","wordCount":"345","inLanguage":"en","datePublished":"2018-08-01T19:53:23Z","dateModified":"2018-08-01T19:53:23Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/faas-provider/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -91,6 +91,11 @@ provider要提供的一些API有：
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -116,10 +121,31 @@ faas-provider
 August 1, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#faas-provider aria-label=faas-provider>faas-provider</a></li><li>
+<a href=#faas-netes aria-label=faas-netes>faas-netes</a><ul>
+<li>
+<a href=#functionproxy aria-label=FunctionProxy>FunctionProxy</a></li><li>
+<a href=#replicareader-%e5%92%8c-replicaupdater aria-label="ReplicaReader 和 ReplicaUpdater">ReplicaReader 和 ReplicaUpdater</a><ul>
+<li>
+<a href=#replicareader aria-label=ReplicaReader>ReplicaReader</a></li><li>
+<a href=#replicaupdater aria-label=ReplicaUpdater>ReplicaUpdater</a></li><li>
+<a href=#deletehandlerdeployhandlerfunctionreader-%e5%92%8c-updatehandler aria-label="DeleteHandler，DeployHandler，FunctionReader 和 UpdateHandler">DeleteHandler，DeployHandler，FunctionReader 和 UpdateHandler</a></li></ul>
+</li></ul>
+</li><li>
+<a href=#%e6%80%bb%e7%bb%93 aria-label=总结>总结</a></li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
-<p>faas-provider是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的provider。</p>
+<p>faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。</p>
 <h2 id=faas-provider>faas-provider<a hidden class=anchor aria-hidden=true href=#faas-provider>#</a></h2>
-<p>OpenFaaS官方提供了两套后台provider：</p>
+<p>OpenFaaS 官方提供了两套后台 provider：</p>
 <ul>
 <li>Docker Swarm</li>
 <li>Kubernetes</li>
@@ -129,7 +155,7 @@ August 1, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 <p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1ftuggjuhtpj20xc07k0x7.jpg alt></p>
 <p>调用一个函数</p>
 <p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1ftuggyto07j20xc071n1c.jpg alt></p>
-<p>provider要提供的一些API有：</p>
+<p>provider 要提供的一些 API 有：</p>
 <ul>
 <li>List / Create / Delete 一个函数</li>
 </ul>
@@ -150,29 +176,29 @@ August 1, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </ul>
 <p><code>/function/{name:[-a-zA-Z_0-9]+}</code></p>
 <p>方法: POST</p>
-<p>在provider的server.go的serve方法，可以看到这个serve方法创建了几个路由，接受一个FaaSHandler对象。</p>
-<pre tabindex=0><code>// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking.
+<p>在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking.
 func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) {
-	r.HandleFunc(&quot;/system/functions&quot;, handlers.FunctionReader).Methods(&quot;GET&quot;)
-	r.HandleFunc(&quot;/system/functions&quot;, handlers.DeployHandler).Methods(&quot;POST&quot;)
-	r.HandleFunc(&quot;/system/functions&quot;, handlers.DeleteHandler).Methods(&quot;DELETE&quot;)
-	r.HandleFunc(&quot;/system/functions&quot;, handlers.UpdateHandler).Methods(&quot;PUT&quot;)
+	r.HandleFunc(&#34;/system/functions&#34;, handlers.FunctionReader).Methods(&#34;GET&#34;)
+	r.HandleFunc(&#34;/system/functions&#34;, handlers.DeployHandler).Methods(&#34;POST&#34;)
+	r.HandleFunc(&#34;/system/functions&#34;, handlers.DeleteHandler).Methods(&#34;DELETE&#34;)
+	r.HandleFunc(&#34;/system/functions&#34;, handlers.UpdateHandler).Methods(&#34;PUT&#34;)
 
-	r.HandleFunc(&quot;/system/function/{name:[-a-zA-Z_0-9]+}&quot;, handlers.ReplicaReader).Methods(&quot;GET&quot;)
-	r.HandleFunc(&quot;/system/scale-function/{name:[-a-zA-Z_0-9]+}&quot;, handlers.ReplicaUpdater).Methods(&quot;POST&quot;)
+	r.HandleFunc(&#34;/system/function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.ReplicaReader).Methods(&#34;GET&#34;)
+	r.HandleFunc(&#34;/system/scale-function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.ReplicaUpdater).Methods(&#34;POST&#34;)
 
-	r.HandleFunc(&quot;/function/{name:[-a-zA-Z_0-9]+}&quot;, handlers.FunctionProxy)
-	r.HandleFunc(&quot;/function/{name:[-a-zA-Z_0-9]+}/&quot;, handlers.FunctionProxy)
+	r.HandleFunc(&#34;/function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.FunctionProxy)
+	r.HandleFunc(&#34;/function/{name:[-a-zA-Z_0-9]+}/&#34;, handlers.FunctionProxy)
 
-	r.HandleFunc(&quot;/system/info&quot;, handlers.InfoHandler).Methods(&quot;GET&quot;)
+	r.HandleFunc(&#34;/system/info&#34;, handlers.InfoHandler).Methods(&#34;GET&#34;)
 
 	if config.EnableHealth {
-		r.HandleFunc(&quot;/healthz&quot;, handlers.Health).Methods(&quot;GET&quot;)
+		r.HandleFunc(&#34;/healthz&#34;, handlers.Health).Methods(&#34;GET&#34;)
 	}
 	// 省略
 }
-</code></pre><p>因此在自定义的provider，只需实现FaaSHandlers中的几个路由处理函数即可。这几个handler是：</p>
-<pre tabindex=0><code>// FaaSHandlers provide handlers for OpenFaaS
+</code></pre></div><p>因此在自定义的 provider，只需实现 FaaSHandlers 中的几个路由处理函数即可。这几个 handler 是：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// FaaSHandlers provide handlers for OpenFaaS
 type FaaSHandlers struct {
 	FunctionReader http.HandlerFunc
 	DeployHandler  http.HandlerFunc
@@ -186,10 +212,10 @@ type FaaSHandlers struct {
 	Health        http.HandlerFunc
 	InfoHandler   http.HandlerFunc
 }
-</code></pre><p>我们以官方实现的faas-netes为例，讲解一下这几个hander的实现过程。</p>
+</code></pre></div><p>我们以官方实现的 faas-netes 为例，讲解一下这几个 hander 的实现过程。</p>
 <h2 id=faas-netes>faas-netes<a hidden class=anchor aria-hidden=true href=#faas-netes>#</a></h2>
-<p>我们看下在faas-netes的中的FaaSHandlers实现：</p>
-<pre tabindex=0><code>bootstrapHandlers := bootTypes.FaaSHandlers{
+<p>我们看下在 faas-netes 的中的 FaaSHandlers 实现：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>bootstrapHandlers := bootTypes.FaaSHandlers{
 	FunctionProxy:  handlers.MakeProxy(functionNamespace, cfg.ReadTimeout),
 	DeleteHandler:  handlers.MakeDeleteHandler(functionNamespace, clientset),
 	DeployHandler:  handlers.MakeDeployHandler(functionNamespace, clientset, deployConfig),
@@ -200,83 +226,83 @@ type FaaSHandlers struct {
 		Health:         handlers.MakeHealthHandler(),
 		InfoHandler:    handlers.MakeInfoHandler(version.BuildVersion(), version.GitCommit),
 }
-</code></pre><p>因为是Kubernetes上的provider实现，所以这些函数都带有一个namespace的参数。</p>
+</code></pre></div><p>因为是 Kubernetes 上的 provider 实现，所以这些函数都带有一个 namespace 的参数。</p>
 <h3 id=functionproxy>FunctionProxy<a hidden class=anchor aria-hidden=true href=#functionproxy>#</a></h3>
-<p>这里最重要的就是FunctionProxy，它主要负责调用函数。这个handler其实也是起到了一个代理转发的作用，在这个函数中，只接受get和post。调用函数只接受post和get请求</p>
+<p>这里最重要的就是 FunctionProxy，它主要负责调用函数。这个 handler 其实也是起到了一个代理转发的作用，在这个函数中，只接受 get 和 post。调用函数只接受 post 和 get 请求</p>
 <ol>
 <li>
-<p>创建一个http的client对象</p>
+<p>创建一个 http 的 client 对象</p>
 </li>
 <li>
-<p>只处理get和post请求。</p>
+<p>只处理 get 和 post 请求。</p>
 </li>
 <li>
-<p>组装代理转发的watchdog的地址</p>
-<pre tabindex=0><code>url := forwardReq.ToURL(fmt.Sprintf(&quot;%s.%s&quot;, service, functionNamespace), watchdogPort)
-</code></pre><p>所以最后请求的格式就会形如：</p>
-<pre tabindex=0><code>http://函数名.namespace:监视器的端口/路径
-</code></pre></li>
+<p>组装代理转发的 watchdog 的地址</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>url := forwardReq.ToURL(fmt.Sprintf(&#34;%s.%s&#34;, service, functionNamespace), watchdogPort)
+</code></pre></div><p>所以最后请求的格式就会形如：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>http://函数名.namespace:监视器的端口/路径
+</code></pre></div></li>
 <li>
 <p>将请求发出去</p>
 </li>
 <li>
-<p>设置http响应的头</p>
+<p>设置 http 响应的头</p>
 </li>
 </ol>
-<h3 id=replicareader和replicaupdater>ReplicaReader和ReplicaUpdater<a hidden class=anchor aria-hidden=true href=#replicareader和replicaupdater>#</a></h3>
-<p>这两个是和副本数相关的，所以放在一起对比讲解。这两个的实现依赖于Kubernetes的客户端，获取代码如下：</p>
-<pre tabindex=0><code>clientset, err := kubernetes.NewForConfig(config)
-</code></pre><p>这个config主要满足以下几个条件就行：</p>
-<pre tabindex=0><code>Config{
+<h3 id=replicareader-和-replicaupdater>ReplicaReader 和 ReplicaUpdater<a hidden class=anchor aria-hidden=true href=#replicareader-和-replicaupdater>#</a></h3>
+<p>这两个是和副本数相关的，所以放在一起对比讲解。这两个的实现依赖于 Kubernetes 的客户端，获取代码如下：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>clientset, err := kubernetes.NewForConfig(config)
+</code></pre></div><p>这个 config 主要满足以下几个条件就行：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>Config{
 		// TODO: switch to using cluster DNS.
-		Host:            &quot;https://&quot; + net.JoinHostPort(host, port),
+		Host:            &#34;https://&#34; + net.JoinHostPort(host, port),
 		BearerToken:     string(token),
 		TLSClientConfig: tlsClientConfig,
 }
-</code></pre><p>Kubernetes的所有操作都可以通过rest api来完成，这两个handler也是通过调用Kubernetes的api来做的。</p>
+</code></pre></div><p>Kubernetes 的所有操作都可以通过 rest api 来完成，这两个 handler 也是通过调用 Kubernetes 的 api 来做的。</p>
 <h4 id=replicareader>ReplicaReader<a hidden class=anchor aria-hidden=true href=#replicareader>#</a></h4>
 <p><code>MakeReplicaReader</code>函数是获取当前的副本数：</p>
 <ol>
 <li>
-<p>通过mux从路由中获取到name参数</p>
+<p>通过 mux 从路由中获取到 name 参数</p>
 </li>
 <li>
-<p>调用getService方法获取副本数，getService的核心代码就一句：</p>
-<pre tabindex=0><code>item, err := clientset.ExtensionsV1beta1().Deployments(functionNamespace).Get(functionName, getOpts)
-</code></pre></li>
+<p>调用 getService 方法获取副本数，getService 的核心代码就一句：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>item, err := clientset.ExtensionsV1beta1().Deployments(functionNamespace).Get(functionName, getOpts)
+</code></pre></div></li>
 <li>
 <p>序列化之后，把结果返回</p>
 </li>
 </ol>
 <h4 id=replicaupdater>ReplicaUpdater<a hidden class=anchor aria-hidden=true href=#replicaupdater>#</a></h4>
-<p><code>MakeReplicaUpdater</code>是解析从gateway传过来的post请求，调用k8s的API设置副本数。</p>
+<p><code>MakeReplicaUpdater</code>是解析从 gateway 传过来的 post 请求，调用 k8s 的 API 设置副本数。</p>
 <ol>
 <li>
-<p>从请求中取出body</p>
+<p>从请求中取出 body</p>
 </li>
 <li>
-<p>首先获取该函数的已部署的deployment对象</p>
+<p>首先获取该函数的已部署的 deployment 对象</p>
 </li>
 <li>
-<p>然后将deployment的副本数量设置为应设数量，这样做的目的是为了仅仅修改副本数，而不修改别的属性。</p>
-<pre tabindex=0><code>_, err = clientset.ExtensionsV1beta1().Deployments(functionNamespace).Update(deployment)
-</code></pre></li>
+<p>然后将 deployment 的副本数量设置为应设数量，这样做的目的是为了仅仅修改副本数，而不修改别的属性。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>_, err = clientset.ExtensionsV1beta1().Deployments(functionNamespace).Update(deployment)
+</code></pre></div></li>
 </ol>
 <blockquote>
-<p>注：mux做路由的时候，如果成功的时候不对w做任何处理，是会默认状态码为200，空字符串。</p>
+<p>注：mux 做路由的时候，如果成功的时候不对 w 做任何处理，是会默认状态码为 200，空字符串。</p>
 </blockquote>
-<h4 id=deletehandlerdeployhandlerfunctionreader和updatehandler>DeleteHandler，DeployHandler，FunctionReader和UpdateHandler<a hidden class=anchor aria-hidden=true href=#deletehandlerdeployhandlerfunctionreader和updatehandler>#</a></h4>
-<p>这几个都是对函数的操作，其实就是调用一下Kubernetes的API进行操作。</p>
+<h4 id=deletehandlerdeployhandlerfunctionreader-和-updatehandler>DeleteHandler，DeployHandler，FunctionReader 和 UpdateHandler<a hidden class=anchor aria-hidden=true href=#deletehandlerdeployhandlerfunctionreader-和-updatehandler>#</a></h4>
+<p>这几个都是对函数的操作，其实就是调用一下 Kubernetes 的 API 进行操作。</p>
 <p>这几个是核心的几句代码：</p>
-<pre tabindex=0><code>clientset.ExtensionsV1beta1().Deployments(functionNamespace).Delete(request.FunctionName, opts)
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>clientset.ExtensionsV1beta1().Deployments(functionNamespace).Delete(request.FunctionName, opts)
 
 deploy := clientset.Extensions().Deployments(functionNamespace)
 
 res, err := clientset.ExtensionsV1beta1().Deployments(functionNamespace).List(listOpts)
 
 _, updateErr := clientset.CoreV1().Services(functionNamespace).Update(service)
-</code></pre><h2 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h2>
-<p>官方还提供了一个faas-swarm，其实现思路也是这样，操作swarm的api来做对容器的操作。至于如何调用一个函数，都是在函数的watchdog中实现。</p>
+</code></pre></div><h2 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h2>
+<p>官方还提供了一个 faas-swarm，其实现思路也是这样，操作 swarm 的 api 来做对容器的操作。至于如何调用一个函数，都是在函数的 watchdog 中实现。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -308,7 +334,7 @@ _, updateErr := clientset.CoreV1().Services(functionNamespace).Update(service)
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <meta property="og:title" content="Awesome Fenix">
@@ -24,7 +24,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2021-12-20T09:58:58+08:00">
+<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Awesome Fenix">
@@ -47,6 +47,11 @@
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
 <li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
+<li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
 </a>
@@ -62,16 +67,29 @@
 <article class=post-entry>
 <header class=entry-header>
 <h2>
+Streaming 101
+</h2>
+</header>
+<section class=entry-content>
+<p> 有效的复杂系统总是从简单
+...</p>
+</section>
+<footer class=entry-footer>
+March 26, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+</footer>
+<a class=entry-link aria-label="post link to Streaming 101" href=https://zhenfeng-zhu.github.io/posts/streaming-101/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>
 K3d With Openfaas
 </h2>
 </header>
 <section class=entry-content>
 <p>openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md
-安装docker brew install homebrew/cask/docker 安装单节点K8S brew install k3d 配置单节点K8S集群
-k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装openfaas客户端 faas-cli brew install faas-cli 安装openfaas server端 arkade install openfaas 配置openfaas的ui界面
-kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到openfaas的ui界面了。
-但是当你打开页面的时候，要输入密码，那就需要下面的操作：
-# This command retrieves your password PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{....</p>
+安装 docker brew install homebrew/cask/docker 安装单节点 K8S brew install k3d 配置单节点 K8S 集群
+k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装 arkade curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装 openfaas 客户端 faas-cli brew install faas-cli 安装 openfaas server 端 arkade install openfaas 配置 openfaas 的 ui 界面
+kubectl rollout status -n openfaas deploy/gateway kubectl port-forward svc/gateway -n openfaas 8080:8080 这样就可以在浏览器里输入 127.0.0.1:8080 进入到 openfaas 的 ui 界面了。...</p>
 </section>
 <footer class=entry-footer>
 March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -85,7 +103,7 @@ March 10, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </h2>
 </header>
 <section class=entry-content>
-<p> 面向对象不是设计代码的唯一方法 函数式编程不一定是复杂和纯数学的 编程的基础不是赋值、if语句和循环 并发不一定需要锁、信号量、监视器等类似的东西 进程不必消耗大量的资源 元编程不只是语言的附属品 即使编程是你的工作，也应该是充满乐趣的 ...</p>
+<p> 面向对象不是设计代码的唯一方法 函数式编程不一定是复杂和纯数学的 编程的基础不是赋值、if 语句和循环 并发不一定需要锁、信号量、监视器等类似的东西 进程不必消耗大量的资源 元编程不只是语言的附属品 即使编程是你的工作，也应该是充满乐趣的 ...</p>
 </section>
 <footer class=entry-footer>
 February 27, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
@@ -95,36 +113,36 @@ February 27, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-小白都能快速上手的Vim配置
+小白都能快速上手的 Vim 配置
 </h2>
 </header>
 <section class=entry-content>
-<p>首先把所有的vim相关的都删除。 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc中添加下面的代码
-" basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set backspace=eol,start,indent set laststatus=2 set colorcolumn=80 set cursorline set linebreak set autoindent set ignorecase set smartcase set ruler set diffopt+=internal,indent-heuristic,algorithm:patience set showcmd set clipboard^=unnamed,unnamedplus set showmode set mouse=a set tabstop=2 set shiftwidth=4 set expandtab set softtabstop=2 set showmatch set incsearch set nobackup set autoread set wildmenu set wildmode=longest:list,full set nofoldenable filetype plugin indent on syntax on 有了上面的设置，会让你的vim更好用一些。...</p>
+<p>首先把所有的 vim 相关的都删除 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc 中添加下面的代码
+" basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set backspace=eol,start,indent set laststatus=2 set colorcolumn=80 set cursorline set linebreak set autoindent set ignorecase set smartcase set ruler set diffopt+=internal,indent-heuristic,algorithm:patience set showcmd set clipboard^=unnamed,unnamedplus set showmode set mouse=a set tabstop=2 set shiftwidth=4 set expandtab set softtabstop=2 set showmatch set incsearch set nobackup set autoread set wildmenu set wildmode=longest:list,full set nofoldenable filetype plugin indent on syntax on 有了上面的设置，会让你的 vim 更好用一些。...</p>
 </section>
 <footer class=entry-footer>
 February 20, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to 小白都能快速上手的Vim配置" href=https://zhenfeng-zhu.github.io/posts/vim/></a>
+<a class=entry-link aria-label="post link to 小白都能快速上手的 Vim 配置" href=https://zhenfeng-zhu.github.io/posts/vim/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-Github Action自动部署blog
+Github Action 自动部署 blog
 </h2>
 </header>
 <section class=entry-content>
-<p>之前我采用的方式是两个github repo的方式：
-一个叫hugo-blog，用于存放blog的源文件
-一个叫zhenfeng-zhu.github.io，用于存放生成之后的文件
-然后通过写一个shell脚本，将生成之后的文件推向zhenfeng-zhu.github.io仓库中，同时将blog的源文件也做了一个backup。后来使用了一个github action的方式， 就不用在两个仓库中进行折腾，一切都由github action来做了。
-方案 设置workflow 首先创建一个.github/workflows/gh-pages.yml
-name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: 'latest' # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets....</p>
+<p>之前我采用的方式是两个 github repo 的方式：
+一个叫 hugo-blog，用于存放 blog 的源文件
+一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件
+然后通过写一个 shell 脚本，将生成之后的文件推向 zhenfeng-zhu.github.io 仓库中，同时将 blog 的源文件也做了一个 backup。后来使用了一个 github action 的方式， 就不用在两个仓库中进行折腾，一切都由 github action 来做了。
+方案 设置 workflow 首先创建一个.github/workflows/gh-pages.yml
+name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and ....</p>
 </section>
 <footer class=entry-footer>
 February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to Github Action自动部署blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a>
+<a class=entry-link aria-label="post link to Github Action 自动部署 blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -191,76 +209,31 @@ February 17, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <article class=post-entry>
 <header class=entry-header>
 <h2>
-Web前端性能优化
+Web 前端性能优化
 </h2>
 </header>
 <section class=entry-content>
-<p>一般来说web前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN服务等等。web前端优化主要从如下三个方面入手：
-浏览器访问优化 减少http请求
-http协议是一个无状态的，每次请求都需要建立通信链路进行传输，在服务器端，一般每个请求都会分配一个线程去处理。
-减少http请求的主要手段是合并CSS、合并js、合并图片。
+<p>一般来说 web 前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN 服务等等。web 前端优化主要从如下三个方面入手：
+浏览器访问优化 减少 http 请求
+http 协议是一个无状态的，每次请求都需要建立通信链路进行传输，在服务器端，一般每个请求都会分配一个线程去处理。
+减少 http 请求的主要手段是合并 CSS、合并 js、合并图片。
 使用浏览器缓存
 css、js、Logo、图标等静态资源文件更新频率较低，可以将这些文件缓存在浏览器中。
-在更新js等文件的时候，一般不是将文件内容更新，而是生成一个新的文件，然后更新html的引用。
+在更新 js 等文件的时候，一般不是将文件内容更新，而是生成一个新的文件，然后更新 html 的引用。
 更新静态资源的时候，也是要逐量更新，以避免用户浏览器的大量缓存失效，造成服务器负载增加、网络堵塞。
 启用压缩
 在服务器对文件压缩，然后在浏览器端解压缩，可以减少通信传输的数据量。
-CSS放在页面最上面，js放在页面最下面
-浏览器会在下载完全部CSS之后才对整个页面进行渲染，而浏览器是在加载js之后就立即执行，有可能会阻塞整个页面。因此最好的做法就是把CSS放在最上面，js放在最下面。但是如果是页面解析的时候就用到js，也是要相应的js放在上面。
-减少cookie传输
-cookie会包含在每次请求和响应中，太大的cookie会影响数据传输，需要慎重考虑哪些数据写入cookie中。
-对于某些静态资源的访问，如css和js等，发送cookie没意义，可以考虑静态资源使用独立域名访问，避免请求静态资源时发送cookie。
-CDN加速 CDN（content distribute network，内容分发网络）的本质仍然是一个缓存。将缓存放在离用户最近的地方，使得用户可以以最快的速度获取数据。
-CDN缓存的一般是静态资源，如图片、文件、CSS、js、静态网页等。
-反向代理 反向代理服务器位于网站中心机房的一侧，代理网站web服务器接收http请求。
-反向代理可以在一定程度上保护网站安全，来自互联网的访问请求必须经过代理服务器，相当于在web服务器和攻击之间加了一个屏障。
-反向代理也可以通过配置缓存，静态资源被缓存在反向代理服务器，当用户访问时，可以从反向代理服务器上返回。有些网站也会将部分动态内容缓存在代理服务器上，通过内部通知机制，更新缓存。
-反向代理也可以实现负载均衡的功能。
-写在最后 可以发现，在web前端性能优化的时候，提到最多的就是缓存。
-网站性能优化第一定律：优先考虑使用缓存！
-...</p>
+CSS 放在页面最上面，js 放在页面最下面
+浏览器会在下载完全部 CSS 之后才对整个页面进行渲染，而浏览器是在加载 js 之后就立即执行，有可能会阻塞整个页面。因此最好的做法就是把 CSS 放在最上面，js 放在最下面。但是如果是页面解析的时候就用到 js，也是要相应的 js 放在上面。
+减少 cookie 传输
+cookie 会包含在每次请求和响应中，太大的 cookie 会影响数据传输，需要慎重考虑哪些数据写入 cookie 中。
+对于某些静态资源的访问，如 css 和 js 等，发送 cookie 没意义，可以考虑静态资源使用独立域名访问，避免请求静态资源时发送 cookie。
+CDN 加速 CDN（content distribute network，内容分发网络）的本质仍然是一个缓存。将缓存放在离用户最近的地方，使得用户可以以最快的速度获取数据。...</p>
 </section>
 <footer class=entry-footer>
 November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </footer>
-<a class=entry-link aria-label="post link to Web前端性能优化" href=https://zhenfeng-zhu.github.io/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>
-大型网站发展历程
-</h2>
-</header>
-<section class=entry-content>
-<p>前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。
-code less, play more!
-前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有庞大的用户，高并发的访问，海量的数据；大型网站都是从小型网站发展而来。网站的价值在于它能给用户提供什么家宅，在于网站能做什么，而不在于它是怎么做的，所以网站在小的时候就去追求网站的架构是舍本逐末，得不偿失的。小型网站最需要做的就是为用户提供更好的服务来创造价值，得到用户认可，活下去，野蛮生长。
-大型网站软件系统的特点 高并发，大流量 高可用 海量数据 用户分布广泛，网络情况复杂 安全环境恶劣 需求快速变更，发布平频繁 渐进式发展 大型网站的发展历程 初始阶段的网站架构
-最开始没有多少人访问，所以应用程序，数据库，文件都在同一台机器上。
-应用服务器和数据服务分离
-应用和数据分离之后，一般需要三台服务器。应用服务器，文件服务器和数据库服务器，这三种服务器对于硬件要求各不相同。
-应用服务器：更强大的CPU 数据库服务器：更快速的磁盘和更大的内存 文件服务器：容量更大的硬盘 使用缓存改善性能
-网站的访问也遵循二八定律：80%的业务集中在20%的数据上。因此可以把这一小部分数据缓存在内存中，减少数据库的访问压力。
-网站的缓存可以分为两种：
-本地缓存：缓存在应用服务器上。本地缓存访问速度快，但是受制于内存限制，缓存数量有限，而且也会出现和应用程序争抢内存的情况。 远程分布式缓存：以集群的方式，缓存在大内存的专用缓存服务器。可以在理论上做到不受内存容量限制。 使用应用服务器集群提高并发能力
-当一台服务器的处理能力和存储空间不足的时候，不要企图更换更强大的服务器。对于大型网站来说，不管多么强大的服务器，都满足不了网站持续增长的业务需求。此时就可以考虑集群的方式，通过负载均衡调度服务器，可以将来自用户的请求分发到应用服务器集群中的任何一台服务器上。
-数据库读写分离
-使用缓存后，大部分的数据读操作访问都可以不通过数据库完成，但是仍有部分读操作（如缓存过期，缓存不命中）和全部的写操作需要访问数据库。
-目前大部分数据库都提供主从热备的功能，在写数据的时候，访问主库，主库通过主从复制机制将数据更新同步至从数据库，在读的时候就可以通过从数据库获取数据。
-使用反向代理和CDN加速网站响应
-在《web性能权威指南》中有讲到，网站性能的瓶颈，大部分时间都浪费在TCP的握手和传输上。因此可以通过CDN和反向代理的方式来加快响应。
-CDN和反向代理的本质都是通过缓存，不同的主要是：
-CDN部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。 使用分布式文件系统和分布式数据库系统
-随着业务的发展，依旧不能满足的时候，就采用分布式的文件和分布式的数据库系统。
-分布式数据库是数据库拆分的最后手段，只用在单表数据规模特别庞大的时候才使用。更常用的拆分手段是业务分库，将不同的业务数据存储在不同的数据库中。
-使用NoSQL和搜索引擎
-对数据检索和存储越来越复杂的时候，就可以采用一些非关系型数据库如HBase和非数据库查询技术如ElasticSearch等等
-业务拆分...</p>
-</section>
-<footer class=entry-footer>
-November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
-<a class=entry-link aria-label="post link to 大型网站发展历程" href=https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/></a>
+<a class=entry-link aria-label="post link to Web 前端性能优化" href=https://zhenfeng-zhu.github.io/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
@@ -269,7 +242,7 @@ November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </nav>
 </footer>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

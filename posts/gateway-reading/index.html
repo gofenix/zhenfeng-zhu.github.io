@@ -5,12 +5,12 @@
 <meta name=robots content="index, follow">
 <title>gateway-reading | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
- UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
-源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。
-go-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。
-client_golang是Prometheus的客户端。
-项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test.">
+<meta name=description content="OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
+ UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。
+源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。
+go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。
+client_golang 是 Prometheus 的客户端。
+项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/gateway-reading/>
 <link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
@@ -21,14 +21,14 @@ client_golang是Prometheus的客户端。
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.2">
 <meta property="og:title" content="gateway-reading">
-<meta property="og:description" content="OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
- UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
-源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。
-go-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。
-client_golang是Prometheus的客户端。
-项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test.">
+<meta property="og:description" content="OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
+ UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。
+源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。
+go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。
+client_golang 是 Prometheus 的客户端。
+项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/gateway-reading/">
 <meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
@@ -37,14 +37,14 @@ client_golang是Prometheus的客户端。
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="gateway-reading">
-<meta name=twitter:description content="OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
- UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。
-源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。
-go-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。
-client_golang是Prometheus的客户端。
-项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test.">
+<meta name=twitter:description content="OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
+ UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。
+源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。
+go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。
+client_golang 是 Prometheus 的客户端。
+项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"gateway-reading","item":"https://zhenfeng-zhu.github.io/posts/gateway-reading/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"gateway-reading","name":"gateway-reading","description":"OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：\n UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发 …","keywords":[],"articleBody":"OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：\n UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。\n源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行http请求的路由和分发的第三方扩展包。\ngo-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。\nclient_golang是Prometheus的客户端。\n项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test.go │ ├── function_cache.go │ ├── function_cache_test.go │ ├── infohandler.go │ ├── metrics.go │ ├── queueproxy.go │ ├── scaling.go │ └── service_query.go ├── metrics │ ├── add_metrics.go │ ├── add_metrics_test.go │ ├── externalwatcher.go │ ├── metrics.go │ └── prometheus_query.go ├── plugin │ ├── external.go │ └── external_test.go ├── queue │ └── types.go ├── requests │ ├── forward_request.go │ ├── forward_request_test.go │ ├── prometheus.go │ ├── prometheus_test.go │ └── requests.go ├── server.go ├── tests │ └── integration ├── types │ ├── handler_set.go │ ├── inforequest.go │ ├── load_credentials.go │ ├── proxy_client.go │ ├── readconfig.go │ └── readconfig_test.go ├── vendor │ └── github.com └── version └── version.go Gateway的目录明显多了很多，看源码的时候，首先要找到的是main包，从main函数看起，就能很容易分析出来项目是如何运行的。\n从server.go的main函数中我们可以看到，其实有如下几个模块：\n 基本的安全验证 和函数相关的代理转发  同步函数  列出函数 部署函数 删除函数 更新函数   异步函数   Prometheus的监控 ui 自动伸缩  基本的安全验证 如果配置了开启基本安全验证，会从磁盘中读取密钥：\nvar credentials *types.BasicAuthCredentials if config.UseBasicAuth { var readErr error reader := types.ReadBasicAuthFromDisk{ SecretMountPath: config.SecretMountPath, } credentials, readErr = reader.Read() if readErr != nil { log.Panicf(readErr.Error()) } } 在Gateway的配置相关的，都会有一个read()方法，进行初始化赋值。\n如果credentials被赋值之后，就会对一些要加密的API handler进行一个修饰，被修饰的API有：\n UpdateFunction DeleteFunction DeployFunction ListFunctions ScaleFunction  if credentials != nil { faasHandlers.UpdateFunction = handlers.DecorateWithBasicAuth(faasHandlers.UpdateFunction, credentials) faasHandlers.DeleteFunction = handlers.DecorateWithBasicAuth(faasHandlers.DeleteFunction, credentials) faasHandlers.DeployFunction = handlers.DecorateWithBasicAuth(faasHandlers.DeployFunction, credentials) faasHandlers.ListFunctions = handlers.DecorateWithBasicAuth(faasHandlers.ListFunctions, credentials) faasHandlers.ScaleFunction = handlers.DecorateWithBasicAuth(faasHandlers.ScaleFunction, credentials) } 这个DecorateWithBasicAuth()方法是一个路由中间件：\n 调用mux路由的BasicAuth()，从http的header中取到用户名和密码 然后给请求头上设置一个字段WWW-Authenticate，值为Basic realm=\"Restricted\" 如果校验失败，则返回错误，成功的话调用next方法继续进入下一个handler。  // DecorateWithBasicAuth enforces basic auth as a middleware with given credentials func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCredentials) http.HandlerFunc { return func(w http.ResponseWriter, r *http.Request) { user, password, ok := r.BasicAuth() w.Header().Set(\"WWW-Authenticate\", `Basic realm=\"Restricted\"`) if !ok || !(credentials.Password == password \u0026\u0026 user == credentials.User) { w.WriteHeader(http.StatusUnauthorized) w.Write([]byte(\"invalid credentials\")) return } next.ServeHTTP(w, r) } } 代理转发 Gateway本身不做任何和部署发布函数的事情，它只是作为一个代理，把请求转发给相应的Provider去处理，所有的请求都要通过这个网关。\n同步函数转发 主要转发的API有：\n RoutelessProxy ListFunctions DeployFunction DeleteFunction UpdateFunction  faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) faasHandlers.ListFunctions = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) faasHandlers.DeployFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) faasHandlers.DeleteFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) faasHandlers.UpdateFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) MakeForwardingProxyHandler()有三个参数：\n  proxy\n这是一个http的客户端，作者把这个客户端抽成一个类，然后使用该类的NewHTTPClientReverseProxy方法创建实例，这样就简化了代码，不用每次都得写一堆相同的配置。\n  notifiers\n这个其实是要打印的日志，这里是一个HTTPNotifier的接口。而在这个MakeForwardingProxyHandler中其实有两个实现类，一个是LoggingNotifier，一个是PrometheusFunctionNotifier，分别用来打印和函数http请求相关的日志以及和Prometheus监控相关的日志。\n  baseURLResolver\n这个就是Provider的url地址。\n  在这个MakeForwardingProxyHandler中主要做了三件事儿：\n  解析要转发的url\n  调用forwardRequest方法转发请求，\nforwardRequest方法的逻辑比较简单，只是把请求发出去。这里就不深入分析了。\n  打印日志\n  // MakeForwardingProxyHandler create a handler which forwards HTTP requests func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers []HTTPNotifier, baseURLResolver BaseURLResolver) http.HandlerFunc { return func(w http.ResponseWriter, r *http.Request) { baseURL := baseURLResolver.Resolve(r) requestURL := r.URL.Path start := time.Now() statusCode, err := forwardRequest(w, r, proxy.Client, baseURL, requestURL, proxy.Timeout) seconds := time.Since(start) if err != nil { log.Printf(\"error with upstream request to: %s, %s\\n\", requestURL, err.Error()) } for _, notifier := range notifiers { notifier.Notify(r.Method, requestURL, statusCode, seconds) } } } 异步函数转发 前面说过，如果是异步函数，Gateway就作为一个发布者，将函数放到队列里。MakeQueuedProxy方法就是做这件事儿的：\n 读取请求体 将X-Callback-Url参数从参数中http的header中读出来 实例化用于异步处理的Request对象 调用canQueueRequests.Queue(req)，将请求发布到队列中  // MakeQueuedProxy accepts work onto a queue func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueRequests queue.CanQueueRequests) http.HandlerFunc { return func(w http.ResponseWriter, r *http.Request) { defer r.Body.Close() body, err := ioutil.ReadAll(r.Body) // 省略错误处理代码 vars := mux.Vars(r) name := vars[\"name\"] callbackURLHeader := r.Header.Get(\"X-Callback-Url\") var callbackURL *url.URL if len(callbackURLHeader)  0 { urlVal, urlErr := url.Parse(callbackURLHeader) // 省略错误处理代码 callbackURL = urlVal } req := \u0026queue.Request{ Function: name, Body: body, Method: r.Method, QueryString: r.URL.RawQuery, Header: r.Header, CallbackURL: callbackURL, } err = canQueueRequests.Queue(req) // 省略错误处理代码 w.WriteHeader(http.StatusAccepted) } } 自动伸缩 伸缩性其实有两种，一种是可以通过调用API接口，来将函数进行缩放。另外一种就是通过AlertHandler。\n自动伸缩是OpenFaaS的一大特点，触发自动伸缩主要是根据不同的指标需求。\n  根据每秒请求数来做伸缩\nOpenFaaS附带了一个自动伸缩的规则，这个规则是在AlertManager配置文件中定义。AlertManager从Prometheus中读取使用情况（每秒请求数），然后在满足一定条件时向Gateway发送警报。\n可以通过删除AlertManager，或者将部署扩展的环境变量设置为0，来禁用此方式。\n  最小/最大副本数\n通过向函数添加标签, 可以在部署时设置最小 (初始) 和最大副本数。\n com.openfaas.scale.min 默认是 1 com.openfaas.scale.max 默认是 20 com.openfaas.scale.factor 默认是 20% ，在0-100之间，这是每次扩容的时候，新增实例的百分比，若是100的话，会瞬间飙升到副本数的最大值。  com.openfaas.scale.min 和 com.openfaas.scale.max值一样的时候，可以关闭自动伸缩。\ncom.openfaas.scale.factor是0时，也会关闭自动伸缩。\n  通过内存和CPU的使用量。\n使用k8s内置的HPA，也可以触发AlertManager。\n  手动指定伸缩的值 可以从这句代码中发现，调用这个路由，转发给了provider处理。\nr.HandleFunc(\"/system/scale-function/{name:[-a-zA-Z_0-9]+}\", faasHandlers.ScaleFunction).Methods(http.MethodPost) 处理AlertManager的伸缩请求 Prometheus将监控指标发给AlertManager之后，会触发AlterManager调用/system/alert接口，这个接口的handler是由handlers.MakeAlertHandler方法生成。\nMakeAlertHandler方法接收的参数是ServiceQuery。ServiceQuery是一个接口，它有两个函数，用来get或者ser最大的副本数。Gateway中实现这个接口的类是ExternalServiceQuery，这个实现类是在plugin包中，我们也可以直接定制这个实现类，用来实现满足特定条件。\n// ServiceQuery provides interface for replica querying/setting type ServiceQuery interface { GetReplicas(service string) (response ServiceQueryResponse, err error) SetReplicas(service string, count uint64) error } // ExternalServiceQuery proxies service queries to external plugin via HTTP type ExternalServiceQuery struct { URL url.URL ProxyClient http.Client } 这个ExternalServiceQuery有一个NewExternalServiceQuery方法，这个方法也是一个工厂方法，用来创建实例。这个url其实就是provider的url，proxyClient就是一个http的client对象。\n  GetReplicas方法\n从system/function/:name接口获取到函数的信息，组装一个ServiceQueryResponse对象即可。\n  SetReplicas方法\n调用system/scale-function/:name接口，设置副本数。\n  MakeAlertHandler的函数主要是从http.Request中读取body，然后反序列化成PrometheusAlert对象：\n// PrometheusAlert as produced by AlertManager type PrometheusAlert struct { Status string `json:\"status\"` Receiver string `json:\"receiver\"` Alerts []PrometheusInnerAlert `json:\"alerts\"` } 可以发现，这个Alerts是一个数组对象，所以可以是对多个函数进行缩放。反序列化之后，调用handleAlerts方法，而handleAlerts对Alerts进行遍历，针对每个Alerts调用了scaleService方法。scaleService才是真正处理伸缩服务的函数。\nfunc scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error { var err error serviceName := alert.Labels.FunctionName if len(serviceName)  0 { queryResponse, getErr := service.GetReplicas(serviceName) if getErr == nil { status := alert.Status newReplicas := CalculateReplicas(status, queryResponse.Replicas, uint64(queryResponse.MaxReplicas), queryResponse.MinReplicas, queryResponse.ScalingFactor) log.Printf(\"[Scale] function=%s %d = %d.\\n\", serviceName, queryResponse.Replicas, newReplicas) if newReplicas == queryResponse.Replicas { return nil } updateErr := service.SetReplicas(serviceName, newReplicas) if updateErr != nil { err = updateErr } } } return err } 从代码总就可以看到，scaleService做了三件事儿：\n  获取现在的副本数\n  计算新的副本数\n新副本数的计算方法是根据com.openfaas.scale.factor计算步长：\nstep := uint64((float64(maxReplicas) / 100) * float64(scalingFactor))   设置为新的副本数\n  从0增加副本到的最小值 我们在调用函数的时候，用的路由是：/function/:name。如果环境变量里有配置scale_from_zero为true，先用MakeScalingHandler()方法对proxyHandler进行一次包装。\nMakeScalingHandler接受参数主要是：\n  next：就是下一个httpHandlerFunc，中间件都会有这样一个参数\n  config：ScalingConfig的对象：\n// ScalingConfig for scaling behaviours type ScalingConfig struct { MaxPollCount uint // 查到的最大数量 FunctionPollInterval time.Duration // 函数调用时间间隔 CacheExpiry time.Duration // 缓存过期时间 ServiceQuery ServiceQuery // 外部服务调用的一个接口 }   这个MakeScalingHandler中间件主要做了如下的事情：\n 先从FunctionCache缓存中获取该函数的基本信息，从这个缓存可以拿到每个函数的副本数量。 为了加快函数的启动速度，如果缓存中可以获该得函数，且函数的副本数大于0，满足条件，return即可。 如果不满足上一步，就会调用SetReplicas方法设置副本数，并更新FunctionCache的缓存。  // MakeScalingHandler creates handler which can scale a function from // zero to 1 replica(s). func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config ScalingConfig) http.HandlerFunc { cache := FunctionCache{ Cache: make(map[string]*FunctionMeta), Expiry: config.CacheExpiry, } return func(w http.ResponseWriter, r *http.Request) { functionName := getServiceName(r.URL.String()) if serviceQueryResponse, hit := cache.Get(functionName); hit \u0026\u0026 serviceQueryResponse.AvailableReplicas  0 { next.ServeHTTP(w, r) return } queryResponse, err := config.ServiceQuery.GetReplicas(functionName) cache.Set(functionName, queryResponse) // 省略错误处理 if queryResponse.AvailableReplicas == 0 { minReplicas := uint64(1) if queryResponse.MinReplicas  0 { minReplicas = queryResponse.MinReplicas } err := config.ServiceQuery.SetReplicas(functionName, minReplicas) // 省略错误处理代码 for i := 0; i 监控 监控是一个定时任务，开启了一个新协程，利用go的ticker.C的间隔不停的去调用/system/functions接口。反序列化到MetricOptions对象中。\nfunc AttachExternalWatcher(endpointURL url.URL, metricsOptions MetricOptions, label string, interval time.Duration) { ticker := time.NewTicker(interval) quit := make(chan struct{}) proxyClient := // 省略创建一个http.Client对象 go func() { for { select { case UI UI的代码很简单，主要就是一些前端的代码，调用上面的讲的一些API接口即可，这里就略去不表。\n总结 Gateway是OpenFaaS最为重要的一个组件。回过头看整个项目的结构，Gateway就是一个rest转发服务，一个一个的handler，每个模块之间的耦合性不是很高，可以很容易的去拆卸，自定义实现相应的模块。\n","wordCount":"916","inLanguage":"en","datePublished":"2018-08-01T09:15:35Z","dateModified":"2018-08-01T09:15:35Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/gateway-reading/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"gateway-reading","name":"gateway-reading","description":"OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：\n UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider， …","keywords":[],"articleBody":"OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：\n UI 部署函数 监控 自动伸缩  架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。\n源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。\ngo-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。\nclient_golang 是 Prometheus 的客户端。\n项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test.go │ ├── asyncreport.go │ ├── baseurlresolver_test.go │ ├── basic_auth.go │ ├── basic_auth_test.go │ ├── callid_middleware.go │ ├── cors.go │ ├── cors_test.go │ ├── forwarding_proxy.go │ ├── forwarding_proxy_test.go │ ├── function_cache.go │ ├── function_cache_test.go │ ├── infohandler.go │ ├── metrics.go │ ├── queueproxy.go │ ├── scaling.go │ └── service_query.go ├── metrics │ ├── add_metrics.go │ ├── add_metrics_test.go │ ├── externalwatcher.go │ ├── metrics.go │ └── prometheus_query.go ├── plugin │ ├── external.go │ └── external_test.go ├── queue │ └── types.go ├── requests │ ├── forward_request.go │ ├── forward_request_test.go │ ├── prometheus.go │ ├── prometheus_test.go │ └── requests.go ├── server.go ├── tests │ └── integration ├── types │ ├── handler_set.go │ ├── inforequest.go │ ├── load_credentials.go │ ├── proxy_client.go │ ├── readconfig.go │ └── readconfig_test.go ├── vendor │ └── github.com └── version └── version.go Gateway 的目录明显多了很多，看源码的时候，首先要找到的是 main 包，从 main 函数看起，就能很容易分析出来项目是如何运行的。\n从 server.go 的 main 函数中我们可以看到，其实有如下几个模块：\n 基本的安全验证 和函数相关的代理转发  同步函数  列出函数 部署函数 删除函数 更新函数   异步函数   Prometheus 的监控 ui 自动伸缩  基本的安全验证 如果配置了开启基本安全验证，会从磁盘中读取密钥：\nvar credentials *types.BasicAuthCredentials if config.UseBasicAuth { var readErr error reader := types.ReadBasicAuthFromDisk{ SecretMountPath: config.SecretMountPath, } credentials, readErr = reader.Read() if readErr != nil { log.Panicf(readErr.Error()) } } 在 Gateway 的配置相关的，都会有一个 read()方法，进行初始化赋值。\n如果 credentials 被赋值之后，就会对一些要加密的 API handler 进行一个修饰，被修饰的 API 有：\n UpdateFunction DeleteFunction DeployFunction ListFunctions ScaleFunction  if credentials != nil { faasHandlers.UpdateFunction = handlers.DecorateWithBasicAuth(faasHandlers.UpdateFunction, credentials) faasHandlers.DeleteFunction = handlers.DecorateWithBasicAuth(faasHandlers.DeleteFunction, credentials) faasHandlers.DeployFunction = handlers.DecorateWithBasicAuth(faasHandlers.DeployFunction, credentials) faasHandlers.ListFunctions = handlers.DecorateWithBasicAuth(faasHandlers.ListFunctions, credentials) faasHandlers.ScaleFunction = handlers.DecorateWithBasicAuth(faasHandlers.ScaleFunction, credentials) } 这个 DecorateWithBasicAuth()方法是一个路由中间件：\n 调用 mux 路由的 BasicAuth()，从 http 的 header 中取到用户名和密码 然后给请求头上设置一个字段WWW-Authenticate，值为Basic realm=\"Restricted\" 如果校验失败，则返回错误，成功的话调用 next 方法继续进入下一个 handler。  // DecorateWithBasicAuth enforces basic auth as a middleware with given credentials func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCredentials) http.HandlerFunc { return func(w http.ResponseWriter, r *http.Request) { user, password, ok := r.BasicAuth() w.Header().Set(\"WWW-Authenticate\", `Basic realm=\"Restricted\"`) if !ok || !(credentials.Password == password \u0026\u0026 user == credentials.User) { w.WriteHeader(http.StatusUnauthorized) w.Write([]byte(\"invalid credentials\")) return } next.ServeHTTP(w, r) } } 代理转发 Gateway 本身不做任何和部署发布函数的事情，它只是作为一个代理，把请求转发给相应的 Provider 去处理，所有的请求都要通过这个网关。\n同步函数转发 主要转发的 API 有：\n RoutelessProxy ListFunctions DeployFunction DeleteFunction UpdateFunction  faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) faasHandlers.ListFunctions = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) faasHandlers.DeployFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) faasHandlers.DeleteFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) faasHandlers.UpdateFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver) MakeForwardingProxyHandler()有三个参数：\n  proxy\n这是一个 http 的客户端，作者把这个客户端抽成一个类，然后使用该类的 NewHTTPClientReverseProxy 方法创建实例，这样就简化了代码，不用每次都得写一堆相同的配置。\n  notifiers\n这个其实是要打印的日志，这里是一个 HTTPNotifier 的接口。而在这个 MakeForwardingProxyHandler 中其实有两个实现类，一个是 LoggingNotifier，一个是 PrometheusFunctionNotifier，分别用来打印和函数 http 请求相关的日志以及和 Prometheus 监控相关的日志。\n  baseURLResolver\n这个就是 Provider 的 url 地址。\n  在这个 MakeForwardingProxyHandler 中主要做了三件事儿：\n  解析要转发的 url\n  调用 forwardRequest 方法转发请求，\nforwardRequest 方法的逻辑比较简单，只是把请求发出去。这里就不深入分析了。\n  打印日志\n  // MakeForwardingProxyHandler create a handler which forwards HTTP requests func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers []HTTPNotifier, baseURLResolver BaseURLResolver) http.HandlerFunc { return func(w http.ResponseWriter, r *http.Request) { baseURL := baseURLResolver.Resolve(r) requestURL := r.URL.Path start := time.Now() statusCode, err := forwardRequest(w, r, proxy.Client, baseURL, requestURL, proxy.Timeout) seconds := time.Since(start) if err != nil { log.Printf(\"error with upstream request to: %s, %s\\n\", requestURL, err.Error()) } for _, notifier := range notifiers { notifier.Notify(r.Method, requestURL, statusCode, seconds) } } } 异步函数转发 前面说过，如果是异步函数，Gateway 就作为一个发布者，将函数放到队列里。MakeQueuedProxy 方法就是做这件事儿的：\n 读取请求体 将X-Callback-Url参数从参数中 http 的 header 中读出来 实例化用于异步处理的 Request 对象 调用 canQueueRequests.Queue(req)，将请求发布到队列中  // MakeQueuedProxy accepts work onto a queue func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueRequests queue.CanQueueRequests) http.HandlerFunc { return func(w http.ResponseWriter, r *http.Request) { defer r.Body.Close() body, err := ioutil.ReadAll(r.Body) // 省略错误处理代码 vars := mux.Vars(r) name := vars[\"name\"] callbackURLHeader := r.Header.Get(\"X-Callback-Url\") var callbackURL *url.URL if len(callbackURLHeader)  0 { urlVal, urlErr := url.Parse(callbackURLHeader) // 省略错误处理代码 callbackURL = urlVal } req := \u0026queue.Request{ Function: name, Body: body, Method: r.Method, QueryString: r.URL.RawQuery, Header: r.Header, CallbackURL: callbackURL, } err = canQueueRequests.Queue(req) // 省略错误处理代码 w.WriteHeader(http.StatusAccepted) } } 自动伸缩 伸缩性其实有两种，一种是可以通过调用 API 接口，来将函数进行缩放。另外一种就是通过 AlertHandler。\n自动伸缩是 OpenFaaS 的一大特点，触发自动伸缩主要是根据不同的指标需求。\n  根据每秒请求数来做伸缩\nOpenFaaS 附带了一个自动伸缩的规则，这个规则是在 AlertManager 配置文件中定义。AlertManager 从 Prometheus 中读取使用情况（每秒请求数），然后在满足一定条件时向 Gateway 发送警报。\n可以通过删除 AlertManager，或者将部署扩展的环境变量设置为 0，来禁用此方式。\n  最小/最大副本数\n通过向函数添加标签, 可以在部署时设置最小 (初始) 和最大副本数。\n com.openfaas.scale.min 默认是 1 com.openfaas.scale.max 默认是 20 com.openfaas.scale.factor 默认是 20% ，在 0-100 之间，这是每次扩容的时候，新增实例的百分比，若是 100 的话，会瞬间飙升到副本数的最大值。  com.openfaas.scale.min 和 com.openfaas.scale.max值一样的时候，可以关闭自动伸缩。\ncom.openfaas.scale.factor是 0 时，也会关闭自动伸缩。\n  通过内存和 CPU 的使用量。\n使用 k8s 内置的 HPA，也可以触发 AlertManager。\n  手动指定伸缩的值 可以从这句代码中发现，调用这个路由，转发给了 provider 处理。\nr.HandleFunc(\"/system/scale-function/{name:[-a-zA-Z_0-9]+}\", faasHandlers.ScaleFunction).Methods(http.MethodPost) 处理 AlertManager 的伸缩请求 Prometheus 将监控指标发给 AlertManager 之后，会触发 AlterManager 调用/system/alert接口，这个接口的 handler 是由handlers.MakeAlertHandler方法生成。\nMakeAlertHandler 方法接收的参数是 ServiceQuery。ServiceQuery 是一个接口，它有两个函数，用来 get 或者 ser 最大的副本数。Gateway 中实现这个接口的类是 ExternalServiceQuery，这个实现类是在 plugin 包中，我们也可以直接定制这个实现类，用来实现满足特定条件。\n// ServiceQuery provides interface for replica querying/setting type ServiceQuery interface { GetReplicas(service string) (response ServiceQueryResponse, err error) SetReplicas(service string, count uint64) error } // ExternalServiceQuery proxies service queries to external plugin via HTTP type ExternalServiceQuery struct { URL url.URL ProxyClient http.Client } 这个 ExternalServiceQuery 有一个NewExternalServiceQuery方法，这个方法也是一个工厂方法，用来创建实例。这个 url 其实就是 provider 的 url，proxyClient 就是一个 http 的 client 对象。\n  GetReplicas方法\n从system/function/:name接口获取到函数的信息，组装一个ServiceQueryResponse对象即可。\n  SetReplicas方法\n调用system/scale-function/:name接口，设置副本数。\n  MakeAlertHandler 的函数主要是从http.Request中读取 body，然后反序列化成PrometheusAlert对象：\n// PrometheusAlert as produced by AlertManager type PrometheusAlert struct { Status string `json:\"status\"` Receiver string `json:\"receiver\"` Alerts []PrometheusInnerAlert `json:\"alerts\"` } 可以发现，这个 Alerts 是一个数组对象，所以可以是对多个函数进行缩放。反序列化之后，调用handleAlerts方法，而handleAlerts对 Alerts 进行遍历，针对每个 Alerts 调用了scaleService方法。scaleService才是真正处理伸缩服务的函数。\nfunc scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error { var err error serviceName := alert.Labels.FunctionName if len(serviceName)  0 { queryResponse, getErr := service.GetReplicas(serviceName) if getErr == nil { status := alert.Status newReplicas := CalculateReplicas(status, queryResponse.Replicas, uint64(queryResponse.MaxReplicas), queryResponse.MinReplicas, queryResponse.ScalingFactor) log.Printf(\"[Scale] function=%s %d = %d.\\n\", serviceName, queryResponse.Replicas, newReplicas) if newReplicas == queryResponse.Replicas { return nil } updateErr := service.SetReplicas(serviceName, newReplicas) if updateErr != nil { err = updateErr } } } return err } 从代码总就可以看到，scaleService 做了三件事儿：\n  获取现在的副本数\n  计算新的副本数\n新副本数的计算方法是根据com.openfaas.scale.factor计算步长：\nstep := uint64((float64(maxReplicas) / 100) * float64(scalingFactor))   设置为新的副本数\n  从 0 增加副本到的最小值 我们在调用函数的时候，用的路由是：/function/:name。如果环境变量里有配置scale_from_zero为 true，先用MakeScalingHandler()方法对 proxyHandler 进行一次包装。\nMakeScalingHandler接受参数主要是：\n  next：就是下一个 httpHandlerFunc，中间件都会有这样一个参数\n  config：ScalingConfig的对象：\n// ScalingConfig for scaling behaviours type ScalingConfig struct { MaxPollCount uint // 查到的最大数量 FunctionPollInterval time.Duration // 函数调用时间间隔 CacheExpiry time.Duration // 缓存过期时间 ServiceQuery ServiceQuery // 外部服务调用的一个接口 }   这个MakeScalingHandler中间件主要做了如下的事情：\n 先从 FunctionCache 缓存中获取该函数的基本信息，从这个缓存可以拿到每个函数的副本数量。 为了加快函数的启动速度，如果缓存中可以获该得函数，且函数的副本数大于 0，满足条件，return 即可。 如果不满足上一步，就会调用SetReplicas方法设置副本数，并更新 FunctionCache 的缓存。  // MakeScalingHandler creates handler which can scale a function from // zero to 1 replica(s). func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config ScalingConfig) http.HandlerFunc { cache := FunctionCache{ Cache: make(map[string]*FunctionMeta), Expiry: config.CacheExpiry, } return func(w http.ResponseWriter, r *http.Request) { functionName := getServiceName(r.URL.String()) if serviceQueryResponse, hit := cache.Get(functionName); hit \u0026\u0026 serviceQueryResponse.AvailableReplicas  0 { next.ServeHTTP(w, r) return } queryResponse, err := config.ServiceQuery.GetReplicas(functionName) cache.Set(functionName, queryResponse) // 省略错误处理 if queryResponse.AvailableReplicas == 0 { minReplicas := uint64(1) if queryResponse.MinReplicas  0 { minReplicas = queryResponse.MinReplicas } err := config.ServiceQuery.SetReplicas(functionName, minReplicas) // 省略错误处理代码 for i := 0; i 监控 监控是一个定时任务，开启了一个新协程，利用 go 的 ticker.C 的间隔不停的去调用/system/functions接口。反序列化到 MetricOptions 对象中。\nfunc AttachExternalWatcher(endpointURL url.URL, metricsOptions MetricOptions, label string, interval time.Duration) { ticker := time.NewTicker(interval) quit := make(chan struct{}) proxyClient := // 省略创建一个http.Client对象 go func() { for { select { case UI UI 的代码很简单，主要就是一些前端的代码，调用上面的讲的一些 API 接口即可，这里就略去不表。\n总结 Gateway 是 OpenFaaS 最为重要的一个组件。回过头看整个项目的结构，Gateway 就是一个 rest 转发服务，一个一个的 handler，每个模块之间的耦合性不是很高，可以很容易的去拆卸，自定义实现相应的模块。\n","wordCount":"1109","inLanguage":"en","datePublished":"2018-08-01T09:15:35Z","dateModified":"2018-08-01T09:15:35Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/gateway-reading/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -61,6 +61,11 @@ client_golang是Prometheus的客户端。
 </span>
 </div>
 <ul id=menu onscroll=menu_on_scroll()>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
 <li>
 <a href=https://zhenfeng-zhu.github.io/about title=About>
 <span>About</span>
@@ -83,11 +88,41 @@ client_golang是Prometheus的客户端。
 gateway-reading
 </h1>
 <div class=post-meta>
-August 1, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
+August 1, 2018&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix
 </div>
 </header>
+<div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>Table of Contents</div>
+</summary>
+<div class=inner><ul><li>
+<a href=#%e6%9e%b6%e6%9e%84%e5%88%86%e6%9e%90 aria-label=架构分析>架构分析</a></li><li>
+<a href=#%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90 aria-label=源码分析>源码分析</a><ul>
+<li>
+<a href=#%e4%be%9d%e8%b5%96 aria-label=依赖>依赖</a></li><li>
+<a href=#%e9%a1%b9%e7%9b%ae%e7%bb%93%e6%9e%84 aria-label=项目结构>项目结构</a></li><li>
+<a href=#%e5%9f%ba%e6%9c%ac%e7%9a%84%e5%ae%89%e5%85%a8%e9%aa%8c%e8%af%81 aria-label=基本的安全验证>基本的安全验证</a></li><li>
+<a href=#%e4%bb%a3%e7%90%86%e8%bd%ac%e5%8f%91 aria-label=代理转发>代理转发</a><ul>
+<li>
+<a href=#%e5%90%8c%e6%ad%a5%e5%87%bd%e6%95%b0%e8%bd%ac%e5%8f%91 aria-label=同步函数转发>同步函数转发</a></li><li>
+<a href=#%e5%bc%82%e6%ad%a5%e5%87%bd%e6%95%b0%e8%bd%ac%e5%8f%91 aria-label=异步函数转发>异步函数转发</a></li><li>
+<a href=#%e8%87%aa%e5%8a%a8%e4%bc%b8%e7%bc%a9 aria-label=自动伸缩>自动伸缩</a><ul>
+<li>
+<a href=#%e6%89%8b%e5%8a%a8%e6%8c%87%e5%ae%9a%e4%bc%b8%e7%bc%a9%e7%9a%84%e5%80%bc aria-label=手动指定伸缩的值>手动指定伸缩的值</a></li><li>
+<a href=#%e5%a4%84%e7%90%86-alertmanager-%e7%9a%84%e4%bc%b8%e7%bc%a9%e8%af%b7%e6%b1%82 aria-label="处理 AlertManager 的伸缩请求">处理 AlertManager 的伸缩请求</a></li><li>
+<a href=#%e4%bb%8e-0-%e5%a2%9e%e5%8a%a0%e5%89%af%e6%9c%ac%e5%88%b0%e7%9a%84%e6%9c%80%e5%b0%8f%e5%80%bc aria-label="从 0 增加副本到的最小值">从 0 增加副本到的最小值</a></li></ul>
+</li></ul>
+</li><li>
+<a href=#%e7%9b%91%e6%8e%a7 aria-label=监控>监控</a></li><li>
+<a href=#ui aria-label=UI>UI</a></li></ul>
+</li><li>
+<a href=#%e6%80%bb%e7%bb%93 aria-label=总结>总结</a></li></ul>
+</div>
+</details>
+</div>
 <div class=post-content>
-<p>OpenFaaS的Gateway是一个golang实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：</p>
+<p>OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：</p>
 <ul>
 <li>UI</li>
 <li>部署函数</li>
@@ -96,19 +131,19 @@ August 1, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
 </ul>
 <h2 id=架构分析>架构分析<a hidden class=anchor aria-hidden=true href=#架构分析>#</a></h2>
 <p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1fttxzimdp3j20sm0hqabx.jpg alt=图：Kubernetes作为Provider的架构图></p>
-<p>从图中可以发现，当Gateway作为一个入口，当CLI或者web页面发来要部署或者调用一个函数的时候，Gateway会将请求转发给Provider，同时会将监控指标发给Prometheus。AlterManager会根据需求，调用API自动伸缩函数。</p>
+<p>从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。</p>
 <h2 id=源码分析>源码分析<a hidden class=anchor aria-hidden=true href=#源码分析>#</a></h2>
 <h3 id=依赖>依赖<a hidden class=anchor aria-hidden=true href=#依赖>#</a></h3>
-<pre tabindex=0><code>github.com/gorilla/mux
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>github.com/gorilla/mux
 
 github.com/nats-io/go-nats-streaming
 github.com/nats-io/go-nats
 github.com/openfaas/nats-queue-worker
 
 github.com/prometheus/client_golang
-</code></pre><p>mux 是一个用来执行http请求的路由和分发的第三方扩展包。</p>
-<p>go-nats-streaming，go-nats，nats-queue-worker这三个依赖是异步函数的时候才会用到，在分析queue-worker的时候有说到Gateway也是一个发布者。</p>
-<p>client_golang是Prometheus的客户端。</p>
+</code></pre></div><p>mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。</p>
+<p>go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。</p>
+<p>client_golang 是 Prometheus 的客户端。</p>
 <h3 id=项目结构>项目结构<a hidden class=anchor aria-hidden=true href=#项目结构>#</a></h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>├── Dockerfile
 ├── Dockerfile.arm64
@@ -168,8 +203,8 @@ github.com/prometheus/client_golang
 │   └── github.com
 └── version
     └── version.go
-</code></pre></div><p>Gateway的目录明显多了很多，看源码的时候，首先要找到的是main包，从main函数看起，就能很容易分析出来项目是如何运行的。</p>
-<p>从server.go的main函数中我们可以看到，其实有如下几个模块：</p>
+</code></pre></div><p>Gateway 的目录明显多了很多，看源码的时候，首先要找到的是 main 包，从 main 函数看起，就能很容易分析出来项目是如何运行的。</p>
+<p>从 server.go 的 main 函数中我们可以看到，其实有如下几个模块：</p>
 <ul>
 <li>基本的安全验证</li>
 <li>和函数相关的代理转发
@@ -185,13 +220,13 @@ github.com/prometheus/client_golang
 <li>异步函数</li>
 </ul>
 </li>
-<li>Prometheus的监控</li>
+<li>Prometheus 的监控</li>
 <li>ui</li>
 <li>自动伸缩</li>
 </ul>
 <h3 id=基本的安全验证>基本的安全验证<a hidden class=anchor aria-hidden=true href=#基本的安全验证>#</a></h3>
 <p>如果配置了开启基本安全验证，会从磁盘中读取密钥：</p>
-<pre tabindex=0><code>var credentials *types.BasicAuthCredentials
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>var credentials *types.BasicAuthCredentials
 
 if config.UseBasicAuth {
 	var readErr error
@@ -204,8 +239,8 @@ if config.UseBasicAuth {
 		log.Panicf(readErr.Error())
 	}
 }
-</code></pre><p>在Gateway的配置相关的，都会有一个read()方法，进行初始化赋值。</p>
-<p>如果credentials被赋值之后，就会对一些要加密的API handler进行一个修饰，被修饰的API有：</p>
+</code></pre></div><p>在 Gateway 的配置相关的，都会有一个 read()方法，进行初始化赋值。</p>
+<p>如果 credentials 被赋值之后，就会对一些要加密的 API handler 进行一个修饰，被修饰的 API 有：</p>
 <ul>
 <li>UpdateFunction</li>
 <li>DeleteFunction</li>
@@ -213,7 +248,7 @@ if config.UseBasicAuth {
 <li>ListFunctions</li>
 <li>ScaleFunction</li>
 </ul>
-<pre tabindex=0><code>if credentials != nil {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>if credentials != nil {
 	faasHandlers.UpdateFunction =
 			handlers.DecorateWithBasicAuth(faasHandlers.UpdateFunction, credentials)
 	faasHandlers.DeleteFunction =
@@ -225,31 +260,31 @@ if config.UseBasicAuth {
 	faasHandlers.ScaleFunction =
 			handlers.DecorateWithBasicAuth(faasHandlers.ScaleFunction, credentials)
 }
-</code></pre><p>这个DecorateWithBasicAuth()方法是一个路由中间件：</p>
+</code></pre></div><p>这个 DecorateWithBasicAuth()方法是一个路由中间件：</p>
 <ol>
-<li>调用mux路由的BasicAuth()，从http的header中取到用户名和密码</li>
+<li>调用 mux 路由的 BasicAuth()，从 http 的 header 中取到用户名和密码</li>
 <li>然后给请求头上设置一个字段<code>WWW-Authenticate</code>，值为<code>Basic realm="Restricted"</code></li>
-<li>如果校验失败，则返回错误，成功的话调用next方法继续进入下一个handler。</li>
+<li>如果校验失败，则返回错误，成功的话调用 next 方法继续进入下一个 handler。</li>
 </ol>
-<pre tabindex=0><code>// DecorateWithBasicAuth enforces basic auth as a middleware with given credentials
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// DecorateWithBasicAuth enforces basic auth as a middleware with given credentials
 func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCredentials) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		user, password, ok := r.BasicAuth()
-		w.Header().Set(&quot;WWW-Authenticate&quot;, `Basic realm=&quot;Restricted&quot;`)
+		w.Header().Set(&#34;WWW-Authenticate&#34;, `Basic realm=&#34;Restricted&#34;`)
 
 		if !ok || !(credentials.Password == password &amp;&amp; user == credentials.User) {
 
 			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte(&quot;invalid credentials&quot;))
+			w.Write([]byte(&#34;invalid credentials&#34;))
 			return
 		}
 		next.ServeHTTP(w, r)
 	}
 }
-</code></pre><h3 id=代理转发>代理转发<a hidden class=anchor aria-hidden=true href=#代理转发>#</a></h3>
-<p>Gateway本身不做任何和部署发布函数的事情，它只是作为一个代理，把请求转发给相应的Provider去处理，所有的请求都要通过这个网关。</p>
+</code></pre></div><h3 id=代理转发>代理转发<a hidden class=anchor aria-hidden=true href=#代理转发>#</a></h3>
+<p>Gateway 本身不做任何和部署发布函数的事情，它只是作为一个代理，把请求转发给相应的 Provider 去处理，所有的请求都要通过这个网关。</p>
 <h4 id=同步函数转发>同步函数转发<a hidden class=anchor aria-hidden=true href=#同步函数转发>#</a></h4>
-<p>主要转发的API有：</p>
+<p>主要转发的 API 有：</p>
 <ul>
 <li>RoutelessProxy</li>
 <li>ListFunctions</li>
@@ -257,40 +292,40 @@ func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCr
 <li>DeleteFunction</li>
 <li>UpdateFunction</li>
 </ul>
-<pre tabindex=0><code>faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
 	faasHandlers.ListFunctions = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
 	faasHandlers.DeployFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
 	faasHandlers.DeleteFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
 	faasHandlers.UpdateFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
-</code></pre><p>MakeForwardingProxyHandler()有三个参数：</p>
+</code></pre></div><p>MakeForwardingProxyHandler()有三个参数：</p>
 <ul>
 <li>
 <p>proxy</p>
-<p>这是一个http的客户端，作者把这个客户端抽成一个类，然后使用该类的NewHTTPClientReverseProxy方法创建实例，这样就简化了代码，不用每次都得写一堆相同的配置。</p>
+<p>这是一个 http 的客户端，作者把这个客户端抽成一个类，然后使用该类的 NewHTTPClientReverseProxy 方法创建实例，这样就简化了代码，不用每次都得写一堆相同的配置。</p>
 </li>
 <li>
 <p>notifiers</p>
-<p>这个其实是要打印的日志，这里是一个HTTPNotifier的接口。而在这个MakeForwardingProxyHandler中其实有两个实现类，一个是LoggingNotifier，一个是PrometheusFunctionNotifier，分别用来打印和函数http请求相关的日志以及和Prometheus监控相关的日志。</p>
+<p>这个其实是要打印的日志，这里是一个 HTTPNotifier 的接口。而在这个 MakeForwardingProxyHandler 中其实有两个实现类，一个是 LoggingNotifier，一个是 PrometheusFunctionNotifier，分别用来打印和函数 http 请求相关的日志以及和 Prometheus 监控相关的日志。</p>
 </li>
 <li>
 <p>baseURLResolver</p>
-<p>这个就是Provider的url地址。</p>
+<p>这个就是 Provider 的 url 地址。</p>
 </li>
 </ul>
-<p>在这个MakeForwardingProxyHandler中主要做了三件事儿：</p>
+<p>在这个 MakeForwardingProxyHandler 中主要做了三件事儿：</p>
 <ol>
 <li>
-<p>解析要转发的url</p>
+<p>解析要转发的 url</p>
 </li>
 <li>
-<p>调用forwardRequest方法转发请求，</p>
-<p>forwardRequest方法的逻辑比较简单，只是把请求发出去。这里就不深入分析了。</p>
+<p>调用 forwardRequest 方法转发请求，</p>
+<p>forwardRequest 方法的逻辑比较简单，只是把请求发出去。这里就不深入分析了。</p>
 </li>
 <li>
 <p>打印日志</p>
 </li>
 </ol>
-<pre tabindex=0><code>// MakeForwardingProxyHandler create a handler which forwards HTTP requests
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// MakeForwardingProxyHandler create a handler which forwards HTTP requests
 func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers []HTTPNotifier, baseURLResolver BaseURLResolver) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		baseURL := baseURLResolver.Resolve(r)
@@ -299,31 +334,31 @@ func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers [
 		statusCode, err := forwardRequest(w, r, proxy.Client, baseURL, requestURL, proxy.Timeout)
 		seconds := time.Since(start)
 		if err != nil {
-			log.Printf(&quot;error with upstream request to: %s, %s\n&quot;, requestURL, err.Error())
+			log.Printf(&#34;error with upstream request to: %s, %s\n&#34;, requestURL, err.Error())
 		}
 		for _, notifier := range notifiers {
 			notifier.Notify(r.Method, requestURL, statusCode, seconds)
 		}
 	}
 }
-</code></pre><h4 id=异步函数转发>异步函数转发<a hidden class=anchor aria-hidden=true href=#异步函数转发>#</a></h4>
-<p>前面说过，如果是异步函数，Gateway就作为一个发布者，将函数放到队列里。MakeQueuedProxy方法就是做这件事儿的：</p>
+</code></pre></div><h4 id=异步函数转发>异步函数转发<a hidden class=anchor aria-hidden=true href=#异步函数转发>#</a></h4>
+<p>前面说过，如果是异步函数，Gateway 就作为一个发布者，将函数放到队列里。MakeQueuedProxy 方法就是做这件事儿的：</p>
 <ol>
 <li>读取请求体</li>
-<li>将<code>X-Callback-Url</code>参数从参数中http的header中读出来</li>
-<li>实例化用于异步处理的Request对象</li>
-<li>调用canQueueRequests.Queue(req)，将请求发布到队列中</li>
+<li>将<code>X-Callback-Url</code>参数从参数中 http 的 header 中读出来</li>
+<li>实例化用于异步处理的 Request 对象</li>
+<li>调用 canQueueRequests.Queue(req)，将请求发布到队列中</li>
 </ol>
-<pre tabindex=0><code>// MakeQueuedProxy accepts work onto a queue
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// MakeQueuedProxy accepts work onto a queue
 func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueRequests queue.CanQueueRequests) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 		body, err := ioutil.ReadAll(r.Body)
 		// 省略错误处理代码
 		vars := mux.Vars(r)
-		name := vars[&quot;name&quot;]
+		name := vars[&#34;name&#34;]
 
-		callbackURLHeader := r.Header.Get(&quot;X-Callback-Url&quot;)
+		callbackURLHeader := r.Header.Get(&#34;X-Callback-Url&#34;)
 		var callbackURL *url.URL
 		if len(callbackURLHeader) &gt; 0 {
 			urlVal, urlErr := url.Parse(callbackURLHeader)
@@ -343,14 +378,14 @@ func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueReque
 		w.WriteHeader(http.StatusAccepted)
 	}
 }
-</code></pre><h4 id=自动伸缩>自动伸缩<a hidden class=anchor aria-hidden=true href=#自动伸缩>#</a></h4>
-<p>伸缩性其实有两种，一种是可以通过调用API接口，来将函数进行缩放。另外一种就是通过AlertHandler。</p>
-<p>自动伸缩是OpenFaaS的一大特点，触发自动伸缩主要是根据不同的指标需求。</p>
+</code></pre></div><h4 id=自动伸缩>自动伸缩<a hidden class=anchor aria-hidden=true href=#自动伸缩>#</a></h4>
+<p>伸缩性其实有两种，一种是可以通过调用 API 接口，来将函数进行缩放。另外一种就是通过 AlertHandler。</p>
+<p>自动伸缩是 OpenFaaS 的一大特点，触发自动伸缩主要是根据不同的指标需求。</p>
 <ul>
 <li>
 <p>根据每秒请求数来做伸缩</p>
-<p>OpenFaaS附带了一个自动伸缩的规则，这个规则是在AlertManager配置文件中定义。AlertManager从Prometheus中读取使用情况（每秒请求数），然后在满足一定条件时向Gateway发送警报。</p>
-<p>可以通过删除AlertManager，或者将部署扩展的环境变量设置为0，来禁用此方式。</p>
+<p>OpenFaaS 附带了一个自动伸缩的规则，这个规则是在 AlertManager 配置文件中定义。AlertManager 从 Prometheus 中读取使用情况（每秒请求数），然后在满足一定条件时向 Gateway 发送警报。</p>
+<p>可以通过删除 AlertManager，或者将部署扩展的环境变量设置为 0，来禁用此方式。</p>
 </li>
 <li>
 <p>最小/最大副本数</p>
@@ -358,23 +393,23 @@ func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueReque
 <ul>
 <li><code>com.openfaas.scale.min</code> 默认是 <code>1</code></li>
 <li><code>com.openfaas.scale.max</code> 默认是 <code>20</code></li>
-<li><code>com.openfaas.scale.factor</code> 默认是 <code>20%</code> ，在0-100之间，这是每次扩容的时候，新增实例的百分比，若是100的话，会瞬间飙升到副本数的最大值。</li>
+<li><code>com.openfaas.scale.factor</code> 默认是 <code>20%</code> ，在 0-100 之间，这是每次扩容的时候，新增实例的百分比，若是 100 的话，会瞬间飙升到副本数的最大值。</li>
 </ul>
 <p><code>com.openfaas.scale.min</code> 和 <code>com.openfaas.scale.max</code>值一样的时候，可以关闭自动伸缩。</p>
-<p><code>com.openfaas.scale.factor</code>是0时，也会关闭自动伸缩。</p>
+<p><code>com.openfaas.scale.factor</code>是 0 时，也会关闭自动伸缩。</p>
 </li>
 <li>
-<p>通过内存和CPU的使用量。</p>
-<p>使用k8s内置的HPA，也可以触发AlertManager。</p>
+<p>通过内存和 CPU 的使用量。</p>
+<p>使用 k8s 内置的 HPA，也可以触发 AlertManager。</p>
 </li>
 </ul>
 <h5 id=手动指定伸缩的值>手动指定伸缩的值<a hidden class=anchor aria-hidden=true href=#手动指定伸缩的值>#</a></h5>
-<p>可以从这句代码中发现，调用这个路由，转发给了provider处理。</p>
-<pre tabindex=0><code>r.HandleFunc(&quot;/system/scale-function/{name:[-a-zA-Z_0-9]+}&quot;, faasHandlers.ScaleFunction).Methods(http.MethodPost)
-</code></pre><h5 id=处理alertmanager的伸缩请求>处理AlertManager的伸缩请求<a hidden class=anchor aria-hidden=true href=#处理alertmanager的伸缩请求>#</a></h5>
-<p>Prometheus将监控指标发给AlertManager之后，会触发AlterManager调用<code>/system/alert</code>接口，这个接口的handler是由<code>handlers.MakeAlertHandler</code>方法生成。</p>
-<p>MakeAlertHandler方法接收的参数是ServiceQuery。ServiceQuery是一个接口，它有两个函数，用来get或者ser最大的副本数。Gateway中实现这个接口的类是ExternalServiceQuery，这个实现类是在plugin包中，我们也可以直接定制这个实现类，用来实现满足特定条件。</p>
-<pre tabindex=0><code>// ServiceQuery provides interface for replica querying/setting
+<p>可以从这句代码中发现，调用这个路由，转发给了 provider 处理。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>r.HandleFunc(&#34;/system/scale-function/{name:[-a-zA-Z_0-9]+}&#34;, faasHandlers.ScaleFunction).Methods(http.MethodPost)
+</code></pre></div><h5 id=处理-alertmanager-的伸缩请求>处理 AlertManager 的伸缩请求<a hidden class=anchor aria-hidden=true href=#处理-alertmanager-的伸缩请求>#</a></h5>
+<p>Prometheus 将监控指标发给 AlertManager 之后，会触发 AlterManager 调用<code>/system/alert</code>接口，这个接口的 handler 是由<code>handlers.MakeAlertHandler</code>方法生成。</p>
+<p>MakeAlertHandler 方法接收的参数是 ServiceQuery。ServiceQuery 是一个接口，它有两个函数，用来 get 或者 ser 最大的副本数。Gateway 中实现这个接口的类是 ExternalServiceQuery，这个实现类是在 plugin 包中，我们也可以直接定制这个实现类，用来实现满足特定条件。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// ServiceQuery provides interface for replica querying/setting
 type ServiceQuery interface {
 	GetReplicas(service string) (response ServiceQueryResponse, err error)
 	SetReplicas(service string, count uint64) error
@@ -385,7 +420,7 @@ type ExternalServiceQuery struct {
 	URL         url.URL
 	ProxyClient http.Client
 }
-</code></pre><p>这个ExternalServiceQuery有一个<code>NewExternalServiceQuery</code>方法，这个方法也是一个工厂方法，用来创建实例。这个url其实就是provider的url，proxyClient就是一个http的client对象。</p>
+</code></pre></div><p>这个 ExternalServiceQuery 有一个<code>NewExternalServiceQuery</code>方法，这个方法也是一个工厂方法，用来创建实例。这个 url 其实就是 provider 的 url，proxyClient 就是一个 http 的 client 对象。</p>
 <ul>
 <li>
 <p><code>GetReplicas</code>方法</p>
@@ -396,15 +431,15 @@ type ExternalServiceQuery struct {
 <p>调用<code>system/scale-function/:name</code>接口，设置副本数。</p>
 </li>
 </ul>
-<p>MakeAlertHandler的函数主要是从<code>http.Request</code>中读取body，然后反序列化成<code>PrometheusAlert</code>对象：</p>
-<pre tabindex=0><code>// PrometheusAlert as produced by AlertManager
+<p>MakeAlertHandler 的函数主要是从<code>http.Request</code>中读取 body，然后反序列化成<code>PrometheusAlert</code>对象：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// PrometheusAlert as produced by AlertManager
 type PrometheusAlert struct {
-	Status   string                 `json:&quot;status&quot;`
-	Receiver string                 `json:&quot;receiver&quot;`
-	Alerts   []PrometheusInnerAlert `json:&quot;alerts&quot;`
+	Status   string                 `json:&#34;status&#34;`
+	Receiver string                 `json:&#34;receiver&#34;`
+	Alerts   []PrometheusInnerAlert `json:&#34;alerts&#34;`
 }
-</code></pre><p>可以发现，这个Alerts是一个数组对象，所以可以是对多个函数进行缩放。反序列化之后，调用<code>handleAlerts</code>方法，而<code>handleAlerts</code>对Alerts进行遍历，针对每个Alerts调用了<code>scaleService</code>方法。<code>scaleService</code>才是真正处理伸缩服务的函数。</p>
-<pre tabindex=0><code>func scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error {
+</code></pre></div><p>可以发现，这个 Alerts 是一个数组对象，所以可以是对多个函数进行缩放。反序列化之后，调用<code>handleAlerts</code>方法，而<code>handleAlerts</code>对 Alerts 进行遍历，针对每个 Alerts 调用了<code>scaleService</code>方法。<code>scaleService</code>才是真正处理伸缩服务的函数。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error {
 	var err error
 	serviceName := alert.Labels.FunctionName
 
@@ -415,7 +450,7 @@ type PrometheusAlert struct {
 
 			newReplicas := CalculateReplicas(status, queryResponse.Replicas, uint64(queryResponse.MaxReplicas), queryResponse.MinReplicas, queryResponse.ScalingFactor)
 
-			log.Printf(&quot;[Scale] function=%s %d =&gt; %d.\n&quot;, serviceName, queryResponse.Replicas, newReplicas)
+			log.Printf(&#34;[Scale] function=%s %d =&gt; %d.\n&#34;, serviceName, queryResponse.Replicas, newReplicas)
 			if newReplicas == queryResponse.Replicas {
 				return nil
 			}
@@ -428,7 +463,7 @@ type PrometheusAlert struct {
 	}
 	return err
 }
-</code></pre><p>从代码总就可以看到，scaleService做了三件事儿：</p>
+</code></pre></div><p>从代码总就可以看到，scaleService 做了三件事儿：</p>
 <ul>
 <li>
 <p>获取现在的副本数</p>
@@ -436,37 +471,37 @@ type PrometheusAlert struct {
 <li>
 <p>计算新的副本数</p>
 <p>新副本数的计算方法是根据<code>com.openfaas.scale.factor</code>计算步长：</p>
-<pre tabindex=0><code>step := uint64((float64(maxReplicas) / 100) * float64(scalingFactor))
-</code></pre></li>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>step := uint64((float64(maxReplicas) / 100) * float64(scalingFactor))
+</code></pre></div></li>
 <li>
 <p>设置为新的副本数</p>
 </li>
 </ul>
-<h5 id=从0增加副本到的最小值>从0增加副本到的最小值<a hidden class=anchor aria-hidden=true href=#从0增加副本到的最小值>#</a></h5>
-<p>我们在调用函数的时候，用的路由是：<code>/function/:name</code>。如果环境变量里有配置<code>scale_from_zero</code>为true，先用<code>MakeScalingHandler()</code>方法对proxyHandler进行一次包装。</p>
+<h5 id=从-0-增加副本到的最小值>从 0 增加副本到的最小值<a hidden class=anchor aria-hidden=true href=#从-0-增加副本到的最小值>#</a></h5>
+<p>我们在调用函数的时候，用的路由是：<code>/function/:name</code>。如果环境变量里有配置<code>scale_from_zero</code>为 true，先用<code>MakeScalingHandler()</code>方法对 proxyHandler 进行一次包装。</p>
 <p><code>MakeScalingHandler</code>接受参数主要是：</p>
 <ul>
 <li>
-<p>next：就是下一个httpHandlerFunc，中间件都会有这样一个参数</p>
+<p>next：就是下一个 httpHandlerFunc，中间件都会有这样一个参数</p>
 </li>
 <li>
 <p>config：<code>ScalingConfig</code>的对象：</p>
-<pre tabindex=0><code>// ScalingConfig for scaling behaviours
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// ScalingConfig for scaling behaviours
 type ScalingConfig struct {
 	MaxPollCount         uint              // 查到的最大数量
 	FunctionPollInterval time.Duration     // 函数调用时间间隔
 	CacheExpiry          time.Duration     // 缓存过期时间
 	ServiceQuery         ServiceQuery      // 外部服务调用的一个接口
 }
-</code></pre></li>
+</code></pre></div></li>
 </ul>
 <p>这个<code>MakeScalingHandler</code>中间件主要做了如下的事情：</p>
 <ul>
-<li>先从FunctionCache缓存中获取该函数的基本信息，从这个缓存可以拿到每个函数的副本数量。</li>
-<li>为了加快函数的启动速度，如果缓存中可以获该得函数，且函数的副本数大于0，满足条件，return即可。</li>
-<li>如果不满足上一步，就会调用<code>SetReplicas</code>方法设置副本数，并更新FunctionCache的缓存。</li>
+<li>先从 FunctionCache 缓存中获取该函数的基本信息，从这个缓存可以拿到每个函数的副本数量。</li>
+<li>为了加快函数的启动速度，如果缓存中可以获该得函数，且函数的副本数大于 0，满足条件，return 即可。</li>
+<li>如果不满足上一步，就会调用<code>SetReplicas</code>方法设置副本数，并更新 FunctionCache 的缓存。</li>
 </ul>
-<pre tabindex=0><code>// MakeScalingHandler creates handler which can scale a function from
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// MakeScalingHandler creates handler which can scale a function from
 // zero to 1 replica(s).
 func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config ScalingConfig) http.HandlerFunc {
 	cache := FunctionCache{
@@ -499,9 +534,9 @@ func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config
 		next.ServeHTTP(w, r)
 	}
 }
-</code></pre><h3 id=监控>监控<a hidden class=anchor aria-hidden=true href=#监控>#</a></h3>
-<p>监控是一个定时任务，开启了一个新协程，利用go的ticker.C的间隔不停的去调用<code>/system/functions</code>接口。反序列化到MetricOptions对象中。</p>
-<pre tabindex=0><code>func AttachExternalWatcher(endpointURL url.URL, metricsOptions MetricOptions, label string, interval time.Duration) {
+</code></pre></div><h3 id=监控>监控<a hidden class=anchor aria-hidden=true href=#监控>#</a></h3>
+<p>监控是一个定时任务，开启了一个新协程，利用 go 的 ticker.C 的间隔不停的去调用<code>/system/functions</code>接口。反序列化到 MetricOptions 对象中。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func AttachExternalWatcher(endpointURL url.URL, metricsOptions MetricOptions, label string, interval time.Duration) {
 	ticker := time.NewTicker(interval)
 	quit := make(chan struct{})
 	proxyClient := // 省略创建一个http.Client对象
@@ -510,7 +545,7 @@ func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config
 		for {
 			select {
 			case &lt;-ticker.C:
-				get, _ := http.NewRequest(http.MethodGet, endpointURL.String()+&quot;system/functions&quot;, nil)
+				get, _ := http.NewRequest(http.MethodGet, endpointURL.String()+&#34;system/functions&#34;, nil)
 				services := []requests.Function{}
 				res, err := proxyClient.Do(get)
 				// 省略反序列的代码
@@ -526,10 +561,10 @@ func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config
 		}
 	}()
 }
-</code></pre><h3 id=ui>UI<a hidden class=anchor aria-hidden=true href=#ui>#</a></h3>
-<p>UI的代码很简单，主要就是一些前端的代码，调用上面的讲的一些API接口即可，这里就略去不表。</p>
+</code></pre></div><h3 id=ui>UI<a hidden class=anchor aria-hidden=true href=#ui>#</a></h3>
+<p>UI 的代码很简单，主要就是一些前端的代码，调用上面的讲的一些 API 接口即可，这里就略去不表。</p>
 <h2 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h2>
-<p>Gateway是OpenFaaS最为重要的一个组件。回过头看整个项目的结构，Gateway就是一个rest转发服务，一个一个的handler，每个模块之间的耦合性不是很高，可以很容易的去拆卸，自定义实现相应的模块。</p>
+<p>Gateway 是 OpenFaaS 最为重要的一个组件。回过头看整个项目的结构，Gateway 就是一个 rest 转发服务，一个一个的 handler，每个模块之间的耦合性不是很高，可以很容易的去拆卸，自定义实现相应的模块。</p>
 </div>
 <footer class=post-footer>
 <nav class=paginav>
@@ -561,7 +596,7 @@ func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
 </main><footer class=footer>
-<span>&copy; 2021 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>
