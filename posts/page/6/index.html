@@ -67,6 +67,159 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>golang 踩坑
+</h2>
+</header>
+<section class=entry-content>
+<p>一 x509 error when using HTTPS inside a Docker container
+因为 docker 中没有 CA 证书。
+普通的镜像解决办法
+FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是 alpine 的参考这个：
+FROM docker.finogeeks.club/base/alpine MAINTAINER "zhuzhenfeng@finogeeks.club" RUN set -ex \ && apk add --no-cache ca-certificates COPY src/wallet/wallet /opt/wallet ENTRYPOINT /opt/wallet 二 panic: runtime error: invalid memory address or nil pointer dereference [signal 0xb code=0x1 addr=0x38 pc=0x26df]
+“An error is returned if caused by client policy (such as CheckRedirect), or if there was an HTTP protocol error....</p>
+</section>
+<footer class=entry-footer><span title="2018-08-14 20:10:55 +0000 UTC">August 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to golang 踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>以太坊开发总结
+</h2>
+</header>
+<section class=entry-content>
+<p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
+在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
+什么是区块链
+相信大家对区块链都有自己的理解，不仅仅是互联网公司，传统企业也在“币改转型”。
+**简言之，区块链就是数据库。**它是特定数据的数据库，里面的数据不断增长，具有非凡特性：
+一旦数据存储于数据库，永远都无法被修改或删除。区块链上的每个记录会被永久保存下来。 没有单独的个人或组织能维护该数据库。必须要上千个人才行，每个人都有数据库的副本。 什么是以太坊？
+以太坊（英语：Ethereum）是一个开源的有智能合约功能的公共区块链平台[1][2]。通过其专用加密货币以太币（Ether，又称“以太币”）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。
+为什么选择以太坊？
+智能合约
+代币
+资料相对完善，相对容易开发
+大佬对以太坊比较熟悉
+大佬对以太坊比较熟悉
+大佬对以太坊比较熟悉
+重要的事情说三遍，有一个经验丰富的人带领，做东西肯定事半功倍。
+自己动手写区块链
+这里提供两个教程，一个是书，一个是视频。其中视频和书是对应的，不清楚是不是同一个作者。
+Blockchain Tutorial
+私有区块链，我们一起 GO
+以太坊开发
+由于我是专注于后端的开发，现在的技术栈是
+node go 正式进入以太坊的开发。这是我这段时间接触到的一些资源：
+go-ethereum：也就是 geth，官方的 go 版本的客户端
+solidity：智能合约编程语言
+truffle：智能合约的编程框架，基于 nodejs
+Ganache：启动了多个节点本地私链
+Rinkeby：以太坊测试链
+Etherscan：以太坊区块链浏览器，可以查询交易...</p>
+</section>
+<footer class=entry-footer><span title="2018-08-10 18:57:09 +0000 UTC">August 10, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>以太坊
+</h2>
+</header>
+<section class=entry-content>
+<p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
+首先先把 go 的依赖下载下来：
+go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从 github 上拉下来代码。
+账户 以太坊的地址在离线状态下也可以创建到。
+创建账户有两种方式：
+以公钥和私钥的形式创建 func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return "", nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println("address: ", address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println("privateKey: ", privateKey) return address, nil } 这种方式一般用的比较少。
+以 keystore 的形式创建 keystore 会创建一个文件，这个文件如下所示：
+{ "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p>
+</section>
+<footer class=entry-footer><span title="2018-08-07 20:09:26 +0000 UTC">August 7, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 以太坊" href=https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>contract
+</h2>
+</header>
+<section class=entry-content>
+<p>类型 Solidity 是静态类型的语言。
+值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex"0012" enum function 引用类型 数组
+uint[]
+结构体
+struct
+映射
+mapping(key => value)
+单元和全局变量 以太币的单位
+在数字后面加上 wei、 finney、 szabo 或 ether。默认是 wei
+时间单位
+数字后面带有 seconds、 minutes、 hours、 days、 weeks 和 years。默认是秒。
+区块和交易...</p>
+</section>
+<footer class=entry-footer><span title="2018-08-03 14:32:03 +0000 UTC">August 3, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to contract" href=https://zhenfeng-zhu.github.io/posts/contract/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>faas-provider
+</h2>
+</header>
+<section class=entry-content>
+<p>faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。
+faas-provider OpenFaaS 官方提供了两套后台 provider：
+Docker Swarm Kubernetes 这两者在部署和调用函数的时候流程图如下：
+部署一个函数
+调用一个函数
+provider 要提供的一些 API 有：
+List / Create / Delete 一个函数 /system/functions
+方法: GET / POST / DELETE
+获取一个函数 /system/function/{name:[-a-zA-Z_0-9]+}
+方法: GET
+伸缩一个函数 /system/scale-function/{name:[-a-zA-Z_0-9]+}
+方法: POST
+调用一个函数 /function/{name:[-a-zA-Z_0-9]+}
+方法: POST
+在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。
+// Serve load your handlers into the correct OpenFaaS route spec....</p>
+</section>
+<footer class=entry-footer><span title="2018-08-01 19:53:23 +0000 UTC">August 1, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to faas-provider" href=https://zhenfeng-zhu.github.io/posts/faas-provider/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>gateway-reading
+</h2>
+</header>
+<section class=entry-content>
+<p>OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
+UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。
+源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。
+go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。
+client_golang 是 Prometheus 的客户端。
+项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test....</p>
+</section>
+<footer class=entry-footer><span title="2018-08-01 09:15:35 +0000 UTC">August 1, 2018</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to gateway-reading" href=https://zhenfeng-zhu.github.io/posts/gateway-reading/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>NATS streaming
+</h2>
+</header>
+<section class=entry-content>
+<p>市面上常见到的和 Nats 功能类似的消息通信系统有：
+ActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：
+可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：NATS 简介
+NATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 go 语言写成的，在保证吞吐量和时延的基础上，解决了 Nats 消息投递一致性的问题。nats streaming 可以和核心 nats 平台无缝嵌入，扩展和互动。
+功能 除了 nats 平台的一些功能，nats streaming 还支持以下的：
+增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅 使用 首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：
+homebrew...</p>
+</section>
+<footer class=entry-footer><span title="2018-07-30 14:51:26 +0000 UTC">July 30, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to NATS streaming" href=https://zhenfeng-zhu.github.io/posts/nats-streaming/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>nats 简介
 </h2>
 </header>
@@ -115,125 +268,6 @@ version: "2" services: alertmanager: image: functions/alertmanager:latest labels
 </section>
 <footer class=entry-footer><span title="2018-07-26 09:50:46 +0000 UTC">July 26, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to OpenFaaS on Rancher 2.0" href=https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>openfaas-workshop-lab4
-</h2>
-</header>
-<section class=entry-content>
-<p>实验 4–更深入地使用函数 在开始本实验之前，为你的文件创建一个新的文件夹。由于本实验是建立在早期实验的基础上的，所以请复制 lab3。
-$ cp -r lab3 lab4\ && cd lab4 通过环境变量注入配置 能够控制一个函数在运行时的行为方式是很有用的，我们至少可以通过两种方式来实现这一点。
-在部署时 *在部署时设置环境变量
-我们在Lab 3中用write_debug做了这个 - 你也可以在这里设置任何你想要的自定义环境变量 - 例如，如果你想为你的hello world函数配置一种语言，你可以引入一个spoken_language变量。
-使用 HTTP 上下文–querystring / headers *使用 querystring 和 HTTP headers
-另一个更动态的、可以在每个请求层面上改变的选项是使用查询字符串和 HTTP 头信息，两者都可以通过faas-cli或curl传递。
-这些头信息通过环境变量暴露出来，所以它们很容易在你的函数中被使用。所以任何头信息都以Http_为前缀，所有-连字符都被替换成_下划线。
-让我们用 querystring 和一个列出所有环境变量的函数来试试。
-使用 BusyBox 的内置命令，部署一个打印环境变量的函数。 faas-cli deploy --name env --fprocess="env" --image="function/alpine:latest" 用一个查询字符串调用该函数。 $ echo "" | faas-cli invoke env --query workshop=1 PATH=/usr/local/bin:/usr/local/bin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_Connection=close Http_Content_Type=text/plain Http_X_Call_Id=cdbed396-a20a-43fe-9123-1d5a122c976d Http_X_Forwarded_For=10....</p>
-</section>
-<footer class=entry-footer><span title="2018-07-02 09:32:59 +0000 UTC">July 2, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to openfaas-workshop-lab4" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>ubuntu-docker-sudo
-</h2>
-</header>
-<section class=entry-content>
-<p>sudo chown "$USER":"$USER" /home/"$USER"/.docker -R sudo chmod g+rwx "/home/$USER/.docker" -R https://api.finochat.com/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI http://localhost:3000/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI </p>
-</section>
-<footer class=entry-footer><span title="2018-06-29 13:54:25 +0000 UTC">June 29, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to ubuntu-docker-sudo" href=https://zhenfeng-zhu.github.io/posts/ubuntu-docker-sudo/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>openfaas-workshop-lab3
-</h2>
-</header>
-<section class=entry-content>
-<p>实验 3–函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。
-$ mkdir -p lab3\`s && cd lab3 创建一个新的函数 有两种方法来创建一个新的函数。
-使用一个内置的或社区的代码模板建立一个函数（默认情况下） 使用一个现有的二进制文件并将其作为你的函数（高级） 构建或生成一个新函数 在用模板创建新函数之前，请确保你从 GitHub 上提取了模板。
-$ faas-cli template pull Fetch templates from repository: https://github.com/openfaas/templates.git Attempting to expand templates from https://github.com/openfaas/templates.git 2021/08/25 15:58:10 Fetched 13 template(s) : [csharp dockerfile go java11 java11-vert-x node node12 node14 php7 python python3 python3-debian ruby] from https://github.com/openfaas/templates.git 之后，要想知道哪些语言是可用的，请键入。
-$ faas-cli new --list Languages available as templates: - csharp - dockerfile - go - java11 - java11-vert-x - node - node12 - node14 - php7 - python - python3 - python3-debian - ruby 或者创建一个包含Dockerfile的文件夹，然后在 YAML 文件中选择 Dockerfile语言类型。...</p>
-</section>
-<footer class=entry-footer><span title="2018-06-28 17:29:56 +0000 UTC">June 28, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to openfaas-workshop-lab3" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab3/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>译：openfaas-workshop-Lab1
-</h2>
-</header>
-<section class=entry-content>
-<p>今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。
-目前已经有一批优秀的 serverless 架构开源项目，OpenFaas 就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力 serverless 的发展。
-这是一个自学研讨会，学习如何构建、部署和运行 OpenFaas 函数。
-Lab1 - OpenFaas 的准备工作 OpenFaas 可以在 Docker Swarm 和 Kubernetes 的过几个主要平台之上运行。在此教程里，我们将会在的您本地电脑使用 Docker Swarm 来入门。
-预备条件 Docker Mac
-Docker CE for Mac Edge Edition Windows
-仅针对 windows10 专业版或企业版 安装Docker CE for Windows 安装Git Bash 备注：所有步骤中请使用 Git Bash：不要尝试使用 WSL 或 Bash for Windows。
-Linux - Ubuntu 或 Debian
-Docker CE for Linux 你可以从Docker Store中安装 Docker CE...</p>
-</section>
-<footer class=entry-footer><span title="2018-06-25 18:04:09 +0000 UTC">June 25, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 译：openfaas-workshop-Lab1" href=https://zhenfeng-zhu.github.io/posts/workshop-lab1/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>openfaas
-</h2>
-</header>
-<section class=entry-content>
-<p>对于 mac 环境来讲，首先安装新版 docker:
-brew cask install docker 然后启动 docker。
-命令行登陆 docker hub
-docker login 启动 docker swarm
-docker swarm init 安装 faas-cli
-brew install faas-cli clone 下来代码：
-git clone https://github.com/openfaas/faas 然后执行
-./deploy_stack.sh 部署一些示例
-faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。
-安装 grafana 进行监控
-docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
-常用命令：
-$ faas-cli new --list $ faas-cli build -f ....</p>
-</section>
-<footer class=entry-footer><span title="2018-06-24 15:43:46 +0000 UTC">June 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to openfaas" href=https://zhenfeng-zhu.github.io/posts/openfaas/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>java-reactive-web
-</h2>
-</header>
-<section class=entry-content>
-<p>Spring web mvc： 传统 servlet web
-spring web flux： Reactive web
-编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程
-In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow....</p>
-</section>
-<footer class=entry-footer><span title="2018-06-23 15:05:32 +0000 UTC">June 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to java-reactive-web" href=https://zhenfeng-zhu.github.io/posts/java-reactive-web/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>kafka
-</h2>
-</header>
-<section class=entry-content>
-<p>启动 zookeeper
-bin/zookeeper-server-start.sh config/zookeeper.properties 启动 kafka
-bin/kafka-server-start.sh config/server.properties 创建一个主题
-bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者
-bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect
-echo -e "zhisheng\ntian" > test.txt ls
-zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e "zhisheng\ntian" > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器...</p>
-</section>
-<footer class=entry-footer><span title="2018-06-21 17:49:46 +0000 UTC">June 21, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to kafka" href=https://zhenfeng-zhu.github.io/posts/kafka/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

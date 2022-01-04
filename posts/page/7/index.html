@@ -67,6 +67,125 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>openfaas-workshop-lab4
+</h2>
+</header>
+<section class=entry-content>
+<p>实验 4–更深入地使用函数 在开始本实验之前，为你的文件创建一个新的文件夹。由于本实验是建立在早期实验的基础上的，所以请复制 lab3。
+$ cp -r lab3 lab4\ && cd lab4 通过环境变量注入配置 能够控制一个函数在运行时的行为方式是很有用的，我们至少可以通过两种方式来实现这一点。
+在部署时 *在部署时设置环境变量
+我们在Lab 3中用write_debug做了这个 - 你也可以在这里设置任何你想要的自定义环境变量 - 例如，如果你想为你的hello world函数配置一种语言，你可以引入一个spoken_language变量。
+使用 HTTP 上下文–querystring / headers *使用 querystring 和 HTTP headers
+另一个更动态的、可以在每个请求层面上改变的选项是使用查询字符串和 HTTP 头信息，两者都可以通过faas-cli或curl传递。
+这些头信息通过环境变量暴露出来，所以它们很容易在你的函数中被使用。所以任何头信息都以Http_为前缀，所有-连字符都被替换成_下划线。
+让我们用 querystring 和一个列出所有环境变量的函数来试试。
+使用 BusyBox 的内置命令，部署一个打印环境变量的函数。 faas-cli deploy --name env --fprocess="env" --image="function/alpine:latest" 用一个查询字符串调用该函数。 $ echo "" | faas-cli invoke env --query workshop=1 PATH=/usr/local/bin:/usr/local/bin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_Connection=close Http_Content_Type=text/plain Http_X_Call_Id=cdbed396-a20a-43fe-9123-1d5a122c976d Http_X_Forwarded_For=10....</p>
+</section>
+<footer class=entry-footer><span title="2018-07-02 09:32:59 +0000 UTC">July 2, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to openfaas-workshop-lab4" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>ubuntu-docker-sudo
+</h2>
+</header>
+<section class=entry-content>
+<p>sudo chown "$USER":"$USER" /home/"$USER"/.docker -R sudo chmod g+rwx "/home/$USER/.docker" -R https://api.finochat.com/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI http://localhost:3000/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI </p>
+</section>
+<footer class=entry-footer><span title="2018-06-29 13:54:25 +0000 UTC">June 29, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to ubuntu-docker-sudo" href=https://zhenfeng-zhu.github.io/posts/ubuntu-docker-sudo/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>openfaas-workshop-lab3
+</h2>
+</header>
+<section class=entry-content>
+<p>实验 3–函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab3\`s && cd lab3 创建一个新的函数 有两种方法来创建一个新的函数。
+使用一个内置的或社区的代码模板建立一个函数（默认情况下） 使用一个现有的二进制文件并将其作为你的函数（高级） 构建或生成一个新函数 在用模板创建新函数之前，请确保你从 GitHub 上提取了模板。
+$ faas-cli template pull Fetch templates from repository: https://github.com/openfaas/templates.git Attempting to expand templates from https://github.com/openfaas/templates.git 2021/08/25 15:58:10 Fetched 13 template(s) : [csharp dockerfile go java11 java11-vert-x node node12 node14 php7 python python3 python3-debian ruby] from https://github.com/openfaas/templates.git 之后，要想知道哪些语言是可用的，请键入。
+$ faas-cli new --list Languages available as templates: - csharp - dockerfile - go - java11 - java11-vert-x - node - node12 - node14 - php7 - python - python3 - python3-debian - ruby 或者创建一个包含Dockerfile的文件夹，然后在 YAML 文件中选择 Dockerfile语言类型。...</p>
+</section>
+<footer class=entry-footer><span title="2018-06-28 17:29:56 +0000 UTC">June 28, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to openfaas-workshop-lab3" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab3/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>译：openfaas-workshop-Lab1
+</h2>
+</header>
+<section class=entry-content>
+<p>今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。
+目前已经有一批优秀的 serverless 架构开源项目，OpenFaas 就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力 serverless 的发展。
+这是一个自学研讨会，学习如何构建、部署和运行 OpenFaas 函数。
+Lab1 - OpenFaas 的准备工作 OpenFaas 可以在 Docker Swarm 和 Kubernetes 的过几个主要平台之上运行。在此教程里，我们将会在的您本地电脑使用 Docker Swarm 来入门。
+预备条件 Docker Mac
+Docker CE for Mac Edge Edition Windows
+仅针对 windows10 专业版或企业版 安装Docker CE for Windows 安装Git Bash 备注：所有步骤中请使用 Git Bash：不要尝试使用 WSL 或 Bash for Windows。
+Linux - Ubuntu 或 Debian
+Docker CE for Linux 你可以从Docker Store中安装 Docker CE...</p>
+</section>
+<footer class=entry-footer><span title="2018-06-25 18:04:09 +0000 UTC">June 25, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 译：openfaas-workshop-Lab1" href=https://zhenfeng-zhu.github.io/posts/workshop-lab1/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>openfaas
+</h2>
+</header>
+<section class=entry-content>
+<p>对于 mac 环境来讲，首先安装新版 docker:
+brew cask install docker 然后启动 docker。
+命令行登陆 docker hub
+docker login 启动 docker swarm
+docker swarm init 安装 faas-cli
+brew install faas-cli clone 下来代码：
+git clone https://github.com/openfaas/faas 然后执行
+./deploy_stack.sh 部署一些示例
+faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。
+安装 grafana 进行监控
+docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
+常用命令：
+$ faas-cli new --list $ faas-cli build -f ....</p>
+</section>
+<footer class=entry-footer><span title="2018-06-24 15:43:46 +0000 UTC">June 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to openfaas" href=https://zhenfeng-zhu.github.io/posts/openfaas/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>java-reactive-web
+</h2>
+</header>
+<section class=entry-content>
+<p>Spring web mvc： 传统 servlet web
+spring web flux： Reactive web
+编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程
+In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow....</p>
+</section>
+<footer class=entry-footer><span title="2018-06-23 15:05:32 +0000 UTC">June 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to java-reactive-web" href=https://zhenfeng-zhu.github.io/posts/java-reactive-web/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>kafka
+</h2>
+</header>
+<section class=entry-content>
+<p>启动 zookeeper
+bin/zookeeper-server-start.sh config/zookeeper.properties 启动 kafka
+bin/kafka-server-start.sh config/server.properties 创建一个主题
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect
+echo -e "zhisheng\ntian" > test.txt ls
+zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e "zhisheng\ntian" > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器...</p>
+</section>
+<footer class=entry-footer><span title="2018-06-21 17:49:46 +0000 UTC">June 21, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to kafka" href=https://zhenfeng-zhu.github.io/posts/kafka/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>译：vertx-kotlin-coroutine
 </h2>
 </header>
@@ -128,124 +247,6 @@ val vertx = Vertx.vertx() vertx.deployVerticle(ExampleVerticle()) launch(vertx.d
 </section>
 <footer class=entry-footer><span title="2018-05-20 14:17:07 +0000 UTC">May 20, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to elasticsearch" href=https://zhenfeng-zhu.github.io/posts/elasticsearch/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>git 常用操作
-</h2>
-</header>
-<section class=entry-content>
-<p>整理一下常用的 git 操作，不用再到处找了。
-git 放弃本地修改，强制更新 git fetch --all git reset --hard origin/master git 修改远程仓库地址 git remote set-url origin url cherry-pick 当你通过一番挣扎终于搞定一个 bug,顺手提交到 git 服务器,心里一阵暗爽. 这时发现你当前所在的分支是 master !!!
-这个分支不是开发者用来提交代码的,可惜现在剁手也晚了.
-先切换到 master git checkout master git log 复制提交的 commit id
-切换到 dev, cherry-pick
-git checkout dev git cherry-pic ${commit_id} 常用开发流程 git checkout -b feature1
-git commit 之后，进行 rebase
-git pull –rebase
-gca!
-git rvm</p>
-</section>
-<footer class=entry-footer><span title="2018-05-14 10:04:02 +0000 UTC">May 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to git 常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>node 的 cluster
-</h2>
-</header>
-<section class=entry-content>
-<p>我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。
-一个问题就是：
-如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。
-1 cluster 是什么 简单来说：
-在服务器上同时启动多个进程。 每个进程都跑的是同一份源码。 这些进程可以同时监听一个端口。 其中：
-负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。 以下是官方文档的一个例子：
-const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i &lt; numCPUs; i++) { cluster....</p>
-</section>
-<footer class=entry-footer><span title="2018-05-05 15:45:47 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to node 的 cluster" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>node 踩坑
-</h2>
-</header>
-<section class=entry-content>
-<p>module 首先第一个就是 es6 的 module。
-看到别人写的
-import { a } from "./module"; 所以自己也想要这么写，但是每次运行的时候都会报错。
-// demo2.js export const a = "hello"; //demo1.js import { a } from "./demo2"; function hello() { console.log(a); } zhuzhenfengdeMacBook-Pro :: node/node-example » node demo1.js /Users/zhuzhenfeng/Documents/github/node/node-example/demo1.js:1 (function (exports, require, module, __filename, __dirname) { import { a } from "./demo2"; ^ SyntaxError: Unexpected token { at new Script (vm.js:74:7) at createScript (vm.js:246:10) at Object.runInThisContext (vm.js:298:10) at Module._compile (internal/modules/cjs/loader.js:646:28) at Object....</p>
-</section>
-<footer class=entry-footer><span title="2018-05-05 15:32:59 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to node 踩坑" href=https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>node 学习笔记
-</h2>
-</header>
-<section class=entry-content>
-<p>写 node 也有一段时间了，整理一下学习笔记，共同进步
-什么是 node 首先看一下什么是 node.js
-Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效 Node.js 的包管理器 npm，是全球最大的开源库生态系统 模块系统是 node 最基本也是最常用的。一般可以分为四类：
-原生模块 文件模块 第三方模块 自定义模块 node 社区崇尚 DRY 文化，即 Don’t repeate yourself。这种文化使得 node 的生态异常繁荣，同样也由于某些包的质量低下引来了一些诟病。
-谈谈自定义模块 我们在写 node 程序的时候，一般都是在写自定义模块。
-创建模块
-// b.js function FunA(){ return "hello world"; } // 暴露方法FunA module.exports = FunA; 加载模块
-// a.js const FunA=require('....</p>
-</section>
-<footer class=entry-footer><span title="2018-04-22 15:41:21 +0000 UTC">April 22, 2018</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to node 学习笔记" href=https://zhenfeng-zhu.github.io/posts/node-learning/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>node 的 redis 实战
-</h2>
-</header>
-<section class=entry-content>
-<p>Node.js Redis 客户端模块 为了追新，这里我使用的 yarn，毕竟我是 HDD（面向热点编程）编程实践者。
-模块安装
-yarn add redis 模块使用实例
-const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on("error", function (err) { console.log("Error " + err); }); client.set("string key", "string val", redis.print); client.hset("hash key", "hashtest 1", "some value", redis.print); client.hset(["hash key", "hashtest 2", "some other value"], redis.print); client.hkeys("hash key", function (err, replies) { console.log(replies.length + " replies:"); replies.forEach(function (reply, i) { console.log(" " + i + ": " + reply); }); client....</p>
-</section>
-<footer class=entry-footer><span title="2018-04-13 10:00:12 +0000 UTC">April 13, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to node 的 redis 实战" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>谈谈 web 框架
-</h2>
-</header>
-<section class=entry-content>
-<p>这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对 web 框架的理解。自己了解的也不是很多，也请多多指教。
-写程序免不了要做 web 相关的，现在由于前后端的分离，后端一般只提供 rest 接口，前端一般使用 node 来做渲染。在之前使用 jsp 那一套的时候，基本上都要写 html+js 的前端的一套，也要写后端 java 的 CRUD。
-我理解的 web 框架中，大致是分为这么两类：
-router 框架 mvc 框架 mvc 类框架 mvc，初级程序员面试笔试的时候必考的一个知识点。model-view-controller，即模型-视图-控制器。
-m，模型主要用于封装与应用程序相关的数据以及对数据的处理方法。 v，在 View 中一般没有程序上的逻辑。为了实现 View 上的刷新功能，View 需要访问它监视的数据模型（Model），因此应该事先在被它监视的数据那里注册。 c，用于控制应用程序的流程。 我了解比较多的 mvc 框架是 spring mvc。spring、spring mvc 和 spring boot 等，他们并不是一个概念，也不是仅仅用于 web 开发。但是在这里我就不分那么细，统一用 spring 来代替。这里所说的 spring 都是指狭义上的 web 开发方面。
-在做 web 开发的时候，项目目录一般是这样的：
-$ tree [16:23:43] . ├── mvnw ├── mvnw.cmd ├── pom.xml └── src ├── main │ ├── java │ │ └── com │ │ └── example │ │ └── demo │ │ └── DemoApplication....</p>
-</section>
-<footer class=entry-footer><span title="2018-04-08 16:01:48 +0000 UTC">April 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 谈谈 web 框架" href=https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>技术栈
-</h2>
-</header>
-<section class=entry-content>
-<p>创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
-技术栈 Docker docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。
-rancher rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。
-aws 近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。
-kotlin 之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。
-guice 这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。
-需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。
-rxjava rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。...</p>
-</section>
-<footer class=entry-footer><span title="2018-04-05 09:49:06 +0000 UTC">April 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 技术栈" href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

@@ -67,6 +67,110 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>小白都能快速上手的 Vim 配置
+</h2>
+</header>
+<section class=entry-content>
+<p>首先把所有的 vim 相关的都删除 cd rm -rf .vim* 创建自己的.vimrc vim .vimrc 一些基本的设置 在.vimrc 中添加下面的代码
+" basic set set number set noswapfile set encoding=utf-8 set fileencodings=utf-8,gb18030 set backspace=eol,start,indent set laststatus=2 set colorcolumn=80 set cursorline set linebreak set autoindent set ignorecase set smartcase set ruler set diffopt+=internal,indent-heuristic,algorithm:patience set showcmd set clipboard^=unnamed,unnamedplus set showmode set mouse=a set tabstop=2 set shiftwidth=4 set expandtab set softtabstop=2 set showmatch set incsearch set nobackup set autoread set wildmenu set wildmode=longest:list,full set nofoldenable filetype plugin indent on syntax on 有了上面的设置，会让你的 vim 更好用一些。...</p>
+</section>
+<footer class=entry-footer><span title="2021-02-20 09:56:31 +0800 +0800">February 20, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 小白都能快速上手的 Vim 配置" href=https://zhenfeng-zhu.github.io/posts/vim/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Github Action 自动部署 blog
+</h2>
+</header>
+<section class=entry-content>
+<p>之前我采用的方式是两个 github repo 的方式：
+一个叫 hugo-blog，用于存放 blog 的源文件
+一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件
+然后通过写一个 shell 脚本，将生成之后的文件推向 zhenfeng-zhu.github.io 仓库中，同时将 blog 的源文件也做了一个 backup。后来使用了一个 github action 的方式， 就不用在两个仓库中进行折腾，一切都由 github action 来做了。
+方案 设置 workflow 首先创建一个.github/workflows/gh-pages.yml
+name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and ....</p>
+</section>
+<footer class=entry-footer><span title="2021-02-18 13:20:11 +0800 +0800">February 18, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Github Action 自动部署 blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>编程语言的世界观
+</h2>
+</header>
+<section class=entry-content>
+<p>Elixir everything is a process. process are strongly isolated. process creation and destruction is a lightweight operation. message passing is the only way for processes to interact. processes have unique names. if you know the name of a process you can send it a message. processes share no resources. error handling is non-local. processes do what they are supposed to do or fail. Go simple, poetic, pithy don’t communicate by sharing memory, share memory by communicating concurrency is not parallelism channels orchestrate; mutexes serialize the bigger the interface, the weaker the abstraction make the zero value useful interface{} says nothing gofmt’s style is no one’s favorite, yet gofmt is everyone’s favorite A little copying is better than a little dependency </p>
+</section>
+<footer class=entry-footer><span title="2021-02-18 13:05:31 +0800 +0800">February 18, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 编程语言的世界观" href=https://zhenfeng-zhu.github.io/posts/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%96%E7%95%8C%E8%A7%82/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>如何建立指标体系
+</h2>
+</header>
+<section class=entry-content>
+<p>什么是指标体系 指标体系是在业务的不同阶段，分析师牵头与业务方协助，制定一套能从各个维度反映业务状况的待实施框架。
+关键点 在业务的前期、中期和后期，指标体系是不一样的 一定是由分析师牵头与业务方协助，而不是闭门造车 从各个维度去反应业务的核心状况，指标有很多维度 最后就是一个大的实施框架，一定要实施，否则就是浪费大家的时间 指标选取的几个原则 根本性：对于核心数据一定要理解到位和准确，如果这里错了，后面基本就不用看。 可理解性：所有指标要配上业务解释 结构性：能够充分从各维度对业务进行解读，方便归因。 建立步骤 理清业务阶段和方向 我们需要知道当前产品或者业务处于什么阶段，具体的业务方向是什么。一般都是分为三个阶段： 第一阶段：业务前期。在业务的前期更多的是想要快速推出来，有更多人去使用我们的产品。所以此时我们的指标体系应该更多的围绕用户量提升做各种维度的拆解 第二阶段：业务中期（快速发展期）。在业务中期，除了关注盘子的大小，还要看产品的健康度。 第三阶段：业务后期（成熟期）。主要看变现能力以及市场份额。
+确定核心指标 找核心指标不是一件容易的事儿。 只能多花时间去考虑这个事儿。
+指标核心维度拆解 核心指标的波动必然是由某种维度的波动引起，所以监控核心指标指标，本质是监控核心维度。 通用的拆解方法是先对核心指标进行公式计算，再按照业务路径或者业务模块去拆解。 核心指标的拆解，需要多和业务方进行沟通，把能够考虑的模块都考虑进去，基本上就能比较全面。
+指标宣贯、存档和落地 宣贯：实际上搭建号指标体系之后，要当面触达所有相关的业务接口人。 存档：同时对指标的口径和业务逻辑进行详细的描述存档，也就是指标口径归档 落地：落地就是建立核心指标的相关报表，实际工作中，报表会在埋点前建好，这样一旦版本上线就能立刻看到数据，这样各方的配合度就会很高。
+</p>
+</section>
+<footer class=entry-footer><span title="2021-02-18 12:48:34 +0800 +0800">February 18, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 如何建立指标体系" href=https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E6%8C%87%E6%A0%87%E4%BD%93%E7%B3%BB/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>业务代码的成长机会
+</h2>
+</header>
+<section class=entry-content>
+<p>对于大部分公司而言，能够写底层代码或者中间件代码的人总是有限的，写业务代码会面临更高的复杂度。这里分三个层次来看其中的机会：
+第一个层次，让代码写的不一样。可从代码规范、可读性、可扩展性等角度着手，这也是程序员的基本功。 第二个层次，考虑业务问题和技术问题的匹配。可从写业务代码中理解需求，并做好分析设计。被动接收需求和实现接口，确实成长空间不大。 第三个层次，总结相关方法体系，成为业务及技术双料专家。 </p>
+</section>
+<footer class=entry-footer><span title="2021-02-17 17:45:40 +0800 +0800">February 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 业务代码的成长机会" href=https://zhenfeng-zhu.github.io/posts/%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84%E6%88%90%E9%95%BF%E6%9C%BA%E4%BC%9A/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>unix 哲学
+</h2>
+</header>
+<section class=entry-content>
+<p> 让每个程序都做好一件事。要做一件新的工作，写一个新程序，而不是通过添加“功能”让老程序复杂化。 期待每个程序的输出成为另一个程序的输入。不要将无关信息混入输出。避免使用严格的列数据或二进制输入格式。不要坚持交互式输入。 设计和构建软件，甚至是操作系统，要尽早尝试，最好在几周内完成。不要犹豫，扔掉笨拙的部分，重建它们。 优先使用工具来减轻编程任务，即使必须曲线救国编写工具，且在用完后很可能要扔掉大部分。 </p>
+</section>
+<footer class=entry-footer><span title="2021-02-17 16:46:52 +0800 +0800">February 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to unix 哲学" href=https://zhenfeng-zhu.github.io/posts/unix-philosophy/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Web 前端性能优化
+</h2>
+</header>
+<section class=entry-content>
+<p>一般来说 web 前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN 服务等等。web 前端优化主要从如下三个方面入手：
+浏览器访问优化 减少 http 请求
+http 协议是一个无状态的，每次请求都需要建立通信链路进行传输，在服务器端，一般每个请求都会分配一个线程去处理。
+减少 http 请求的主要手段是合并 CSS、合并 js、合并图片。
+使用浏览器缓存
+css、js、Logo、图标等静态资源文件更新频率较低，可以将这些文件缓存在浏览器中。
+在更新 js 等文件的时候，一般不是将文件内容更新，而是生成一个新的文件，然后更新 html 的引用。
+更新静态资源的时候，也是要逐量更新，以避免用户浏览器的大量缓存失效，造成服务器负载增加、网络堵塞。
+启用压缩
+在服务器对文件压缩，然后在浏览器端解压缩，可以减少通信传输的数据量。
+CSS 放在页面最上面，js 放在页面最下面
+浏览器会在下载完全部 CSS 之后才对整个页面进行渲染，而浏览器是在加载 js 之后就立即执行，有可能会阻塞整个页面。因此最好的做法就是把 CSS 放在最上面，js 放在最下面。但是如果是页面解析的时候就用到 js，也是要相应的 js 放在上面。
+减少 cookie 传输
+cookie 会包含在每次请求和响应中，太大的 cookie 会影响数据传输，需要慎重考虑哪些数据写入 cookie 中。
+对于某些静态资源的访问，如 css 和 js 等，发送 cookie 没意义，可以考虑静态资源使用独立域名访问，避免请求静态资源时发送 cookie。
+CDN 加速 CDN（content distribute network，内容分发网络）的本质仍然是一个缓存。将缓存放在离用户最近的地方，使得用户可以以最快的速度获取数据。...</p>
+</section>
+<footer class=entry-footer><span title="2020-11-20 16:01:49 +0800 +0800">November 20, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Web 前端性能优化" href=https://zhenfeng-zhu.github.io/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>大型网站发展历程
 </h2>
 </header>
@@ -123,119 +227,6 @@ zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum comma
 </section>
 <footer class=entry-footer><span title="2020-11-20 10:07:39 +0800 +0800">November 20, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Geth" href=https://zhenfeng-zhu.github.io/posts/geth/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>hive 常用函数
-</h2>
-</header>
-<section class=entry-content>
-<p>json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path)
-解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。
-path 就是 ‘$.字段名’。
-如果该字段的 value 也是 json，就可以一直点下去。
-如果该字段的 value 是数组，就可以用 ‘$.字段名[0]'，类似这样下标的形式去访问。
-explode explode(array)
-经常和 lateral view 一起使用，将数组中的元素拆分成多行显示。
-substr substr(string A, int start, int len)
-返回字符串 A 从 start 位置开始，长度为 len 的字符串
-json_tuple json_tuple(string json_string, col1, col2, …)
-经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。
-parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)...</p>
-</section>
-<footer class=entry-footer><span title="2020-04-16 17:59:03 +0800 +0800">April 16, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to hive 常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>mysql 的学习
-</h2>
-</header>
-<section class=entry-content>
-<p>SQL 条件语句 IF if(exp1, exp2, exp3)
-exp1 是条件，条件为 true 的话，是 exp2，否则是 exp3
-case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNULL IFNULL(exp1, exp2)
-在 exp1 的值不为 null 的情况下，返回 exp1，如果 exp1 位 null，返回 exp2 的值。</p>
-</section>
-<footer class=entry-footer><span title="2020-04-16 17:34:30 +0800 +0800">April 16, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to mysql 的学习" href=https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>clickhouse
-</h2>
-</header>
-<section class=entry-content>
-<p>ClickHouse ClickHouse 是一个用于联机分析（Online Analytical Processing：OLAP）的列式数据库管理系统(DBMS)。通过使用 OLAP 工具，用户能够从多个角度交互地分析多维数据。
-OLAP 由三个基本的分析操作组成：上卷（roll-up）、钻取（drill-down）、切片（slicing）和切块（dicing）。
-上卷（roll-up）：涉及可以在一个或多个维度中累积和计算的数据的聚合。例如，所有的销售办事处汇总到销售部门，以预测销售趋势。
-钻取（drill-down）：是一种允许用户浏览详细信息的技术。例如，用户可以查看组成一个地区销售额的单个产品的销售额。
-切片（slicing）和切块（dicing）：用户可以从 OLAP 多维数据集中取出（切片）一组特定的数据，并从不同的角度查看（切块）切片。这些角度有时被称为维度（例如按销售人员、按日期、按客户、按产品或按地区查看相同的销售情况等）。
-传统行式数据库中，处于同一行中的数据总是被物理的存在一起。列式数据库总是将同一列的数据存储在一起，不同列的数据分开存储。
-行式数据库：mysql，pg
-列式数据库：vertica，druid
-OLAP 的关键特征 大多是读请求 数据总是以相当大的批（>1000w）进行写入 不修改已经添加的数据 每次查询都从数据库中读取大量的行，但是同时又仅需要少量的列 宽表，即每个表包含大量的列 较少的查询（通常每台服务器每秒数百个查询或更少） 对于简单的查询，允许延迟大约 50ms 列中的数据相对较小：数字和短字符串 处理单个查询时需要高吞吐量（每个服务器每秒高达数十亿行） 事务不是必须的 对数据一致性要求低 每一个查询除了一个大表外都很小 查询结果明显小于数据源，换句话说，数据被过滤或者聚合之后能够被放在单台服务器的内存中 列式数据库更适合 OLAP 场景 Input/Output 分析类的查询，通常只需要读取表的一小部分列。 数据总是打包成批量读取，列压缩更容易 IO 降低了 CPU 由于执行一个查询需要处理大量的行，因此在整个向量上执行所有操作将比在每一行上执行所有操作更加高效。同时这将有助于实现一个几乎没有调用成本的查询引擎。
-向量引擎 代码生成 为了提高 CPU 效率，查询语言必须是声明型的(SQL 或 MDX)， 或者至少一个向量(J，K)。 查询应该只包含隐式循环，允许进行优化。
-clickhouse 的独特功能 真正的列式数据库管理系统 </p>
-</section>
-<footer class=entry-footer><span title="2019-10-12 06:48:01.338 +0000 UTC">October 12, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to clickhouse" href=https://zhenfeng-zhu.github.io/posts/clickhouse/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>每日学习 2
-</h2>
-</header>
-<section class=entry-content>
-<p>https://mubu.com/doc/oHlgG0FSu0</p>
-</section>
-<footer class=entry-footer><span title="2019-09-29 02:19:03.574 +0000 UTC">September 29, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 每日学习 2" href=https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>每日学习-2019-09-24
-</h2>
-</header>
-<section class=entry-content>
-<p>开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里可能有相同名称的变量，必须找到正确的那个，这个过程就是引用消解。 函数引用消解 命名空间引用消解 左值和右值 左值取的是变量的地址或者说是变量的引用，获得地址之后，我们就可以把新值写进去。 右值就是我们常说的值。 不是所有的表达式都能生成一个合格的左值。 属性计算 上下文分析或者说语义分析的一种算法。 属性文法的主要思路是计算机科学的重要开拓者，是在上下文无关文法的基础上做了一些增强，使之可以计算属性值。 过程 类型和作用域解析 类型的消解 引用的消解和 S 属性的类型推导 做类型检查 做一些语义合法性检查 趣谈 Linux 操作系统 Namespace 技术：内部创业公司应该独立运营 为了隔离不同类型的资源，Linux 内核里面有如下几种不同类型的 namespace：
-UTS，表示不同的 namespace 可以配置不同的 hostname User，可以配置不同的用户和组 Mount，文件系统挂载点是隔离的 PID，有完全独立的 pid Network，有独立的网络协议栈 </p>
-</section>
-<footer class=entry-footer><span title="2019-09-29 02:17:46.822 +0000 UTC">September 29, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 每日学习-2019-09-24" href=https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>tmux
-</h2>
-</header>
-<section class=entry-content>
-<p>折腾一下 tmux
-安装 brew install tmux 概念 session：理解为一个会话，持久保存工作状态。 window：可以理解为我们常说的 tab 页。 pane：一个 window 被分成若干个 pane，理解为 iterm 的分屏。 session 新建
-tmux new -s your-session-name 断开
-tmux detach 恢复
-tmux attach-session -t your-session-name 或者 tmux a -t your-session-name 关闭
-kill-server kill-session kill-window kill-pane tmux kill-session -t your-session-name tmux kill-server 查看
-tmux list-session tmux ls tmux 的基础配置 prefix 是 tmux 的前缀键，默认是 ctrl+b 。只有按下前缀键，才会激活 tmux，然后再按其他的键进行 tmux 操作。这样可以避免与其他应用的快捷键进行冲突。
-配置前缀 需要去 tmux.conf 中去配置...</p>
-</section>
-<footer class=entry-footer><span title="2019-08-28 12:03:46.801 +0000 UTC">August 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to tmux" href=https://zhenfeng-zhu.github.io/posts/tmux/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>crystal 开发环境
-</h2>
-</header>
-<section class=entry-content>
-<p>突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。
-安装 crystal brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang
-安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。
-$ git clone https://github.com/crystal-lang-tools/scry.git $ cd scry $ shards build -v Dependencies are satisfied Building: scry crystal build -o /Users/lucas/Documents/demos/crystal/scry/bin/scry src/scry.cr /Users/lucas/Documents/demos/crystal/scry/bin/scry 就是编译出来的二进制的路径
-配置插件 "crystal-lang.compiler": "crystal", "crystal-lang.server": "/Users/lucas/Documents/demos/crystal/scry/bin/scry", "crystal-lang.maxNumberOfProblems": 20, "crystal-lang.mainFile": "${workspaceRoot}/src/main.cr", "crystal-lang.processesLimit": 5, "crystal-lang.hover": true, "crystal-lang.problems": "build", "crystal-lang.implementations": true, "crystal-lang.completion": true, "crystal-lang.logLevel": "info", 把上面的配置加到 vscode 的 settings 文件中，就可以愉快的开发啦。</p>
-</section>
-<footer class=entry-footer><span title="2019-08-27 14:03:12 +0000 UTC">August 27, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to crystal 开发环境" href=https://zhenfeng-zhu.github.io/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

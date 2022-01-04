@@ -9,7 +9,132 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 04 Jan 2022 10:04:05 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 04 Jan 2022 13:44:15 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Openfaas Workshop Lab11</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab11/</link>
+      <pubDate>Tue, 04 Jan 2022 13:44:15 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab11/</guid>
+      <description>Lab 11 - 高级函数 - 使用 HMAC 的信任 前言 用于微服务的传统认证策略与函数的工作原理完全相同。在这个实验室中，我们将讨论使用共享秘密和基于哈希的消息验证码（HMAC）的几种可用方法之一。有关其他认证策略和想法，请参见。openfaas-function-auth
+这绝不是一个广泛的清单，安全和认证是一个复杂的领域，最好留给专家使用经过试验的方法。
+准备好你的环境 在开始这个实验之前，创建一个新的文件夹
+mkdir -p lab11\`bash &amp;amp;&amp;amp; cd lab11 也要确保你的faas-cli&#39;版本是0.7.4&amp;rsquo;或以上，使用以下命令。
+$ faas-cli version 什么是 HMAC 如果没有任何形式的认证或信任，我们的函数可能会暴露给任何能猜到其 URL 的人。如果我们的函数可以在互联网或本地网络上访问，那么它们就可能被坏的行为者调用。默认情况下，函数会对任何请求做出响应。然而，如果我们想控制对函数的访问，我们可以使用基于哈希的消息验证码（HMAC）来验证信息的来源。
+来自[alexellis/hmac]（https://github.com/alexellis/hmac）。
+ HMAC 使用发送方/接收方提前共享的对称密钥。发送方在想要传输信息时将产生一个哈希值&amp;ndash;该数据与有效载荷一起发送。然后，收件人将用共享密钥签署有效载荷，如果哈希值匹配，则假定有效载荷来自发件人。
+ 这样我们就可以避免我们的函数被无效的甚至是危险的信息所调用。
+使用 HMAC 我们将使用 faas-cli 提供的--sign标志来包含一个头，其中包含使用我们用--key标志提供的共享密钥创建的散列信息。
+ 注意: --sign和--key必须同时存在。
+ 让我们首先通过部署-env函数来检查该标志的作用，该函数将打印函数中可访问的所有环境变量。
+$ faas-cli deploy --name env --fprocess=&amp;#34;env&amp;#34; --image=&amp;#34;function/alpine:new&amp;#34;  调用不带--sign标志的函数。  $ echo &amp;#34;The message&amp;#34; | faas-cli invoke env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin HOSTNAME=d2c1a2cb20c2 fprocess=env HOME=/root Http_X_Call_Id=b84947c6-2970-4fcf-ba3b-66dde6943999 Http_X_Forwarded_For=10.255.0.2:34974 Http_X_Forwarded_Host=127.0.0.1:8080 Http_Content_Length=0 Http_Accept_Encoding=gzip Http_Content_Type=text/plain Http_User_Agent=Go-http-client/1.</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop Lab10</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/</link>
+      <pubDate>Tue, 04 Jan 2022 13:44:12 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/</guid>
+      <description>Lab 10 - 高级函数 - 秘密 在开始本实验室之前，为你的文件创建一个新的文件夹。由于本实验室是建立在先前的实验室基础上的，因此请复制 lab5。
+$ cp -r lab5 lab10\ &amp;amp;&amp;amp; cd lab10 使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。
+来自 Docker 文档。
+ &amp;hellip; 秘密是一团数据，如密码、SSH 私钥、SSL 证书或其他数据，不应通过网络传输或未经加密存储在 Docker 文件或应用程序的源代码中。
+ 这是一个比环境变量更安全的选择。环境变量更容易使用，但最适合于非保密的配置项目。 似乎很适合用于存储auth_token值。
+请参阅docs中关于秘密的更多信息和它的设计。
+创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或&#39;-&amp;lsquo;组成，并且必须以一个字母数字字符开始和结束
+ 从一个终端运行以下命令。
+$ echo -n &amp;lt;auth_token&amp;gt; | faas-cli secret create auth-token 测试秘密是否被创建。
+$ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
+ kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop Lab9</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab9/</link>
+      <pubDate>Tue, 04 Jan 2022 13:44:09 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab9/</guid>
+      <description>Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运作的。
+前提条件   在完成了Lab 1中对 OpenFaaS 的设置后，你将拥有触发自动扩展所需的一切。
+  多个工具可以用来创建足够的流量来触发自动扩展 - 在这个例子中，`curl&amp;rsquo;将被使用，因为它很容易在 Mac 和 Linux 上使用，并在 Windows 上与 Git Bash 打包。
+  自动扩展的背景 开箱即用的 OpenFaaS 是这样配置的，它将根据 Prometheus 测量的 每秒请求指标进行自动扩展。 这个指标是在流量通过 API 网关的时候捕获的。如果超过了定义的 每秒请求的阈值，AlertManager 就会启动。这个阈值应该被重新配置为适合生产使用的水平，因为在这个例子中，为了演示，它被设置为一个低值。
+ 在文档网站中找到更多关于自动缩放的信息。
+ 每次警报被 AlertManager 触发时，API 网关将把你的函数的一定数量的副本添加到集群中。OpenFaaS 有两个配置选项，允许指定复制的起始/最低数量，也允许停止复制的最大数量。
+你可以通过设置com.openfaas.scale.min来控制函数的最小复制量，目前默认值为1。
+你可以通过设置com.openfaas.scale.max来控制一个函数可以产生的最大复制量，目前默认值是20。
+ 注意: 如果你把com.openfaas.scale.min和com.openfaas.scale.max设置成相同的值，你就会禁用自动缩放函数。
+ 查看 Prometheus 你需要运行这个端口转发命令，以便能够在http://127.0.0.1:9090访问 Prometheus。
+$ kubectl port-forward deployment/prometheus 9090:9090 -n openfaas 现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code=&amp;quot;200&amp;quot;} [20s])作为查询来实现。导致一个看起来像这样的页面。</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop Lab8</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab8/</link>
+      <pubDate>Tue, 04 Jan 2022 13:44:05 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab8/</guid>
+      <description>Lab 8 - 高级函数 - 超时 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab8 \ &amp;amp;&amp;amp; cd lab8 用read_timeout扩展超时时间 timeout对应于一个函数可以运行多长时间，直到被执行。它对防止分布式系统中的误操作很重要。
+有几个地方可以为你的函数配置超时，在每个地方都可以通过使用环境变量来完成。
+  函数超时
+  read_timeout - 允许函数通过 HTTP 读取一个请求的时间
+  write_timeout - 允许函数在 HTTP 上写一个响应的时间
+  exec_timeout - 一个函数在被终止前可以运行的最大时间。
+  API 网关的默认时间是 20 秒，所以我们来测试一下在一个函数上设置一个更短的超时时间。
+$ faas-cli new --lang python3 sleep-for --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑handler.py。
+import time import os def handle(req): &amp;#34;&amp;#34;&amp;#34;handle a request to the function Args: req (str): request body &amp;#34;&amp;#34;&amp;#34; sleep_duration = int(os.</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop Lab7</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab7/</link>
+      <pubDate>Tue, 04 Jan 2022 13:44:02 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab7/</guid>
+      <description>实验 7&amp;ndash;异步函数 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab7 \ &amp;amp;&amp;amp; cd lab7 同步与异步地调用一个函数 当你同步调用一个函数时，一个连接会通过网关连接到你的函数，并且在整个执行过程中保持开放。同步调用是*阻塞的，所以你应该看到你的客户端暂停，变得不活跃，直到该函数完成其任务。
+ 网关使用的路由是。/function/&amp;lt;function_name&amp;gt;。 你必须等待，直到它完成 你在调用后得到结果 你知道它是通过还是失败  异步任务以类似的方式运行，但有一些区别。
+ 网关使用不同的路由：/async-function/&amp;lt;function_name&amp;gt;。 客户端从网关得到一个立即的202 接受的响应。 该函数稍后使用一个队列工作器来调用 默认情况下，结果被丢弃  让我们试一试快速演示。
+$ faas-cli new --lang dockerfile long-task --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑long-task/Dockerfile并将 fprocess 改为sleep 1。
+现在构建、部署并同步调用你的函数 10 次，像这样。
+echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task 现在异步调用该函数 10 次。</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop Lab6</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab6/</link>
+      <pubDate>Tue, 04 Jan 2022 13:43:59 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab6/</guid>
+      <description>实验 6&amp;ndash;你的函数的 HTML 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab6\ &amp;amp;&amp;amp; cd lab6 从一个函数中生成并返回基本的 HTML 函数可以返回 HTML，并将Content-Type设置为text/html。因此，函数返回的 HTML 可以通过浏览器进行渲染。让我们创建一个简单的函数，生成并返回一个基本的 HTML。
+$ faas-cli new --lang python3 show-html --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑handler.py。
+def handle(req): &amp;#34;&amp;#34;&amp;#34;handle a request to the function Args: req (str): request body &amp;#34;&amp;#34;&amp;#34; html = &amp;#39;&amp;lt;html&amp;gt;&amp;lt;h2&amp;gt;Hi, from your function!&amp;lt;/h2&amp;gt;&amp;lt;/html&amp;gt;&amp;#39; return html 这将返回 HTML 给调用者。 还有一件事我们应该做的是设置响应的Content-Type&#39;。我们100%确定这个函数将返回一个HTML，所以Content-Type应该总是text/html。我们可以利用show-html.yml文件中的environment`部分来设置。
+编辑show-html.yml。
+provider: name: openfaas gateway: http://127.0.0.1:8080 functions: show-html: lang: python3 handler: ./show-html image: &amp;lt;your-docker-username-here&amp;gt;/show-html environment: content_type: text/html environment中的content_type键将设置响应的Content-Type。</description>
+    </item>
+    
+    <item>
+      <title>Openfaas Workshop Lab5</title>
+      <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab5/</link>
+      <pubDate>Tue, 04 Jan 2022 13:43:56 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab5/</guid>
+      <description>Lab 5 - 创建一个 GitHub 机器人 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab5\  &amp;amp;&amp;amp; cd lab5 我们将使用 OpenFaaS 的函数来创建一个名为 issue-bot的 GitHub 机器人。
+问题机器人的工作是通过分析 描述 字段的情绪来分流新的问题，然后它将应用一个积极或审查的标签。这将有助于维护者在繁忙的工作中，可以优先考虑哪些问题需要首先处理。
+问题机器人的图示](./diagram/issue-bot.png)
+获取一个 GitHub 账户   注册一个GitHub 账户，如果你还没有一个账户。
+  创建一个新的仓库，并将其称为bot-test。
+  注意：我们将只使用这个仓库作为创建问题的测试场所。你不需要在那里提交任何代码。
+建立一个带有入口的隧道 你需要接收来自 GitHub 的 webhooks。幸运的是，inlets 让这一切变得非常快速和简单。它可以按月或按年订阅，所以如果你不确定是否全年都需要它，你可以只付一个月的钱。
+inlets 有一个叫做 inlets-operator 的 Kubernetes 集成。你可以用它来设置 LoadBalancers 或带有 TLS 的 Ingress。它的工作原理是为你创建一个云虚拟机，并在那里运行一个隧道服务器，然后为你运行一个隧道客户端作为一个 Pod，你就可以获得传入流量。
+在你喜欢的云提供商（如 DigitalOcean）的 API 页面下创建一个写入访问令牌，然后将内容保存到digital-ocean-api-token.txt。
+设置完订阅后，将你的密钥保存到$HOME/.inlets/LICENSE，然后运行以下程序。
+arkade install inlets-operator \  --provider digitalocean \  --region lon1 \  --token-file $HOME/digital-ocean-api-token.</description>
+    </item>
+    
     <item>
       <title>Blockchain 数据结构分析</title>
       <link>https://zhenfeng-zhu.github.io/posts/blockchain-schema/</link>
