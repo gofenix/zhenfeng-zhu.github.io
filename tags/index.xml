@@ -8,6 +8,16 @@
       <url>https://zhenfeng-zhu.github.io/papermod-cover.png</url>
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://zhenfeng-zhu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 04 Jan 2022 13:44:15 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>openfaas</title>
+      <link>https://zhenfeng-zhu.github.io/tags/openfaas/</link>
+      <pubDate>Tue, 04 Jan 2022 13:44:15 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/tags/openfaas/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

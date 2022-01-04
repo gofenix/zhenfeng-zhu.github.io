@@ -5,10 +5,16 @@
     <loc>https://zhenfeng-zhu.github.io/</loc>
     <lastmod>2022-01-04T13:44:15+08:00</lastmod>
   </url><url>
+    <loc>https://zhenfeng-zhu.github.io/tags/openfaas/</loc>
+    <lastmod>2022-01-04T13:44:15+08:00</lastmod>
+  </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab11/</loc>
     <lastmod>2022-01-04T13:44:15+08:00</lastmod>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/</loc>
+    <lastmod>2022-01-04T13:44:15+08:00</lastmod>
+  </url><url>
+    <loc>https://zhenfeng-zhu.github.io/tags/</loc>
     <lastmod>2022-01-04T13:44:15+08:00</lastmod>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/</loc>
@@ -309,7 +315,5 @@
     <loc>https://zhenfeng-zhu.github.io/search/</loc>
   </url><url>
     <loc>https://zhenfeng-zhu.github.io/series/</loc>
-  </url><url>
-    <loc>https://zhenfeng-zhu.github.io/tags/</loc>
   </url>
 </urlset>
