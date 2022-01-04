@@ -14,7 +14,8 @@
 const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i < numCPUs; i++) { cluster.">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/>
-<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
 <link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
 <link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
@@ -23,7 +24,10 @@ const cluster = require('cluster'); const http = require('http'); const numCPUs 
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.91.2">
-<meta property="og:title" content="node 的 cluster">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="node 的 cluster">
 <meta property="og:description" content="我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。
 一个问题就是：
 如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。
@@ -32,8 +36,7 @@ const cluster = require('cluster'); const http = require('http'); const numCPUs 
  负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。  以下是官方文档的一个例子：
 const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i < numCPUs; i++) { cluster.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/">
-<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2018-05-05T15:45:47+00:00">
 <meta property="article:modified_time" content="2018-05-05T15:45:47+00:00">
 <meta name=twitter:card content="summary_large_image">
@@ -47,13 +50,10 @@ const cluster = require('cluster'); const http = require('http'); const numCPUs 
  负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。  以下是官方文档的一个例子：
 const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i < numCPUs; i++) { cluster.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"node 的 cluster","item":"https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"node 的 cluster","name":"node 的 cluster","description":"我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。\n一个问题就是：\n如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。\n1 cluster 是什么 简单来说：\n 在服务器上同时启动多个进程。  …","keywords":[],"articleBody":"我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。\n一个问题就是：\n如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。\n1 cluster 是什么 简单来说：\n 在服务器上同时启动多个进程。 每个进程都跑的是同一份源码。 这些进程可以同时监听一个端口。  其中：\n 负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。  以下是官方文档的一个例子：\nconst cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i { console.log(`工作进程 ${worker.process.pid} 已退出`); }); } else { // 工作进程可以共享任何 TCP 连接。 // 在本例子中，共享的是一个 HTTP 服务器。 http.createServer((req, res) = { res.writeHead(200); res.end('你好世界\\n'); }).listen(8000); console.log(`工作进程 ${process.pid} 已启动`); } % node cluster.js 主进程 16391 正在运行 工作进程 16394 已启动 工作进程 16393 已启动 工作进程 16395 已启动 工作进程 16392 已启动 2 多进程模型 官网的示例很简单，但是我们还要考虑很多东西。\n worker 进程异常退出以后如何处理？ 多个 worker 进程之间如何共享资源？ 多个 worker 进程之间如何调度？ 。。。  进程守护 健壮性是我们做大型应用要考虑的一个问题。一般来说，node 的进程退出可以分为两类：\n 未捕获异常 内存溢出（OOM）或者系统异常  代码跑出了异常却没有没捕捉时，进程将会退出，此时 node 提供了 process.on(‘uncaughtException’, handler)来捕获。但是当一个 worker 进程遇到未 捕获的异常时，他已经处于一个不确定的状态，此时我们应该让这个进程优雅的退出。\n优雅退出的流程是：\n 关闭异常 worker 进程和所有的 tcp server(将已有的连接快速断开，且不再接收新的连接)，断开和 master 的 ipc 通道，不再接收新的用户请求。 master 立即 fork 一个新的 worker 进程，保证在线的“工人”总数不变。 异常 worker 等待一段时间，处理完已经接受的请求后退出。  而当一个进程出现异常导致 crash 或者 OOM 被系统杀死时，不像未捕获异常发生时我们还有机会让进程继续执行，只能够让当前进程直接退出，Master 立刻 fork 一个新的 Worker。\nAgent 机制 有些工作并不需要每个 worker 都去做，如果都做，一个是浪费资源，另一个更重要的是可能会导致多进程之间资源访问冲突。\n比如：生产环境中一般会按照日期进行归档，在单进程模型的时候比较简单：\n 每天凌晨，批量将日志文件重命名 创建新的日志文件继续写入。  如果这个任务由 4 个进程同时做，就乱套了。所以对于这一类的后台运行逻辑，应该放到一个单独的进程去执行，这个进程就是 agent。agent 好比是给其他 worker 请的一个秘书，它不对外提供服务，只给 worker 打工，处理一些公共事务。\n另外，关于 Agent Worker 还有几点需要注意的是：\n 由于 Worker 依赖于 Agent，所以必须等 Agent 初始化完成后才能 fork Worker Agent 虽然是 Worker 的『小秘』，但是业务相关的工作不应该放到 Agent 上去做。 由于 Agent 的特殊定位，我们应该保证它相对稳定。当它发生未捕获异常，不应该像 Worker 一样让他退出重启，而是记录异常日志、报警等待人工处理。  3 进程间通讯（IPC） 虽然每个 Worker 进程是相对独立的，但是它们之间始终还是需要通讯的，叫进程间通讯（IPC）。\nif (cluster.isMaster) { const worker = cluster.fork(); worker.send('hi there'); } else if (cluster.isWorker) { process.on('message', (msg) = { process.send(msg); }); } 这个例子里面，工作进程将主进程发送的消息 echo 回去。\n4 长连接 一些中间件客户端需要和服务器建立长连接，理论上一台服务器最好只建立一个长连接，但多进程模型会导致 n 倍（n = Worker 进程数）连接被创建。\n为了尽可能的复用长连接（因为它们对于服务端来说是非常宝贵的资源），我们会把它放到 Agent 进程里维护，然后通过 messenger 将数据传递给各个 Worker。这种做法是可行的，但是往往需要写大量代码去封装接口和实现数据的传递，非常麻烦。\n另外，通过 messenger 传递数据效率是比较低的，因为它会通过 Master 来做中转；万一 IPC 通道出现问题还可能将 Master 进程搞挂。\n那么有没有更好的方法呢？答案是肯定的，我们提供一种新的模式来降低这类客户端封装的复杂度。通过建立 Agent 和 Worker 的 socket 直连跳过 Master 的中转。Agent 作为对外的门面维持多个 Worker 进程的共享连接。\n核心思想  受到 Leader/Follower 模式的启发 客户端会被区分为两种角色：  Leader: 负责和远程服务端维持连接，对于同一类的客户端只有一个 Leader Follower: 会将具体的操作委托给 Leader，常见的是订阅模型（让 Leader 和远程服务端交互，并等待其返回）。   如何确定谁是 Leader，谁是 Follower 呢？有两种模式：  自由竞争模式：客户端启动的时候通过本地端口的争夺来确定 Leader。例如：大家都尝试监听 7777 端口，最后只会有一个实例抢占到，那它就变成 Leader，其余的都是 Follower。 强制指定模式：框架指定某一个 Leader，其余的就是 Follower   启动的时候 Master 会随机选择一个可用的端口作为 Cluster Client 监听的通讯端口，并将它通过参数传递给 Agent 和 App Worker Leader 和 Follower 之间通过 socket 直连（通过通讯端口），不再需要 Master 中转   5 参考资料 多进程模型和进程间通讯\nNode.js v8.11.1 文档 cluster\n","wordCount":"326","inLanguage":"en","datePublished":"2018-05-05T15:45:47Z","dateModified":"2018-05-05T15:45:47Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"node 的 cluster","name":"node 的 cluster","description":"我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。\n一个问题就是：\n如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。\n1 cluster 是什么 简单来说：\n 在服务器上同时启动多个进程。 每个进程都跑的是同一份源码。 这些进程可以同时监听一个端口。  其中：\n 负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。  以下是官方文档的一个例子：\nconst cluster = require(\u0026#39;cluster\u0026#39;); const http = require(\u0026#39;http\u0026#39;); const numCPUs = require(\u0026#39;os\u0026#39;).cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i \u0026lt; numCPUs; i++) { cluster.","keywords":[],"articleBody":"我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。\n一个问题就是：\n如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。\n1 cluster 是什么 简单来说：\n 在服务器上同时启动多个进程。 每个进程都跑的是同一份源码。 这些进程可以同时监听一个端口。  其中：\n 负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。  以下是官方文档的一个例子：\nconst cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i { console.log(`工作进程 ${worker.process.pid} 已退出`); }); } else { // 工作进程可以共享任何 TCP 连接。 // 在本例子中，共享的是一个 HTTP 服务器。 http.createServer((req, res) = { res.writeHead(200); res.end('你好世界\\n'); }).listen(8000); console.log(`工作进程 ${process.pid} 已启动`); } % node cluster.js 主进程 16391 正在运行 工作进程 16394 已启动 工作进程 16393 已启动 工作进程 16395 已启动 工作进程 16392 已启动 2 多进程模型 官网的示例很简单，但是我们还要考虑很多东西。\n worker 进程异常退出以后如何处理？ 多个 worker 进程之间如何共享资源？ 多个 worker 进程之间如何调度？ 。。。  进程守护 健壮性是我们做大型应用要考虑的一个问题。一般来说，node 的进程退出可以分为两类：\n 未捕获异常 内存溢出（OOM）或者系统异常  代码跑出了异常却没有没捕捉时，进程将会退出，此时 node 提供了 process.on(‘uncaughtException’, handler)来捕获。但是当一个 worker 进程遇到未 捕获的异常时，他已经处于一个不确定的状态，此时我们应该让这个进程优雅的退出。\n优雅退出的流程是：\n 关闭异常 worker 进程和所有的 tcp server(将已有的连接快速断开，且不再接收新的连接)，断开和 master 的 ipc 通道，不再接收新的用户请求。 master 立即 fork 一个新的 worker 进程，保证在线的“工人”总数不变。 异常 worker 等待一段时间，处理完已经接受的请求后退出。  而当一个进程出现异常导致 crash 或者 OOM 被系统杀死时，不像未捕获异常发生时我们还有机会让进程继续执行，只能够让当前进程直接退出，Master 立刻 fork 一个新的 Worker。\nAgent 机制 有些工作并不需要每个 worker 都去做，如果都做，一个是浪费资源，另一个更重要的是可能会导致多进程之间资源访问冲突。\n比如：生产环境中一般会按照日期进行归档，在单进程模型的时候比较简单：\n 每天凌晨，批量将日志文件重命名 创建新的日志文件继续写入。  如果这个任务由 4 个进程同时做，就乱套了。所以对于这一类的后台运行逻辑，应该放到一个单独的进程去执行，这个进程就是 agent。agent 好比是给其他 worker 请的一个秘书，它不对外提供服务，只给 worker 打工，处理一些公共事务。\n另外，关于 Agent Worker 还有几点需要注意的是：\n 由于 Worker 依赖于 Agent，所以必须等 Agent 初始化完成后才能 fork Worker Agent 虽然是 Worker 的『小秘』，但是业务相关的工作不应该放到 Agent 上去做。 由于 Agent 的特殊定位，我们应该保证它相对稳定。当它发生未捕获异常，不应该像 Worker 一样让他退出重启，而是记录异常日志、报警等待人工处理。  3 进程间通讯（IPC） 虽然每个 Worker 进程是相对独立的，但是它们之间始终还是需要通讯的，叫进程间通讯（IPC）。\nif (cluster.isMaster) { const worker = cluster.fork(); worker.send('hi there'); } else if (cluster.isWorker) { process.on('message', (msg) = { process.send(msg); }); } 这个例子里面，工作进程将主进程发送的消息 echo 回去。\n4 长连接 一些中间件客户端需要和服务器建立长连接，理论上一台服务器最好只建立一个长连接，但多进程模型会导致 n 倍（n = Worker 进程数）连接被创建。\n为了尽可能的复用长连接（因为它们对于服务端来说是非常宝贵的资源），我们会把它放到 Agent 进程里维护，然后通过 messenger 将数据传递给各个 Worker。这种做法是可行的，但是往往需要写大量代码去封装接口和实现数据的传递，非常麻烦。\n另外，通过 messenger 传递数据效率是比较低的，因为它会通过 Master 来做中转；万一 IPC 通道出现问题还可能将 Master 进程搞挂。\n那么有没有更好的方法呢？答案是肯定的，我们提供一种新的模式来降低这类客户端封装的复杂度。通过建立 Agent 和 Worker 的 socket 直连跳过 Master 的中转。Agent 作为对外的门面维持多个 Worker 进程的共享连接。\n核心思想  受到 Leader/Follower 模式的启发 客户端会被区分为两种角色：  Leader: 负责和远程服务端维持连接，对于同一类的客户端只有一个 Leader Follower: 会将具体的操作委托给 Leader，常见的是订阅模型（让 Leader 和远程服务端交互，并等待其返回）。   如何确定谁是 Leader，谁是 Follower 呢？有两种模式：  自由竞争模式：客户端启动的时候通过本地端口的争夺来确定 Leader。例如：大家都尝试监听 7777 端口，最后只会有一个实例抢占到，那它就变成 Leader，其余的都是 Follower。 强制指定模式：框架指定某一个 Leader，其余的就是 Follower   启动的时候 Master 会随机选择一个可用的端口作为 Cluster Client 监听的通讯端口，并将它通过参数传递给 Agent 和 App Worker Leader 和 Follower 之间通过 socket 直连（通过通讯端口），不再需要 Master 中转   5 参考资料 多进程模型和进程间通讯\nNode.js v8.11.1 文档 cluster\n","wordCount":"326","inLanguage":"en","datePublished":"2018-05-05T15:45:47Z","dateModified":"2018-05-05T15:45:47Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-</noscript>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -63,7 +63,7 @@ const cluster = require('cluster'); const http = require('http'); const numCPUs 
 </button>
 </span>
 </div>
-<ul id=menu onscroll=menu_on_scroll()>
+<ul id=menu>
 <li>
 <a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
 <span>Archives</span>
@@ -78,45 +78,49 @@ const cluster = require('cluster'); const http = require('http'); const numCPUs 
 <a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
 <span>🔍</span>
 </a>
-</li></ul>
+</li>
+</ul>
 </nav>
 </header>
 <main class=main>
 <article class=post-single>
 <header class=post-header>
-<div class=breadcrumbs>
-<a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a>
-</div>
+<div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a></div>
 <h1 class=post-title>
 node 的 cluster
 </h1>
-<div class=post-meta>
-May 5, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
+<div class=post-meta><span title="2018-05-05 15:45:47 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix&nbsp;|&nbsp;<a href=https://github.com/zhenfeng-zhu/zhenfeng-zhu.github.io/content rel="noopener noreferrer" target=_blank>Suggest Changes</a>
 </div>
-</header>
-<div class=toc>
+</header> <div class=toc>
 <details>
 <summary accesskey=c title="(Alt + C)">
-<div class=details>Table of Contents</div>
+<span class=details>Table of Contents</span>
 </summary>
-<div class=inner><ul><li>
-<a href=#1-cluster-%e6%98%af%e4%bb%80%e4%b9%88 aria-label="1 cluster 是什么">1 cluster 是什么</a></li><li>
+<div class=inner><ul>
+<li>
+<a href=#1-cluster-%e6%98%af%e4%bb%80%e4%b9%88 aria-label="1 cluster 是什么">1 cluster 是什么</a></li>
+<li>
 <a href=#2-%e5%a4%9a%e8%bf%9b%e7%a8%8b%e6%a8%a1%e5%9e%8b aria-label="2 多进程模型">2 多进程模型</a><ul>
 <li>
-<a href=#%e8%bf%9b%e7%a8%8b%e5%ae%88%e6%8a%a4 aria-label=进程守护>进程守护</a></li><li>
+<a href=#%e8%bf%9b%e7%a8%8b%e5%ae%88%e6%8a%a4 aria-label=进程守护>进程守护</a></li>
+<li>
 <a href=#agent-%e6%9c%ba%e5%88%b6 aria-label="Agent 机制">Agent 机制</a></li></ul>
-</li><li>
-<a href=#3-%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e8%ae%afipc aria-label="3 进程间通讯（IPC）">3 进程间通讯（IPC）</a></li><li>
+</li>
+<li>
+<a href=#3-%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e8%ae%afipc aria-label="3 进程间通讯（IPC）">3 进程间通讯（IPC）</a></li>
+<li>
 <a href=#4-%e9%95%bf%e8%bf%9e%e6%8e%a5 aria-label="4 长连接">4 长连接</a><ul>
 <li>
 <a href=#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3 aria-label=核心思想>核心思想</a></li></ul>
-</li><li>
-<a href=#5-%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99 aria-label="5 参考资料">5 参考资料</a></li></ul>
+</li>
+<li>
+<a href=#5-%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99 aria-label="5 参考资料">5 参考资料</a>
+</li>
+</ul>
 </div>
 </details>
 </div>
-<div class=post-content>
-<p>我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。</p>
+<div class=post-content><p>我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。</p>
 <p>一个问题就是：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>如何榨干服务器资源，利用多核CPU的并发优势。
 </code></pre></div><p>node 官方提供的解决方案是 cluster。</p>
@@ -270,19 +274,20 @@ if (cluster.isMaster) {
 </div>
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
-</main><footer class=footer>
+</main>
+<footer class=footer>
 <span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
-<span>&#183;</span>
-<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
-<span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
 </footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
 </body>
 </html>

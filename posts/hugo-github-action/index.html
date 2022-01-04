@@ -13,7 +13,8 @@
 name: github pages on: push: branches: - main  # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/>
-<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
 <link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
 <link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
@@ -22,7 +23,10 @@ name: github pages on: push: branches: - main  # Set a branch to deploy jobs: de
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.91.2">
-<meta property="og:title" content="Github Action 自动部署 blog">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="Github Action 自动部署 blog">
 <meta property="og:description" content="之前我采用的方式是两个 github repo 的方式：
 一个叫 hugo-blog，用于存放 blog 的源文件
 一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件
@@ -30,8 +34,7 @@ name: github pages on: push: branches: - main  # Set a branch to deploy jobs: de
 方案 设置 workflow 首先创建一个.github/workflows/gh-pages.yml
 name: github pages on: push: branches: - main  # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/hugo-github-action/">
-<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/hugo-github-action/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-02-18T13:20:11+08:00">
 <meta property="article:modified_time" content="2021-02-18T13:20:11+08:00">
 <meta name=twitter:card content="summary_large_image">
@@ -44,13 +47,10 @@ name: github pages on: push: branches: - main  # Set a branch to deploy jobs: de
 方案 设置 workflow 首先创建一个.github/workflows/gh-pages.yml
 name: github pages on: push: branches: - main  # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Github Action 自动部署 blog","item":"https://zhenfeng-zhu.github.io/posts/hugo-github-action/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Github Action 自动部署 blog","name":"Github Action 自动部署 blog","description":"之前我采用的方式是两个 github repo 的方式：\n一个叫 hugo-blog，用于存放 blog 的源文件\n一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件\n然后通过写一个 shell 脚本，将生成之后的文件推向 zhenfeng-zhu.github.io 仓库中，同时将 blog 的源文件也做了一个 backup。后来 …","keywords":[],"articleBody":"之前我采用的方式是两个 github repo 的方式：\n一个叫 hugo-blog，用于存放 blog 的源文件\n一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件\n然后通过写一个 shell 脚本，将生成之后的文件推向 zhenfeng-zhu.github.io 仓库中，同时将 blog 的源文件也做了一个 backup。后来使用了一个 github action 的方式， 就不用在两个仓库中进行折腾，一切都由 github action 来做了。\n方案 设置 workflow 首先创建一个.github/workflows/gh-pages.yml\nname: github pages on: push: branches: - main  # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: 'latest' # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets.GITHUB_TOKEN }} publish_dir: ./public 我们看下这个 workflow 的步骤：\n  name 就是 github pages\n  on 的意思代表，是什么行为会触发这个 action 的构建。 这里我们设置的是当 push 到 main 分支的时候进行构建。\n  jobs 就是具体的工作，这里指定了几个步骤：\n 首先是在 Ubuntu 18.04 下进行构建 这些步骤都是用的 actions/checkout@v2 模板进行，拉取 submodules。 setup hugo：采用的是 peaceiris/actions-hugo@v2 模板 build：简单的 hugo 命令 deploy：采用 peaceiris/actions-gh-pages@v3 方式，把自己的 github token 也配置上。具体可以点进去看下这个步骤做了什么操作。    然后把博客的源文件，放在 main 分支里，当我们 push 之后，就会发现出现了一个 gh-pages 分支。\n设置 github pages 打开该 repo 的 settings，选到 GitHub Pages。\n我们选择分支是 gh-pages 即可。\n","wordCount":"159","inLanguage":"en","datePublished":"2021-02-18T13:20:11+08:00","dateModified":"2021-02-18T13:20:11+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/hugo-github-action/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Github Action 自动部署 blog","name":"Github Action 自动部署 blog","description":"之前我采用的方式是两个 github repo 的方式：\n一个叫 hugo-blog，用于存放 blog 的源文件\n一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件\n然后通过写一个 shell 脚本，将生成之后的文件推向 zhenfeng-zhu.github.io 仓库中，同时将 blog 的源文件也做了一个 backup。后来使用了一个 github action 的方式， 就不用在两个仓库中进行折腾，一切都由 github action 来做了。\n方案 设置 workflow 首先创建一个.github/workflows/gh-pages.yml\nname: github pages on: push: branches: - main  # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .","keywords":[],"articleBody":"之前我采用的方式是两个 github repo 的方式：\n一个叫 hugo-blog，用于存放 blog 的源文件\n一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件\n然后通过写一个 shell 脚本，将生成之后的文件推向 zhenfeng-zhu.github.io 仓库中，同时将 blog 的源文件也做了一个 backup。后来使用了一个 github action 的方式， 就不用在两个仓库中进行折腾，一切都由 github action 来做了。\n方案 设置 workflow 首先创建一个.github/workflows/gh-pages.yml\nname: github pages on: push: branches: - main  # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod - name: Setup Hugo uses: peaceiris/actions-hugo@v2 with: hugo-version: 'latest' # extended: true - name: Build run: hugo --minify - name: Deploy uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets.GITHUB_TOKEN }} publish_dir: ./public 我们看下这个 workflow 的步骤：\n  name 就是 github pages\n  on 的意思代表，是什么行为会触发这个 action 的构建。 这里我们设置的是当 push 到 main 分支的时候进行构建。\n  jobs 就是具体的工作，这里指定了几个步骤：\n 首先是在 Ubuntu 18.04 下进行构建 这些步骤都是用的 actions/checkout@v2 模板进行，拉取 submodules。 setup hugo：采用的是 peaceiris/actions-hugo@v2 模板 build：简单的 hugo 命令 deploy：采用 peaceiris/actions-gh-pages@v3 方式，把自己的 github token 也配置上。具体可以点进去看下这个步骤做了什么操作。    然后把博客的源文件，放在 main 分支里，当我们 push 之后，就会发现出现了一个 gh-pages 分支。\n设置 github pages 打开该 repo 的 settings，选到 GitHub Pages。\n我们选择分支是 gh-pages 即可。\n","wordCount":"159","inLanguage":"en","datePublished":"2021-02-18T13:20:11+08:00","dateModified":"2021-02-18T13:20:11+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/hugo-github-action/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-</noscript>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -60,7 +60,7 @@ name: github pages on: push: branches: - main  # Set a branch to deploy jobs: de
 </button>
 </span>
 </div>
-<ul id=menu onscroll=menu_on_scroll()>
+<ul id=menu>
 <li>
 <a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
 <span>Archives</span>
@@ -75,38 +75,39 @@ name: github pages on: push: branches: - main  # Set a branch to deploy jobs: de
 <a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
 <span>🔍</span>
 </a>
-</li></ul>
+</li>
+</ul>
 </nav>
 </header>
 <main class=main>
 <article class=post-single>
 <header class=post-header>
-<div class=breadcrumbs>
-<a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a>
-</div>
+<div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a></div>
 <h1 class=post-title>
 Github Action 自动部署 blog
 </h1>
-<div class=post-meta>
-February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+<div class=post-meta><span title="2021-02-18 13:20:11 +0800 +0800">February 18, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix&nbsp;|&nbsp;<a href=https://github.com/zhenfeng-zhu/zhenfeng-zhu.github.io/content rel="noopener noreferrer" target=_blank>Suggest Changes</a>
 </div>
-</header>
-<div class=toc>
+</header> <div class=toc>
 <details>
 <summary accesskey=c title="(Alt + C)">
-<div class=details>Table of Contents</div>
+<span class=details>Table of Contents</span>
 </summary>
-<div class=inner><ul><li>
+<div class=inner><ul>
+<li>
 <a href=#%e6%96%b9%e6%a1%88 aria-label=方案>方案</a><ul>
 <li>
-<a href=#%e8%ae%be%e7%bd%ae-workflow aria-label="设置 workflow">设置 workflow</a></li><li>
-<a href=#%e8%ae%be%e7%bd%ae-github-pages aria-label="设置 github pages">设置 github pages</a></li></ul>
-</li></ul>
+<a href=#%e8%ae%be%e7%bd%ae-workflow aria-label="设置 workflow">设置 workflow</a></li>
+<li>
+<a href=#%e8%ae%be%e7%bd%ae-github-pages aria-label="设置 github pages">设置 github pages</a>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </details>
 </div>
-<div class=post-content>
-<p>之前我采用的方式是两个 github repo 的方式：</p>
+<div class=post-content><p>之前我采用的方式是两个 github repo 的方式：</p>
 <p>一个叫 hugo-blog，用于存放 blog 的源文件</p>
 <p>一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件</p>
 <p>然后通过写一个 shell 脚本，将生成之后的文件推向 zhenfeng-zhu.github.io 仓库中，同时将 blog 的源文件也做了一个 backup。后来使用了一个 github action 的方式，
@@ -198,19 +199,20 @@ February 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
-</main><footer class=footer>
+</main>
+<footer class=footer>
 <span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
-<span>&#183;</span>
-<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
-<span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
 </footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
 </body>
 </html>

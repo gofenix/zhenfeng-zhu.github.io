@@ -5,10 +5,10 @@
 <meta name=robots content="index, follow">
 <title>Posts | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta name=description content="Posts - Awesome Fenix">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/>
-<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
 <link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
 <link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
@@ -18,12 +18,13 @@
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
-<meta property="og:title" content="Posts">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
-<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -32,9 +33,6 @@
 </head>
 <body class=list id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-</noscript>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -44,7 +42,7 @@
 </button>
 </span>
 </div>
-<ul id=menu onscroll=menu_on_scroll()>
+<ul id=menu>
 <li>
 <a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
 <span>Archives</span>
@@ -59,20 +57,17 @@
 <a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
 <span>🔍</span>
 </a>
-</li></ul>
+</li>
+</ul>
 </nav>
 </header>
 <main class=main>
-<header class=page-header>
-<div class=breadcrumbs>
-<a href=https://zhenfeng-zhu.github.io>Home</a>
-</div>
+<header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div>
 <h1>Posts</h1>
 </header>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-crystal 简介
+<h2>crystal 简介
 </h2>
 </header>
 <section class=entry-content>
@@ -82,15 +77,12 @@ Fast as C, Slick as Ruby
 # A very basic HTTP server require "http/server" server = HTTP::Server.new do |context| context.response.content_type = "text/plain" context.response.print "Hello world, got #{context.request.path}!" end puts "Listening on http://127.0.0.1:8080" server.listen(8080) 类型系统 crystal 的一大卖点就是静态类型系统，但是写起来又和脚本语言类似。
 def shout(x) # Notice that both Int32 and String respond_to `to_s` x.to_s.upcase end foo = ENV["FOO"]? || 10 typeof(foo) # => (Int32 | String) typeof(shout(foo)) # => String 空引用检查 crystal 可以在编译的时候检查空引用，避免出现空指针异常。...</p>
 </section>
-<footer class=entry-footer>
-August 27, 2019&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2019-08-27 02:14:18.124 +0000 UTC">August 27, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to crystal 简介" href=https://zhenfeng-zhu.github.io/posts/crystal%E7%AE%80%E4%BB%8B/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-socket
+<h2>socket
 </h2>
 </header>
 <section class=entry-content>
@@ -99,15 +91,12 @@ socket
 传输层的 tcp 和 udp 里都有端口的概念，不同应用监听不同的段即可。
 应用层和内核的互通机制，就是通过 socket 系统调用。其实 socket 哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是 socket。...</p>
 </section>
-<footer class=entry-footer>
-August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2019-08-26 06:54:14.652 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-go 进阶
+<h2>go 进阶
 </h2>
 </header>
 <section class=entry-content>
@@ -116,15 +105,12 @@ profiling 分析 tracing 跟踪 debuging 调试 运行时统计信息和事件 P
 runtime/pprof 包有：
 cpu 主动消费 cpu 周期所花费的时间，不包括睡眠或者 io 等待 heap 报告内存分配采样； 当前或历史内存使用状况 检测内存泄露 threadcreate 报告创建新的系统线程 goroutine 当前所有协程的堆栈跟踪 block 显示 goroutine 阻塞等待同步原语的位置。 默认不开启，使用 runtime.SetBlockProfileRate 启用 mutex 报告锁竞争。 如果认为自己的程序因为互斥锁导致 cpu 不能充分利用的时候，使用这个。 默认也是不开启，使用 runtime.SetMutexProfileFraction 启用。 其他可用的的性能分析工具...</p>
 </section>
-<footer class=entry-footer>
-August 26, 2019&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2019-08-26 06:53:32.176 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to go 进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-mysql
+<h2>mysql
 </h2>
 </header>
 <section class=entry-content>
@@ -150,15 +136,12 @@ binlog 归档日志 binlog 是 server 层实现的，所有的引擎都可以使
 写入 binlog
 提交事务，处于 commit 阶段。...</p>
 </section>
-<footer class=entry-footer>
-December 1, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-12-01 15:54:53 +0000 UTC">December 1, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to mysql" href=https://zhenfeng-zhu.github.io/posts/mysql/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-graphql
+<h2>graphql
 </h2>
 </header>
 <section class=entry-content>
@@ -172,15 +155,12 @@ type Person{ name: String! age: Int! posts: [Post!]! } 通过 Query 获取数据
 服务器返回的结果会是这样的：
 { "allPersons": [ { "name": "Johnny" }, { "name": "Sarah" }, { "name": "Alice" } ] } 可以看到只返回了 name 字段，age 字段是不会返回的。...</p>
 </section>
-<footer class=entry-footer>
-November 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-11-08 18:28:13 +0000 UTC">November 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to graphql" href=https://zhenfeng-zhu.github.io/posts/graphql/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-go-best-practice
+<h2>go-best-practice
 </h2>
 </header>
 <section class=entry-content>
@@ -191,17 +171,14 @@ var usersMap map[string]*User 如果users的描述性都不够用，那么usersM
 在声明和初始化时，使用:=。
 关于变量和常量的注释应描述其内容而非其目的 任何既不明显也不简短的公共功能必须予以注释。 无论长度或复杂程度如何，对库中的任何函数都必须进行注释 在编写函数之前，请编写描述函数的注释。 如果你发现很难写出注释，那么这就表明你将要编写的代码很难理解。
 以包所提供的内容来命名，而不是它包含的内容。
-避免使用类似base，common或util的包名称 尽早return而不是深度嵌套 使用internal包来减少公共 API 不鼓励使用nil作为参数 首选可变参数函数而非[]T参数 通过消除错误来消除错误处理 使用github.com/pkg/errors包装errors 永远不要启动一个停止不了的 goroutine ...</p>
+避免使用类似base，common或util的包名称 尽早return而不是深度嵌套 使用internal包来减少公共 API 不鼓励使用nil作为参数 首选可变参数函数而非[]T参数 通过消除错误来消除错误处理 使用github.com/pkg/errors包装errors 永远不要启动一个停止不了的 goroutine </p>
 </section>
-<footer class=entry-footer>
-November 7, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-11-07 17:16:07 +0000 UTC">November 7, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to go-best-practice" href=https://zhenfeng-zhu.github.io/posts/go-best-practice/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-kubernetes
+<h2>kubernetes
 </h2>
 </header>
 <section class=entry-content>
@@ -221,15 +198,12 @@ volume 机制，允许你将宿主机上指定的目录或文件，挂载到容�
 主要依赖 Linux 依赖三大技术 Namespace Cgroups rootfs 和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。
 docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。...</p>
 </section>
-<footer class=entry-footer>
-October 8, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-10-08 15:29:21 +0000 UTC">October 8, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to kubernetes" href=https://zhenfeng-zhu.github.io/posts/kubernetes/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-watchdog
+<h2>watchdog
 </h2>
 </header>
 <section class=entry-content>
@@ -243,15 +217,12 @@ watchdog
 如果你不想使用 CLI 或者现有的二进制文件或镜像，可以使用下面的方法去打包函数：
 使用一个现有的或者一个新的 Docker 镜像作为基础镜像 FROM 通过curl 或 ADD https://从 Releases 页面 添加 fwatchdog 二进制文件 为每个你要运行的函数设置 fprocess(函数进程) 环境变量 Expose port 8080 暴露端口 8080 Set the CMD to fwatchdog 设置 CMD为fwatchdog 一个echo函数的示例 Dockerfile：...</p>
 </section>
-<footer class=entry-footer>
-September 6, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-09-06 16:23:57 +0000 UTC">September 6, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to watchdog" href=https://zhenfeng-zhu.github.io/posts/watchdog/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-queue-worker
+<h2>queue-worker
 </h2>
 </header>
 <section class=entry-content>
@@ -261,15 +232,12 @@ queue-worker
 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。 源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。
 faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：...</p>
 </section>
-<footer class=entry-footer>
-September 6, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-09-06 16:23:12 +0000 UTC">September 6, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to queue-worker" href=https://zhenfeng-zhu.github.io/posts/queue-worker/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-区块链学习笔记
+<h2>区块链学习笔记
 </h2>
 </header>
 <section class=entry-content>
@@ -297,9 +265,7 @@ September 6, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 采用区块链作为账本的时候，会面临如下几个问题：
 不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan....</p>
 </section>
-<footer class=entry-footer>
-August 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-23 15:14:02 +0000 UTC">August 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 区块链学习笔记" href=https://zhenfeng-zhu.github.io/posts/blockchain/></a>
 </article>
 <footer class=page-footer>
@@ -308,18 +274,19 @@ August 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 <a class=next href=https://zhenfeng-zhu.github.io/posts/page/5/>Next Page »</a>
 </nav>
 </footer>
-</main><footer class=footer>
+</main>
+<footer class=footer>
 <span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
-<span>&#183;</span>
-<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
-<span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
 </footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>
 </html>

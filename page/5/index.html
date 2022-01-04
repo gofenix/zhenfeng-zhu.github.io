@@ -4,11 +4,10 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>Awesome Fenix</title>
-<meta name=keywords content>
 <meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/>
-<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
 <link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
 <link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
@@ -19,12 +18,13 @@
 <meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
-<meta property="og:title" content="Awesome Fenix">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="Awesome Fenix">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/">
-<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Awesome Fenix">
@@ -33,9 +33,6 @@
 </head>
 <body class=list id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-</noscript>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -45,7 +42,7 @@
 </button>
 </span>
 </div>
-<ul id=menu onscroll=menu_on_scroll()>
+<ul id=menu>
 <li>
 <a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
 <span>Archives</span>
@@ -60,14 +57,14 @@
 <a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
 <span>🔍</span>
 </a>
-</li></ul>
+</li>
+</ul>
 </nav>
 </header>
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-谈谈聊天机器人框架的实现原理
+<h2>谈谈聊天机器人框架的实现原理
 </h2>
 </header>
 <section class=entry-content>
@@ -91,15 +88,12 @@
 人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限 示例：
 const {startWith, when, goto, stay, stop} = botkit....</p>
 </section>
-<footer class=entry-footer>
-August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-22 19:39:12 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-基于以太坊的 Parity 联盟链部署
+<h2>基于以太坊的 Parity 联盟链部署
 </h2>
 </header>
 <section class=entry-content>
@@ -109,31 +103,25 @@ August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
 brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
 // demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0 节点：...</p>
 </section>
-<footer class=entry-footer>
-August 22, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-22 16:51:13 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 基于以太坊的 Parity 联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-dive-into-redis
+<h2>dive-into-redis
 </h2>
 </header>
 <section class=entry-content>
 <p>redis 持久化，
 机制有两种：
-快照：全量备份，二进制序列化，存储紧凑 AOF 日志：连续的增量备份，内存数据修改的文本 ...</p>
+快照：全量备份，二进制序列化，存储紧凑 AOF 日志：连续的增量备份，内存数据修改的文本 </p>
 </section>
-<footer class=entry-footer>
-August 20, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-20 09:39:08 +0000 UTC">August 20, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-golang 踩坑
+<h2>golang 踩坑
 </h2>
 </header>
 <section class=entry-content>
@@ -144,15 +132,12 @@ FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CM
 FROM docker.finogeeks.club/base/alpine MAINTAINER "zhuzhenfeng@finogeeks.club" RUN set -ex \ && apk add --no-cache ca-certificates COPY src/wallet/wallet /opt/wallet ENTRYPOINT /opt/wallet 二 panic: runtime error: invalid memory address or nil pointer dereference [signal 0xb code=0x1 addr=0x38 pc=0x26df]
 “An error is returned if caused by client policy (such as CheckRedirect), or if there was an HTTP protocol error....</p>
 </section>
-<footer class=entry-footer>
-August 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-14 20:10:55 +0000 UTC">August 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to golang 踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-以太坊开发总结
+<h2>以太坊开发总结
 </h2>
 </header>
 <section class=entry-content>
@@ -185,15 +170,12 @@ Ganache：启动了多个节点本地私链
 Rinkeby：以太坊测试链
 Etherscan：以太坊区块链浏览器，可以查询交易...</p>
 </section>
-<footer class=entry-footer>
-August 10, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-10 18:57:09 +0000 UTC">August 10, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-以太坊
+<h2>以太坊
 </h2>
 </header>
 <section class=entry-content>
@@ -206,15 +188,12 @@ go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以�
 以 keystore 的形式创建 keystore 会创建一个文件，这个文件如下所示：
 { "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p>
 </section>
-<footer class=entry-footer>
-August 7, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-07 20:09:26 +0000 UTC">August 7, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 以太坊" href=https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-contract
+<h2>contract
 </h2>
 </header>
 <section class=entry-content>
@@ -231,15 +210,12 @@ mapping(key => value)
 数字后面带有 seconds、 minutes、 hours、 days、 weeks 和 years。默认是秒。
 区块和交易...</p>
 </section>
-<footer class=entry-footer>
-August 3, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-03 14:32:03 +0000 UTC">August 3, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to contract" href=https://zhenfeng-zhu.github.io/posts/contract/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-faas-provider
+<h2>faas-provider
 </h2>
 </header>
 <section class=entry-content>
@@ -260,15 +236,12 @@ List / Create / Delete 一个函数 /system/functions
 在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。
 // Serve load your handlers into the correct OpenFaaS route spec....</p>
 </section>
-<footer class=entry-footer>
-August 1, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-01 19:53:23 +0000 UTC">August 1, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to faas-provider" href=https://zhenfeng-zhu.github.io/posts/faas-provider/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-gateway-reading
+<h2>gateway-reading
 </h2>
 </header>
 <section class=entry-content>
@@ -279,15 +252,12 @@ go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数�
 client_golang 是 Prometheus 的客户端。
 项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test....</p>
 </section>
-<footer class=entry-footer>
-August 1, 2018&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-08-01 09:15:35 +0000 UTC">August 1, 2018</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to gateway-reading" href=https://zhenfeng-zhu.github.io/posts/gateway-reading/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-NATS streaming
+<h2>NATS streaming
 </h2>
 </header>
 <section class=entry-content>
@@ -299,9 +269,7 @@ NATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 g
 增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅 使用 首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：
 homebrew...</p>
 </section>
-<footer class=entry-footer>
-July 30, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-07-30 14:51:26 +0000 UTC">July 30, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to NATS streaming" href=https://zhenfeng-zhu.github.io/posts/nats-streaming/></a>
 </article>
 <footer class=page-footer>
@@ -310,18 +278,19 @@ July 30, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 <a class=next href=https://zhenfeng-zhu.github.io/page/6/>Next Page »</a>
 </nav>
 </footer>
-</main><footer class=footer>
+</main>
+<footer class=footer>
 <span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
-<span>&#183;</span>
-<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
-<span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
 </footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>
 </html>

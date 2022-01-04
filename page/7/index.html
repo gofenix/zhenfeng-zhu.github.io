@@ -4,11 +4,10 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>Awesome Fenix</title>
-<meta name=keywords content>
 <meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/>
-<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
 <link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
 <link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
@@ -19,12 +18,13 @@
 <meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
-<meta property="og:title" content="Awesome Fenix">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="Awesome Fenix">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/">
-<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Awesome Fenix">
@@ -33,9 +33,6 @@
 </head>
 <body class=list id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-</noscript>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -45,7 +42,7 @@
 </button>
 </span>
 </div>
-<ul id=menu onscroll=menu_on_scroll()>
+<ul id=menu>
 <li>
 <a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
 <span>Archives</span>
@@ -60,14 +57,14 @@
 <a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
 <span>🔍</span>
 </a>
-</li></ul>
+</li>
+</ul>
 </nav>
 </header>
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-译：vertx-kotlin-coroutine
+<h2>译：vertx-kotlin-coroutine
 </h2>
 </header>
 <section class=entry-content>
@@ -83,15 +80,12 @@ vertx-lang-kotlin-coroutines 目前仅适用于 kotlin，而且是 kotlin1.1 的
 从一个 vertx.x 的 contex 中启动协程 导入 io.vertx.kotlin.coroutines.VertxCoroutine，launch（协程生成器）方法中允许运行一段代码作为可以暂停的协程：
 val vertx = Vertx.vertx() vertx.deployVerticle(ExampleVerticle()) launch(vertx.dispatcher()) { val timerId = awaitEvent&lt;Long> { handler -> vertx....</p>
 </section>
-<footer class=entry-footer>
-June 2, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-06-02 16:00:52 +0000 UTC">June 2, 2018</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 译：vertx-kotlin-coroutine" href=https://zhenfeng-zhu.github.io/posts/vertx-kotlin-coroutine/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-小议 async/await 和 coroutine
+<h2>小议 async/await 和 coroutine
 </h2>
 </header>
 <section class=entry-content>
@@ -105,15 +99,12 @@ June 2, 2018&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix
 跳转离开，在任何语言里都有 2 种最基本的方法：1）从当前函数返回； 2）调用一个新的函数。 前者会把上下文中的局部变量和函数参数全部摧毁，除非他返回前把这些变量找个别的地方保存起来；后者则能保护住整个上下文的内存（除了协程切换后会摧毁一些寄存器），而且跳转回来也是常规方法：函数返回。
 在写 node 的时候，基本上是无脑上 async/await。每次看到回调函数的时候，强迫症就犯了，总是想方设法将那个方法转成 promise，然后使用 await 获得结果。无脑尝试了 bluebird 和 node 的 util，虽然有些是很好用的，但是有的还是无法达到我预期的。靠着无脑的 async/await，实现了很多功能，代码写起来也是快的飞起，但是只顾着做业务而不深入思考的话，是一个不好的表现，所以我就停下来搜了很多 async/await 的东西，特别是从阮一峰老师那里收获了很多。...</p>
 </section>
-<footer class=entry-footer>
-May 21, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-05-21 19:37:14 +0000 UTC">May 21, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 小议 async/await 和 coroutine" href=https://zhenfeng-zhu.github.io/posts/async/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-elasticsearch
+<h2>elasticsearch
 </h2>
 </header>
 <section class=entry-content>
@@ -132,15 +123,12 @@ elasticsearch
 快速入门 安装 es 的安装很简单，我这里使用的是 mac，下载下来 zip 包，解压即可使用。
 [elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ./bin/elasticsearch Java HotSpot(TM) 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9....</p>
 </section>
-<footer class=entry-footer>
-May 20, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-05-20 14:17:07 +0000 UTC">May 20, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to elasticsearch" href=https://zhenfeng-zhu.github.io/posts/elasticsearch/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-git 常用操作
+<h2>git 常用操作
 </h2>
 </header>
 <section class=entry-content>
@@ -153,17 +141,14 @@ git checkout dev git cherry-pic ${commit_id} 常用开发流程 git checkout -b 
 git commit 之后，进行 rebase
 git pull –rebase
 gca!
-git rvm...</p>
+git rvm</p>
 </section>
-<footer class=entry-footer>
-May 14, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-05-14 10:04:02 +0000 UTC">May 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to git 常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-node 的 cluster
+<h2>node 的 cluster
 </h2>
 </header>
 <section class=entry-content>
@@ -175,15 +160,12 @@ node 的 cluster
 负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。 以下是官方文档的一个例子：
 const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i &lt; numCPUs; i++) { cluster....</p>
 </section>
-<footer class=entry-footer>
-May 5, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-05-05 15:45:47 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to node 的 cluster" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-node 踩坑
+<h2>node 踩坑
 </h2>
 </header>
 <section class=entry-content>
@@ -192,15 +174,12 @@ node 踩坑
 import { a } from "./module"; 所以自己也想要这么写，但是每次运行的时候都会报错。
 // demo2.js export const a = "hello"; //demo1.js import { a } from "./demo2"; function hello() { console.log(a); } zhuzhenfengdeMacBook-Pro :: node/node-example » node demo1.js /Users/zhuzhenfeng/Documents/github/node/node-example/demo1.js:1 (function (exports, require, module, __filename, __dirname) { import { a } from "./demo2"; ^ SyntaxError: Unexpected token { at new Script (vm.js:74:7) at createScript (vm.js:246:10) at Object.runInThisContext (vm.js:298:10) at Module._compile (internal/modules/cjs/loader.js:646:28) at Object....</p>
 </section>
-<footer class=entry-footer>
-May 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-05-05 15:32:59 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to node 踩坑" href=https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-node 学习笔记
+<h2>node 学习笔记
 </h2>
 </header>
 <section class=entry-content>
@@ -213,15 +192,12 @@ Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎�
 // b.js function FunA(){ return "hello world"; } // 暴露方法FunA module.exports = FunA; 加载模块
 // a.js const FunA=require('....</p>
 </section>
-<footer class=entry-footer>
-April 22, 2018&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-04-22 15:41:21 +0000 UTC">April 22, 2018</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to node 学习笔记" href=https://zhenfeng-zhu.github.io/posts/node-learning/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-node 的 redis 实战
+<h2>node 的 redis 实战
 </h2>
 </header>
 <section class=entry-content>
@@ -230,15 +206,12 @@ node 的 redis 实战
 yarn add redis 模块使用实例
 const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on("error", function (err) { console.log("Error " + err); }); client.set("string key", "string val", redis.print); client.hset("hash key", "hashtest 1", "some value", redis.print); client.hset(["hash key", "hashtest 2", "some other value"], redis.print); client.hkeys("hash key", function (err, replies) { console.log(replies.length + " replies:"); replies.forEach(function (reply, i) { console.log(" " + i + ": " + reply); }); client....</p>
 </section>
-<footer class=entry-footer>
-April 13, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-04-13 10:00:12 +0000 UTC">April 13, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to node 的 redis 实战" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-谈谈 web 框架
+<h2>谈谈 web 框架
 </h2>
 </header>
 <section class=entry-content>
@@ -250,15 +223,12 @@ m，模型主要用于封装与应用程序相关的数据以及对数据的处�
 在做 web 开发的时候，项目目录一般是这样的：
 $ tree [16:23:43] . ├── mvnw ├── mvnw.cmd ├── pom.xml └── src ├── main │ ├── java │ │ └── com │ │ └── example │ │ └── demo │ │ └── DemoApplication....</p>
 </section>
-<footer class=entry-footer>
-April 8, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-04-08 16:01:48 +0000 UTC">April 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 谈谈 web 框架" href=https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-技术栈
+<h2>技术栈
 </h2>
 </header>
 <section class=entry-content>
@@ -271,9 +241,7 @@ guice 这个我之前都读错了，我读成了盖斯，其实是和果汁的�
 需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。
 rxjava rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。...</p>
 </section>
-<footer class=entry-footer>
-April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-04-05 09:49:06 +0000 UTC">April 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 技术栈" href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/></a>
 </article>
 <footer class=page-footer>
@@ -282,18 +250,19 @@ April 5, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <a class=next href=https://zhenfeng-zhu.github.io/page/8/>Next Page »</a>
 </nav>
 </footer>
-</main><footer class=footer>
+</main>
+<footer class=footer>
 <span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
-<span>&#183;</span>
-<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
-<span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
 </footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>
 </html>

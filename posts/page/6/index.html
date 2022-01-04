@@ -5,10 +5,10 @@
 <meta name=robots content="index, follow">
 <title>Posts | Awesome Fenix</title>
 <meta name=keywords content>
-<meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta name=description content="Posts - Awesome Fenix">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/>
-<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
 <link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
 <link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
@@ -18,12 +18,13 @@
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
-<meta property="og:title" content="Posts">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="Posts">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/">
-<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Posts">
@@ -32,9 +33,6 @@
 </head>
 <body class=list id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-</noscript>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -44,7 +42,7 @@
 </button>
 </span>
 </div>
-<ul id=menu onscroll=menu_on_scroll()>
+<ul id=menu>
 <li>
 <a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
 <span>Archives</span>
@@ -59,20 +57,17 @@
 <a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
 <span>🔍</span>
 </a>
-</li></ul>
+</li>
+</ul>
 </nav>
 </header>
 <main class=main>
-<header class=page-header>
-<div class=breadcrumbs>
-<a href=https://zhenfeng-zhu.github.io>Home</a>
-</div>
+<header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div>
 <h1>Posts</h1>
 </header>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-nats 简介
+<h2>nats 简介
 </h2>
 </header>
 <section class=entry-content>
@@ -87,15 +82,12 @@ NATS 设计目标
 一些适用 nats 的场景有：
 高吞吐量的消息分散 —— 少数的生产者需要将数据发送给很多的消费者。 寻址和发现 —— 将数据发送给特定的应用实例，设备或者用户，也可用于发现并连接到基础架构中的实例，设备或用户。 命令和控制（控制面板）—— 向程序或设备发送指令，并从程序/设备中接收状态，如 SCADA，卫星遥感，物联网等。 负载均衡 —— 主要应用于程序会生成大量的请求，且可动态伸缩程序实例。 N 路可扩展性 —— 通信基础架构能够充分利用 go 的高效并发/调度机制，以增强水平和垂直的扩展性。 位置透明 —— 程序在各个地理位置上分布者大量实例，且你无法了解到程序之间的端点配置详情，及他们所生产或消费的数据。 容错 使用 nats-streaming 的附加场景有：...</p>
 </section>
-<footer class=entry-footer>
-July 30, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-07-30 11:15:39 +0000 UTC">July 30, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to nats 简介" href=https://zhenfeng-zhu.github.io/posts/nats/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-overview-of-openfaas
+<h2>overview-of-openfaas
 </h2>
 </header>
 <section class=entry-content>
@@ -106,15 +98,12 @@ overview-of-openfaas
 CLI 实际上是 API 网关的一个 RESTful 客户端。
 在配置好 OpenFaaS 之后，你可以在这里开始学习 CLI开始学习 CLI...</p>
 </section>
-<footer class=entry-footer>
-July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-07-26 17:41:33 +0000 UTC">July 26, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to overview-of-openfaas" href=https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-OpenFaaS on Rancher 2.0
+<h2>OpenFaaS on Rancher 2.0
 </h2>
 </header>
 <section class=entry-content>
@@ -124,15 +113,12 @@ https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be
 这里是创建栈的compose.yml文件：
 version: "2" services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config....</p>
 </section>
-<footer class=entry-footer>
-July 26, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-07-26 09:50:46 +0000 UTC">July 26, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to OpenFaaS on Rancher 2.0" href=https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-openfaas-workshop-lab4
+<h2>openfaas-workshop-lab4
 </h2>
 </header>
 <section class=entry-content>
@@ -142,29 +128,23 @@ $ cp -r lab3 lab4 \ && cd lab4 通过环境变量注入配置 It is useful to be
 在部署时 在部署时设置环境变量 我们在 Lab3 时用了 write_debug 来做——你也可以在这里设置你想要的任何自定义的环境变量。例如：如果你想为 hello world 函数配置一种语言，可以引入一个 spoken_language 变量。
 使用 HTTP 上下文——querystring / headers 使用 querystring 和 HTTP headers 另一个更为动态的选项是可以在每个请求级别上进行修改，即使用 querystrings 和 HTTP headers，这两者都可以通过 faas-cli 或者 curl 传递。...</p>
 </section>
-<footer class=entry-footer>
-July 2, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-07-02 09:32:59 +0000 UTC">July 2, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to openfaas-workshop-lab4" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-ubuntu-docker-sudo
+<h2>ubuntu-docker-sudo
 </h2>
 </header>
 <section class=entry-content>
-<p>sudo chown "$USER":"$USER" /home/"$USER"/.docker -R sudo chmod g+rwx "/home/$USER/.docker" -R https://api.finochat.com/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI http://localhost:3000/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI ...</p>
+<p>sudo chown "$USER":"$USER" /home/"$USER"/.docker -R sudo chmod g+rwx "/home/$USER/.docker" -R https://api.finochat.com/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI http://localhost:3000/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI </p>
 </section>
-<footer class=entry-footer>
-June 29, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-06-29 13:54:25 +0000 UTC">June 29, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to ubuntu-docker-sudo" href=https://zhenfeng-zhu.github.io/posts/ubuntu-docker-sudo/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-openfaas-workshop-lab3
+<h2>openfaas-workshop-lab3
 </h2>
 </header>
 <section class=entry-content>
@@ -174,15 +154,12 @@ $ mkdir -p lab3 \ && cd lab3 创建一个新函数 创建函数有两种方式�
 $ faas-cli template pull Fetch templates from repository: https://github.com/openfaas/templates.git Attempting to expand templates from https://github.com/openfaas/templates.git Fetched 11 template(s) : [csharp dockerfile go go-armhf node node-arm64 node-armhf python python-armhf python3 ruby] 之后找到可用的语言：
 $ faas-cli new --list Languages available as templates: - csharp - dockerfile - go - go-armhf - node - node-arm64 - node-armhf - python - python-armhf - python3 - ruby Or alternatively create a folder containing a Dockerfile, then pick the "Dockerfile" lang type in your YAML file....</p>
 </section>
-<footer class=entry-footer>
-June 28, 2018&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-06-28 17:29:56 +0000 UTC">June 28, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to openfaas-workshop-lab3" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab3/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-译：openfaas-workshop-Lab1
+<h2>译：openfaas-workshop-Lab1
 </h2>
 </header>
 <section class=entry-content>
@@ -196,15 +173,12 @@ Docker CE for Mac Edge Edition Windows
 Linux - Ubuntu 或 Debian
 Docker CE for Linux 你可以从Docker Store中安装 Docker CE...</p>
 </section>
-<footer class=entry-footer>
-June 25, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-06-25 18:04:09 +0000 UTC">June 25, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 译：openfaas-workshop-Lab1" href=https://zhenfeng-zhu.github.io/posts/workshop-lab1/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-openfaas
+<h2>openfaas
 </h2>
 </header>
 <section class=entry-content>
@@ -222,15 +196,12 @@ docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func
 常用命令：
 $ faas-cli new --list $ faas-cli build -f ....</p>
 </section>
-<footer class=entry-footer>
-June 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-06-24 15:43:46 +0000 UTC">June 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to openfaas" href=https://zhenfeng-zhu.github.io/posts/openfaas/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-java-reactive-web
+<h2>java-reactive-web
 </h2>
 </header>
 <section class=entry-content>
@@ -239,15 +210,12 @@ spring web flux： Reactive web
 编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程
 In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow....</p>
 </section>
-<footer class=entry-footer>
-June 23, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-06-23 15:05:32 +0000 UTC">June 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to java-reactive-web" href=https://zhenfeng-zhu.github.io/posts/java-reactive-web/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-kafka
+<h2>kafka
 </h2>
 </header>
 <section class=entry-content>
@@ -260,9 +228,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --f
 echo -e "zhisheng\ntian" > test.txt ls
 zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e "zhisheng\ntian" > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器...</p>
 </section>
-<footer class=entry-footer>
-June 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-06-21 17:49:46 +0000 UTC">June 21, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to kafka" href=https://zhenfeng-zhu.github.io/posts/kafka/></a>
 </article>
 <footer class=page-footer>
@@ -271,18 +237,19 @@ June 21, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 <a class=next href=https://zhenfeng-zhu.github.io/posts/page/7/>Next Page »</a>
 </nav>
 </footer>
-</main><footer class=footer>
+</main>
+<footer class=footer>
 <span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
-<span>&#183;</span>
-<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
-<span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
 </footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>
 </html>

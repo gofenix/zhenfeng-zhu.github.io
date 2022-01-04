@@ -26,7 +26,8 @@ CDN 和反向代理的本质都是通过缓存，不同的主要是：
  CDN 部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。    使用分布式文件系统和分布式数据库系统">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/>
-<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
 <link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
 <link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
@@ -35,7 +36,10 @@ CDN 和反向代理的本质都是通过缓存，不同的主要是：
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.91.2">
-<meta property="og:title" content="大型网站发展历程">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="大型网站发展历程">
 <meta property="og:description" content="前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。
  code less, play more!
  前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有庞大的用户，高并发的访问，海量的数据；大型网站都是从小型网站发展而来。网站的价值在于它能给用户提供什么家宅，在于网站能做什么，而不在于它是怎么做的，所以网站在小的时候就去追求网站的架构是舍本逐末，得不偿失的。小型网站最需要做的就是为用户提供更好的服务来创造价值，得到用户认可，活下去，野蛮生长。
@@ -56,8 +60,7 @@ CDN 和反向代理的本质都是通过缓存，不同的主要是：
 CDN 和反向代理的本质都是通过缓存，不同的主要是：
  CDN 部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。    使用分布式文件系统和分布式数据库系统">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/">
-<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2020-11-20T16:00:59+08:00">
 <meta property="article:modified_time" content="2020-11-20T16:00:59+08:00">
 <meta name=twitter:card content="summary_large_image">
@@ -83,13 +86,10 @@ CDN 和反向代理的本质都是通过缓存，不同的主要是：
 CDN 和反向代理的本质都是通过缓存，不同的主要是：
  CDN 部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。    使用分布式文件系统和分布式数据库系统">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"大型网站发展历程","item":"https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"大型网站发展历程","name":"大型网站发展历程","description":"前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。\n code less, play more!\n 前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有 …","keywords":[],"articleBody":"前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。\n code less, play more!\n 前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有庞大的用户，高并发的访问，海量的数据；大型网站都是从小型网站发展而来。网站的价值在于它能给用户提供什么家宅，在于网站能做什么，而不在于它是怎么做的，所以网站在小的时候就去追求网站的架构是舍本逐末，得不偿失的。小型网站最需要做的就是为用户提供更好的服务来创造价值，得到用户认可，活下去，野蛮生长。\n大型网站软件系统的特点  高并发，大流量 高可用 海量数据 用户分布广泛，网络情况复杂 安全环境恶劣 需求快速变更，发布平频繁 渐进式发展  大型网站的发展历程   初始阶段的网站架构\n最开始没有多少人访问，所以应用程序，数据库，文件都在同一台机器上。\n  应用服务器和数据服务分离\n应用和数据分离之后，一般需要三台服务器。应用服务器，文件服务器和数据库服务器，这三种服务器对于硬件要求各不相同。\n 应用服务器：更强大的 CPU 数据库服务器：更快速的磁盘和更大的内存 文件服务器：容量更大的硬盘    使用缓存改善性能\n网站的访问也遵循二八定律：80%的业务集中在 20%的数据上。因此可以把这一小部分数据缓存在内存中，减少数据库的访问压力。\n网站的缓存可以分为两种：\n 本地缓存：缓存在应用服务器上。本地缓存访问速度快，但是受制于内存限制，缓存数量有限，而且也会出现和应用程序争抢内存的情况。 远程分布式缓存：以集群的方式，缓存在大内存的专用缓存服务器。可以在理论上做到不受内存容量限制。    使用应用服务器集群提高并发能力\n当一台服务器的处理能力和存储空间不足的时候，不要企图更换更强大的服务器。对于大型网站来说，不管多么强大的服务器，都满足不了网站持续增长的业务需求。此时就可以考虑集群的方式，通过负载均衡调度服务器，可以将来自用户的请求分发到应用服务器集群中的任何一台服务器上。\n  数据库读写分离\n使用缓存后，大部分的数据读操作访问都可以不通过数据库完成，但是仍有部分读操作（如缓存过期，缓存不命中）和全部的写操作需要访问数据库。\n目前大部分数据库都提供主从热备的功能，在写数据的时候，访问主库，主库通过主从复制机制将数据更新同步至从数据库，在读的时候就可以通过从数据库获取数据。\n  使用反向代理和 CDN 加速网站响应\n在《web 性能权威指南》中有讲到，网站性能的瓶颈，大部分时间都浪费在 TCP 的握手和传输上。因此可以通过 CDN 和反向代理的方式来加快响应。\nCDN 和反向代理的本质都是通过缓存，不同的主要是：\n CDN 部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。    使用分布式文件系统和分布式数据库系统\n随着业务的发展，依旧不能满足的时候，就采用分布式的文件和分布式的数据库系统。\n分布式数据库是数据库拆分的最后手段，只用在单表数据规模特别庞大的时候才使用。更常用的拆分手段是业务分库，将不同的业务数据存储在不同的数据库中。\n  使用 NoSQL 和搜索引擎\n对数据检索和存储越来越复杂的时候，就可以采用一些非关系型数据库如 HBase 和非数据库查询技术如 ElasticSearch 等等\n  业务拆分\n业务场景复杂的时候，一般讲整个网站业务分为不同的产品线，如首页，订单，买家，卖家等等。\n技术上也会根据产品线划分，将一个网站分为许多不同的应用，每个应用独立部署维护，应用之间可以通过一个超链接建立联系，也可以通过消息队列进行数据分发，当然最多的还是通过访问同一个数据存储系统来构成一个关联的完整系统。\n  分布式服务\n随着业务越拆越小，存储越来越大，维护越来越困难。此时就可以将相同业务操作的提取出来，独立部署。应用系统只需要管理用户界面，通过分布式服务调用共同的业务服务完成具体的业务操作。也就是最近概念越来越火的——微服务。\n  云计算\n大型网站架构解决了海量数据库管理和高并发事务处理，可以将这些解决方案应用到网站自身以外的业务上。现在像阿里云，亚马逊等云计算平台，将计算作为一种基础资源出售，中小网站不需要关系技术架构等问题，只需要按需付费，就可以使网站随着业务的增长获得更大的存储和计算资源。\n  未来\n未来还能变成什么样子，我也不清楚，也许以后都不是开发人员来维护了，所有的这些都是 AI 来完成，程序员要做的就是如何完善 AI。也许 AI 发展到最后，人类都不需要存在了吧。\n  结语 网站的技术是为业务而存在的，除此以外毫无意义。在技术选型和架构设计中，脱离业务发展实际，一味的追求新技术，可能会把技术发展引入一个歪路。\n技术是用来解决业务的问题，而技术不可能将所有问题都解决掉，涉及业务自身的问题，还是要通过业务手段去解决。\n","wordCount":"77","inLanguage":"en","datePublished":"2020-11-20T16:00:59+08:00","dateModified":"2020-11-20T16:00:59+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"大型网站发展历程","name":"大型网站发展历程","description":"前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。\n code less, play more!\n 前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有庞大的用户，高并发的访问，海量的数据；大型网站都是从小型网站发展而来。网站的价值在于它能给用户提供什么家宅，在于网站能做什么，而不在于它是怎么做的，所以网站在小的时候就去追求网站的架构是舍本逐末，得不偿失的。小型网站最需要做的就是为用户提供更好的服务来创造价值，得到用户认可，活下去，野蛮生长。\n大型网站软件系统的特点  高并发，大流量 高可用 海量数据 用户分布广泛，网络情况复杂 安全环境恶劣 需求快速变更，发布平频繁 渐进式发展  大型网站的发展历程   初始阶段的网站架构\n最开始没有多少人访问，所以应用程序，数据库，文件都在同一台机器上。\n  应用服务器和数据服务分离\n应用和数据分离之后，一般需要三台服务器。应用服务器，文件服务器和数据库服务器，这三种服务器对于硬件要求各不相同。\n 应用服务器：更强大的 CPU 数据库服务器：更快速的磁盘和更大的内存 文件服务器：容量更大的硬盘    使用缓存改善性能\n网站的访问也遵循二八定律：80%的业务集中在 20%的数据上。因此可以把这一小部分数据缓存在内存中，减少数据库的访问压力。\n网站的缓存可以分为两种：\n 本地缓存：缓存在应用服务器上。本地缓存访问速度快，但是受制于内存限制，缓存数量有限，而且也会出现和应用程序争抢内存的情况。 远程分布式缓存：以集群的方式，缓存在大内存的专用缓存服务器。可以在理论上做到不受内存容量限制。    使用应用服务器集群提高并发能力\n当一台服务器的处理能力和存储空间不足的时候，不要企图更换更强大的服务器。对于大型网站来说，不管多么强大的服务器，都满足不了网站持续增长的业务需求。此时就可以考虑集群的方式，通过负载均衡调度服务器，可以将来自用户的请求分发到应用服务器集群中的任何一台服务器上。\n  数据库读写分离\n使用缓存后，大部分的数据读操作访问都可以不通过数据库完成，但是仍有部分读操作（如缓存过期，缓存不命中）和全部的写操作需要访问数据库。\n目前大部分数据库都提供主从热备的功能，在写数据的时候，访问主库，主库通过主从复制机制将数据更新同步至从数据库，在读的时候就可以通过从数据库获取数据。\n  使用反向代理和 CDN 加速网站响应\n在《web 性能权威指南》中有讲到，网站性能的瓶颈，大部分时间都浪费在 TCP 的握手和传输上。因此可以通过 CDN 和反向代理的方式来加快响应。\nCDN 和反向代理的本质都是通过缓存，不同的主要是：\n CDN 部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。    使用分布式文件系统和分布式数据库系统","keywords":[],"articleBody":"前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。\n code less, play more!\n 前言 这个世界上没有哪个网站从诞生起就是大型网站；也没有哪个网站第一次发布的时候就拥有庞大的用户，高并发的访问，海量的数据；大型网站都是从小型网站发展而来。网站的价值在于它能给用户提供什么家宅，在于网站能做什么，而不在于它是怎么做的，所以网站在小的时候就去追求网站的架构是舍本逐末，得不偿失的。小型网站最需要做的就是为用户提供更好的服务来创造价值，得到用户认可，活下去，野蛮生长。\n大型网站软件系统的特点  高并发，大流量 高可用 海量数据 用户分布广泛，网络情况复杂 安全环境恶劣 需求快速变更，发布平频繁 渐进式发展  大型网站的发展历程   初始阶段的网站架构\n最开始没有多少人访问，所以应用程序，数据库，文件都在同一台机器上。\n  应用服务器和数据服务分离\n应用和数据分离之后，一般需要三台服务器。应用服务器，文件服务器和数据库服务器，这三种服务器对于硬件要求各不相同。\n 应用服务器：更强大的 CPU 数据库服务器：更快速的磁盘和更大的内存 文件服务器：容量更大的硬盘    使用缓存改善性能\n网站的访问也遵循二八定律：80%的业务集中在 20%的数据上。因此可以把这一小部分数据缓存在内存中，减少数据库的访问压力。\n网站的缓存可以分为两种：\n 本地缓存：缓存在应用服务器上。本地缓存访问速度快，但是受制于内存限制，缓存数量有限，而且也会出现和应用程序争抢内存的情况。 远程分布式缓存：以集群的方式，缓存在大内存的专用缓存服务器。可以在理论上做到不受内存容量限制。    使用应用服务器集群提高并发能力\n当一台服务器的处理能力和存储空间不足的时候，不要企图更换更强大的服务器。对于大型网站来说，不管多么强大的服务器，都满足不了网站持续增长的业务需求。此时就可以考虑集群的方式，通过负载均衡调度服务器，可以将来自用户的请求分发到应用服务器集群中的任何一台服务器上。\n  数据库读写分离\n使用缓存后，大部分的数据读操作访问都可以不通过数据库完成，但是仍有部分读操作（如缓存过期，缓存不命中）和全部的写操作需要访问数据库。\n目前大部分数据库都提供主从热备的功能，在写数据的时候，访问主库，主库通过主从复制机制将数据更新同步至从数据库，在读的时候就可以通过从数据库获取数据。\n  使用反向代理和 CDN 加速网站响应\n在《web 性能权威指南》中有讲到，网站性能的瓶颈，大部分时间都浪费在 TCP 的握手和传输上。因此可以通过 CDN 和反向代理的方式来加快响应。\nCDN 和反向代理的本质都是通过缓存，不同的主要是：\n CDN 部署在服务器器上的机房，用户在请求时，从距离自己最近的机房获取数据。 反向代理是部署在中心机房，用户请求到达中心机房之后，首先访问的服务器是反向代理的拂去其，如果反向代理服务器中缓存着用户请求的额资源，就将其返回给用户。    使用分布式文件系统和分布式数据库系统\n随着业务的发展，依旧不能满足的时候，就采用分布式的文件和分布式的数据库系统。\n分布式数据库是数据库拆分的最后手段，只用在单表数据规模特别庞大的时候才使用。更常用的拆分手段是业务分库，将不同的业务数据存储在不同的数据库中。\n  使用 NoSQL 和搜索引擎\n对数据检索和存储越来越复杂的时候，就可以采用一些非关系型数据库如 HBase 和非数据库查询技术如 ElasticSearch 等等\n  业务拆分\n业务场景复杂的时候，一般讲整个网站业务分为不同的产品线，如首页，订单，买家，卖家等等。\n技术上也会根据产品线划分，将一个网站分为许多不同的应用，每个应用独立部署维护，应用之间可以通过一个超链接建立联系，也可以通过消息队列进行数据分发，当然最多的还是通过访问同一个数据存储系统来构成一个关联的完整系统。\n  分布式服务\n随着业务越拆越小，存储越来越大，维护越来越困难。此时就可以将相同业务操作的提取出来，独立部署。应用系统只需要管理用户界面，通过分布式服务调用共同的业务服务完成具体的业务操作。也就是最近概念越来越火的——微服务。\n  云计算\n大型网站架构解决了海量数据库管理和高并发事务处理，可以将这些解决方案应用到网站自身以外的业务上。现在像阿里云，亚马逊等云计算平台，将计算作为一种基础资源出售，中小网站不需要关系技术架构等问题，只需要按需付费，就可以使网站随着业务的增长获得更大的存储和计算资源。\n  未来\n未来还能变成什么样子，我也不清楚，也许以后都不是开发人员来维护了，所有的这些都是 AI 来完成，程序员要做的就是如何完善 AI。也许 AI 发展到最后，人类都不需要存在了吧。\n  结语 网站的技术是为业务而存在的，除此以外毫无意义。在技术选型和架构设计中，脱离业务发展实际，一味的追求新技术，可能会把技术发展引入一个歪路。\n技术是用来解决业务的问题，而技术不可能将所有问题都解决掉，涉及业务自身的问题，还是要通过业务手段去解决。\n","wordCount":"77","inLanguage":"en","datePublished":"2020-11-20T16:00:59+08:00","dateModified":"2020-11-20T16:00:59+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-</noscript>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -99,7 +99,7 @@ CDN 和反向代理的本质都是通过缓存，不同的主要是：
 </button>
 </span>
 </div>
-<ul id=menu onscroll=menu_on_scroll()>
+<ul id=menu>
 <li>
 <a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
 <span>Archives</span>
@@ -114,39 +114,40 @@ CDN 和反向代理的本质都是通过缓存，不同的主要是：
 <a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
 <span>🔍</span>
 </a>
-</li></ul>
+</li>
+</ul>
 </nav>
 </header>
 <main class=main>
 <article class=post-single>
 <header class=post-header>
-<div class=breadcrumbs>
-<a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a>
-</div>
+<div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a></div>
 <h1 class=post-title>
 大型网站发展历程
 </h1>
-<div class=post-meta>
-November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
+<div class=post-meta><span title="2020-11-20 16:00:59 +0800 +0800">November 20, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix&nbsp;|&nbsp;<a href=https://github.com/zhenfeng-zhu/zhenfeng-zhu.github.io/content rel="noopener noreferrer" target=_blank>Suggest Changes</a>
 </div>
-</header>
-<div class=toc>
+</header> <div class=toc>
 <details>
 <summary accesskey=c title="(Alt + C)">
-<div class=details>Table of Contents</div>
+<span class=details>Table of Contents</span>
 </summary>
-<div class=inner><ul><li>
-<a href=#%e5%89%8d%e8%a8%80 aria-label=前言>前言</a></li><li>
+<div class=inner><ul>
+<li>
+<a href=#%e5%89%8d%e8%a8%80 aria-label=前言>前言</a></li>
+<li>
 <a href=#%e5%a4%a7%e5%9e%8b%e7%bd%91%e7%ab%99%e8%bd%af%e4%bb%b6%e7%b3%bb%e7%bb%9f%e7%9a%84%e7%89%b9%e7%82%b9 aria-label=大型网站软件系统的特点>大型网站软件系统的特点</a><ul>
 <li>
 <a href=#%e5%a4%a7%e5%9e%8b%e7%bd%91%e7%ab%99%e7%9a%84%e5%8f%91%e5%b1%95%e5%8e%86%e7%a8%8b aria-label=大型网站的发展历程>大型网站的发展历程</a></li></ul>
-</li><li>
-<a href=#%e7%bb%93%e8%af%ad aria-label=结语>结语</a></li></ul>
+</li>
+<li>
+<a href=#%e7%bb%93%e8%af%ad aria-label=结语>结语</a>
+</li>
+</ul>
 </div>
 </details>
 </div>
-<div class=post-content>
-<p>前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。</p>
+<div class=post-content><p>前几天跟一个朋友聊了一些关于网站缓存分布式的一些东西，发现自己的知识还是太过贫瘠。理论+协议，这是现在我亟待加强的。这个周末买了两本关于分布式网站的书，本着好记性不如烂笔头，便有了这样一系列的文章。希望一同分享，也请多指教。</p>
 <blockquote>
 <p>code less, play more!</p>
 </blockquote>
@@ -264,19 +265,20 @@ November 20, 2020&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
 </div>
 </footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
 </article>
-</main><footer class=footer>
+</main>
+<footer class=footer>
 <span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
-<span>&#183;</span>
-<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
-<span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
 </footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a>
-<script defer src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
 </body>
 </html>

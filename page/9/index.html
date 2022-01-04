@@ -4,11 +4,10 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>Awesome Fenix</title>
-<meta name=keywords content>
 <meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/>
-<link href=/assets/css/stylesheet.min.8d754ccb970fef4a6d8e5b0441e01d76a0d3530c6777067a1b2ca581aa1b4af7.css integrity="sha256-jXVMy5cP70ptjlsEQeAddqDTUwxndwZ6GyylgaobSvc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
 <link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
 <link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
@@ -19,12 +18,13 @@
 <meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
-<meta property="og:title" content="Awesome Fenix">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="Awesome Fenix">
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/">
-<meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
-<meta property="og:updated_time" content="2022-01-04T10:04:05+08:00">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
 <meta name=twitter:title content="Awesome Fenix">
@@ -33,9 +33,6 @@
 </head>
 <body class=list id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-</noscript>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -45,7 +42,7 @@
 </button>
 </span>
 </div>
-<ul id=menu onscroll=menu_on_scroll()>
+<ul id=menu>
 <li>
 <a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
 <span>Archives</span>
@@ -60,14 +57,14 @@
 <a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
 <span>🔍</span>
 </a>
-</li></ul>
+</li>
+</ul>
 </nav>
 </header>
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-Guice 快速入门
+<h2>Guice 快速入门
 </h2>
 </header>
 <section class=entry-content>
@@ -80,15 +77,12 @@ compile "com.google.inject:guice:4.1.0" 项目骨架 首先需要一个业务接
 package com.learning.guice; public interface UserService { void process(); } package com.learning.guice; public class UserServiceImpl implements UserService { @Override public void process() { System.out.println("我需要做一些业务逻辑"); } } 然后写一个日志的接口：
 package com.learning.guice; public interface LogService { void log(String msg); } package com....</p>
 </section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-24 17:57:15 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Guice 快速入门" href=https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-kotlin 快速入门
+<h2>kotlin 快速入门
 </h2>
 </header>
 <section class=entry-content>
@@ -97,44 +91,35 @@ kotlin 快速入门
 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参数并返回 Int 类型的值： fun sum(a: Int, b: Int): Int { return a + b } 带有方法体，返回推断类型数据的定义方式，例如： fun sum(a: Int, b: Int) = a + b 返回无意义类型的定义方式： fun printSum(a: Int, b: Int): Unit { println("sum of $aand $bis ${a + b}") } 或者省略 Unit：
 fun printSum(a: Int, b: Int) { println("sum of $aand $bis ${a + b}") } 变量定义 只赋值一次（只读）本地变量，val： val a:Int = 1 // 指定初始值 val b = 2 // 类型自推断为 `Int` val c:Int // 当不指定初始值时需要指定类型 c = 3 // 延迟赋值 可变变量， var： var x = 5 // 类型自推断为 `Int` x += 1 顶层变量 val PI = 3....</p>
 </section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-24 17:56:45 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to kotlin 快速入门" href=https://zhenfeng-zhu.github.io/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-RxJava2 快速入门
+<h2>RxJava2 快速入门
 </h2>
 </header>
 <section class=entry-content>
 <p>RxJava2 快速入门 引入依赖 compile 'io.reactivex.rxjava2:rxjava:2.0.1' 写法 简单版本 private static void helloSimple() { Consumer&lt;String> consumer = new Consumer&lt;String>() { @Override public void accept(String s) throws Exception { System.out.println("consumer accept is " + s); } }; Observable.just("hello world").subscribe(consumer); } 复杂版本 private static void helloComplex() { Observer&lt;String> observer = new Observer&lt;String>() { @Override public void onSubscribe(Disposable d) { System.out.println("onSubscribe: " + d); } @Override public void onNext(String s) { System.out.println("onNext: " + s); } @Override public void onError(Throwable e) { System....</p>
 </section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-24 17:55:56 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to RxJava2 快速入门" href=https://zhenfeng-zhu.github.io/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-领域实体类
+<h2>领域实体类
 </h2>
 </header>
 <section class=entry-content>
 <p>在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。
-pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。 根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。...</p>
+pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。 根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。</p>
 </section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-24 17:53:42 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 领域实体类" href=https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-docker
+<h2>docker
 </h2>
 </header>
 <section class=entry-content>
@@ -157,15 +142,12 @@ shell 格式
 exec 格式
 COPY 和 ADD 指令是复制文件...</p>
 </section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-24 17:42:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to docker" href=https://zhenfeng-zhu.github.io/posts/docker/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-express
+<h2>express
 </h2>
 </header>
 <section class=entry-content>
@@ -175,15 +157,12 @@ express 程序生成器 安装 npm install -g express-generator 示例 以下语
 express --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
 DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。...</p>
 </section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-24 17:41:01 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to express" href=https://zhenfeng-zhu.github.io/posts/express/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-碎碎念
+<h2>碎碎念
 </h2>
 </header>
 <section class=entry-content>
@@ -196,17 +175,14 @@ March 24, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
 女朋友，出乎我的意料，现在想想还是感觉活在梦里，略过略过。
 至于买房，没买之前的想法盲目乐观，后来算了一下，要是在深圳买房的话，我每个月的房贷是 2 万多，关键是首付还不一定能搞得出来。还是建议在北上广深工作的人，有机会现在老家的省会一类的城市，先搞一套，以后可以置换，能上车的时候早点上车，也是相当于变相攒钱了。对于不会投资或者创业的朋友，有时候辛辛苦苦干一年之后算一下，不知不觉中，自己的钱都不知道花在了哪里，如果有房贷的话，等用的时候说不定卖掉还能赚一些钱。
 感觉自己换公司还是挺戏剧化的，当时也没想着真的就换工作吧，只是想投投简历，然后去面试一波看看自己的水平怎么样。总觉得自己在招银的舒适区待的太久了，没有什么激情了。同时自己也想出来试试，万一公司上市，摇身一变成为富翁了。当然这是白日梦了，路还是要一步一步的走的。
-总感觉自己想了很多东西，但是就是写不出来，自己讲故事的能力还是要提升一些。...</p>
+总感觉自己想了很多东西，但是就是写不出来，自己讲故事的能力还是要提升一些。</p>
 </section>
-<footer class=entry-footer>
-March 24, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-24 15:55:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 碎碎念" href=https://zhenfeng-zhu.github.io/posts/a-month-in-finogeeks/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-Java 内存模型和线程
+<h2>Java 内存模型和线程
 </h2>
 </header>
 <section class=entry-content>
@@ -220,15 +196,12 @@ java 内存模型的主要目标是定义程序中各个变量的访问规则，
 1.2 内存之间的交互 关于主内存和工作内存之间的具体交互协议，java 内存模型定义了 8 中操作来完成，虚拟机实现的时候必须保证每个操作都是原子的，不可分割的（对于 long 和 double 有例外）
 lock 锁定：作用于主内存变量，代表一个变量是一条线程独占。 unlock 解锁：作用于主内存变量，把锁定的变量解锁。 read 读取：作用于主内存变量，把变量值从主内存传到线程的工作内存中，供 load 使用。 load 载入：作用工作内存变量，把上一个 read 到的值放入到工作内存中的变量中。 use 使用：作用于工作内存变量，把工作内存中的一个变量的值传递给执行引擎。 assign：作用于工作内存变量，把执行引擎执行过的值赋给工作内存中的变量。 store 存储：作用于工作内存变量，把工作内存中的变量值传给主内存，供 write 使用。 这些操作要满足一定的规则。...</p>
 </section>
-<footer class=entry-footer>
-March 22, 2018&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-22 19:16:37 +0000 UTC">March 22, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Java 内存模型和线程" href=https://zhenfeng-zhu.github.io/posts/java-memory-thread/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-aws.md
+<h2>aws.md
 </h2>
 </header>
 <section class=entry-content>
@@ -240,17 +213,14 @@ IAM 角色 类似于用户，可以被分配权限。
 安全组 控制连接到此 EC2 实例的流量，或者是控制对外暴露的端口。
 CIDR CIDR 主要是一个按位的、基于前缀的，用于解释 IP 地址的标准。当用二进制表示这些地址时，它们有着在开头部分的一系列相同的位。
 IPv4 的 CIDR 地址块的表示方法和 IPv4 地址的表示方法是相似的：由四部分组成的点分十进制地址，后跟一个斜线，最后是范围在 0 到 32 之间的一个数字：A.B.C.D/N。点分十进制的部分和 IPv4 地址一样是一个被分成四个八位位组的 32 位二进制数。斜线后面的数字就是前缀长度，也就是从左到右，被地址块里的地址所共享的位的数目。
-十进制部分有时会被省略，因此，/20 就表示一个前缀长度是 20 的 CIDR 地址块。如果一个 IP 地址的前 N 位与一个 CIDR 地址块的前缀是相同的话，那么就说这个地址属于这个 CIDR 地址块，也可以说是与 CIDR 地址块的前缀匹配。所以，要理解 CIDR，就要把地址写成二进制的形式。...</p>
+十进制部分有时会被省略，因此，/20 就表示一个前缀长度是 20 的 CIDR 地址块。如果一个 IP 地址的前 N 位与一个 CIDR 地址块的前缀是相同的话，那么就说这个地址属于这个 CIDR 地址块，也可以说是与 CIDR 地址块的前缀匹配。所以，要理解 CIDR，就要把地址写成二进制的形式。</p>
 </section>
-<footer class=entry-footer>
-March 22, 2018&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer><span title="2018-03-22 14:04:09 +0000 UTC">March 22, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to aws.md" href=https://zhenfeng-zhu.github.io/posts/aws-md/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>
-Hello World
+<h2>Hello World
 </h2>
 </header>
 <section class=entry-content>
@@ -258,11 +228,9 @@ Hello World
 Quick Start Create a new post $ hexo new "My New Post" More info: Writing
 Run server $ hexo server More info: Server
 Generate static files $ hexo generate More info: Generating
-Deploy to remote sites $ hexo deploy More info: Deployment...</p>
+Deploy to remote sites $ hexo deploy More info: Deployment</p>
 </section>
-<footer class=entry-footer>
-1 min&nbsp;·&nbsp;Fenix
-</footer>
+<footer class=entry-footer>1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Hello World" href=https://zhenfeng-zhu.github.io/posts/hello-world/></a>
 </article>
 <footer class=page-footer>
@@ -270,18 +238,19 @@ Deploy to remote sites $ hexo deploy More info: Deployment...</p>
 <a class=prev href=https://zhenfeng-zhu.github.io/page/8/>« Prev Page</a>
 </nav>
 </footer>
-</main><footer class=footer>
+</main>
+<footer class=footer>
 <span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
-<span>&#183;</span>
-<span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
-<span>&#183;</span>
-<span>Theme <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
 </footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
 </a>
-<script>window.onload=function(){localStorage.getItem("menu-scroll-position")&&(document.getElementById('menu').scrollLeft=localStorage.getItem("menu-scroll-position"))},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")};function menu_on_scroll(){localStorage.setItem("menu-scroll-position",document.getElementById('menu').scrollLeft)}</script>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
 <script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
 </body>
 </html>
