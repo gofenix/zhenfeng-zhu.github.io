@@ -70,6 +70,19 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>dive-into-redis
+</h2>
+</header>
+<section class=entry-content>
+<p>redis 持久化，
+机制有两种：
+快照：全量备份，二进制序列化，存储紧凑 AOF 日志：连续的增量备份，内存数据修改的文本 </p>
+</section>
+<footer class=entry-footer><span title="2018-08-20 09:39:08 +0000 UTC">August 20, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>golang 踩坑
 </h2>
 </header>
@@ -258,23 +271,6 @@ CLI 实际上是 API 网关的一个 RESTful 客户端。
 </section>
 <footer class=entry-footer><span title="2018-07-26 17:41:33 +0000 UTC">July 26, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to overview-of-openfaas" href=https://zhenfeng-zhu.github.io/posts/overview-of-openfaas/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>OpenFaaS on Rancher 2.0
-</h2>
-</header>
-<section class=entry-content>
-<p>这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。
-下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：
-https://www.youtube.com/watch?v=kX8mXv5d1qg&feature=youtu.be
-这里是创建栈的compose.yml文件：
-version: "2" services: alertmanager: image: functions/alertmanager:latest labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 faas-rancher: environment: - CATTLE_URL=${CATTLE_URL} - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY} - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY} - FUNCTION_STACK_NAME=faas-functions image: kenfdev/faas-rancher:v3 labels: io.rancher.container.pull_image: always stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 gateway: environment: - functions_provider_url=http://faas-rancher:8080/ image: functions/gateway:0.6.6-beta1 labels: io.rancher.container.pull_image: always ports: - 8080:8080/tcp stop_signal: SIGTERM restart: always stdin_open: true tty: true scale: 1 prometheus: command: [-config....</p>
-</section>
-<footer class=entry-footer><span title="2018-07-26 09:50:46 +0000 UTC">July 26, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to OpenFaaS on Rancher 2.0" href=https://zhenfeng-zhu.github.io/posts/openfaas-on-rancher/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

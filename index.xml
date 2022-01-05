@@ -9,7 +9,32 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 04 Jan 2022 13:44:15 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Jan 2022 10:20:39 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gavin Wood: Web3 去中心化技术是维护自由民主的唯一希望</title>
+      <link>https://zhenfeng-zhu.github.io/posts/what-is-web3/</link>
+      <pubDate>Wed, 05 Jan 2022 10:20:39 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/what-is-web3/</guid>
+      <description>Gavin Wood 在 2014 年创造了 Web3（最初是 Web 3.0）这个词。当时，他刚开始帮助开发以太坊，这是一种在知名度和市场规模上仅次于比特币的加密货币。如今，他经营着支持去中心化技术项目的 Web3 基金会，以及专注于为 Web3 构建区块链基础设施的公司 Parity Technologies。居住在瑞士的 Gavin 上周通过视频与我讨论了 Web 2.0 出错的地方、他对未来的展望，以及为什么我们都需要更少的信任。以下采访是我们谈话的记录的整理版。
+  WIRED：据我所知，Web3 最基本的想法是当前的 Web2.0 不好。因此，在我们讨论 Web3 会带来什么之前，你会怎么描述现在的问题？
+Gavin Wood：我认为 Web 2.0 的模型与互联网出现之前的社会模型非常相似。如果你回到 500 年前，人们基本上只在他们的小村庄和乡镇，并与他们认识的人进行交易。从广义上讲，他们依靠社会结构来确保他们的期望是可信的，并且很可能会真正发生，比如，这些苹果没有腐烂，或者这个马蹄铁在三周后不会破裂。
+这种机制运行很好，因为在城镇之间移动既困难又耗时且成本高昂。所以你有相当高的可信度，就会有人留下来，他们并不想被流放。
+但是随着社会变得更大规模，我们有了城市、国家和国际组织，我们开始关注这种奇怪的品牌声誉问题。我们创建了这些强大但受监管的机构，监管机构原则上确保满足我们的期望。想要在特定行业开展业务，你必须满足某些法定要求。
+这不是一个很好的解决方案，原因有几个。其中之一是，去监管新兴产业非常困难。政府的行动是比较缓慢的，需要一段时间才能赶上。另一个是监管机构不完善。尤其是当他们与行业密切合作时，行业和监管机构之间通常会存在一些旋转门关系。
+另一个是监管机构的支持力度非常有限，也就是政府投入多少资金。因此，监管将是不完整的。他们能够监管最大的罪犯，但他们无法在任何地方都保持真正强大的影响力。当然，监管机构和法律因司法管辖区而异。如果你去欧盟的某个地方，那么 xx 活动就可以了；如果你去别的地方，那就不行了。随着我们成为一个非常国际化的社会，这实际上意味着你的期望仍未得到满足。
+所以我们需要超越这一点。但不幸的是，Web 2.0 仍然存在于这种非常中心化的模型中。
+WIRED：我们真的在谈论技术的失败吗？还是我们在谈论治理、监管和竞争政策的失败？因为听起来你是在说：这是监管的失败，但答案却不是更好的监管，而是需要有一个新的技术层，因为监管失败是不可避免的。我是否正确描述了您的观点？
+Gavin Wood：是的，这个模型坏了。
+WIRED：那么让我们来谈谈应该用什么来代替它。我们一直在讨论为什么 Web 2.0 不起作用。你对 Web3 的定义是什么？
+Gavin Wood：Less trust, more truth。更少的信任，更多的事实。
+WIRED：“less trust”是什么意思？
+Gavin Wood：我对信任有一个特殊的含义，它本质上是信仰。这是一种信念（faith），即某些事情会发生的信仰，世界会以某种方式运转，而没有任何真实的证据或理性的论据来说明为什么会发生这种情况。所以我们想要的更少的信任，我们想要更多的事实真相。我真正想表达的意思是在 Web3 下更加可以相信我们的期望会得到满足。
+WIRED：这听起来像是在说“减少盲目信仰，增加信誉的可信度”。
+Gavin Wood：可以说是，也可以说不是。我认为信任本身实际上围绕着坏事。信任意味着你将某种权力授予其他人或某个组织，他们将能够以某种任意方式使用该权力。一旦它成为可信的信任，它就不再是真正的信任。它会有一个机制，一个基本原理，一个论点，一个逻辑机制。无论如何，但在我看来，这不是信任。
+WIRED：已经写到 Web3 将打破像 Google 和 Facebook 这样的垄断企业平台。你能解释一下它将如何做到这一点吗？</description>
+    </item>
+    
     <item>
       <title>Openfaas Workshop Lab11</title>
       <link>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab11/</link>

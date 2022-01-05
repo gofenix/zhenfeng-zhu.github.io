@@ -73,6 +73,30 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>elasticsearch
+</h2>
+</header>
+<section class=entry-content>
+<p>以前没有好好学的东西，现在在工作中慢慢的补回来了。
+基础概念 索引 es 是将数据存储在一个或者多个索引（index）中。
+索引就像是数据库。
+文档 文档是 es 的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。
+文档就像数据库中的一条条记录。
+类型 每个文档都有一个类型与之相对应。
+类型就像数据库中的表。
+映射 所有文档在被写入到 es 中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。
+节点 单个 es 服务实例就是一个节点。
+集群 多个协同工作的 es 节点的集合就是集群。
+分片 es 将数据分散到多个物理的 Lucene 索引上，这些物理 Lucene 索引被称为分片。
+副本 副本就是每个分片都做冗余处理，一个宕机之后，不影响服务。
+快速入门 安装 es 的安装很简单，我这里使用的是 mac，下载下来 zip 包，解压即可使用。
+[elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ./bin/elasticsearch Java HotSpot(TM) 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9....</p>
+</section>
+<footer class=entry-footer><span title="2018-05-20 14:17:07 +0000 UTC">May 20, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to elasticsearch" href=https://zhenfeng-zhu.github.io/posts/elasticsearch/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>git 常用操作
 </h2>
 </header>
@@ -217,18 +241,6 @@ interface User{ void login(); void logout(); } 在 java 中，继承的类必须
 </section>
 <footer class=entry-footer><span title="2018-04-04 13:48:57 +0000 UTC">April 4, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Go 语言体会" href=https://zhenfeng-zhu.github.io/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>关于时间管理
-</h2>
-</header>
-<section class=entry-content>
-<p>主动管理时间，敢于说不。
-有目标向前看，没目标向钱看。</p>
-</section>
-<footer class=entry-footer><span title="2018-03-25 20:28:42 +0000 UTC">March 25, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 关于时间管理" href=https://zhenfeng-zhu.github.io/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
