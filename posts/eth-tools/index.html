@@ -284,45 +284,45 @@ Blockchain Tutorial
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>github.com/ethereum/go-ethereum
 </code></pre></div><p>首先要连接到测试链，测试链可以是本地的也可以是公网的。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func connectRPC() (*ethclient.Client, error) {
-	// 连接测试链的节点
-	//rpcClient, err := rpc.Dial(&#34;https://rinkeby.infura.io/v3/6c81fb1b66804f0698d49f2ec242afc9&#34;)
-	rpcClient, err := rpc.Dial(&#34;http://127.0.0.1:7545&#34;)
-	if err != nil {
-		log.Fatalln(err)
-		return nil, err
-	}
+ // 连接测试链的节点
+ //rpcClient, err := rpc.Dial(&#34;https://rinkeby.infura.io/v3/6c81fb1b66804f0698d49f2ec242afc9&#34;)
+ rpcClient, err := rpc.Dial(&#34;http://127.0.0.1:7545&#34;)
+ if err != nil {
+  log.Fatalln(err)
+  return nil, err
+ }
 
-	conn := ethclient.NewClient(rpcClient)
-	return conn, nil
+ conn := ethclient.NewClient(rpcClient)
+ return conn, nil
 }
 </code></pre></div><p>一般都选择以 keystore 的形式创建账户</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func CreateWallet() (key, addr string) {
-	ks := keystore.NewKeyStore(&#34;~/Documents/github/gowork/src/geth-demo/&#34;,
-		keystore.StandardScryptN, keystore.StandardScryptP)
-	account, _ := ks.NewAccount(&#34;password&#34;)
-	key_json, err := ks.Export(account, &#34;password&#34;, &#34;password&#34;)
-	if err != nil {
-		log.Fatalln(&#34;导出账户错误: &#34;, err)
-		panic(err)
-	}
-	key = string(key_json)
-	addr = account.Address.Hex()
-	return
+ ks := keystore.NewKeyStore(&#34;~/Documents/github/gowork/src/geth-demo/&#34;,
+  keystore.StandardScryptN, keystore.StandardScryptP)
+ account, _ := ks.NewAccount(&#34;password&#34;)
+ key_json, err := ks.Export(account, &#34;password&#34;, &#34;password&#34;)
+ if err != nil {
+  log.Fatalln(&#34;导出账户错误: &#34;, err)
+  panic(err)
+ }
+ key = string(key_json)
+ addr = account.Address.Hex()
+ return
 }
 </code></pre></div><p>当然另一种创建账户的方式是用私钥：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func CreateWallet() (string, error) {
-	key, err := crypto.GenerateKey()
-	if err != nil {
-		log.Fatalln(err)
-		return &#34;&#34;, nil
-	}
+ key, err := crypto.GenerateKey()
+ if err != nil {
+  log.Fatalln(err)
+  return &#34;&#34;, nil
+ }
 
-	address := crypto.PubkeyToAddress(key.PublicKey).Hex()
-	log.Println(&#34;address: &#34;, address)
+ address := crypto.PubkeyToAddress(key.PublicKey).Hex()
+ log.Println(&#34;address: &#34;, address)
 
-	privateKey := hex.EncodeToString(key.D.Bytes())
-	log.Println(&#34;privateKey: &#34;, privateKey)
-	return address, nil
+ privateKey := hex.EncodeToString(key.D.Bytes())
+ log.Println(&#34;privateKey: &#34;, privateKey)
+ return address, nil
 }
 </code></pre></div><p>Node</p>
 <p>node 一般使用 web3。创建 web3 对象的时候要使用一个 provider，这个 provider 用来连接到测试链，可以是钱包的，也可以是一个 HttpProvider。</p>

@@ -246,15 +246,15 @@ github.com/prometheus/client_golang
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>var credentials *types.BasicAuthCredentials
 
 if config.UseBasicAuth {
-	var readErr error
-	reader := types.ReadBasicAuthFromDisk{
-		SecretMountPath: config.SecretMountPath,
-	}
-	credentials, readErr = reader.Read()
+ var readErr error
+ reader := types.ReadBasicAuthFromDisk{
+  SecretMountPath: config.SecretMountPath,
+ }
+ credentials, readErr = reader.Read()
 
-	if readErr != nil {
-		log.Panicf(readErr.Error())
-	}
+ if readErr != nil {
+  log.Panicf(readErr.Error())
+ }
 }
 </code></pre></div><p>在 Gateway 的配置相关的，都会有一个 read()方法，进行初始化赋值。</p>
 <p>如果 credentials 被赋值之后，就会对一些要加密的 API handler 进行一个修饰，被修饰的 API 有：</p>
@@ -266,16 +266,16 @@ if config.UseBasicAuth {
 <li>ScaleFunction</li>
 </ul>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>if credentials != nil {
-	faasHandlers.UpdateFunction =
-			handlers.DecorateWithBasicAuth(faasHandlers.UpdateFunction, credentials)
-	faasHandlers.DeleteFunction =
-			handlers.DecorateWithBasicAuth(faasHandlers.DeleteFunction, credentials)
-	faasHandlers.DeployFunction =
-			handlers.DecorateWithBasicAuth(faasHandlers.DeployFunction, credentials)
-	faasHandlers.ListFunctions =
-			handlers.DecorateWithBasicAuth(faasHandlers.ListFunctions, credentials)
-	faasHandlers.ScaleFunction =
-			handlers.DecorateWithBasicAuth(faasHandlers.ScaleFunction, credentials)
+ faasHandlers.UpdateFunction =
+   handlers.DecorateWithBasicAuth(faasHandlers.UpdateFunction, credentials)
+ faasHandlers.DeleteFunction =
+   handlers.DecorateWithBasicAuth(faasHandlers.DeleteFunction, credentials)
+ faasHandlers.DeployFunction =
+   handlers.DecorateWithBasicAuth(faasHandlers.DeployFunction, credentials)
+ faasHandlers.ListFunctions =
+   handlers.DecorateWithBasicAuth(faasHandlers.ListFunctions, credentials)
+ faasHandlers.ScaleFunction =
+   handlers.DecorateWithBasicAuth(faasHandlers.ScaleFunction, credentials)
 }
 </code></pre></div><p>这个 DecorateWithBasicAuth()方法是一个路由中间件：</p>
 <ol>
@@ -285,18 +285,18 @@ if config.UseBasicAuth {
 </ol>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// DecorateWithBasicAuth enforces basic auth as a middleware with given credentials
 func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCredentials) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		user, password, ok := r.BasicAuth()
-		w.Header().Set(&#34;WWW-Authenticate&#34;, `Basic realm=&#34;Restricted&#34;`)
+ return func(w http.ResponseWriter, r *http.Request) {
+  user, password, ok := r.BasicAuth()
+  w.Header().Set(&#34;WWW-Authenticate&#34;, `Basic realm=&#34;Restricted&#34;`)
 
-		if !ok || !(credentials.Password == password &amp;&amp; user == credentials.User) {
+  if !ok || !(credentials.Password == password &amp;&amp; user == credentials.User) {
 
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte(&#34;invalid credentials&#34;))
-			return
-		}
-		next.ServeHTTP(w, r)
-	}
+   w.WriteHeader(http.StatusUnauthorized)
+   w.Write([]byte(&#34;invalid credentials&#34;))
+   return
+  }
+  next.ServeHTTP(w, r)
+ }
 }
 </code></pre></div><h3 id=代理转发>代理转发<a hidden class=anchor aria-hidden=true href=#代理转发>#</a></h3>
 <p>Gateway 本身不做任何和部署发布函数的事情，它只是作为一个代理，把请求转发给相应的 Provider 去处理，所有的请求都要通过这个网关。</p>
@@ -310,10 +310,10 @@ func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCr
 <li>UpdateFunction</li>
 </ul>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
-	faasHandlers.ListFunctions = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
-	faasHandlers.DeployFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
-	faasHandlers.DeleteFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
-	faasHandlers.UpdateFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+ faasHandlers.ListFunctions = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+ faasHandlers.DeployFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+ faasHandlers.DeleteFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+ faasHandlers.UpdateFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
 </code></pre></div><p>MakeForwardingProxyHandler()有三个参数：</p>
 <ul>
 <li>
@@ -344,19 +344,19 @@ func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCr
 </ol>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// MakeForwardingProxyHandler create a handler which forwards HTTP requests
 func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers []HTTPNotifier, baseURLResolver BaseURLResolver) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		baseURL := baseURLResolver.Resolve(r)
-		requestURL := r.URL.Path
-		start := time.Now()
-		statusCode, err := forwardRequest(w, r, proxy.Client, baseURL, requestURL, proxy.Timeout)
-		seconds := time.Since(start)
-		if err != nil {
-			log.Printf(&#34;error with upstream request to: %s, %s\n&#34;, requestURL, err.Error())
-		}
-		for _, notifier := range notifiers {
-			notifier.Notify(r.Method, requestURL, statusCode, seconds)
-		}
-	}
+ return func(w http.ResponseWriter, r *http.Request) {
+  baseURL := baseURLResolver.Resolve(r)
+  requestURL := r.URL.Path
+  start := time.Now()
+  statusCode, err := forwardRequest(w, r, proxy.Client, baseURL, requestURL, proxy.Timeout)
+  seconds := time.Since(start)
+  if err != nil {
+   log.Printf(&#34;error with upstream request to: %s, %s\n&#34;, requestURL, err.Error())
+  }
+  for _, notifier := range notifiers {
+   notifier.Notify(r.Method, requestURL, statusCode, seconds)
+  }
+ }
 }
 </code></pre></div><h4 id=异步函数转发>异步函数转发<a hidden class=anchor aria-hidden=true href=#异步函数转发>#</a></h4>
 <p>前面说过，如果是异步函数，Gateway 就作为一个发布者，将函数放到队列里。MakeQueuedProxy 方法就是做这件事儿的：</p>
@@ -368,32 +368,32 @@ func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers [
 </ol>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// MakeQueuedProxy accepts work onto a queue
 func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueRequests queue.CanQueueRequests) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		defer r.Body.Close()
-		body, err := ioutil.ReadAll(r.Body)
-		// 省略错误处理代码
-		vars := mux.Vars(r)
-		name := vars[&#34;name&#34;]
+ return func(w http.ResponseWriter, r *http.Request) {
+  defer r.Body.Close()
+  body, err := ioutil.ReadAll(r.Body)
+  // 省略错误处理代码
+  vars := mux.Vars(r)
+  name := vars[&#34;name&#34;]
 
-		callbackURLHeader := r.Header.Get(&#34;X-Callback-Url&#34;)
-		var callbackURL *url.URL
-		if len(callbackURLHeader) &gt; 0 {
-			urlVal, urlErr := url.Parse(callbackURLHeader)
-			// 省略错误处理代码
-			callbackURL = urlVal
-		}
-		req := &amp;queue.Request{
-			Function:    name,
-			Body:        body,
-			Method:      r.Method,
-			QueryString: r.URL.RawQuery,
-			Header:      r.Header,
-			CallbackURL: callbackURL,
-		}
-		err = canQueueRequests.Queue(req)
-		// 省略错误处理代码
-		w.WriteHeader(http.StatusAccepted)
-	}
+  callbackURLHeader := r.Header.Get(&#34;X-Callback-Url&#34;)
+  var callbackURL *url.URL
+  if len(callbackURLHeader) &gt; 0 {
+   urlVal, urlErr := url.Parse(callbackURLHeader)
+   // 省略错误处理代码
+   callbackURL = urlVal
+  }
+  req := &amp;queue.Request{
+   Function:    name,
+   Body:        body,
+   Method:      r.Method,
+   QueryString: r.URL.RawQuery,
+   Header:      r.Header,
+   CallbackURL: callbackURL,
+  }
+  err = canQueueRequests.Queue(req)
+  // 省略错误处理代码
+  w.WriteHeader(http.StatusAccepted)
+ }
 }
 </code></pre></div><h4 id=自动伸缩>自动伸缩<a hidden class=anchor aria-hidden=true href=#自动伸缩>#</a></h4>
 <p>伸缩性其实有两种，一种是可以通过调用 API 接口，来将函数进行缩放。另外一种就是通过 AlertHandler。</p>
@@ -428,14 +428,14 @@ func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueReque
 <p>MakeAlertHandler 方法接收的参数是 ServiceQuery。ServiceQuery 是一个接口，它有两个函数，用来 get 或者 ser 最大的副本数。Gateway 中实现这个接口的类是 ExternalServiceQuery，这个实现类是在 plugin 包中，我们也可以直接定制这个实现类，用来实现满足特定条件。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// ServiceQuery provides interface for replica querying/setting
 type ServiceQuery interface {
-	GetReplicas(service string) (response ServiceQueryResponse, err error)
-	SetReplicas(service string, count uint64) error
+ GetReplicas(service string) (response ServiceQueryResponse, err error)
+ SetReplicas(service string, count uint64) error
 }
 
 // ExternalServiceQuery proxies service queries to external plugin via HTTP
 type ExternalServiceQuery struct {
-	URL         url.URL
-	ProxyClient http.Client
+ URL         url.URL
+ ProxyClient http.Client
 }
 </code></pre></div><p>这个 ExternalServiceQuery 有一个<code>NewExternalServiceQuery</code>方法，这个方法也是一个工厂方法，用来创建实例。这个 url 其实就是 provider 的 url，proxyClient 就是一个 http 的 client 对象。</p>
 <ul>
@@ -451,34 +451,34 @@ type ExternalServiceQuery struct {
 <p>MakeAlertHandler 的函数主要是从<code>http.Request</code>中读取 body，然后反序列化成<code>PrometheusAlert</code>对象：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// PrometheusAlert as produced by AlertManager
 type PrometheusAlert struct {
-	Status   string                 `json:&#34;status&#34;`
-	Receiver string                 `json:&#34;receiver&#34;`
-	Alerts   []PrometheusInnerAlert `json:&#34;alerts&#34;`
+ Status   string                 `json:&#34;status&#34;`
+ Receiver string                 `json:&#34;receiver&#34;`
+ Alerts   []PrometheusInnerAlert `json:&#34;alerts&#34;`
 }
 </code></pre></div><p>可以发现，这个 Alerts 是一个数组对象，所以可以是对多个函数进行缩放。反序列化之后，调用<code>handleAlerts</code>方法，而<code>handleAlerts</code>对 Alerts 进行遍历，针对每个 Alerts 调用了<code>scaleService</code>方法。<code>scaleService</code>才是真正处理伸缩服务的函数。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error {
-	var err error
-	serviceName := alert.Labels.FunctionName
+ var err error
+ serviceName := alert.Labels.FunctionName
 
-	if len(serviceName) &gt; 0 {
-		queryResponse, getErr := service.GetReplicas(serviceName)
-		if getErr == nil {
-			status := alert.Status
+ if len(serviceName) &gt; 0 {
+  queryResponse, getErr := service.GetReplicas(serviceName)
+  if getErr == nil {
+   status := alert.Status
 
-			newReplicas := CalculateReplicas(status, queryResponse.Replicas, uint64(queryResponse.MaxReplicas), queryResponse.MinReplicas, queryResponse.ScalingFactor)
+   newReplicas := CalculateReplicas(status, queryResponse.Replicas, uint64(queryResponse.MaxReplicas), queryResponse.MinReplicas, queryResponse.ScalingFactor)
 
-			log.Printf(&#34;[Scale] function=%s %d =&gt; %d.\n&#34;, serviceName, queryResponse.Replicas, newReplicas)
-			if newReplicas == queryResponse.Replicas {
-				return nil
-			}
+   log.Printf(&#34;[Scale] function=%s %d =&gt; %d.\n&#34;, serviceName, queryResponse.Replicas, newReplicas)
+   if newReplicas == queryResponse.Replicas {
+    return nil
+   }
 
-			updateErr := service.SetReplicas(serviceName, newReplicas)
-			if updateErr != nil {
-				err = updateErr
-			}
-		}
-	}
-	return err
+   updateErr := service.SetReplicas(serviceName, newReplicas)
+   if updateErr != nil {
+    err = updateErr
+   }
+  }
+ }
+ return err
 }
 </code></pre></div><p>从代码总就可以看到，scaleService 做了三件事儿：</p>
 <ul>
@@ -505,10 +505,10 @@ type PrometheusAlert struct {
 <p>config：<code>ScalingConfig</code>的对象：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// ScalingConfig for scaling behaviours
 type ScalingConfig struct {
-	MaxPollCount         uint              // 查到的最大数量
-	FunctionPollInterval time.Duration     // 函数调用时间间隔
-	CacheExpiry          time.Duration     // 缓存过期时间
-	ServiceQuery         ServiceQuery      // 外部服务调用的一个接口
+ MaxPollCount         uint              // 查到的最大数量
+ FunctionPollInterval time.Duration     // 函数调用时间间隔
+ CacheExpiry          time.Duration     // 缓存过期时间
+ ServiceQuery         ServiceQuery      // 外部服务调用的一个接口
 }
 </code></pre></div></li>
 </ul>
@@ -521,62 +521,62 @@ type ScalingConfig struct {
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// MakeScalingHandler creates handler which can scale a function from
 // zero to 1 replica(s).
 func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config ScalingConfig) http.HandlerFunc {
-	cache := FunctionCache{
-		Cache:  make(map[string]*FunctionMeta),
-		Expiry: config.CacheExpiry,
-	}
-	return func(w http.ResponseWriter, r *http.Request) {
-		functionName := getServiceName(r.URL.String())
-		if serviceQueryResponse, hit := cache.Get(functionName); hit &amp;&amp; serviceQueryResponse.AvailableReplicas &gt; 0 {
-			next.ServeHTTP(w, r)
-			return
-		} 
-		queryResponse, err := config.ServiceQuery.GetReplicas(functionName)
-		cache.Set(functionName, queryResponse)
+ cache := FunctionCache{
+  Cache:  make(map[string]*FunctionMeta),
+  Expiry: config.CacheExpiry,
+ }
+ return func(w http.ResponseWriter, r *http.Request) {
+  functionName := getServiceName(r.URL.String())
+  if serviceQueryResponse, hit := cache.Get(functionName); hit &amp;&amp; serviceQueryResponse.AvailableReplicas &gt; 0 {
+   next.ServeHTTP(w, r)
+   return
+  } 
+  queryResponse, err := config.ServiceQuery.GetReplicas(functionName)
+  cache.Set(functionName, queryResponse)
         // 省略错误处理
-		if queryResponse.AvailableReplicas == 0 {
-			minReplicas := uint64(1)
-			if queryResponse.MinReplicas &gt; 0 {
-				minReplicas = queryResponse.MinReplicas
-			}
-			err := config.ServiceQuery.SetReplicas(functionName, minReplicas)
-			// 省略错误处理代码
-			for i := 0; i &lt; int(config.MaxPollCount); i++ {
-				queryResponse, err := config.ServiceQuery.GetReplicas(functionName)
-				cache.Set(functionName, queryResponse)
-				// 省略错误处理
-				time.Sleep(config.FunctionPollInterval)
-			}
-		}
-		next.ServeHTTP(w, r)
-	}
+  if queryResponse.AvailableReplicas == 0 {
+   minReplicas := uint64(1)
+   if queryResponse.MinReplicas &gt; 0 {
+    minReplicas = queryResponse.MinReplicas
+   }
+   err := config.ServiceQuery.SetReplicas(functionName, minReplicas)
+   // 省略错误处理代码
+   for i := 0; i &lt; int(config.MaxPollCount); i++ {
+    queryResponse, err := config.ServiceQuery.GetReplicas(functionName)
+    cache.Set(functionName, queryResponse)
+    // 省略错误处理
+    time.Sleep(config.FunctionPollInterval)
+   }
+  }
+  next.ServeHTTP(w, r)
+ }
 }
 </code></pre></div><h3 id=监控>监控<a hidden class=anchor aria-hidden=true href=#监控>#</a></h3>
 <p>监控是一个定时任务，开启了一个新协程，利用 go 的 ticker.C 的间隔不停的去调用<code>/system/functions</code>接口。反序列化到 MetricOptions 对象中。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func AttachExternalWatcher(endpointURL url.URL, metricsOptions MetricOptions, label string, interval time.Duration) {
-	ticker := time.NewTicker(interval)
-	quit := make(chan struct{})
-	proxyClient := // 省略创建一个http.Client对象
+ ticker := time.NewTicker(interval)
+ quit := make(chan struct{})
+ proxyClient := // 省略创建一个http.Client对象
 
-	go func() {
-		for {
-			select {
-			case &lt;-ticker.C:
-				get, _ := http.NewRequest(http.MethodGet, endpointURL.String()+&#34;system/functions&#34;, nil)
-				services := []requests.Function{}
-				res, err := proxyClient.Do(get)
-				// 省略反序列的代码
-				for _, service := range services {
-					metricsOptions.ServiceReplicasCounter.
-						WithLabelValues(service.Name).
-						Set(float64(service.Replicas))
-				}
-				break
-			case &lt;-quit:
-				return
-			}
-		}
-	}()
+ go func() {
+  for {
+   select {
+   case &lt;-ticker.C:
+    get, _ := http.NewRequest(http.MethodGet, endpointURL.String()+&#34;system/functions&#34;, nil)
+    services := []requests.Function{}
+    res, err := proxyClient.Do(get)
+    // 省略反序列的代码
+    for _, service := range services {
+     metricsOptions.ServiceReplicasCounter.
+      WithLabelValues(service.Name).
+      Set(float64(service.Replicas))
+    }
+    break
+   case &lt;-quit:
+    return
+   }
+  }
+ }()
 }
 </code></pre></div><h3 id=ui>UI<a hidden class=anchor aria-hidden=true href=#ui>#</a></h3>
 <p>UI 的代码很简单，主要就是一些前端的代码，调用上面的讲的一些 API 接口即可，这里就略去不表。</p>

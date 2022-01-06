@@ -149,18 +149,18 @@ go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以�
 <p>创建账户有两种方式：</p>
 <h4 id=以公钥和私钥的形式创建>以公钥和私钥的形式创建<a hidden class=anchor aria-hidden=true href=#以公钥和私钥的形式创建>#</a></h4>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func CreateAccount() (string, error) {
-	key, err := crypto.GenerateKey()
-	if err != nil {
-		log.Fatalln(err)
-		return &#34;&#34;, nil
-	}
+ key, err := crypto.GenerateKey()
+ if err != nil {
+  log.Fatalln(err)
+  return &#34;&#34;, nil
+ }
 
-	address := crypto.PubkeyToAddress(key.PublicKey).Hex()
-	log.Println(&#34;address: &#34;, address)
+ address := crypto.PubkeyToAddress(key.PublicKey).Hex()
+ log.Println(&#34;address: &#34;, address)
 
-	privateKey := hex.EncodeToString(key.D.Bytes())
-	log.Println(&#34;privateKey: &#34;, privateKey)
-	return address, nil
+ privateKey := hex.EncodeToString(key.D.Bytes())
+ log.Println(&#34;privateKey: &#34;, privateKey)
+ return address, nil
 }
 </code></pre></div><p>这种方式一般用的比较少。</p>
 <h4 id=以-keystore-的形式创建>以 keystore 的形式创建<a hidden class=anchor aria-hidden=true href=#以-keystore-的形式创建>#</a></h4>
@@ -189,16 +189,16 @@ go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以�
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// 理论上来讲，这个函数应该只被创建一次即可
 // 创建一个账户
 func CreateWallet() (key, addr string) {
-	ks := keystore.NewKeyStore(&#34;/Users/zhuzhenfeng/Documents/github/gowork/src/geth-demo/&#34;, keystore.StandardScryptN, keystore.StandardScryptP)
-	account, _ := ks.NewAccount(&#34;password&#34;)
-	key_json, err := ks.Export(account, &#34;password&#34;, &#34;password&#34;)
-	if err != nil {
-		log.Fatalln(&#34;导出账户错误: &#34;, err)
-		panic(err)
-	}
-	key = string(key_json)
-	addr = account.Address.Hex()
-	return
+ ks := keystore.NewKeyStore(&#34;/Users/zhuzhenfeng/Documents/github/gowork/src/geth-demo/&#34;, keystore.StandardScryptN, keystore.StandardScryptP)
+ account, _ := ks.NewAccount(&#34;password&#34;)
+ key_json, err := ks.Export(account, &#34;password&#34;, &#34;password&#34;)
+ if err != nil {
+  log.Fatalln(&#34;导出账户错误: &#34;, err)
+  panic(err)
+ }
+ key = string(key_json)
+ addr = account.Address.Hex()
+ return
 }
 </code></pre></div><p>这个 key 和 address，&ldquo;password"是这个文件的密码。</p>
 <h2 id=私链>私链<a hidden class=anchor aria-hidden=true href=#私链>#</a></h2>
@@ -214,34 +214,34 @@ func CreateWallet() (key, addr string) {
 </code></pre></div><h4 id=连接>连接<a hidden class=anchor aria-hidden=true href=#连接>#</a></h4>
 <p>我们用 geth 的 rpc 连接上面的私链地址即可：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func connectRPC() (*ethclient.Client, error) {
-	// 连接测试链的节点
-	//rpcClient, err := rpc.Dial(&#34;https://rinkeby.infura.io/v3/6c81fb1b66804f0698d49f2ec242afc9&#34;)
-	rpcClient, err := rpc.Dial(&#34;http://127.0.0.1:7545&#34;)
-	if err != nil {
-		log.Fatalln(err)
-		return nil, err
-	}
+ // 连接测试链的节点
+ //rpcClient, err := rpc.Dial(&#34;https://rinkeby.infura.io/v3/6c81fb1b66804f0698d49f2ec242afc9&#34;)
+ rpcClient, err := rpc.Dial(&#34;http://127.0.0.1:7545&#34;)
+ if err != nil {
+  log.Fatalln(err)
+  return nil, err
+ }
 
-	conn := ethclient.NewClient(rpcClient)
-	return conn, nil
+ conn := ethclient.NewClient(rpcClient)
+ return conn, nil
 }
 </code></pre></div><h2 id=其他操作>其他操作<a hidden class=anchor aria-hidden=true href=#其他操作>#</a></h2>
 <p>在上一步中连接 rpc 中，拿到了 client。用这个 client 就可以做很多事儿：</p>
 <h3 id=获取余额>获取余额<a hidden class=anchor aria-hidden=true href=#获取余额>#</a></h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func GetBalance(address string) (float64, error) {
-	client, err := connectRPC()
-	if err != nil {
-		log.Fatalln(&#34;err: &#34;, err)
-		panic(err)
-	}
+ client, err := connectRPC()
+ if err != nil {
+  log.Fatalln(&#34;err: &#34;, err)
+  panic(err)
+ }
 
-	balance, err := client.BalanceAt(context.TODO(), common.HexToAddress(address), nil)
-	if err != nil {
-		log.Fatalln(balance)
-		return 0, err
-	}
-	balanceV := float64(balance.Int64()) * math.Pow(10, -18)
-	return balanceV, nil
+ balance, err := client.BalanceAt(context.TODO(), common.HexToAddress(address), nil)
+ if err != nil {
+  log.Fatalln(balance)
+  return 0, err
+ }
+ balanceV := float64(balance.Int64()) * math.Pow(10, -18)
+ return balanceV, nil
 }
 </code></pre></div><h3 id=代币转账>代币转账<a hidden class=anchor aria-hidden=true href=#代币转账>#</a></h3>
 <p>要生成代币，需要写一个 token 的合约。可以用这一个最简单的 token.abi。复杂一般可以用 truffle 框架来编写。</p>
@@ -330,44 +330,44 @@ func CreateWallet() (key, addr string) {
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>abigen --abi token.abi --pkg main --type Token --out token.go
 </code></pre></div><p>生成的 token.go 文件，才是可以被操作的文件。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>func TransferToken() {
-	key, to_address := CreateWallet()
+ key, to_address := CreateWallet()
 
-	client, err := connectRPC()
-	if err != nil {
-		log.Fatalln(err)
-		panic(err)
-	}
+ client, err := connectRPC()
+ if err != nil {
+  log.Fatalln(err)
+  panic(err)
+ }
 
-	auth, err := bind.NewTransactor(strings.NewReader(key), &#34;password&#34;)
-	if err != nil {
-		log.Fatalln(&#34;读取keystore失败&#34;, err)
-		panic(err)
-	}
+ auth, err := bind.NewTransactor(strings.NewReader(key), &#34;password&#34;)
+ if err != nil {
+  log.Fatalln(&#34;读取keystore失败&#34;, err)
+  panic(err)
+ }
 
-	token, err := cont.NewToken(common.HexToAddress(&#34;0x75a26aaaecda412bd914e8fbfaed586a467fa8b5&#34;), client)
-	if err != nil {
-		log.Fatalln(&#34;获取token失败&#34;, err)
-		panic(err)
-	}
+ token, err := cont.NewToken(common.HexToAddress(&#34;0x75a26aaaecda412bd914e8fbfaed586a467fa8b5&#34;), client)
+ if err != nil {
+  log.Fatalln(&#34;获取token失败&#34;, err)
+  panic(err)
+ }
 
-	balance, err := token.BalanceOf(nil, common.HexToAddress(to_address))
-	if err != nil {
-		log.Fatalln(&#34;token balance of&#34;, err)
-	}
+ balance, err := token.BalanceOf(nil, common.HexToAddress(to_address))
+ if err != nil {
+  log.Fatalln(&#34;token balance of&#34;, err)
+ }
 
-	log.Println(&#34;to address balance: &#34;, balance)
+ log.Println(&#34;to address balance: &#34;, balance)
 
-	amount := big.NewFloat(10.00)
-	//这是处理位数的代码段
-	tenDecimal := big.NewFloat(math.Pow(10, 18))
-	convertAmount, _ := new(big.Float).Mul(tenDecimal, amount).Int(&amp;big.Int{})
+ amount := big.NewFloat(10.00)
+ //这是处理位数的代码段
+ tenDecimal := big.NewFloat(math.Pow(10, 18))
+ convertAmount, _ := new(big.Float).Mul(tenDecimal, amount).Int(&amp;big.Int{})
 
-	tx, err := token.Transfer(auth, common.HexToAddress(to_address), convertAmount)
-	if nil != err {
-		fmt.Printf(&#34;err: %v \n&#34;, err)
-		return
-	}
-	fmt.Printf(&#34;result: %v\n&#34;, tx)
+ tx, err := token.Transfer(auth, common.HexToAddress(to_address), convertAmount)
+ if nil != err {
+  fmt.Printf(&#34;err: %v \n&#34;, err)
+  return
+ }
+ fmt.Printf(&#34;result: %v\n&#34;, tx)
 }
 </code></pre></div><blockquote>
 <p>不知为何会出现 failed to estimate gas needed 的情况</p>

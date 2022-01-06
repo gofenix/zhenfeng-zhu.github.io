@@ -125,9 +125,9 @@ Spring Boot 启动原理分析
 <p>我们在开发 spring boot 应用的时候，一般会遇到如下的启动类：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>@SpringBootApplication
 public class DemoApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+ public static void main(String[] args) {
+  SpringApplication.run(DemoApplication.class, args);
+ }
 }
 </code></pre></div><p>从这段代码可以看出，注解@SpringBootApplication 和 SpringApplication.run()是比较重要的两个东西。</p>
 <h2 id=1-springapplication-注解>1 @SpringApplication 注解<a hidden class=anchor aria-hidden=true href=#1-springapplication-注解>#</a></h2>
@@ -138,8 +138,8 @@ public class DemoApplication {
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan(excludeFilters = {
-		@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
-		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+  @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+  @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
 public @interface SpringBootApplication {
 ...
 }
@@ -154,9 +154,9 @@ public @interface SpringBootApplication {
 @EnableAutoConfiguration
 @Configuration
 public class DemoApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+ public static void main(String[] args) {
+  SpringApplication.run(DemoApplication.class, args);
+ }
 }
 </code></pre></div><p>每次写这三个注解的话，比较繁琐，所以就 spring 团队就封装了一个@SpringBootApplication。</p>
 <h2 id=11-configuration>1.1 @Configuration<a hidden class=anchor aria-hidden=true href=#11-configuration>#</a></h2>
@@ -188,10 +188,10 @@ public class MockConfiguration{
 </code></pre></div><p>而基于 Java config 的配置形式是这样的：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>@Configuration
 public class MockConfiguration{
-	@Bean
-	public MockService mockService(){
-    	return new MockServiceImpl();
-	}
+ @Bean
+ public MockService mockService(){
+     return new MockServiceImpl();
+ }
 }
 </code></pre></div><p>任何一个标注了@Bean 的方法，其返回值将作为一个 bean 定义注册到 Spring 的 IoC 容器，方法名将默认成该 bean 定义的 id。</p>
 </li>

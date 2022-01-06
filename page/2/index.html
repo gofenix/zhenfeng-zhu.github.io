@@ -155,10 +155,10 @@ Type system review Make a review and possible formalisation of Crystal’s type 
 一个静态网站生成器的工作流程通常有如下几个步骤：
 读取源文件，一般是 markdown 格式的。 模板引擎的渲染 生成目标文件 接下来会从每个步骤来进行简单介绍。
 最终版本的请参考：https://github.com/zhenfeng-zhu/ego， 欢迎 pr 和 issue。
-极简 MVP 版本介绍 初始化 $ mix new ego 在 mix.exs 中添加依赖
+极简 MVP 版本介绍 初始化 mix new ego 在 mix.exs 中添加依赖
 earmark 是将 markdown 转换为 html。 plug_cowboy 是提供本地预览 html 文件的 server。 json 是一个 json 解析库 指定以 escript 的方式启动 解析 markdown 文件 将一个 markdown 文件转为 html 也是比较简单的，首先读取，然后调用 Earmark.as_html!函数，就能将 markdown 转换为 html 了。
 eg.
-def gen_blogs(m) do m |> File....</p>
+def gen_blogs(m) do m |> File.read!() |> Earmark....</p>
 </section>
 <footer class=entry-footer><span title="2021-07-23 09:33:18 +0800 +0800">July 23, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 如何从零开始写一个静态网站生成器" href=https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/></a>

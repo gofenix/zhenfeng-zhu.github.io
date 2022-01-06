@@ -184,7 +184,7 @@ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.
 安装 grafana 进行监控
 docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
 常用命令：
-$ faas-cli new --list $ faas-cli build -f ....</p>
+faas-cli new --list faas-cli build -f ....</p>
 </section>
 <footer class=entry-footer><span title="2018-06-24 15:43:46 +0000 UTC">June 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to openfaas" href=https://zhenfeng-zhu.github.io/posts/openfaas/></a>

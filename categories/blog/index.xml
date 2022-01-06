@@ -16,10 +16,10 @@
       
       <guid>https://zhenfeng-zhu.github.io/posts/hello-world/</guid>
       <description>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick Start Create a new post $ hexo new &amp;#34;My New Post&amp;#34; More info: Writing
-Run server $ hexo server More info: Server
-Generate static files $ hexo generate More info: Generating
-Deploy to remote sites $ hexo deploy More info: Deployment</description>
+Quick Start Create a new post hexo new &amp;#34;My New Post&amp;#34; More info: Writing
+Run server hexo server More info: Server
+Generate static files hexo generate More info: Generating
+Deploy to remote sites hexo deploy More info: Deployment</description>
     </item>
     
   </channel>

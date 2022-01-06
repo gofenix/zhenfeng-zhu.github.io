@@ -69,14 +69,14 @@ WIRED：已经写到 Web3 将打破像 Google 和 Facebook 这样的垄断企业
 这绝不是一个广泛的清单，安全和认证是一个复杂的领域，最好留给专家使用经过试验的方法。
 准备好你的环境 在开始这个实验之前，创建一个新的文件夹
 mkdir -p lab11\`bash &amp;amp;&amp;amp; cd lab11 也要确保你的faas-cli&#39;版本是0.7.4&amp;rsquo;或以上，使用以下命令。
-$ faas-cli version 什么是 HMAC 如果没有任何形式的认证或信任，我们的函数可能会暴露给任何能猜到其 URL 的人。如果我们的函数可以在互联网或本地网络上访问，那么它们就可能被坏的行为者调用。默认情况下，函数会对任何请求做出响应。然而，如果我们想控制对函数的访问，我们可以使用基于哈希的消息验证码（HMAC）来验证信息的来源。
+faas-cli version 什么是 HMAC 如果没有任何形式的认证或信任，我们的函数可能会暴露给任何能猜到其 URL 的人。如果我们的函数可以在互联网或本地网络上访问，那么它们就可能被坏的行为者调用。默认情况下，函数会对任何请求做出响应。然而，如果我们想控制对函数的访问，我们可以使用基于哈希的消息验证码（HMAC）来验证信息的来源。
 来自[alexellis/hmac]（https://github.com/alexellis/hmac）。
  HMAC 使用发送方/接收方提前共享的对称密钥。发送方在想要传输信息时将产生一个哈希值&amp;ndash;该数据与有效载荷一起发送。然后，收件人将用共享密钥签署有效载荷，如果哈希值匹配，则假定有效载荷来自发件人。
  这样我们就可以避免我们的函数被无效的甚至是危险的信息所调用。
 使用 HMAC 我们将使用 faas-cli 提供的--sign标志来包含一个头，其中包含使用我们用--key标志提供的共享密钥创建的散列信息。
  注意: --sign和--key必须同时存在。
  让我们首先通过部署-env函数来检查该标志的作用，该函数将打印函数中可访问的所有环境变量。
-$ faas-cli deploy --name env --fprocess=&amp;#34;env&amp;#34; --image=&amp;#34;function/alpine:new&amp;#34;  调用不带--sign标志的函数。  $ echo &amp;#34;The message&amp;#34; | faas-cli invoke env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin HOSTNAME=d2c1a2cb20c2 fprocess=env HOME=/root Http_X_Call_Id=b84947c6-2970-4fcf-ba3b-66dde6943999 Http_X_Forwarded_For=10.255.0.2:34974 Http_X_Forwarded_Host=127.0.0.1:8080 Http_Content_Length=0 Http_Accept_Encoding=gzip Http_Content_Type=text/plain Http_User_Agent=Go-http-client/1.</description>
+faas-cli deploy --name env --fprocess=&amp;#34;env&amp;#34; --image=&amp;#34;function/alpine:new&amp;#34;  调用不带--sign标志的函数。  $ echo &amp;#34;The message&amp;#34; | faas-cli invoke env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin HOSTNAME=d2c1a2cb20c2 fprocess=env HOME=/root Http_X_Call_Id=b84947c6-2970-4fcf-ba3b-66dde6943999 Http_X_Forwarded_For=10.255.0.2:34974 Http_X_Forwarded_Host=127.0.0.1:8080 Http_Content_Length=0 Http_Accept_Encoding=gzip Http_Content_Type=text/plain Http_User_Agent=Go-http-client/1.</description>
     </item>
     
     <item>
@@ -93,9 +93,10 @@ $ cp -r lab5 lab10\ &amp;amp;&amp;amp; cd lab10 使用秘密 实验室 5研究�
 请参阅docs中关于秘密的更多信息和它的设计。
 创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或&#39;-&amp;lsquo;组成，并且必须以一个字母数字字符开始和结束
  从一个终端运行以下命令。
-$ echo -n &amp;lt;auth_token&amp;gt; | faas-cli secret create auth-token 测试秘密是否被创建。
-$ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
- kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。</description>
+echo -n &amp;lt;auth_token&amp;gt; | faas-cli secret create auth-token 测试秘密是否被创建。
+faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
+ kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。
+ 当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler.</description>
     </item>
     
     <item>
@@ -114,7 +115,7 @@ $ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松�
 你可以通过设置com.openfaas.scale.max来控制一个函数可以产生的最大复制量，目前默认值是20。
  注意: 如果你把com.openfaas.scale.min和com.openfaas.scale.max设置成相同的值，你就会禁用自动缩放函数。
  查看 Prometheus 你需要运行这个端口转发命令，以便能够在http://127.0.0.1:9090访问 Prometheus。
-$ kubectl port-forward deployment/prometheus 9090:9090 -n openfaas 现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code=&amp;quot;200&amp;quot;} [20s])作为查询来实现。导致一个看起来像这样的页面。</description>
+kubectl port-forward deployment/prometheus 9090:9090 -n openfaas 现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code=&amp;quot;200&amp;quot;} [20s])作为查询来实现。导致一个看起来像这样的页面。</description>
     </item>
     
     <item>
@@ -131,7 +132,7 @@ $ mkdir -p lab8 \ &amp;amp;&amp;amp; cd lab8 用read_timeout扩展超时时间 t
   write_timeout - 允许函数在 HTTP 上写一个响应的时间
   exec_timeout - 一个函数在被终止前可以运行的最大时间。
   API 网关的默认时间是 20 秒，所以我们来测试一下在一个函数上设置一个更短的超时时间。
-$ faas-cli new --lang python3 sleep-for --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑handler.py。
+faas-cli new --lang python3 sleep-for --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑handler.py。
 import time import os def handle(req): &amp;#34;&amp;#34;&amp;#34;handle a request to the function Args: req (str): request body &amp;#34;&amp;#34;&amp;#34; sleep_duration = int(os.</description>
     </item>
     
@@ -145,7 +146,7 @@ import time import os def handle(req): &amp;#34;&amp;#34;&amp;#34;handle a reque
 $ mkdir -p lab7 \ &amp;amp;&amp;amp; cd lab7 同步与异步地调用一个函数 当你同步调用一个函数时，一个连接会通过网关连接到你的函数，并且在整个执行过程中保持开放。同步调用是*阻塞的，所以你应该看到你的客户端暂停，变得不活跃，直到该函数完成其任务。
  网关使用的路由是。/function/&amp;lt;function_name&amp;gt;。 你必须等待，直到它完成 你在调用后得到结果 你知道它是通过还是失败  异步任务以类似的方式运行，但有一些区别。
  网关使用不同的路由：/async-function/&amp;lt;function_name&amp;gt;。 客户端从网关得到一个立即的202 接受的响应。 该函数稍后使用一个队列工作器来调用 默认情况下，结果被丢弃  让我们试一试快速演示。
-$ faas-cli new --lang dockerfile long-task --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑long-task/Dockerfile并将 fprocess 改为sleep 1。
+faas-cli new --lang dockerfile long-task --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑long-task/Dockerfile并将 fprocess 改为sleep 1。
 现在构建、部署并同步调用你的函数 10 次，像这样。
 echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task 现在异步调用该函数 10 次。</description>
     </item>
@@ -158,10 +159,11 @@ echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34
       <guid>https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab6/</guid>
       <description>实验 6&amp;ndash;你的函数的 HTML 在开始这个实验之前，为你的文件创建一个新的文件夹。
 $ mkdir -p lab6\ &amp;amp;&amp;amp; cd lab6 从一个函数中生成并返回基本的 HTML 函数可以返回 HTML，并将Content-Type设置为text/html。因此，函数返回的 HTML 可以通过浏览器进行渲染。让我们创建一个简单的函数，生成并返回一个基本的 HTML。
-$ faas-cli new --lang python3 show-html --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑handler.py。
+faas-cli new --lang python3 show-html --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑handler.py。
 def handle(req): &amp;#34;&amp;#34;&amp;#34;handle a request to the function Args: req (str): request body &amp;#34;&amp;#34;&amp;#34; html = &amp;#39;&amp;lt;html&amp;gt;&amp;lt;h2&amp;gt;Hi, from your function!&amp;lt;/h2&amp;gt;&amp;lt;/html&amp;gt;&amp;#39; return html 这将返回 HTML 给调用者。 还有一件事我们应该做的是设置响应的Content-Type&#39;。我们100%确定这个函数将返回一个HTML，所以Content-Type应该总是text/html。我们可以利用show-html.yml文件中的environment`部分来设置。
 编辑show-html.yml。
-provider: name: openfaas gateway: http://127.0.0.1:8080 functions: show-html: lang: python3 handler: ./show-html image: &amp;lt;your-docker-username-here&amp;gt;/show-html environment: content_type: text/html environment中的content_type键将设置响应的Content-Type。</description>
+provider: name: openfaas gateway: http://127.0.0.1:8080 functions: show-html: lang: python3 handler: ./show-html image: &amp;lt;your-docker-username-here&amp;gt;/show-html environment: content_type: text/html environment中的content_type键将设置响应的Content-Type。
+现在构建、推送和部署该函数。</description>
     </item>
     
     <item>
@@ -261,10 +263,10 @@ Type system review Make a review and possible formalisation of Crystal&amp;rsquo
 一个静态网站生成器的工作流程通常有如下几个步骤：
  读取源文件，一般是 markdown 格式的。 模板引擎的渲染 生成目标文件  接下来会从每个步骤来进行简单介绍。
 最终版本的请参考：https://github.com/zhenfeng-zhu/ego， 欢迎 pr 和 issue。
-极简 MVP 版本介绍 初始化 $ mix new ego 在 mix.exs 中添加依赖
+极简 MVP 版本介绍 初始化 mix new ego 在 mix.exs 中添加依赖
  earmark 是将 markdown 转换为 html。 plug_cowboy 是提供本地预览 html 文件的 server。 json 是一个 json 解析库 指定以 escript 的方式启动  解析 markdown 文件 将一个 markdown 文件转为 html 也是比较简单的，首先读取，然后调用 Earmark.as_html!函数，就能将 markdown 转换为 html 了。
 eg.
-def gen_blogs(m) do m |&amp;gt; File.</description>
+def gen_blogs(m) do m |&amp;gt; File.read!() |&amp;gt; Earmark.</description>
     </item>
     
     <item>
@@ -1095,7 +1097,7 @@ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.
 安装 grafana 进行监控
 docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
 常用命令：
-$ faas-cli new --list $ faas-cli build -f .</description>
+faas-cli new --list faas-cli build -f .</description>
     </item>
     
     <item>
@@ -1590,10 +1592,10 @@ IPv4 的 CIDR 地址块的表示方法和 IPv4 地址的表示方法是相似的
       
       <guid>https://zhenfeng-zhu.github.io/posts/hello-world/</guid>
       <description>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick Start Create a new post $ hexo new &amp;#34;My New Post&amp;#34; More info: Writing
-Run server $ hexo server More info: Server
-Generate static files $ hexo generate More info: Generating
-Deploy to remote sites $ hexo deploy More info: Deployment</description>
+Quick Start Create a new post hexo new &amp;#34;My New Post&amp;#34; More info: Writing
+Run server hexo server More info: Server
+Generate static files hexo generate More info: Generating
+Deploy to remote sites hexo deploy More info: Deployment</description>
     </item>
     
   </channel>

@@ -162,20 +162,20 @@ go log(&#34;&#34;)
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package main
 
 import (
-	&#34;log&#34;
-	&#34;time&#34;
+ &#34;log&#34;
+ &#34;time&#34;
 )
 
 func doSomething(id int) {
-	log.Printf(&#34;before do job:(%d) \n&#34;, id)
-	time.Sleep(3 * time.Second)
-	log.Printf(&#34;after do job:(%d) \n&#34;, id)
+ log.Printf(&#34;before do job:(%d) \n&#34;, id)
+ time.Sleep(3 * time.Second)
+ log.Printf(&#34;after do job:(%d) \n&#34;, id)
 }
 
 func main() {
-	doSomething(1)
-	doSomething(2)
-	doSomething(3)
+ doSomething(1)
+ doSomething(2)
+ doSomething(3)
 }
 </code></pre></div><p>这个例子的输出是：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>2018/04/15 17:06:05 before do job:(1) 
@@ -186,50 +186,50 @@ func main() {
 2018/04/15 17:06:14 after do job:(3) 
 </code></pre></div><p>可以看到是用了 9 秒的时间才完成，如果是采用 goroutine 的话，就很快。很简单，就是在执行 doSomething 之前，加上 go 关键字。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>import (
-	&#34;log&#34;
-	&#34;time&#34;
+ &#34;log&#34;
+ &#34;time&#34;
 )
 
 func doSomething(id int) {
-	log.Printf(&#34;before do job:(%d) \n&#34;, id)
-	time.Sleep(3 * time.Second)
-	log.Printf(&#34;after do job:(%d) \n&#34;, id)
+ log.Printf(&#34;before do job:(%d) \n&#34;, id)
+ time.Sleep(3 * time.Second)
+ log.Printf(&#34;after do job:(%d) \n&#34;, id)
 }
 
 func main() {
-	go doSomething(1)
-	go doSomething(2)
-	go doSomething(3)
+ go doSomething(1)
+ go doSomething(2)
+ go doSomething(3)
 }
 </code></pre></div><p>但是这样的话，什么结果也没有，是因为 main 函数本身也是一个 goroutine，main 执行完之后，其他的还没开始，所以什么也看不到。最简单的办法就是让 main 函数等待一段时间再结束，但是这样不够优雅。</p>
 <p>我们应该采用 sync.WaitGroup 来等待所有的 goroutine 结束。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package main
 
 import (
-	&#34;log&#34;
-	&#34;sync&#34;
-	&#34;time&#34;
+ &#34;log&#34;
+ &#34;sync&#34;
+ &#34;time&#34;
 )
 
 func doSomething(id int, wg *sync.WaitGroup) {
-	defer wg.Done()
+ defer wg.Done()
 
-	log.Printf(&#34;before do job:(%d) \n&#34;, id)
-	time.Sleep(3 * time.Second)
-	log.Printf(&#34;after do job:(%d) \n&#34;, id)
+ log.Printf(&#34;before do job:(%d) \n&#34;, id)
+ time.Sleep(3 * time.Second)
+ log.Printf(&#34;after do job:(%d) \n&#34;, id)
 }
 
 func main() {
-	var wg sync.WaitGroup
-	wg.Add(3)
+ var wg sync.WaitGroup
+ wg.Add(3)
 
     // 因为我们要修改wg的状态，所以要传指针过去
-	go doSomething(1, &amp;wg)
-	go doSomething(2, &amp;wg)
-	go doSomething(3, &amp;wg)
+ go doSomething(1, &amp;wg)
+ go doSomething(2, &amp;wg)
+ go doSomething(3, &amp;wg)
 
-	wg.Wait()
-	log.Printf(&#34;finish all jobs\n&#34;)
+ wg.Wait()
+ log.Printf(&#34;finish all jobs\n&#34;)
 }
 </code></pre></div><p>执行结果是：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>2018/04/15 17:13:14 before do job:(3) 

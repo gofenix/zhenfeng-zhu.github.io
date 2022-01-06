@@ -128,7 +128,7 @@ RxJava2 快速入门
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>compile &#39;io.reactivex.rxjava2:rxjava:2.0.1&#39;
 </code></pre></div><h2 id=写法>写法<a hidden class=anchor aria-hidden=true href=#写法>#</a></h2>
 <h3 id=简单版本>简单版本<a hidden class=anchor aria-hidden=true href=#简单版本>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>	private static void helloSimple() {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain> private static void helloSimple() {
         Consumer&lt;String&gt; consumer = new Consumer&lt;String&gt;() {
             @Override
             public void accept(String s) throws Exception {
@@ -137,9 +137,9 @@ RxJava2 快速入门
         };
 
         Observable.just(&#34;hello world&#34;).subscribe(consumer);
-	}
+ }
 </code></pre></div><h3 id=复杂版本>复杂版本<a hidden class=anchor aria-hidden=true href=#复杂版本>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>	private static void helloComplex() {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain> private static void helloComplex() {
         Observer&lt;String&gt; observer = new Observer&lt;String&gt;() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -165,7 +165,7 @@ RxJava2 快速入门
         Observable.just(&#34;Hello world&#34;).subscribe(observer);
     }
 </code></pre></div><h3 id=变态版本>变态版本<a hidden class=anchor aria-hidden=true href=#变态版本>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>	private static void helloPlus() {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain> private static void helloPlus() {
         Observer&lt;String&gt; observer = new Observer&lt;String&gt;() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -202,7 +202,7 @@ RxJava2 快速入门
 <h3 id=filter>filter<a hidden class=anchor aria-hidden=true href=#filter>#</a></h3>
 <p>你早上去吃早餐，师傅是被观察者，说咱这有"包子", &ldquo;馒头&rdquo;, &ldquo;花生&rdquo;, &ldquo;牛奶&rdquo;, &ldquo;饺子&rdquo;, &ldquo;春卷&rdquo;, &ldquo;油条&rdquo;，你仔细想了想，发现你是最喜欢饺子的，所以把其他的都排除掉，
 于是你就吃到了饺子。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>	private static void helloFilter() {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain> private static void helloFilter() {
         Consumer&lt;String&gt; consumer = new Consumer&lt;String&gt;() {
             @Override
             public void accept(String s) throws Exception {
@@ -223,7 +223,7 @@ RxJava2 快速入门
 </code></pre></div><h3 id=map>Map<a hidden class=anchor aria-hidden=true href=#map>#</a></h3>
 <p>map 操作符能够完成数据类型的转换。</p>
 <p>将 String 类型转换为 Integer 类型。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>	private static void helloMap() {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain> private static void helloMap() {
         // 观察者观察Integer
         Observer&lt;Integer&gt; observer = new Observer&lt;Integer&gt;() {
             @Override

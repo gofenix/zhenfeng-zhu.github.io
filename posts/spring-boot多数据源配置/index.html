@@ -140,9 +140,9 @@ spring boot 多数据源配置
 <p>首先要将 spring boot 自带的<code>DataSourceAutoConfiguration</code>禁掉，因为它会读取<code>application.properties</code>文件的<code>spring.datasource.*</code>属性并自动配置单数据源。在<code>@SpringBootApplication</code>注解中添加<code>exclude</code>属性即可：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class DemoApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(JpaDemoApplication.class, args);
-	}
+ public static void main(String[] args) {
+  SpringApplication.run(JpaDemoApplication.class, args);
+ }
 }
 </code></pre></div><h3 id=12-配置数据库连接>1.2 配置数据库连接<a hidden class=anchor aria-hidden=true href=#12-配置数据库连接>#</a></h3>
 <p>然后在<code>application.properties</code>中配置多数据源连接信息：</p>

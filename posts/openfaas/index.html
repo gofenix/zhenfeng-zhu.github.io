@@ -17,7 +17,7 @@ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.
 安装 grafana 进行监控
 docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
 常用命令：
-$ faas-cli new --list $ faas-cli build -f .">
+faas-cli new --list faas-cli build -f .">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/openfaas/>
 <link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
@@ -47,7 +47,7 @@ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.
 安装 grafana 进行监控
 docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
 常用命令：
-$ faas-cli new --list $ faas-cli build -f .">
+faas-cli new --list faas-cli build -f .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/openfaas/">
 <meta property="og:image" content="https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png"><meta property="article:section" content="posts">
@@ -68,9 +68,9 @@ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.
 安装 grafana 进行监控
 docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
 常用命令：
-$ faas-cli new --list $ faas-cli build -f .">
+faas-cli new --list faas-cli build -f .">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"openfaas","item":"https://zhenfeng-zhu.github.io/posts/openfaas/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"openfaas","name":"openfaas","description":"对于 mac 环境来讲，首先安装新版 docker:\nbrew cask install docker 然后启动 docker。\n命令行登陆 docker hub\ndocker login 启动 docker swarm\ndocker swarm init 安装 faas-cli\nbrew install faas-cli clone 下来代码：\ngit clone https://github.com/openfaas/faas 然后执行\n./deploy_stack.sh 部署一些示例\nfaas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。\n安装 grafana 进行监控\ndocker service create -d \\ --name=grafana \\ --publish=3000:3000 \\ --network=func_functions \\ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。\n常用命令：\n$ faas-cli new --list $ faas-cli build -f .","keywords":["openfaas"],"articleBody":"对于 mac 环境来讲，首先安装新版 docker:\nbrew cask install docker 然后启动 docker。\n命令行登陆 docker hub\ndocker login 启动 docker swarm\ndocker swarm init 安装 faas-cli\nbrew install faas-cli clone 下来代码：\ngit clone https://github.com/openfaas/faas 然后执行\n./deploy_stack.sh 部署一些示例\nfaas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。\n安装 grafana 进行监控\ndocker service create -d \\ --name=grafana \\ --publish=3000:3000 \\ --network=func_functions \\ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。\n常用命令：\n$ faas-cli new --list $ faas-cli build -f ./hello-openfaas.yml $ faas-cli push -f ./hello-openfaas.yml $ faas-cli deploy -f ./hello-openfaas.yml ","wordCount":"84","inLanguage":"en","image":"https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png","datePublished":"2018-06-24T15:43:46Z","dateModified":"2018-06-24T15:43:46Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"openfaas","name":"openfaas","description":"对于 mac 环境来讲，首先安装新版 docker:\nbrew cask install docker 然后启动 docker。\n命令行登陆 docker hub\ndocker login 启动 docker swarm\ndocker swarm init 安装 faas-cli\nbrew install faas-cli clone 下来代码：\ngit clone https://github.com/openfaas/faas 然后执行\n./deploy_stack.sh 部署一些示例\nfaas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。\n安装 grafana 进行监控\ndocker service create -d \\ --name=grafana \\ --publish=3000:3000 \\ --network=func_functions \\ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。\n常用命令：\nfaas-cli new --list faas-cli build -f .","keywords":["openfaas"],"articleBody":"对于 mac 环境来讲，首先安装新版 docker:\nbrew cask install docker 然后启动 docker。\n命令行登陆 docker hub\ndocker login 启动 docker swarm\ndocker swarm init 安装 faas-cli\nbrew install faas-cli clone 下来代码：\ngit clone https://github.com/openfaas/faas 然后执行\n./deploy_stack.sh 部署一些示例\nfaas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。\n安装 grafana 进行监控\ndocker service create -d \\ --name=grafana \\ --publish=3000:3000 \\ --network=func_functions \\ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。\n常用命令：\nfaas-cli new --list faas-cli build -f ./hello-openfaas.yml faas-cli push -f ./hello-openfaas.yml faas-cli deploy -f ./hello-openfaas.yml ","wordCount":"80","inLanguage":"en","image":"https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png","datePublished":"2018-06-24T15:43:46Z","dateModified":"2018-06-24T15:43:46Z","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -132,19 +132,19 @@ openfaas
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>./deploy_stack.sh
 </code></pre></div><p>部署一些示例</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml
-</code></pre></div><p>使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。</p>
+</code></pre></div><p>使用浏览器打开 <a href=http://127.0.0.1:8080>http://127.0.0.1:8080</a> 就可以看到 ui 界面了。</p>
 <p>安装 grafana 进行监控</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>docker service create -d \
 --name=grafana \
 --publish=3000:3000 \
 --network=func_functions \
 stefanprodan/faas-grafana:4.6.3
-</code></pre></div><p>浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。</p>
+</code></pre></div><p>浏览器打开： <a href=http://127.0.0.1:3000>http://127.0.0.1:3000</a> 登陆 admin admin 查看。</p>
 <p>常用命令：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ faas-cli new --list
-$ faas-cli build -f ./hello-openfaas.yml
-$ faas-cli push -f ./hello-openfaas.yml
-$ faas-cli deploy -f ./hello-openfaas.yml
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>faas-cli new --list
+faas-cli build -f ./hello-openfaas.yml
+faas-cli push -f ./hello-openfaas.yml
+faas-cli deploy -f ./hello-openfaas.yml
 </code></pre></div>
 </div>
 <footer class=post-footer>

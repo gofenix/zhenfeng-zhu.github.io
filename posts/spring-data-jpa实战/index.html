@@ -117,66 +117,66 @@ Spring Data Jpa 实战
 <h3 id=11-pom>1.1 pom<a hidden class=anchor aria-hidden=true href=#11-pom>#</a></h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
 <span style=color:#f92672>&lt;project</span> <span style=color:#a6e22e>xmlns=</span><span style=color:#e6db74>&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span style=color:#a6e22e>xmlns:xsi=</span><span style=color:#e6db74>&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
-	<span style=color:#a6e22e>xsi:schemaLocation=</span><span style=color:#e6db74>&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span style=color:#f92672>&gt;</span>
-	<span style=color:#f92672>&lt;modelVersion&gt;</span>4.0.0<span style=color:#f92672>&lt;/modelVersion&gt;</span>
+ <span style=color:#a6e22e>xsi:schemaLocation=</span><span style=color:#e6db74>&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span style=color:#f92672>&gt;</span>
+ <span style=color:#f92672>&lt;modelVersion&gt;</span>4.0.0<span style=color:#f92672>&lt;/modelVersion&gt;</span>
 
-	<span style=color:#f92672>&lt;groupId&gt;</span>com.example<span style=color:#f92672>&lt;/groupId&gt;</span>
-	<span style=color:#f92672>&lt;artifactId&gt;</span>jpa-demo<span style=color:#f92672>&lt;/artifactId&gt;</span>
-	<span style=color:#f92672>&lt;version&gt;</span>0.0.1-SNAPSHOT<span style=color:#f92672>&lt;/version&gt;</span>
-	<span style=color:#f92672>&lt;packaging&gt;</span>jar<span style=color:#f92672>&lt;/packaging&gt;</span>
+ <span style=color:#f92672>&lt;groupId&gt;</span>com.example<span style=color:#f92672>&lt;/groupId&gt;</span>
+ <span style=color:#f92672>&lt;artifactId&gt;</span>jpa-demo<span style=color:#f92672>&lt;/artifactId&gt;</span>
+ <span style=color:#f92672>&lt;version&gt;</span>0.0.1-SNAPSHOT<span style=color:#f92672>&lt;/version&gt;</span>
+ <span style=color:#f92672>&lt;packaging&gt;</span>jar<span style=color:#f92672>&lt;/packaging&gt;</span>
 
-	<span style=color:#f92672>&lt;name&gt;</span>jpa-demo<span style=color:#f92672>&lt;/name&gt;</span>
-	<span style=color:#f92672>&lt;description&gt;</span>Demo project for Spring Boot<span style=color:#f92672>&lt;/description&gt;</span>
+ <span style=color:#f92672>&lt;name&gt;</span>jpa-demo<span style=color:#f92672>&lt;/name&gt;</span>
+ <span style=color:#f92672>&lt;description&gt;</span>Demo project for Spring Boot<span style=color:#f92672>&lt;/description&gt;</span>
 
-	<span style=color:#f92672>&lt;parent&gt;</span>
-		<span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
-		<span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-parent<span style=color:#f92672>&lt;/artifactId&gt;</span>
-		<span style=color:#f92672>&lt;version&gt;</span>1.5.9.RELEASE<span style=color:#f92672>&lt;/version&gt;</span>
-		<span style=color:#f92672>&lt;relativePath/&gt;</span> <span style=color:#75715e>&lt;!-- lookup parent from repository --&gt;</span>
-	<span style=color:#f92672>&lt;/parent&gt;</span>
+ <span style=color:#f92672>&lt;parent&gt;</span>
+  <span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
+  <span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-parent<span style=color:#f92672>&lt;/artifactId&gt;</span>
+  <span style=color:#f92672>&lt;version&gt;</span>1.5.9.RELEASE<span style=color:#f92672>&lt;/version&gt;</span>
+  <span style=color:#f92672>&lt;relativePath/&gt;</span> <span style=color:#75715e>&lt;!-- lookup parent from repository --&gt;</span>
+ <span style=color:#f92672>&lt;/parent&gt;</span>
 
-	<span style=color:#f92672>&lt;properties&gt;</span>
-		<span style=color:#f92672>&lt;project.build.sourceEncoding&gt;</span>UTF-8<span style=color:#f92672>&lt;/project.build.sourceEncoding&gt;</span>
-		<span style=color:#f92672>&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span style=color:#f92672>&lt;/project.reporting.outputEncoding&gt;</span>
-		<span style=color:#f92672>&lt;java.version&gt;</span>1.8<span style=color:#f92672>&lt;/java.version&gt;</span>
-	<span style=color:#f92672>&lt;/properties&gt;</span>
+ <span style=color:#f92672>&lt;properties&gt;</span>
+  <span style=color:#f92672>&lt;project.build.sourceEncoding&gt;</span>UTF-8<span style=color:#f92672>&lt;/project.build.sourceEncoding&gt;</span>
+  <span style=color:#f92672>&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span style=color:#f92672>&lt;/project.reporting.outputEncoding&gt;</span>
+  <span style=color:#f92672>&lt;java.version&gt;</span>1.8<span style=color:#f92672>&lt;/java.version&gt;</span>
+ <span style=color:#f92672>&lt;/properties&gt;</span>
 
-	<span style=color:#f92672>&lt;dependencies&gt;</span>
-		<span style=color:#f92672>&lt;dependency&gt;</span>
-			<span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
-			<span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-data-jpa<span style=color:#f92672>&lt;/artifactId&gt;</span>
-		<span style=color:#f92672>&lt;/dependency&gt;</span>
-		<span style=color:#f92672>&lt;dependency&gt;</span>
-			<span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
-			<span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-web<span style=color:#f92672>&lt;/artifactId&gt;</span>
-		<span style=color:#f92672>&lt;/dependency&gt;</span>
+ <span style=color:#f92672>&lt;dependencies&gt;</span>
+  <span style=color:#f92672>&lt;dependency&gt;</span>
+   <span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
+   <span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-data-jpa<span style=color:#f92672>&lt;/artifactId&gt;</span>
+  <span style=color:#f92672>&lt;/dependency&gt;</span>
+  <span style=color:#f92672>&lt;dependency&gt;</span>
+   <span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
+   <span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-web<span style=color:#f92672>&lt;/artifactId&gt;</span>
+  <span style=color:#f92672>&lt;/dependency&gt;</span>
 
-		<span style=color:#f92672>&lt;dependency&gt;</span>
-			<span style=color:#f92672>&lt;groupId&gt;</span>mysql<span style=color:#f92672>&lt;/groupId&gt;</span>
-			<span style=color:#f92672>&lt;artifactId&gt;</span>mysql-connector-java<span style=color:#f92672>&lt;/artifactId&gt;</span>
-			<span style=color:#f92672>&lt;scope&gt;</span>runtime<span style=color:#f92672>&lt;/scope&gt;</span>
-		<span style=color:#f92672>&lt;/dependency&gt;</span>
-		<span style=color:#f92672>&lt;dependency&gt;</span>
-			<span style=color:#f92672>&lt;groupId&gt;</span>org.projectlombok<span style=color:#f92672>&lt;/groupId&gt;</span>
-			<span style=color:#f92672>&lt;artifactId&gt;</span>lombok<span style=color:#f92672>&lt;/artifactId&gt;</span>
-			<span style=color:#f92672>&lt;optional&gt;</span>true<span style=color:#f92672>&lt;/optional&gt;</span>
-		<span style=color:#f92672>&lt;/dependency&gt;</span>
-		<span style=color:#f92672>&lt;dependency&gt;</span>
-			<span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
-			<span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-test<span style=color:#f92672>&lt;/artifactId&gt;</span>
-			<span style=color:#f92672>&lt;scope&gt;</span>test<span style=color:#f92672>&lt;/scope&gt;</span>
-		<span style=color:#f92672>&lt;/dependency&gt;</span>
+  <span style=color:#f92672>&lt;dependency&gt;</span>
+   <span style=color:#f92672>&lt;groupId&gt;</span>mysql<span style=color:#f92672>&lt;/groupId&gt;</span>
+   <span style=color:#f92672>&lt;artifactId&gt;</span>mysql-connector-java<span style=color:#f92672>&lt;/artifactId&gt;</span>
+   <span style=color:#f92672>&lt;scope&gt;</span>runtime<span style=color:#f92672>&lt;/scope&gt;</span>
+  <span style=color:#f92672>&lt;/dependency&gt;</span>
+  <span style=color:#f92672>&lt;dependency&gt;</span>
+   <span style=color:#f92672>&lt;groupId&gt;</span>org.projectlombok<span style=color:#f92672>&lt;/groupId&gt;</span>
+   <span style=color:#f92672>&lt;artifactId&gt;</span>lombok<span style=color:#f92672>&lt;/artifactId&gt;</span>
+   <span style=color:#f92672>&lt;optional&gt;</span>true<span style=color:#f92672>&lt;/optional&gt;</span>
+  <span style=color:#f92672>&lt;/dependency&gt;</span>
+  <span style=color:#f92672>&lt;dependency&gt;</span>
+   <span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
+   <span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-test<span style=color:#f92672>&lt;/artifactId&gt;</span>
+   <span style=color:#f92672>&lt;scope&gt;</span>test<span style=color:#f92672>&lt;/scope&gt;</span>
+  <span style=color:#f92672>&lt;/dependency&gt;</span>
 
-	<span style=color:#f92672>&lt;/dependencies&gt;</span>
+ <span style=color:#f92672>&lt;/dependencies&gt;</span>
 
-	<span style=color:#f92672>&lt;build&gt;</span>
-		<span style=color:#f92672>&lt;plugins&gt;</span>
-			<span style=color:#f92672>&lt;plugin&gt;</span>
-				<span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
-				<span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-maven-plugin<span style=color:#f92672>&lt;/artifactId&gt;</span>
-			<span style=color:#f92672>&lt;/plugin&gt;</span>
-		<span style=color:#f92672>&lt;/plugins&gt;</span>
-	<span style=color:#f92672>&lt;/build&gt;</span>
+ <span style=color:#f92672>&lt;build&gt;</span>
+  <span style=color:#f92672>&lt;plugins&gt;</span>
+   <span style=color:#f92672>&lt;plugin&gt;</span>
+    <span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
+    <span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-maven-plugin<span style=color:#f92672>&lt;/artifactId&gt;</span>
+   <span style=color:#f92672>&lt;/plugin&gt;</span>
+  <span style=color:#f92672>&lt;/plugins&gt;</span>
+ <span style=color:#f92672>&lt;/build&gt;</span>
 
 
 <span style=color:#f92672>&lt;/project&gt;</span>

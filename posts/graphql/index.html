@@ -169,19 +169,19 @@ graphql
 </code></pre></div><p>allPersons 是根字段（root field），它下面的成为查询的 payload，这里仅包含了一个 name。</p>
 <p>服务器返回的结果会是这样的：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-tsx data-lang=tsx>{
-  	<span style=color:#e6db74>&#34;allPersons&#34;</span><span style=color:#f92672>:</span> [
-    	{ <span style=color:#e6db74>&#34;name&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;Johnny&#34;</span> },
-    	{ <span style=color:#e6db74>&#34;name&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;Sarah&#34;</span> },
-    	{ <span style=color:#e6db74>&#34;name&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;Alice&#34;</span> }
-  	]
+   <span style=color:#e6db74>&#34;allPersons&#34;</span><span style=color:#f92672>:</span> [
+     { <span style=color:#e6db74>&#34;name&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;Johnny&#34;</span> },
+     { <span style=color:#e6db74>&#34;name&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;Sarah&#34;</span> },
+     { <span style=color:#e6db74>&#34;name&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;Alice&#34;</span> }
+   ]
 }
 </code></pre></div><p>可以看到只返回了 name 字段，age 字段是不会返回的。</p>
 <p>如果使用如下的 payload 就会返回：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-tsx data-lang=tsx>{
-  	<span style=color:#a6e22e>allPersons</span> {
-    	<span style=color:#a6e22e>name</span>
-    	<span style=color:#a6e22e>age</span>
-  	}
+   <span style=color:#a6e22e>allPersons</span> {
+     <span style=color:#a6e22e>name</span>
+     <span style=color:#a6e22e>age</span>
+   }
 }
 </code></pre></div><p>还可以查询 posts 中的 title：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>{

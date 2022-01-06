@@ -13,9 +13,10 @@ $ cp -r lab5 lab10\ && cd lab10 使用秘密 实验室 5研究了issue-bot如何
 请参阅docs中关于秘密的更多信息和它的设计。
 创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-&lsquo;组成，并且必须以一个字母数字字符开始和结束
  从一个终端运行以下命令。
-$ echo -n <auth_token> | faas-cli secret create auth-token 测试秘密是否被创建。
-$ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
- kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。">
+echo -n <auth_token> | faas-cli secret create auth-token 测试秘密是否被创建。
+faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
+ kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。
+ 当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler.">
 <meta name=author content="Fenix">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/>
 <link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
@@ -41,9 +42,10 @@ $ cp -r lab5 lab10\ && cd lab10 使用秘密 实验室 5研究了issue-bot如何
 请参阅docs中关于秘密的更多信息和它的设计。
 创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-&lsquo;组成，并且必须以一个字母数字字符开始和结束
  从一个终端运行以下命令。
-$ echo -n <auth_token> | faas-cli secret create auth-token 测试秘密是否被创建。
-$ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
- kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。">
+echo -n <auth_token> | faas-cli secret create auth-token 测试秘密是否被创建。
+faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
+ kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。
+ 当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/">
 <meta property="og:image" content="https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png"><meta property="article:section" content="posts">
@@ -60,11 +62,12 @@ $ cp -r lab5 lab10\ && cd lab10 使用秘密 实验室 5研究了issue-bot如何
 请参阅docs中关于秘密的更多信息和它的设计。
 创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-&lsquo;组成，并且必须以一个字母数字字符开始和结束
  从一个终端运行以下命令。
-$ echo -n <auth_token> | faas-cli secret create auth-token 测试秘密是否被创建。
-$ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
- kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。">
+echo -n <auth_token> | faas-cli secret create auth-token 测试秘密是否被创建。
+faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
+ kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。
+ 当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Openfaas Workshop Lab10","item":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop Lab10","name":"Openfaas Workshop Lab10","description":"Lab 10 - 高级函数 - 秘密 在开始本实验室之前，为你的文件创建一个新的文件夹。由于本实验室是建立在先前的实验室基础上的，因此请复制 lab5。\n$ cp -r lab5 lab10\\ \u0026amp;\u0026amp; cd lab10 使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。\n来自 Docker 文档。\n \u0026hellip; 秘密是一团数据，如密码、SSH 私钥、SSL 证书或其他数据，不应通过网络传输或未经加密存储在 Docker 文件或应用程序的源代码中。\n 这是一个比环境变量更安全的选择。环境变量更容易使用，但最适合于非保密的配置项目。 似乎很适合用于存储auth_token值。\n请参阅docs中关于秘密的更多信息和它的设计。\n创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-\u0026lsquo;组成，并且必须以一个字母数字字符开始和结束\n 从一个终端运行以下命令。\n$ echo -n \u0026lt;auth_token\u0026gt; | faas-cli secret create auth-token 测试秘密是否被创建。\n$ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。\n kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。","keywords":["openfaas"],"articleBody":"Lab 10 - 高级函数 - 秘密 在开始本实验室之前，为你的文件创建一个新的文件夹。由于本实验室是建立在先前的实验室基础上的，因此请复制 lab5。\n$ cp -r lab5 lab10\\ \u0026\u0026 cd lab10 使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。\n来自 Docker 文档。\n … 秘密是一团数据，如密码、SSH 私钥、SSL 证书或其他数据，不应通过网络传输或未经加密存储在 Docker 文件或应用程序的源代码中。\n 这是一个比环境变量更安全的选择。环境变量更容易使用，但最适合于非保密的配置项目。 似乎很适合用于存储auth_token值。\n请参阅docs中关于秘密的更多信息和它的设计。\n创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-‘组成，并且必须以一个字母数字字符开始和结束\n 从一个终端运行以下命令。\n$ echo -n  | faas-cli secret create auth-token 测试秘密是否被创建。\n$ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。\n kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。\n 当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler.py读取，以获得 GitHub 的个人访问令牌。\n更新 issue-bot.yml 用一个指令取代对env.yml的引用，使auth-token的秘密对函数可用。\nprovider: name: openfaas gateway: http://127.0.0.1:8080 functions: issue-bot: lang: python3 handler: ./issue-bot image: /issue-bot environment: write_debug: true gateway_hostname: \"gateway.openfaas\" positive_threshold: 0.25 secrets: - auth-token 更新issue-bot函数 函数处理程序需要改变，以使其读取auth-token秘密，而不是环境变量。 这只是一个单行的改动，在这里。\npython g = Github(os.getenv(“auth_token”))\n被替换为 ```python with open(\"/var/openfaas/secrets/auth-token\", \"r\") as authToken: g = Github(authToken.read())  完整的源代码可在issue-bot-secrets/bot-handler/handler.py\n  构建和部署  使用 CLI 来构建和部署该函数。\n$ faas-cli up -f issue-bot.yml 现在转到Lab 11。\n","wordCount":"122","inLanguage":"en","image":"https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png","datePublished":"2022-01-04T13:44:12+08:00","dateModified":"2022-01-04T13:44:12+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Openfaas Workshop Lab10","name":"Openfaas Workshop Lab10","description":"Lab 10 - 高级函数 - 秘密 在开始本实验室之前，为你的文件创建一个新的文件夹。由于本实验室是建立在先前的实验室基础上的，因此请复制 lab5。\n$ cp -r lab5 lab10\\ \u0026amp;\u0026amp; cd lab10 使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。\n来自 Docker 文档。\n \u0026hellip; 秘密是一团数据，如密码、SSH 私钥、SSL 证书或其他数据，不应通过网络传输或未经加密存储在 Docker 文件或应用程序的源代码中。\n 这是一个比环境变量更安全的选择。环境变量更容易使用，但最适合于非保密的配置项目。 似乎很适合用于存储auth_token值。\n请参阅docs中关于秘密的更多信息和它的设计。\n创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-\u0026lsquo;组成，并且必须以一个字母数字字符开始和结束\n 从一个终端运行以下命令。\necho -n \u0026lt;auth_token\u0026gt; | faas-cli secret create auth-token 测试秘密是否被创建。\nfaas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。\n kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。\n 当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler.","keywords":["openfaas"],"articleBody":"Lab 10 - 高级函数 - 秘密 在开始本实验室之前，为你的文件创建一个新的文件夹。由于本实验室是建立在先前的实验室基础上的，因此请复制 lab5。\n$ cp -r lab5 lab10\\ \u0026\u0026 cd lab10 使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。\n来自 Docker 文档。\n … 秘密是一团数据，如密码、SSH 私钥、SSL 证书或其他数据，不应通过网络传输或未经加密存储在 Docker 文件或应用程序的源代码中。\n 这是一个比环境变量更安全的选择。环境变量更容易使用，但最适合于非保密的配置项目。 似乎很适合用于存储auth_token值。\n请参阅docs中关于秘密的更多信息和它的设计。\n创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-‘组成，并且必须以一个字母数字字符开始和结束\n 从一个终端运行以下命令。\necho -n  | faas-cli secret create auth-token 测试秘密是否被创建。\nfaas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。\n kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。\n 当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler.py读取，以获得 GitHub 的个人访问令牌。\n更新 issue-bot.yml 用一个指令取代对env.yml的引用，使auth-token的秘密对函数可用。\nprovider: name: openfaas gateway: http://127.0.0.1:8080 functions: issue-bot: lang: python3 handler: ./issue-bot image: /issue-bot environment: write_debug: true gateway_hostname: \"gateway.openfaas\" positive_threshold: 0.25 secrets: - auth-token 更新issue-bot函数 函数处理程序需要改变，以使其读取auth-token秘密，而不是环境变量。 这只是一个单行的改动，在这里。\npython g = Github(os.getenv(“auth_token”))\n被替换为 ```python with open(\"/var/openfaas/secrets/auth-token\", \"r\") as authToken: g = Github(authToken.read())  完整的源代码可在issue-bot-secrets/bot-handler/handler.py\n  构建和部署  使用 CLI 来构建和部署该函数。\nfaas-cli up -f issue-bot.yml 现在转到Lab 11。\n","wordCount":"119","inLanguage":"en","image":"https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png","datePublished":"2022-01-04T13:44:12+08:00","dateModified":"2022-01-04T13:44:12+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -153,9 +156,9 @@ Openfaas Workshop Lab10
 <p>秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-&lsquo;组成，并且必须以一个字母数字字符开始和结束</p>
 </blockquote>
 <p>从一个终端运行以下命令。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ echo -n &lt;auth_token&gt; | faas-cli secret create auth-token
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>echo -n &lt;auth_token&gt; | faas-cli secret create auth-token
 </code></pre></div><p>测试秘密是否被创建。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ faas-cli secret ls
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>faas-cli secret ls
 </code></pre></div><blockquote>
 <p>注意：请记住，<code>-g</code>标志可以在网关之间轻松切换。 这也适用于秘密。</p>
 </blockquote>
@@ -196,7 +199,7 @@ with open(&#34;/var/openfaas/secrets/auth-token&#34;, &#34;r&#34;) as authToken:
 <li>构建和部署</li>
 </ul>
 <p>使用 CLI 来构建和部署该函数。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>$ faas-cli up -f issue-bot.yml
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>faas-cli up -f issue-bot.yml
 </code></pre></div><p>现在转到<a href=lab11.md>Lab 11</a>。</p>
 </div>
 <footer class=post-footer>

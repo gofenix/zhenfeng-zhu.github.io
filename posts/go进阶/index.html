@@ -154,26 +154,26 @@ go 进阶
 </li>
 </ul>
 <p>其他可用的的性能分析工具</p>
-<p>Linux 使用https://perf.wiki.kernel.org/index.php/Tutorial，perf 可以分析 cgo/SWIG 代码和系统内核。</p>
+<p>Linux 使用<a href=https://perf.wiki.kernel.org/index.php/Tutorial%EF%BC%8Cperf>https://perf.wiki.kernel.org/index.php/Tutorial，perf</a> 可以分析 cgo/SWIG 代码和系统内核。</p>
 <p>mac 上使用 <a href=https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/>https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/</a> 就足够了。</p>
 <p>分析线上处于生产状态服务</p>
 <p>在生产上分析程序也是没问题的，但是开启某些指标会增加成本。</p>
 <p>可视化分析数据</p>
-<p>go 提供了很多可视化的工具，参考https://blog.golang.org/profiling-go-programs</p>
-<p>也可以创建自定义的 profil 文件：参考https://golang.org/pkg/runtime/pprof/#Profile</p>
+<p>go 提供了很多可视化的工具，参考<a href=https://blog.golang.org/profiling-go-programs>https://blog.golang.org/profiling-go-programs</a></p>
+<p>也可以创建自定义的 profil 文件：参考<a href=https://golang.org/pkg/runtime/pprof/#Profile>https://golang.org/pkg/runtime/pprof/#Profile</a></p>
 <p>也可以自定义修改 pprof 程序监听的端口和路径，参考：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
 
 <span style=color:#f92672>import</span> (
-	<span style=color:#e6db74>&#34;log&#34;</span>
-	<span style=color:#e6db74>&#34;net/http&#34;</span>
-	<span style=color:#e6db74>&#34;net/http/pprof&#34;</span>
+ <span style=color:#e6db74>&#34;log&#34;</span>
+ <span style=color:#e6db74>&#34;net/http&#34;</span>
+ <span style=color:#e6db74>&#34;net/http/pprof&#34;</span>
 )
 
 <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {
-	<span style=color:#a6e22e>mux</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>NewServeMux</span>()
-	<span style=color:#a6e22e>mux</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/custom_debug_path/profile&#34;</span>, <span style=color:#a6e22e>pprof</span>.<span style=color:#a6e22e>Profile</span>)
-	<span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Fatal</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>ListenAndServe</span>(<span style=color:#e6db74>&#34;:7777&#34;</span>, <span style=color:#a6e22e>mux</span>))
+ <span style=color:#a6e22e>mux</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>NewServeMux</span>()
+ <span style=color:#a6e22e>mux</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/custom_debug_path/profile&#34;</span>, <span style=color:#a6e22e>pprof</span>.<span style=color:#a6e22e>Profile</span>)
+ <span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Fatal</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>ListenAndServe</span>(<span style=color:#e6db74>&#34;:7777&#34;</span>, <span style=color:#a6e22e>mux</span>))
 }
 </code></pre></div>
 </div>

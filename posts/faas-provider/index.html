@@ -191,52 +191,52 @@ faas-provider
 <p>在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// Serve load your handlers into the correct OpenFaaS route spec. This function is blocking.
 func Serve(handlers *types.FaaSHandlers, config *types.FaaSConfig) {
-	r.HandleFunc(&#34;/system/functions&#34;, handlers.FunctionReader).Methods(&#34;GET&#34;)
-	r.HandleFunc(&#34;/system/functions&#34;, handlers.DeployHandler).Methods(&#34;POST&#34;)
-	r.HandleFunc(&#34;/system/functions&#34;, handlers.DeleteHandler).Methods(&#34;DELETE&#34;)
-	r.HandleFunc(&#34;/system/functions&#34;, handlers.UpdateHandler).Methods(&#34;PUT&#34;)
+ r.HandleFunc(&#34;/system/functions&#34;, handlers.FunctionReader).Methods(&#34;GET&#34;)
+ r.HandleFunc(&#34;/system/functions&#34;, handlers.DeployHandler).Methods(&#34;POST&#34;)
+ r.HandleFunc(&#34;/system/functions&#34;, handlers.DeleteHandler).Methods(&#34;DELETE&#34;)
+ r.HandleFunc(&#34;/system/functions&#34;, handlers.UpdateHandler).Methods(&#34;PUT&#34;)
 
-	r.HandleFunc(&#34;/system/function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.ReplicaReader).Methods(&#34;GET&#34;)
-	r.HandleFunc(&#34;/system/scale-function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.ReplicaUpdater).Methods(&#34;POST&#34;)
+ r.HandleFunc(&#34;/system/function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.ReplicaReader).Methods(&#34;GET&#34;)
+ r.HandleFunc(&#34;/system/scale-function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.ReplicaUpdater).Methods(&#34;POST&#34;)
 
-	r.HandleFunc(&#34;/function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.FunctionProxy)
-	r.HandleFunc(&#34;/function/{name:[-a-zA-Z_0-9]+}/&#34;, handlers.FunctionProxy)
+ r.HandleFunc(&#34;/function/{name:[-a-zA-Z_0-9]+}&#34;, handlers.FunctionProxy)
+ r.HandleFunc(&#34;/function/{name:[-a-zA-Z_0-9]+}/&#34;, handlers.FunctionProxy)
 
-	r.HandleFunc(&#34;/system/info&#34;, handlers.InfoHandler).Methods(&#34;GET&#34;)
+ r.HandleFunc(&#34;/system/info&#34;, handlers.InfoHandler).Methods(&#34;GET&#34;)
 
-	if config.EnableHealth {
-		r.HandleFunc(&#34;/healthz&#34;, handlers.Health).Methods(&#34;GET&#34;)
-	}
-	// 省略
+ if config.EnableHealth {
+  r.HandleFunc(&#34;/healthz&#34;, handlers.Health).Methods(&#34;GET&#34;)
+ }
+ // 省略
 }
 </code></pre></div><p>因此在自定义的 provider，只需实现 FaaSHandlers 中的几个路由处理函数即可。这几个 handler 是：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>// FaaSHandlers provide handlers for OpenFaaS
 type FaaSHandlers struct {
-	FunctionReader http.HandlerFunc
-	DeployHandler  http.HandlerFunc
-	DeleteHandler  http.HandlerFunc
-	ReplicaReader  http.HandlerFunc
-	FunctionProxy  http.HandlerFunc
-	ReplicaUpdater http.HandlerFunc
+ FunctionReader http.HandlerFunc
+ DeployHandler  http.HandlerFunc
+ DeleteHandler  http.HandlerFunc
+ ReplicaReader  http.HandlerFunc
+ FunctionProxy  http.HandlerFunc
+ ReplicaUpdater http.HandlerFunc
 
-	// Optional: Update an existing function
-	UpdateHandler http.HandlerFunc
-	Health        http.HandlerFunc
-	InfoHandler   http.HandlerFunc
+ // Optional: Update an existing function
+ UpdateHandler http.HandlerFunc
+ Health        http.HandlerFunc
+ InfoHandler   http.HandlerFunc
 }
 </code></pre></div><p>我们以官方实现的 faas-netes 为例，讲解一下这几个 hander 的实现过程。</p>
 <h2 id=faas-netes>faas-netes<a hidden class=anchor aria-hidden=true href=#faas-netes>#</a></h2>
 <p>我们看下在 faas-netes 的中的 FaaSHandlers 实现：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>bootstrapHandlers := bootTypes.FaaSHandlers{
-	FunctionProxy:  handlers.MakeProxy(functionNamespace, cfg.ReadTimeout),
-	DeleteHandler:  handlers.MakeDeleteHandler(functionNamespace, clientset),
-	DeployHandler:  handlers.MakeDeployHandler(functionNamespace, clientset, deployConfig),
-	FunctionReader: handlers.MakeFunctionReader(functionNamespace, clientset),
-	ReplicaReader:  handlers.MakeReplicaReader(functionNamespace, clientset),
-	ReplicaUpdater: handlers.MakeReplicaUpdater(functionNamespace, clientset),
-	UpdateHandler:  handlers.MakeUpdateHandler(functionNamespace, clientset),
-		Health:         handlers.MakeHealthHandler(),
-		InfoHandler:    handlers.MakeInfoHandler(version.BuildVersion(), version.GitCommit),
+ FunctionProxy:  handlers.MakeProxy(functionNamespace, cfg.ReadTimeout),
+ DeleteHandler:  handlers.MakeDeleteHandler(functionNamespace, clientset),
+ DeployHandler:  handlers.MakeDeployHandler(functionNamespace, clientset, deployConfig),
+ FunctionReader: handlers.MakeFunctionReader(functionNamespace, clientset),
+ ReplicaReader:  handlers.MakeReplicaReader(functionNamespace, clientset),
+ ReplicaUpdater: handlers.MakeReplicaUpdater(functionNamespace, clientset),
+ UpdateHandler:  handlers.MakeUpdateHandler(functionNamespace, clientset),
+  Health:         handlers.MakeHealthHandler(),
+  InfoHandler:    handlers.MakeInfoHandler(version.BuildVersion(), version.GitCommit),
 }
 </code></pre></div><p>因为是 Kubernetes 上的 provider 实现，所以这些函数都带有一个 namespace 的参数。</p>
 <h3 id=functionproxy>FunctionProxy<a hidden class=anchor aria-hidden=true href=#functionproxy>#</a></h3>
@@ -266,10 +266,10 @@ type FaaSHandlers struct {
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>clientset, err := kubernetes.NewForConfig(config)
 </code></pre></div><p>这个 config 主要满足以下几个条件就行：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>Config{
-		// TODO: switch to using cluster DNS.
-		Host:            &#34;https://&#34; + net.JoinHostPort(host, port),
-		BearerToken:     string(token),
-		TLSClientConfig: tlsClientConfig,
+  // TODO: switch to using cluster DNS.
+  Host:            &#34;https://&#34; + net.JoinHostPort(host, port),
+  BearerToken:     string(token),
+  TLSClientConfig: tlsClientConfig,
 }
 </code></pre></div><p>Kubernetes 的所有操作都可以通过 rest api 来完成，这两个 handler 也是通过调用 Kubernetes 的 api 来做的。</p>
 <h4 id=replicareader>ReplicaReader<a hidden class=anchor aria-hidden=true href=#replicareader>#</a></h4>

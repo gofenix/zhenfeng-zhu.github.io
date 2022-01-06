@@ -186,26 +186,26 @@ $ tree [16:23:43] . ├── mvnw ├── mvnw.cmd ├── pom.xml └─�
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plain data-lang=plain>package main
 
 import (
-	&#34;github.com/gin-gonic/gin&#34;
-	&#34;net/http&#34;
+ &#34;github.com/gin-gonic/gin&#34;
+ &#34;net/http&#34;
 )
 
 func main() {
-	router:=gin.Default()
+ router:=gin.Default()
 
-	router.GET(&#34;/hello&#34;, greeting)
+ router.GET(&#34;/hello&#34;, greeting)
 
     // 也可以写成匿名函数
-	router.GET(&#34;/&#34;, func(context *gin.Context) {
-		context.String(http.StatusOK, &#34;I am Lucas&#34;)
-	})
+ router.GET(&#34;/&#34;, func(context *gin.Context) {
+  context.String(http.StatusOK, &#34;I am Lucas&#34;)
+ })
 
-	router.Run()
+ router.Run()
 }
 
 // 可以单独写一个handler函数
 func greeting(context *gin.Context)  {
-	context.String(http.StatusOK, &#34;hello world&#34;)
+ context.String(http.StatusOK, &#34;hello world&#34;)
 }
 
 </code></pre></div><p>可以看到 router 类的框架特别轻量级，而且很适合写 rest api 接口。</p>
