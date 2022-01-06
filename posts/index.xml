@@ -9,7 +9,19 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 05 Jan 2022 10:20:39 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jan 2022 10:29:52 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>修复 Vscode Git Cannot Use Api Proposal ScmValidation</title>
+      <link>https://zhenfeng-zhu.github.io/posts/fix-vscode-git-cannot-use-api-proposal-scmvalidation/</link>
+      <pubDate>Thu, 06 Jan 2022 10:29:52 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/fix-vscode-git-cannot-use-api-proposal-scmvalidation/</guid>
+      <description>问题表现 某天，我的 vscode 的 git 管理出现了问题。
+类似这个样子。
+解决方式 @builtin @id:vscode.git 直接卸载了。
+出现原因 应该是某个公司的插件给我自动装上导致的</description>
+    </item>
+    
     <item>
       <title>Gavin Wood: Web3 去中心化技术是维护自由民主的唯一希望</title>
       <link>https://zhenfeng-zhu.github.io/posts/what-is-web3/</link>
