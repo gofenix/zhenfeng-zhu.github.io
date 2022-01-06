@@ -70,6 +70,35 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>谈谈聊天机器人框架的实现原理
+</h2>
+</header>
+<section class=entry-content>
+<p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
+聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
+我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。
+机器人开发框架 作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。
+然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。
+使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。
+实现方式 webhook 事件回调 FSM 状态机 workflow 工作流 最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。
+那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。
+可能有人不是很懂有限状态机，这里做一下简单说明。
+有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。
+有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
+可以总结为：f(state, action) => state’
+也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。
+可以认为状态机是图灵完备的。
+我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
+我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。
+特点是：
+人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限 示例：
+const {startWith, when, goto, stay, stop} = botkit....</p>
+</section>
+<footer class=entry-footer><span title="2018-08-22 19:39:12 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>基于以太坊的 Parity 联盟链部署
 </h2>
 </header>
@@ -248,26 +277,6 @@ homebrew...</p>
 </section>
 <footer class=entry-footer><span title="2018-07-30 14:51:26 +0000 UTC">July 30, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to NATS streaming" href=https://zhenfeng-zhu.github.io/posts/nats-streaming/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>nats 简介
-</h2>
-</header>
-<section class=entry-content>
-<p>nats 是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC 和爱立信等公司都有在使用。
-核心基于 EventMachine 开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向 MessageBus 发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用 nats streaming 可以做到持久化，缓存等功能。
-NATS server nats 提供了一个 go 编写的轻量级服务器。发行版包括二进制和 docker 镜像
-NATS clients
-nats 官方提供的客户端有 Go，Node，Ruby，Java，C，C＃，NGINX 等。
-NATS 设计目标
-核心原则是性能，可伸缩和易用性。
-高效 始终在线和可用 非常轻巧 支持多种质量的服务 支持各种消息传递模型和使用场景 NATS 使用场景 nats 是一个简单且强大的消息系统，为支持现代云原生架构设计。由于可伸缩性的复杂性，nats 旨在容易使用和实现，且能提供多种质量的服务。
-一些适用 nats 的场景有：
-高吞吐量的消息分散 —— 少数的生产者需要将数据发送给很多的消费者。 寻址和发现 —— 将数据发送给特定的应用实例，设备或者用户，也可用于发现并连接到基础架构中的实例，设备或用户。 命令和控制（控制面板）—— 向程序或设备发送指令，并从程序/设备中接收状态，如 SCADA，卫星遥感，物联网等。 负载均衡 —— 主要应用于程序会生成大量的请求，且可动态伸缩程序实例。 N 路可扩展性 —— 通信基础架构能够充分利用 go 的高效并发/调度机制，以增强水平和垂直的扩展性。 位置透明 —— 程序在各个地理位置上分布者大量实例，且你无法了解到程序之间的端点配置详情，及他们所生产或消费的数据。 容错 使用 nats-streaming 的附加场景有：...</p>
-</section>
-<footer class=entry-footer><span title="2018-07-30 11:15:39 +0000 UTC">July 30, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to nats 简介" href=https://zhenfeng-zhu.github.io/posts/nats/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

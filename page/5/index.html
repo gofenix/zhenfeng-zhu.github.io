@@ -70,6 +70,21 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>crystal 简介
+</h2>
+</header>
+<section class=entry-content>
+<p>关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。
+Fast as C, Slick as Ruby
+语法 crystal 的语法和 Ruby 比较类似。
+# A very basic HTTP server require "http/server" server = HTTP::Server.new do |context| context.response.content_type = "text/plain" context.response.print "Hello world, got #{context.request.path}!" end puts "Listening on http://127.0.0.1:8080" server.listen(8080) 类型系统 crystal 的一大卖点就是静态类型系统，但是写起来又和脚本语言类似。
+def shout(x) # Notice that both Int32 and String respond_to `to_s` x.to_s.upcase end foo = ENV["FOO"]? || 10 typeof(foo) # => (Int32 | String) typeof(shout(foo)) # => String 空引用检查 crystal 可以在编译的时候检查空引用，避免出现空指针异常。...</p>
+</section>
+<footer class=entry-footer><span title="2019-08-27 02:14:18.124 +0000 UTC">August 27, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to crystal 简介" href=https://zhenfeng-zhu.github.io/posts/crystal%E7%AE%80%E4%BB%8B/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>socket
 </h2>
 </header>
@@ -255,35 +270,6 @@ faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这�
 </section>
 <footer class=entry-footer><span title="2018-08-23 15:14:02 +0000 UTC">August 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 区块链学习笔记" href=https://zhenfeng-zhu.github.io/posts/blockchain/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>谈谈聊天机器人框架的实现原理
-</h2>
-</header>
-<section class=entry-content>
-<p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
-聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
-我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。
-机器人开发框架 作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。
-然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。
-使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。
-实现方式 webhook 事件回调 FSM 状态机 workflow 工作流 最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。
-那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。
-可能有人不是很懂有限状态机，这里做一下简单说明。
-有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。
-有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
-可以总结为：f(state, action) => state’
-也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。
-可以认为状态机是图灵完备的。
-我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
-我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。
-特点是：
-人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限 示例：
-const {startWith, when, goto, stay, stop} = botkit....</p>
-</section>
-<footer class=entry-footer><span title="2018-08-22 19:39:12 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

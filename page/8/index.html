@@ -70,6 +70,27 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>译：vertx-kotlin-coroutine
+</h2>
+</header>
+<section class=entry-content>
+<p>尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。
+Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。
+vertx-lang-kotlin-coroutines 集成了 kotlin 协程，用于执行异步操作和处理事件。这样就能够以同步代码的模型编写代码，而且不会阻塞内核线程。
+简介 vert.x 与许多旧的应用平台相比的一个主要优势是它几乎完全是非阻塞的（内核线程）。这允许基于 vert.x 的程序使用极少数的内核线程处理大量的并发（例如：许多连接和消息），可以获得更好的伸缩性。
+vert.x 的非阻塞特性形成了非阻塞 API。非阻塞 API 可以采用多种形式来实现，包括回调函数，promise，fibers 或者响应式扩展。vert.x 的核心 API 使用回调函数的风格，但是它也支持其他模型，如 RxJava 1 和 2。
+在某些情况下，使用异步的 API 编程可能比使用经典的顺序代码风格更具有挑战性，特别是需要按照顺序完成若干操作。另外，使用异步 API 时，错误的传播也更为复杂。
+vertx-lang-kotlin-coroutines 使用协程。协程是非常轻量级的线程，而且不与底层的内核线程对应。所以当协程需要“阻塞”时，它会暂停并释放当前的内核线程，使得另一个协程可以处理事件。
+vertx-lang-kotlin-coroutines 使用 kotlinx.coroutines 来实现协程。
+vertx-lang-kotlin-coroutines 目前仅适用于 kotlin，而且是 kotlin1.1 的一个实验特性。
+从一个 vertx.x 的 contex 中启动协程 导入 io.vertx.kotlin.coroutines.VertxCoroutine，launch（协程生成器）方法中允许运行一段代码作为可以暂停的协程：
+val vertx = Vertx.vertx() vertx.deployVerticle(ExampleVerticle()) launch(vertx.dispatcher()) { val timerId = awaitEvent&lt;Long> { handler -> vertx....</p>
+</section>
+<footer class=entry-footer><span title="2018-06-02 16:00:52 +0000 UTC">June 2, 2018</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 译：vertx-kotlin-coroutine" href=https://zhenfeng-zhu.github.io/posts/vertx-kotlin-coroutine/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>小议 async/await 和 coroutine
 </h2>
 </header>
@@ -228,17 +249,6 @@ rxjava rxjava 我都没有找到一个系统的教程，不知道该从哪里学
 </section>
 <footer class=entry-footer><span title="2018-04-05 09:49:06 +0000 UTC">April 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 技术栈" href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>同步一个 fork
-</h2>
-</header>
-<section class=entry-content>
-<p>具体方法 Configuring a remote for a fork 给 fork 配置一个 remote 主要使用 git remote -v 查看远程状态。 git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) 添加一个将被同步给 fork 远程的上游仓库 git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git 再次查看状态确认是否配置成功。 git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch) # upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push) Syncing a fork 从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master git fetch upstream git fetch upstream # remote: Counting objects: 75, done....</p>
-</section>
-<footer class=entry-footer><span title="2018-04-04 16:01:31 +0000 UTC">April 4, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 同步一个 fork" href=https://zhenfeng-zhu.github.io/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

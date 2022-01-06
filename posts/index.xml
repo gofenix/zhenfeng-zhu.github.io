@@ -9,7 +9,19 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 06 Jan 2022 10:29:52 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jan 2022 10:41:45 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thrfit 入门</title>
+      <link>https://zhenfeng-zhu.github.io/posts/thrfit-get-started/</link>
+      <pubDate>Thu, 06 Jan 2022 10:41:45 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/thrfit-get-started/</guid>
+      <description>本文主要介绍 Thrift 的 IDL 基本语法。
+ IDL Thrift 采用 IDL（Interface Definition Language）来定义通用的服务接口，然后通过 Thrift 提供的编译器，可以将服务接口编译成不同语言编写的代码，通过这个方式来实现跨语言的功能。
+基本类型 thrift基本支持所有的 Java 基本类型以及引用类型。
+ bool  布尔值，对应 java 中的 boolean   byte  有符号字节，对应 java 中的 byte   i16  16 位有符号整型，对应 java 中的 short   i32  32 位有符号整型，对应 java 中的 int   i64  64 位有符号整型，对应 java 中的 long   double  64 位浮点型，对应 java 中的 double   string  字符串，对应 java 中的 String   binary  对应 java 中的 byte[]    struct 结构体 struct 有以下的一些约束：</description>
+    </item>
+    
     <item>
       <title>修复 Vscode Git Cannot Use Api Proposal ScmValidation</title>
       <link>https://zhenfeng-zhu.github.io/posts/fix-vscode-git-cannot-use-api-proposal-scmvalidation/</link>

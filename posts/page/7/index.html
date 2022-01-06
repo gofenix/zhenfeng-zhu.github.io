@@ -72,6 +72,26 @@
 <h1>Posts</h1>
 </header>
 <article class=post-entry>
+<header class=entry-header>
+<h2>nats 简介
+</h2>
+</header>
+<section class=entry-content>
+<p>nats 是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC 和爱立信等公司都有在使用。
+核心基于 EventMachine 开发，原理是基于消息发布订阅机制，每台服务器上的每个模块会根据自己的消息类别向 MessageBus 发布多个消息主题，而同时也向自己需要交互的模块，按照需要的主题订阅消息。能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。使用 nats streaming 可以做到持久化，缓存等功能。
+NATS server nats 提供了一个 go 编写的轻量级服务器。发行版包括二进制和 docker 镜像
+NATS clients
+nats 官方提供的客户端有 Go，Node，Ruby，Java，C，C＃，NGINX 等。
+NATS 设计目标
+核心原则是性能，可伸缩和易用性。
+高效 始终在线和可用 非常轻巧 支持多种质量的服务 支持各种消息传递模型和使用场景 NATS 使用场景 nats 是一个简单且强大的消息系统，为支持现代云原生架构设计。由于可伸缩性的复杂性，nats 旨在容易使用和实现，且能提供多种质量的服务。
+一些适用 nats 的场景有：
+高吞吐量的消息分散 —— 少数的生产者需要将数据发送给很多的消费者。 寻址和发现 —— 将数据发送给特定的应用实例，设备或者用户，也可用于发现并连接到基础架构中的实例，设备或用户。 命令和控制（控制面板）—— 向程序或设备发送指令，并从程序/设备中接收状态，如 SCADA，卫星遥感，物联网等。 负载均衡 —— 主要应用于程序会生成大量的请求，且可动态伸缩程序实例。 N 路可扩展性 —— 通信基础架构能够充分利用 go 的高效并发/调度机制，以增强水平和垂直的扩展性。 位置透明 —— 程序在各个地理位置上分布者大量实例，且你无法了解到程序之间的端点配置详情，及他们所生产或消费的数据。 容错 使用 nats-streaming 的附加场景有：...</p>
+</section>
+<footer class=entry-footer><span title="2018-07-30 11:15:39 +0000 UTC">July 30, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to nats 简介" href=https://zhenfeng-zhu.github.io/posts/nats/></a>
+</article>
+<article class=post-entry>
 <figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
 </figure>
 <header class=entry-header>
@@ -230,27 +250,6 @@ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e "zhisheng\ntian" > test
 </section>
 <footer class=entry-footer><span title="2018-06-21 17:49:46 +0000 UTC">June 21, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to kafka" href=https://zhenfeng-zhu.github.io/posts/kafka/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>译：vertx-kotlin-coroutine
-</h2>
-</header>
-<section class=entry-content>
-<p>尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。
-Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。
-vertx-lang-kotlin-coroutines 集成了 kotlin 协程，用于执行异步操作和处理事件。这样就能够以同步代码的模型编写代码，而且不会阻塞内核线程。
-简介 vert.x 与许多旧的应用平台相比的一个主要优势是它几乎完全是非阻塞的（内核线程）。这允许基于 vert.x 的程序使用极少数的内核线程处理大量的并发（例如：许多连接和消息），可以获得更好的伸缩性。
-vert.x 的非阻塞特性形成了非阻塞 API。非阻塞 API 可以采用多种形式来实现，包括回调函数，promise，fibers 或者响应式扩展。vert.x 的核心 API 使用回调函数的风格，但是它也支持其他模型，如 RxJava 1 和 2。
-在某些情况下，使用异步的 API 编程可能比使用经典的顺序代码风格更具有挑战性，特别是需要按照顺序完成若干操作。另外，使用异步 API 时，错误的传播也更为复杂。
-vertx-lang-kotlin-coroutines 使用协程。协程是非常轻量级的线程，而且不与底层的内核线程对应。所以当协程需要“阻塞”时，它会暂停并释放当前的内核线程，使得另一个协程可以处理事件。
-vertx-lang-kotlin-coroutines 使用 kotlinx.coroutines 来实现协程。
-vertx-lang-kotlin-coroutines 目前仅适用于 kotlin，而且是 kotlin1.1 的一个实验特性。
-从一个 vertx.x 的 contex 中启动协程 导入 io.vertx.kotlin.coroutines.VertxCoroutine，launch（协程生成器）方法中允许运行一段代码作为可以暂停的协程：
-val vertx = Vertx.vertx() vertx.deployVerticle(ExampleVerticle()) launch(vertx.dispatcher()) { val timerId = awaitEvent&lt;Long> { handler -> vertx....</p>
-</section>
-<footer class=entry-footer><span title="2018-06-02 16:00:52 +0000 UTC">June 2, 2018</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 译：vertx-kotlin-coroutine" href=https://zhenfeng-zhu.github.io/posts/vertx-kotlin-coroutine/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

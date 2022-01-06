@@ -73,6 +73,19 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Blockchain 数据结构分析
+</h2>
+</header>
+<section class=entry-content>
+<p>区块 想要了解区块到底是什么，最简单快捷的方法就是分析它的数据结构，以 bitcoin 种的区块为例：
+{ "hash":"00000000000000000018b0a6ae560fa33c469b6528bc9e0fb0c669319a186c33", "confirmations":1009, "strippedsize":956228, "size":1112639, "weight":3981323, "height":514095, "version":536870912, "versionHex":"20000000", "merkleroot":"5f8f8e053fd4c0c3175c10ac5189c15e6ba218909319850936fe54934dcbfeac", "tx":[ // ... 　], "time":1521380124, "mediantime":1521377506, "nonce":3001236454, "bits":"17514a49", "difficulty":3462542391191.563, "chainwork":"0000000000000000000000000000000000000000014d2b41a340e60b72292430", "previousblockhash":"000000000000000000481ab128418847dc25db4dafec464baa5a33e66490990b", "nextblockhash":"0000000000000000000c74966205813839ad1c6d55d75f95c9c5f821db9c3510" } 在这个 Block 的结构体中，previousblockhash 和 merkleroot 是两个最重要的字段；前者是一个哈希指针，它其实是前一个 Block 的哈希，通过 previousblockhash 我们能递归地找到全部的 Block，也就是整条主链，后者是一个 Merkle 树的根，Merkle 树中包含整个 Block 中的全部交易，通过保存 merkleroot，我们可以保证当前 Block 中任意交易都不会被修改。 Ethereum 的区块链模型虽然与 Bitcoin 有非常大的不同，但是它的 Block 结构中也有着类似的信息：
+{ "jsonrpc":"2.0", "result":{ "author":"0x00d8ae40d9a06d0e7a2877b62e32eb959afbe16d", "difficulty":"0x785042b0", "extraData":"0x414952412f7630", "gasLimit":"0x47b784", "gasUsed":"0x44218a", "hash":"0x4de91e4af8d135e061d50ddd6d0d6f4119cd0f7062ebe8ff2d79c5af0e8344b9", "logsBloom":"0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "miner":"0x00d8ae40d9a06d0e7a2877b62e32eb959afbe16d", "mixHash":"0xb8155224974967443d8b83e484402fb6e1e18ff69a8fc5acdda32f2bcc6dd443", "nonce":"0xad14fb6803147c7c", "number":"0x2000f1", "parentHash":"0x31919e2bf29306778f50bbc376bd490a7d056ddfd5b1f615752e79f32c7f1a38", "receiptsRoot":"0xa2a7af5e3b9e1bbb6252ba82a09302321b8f0eea7ec8e3bb977401e4f473e672", "sealFields":[ "0xa0b8155224974967443d8b83e484402fb6e1e18ff69a8fc5acdda32f2bcc6dd443", "0x88ad14fb6803147c7c" ], "sha3Uncles":"0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347", "size":"0x276", "stateRoot":"0x87e7e54cf229003014f453d64f0344e2ba4fc7ee3b95c7dd2642cca389fa1efe", "timestamp":"0x5a10968a", "totalDifficulty":"0x1804de0c47ffe1", "transactions":[....</p>
+</section>
+<footer class=entry-footer><span title="2022-01-04 10:04:05 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Blockchain 数据结构分析" href=https://zhenfeng-zhu.github.io/posts/blockchain-schema/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>轻服务 nodejs 助力爬虫 web3
 </h2>
 </header>
@@ -231,18 +244,6 @@ Docker CE for Mac/Windows 边缘版。 Docker CE for Linux 注意：作为最后
 </section>
 <footer class=entry-footer><span title="2021-03-30 09:53:12 +0800 +0800">March 30, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Openfaas Workshop" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Streaming 101
-</h2>
-</header>
-<section class=entry-content>
-<p> 有效的复杂系统总是从简单
-</p>
-</section>
-<footer class=entry-footer><span title="2021-03-26 14:11:29 +0800 +0800">March 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Streaming 101" href=https://zhenfeng-zhu.github.io/posts/streaming-101/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
