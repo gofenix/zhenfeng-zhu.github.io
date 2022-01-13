@@ -9,7 +9,26 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 13 Jan 2022 10:11:25 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Jan 2022 10:26:48 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chapter1</title>
+      <link>https://zhenfeng-zhu.github.io/posts/chapter1/</link>
+      <pubDate>Thu, 13 Jan 2022 10:26:48 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/chapter1/</guid>
+      <description>构建、运行和 REPL 在本章中，你将预先投入少量时间来熟悉建立和运行Clojure程序的快速、傻瓜式方法。让一个真正的程序运行起来感觉很好。达到了这个里程碑，你就可以自由地进行实验，分享你的工作，并向那些仍在使用上个世纪的语言的同事幸灾乐祸。这将有助于保持你的积极性!
+你还将学习如何使用*Read-Eval-Print Loop（REPL）*在一个正在运行的Clojure进程中即时运行代码，这使你能够快速测试你对语言的理解并更有效地学习。
+但首先，我将简要地介绍Clojure。接下来，我将介绍Leiningen，这是Clojure事实上的标准构建工具。在本章结束时，你将知道如何做以下事情。
+ 用Leiningen创建一个新的Clojure项目 构建该项目以创建一个可执行的JAR文件 执行JAR文件 在Clojure REPL中执行代码  First Things First: 什么是Clojure？ Clojure是由Rich Hickey在一座神话般的火山中铸造的。他使用Lisp、函数式编程和他自己的一绺史诗般的头发的合金，创造了一种令人愉快而强大的语言。它的Lisp遗产使你有能力写出比大多数非Lisp语言更有表现力的代码，而它对函数式编程的独特理解将使你作为一个程序员的思维更敏锐。此外，Clojure为你提供了更好的工具来处理复杂的领域（如并发编程），这些领域在传统上被认为会使开发人员陷入多年的治疗中。
+不过，在谈论Clojure时，重要的是要牢记Clojure语言和Clojure编译器之间的区别。Clojure语言是一种强调功能的Lisp方言，其语法和语义与任何实现都无关。编译器是一个可执行的JAR文件，clojure.jar，它接收用Clojure语言编写的代码并将其编译为Java虚拟机（JVM）字节码。你会看到Clojure被用来指代语言和编译器，如果你不知道它们是独立的东西，就会感到困惑。但现在你意识到了，你就会好起来。
+这种区分是必要的，因为与大多数编程语言如Ruby、Python、C和其他许多语言不同，Clojure是一种托管语言。Clojure程序在JVM中执行，并依赖JVM的核心功能，如线程和垃圾收集。Clojure还针对JavaScript和微软的通用语言运行时（CLR），但本书只关注JVM的实现。
+稍后我们将更多地探讨Clojure和JVM之间的关系，但现在你需要了解的主要概念是这些。
+ JVM进程执行Java字节码。 通常情况下，Java编译器从Java源代码中产生Java字节码。 JAR文件是Java字节码的集合。 Java程序通常以JAR文件分发。 Java程序clojure.jar 读取Clojure源代码并产生Java字节码。 然后，该Java字节码由已经运行clojure.jar的同一JVM进程执行。  Clojure继续发展。截至目前，Clojure的版本为1.9.0，开发工作正在进行中。如果你在遥远的未来读到这本书，并且Clojure有更高的版本号，不要担心！这本书涵盖了Clojure的所有内容。本书涵盖了Clojure的基础知识，这些知识在不同的版本中应该不会改变。没有必要让你的机器人管家把这本书退回给书店。
+现在你知道什么是Clojure了，让我们来实际构建一个该死的Clojure程序吧! 使用www.DeepL.com/Translator翻译（免费版）
+lein new app clojure-noob 这个命令应该创建一个与此相似的目录结构（如果有一些差异也没关系）。
+| .gitignore | doc | | intro.md ➊ | project.clj | README.md ➋ | resources | src | | clojure_noob ➌ | | | core.clj ➍ | test | | clojure_noob | | | core_test.</description>
+    </item>
+    
     <item>
       <title>Introduction</title>
       <link>https://zhenfeng-zhu.github.io/posts/introduction/</link>
@@ -29,7 +48,7 @@
 第二章：如何使用Emacs，一个优秀的Clojure编辑器
 快速的反馈回路对学习至关重要。在这一章中，我从头开始介绍Emacs，以保证你有一个高效的Emacs/Clojure工作流程。
 第二部分：语言基础 这些章节为你继续学习Clojure奠定了坚实的基础。你将从学习Clojure的基础知识（语法、语义和数据结构）开始，这样你就可以做事情。然后，你将退一步详细研究Clojure最常用的函数，并学习如何使用函数式编程*的思维方式来解决这些问题。
-第三章：做事情。Clojure速成班
+第三章：做事情：Clojure速成班
 在这里，你将开始真正深入了解Clojure。这也是你需要关闭窗户的地方，因为你会开始大喊：&amp;quot;HOLY MOLEY THAT&amp;rsquo;S SPIFFY!&amp;quot;，而且直到你读完本书的索引才会停止。
 毫无疑问，你已经听说过Clojure令人敬畏的并发支持和其他了不起的功能，但Clojure最突出的特点是它是一种Lisp。你将探索这个Lisp核心，它由两部分组成：函数和数据。
 第4章：深入探讨核心函数
