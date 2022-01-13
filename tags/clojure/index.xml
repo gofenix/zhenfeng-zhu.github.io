@@ -11,7 +11,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 13 Jan 2022 17:39:28 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Chapter4</title>
+      <title>Chapter4 核心函数的深入研究</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter4/</link>
       <pubDate>Thu, 13 Jan 2022 17:39:28 +0800</pubDate>
       
@@ -29,7 +29,7 @@
     </item>
     
     <item>
-      <title>Chapter3</title>
+      <title>Chapter3 Clojure 速成班</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter3/</link>
       <pubDate>Thu, 13 Jan 2022 11:12:19 +0800</pubDate>
       
@@ -46,7 +46,7 @@
     </item>
     
     <item>
-      <title>Chapter2</title>
+      <title>Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter2/</link>
       <pubDate>Thu, 13 Jan 2022 10:43:56 +0800</pubDate>
       
@@ -61,7 +61,7 @@
     </item>
     
     <item>
-      <title>Chapter1</title>
+      <title>Chapter1 构建、运行和 REPL</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter1/</link>
       <pubDate>Thu, 13 Jan 2022 10:26:48 +0800</pubDate>
       
@@ -70,7 +70,7 @@
 你还将学习如何使用*Read-Eval-Print Loop（REPL）*在一个正在运行的 Clojure 进程中即时运行代码，这使你能够快速测试你对语言的理解并更有效地学习。
 但首先，我将简要地介绍 Clojure。接下来，我将介绍 Leiningen，这是 Clojure 事实上的标准构建工具。在本章结束时，你将知道如何做以下事情。
  用 Leiningen 创建一个新的 Clojure 项目 构建该项目以创建一个可执行的 JAR 文件 执行 JAR 文件 在 Clojure REPL 中执行代码  First Things First: 什么是 Clojure Clojure 是由 Rich Hickey 在一座神话般的火山中铸造的。他使用 Lisp、函数式编程和他自己的一绺史诗般的头发的合金，创造了一种令人愉快而强大的语言。它的 Lisp 遗产使你有能力写出比大多数非 Lisp 语言更有表现力的代码，而它对函数式编程的独特理解将使你作为一个程序员的思维更敏锐。此外，Clojure 为你提供了更好的工具来处理复杂的领域（如并发编程），这些领域在传统上被认为会使开发人员陷入多年的治疗中。
-不过，在谈论 Clojure 时，重要的是要牢记 Clojure 语言和 Clojure 编译器之间的区别。Clojure 语言是一种强调功能的 Lisp 方言，其语法和语义与任何实现都无关。编译器是一个可执行的 JAR 文件，clojure.jar，它接收用 Clojure 语言编写的代码并将其编译为 Java 虚拟机（JVM）字节码。你会看到Clojure被用来指代语言和编译器，如果你不知道它们是独立的东西，就会感到困惑。但现在你意识到了，你就会好起来。
+不过，在谈论 Clojure 时，重要的是要牢记 Clojure 语言和 Clojure 编译器之间的区别。Clojure 语言是一种强调函数的 Lisp 方言，其语法和语义与任何实现都无关。编译器是一个可执行的 JAR 文件，clojure.jar，它接收用 Clojure 语言编写的代码并将其编译为 Java 虚拟机（JVM）字节码。你会看到Clojure被用来指代语言和编译器，如果你不知道它们是独立的东西，就会感到困惑。但现在你意识到了，你就会好起来。
 这种区分是必要的，因为与大多数编程语言如 Ruby、Python、C 和其他许多语言不同，Clojure 是一种托管语言。Clojure 程序在 JVM 中执行，并依赖 JVM 的核心功能，如线程和垃圾收集。Clojure 还针对 JavaScript 和微软的通用语言运行时（CLR），但本书只关注 JVM 的实现。</description>
     </item>
     
