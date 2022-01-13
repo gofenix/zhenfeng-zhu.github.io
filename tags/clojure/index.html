@@ -73,6 +73,25 @@
 </header>
 <article class="post-entry tag-entry">
 <header class=entry-header>
+<h2>Chapter3
+</h2>
+</header>
+<section class=entry-content>
+<p>做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的特点是它是一种 Lisp 语言。在本章中，你将探索构成这个 Lisp 核心的元素：语法、函数和数据。它们将共同为你在 Clojure 中表示和解决问题打下坚实的基础。
+在打下这个基础之后，你将能够编写一些超级重要的代码。在最后一节中，你将通过创建一个霍比特人的模型，并编写一个函数将其打在一个随机的位置上，从而将一切联系起来。超级! 重要的!
+当你阅读本章时，我建议你在 REPL 中输入例子并运行它们。用一种新的语言编程是一种技能，就像约德尔舞或花样游泳一样，你必须通过练习来学习它。 请留意它!
+语法 Clojure 的语法很简单。像所有的 Lisp 一样，它采用了统一的结构、少量的特殊运算符，以及从藏在麻省理工学院下面的小括号矿井中不断提供的小括号，Lisp 就是在那里诞生的。
+形式 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。
+数据结构的字面表示（如数字、字符串、地图和向量） 操作 我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure 形式。但不要太纠结于术语。Clojure 评价每一个表单，以产生一个值。这些字面表达都是有效的形式。
+1 "a string" ["a" "vector" "of" "strings"] 当然，你的代码很少包含自由浮动的字元，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的形式都是：*开括号，*操作符，*操作数，闭括号。
+(operator operand1 operand2 ... operandn) 请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。
+(+ 1 2 3) ; => 6 (str "It was the panda " "in the library " "with a dust buster") ; => "It was the panda in the library with a dust buster" 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种形式都是有效的。这里有一个不是形式的东西，因为它没有一个结束的小括号。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-13 11:12:19 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter3" href=https://zhenfeng-zhu.github.io/posts/chapter3/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
 <h2>Chapter2
 </h2>
 </header>

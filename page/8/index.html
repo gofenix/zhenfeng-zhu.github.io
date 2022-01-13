@@ -69,6 +69,17 @@
 </header>
 <main class=main>
 <article class=post-entry>
+<header class=entry-header>
+<h2>ubuntu-docker-sudo
+</h2>
+</header>
+<section class=entry-content>
+<p>sudo chown "$USER":"$USER" /home/"$USER"/.docker -R sudo chmod g+rwx "/home/$USER/.docker" -R https://api.finochat.com/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI http://localhost:3000/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI </p>
+</section>
+<footer class=entry-footer><span title="2018-06-29 13:54:25 +0000 UTC">June 29, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to ubuntu-docker-sudo" href=https://zhenfeng-zhu.github.io/posts/ubuntu-docker-sudo/></a>
+</article>
+<article class=post-entry>
 <figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
 </figure>
 <header class=entry-header>
@@ -244,23 +255,6 @@ git rvm</p>
 </section>
 <footer class=entry-footer><span title="2018-05-14 10:04:02 +0000 UTC">May 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to git 常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>node 的 cluster
-</h2>
-</header>
-<section class=entry-content>
-<p>我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。
-一个问题就是：
-如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。
-1 cluster 是什么 简单来说：
-在服务器上同时启动多个进程。 每个进程都跑的是同一份源码。 这些进程可以同时监听一个端口。 其中：
-负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。 以下是官方文档的一个例子：
-const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i &lt; numCPUs; i++) { cluster....</p>
-</section>
-<footer class=entry-footer><span title="2018-05-05 15:45:47 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to node 的 cluster" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

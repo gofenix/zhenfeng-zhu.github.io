@@ -73,6 +73,20 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>mysql 的学习
+</h2>
+</header>
+<section class=entry-content>
+<p>SQL 条件语句 IF if(exp1, exp2, exp3)
+exp1 是条件，条件为 true 的话，是 exp2，否则是 exp3
+case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNULL IFNULL(exp1, exp2)
+在 exp1 的值不为 null 的情况下，返回 exp1，如果 exp1 位 null，返回 exp2 的值。</p>
+</section>
+<footer class=entry-footer><span title="2020-04-16 17:34:30 +0800 +0800">April 16, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to mysql 的学习" href=https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>clickhouse
 </h2>
 </header>
@@ -221,25 +235,6 @@ binlog 归档日志 binlog 是 server 层实现的，所有的引擎都可以使
 </section>
 <footer class=entry-footer><span title="2018-12-01 15:54:53 +0000 UTC">December 1, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to mysql" href=https://zhenfeng-zhu.github.io/posts/mysql/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>graphql
-</h2>
-</header>
-<section class=entry-content>
-<p>graphql 经常被认为是聚焦于前端的技术。
-核心概念 SDL：schema definition language（模式定义语言） 如：
-type Person{ name: String! age: Int! } 这个类型有两个字段，name 和 age，他们的类型是 String 和 Int。！的意思代表他们是必需的。
-type Post{ title: String! author: Person! } 接下来的 Post 也有两个字段，其中 Person 也是可以作为一个类型。
-也可以这样，在 Person 中添加一个 post：
-type Person{ name: String! age: Int! posts: [Post!]! } 通过 Query 获取数据 基本查询 客户端发送下面的数据给服务器
-{ allPersons { name } } allPersons 是根字段（root field），它下面的成为查询的 payload，这里仅包含了一个 name。
-服务器返回的结果会是这样的：
-{ "allPersons": [ { "name": "Johnny" }, { "name": "Sarah" }, { "name": "Alice" } ] } 可以看到只返回了 name 字段，age 字段是不会返回的。...</p>
-</section>
-<footer class=entry-footer><span title="2018-11-08 18:28:13 +0000 UTC">November 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to graphql" href=https://zhenfeng-zhu.github.io/posts/graphql/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

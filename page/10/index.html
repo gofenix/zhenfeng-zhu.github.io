@@ -70,6 +70,21 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Spring Boot 启动原理分析
+</h2>
+</header>
+<section class=entry-content>
+<p>Spring Boot 启动原理分析 我们在开发 spring boot 应用的时候，一般会遇到如下的启动类：
+@SpringBootApplication public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } } 从这段代码可以看出，注解@SpringBootApplication 和 SpringApplication.run()是比较重要的两个东西。
+1 @SpringApplication 注解 @Target(ElementType.TYPE) @Retention(RetentionPolicy.RUNTIME) @Documented @Inherited @SpringBootConfiguration @EnableAutoConfiguration @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class), @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) }) public @interface SpringBootApplication { ... } 在这段代码里，比较重要的只有三个注解：
+@Configuration（@SpringBootConfiguration 点开查看发现里面还是应用了@Configuration） @EnableAutoConfiguration @ComponentScan 其实，我们使用这三个注解来修饰 springboot 的启动类也可以正常运行,如下所示：
+@ComponentScan @EnableAutoConfiguration @Configuration public class DemoApplication { public static void main(String[] args) { SpringApplication....</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 19:03:22 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Spring Boot 启动原理分析" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Spring Data Jpa 实战
 </h2>
 </header>
@@ -220,34 +235,6 @@ pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 d
 </section>
 <footer class=entry-footer><span title="2018-03-24 17:53:42 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 领域实体类" href=https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>docker
-</h2>
-</header>
-<section class=entry-content>
-<p>docker 常用命令 docker 获取镜像
-docker pull
-新建并启动
-docker run
-列出镜像
-docker image ls
-docker images
-删除虚悬镜像
-docker image prune
-删除本地镜像
-docker iamge rm
-查看应用信息
-docker logs
-dockerfile 一般步骤 在一个目录里，新建一个文件，命名为 Dockerfile 在 Dockerfile 的目录内，执行 docker build 常用指令 FROM 指定基础镜像，且是第一条命令
-RUN 执行命令
-shell 格式
-exec 格式
-COPY 和 ADD 指令是复制文件...</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 17:42:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to docker" href=https://zhenfeng-zhu.github.io/posts/docker/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

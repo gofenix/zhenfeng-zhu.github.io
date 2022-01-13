@@ -70,6 +70,25 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>graphql
+</h2>
+</header>
+<section class=entry-content>
+<p>graphql 经常被认为是聚焦于前端的技术。
+核心概念 SDL：schema definition language（模式定义语言） 如：
+type Person{ name: String! age: Int! } 这个类型有两个字段，name 和 age，他们的类型是 String 和 Int。！的意思代表他们是必需的。
+type Post{ title: String! author: Person! } 接下来的 Post 也有两个字段，其中 Person 也是可以作为一个类型。
+也可以这样，在 Person 中添加一个 post：
+type Person{ name: String! age: Int! posts: [Post!]! } 通过 Query 获取数据 基本查询 客户端发送下面的数据给服务器
+{ allPersons { name } } allPersons 是根字段（root field），它下面的成为查询的 payload，这里仅包含了一个 name。
+服务器返回的结果会是这样的：
+{ "allPersons": [ { "name": "Johnny" }, { "name": "Sarah" }, { "name": "Alice" } ] } 可以看到只返回了 name 字段，age 字段是不会返回的。...</p>
+</section>
+<footer class=entry-footer><span title="2018-11-08 18:28:13 +0000 UTC">November 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to graphql" href=https://zhenfeng-zhu.github.io/posts/graphql/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>go-best-practice
 </h2>
 </header>
@@ -250,44 +269,6 @@ FROM docker.finogeeks.club/base/alpine MAINTAINER "zhuzhenfeng@finogeeks.club" R
 </section>
 <footer class=entry-footer><span title="2018-08-14 20:10:55 +0000 UTC">August 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to golang 踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>以太坊开发总结
-</h2>
-</header>
-<section class=entry-content>
-<p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
-在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
-什么是区块链
-相信大家对区块链都有自己的理解，不仅仅是互联网公司，传统企业也在“币改转型”。
-**简言之，区块链就是数据库。**它是特定数据的数据库，里面的数据不断增长，具有非凡特性：
-一旦数据存储于数据库，永远都无法被修改或删除。区块链上的每个记录会被永久保存下来。 没有单独的个人或组织能维护该数据库。必须要上千个人才行，每个人都有数据库的副本。 什么是以太坊？
-以太坊（英语：Ethereum）是一个开源的有智能合约功能的公共区块链平台[1][2]。通过其专用加密货币以太币（Ether，又称“以太币”）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。
-为什么选择以太坊？
-智能合约
-代币
-资料相对完善，相对容易开发
-大佬对以太坊比较熟悉
-大佬对以太坊比较熟悉
-大佬对以太坊比较熟悉
-重要的事情说三遍，有一个经验丰富的人带领，做东西肯定事半功倍。
-自己动手写区块链
-这里提供两个教程，一个是书，一个是视频。其中视频和书是对应的，不清楚是不是同一个作者。
-Blockchain Tutorial
-私有区块链，我们一起 GO
-以太坊开发
-由于我是专注于后端的开发，现在的技术栈是
-node go 正式进入以太坊的开发。这是我这段时间接触到的一些资源：
-go-ethereum：也就是 geth，官方的 go 版本的客户端
-solidity：智能合约编程语言
-truffle：智能合约的编程框架，基于 nodejs
-Ganache：启动了多个节点本地私链
-Rinkeby：以太坊测试链
-Etherscan：以太坊区块链浏览器，可以查询交易...</p>
-</section>
-<footer class=entry-footer><span title="2018-08-10 18:57:09 +0000 UTC">August 10, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

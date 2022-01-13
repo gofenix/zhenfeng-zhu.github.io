@@ -75,6 +75,30 @@
 <figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
 </figure>
 <header class=entry-header>
+<h2>Openfaas Workshop Lab10
+</h2>
+</header>
+<section class=entry-content>
+<p>Lab 10 - 高级函数 - 秘密 在开始本实验室之前，为你的文件创建一个新的文件夹。由于本实验室是建立在先前的实验室基础上的，因此请复制 lab5。
+$ cp -r lab5 lab10\ && cd lab10 使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。
+来自 Docker 文档。
+… 秘密是一团数据，如密码、SSH 私钥、SSL 证书或其他数据，不应通过网络传输或未经加密存储在 Docker 文件或应用程序的源代码中。
+这是一个比环境变量更安全的选择。环境变量更容易使用，但最适合于非保密的配置项目。 似乎很适合用于存储auth_token值。
+请参阅docs中关于秘密的更多信息和它的设计。
+创建一个秘密 秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-‘组成，并且必须以一个字母数字字符开始和结束
+从一个终端运行以下命令。
+echo -n &lt;auth_token> | faas-cli secret create auth-token 测试秘密是否被创建。
+faas-cli secret ls 注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
+kubectl get secret auth-token -n openfaas-fn -o json 注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。
+当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler....</p>
+</section>
+<footer class=entry-footer><span title="2022-01-04 13:44:12 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab10" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
+</figure>
+<header class=entry-header>
 <h2>Openfaas Workshop Lab9
 </h2>
 </header>
@@ -237,23 +261,6 @@ Type system review Make a review and possible formalisation of Crystal’s type 
 </section>
 <footer class=entry-footer><span title="2021-10-17 23:08:51 +0800 +0800">October 17, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Crystal 1.2 版本更新说明" href=https://zhenfeng-zhu.github.io/posts/crystal1.2/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>如何理解可观测性
-</h2>
-</header>
-<section class=entry-content>
-<p>可观测性 可观测性 ≠ 监控 核心不同
-监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分析。 维度不同
-监控是从外围的角度，通过各种指标（机器 CPU、负载、网络等维度）来判断整个系统的执行情况。 可观测性则在上述外部指标基础上，以应用内的各个维度来展开推测，通过二者的数据结合来真实的反应应用的运行情况。 展现的信息不同
-有些系统在正常运行时十分稳定，但是一到高并发就会出现问题，此时监控只能汇报问题出现的状况，而可观测性可以很好的通过图形化的方式告知我们问题的原因，不用我们通过经验来猜测。 可观测性打破了开发和运维的原有问题解决方式，不再是运维发现问题开发解决，而是以开发为中心。
-监控数据来源 端上访问
-用户体验监控 web 页面的白屏时间 dom 元素/资源加载耗时 文档网络耗时 app 卡顿率 崩溃率 热启动加载时长 日志 端到端 用户端到后端的请求状况，访问量、成功率、响应时间等。 还需要端上所处的地区、网络环境、响应状态码 可用率 访问是否可用、响应耗时长短的一些指标和 cdn、dns 等公共资源有关系。 应用程序
-执行情况 资源消耗 vm 指标监控 容量 服务关系 应用日志 健康情况 业务监控...</p>
-</section>
-<footer class=entry-footer><span title="2021-10-15 09:45:38 +0800 +0800">October 15, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 如何理解可观测性" href=https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

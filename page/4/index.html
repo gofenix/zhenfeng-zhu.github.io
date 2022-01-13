@@ -70,6 +70,22 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Github Action 自动部署 blog
+</h2>
+</header>
+<section class=entry-content>
+<p>之前我采用的方式是两个 github repo 的方式：
+一个叫 hugo-blog，用于存放 blog 的源文件
+一个叫 zhenfeng-zhu.github.io，用于存放生成之后的文件
+然后通过写一个 shell 脚本，将生成之后的文件推向 zhenfeng-zhu.github.io 仓库中，同时将 blog 的源文件也做了一个 backup。后来使用了一个 github action 的方式， 就不用在两个仓库中进行折腾，一切都由 github action 来做了。
+方案 设置 workflow 首先创建一个.github/workflows/gh-pages.yml
+name: github pages on: push: branches: - main # Set a branch to deploy jobs: deploy: runs-on: ubuntu-18.04 steps: - uses: actions/checkout@v2 with: submodules: true # Fetch Hugo themes (true OR recursive) fetch-depth: 0 # Fetch all history for .GitInfo and ....</p>
+</section>
+<footer class=entry-footer><span title="2021-02-18 13:20:11 +0800 +0800">February 18, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Github Action 自动部署 blog" href=https://zhenfeng-zhu.github.io/posts/hugo-github-action/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>编程语言的世界观
 </h2>
 </header>
@@ -221,20 +237,6 @@ parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, 
 </section>
 <footer class=entry-footer><span title="2020-04-16 17:59:03 +0800 +0800">April 16, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to hive 常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>mysql 的学习
-</h2>
-</header>
-<section class=entry-content>
-<p>SQL 条件语句 IF if(exp1, exp2, exp3)
-exp1 是条件，条件为 true 的话，是 exp2，否则是 exp3
-case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNULL IFNULL(exp1, exp2)
-在 exp1 的值不为 null 的情况下，返回 exp1，如果 exp1 位 null，返回 exp2 的值。</p>
-</section>
-<footer class=entry-footer><span title="2020-04-16 17:34:30 +0800 +0800">April 16, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to mysql 的学习" href=https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
