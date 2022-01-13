@@ -73,6 +73,20 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>node 踩坑
+</h2>
+</header>
+<section class=entry-content>
+<p>module 首先第一个就是 es6 的 module。
+看到别人写的
+import { a } from "./module"; 所以自己也想要这么写，但是每次运行的时候都会报错。
+// demo2.js export const a = "hello"; //demo1.js import { a } from "./demo2"; function hello() { console.log(a); } zhuzhenfengdeMacBook-Pro :: node/node-example » node demo1.js /Users/zhuzhenfeng/Documents/github/node/node-example/demo1.js:1 (function (exports, require, module, __filename, __dirname) { import { a } from "./demo2"; ^ SyntaxError: Unexpected token { at new Script (vm.js:74:7) at createScript (vm.js:246:10) at Object.runInThisContext (vm.js:298:10) at Module._compile (internal/modules/cjs/loader.js:646:28) at Object....</p>
+</section>
+<footer class=entry-footer><span title="2018-05-05 15:32:59 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to node 踩坑" href=https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>node 学习笔记
 </h2>
 </header>
@@ -216,19 +230,6 @@ interface User{ void login(); void logout(); } 在 java 中，继承的类必须
 </section>
 <footer class=entry-footer><span title="2018-03-24 19:03:22 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Spring Boot 启动原理分析" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Spring Data Jpa 实战
-</h2>
-</header>
-<section class=entry-content>
-<p>为了解决抽象各个 Java 实体基本的“增删改查”操作，我们通常会以泛型的方式封装一个模板 Dao 来进行抽象简化，但是这样依然不是很方便，我们需要针对每个实体编写一个继承自泛型模板 Dao 的接口，再编写该接口的实现。虽然一些基础的数据访问已经可以得到很好的复用，但是在代码结构上针对每个实体都会有一堆 Dao 的接口和实现。
-由于模板 Dao 的实现，使得这些具体实体的 Dao 层已经变的非常“薄”，有一些具体实体的 Dao 实现可能完全就是对模板 Dao 的简单代理，并且往往这样的实现类可能会出现在很多实体上。Spring-data-jpa 的出现正可以让这样一个已经很“薄”的数据访问层变成只是一层接口的编写方式。
-1 工程配置 1.1 pom &lt;?xml version="1.0" encoding="UTF-8"?> &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"> &lt;modelVersion>4.0.0&lt;/modelVersion> &lt;groupId>com.example&lt;/groupId> &lt;artifactId>jpa-demo&lt;/artifactId> &lt;version>0.0.1-SNAPSHOT&lt;/version> &lt;packaging>jar&lt;/packaging> &lt;name>jpa-demo&lt;/name> &lt;description>Demo project for Spring Boot&lt;/description> &lt;parent> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-parent&lt;/artifactId> &lt;version>1.5.9.RELEASE&lt;/version> &lt;relativePath/> &lt;!-- lookup parent from repository --> &lt;/parent> &lt;properties> &lt;project.build.sourceEncoding>UTF-8&lt;/project.build.sourceEncoding> &lt;project.reporting.outputEncoding>UTF-8&lt;/project.reporting.outputEncoding> &lt;java.version>1.8&lt;/java.version> &lt;/properties> &lt;dependencies> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-data-jpa&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-web&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>mysql&lt;/groupId> &lt;artifactId>mysql-connector-java&lt;/artifactId> &lt;scope>runtime&lt;/scope> &lt;/dependency> &lt;dependency> &lt;groupId>org....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 19:02:48 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Spring Data Jpa 实战" href=https://zhenfeng-zhu.github.io/posts/spring-data-jpa%E5%AE%9E%E6%88%98/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

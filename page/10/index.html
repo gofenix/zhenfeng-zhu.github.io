@@ -70,6 +70,19 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Spring Data Jpa 实战
+</h2>
+</header>
+<section class=entry-content>
+<p>为了解决抽象各个 Java 实体基本的“增删改查”操作，我们通常会以泛型的方式封装一个模板 Dao 来进行抽象简化，但是这样依然不是很方便，我们需要针对每个实体编写一个继承自泛型模板 Dao 的接口，再编写该接口的实现。虽然一些基础的数据访问已经可以得到很好的复用，但是在代码结构上针对每个实体都会有一堆 Dao 的接口和实现。
+由于模板 Dao 的实现，使得这些具体实体的 Dao 层已经变的非常“薄”，有一些具体实体的 Dao 实现可能完全就是对模板 Dao 的简单代理，并且往往这样的实现类可能会出现在很多实体上。Spring-data-jpa 的出现正可以让这样一个已经很“薄”的数据访问层变成只是一层接口的编写方式。
+1 工程配置 1.1 pom &lt;?xml version="1.0" encoding="UTF-8"?> &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"> &lt;modelVersion>4.0.0&lt;/modelVersion> &lt;groupId>com.example&lt;/groupId> &lt;artifactId>jpa-demo&lt;/artifactId> &lt;version>0.0.1-SNAPSHOT&lt;/version> &lt;packaging>jar&lt;/packaging> &lt;name>jpa-demo&lt;/name> &lt;description>Demo project for Spring Boot&lt;/description> &lt;parent> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-parent&lt;/artifactId> &lt;version>1.5.9.RELEASE&lt;/version> &lt;relativePath/> &lt;!-- lookup parent from repository --> &lt;/parent> &lt;properties> &lt;project.build.sourceEncoding>UTF-8&lt;/project.build.sourceEncoding> &lt;project.reporting.outputEncoding>UTF-8&lt;/project.reporting.outputEncoding> &lt;java.version>1.8&lt;/java.version> &lt;/properties> &lt;dependencies> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-data-jpa&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-web&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>mysql&lt;/groupId> &lt;artifactId>mysql-connector-java&lt;/artifactId> &lt;scope>runtime&lt;/scope> &lt;/dependency> &lt;dependency> &lt;groupId>org....</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 19:02:48 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Spring Data Jpa 实战" href=https://zhenfeng-zhu.github.io/posts/spring-data-jpa%E5%AE%9E%E6%88%98/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>spring boot 多数据源配置
 </h2>
 </header>
@@ -235,21 +248,6 @@ COPY 和 ADD 指令是复制文件...</p>
 </section>
 <footer class=entry-footer><span title="2018-03-24 17:42:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to docker" href=https://zhenfeng-zhu.github.io/posts/docker/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>express
-</h2>
-</header>
-<section class=entry-content>
-<p>Express 快速入门 安装 npm init npm install --save express hello world var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序
-node app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。
-express 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
-express --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
-DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。...</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 17:41:01 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to express" href=https://zhenfeng-zhu.github.io/posts/express/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

@@ -73,6 +73,27 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>clickhouse
+</h2>
+</header>
+<section class=entry-content>
+<p>ClickHouse ClickHouse 是一个用于联机分析（Online Analytical Processing：OLAP）的列式数据库管理系统(DBMS)。通过使用 OLAP 工具，用户能够从多个角度交互地分析多维数据。
+OLAP 由三个基本的分析操作组成：上卷（roll-up）、钻取（drill-down）、切片（slicing）和切块（dicing）。
+上卷（roll-up）：涉及可以在一个或多个维度中累积和计算的数据的聚合。例如，所有的销售办事处汇总到销售部门，以预测销售趋势。
+钻取（drill-down）：是一种允许用户浏览详细信息的技术。例如，用户可以查看组成一个地区销售额的单个产品的销售额。
+切片（slicing）和切块（dicing）：用户可以从 OLAP 多维数据集中取出（切片）一组特定的数据，并从不同的角度查看（切块）切片。这些角度有时被称为维度（例如按销售人员、按日期、按客户、按产品或按地区查看相同的销售情况等）。
+传统行式数据库中，处于同一行中的数据总是被物理的存在一起。列式数据库总是将同一列的数据存储在一起，不同列的数据分开存储。
+行式数据库：mysql，pg
+列式数据库：vertica，druid
+OLAP 的关键特征 大多是读请求 数据总是以相当大的批（>1000w）进行写入 不修改已经添加的数据 每次查询都从数据库中读取大量的行，但是同时又仅需要少量的列 宽表，即每个表包含大量的列 较少的查询（通常每台服务器每秒数百个查询或更少） 对于简单的查询，允许延迟大约 50ms 列中的数据相对较小：数字和短字符串 处理单个查询时需要高吞吐量（每个服务器每秒高达数十亿行） 事务不是必须的 对数据一致性要求低 每一个查询除了一个大表外都很小 查询结果明显小于数据源，换句话说，数据被过滤或者聚合之后能够被放在单台服务器的内存中 列式数据库更适合 OLAP 场景 Input/Output 分析类的查询，通常只需要读取表的一小部分列。 数据总是打包成批量读取，列压缩更容易 IO 降低了 CPU 由于执行一个查询需要处理大量的行，因此在整个向量上执行所有操作将比在每一行上执行所有操作更加高效。同时这将有助于实现一个几乎没有调用成本的查询引擎。
+向量引擎 代码生成 为了提高 CPU 效率，查询语言必须是声明型的(SQL 或 MDX)， 或者至少一个向量(J，K)。 查询应该只包含隐式循环，允许进行优化。
+clickhouse 的独特功能 真正的列式数据库管理系统 </p>
+</section>
+<footer class=entry-footer><span title="2019-10-12 06:48:01.338 +0000 UTC">October 12, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to clickhouse" href=https://zhenfeng-zhu.github.io/posts/clickhouse/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>每日学习 2
 </h2>
 </header>
@@ -219,24 +240,6 @@ type Person{ name: String! age: Int! posts: [Post!]! } 通过 Query 获取数据
 </section>
 <footer class=entry-footer><span title="2018-11-08 18:28:13 +0000 UTC">November 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to graphql" href=https://zhenfeng-zhu.github.io/posts/graphql/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>go-best-practice
-</h2>
-</header>
-<section class=entry-content>
-<p> 短变量名称在声明和上次使用之间的距离很短时效果很好。 长变量名称需要证明自己的合理性; 名称越长，需要提供的价值越高。冗长的名称与页面上的重量相比，信号量较小。 请勿在变量名称中包含类型名称。 常量应该描述它们持有的值，而不是该如何使用。 对于循环和分支使用单字母变量，参数和返回值使用单个字，函数和包级别声明使用多个单词 方法、接口和包使用单个词。 请记住，包的名称是调用者用来引用名称的一部分，因此要好好利用这一点。 变量的名称应描述其内容，而不是内容的类型。
-典型错误：
-var usersMap map[string]*User 如果users的描述性都不够用，那么usersMap也不会。
-声明变量但没有初始化时，请使用 var。
-在声明和初始化时，使用:=。
-关于变量和常量的注释应描述其内容而非其目的 任何既不明显也不简短的公共功能必须予以注释。 无论长度或复杂程度如何，对库中的任何函数都必须进行注释 在编写函数之前，请编写描述函数的注释。 如果你发现很难写出注释，那么这就表明你将要编写的代码很难理解。
-以包所提供的内容来命名，而不是它包含的内容。
-避免使用类似base，common或util的包名称 尽早return而不是深度嵌套 使用internal包来减少公共 API 不鼓励使用nil作为参数 首选可变参数函数而非[]T参数 通过消除错误来消除错误处理 使用github.com/pkg/errors包装errors 永远不要启动一个停止不了的 goroutine </p>
-</section>
-<footer class=entry-footer><span title="2018-11-07 17:16:07 +0000 UTC">November 7, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to go-best-practice" href=https://zhenfeng-zhu.github.io/posts/go-best-practice/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

@@ -72,6 +72,29 @@
 <figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
 </figure>
 <header class=entry-header>
+<h2>Openfaas Workshop Lab9
+</h2>
+</header>
+<section class=entry-content>
+<p>Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运作的。
+前提条件 在完成了Lab 1中对 OpenFaaS 的设置后，你将拥有触发自动扩展所需的一切。
+多个工具可以用来创建足够的流量来触发自动扩展 - 在这个例子中，`curl’将被使用，因为它很容易在 Mac 和 Linux 上使用，并在 Windows 上与 Git Bash 打包。
+自动扩展的背景 开箱即用的 OpenFaaS 是这样配置的，它将根据 Prometheus 测量的 每秒请求指标进行自动扩展。 这个指标是在流量通过 API 网关的时候捕获的。如果超过了定义的 每秒请求的阈值，AlertManager 就会启动。这个阈值应该被重新配置为适合生产使用的水平，因为在这个例子中，为了演示，它被设置为一个低值。
+在文档网站中找到更多关于自动缩放的信息。
+每次警报被 AlertManager 触发时，API 网关将把你的函数的一定数量的副本添加到集群中。OpenFaaS 有两个配置选项，允许指定复制的起始/最低数量，也允许停止复制的最大数量。
+你可以通过设置com.openfaas.scale.min来控制函数的最小复制量，目前默认值为1。
+你可以通过设置com.openfaas.scale.max来控制一个函数可以产生的最大复制量，目前默认值是20。
+注意: 如果你把com.openfaas.scale.min和com.openfaas.scale.max设置成相同的值，你就会禁用自动缩放函数。
+查看 Prometheus 你需要运行这个端口转发命令，以便能够在http://127.0.0.1:9090访问 Prometheus。
+kubectl port-forward deployment/prometheus 9090:9090 -n openfaas 现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code="200"} [20s])作为查询来实现。导致一个看起来像这样的页面。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-04 13:44:09 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab9" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab9/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
+</figure>
+<header class=entry-header>
 <h2>Openfaas Workshop Lab8
 </h2>
 </header>
@@ -228,24 +251,6 @@ Type system review Make a review and possible formalisation of Crystal’s type 
 </section>
 <footer class=entry-footer><span title="2021-10-15 09:45:38 +0800 +0800">October 15, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 如何理解可观测性" href=https://zhenfeng-zhu.github.io/posts/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>如何从零开始写一个静态网站生成器
-</h2>
-</header>
-<section class=entry-content>
-<p>我们常见的静态网站生成器有 Hugo、Hexo 等，程序员们经常会使用类似的工具去将自己的播客托管到 github pages。前段时间研究了一下实现的方式，用 Elixir 简单实现了一个版本。
-一个静态网站生成器的工作流程通常有如下几个步骤：
-读取源文件，一般是 markdown 格式的。 模板引擎的渲染 生成目标文件 接下来会从每个步骤来进行简单介绍。
-最终版本的请参考：https://github.com/zhenfeng-zhu/ego， 欢迎 pr 和 issue。
-极简 MVP 版本介绍 初始化 mix new ego 在 mix.exs 中添加依赖
-earmark 是将 markdown 转换为 html。 plug_cowboy 是提供本地预览 html 文件的 server。 json 是一个 json 解析库 指定以 escript 的方式启动 解析 markdown 文件 将一个 markdown 文件转为 html 也是比较简单的，首先读取，然后调用 Earmark.as_html!函数，就能将 markdown 转换为 html 了。
-eg.
-def gen_blogs(m) do m |> File.read!() |> Earmark....</p>
-</section>
-<footer class=entry-footer><span title="2021-07-23 09:33:18 +0800 +0800">July 23, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 如何从零开始写一个静态网站生成器" href=https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

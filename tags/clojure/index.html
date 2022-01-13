@@ -73,6 +73,41 @@
 </header>
 <article class="post-entry tag-entry">
 <header class=entry-header>
+<h2>Chapter2
+</h2>
+</header>
+<section class=entry-content>
+<p>如何使用Emacs，一个优秀的Clojure编辑器 在你掌握Clojure的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用Emacs，但你当然也可以使用任何你想要的编辑器。如果你不遵循本章中关于Emacs的详尽说明，或者你选择使用一个不同的编辑器，那么至少值得投入一些时间来设置你的编辑器，以便与REPL一起工作。我推荐的两个在社区中受到好评的替代品是Cursive和Nightcode。
+我推荐Emacs的原因是，它提供了与Clojure REPL的紧密集成，这使你可以在写作时立即尝试你的代码。这种紧密的反馈回路在学习Clojure和以后编写真正的Clojure程序时都很有用。Emacs也很适合与任何Lisp方言一起工作；事实上，Emacs是用一种叫做Emacs Lisp（elisp）的Lisp方言编写的。
+在本章结束时，你的Emacs设置将看起来像图2-1。
+图2-1: 使用Clojure的典型Emacs设置：一边是代码，另一边是REPL。
+为了达到这个目的，你将从安装Emacs开始，设置一个适合新人的Emacs配置。然后你将学习基础知识：如何打开、编辑和保存文件，以及如何使用基本的键绑定与Emacs进行交互。最后，你将学习如何实际编辑Clojure代码并与REPL进行交互。
+安装 你应该使用Emacs的最新主要版本，即Emacs 24，用于你工作的平台。
+OS X从*http://emacsformacosx.com*安装vanilla Emacs作为一个Mac应用程序。其他选项，如Aquamacs，应该是为了使Emacs更 “像Mac”，但从长远来看是有问题的，因为它们的设置与标准Emacs有很大的不同，以至于很难使用Emacs手册或跟随教程。 Ubuntu按照*https://launchpad.net/~cassou/+archive/emacs*上的说明。 Windows你可以在*Index of /gnu/emacs/windows找到一个二进制文件。在你下载并解压最新版本后，你可以在bin\runemacs.exe*下运行Emacs可执行文件。 安装完Emacs后，打开它。你应该看到类似图2-2的东西。
+图2-2：当你第一次打开Emacs时显示的屏幕
+欢迎来到Emacs的崇拜！你已经使Richard Stallman成为了Emacs的一员。你让Richard Stallman感到骄傲!
+配置 我创建了一个库，里面有为Clojure配置Emacs所需的所有文件，可在https://github.com/flyingmachine/emacs-for-clojure/archive/book1.zip。
+注意：这些工具一直在更新，所以如果下面的说明对你不起作用，或者你想使用最新的配置，请阅读GitHub - flyingmachine/emacs-for-clojure上的说明。
+按以下步骤删除你现有的Emacs配置并安装对Clojure友好的配置。
+关闭Emacs。
+删除*~/.emacs或~/.emacs.d*，如果它们存在的话。(Windows用户，你的Emacs文件可能在C:\Users\your_user_name\AppData\Roaming*。因此，举例来说，你可以删除C:\Users\jason\AppData\Roaming.emacs.d*）。这是Emacs寻找配置文件的地方，删除这些文件和目录将确保你从一个干净的地方开始。
+下载上面列出的Emacs配置压缩文件并解压。其内容应该是一个文件夹，emacs-for-clojure-book1。运行mv path/to/emacs-for-clojure-book1 ~/.emacs.d。 打开Emacs。
+当你打开Emacs时，你可能会看到大量的活动，因为Emacs正在下载一堆有用的软件包。一旦这些活动停止，继续前进，退出Emacs，然后再打开它。(如果你没有看到任何活动，那也没关系！退出并重新启动Emacs。退出并重新启动Emacs只是为了好玩）。在你这样做之后，你应该看到一个像图2-3那样的窗口。
+图2-3：Emacs在安装了你可爱的新配置后的样子
+现在我们已经设置好了一切，让我们来学习如何使用Emacs!
+Emacs逃逸舱口 在我们进入有趣的东西之前，你需要知道一个重要的Emacs键绑定：ctrl-G。这个键绑定可以退出你试图运行的任何Emacs命令。所以，如果事情进展不顺利，按住ctrl，按G，然后再试一次。它不会关闭Emacs，也不会使你失去任何工作；它只是取消你当前的行动。
+Emacs缓冲区 所有的编辑都发生在Emacs的*缓冲区中。当你第一次启动Emacs时，一个名为 “scratch“的缓冲区被打开。Emacs总是在窗口的底部显示当前缓冲区的名称，如图2-4所示。
+图2-4：Emacs会一直显示当前缓冲区的名称。
+默认情况下，*scratch*缓冲区处理括号和缩进的方式对Lisp开发来说是最理想的，但对编写纯文本却很不方便。让我们创建一个新的缓冲区，这样我们就可以在不发生意外的情况下进行游戏。要创建一个缓冲区，请这样做。
+按住ctrl键并按下X键。 2.松开ctrl键。 按B键。 我们可以用一个更紧凑的格式来表达同样的序列。 C-x b。
+执行这个按键序列后，你会在应用程序的底部看到一个提示，如图2-5所示。
+图2-5: 迷你缓冲区是Emacs提示你输入的地方。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-13 10:43:56 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter2" href=https://zhenfeng-zhu.github.io/posts/chapter2/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
 <h2>Chapter1
 </h2>
 </header>
@@ -85,7 +120,7 @@
 这种区分是必要的，因为与大多数编程语言如Ruby、Python、C和其他许多语言不同，Clojure是一种托管语言。Clojure程序在JVM中执行，并依赖JVM的核心功能，如线程和垃圾收集。Clojure还针对JavaScript和微软的通用语言运行时（CLR），但本书只关注JVM的实现。
 稍后我们将更多地探讨Clojure和JVM之间的关系，但现在你需要了解的主要概念是这些。
 JVM进程执行Java字节码。 通常情况下，Java编译器从Java源代码中产生Java字节码。 JAR文件是Java字节码的集合。 Java程序通常以JAR文件分发。 Java程序clojure.jar 读取Clojure源代码并产生Java字节码。 然后，该Java字节码由已经运行clojure.jar的同一JVM进程执行。 Clojure继续发展。截至目前，Clojure的版本为1.9.0，开发工作正在进行中。如果你在遥远的未来读到这本书，并且Clojure有更高的版本号，不要担心！这本书涵盖了Clojure的所有内容。本书涵盖了Clojure的基础知识，这些知识在不同的版本中应该不会改变。没有必要让你的机器人管家把这本书退回给书店。
-现在你知道什么是Clojure了，让我们来实际构建一个该死的Clojure程序吧! 使用www.DeepL.com/Translator翻译（免费版）
+现在你知道什么是Clojure了，让我们来实际构建一个该死的Clojure程序吧!
 lein new app clojure-noob 这个命令应该创建一个与此相似的目录结构（如果有一些差异也没关系）。
 | .gitignore | doc | | intro.md ➊ | project.clj | README.md ➋ | resources | src | | clojure_noob ➌ | | | core.clj ➍ | test | | clojure_noob | | | core_test....</p>
 </section>

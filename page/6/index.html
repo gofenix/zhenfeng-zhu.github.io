@@ -70,6 +70,24 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>go-best-practice
+</h2>
+</header>
+<section class=entry-content>
+<p> 短变量名称在声明和上次使用之间的距离很短时效果很好。 长变量名称需要证明自己的合理性; 名称越长，需要提供的价值越高。冗长的名称与页面上的重量相比，信号量较小。 请勿在变量名称中包含类型名称。 常量应该描述它们持有的值，而不是该如何使用。 对于循环和分支使用单字母变量，参数和返回值使用单个字，函数和包级别声明使用多个单词 方法、接口和包使用单个词。 请记住，包的名称是调用者用来引用名称的一部分，因此要好好利用这一点。 变量的名称应描述其内容，而不是内容的类型。
+典型错误：
+var usersMap map[string]*User 如果users的描述性都不够用，那么usersMap也不会。
+声明变量但没有初始化时，请使用 var。
+在声明和初始化时，使用:=。
+关于变量和常量的注释应描述其内容而非其目的 任何既不明显也不简短的公共功能必须予以注释。 无论长度或复杂程度如何，对库中的任何函数都必须进行注释 在编写函数之前，请编写描述函数的注释。 如果你发现很难写出注释，那么这就表明你将要编写的代码很难理解。
+以包所提供的内容来命名，而不是它包含的内容。
+避免使用类似base，common或util的包名称 尽早return而不是深度嵌套 使用internal包来减少公共 API 不鼓励使用nil作为参数 首选可变参数函数而非[]T参数 通过消除错误来消除错误处理 使用github.com/pkg/errors包装errors 永远不要启动一个停止不了的 goroutine </p>
+</section>
+<footer class=entry-footer><span title="2018-11-07 17:16:07 +0000 UTC">November 7, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to go-best-practice" href=https://zhenfeng-zhu.github.io/posts/go-best-practice/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>kubernetes
 </h2>
 </header>
@@ -270,24 +288,6 @@ Etherscan：以太坊区块链浏览器，可以查询交易...</p>
 </section>
 <footer class=entry-footer><span title="2018-08-10 18:57:09 +0000 UTC">August 10, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>以太坊
-</h2>
-</header>
-<section class=entry-content>
-<p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
-首先先把 go 的依赖下载下来：
-go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从 github 上拉下来代码。
-账户 以太坊的地址在离线状态下也可以创建到。
-创建账户有两种方式：
-以公钥和私钥的形式创建 func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return "", nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println("address: ", address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println("privateKey: ", privateKey) return address, nil } 这种方式一般用的比较少。
-以 keystore 的形式创建 keystore 会创建一个文件，这个文件如下所示：
-{ "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p>
-</section>
-<footer class=entry-footer><span title="2018-08-07 20:09:26 +0000 UTC">August 7, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 以太坊" href=https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
