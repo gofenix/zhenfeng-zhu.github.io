@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>clojure on Awesome Fenix</title>
+    <link>https://zhenfeng-zhu.github.io/tags/clojure/</link>
+    <description>Recent content in clojure on Awesome Fenix</description>
+    <image>
+      <url>https://zhenfeng-zhu.github.io/papermod-cover.png</url>
+      <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 13 Jan 2022 10:11:25 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction</title>
+      <link>https://zhenfeng-zhu.github.io/posts/introduction/</link>
+      <pubDate>Thu, 13 Jan 2022 10:11:25 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/introduction/</guid>
+      <description>简介 在你的内心深处，你一直都知道你注定要学习Clojure。 每当你高举着键盘，为一个难以理解的类层次结构而痛苦地哭泣时；每当你晚上躺在床上，为一个突变引起的海森堡虫而哭泣扰乱你的亲人时；每当一个竞赛条件使你拔掉更多你不断减少的头发时，你的某个秘密部分已经知道一定有一个更好的办法。
+现在，终于，你面前的教学材料将使你与你渴望已久的编程语言结合起来。
+学习一种新的编程语言：穿越四个迷宫的旅程 为了最大限度地发挥Clojure的作用，你需要在每个学习新语言的程序员面临的四个迷宫中找到自己的路。
+ 工具之林 友好而高效的编程环境使你能够轻松地尝试你的想法。你将学习如何设置你的环境。 语言之山 随着你的攀登，你将获得Clojure的语法、语义和数据结构方面的知识。你将学习如何使用最强大的编程工具之一&amp;ndash;宏，并学习如何利用Clojure的并发结构来简化你的生活。 神器之洞 在它的深处，你将学会构建、运行和发布你自己的程序，以及如何使用代码库。你还将学习Clojure与Java虚拟机（JVM）的关系。 心态的云堡 在其稀薄的空气中，你将了解Lisp和函数式编程的原因和方法。你将了解渗透在Clojure中的简单哲学，以及如何像Clojurist一样解决问题。  别搞错了，你要工作。但这本书会让你感觉到工作是令人振奋的，而不是疲惫的。这是因为本书遵循三个准则。
+ 它采取了甜点优先的方法，给你提供了你需要的开发工具和语言细节，以便立即开始玩真正的程序。 它假定你对JVM、函数式编程或Lisp没有经验。它详细地涵盖了这些主题，所以当你构建和运行Clojure程序时，你会对你正在做的事情感到自信。 它避开了 真实世界 的例子，而选择了更有趣的练习，如 攻击霍比特人 和 追踪闪亮的吸血鬼 。  到最后，你将能够使用Clojure&amp;ndash;现存的最令人兴奋和最有趣的编程语言之一!
+本书是如何组织的 本书分为三个部分，以便更好地指导你完成你的勇敢探索，勇敢的初出茅庐的Clojurist。
+第一部分：环境设置 为了保持动力和高效学习，你需要实际写代码和构建可执行文件。这些章节将带领你快速浏览你所需要的工具，以便轻松地编写程序。这样，你就可以专注于学习Clojure，而不是摆弄你的环境。
+第1章：构建、运行和REPL
+让一个真正的程序运行起来，有一种强大的激励作用。一旦你能做到这一点，你就可以自由地进行实验，而且你可以真正地分享你的工作
+在这短短的一章中，你将投入少量时间来熟悉建立和运行Clojure程序的快速方法。你将学习如何在一个正在运行的Clojure进程中使用读-评-印循环（REPL）来实验代码。这将收紧你的反馈回路，帮助你更有效地学习。
+第二章：如何使用Emacs，一个优秀的Clojure编辑器
+快速的反馈回路对学习至关重要。在这一章中，我从头开始介绍Emacs，以保证你有一个高效的Emacs/Clojure工作流程。
+第二部分：语言基础 这些章节为你继续学习Clojure奠定了坚实的基础。你将从学习Clojure的基础知识（语法、语义和数据结构）开始，这样你就可以做事情。然后，你将退一步详细研究Clojure最常用的函数，并学习如何使用函数式编程*的思维方式来解决这些问题。
+第三章：做事情。Clojure速成班
+在这里，你将开始真正深入了解Clojure。这也是你需要关闭窗户的地方，因为你会开始大喊：&amp;quot;HOLY MOLEY THAT&amp;rsquo;S SPIFFY!&amp;quot;，而且直到你读完本书的索引才会停止。
+毫无疑问，你已经听说过Clojure令人敬畏的并发支持和其他了不起的功能，但Clojure最突出的特点是它是一种Lisp。你将探索这个Lisp核心，它由两部分组成：函数和数据。
+第4章：深入探讨核心函数
+在这一章中，你将了解Clojure的几个基本概念。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你尝试它们时发生了什么。
+你还会看到你最需要的函数的使用例子。这将为你编写自己的代码以及阅读和学习其他人的项目打下坚实的基础。还记得我是如何提到追踪闪闪发光的吸血鬼的吗？你会在这一章中做到这一点（除非你已经在业余时间做到了）。
+第五章：函数式编程
+在这一章中，你将把你在函数和数据结构方面的具体经验与一种新的思维方式结合起来：函数式编程思维方式。你将通过构建席卷全国的最热门的新游戏来炫耀你的知识。Peg Thing!
+第6章：组织你的项目：一个图书管理员的故事
+本章解释了什么是命名空间，以及如何使用它们来组织你的代码。我不想透露太多，但它也涉及到一个国际奶酪大盗。
+第7章：Clojure炼金术：读取、评估和宏
+在这一章中，我们将退一步描述Clojure如何运行你的代码。这将给你一个概念性的结构，你需要真正理解Clojure是如何工作的，以及它与其他非Lisp语言有什么不同。有了这个结构，我将介绍宏，这是现有的最强大的工具之一。
+第8章：编写宏
+这一章彻底研究了如何编写宏，从基本的例子开始，并在复杂程度上有所提高。最后，你将戴上你的假想帽，假装你经营一家网上药水店，并使用宏来验证客户的订单。
+第三部分：高级主题 这些章节涵盖了Clojure的额外有趣的主题：并发、Java互操作和抽象。尽管你可以在不了解这些工具和概念的情况下编写程序，但它们在智力上是有价值的，并能给你作为一个程序员带来巨大的力量。人们说学习Clojure会让你成为一个更好的程序员，原因之一就是它让这些章节中涉及的概念变得易于理解和实际使用。
+第9章：并发和并行编程的神圣艺术
+在这一章中，你将了解什么是并发和并行，以及它们为什么重要。你将了解在编写并行程序时面临的挑战，以及Clojure的设计如何帮助缓解这些挑战。你将使用期货、延迟和承诺来安全地编写并行程序。
+第10章：Clojure形而上学。原子、Refs、Vars和拥抱僵尸
+本章详细介绍了Clojure管理状态的方法以及如何简化并发编程。你将学习如何使用原子、参考数和变量这三种管理状态的结构，并学习如何用pmap进行无状态的并行计算。还会有抱抱的僵尸。
+第11章：用core.async掌握并发进程
+在这一章中，你将思考宇宙中的一切是一台热狗售卖机的想法。我的意思是，你将学习如何为独立运行的进程系统建模，这些进程通过使用core.async库的通道相互通信。
+第12章：与JVM一起工作
+这一章就像一本短语书和Java大陆的文化介绍之间的交叉。它向你概述了什么是JVM，它如何运行程序，以及如何为它编译程序。它还向你简要介绍了常用的Java类和方法，并解释了如何在Clojure中与它们进行交互。不仅如此，它还向你展示了如何思考和理解Java，以便你能将任何Java库纳入你的Clojure程序中。
+第13章：用多方法、协议和记录创建和扩展抽象概念
+在第4章中，你了解到Clojure是以抽象的方式编写的。本章是对创建和实现你自己的抽象的世界的介绍。你将学习多方法、协议和记录的基础知识。</description>
+    </item>
+    
+    <item>
+      <title>Acknowledgments</title>
+      <link>https://zhenfeng-zhu.github.io/posts/acknowledgments/</link>
+      <pubDate>Thu, 13 Jan 2022 10:06:10 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/acknowledgments/</guid>
+      <description>鸣谢 有很多人帮助我诞生了这个奇怪的婴儿，我对他们的支持感到谦卑和感激。
+首先，感谢我的妻子杰西，她为这本书绘制了插图，使它具有我所希望的视觉特性。也感谢你的支持，感谢你在我处于疯狂的作家模式时容忍我。(附注：通过一本编程书的封面感谢我的妻子，感觉很奇怪。）
+感谢我在麦肯锡的朋友和同事，他们阅读了早期的修订稿并鼓励我继续写作。其中最重要的是Pat Shaughnessy、Alex Rothenberg、Thomas Newton、Jalil Fanaian、Chris Parker、Mark Daggett、Christian Lilley，以及Mike Morreale。你们都太伟大了；请搬到达勒姆。
+感谢我的朋友布里奇特-希勒（Bridget Hillyer）一直以来的支持和积极性。我总是觉得你是我的后盾，这对我来说意义重大。也感谢我的朋友乔-杰克逊，感谢他阅读、听我喋喋不休、提供反馈，并感谢他在我面前对其他人大谈这本书，让我感觉很酷。Alan Dipert，朋友，技术评论员，现在的同事，我向你表示万分感谢，感谢你出色的技术编辑，感谢你首先将我引入Clojure。
+我不知道是否每个作家都会不断地问自己：&amp;ldquo;我到底为什么要这样做？是否有人会读它？&amp;ldquo;但我肯定会这样做。因此，我想感谢所有在这本书的最初网络版本编写过程中写信给我并建议进行编辑的友好人士。这些积极的反馈使我感到有信心，我正在做一件有意义的事情。同样地，感谢所有购买Leanpub版本的人
+非常感谢Clojure社区领导人Eric Normand、David Nolen和Alex Miller对本书的积极宣传。在下一届Conj大会上见!
+最后，要感谢No Starch出版社的各位同仁，感谢你们对本书的帮助，使之成为我无比自豪的作品。感谢你们的高标准。感谢你们不断地促使本书更加清晰，甚至提出笑话。(Seph的 &amp;ldquo;蜡球 &amp;ldquo;编辑仍然让我开怀大笑。) Seph Kramer, Riley Hoffman, Hayley Baker, Alison Law, Tyler Ortman, Anne Marie Walker: 谢谢你们!</description>
+    </item>
+    
+    <item>
+      <title>Foreword</title>
+      <link>https://zhenfeng-zhu.github.io/posts/foreword/</link>
+      <pubDate>Thu, 13 Jan 2022 10:04:46 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/foreword/</guid>
+      <description>前言 当你阅读这本搞笑的书时，你会在某个时刻经历一个非常严肃的时刻。这是你向自己承认，在了解了一些Clojure之后，编程变得更加有趣的时刻。这也是你在这本书上的投资，包括金钱和时间，得到回报的时刻&amp;ndash;有兴趣。
+幽默与严肃性有一定的关系。对严肃的事情开玩笑是合适的，但只有在适当的时间过去之后。例如，当我想起我最喜欢的叔叔的最后一句话时，我花了很多年才能够破涕为笑。&amp;ldquo;拿着我的啤酒&amp;rdquo;。
+这本书的工作方式正好相反。它在严肃事件发生之前，甚至在严肃事件发生期间，适时地指出了真正有趣的事情&amp;ndash;那一刻你意识到你因为Clojure而更喜欢编程。它在做到这一点的同时，并没有掩盖你将要学习的Clojure编程的深层技术层面。
+这种方法令人耳目一新，因为我读过的大多数编程书籍都比骆驼的屁还干。我们很幸运，丹尼尔是一位出色的程序员和作家，他的妻子杰斯是一位同样出色的插图画家。我们特别幸运的是，他们两个都疯了，决定在完全相同的时间写一本书。
+Clojure是本书的主题，但在某种程度上它&amp;ndash;或者说它的创造者Rich Hickey&amp;ndash;也是作者之一，因为Clojure是有史以来最优雅的编程语言。就像早午餐的概念一样，Clojure是如此的优雅，以至于如果不以某种方式提高他们的水平，就很难告诉别人关于它的任何事情。
+优雅是编程语言家族中许多方言经常被赋予的品质，这些方言被统称为Lisp，Clojure就是其中之一。所有的Lisp都是由数学家John McCarthy在1958年做出的一系列简单而美丽的发现演变而来。
+自1958年以来，出现了许多Lisps和Lisp书籍。还有更多的Lisps和书籍即将问世。作为过去和未来的人工制品，每一种都适合它们的作者在各自的时代所面临的独特的约束和欲望的组合。
+我发现Clojure，以及这本关于它的特殊书籍，特别适合现在。我希望你也会这样。
+Alan Dipert</description>
+    </item>
+    
+  </channel>
+</rss>

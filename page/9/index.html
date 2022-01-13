@@ -15,7 +15,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <noscript>
@@ -68,6 +68,55 @@
 </nav>
 </header>
 <main class=main>
+<article class=post-entry>
+<header class=entry-header>
+<h2>node 的 redis 实战
+</h2>
+</header>
+<section class=entry-content>
+<p>Node.js Redis 客户端模块 为了追新，这里我使用的 yarn，毕竟我是 HDD（面向热点编程）编程实践者。
+模块安装
+yarn add redis 模块使用实例
+const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on("error", function (err) { console.log("Error " + err); }); client.set("string key", "string val", redis.print); client.hset("hash key", "hashtest 1", "some value", redis.print); client.hset(["hash key", "hashtest 2", "some other value"], redis.print); client.hkeys("hash key", function (err, replies) { console.log(replies.length + " replies:"); replies.forEach(function (reply, i) { console.log(" " + i + ": " + reply); }); client....</p>
+</section>
+<footer class=entry-footer><span title="2018-04-13 10:00:12 +0000 UTC">April 13, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to node 的 redis 实战" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>谈谈 web 框架
+</h2>
+</header>
+<section class=entry-content>
+<p>这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对 web 框架的理解。自己了解的也不是很多，也请多多指教。
+写程序免不了要做 web 相关的，现在由于前后端的分离，后端一般只提供 rest 接口，前端一般使用 node 来做渲染。在之前使用 jsp 那一套的时候，基本上都要写 html+js 的前端的一套，也要写后端 java 的 CRUD。
+我理解的 web 框架中，大致是分为这么两类：
+router 框架 mvc 框架 mvc 类框架 mvc，初级程序员面试笔试的时候必考的一个知识点。model-view-controller，即模型-视图-控制器。
+m，模型主要用于封装与应用程序相关的数据以及对数据的处理方法。 v，在 View 中一般没有程序上的逻辑。为了实现 View 上的刷新功能，View 需要访问它监视的数据模型（Model），因此应该事先在被它监视的数据那里注册。 c，用于控制应用程序的流程。 我了解比较多的 mvc 框架是 spring mvc。spring、spring mvc 和 spring boot 等，他们并不是一个概念，也不是仅仅用于 web 开发。但是在这里我就不分那么细，统一用 spring 来代替。这里所说的 spring 都是指狭义上的 web 开发方面。
+在做 web 开发的时候，项目目录一般是这样的：
+$ tree [16:23:43] . ├── mvnw ├── mvnw.cmd ├── pom.xml └── src ├── main │ ├── java │ │ └── com │ │ └── example │ │ └── demo │ │ └── DemoApplication....</p>
+</section>
+<footer class=entry-footer><span title="2018-04-08 16:01:48 +0000 UTC">April 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 谈谈 web 框架" href=https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>技术栈
+</h2>
+</header>
+<section class=entry-content>
+<p>创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
+技术栈 Docker docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。
+rancher rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。
+aws 近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。
+kotlin 之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。
+guice 这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。
+需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。
+rxjava rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。...</p>
+</section>
+<footer class=entry-footer><span title="2018-04-05 09:49:06 +0000 UTC">April 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 技术栈" href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>同步一个 fork
@@ -174,76 +223,6 @@ spring.datasource.primary.url=jdbc:mysql://localhost:3306/test spring.datasource
 </section>
 <footer class=entry-footer><span title="2018-03-24 19:01:37 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to spring boot 多数据源配置" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>spring boot 连接 redis
-</h2>
-</header>
-<section class=entry-content>
-<p>Spring-data-redis为 spring-data 模块中对 redis 的支持部分，简称为“SDR”，提供了基于 jedis 客户端 API 的高度封装以及与 spring 容器的整合，
-jedis 客户端在编程实施方面存在如下不足：
-connection 管理缺乏自动化，connection-pool 的设计缺少必要的容器支持。 数据操作需要关注“序列化”/“反序列化”，因为 jedis 的客户端 API 接受的数据类型为 string 和 byte，对结构化数据(json,xml,pojo 等)操作需要额外的支持。 事务操作纯粹为硬编码 pub/sub 功能，缺乏必要的设计模式支持，对于开发者而言需要关注的太多。 1 spring-data-redis 特性 连接池自动管理，提供了一个高度封装的“RedisTemplate”类 针对 jedis 客户端中大量 api 进行了归类封装,将同一类型操作封装为 operation 接口 ValueOperations：简单 K-V 操作 SetOperations：set 类型数据操作 ZSetOperations：zset 类型数据操作 HashOperations：针对 map 类型的数据操作 ListOperations：针对 list 类型的数据操作 提供了对 key 的“bound”(绑定)便捷化操作 API，可以通过 bound 封装指定的 key，然后进行一系列的操作而无须“显式”的再次指定 Key，即 BoundKeyOperations： BoundValueOperations BoundSetOperations BoundListOperations BoundSetOperations BoundHashOperations 将事务操作封装，有容器控制。 针对数据的“序列化/反序列化”，提供了多种可选择策略(RedisSerializer) JdkSerializationRedisSerializer：POJO 对象的存取场景，使用 JDK 本身序列化机制，将 pojo 类通过 ObjectInputStream/ObjectOutputStream 进行序列化操作，最终 redis-server 中将存储字节序列。是目前最常用的序列化策略。 StringRedisSerializer：Key 或者 value 为字符串的场景，根据指定的 charset 对数据的字节序列编码成 string，是“new String(bytes, charset)”和“string....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 19:00:48 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to spring boot 连接 redis" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E8%BF%9E%E6%8E%A5redis/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>最终一致性的实现手段
-</h2>
-</header>
-<section class=entry-content>
-<p>最终一致性的实现手段 实现最终一致性有三种手段：可靠事件模式、业务补偿模式和 TCC 模式
-1 可靠事件模式 可靠事件模式属于事件驱动架构，当某件重要的事情发生时，比如更新一个业务实体，微服务会向消息代理发布一个事件。消息代理会将订阅事件的微服务推送事件。
-要实现这种模式需要消息队列实现事件的持久化和 at least once 的可靠事件投递模式。
-1.1 本地事件表 本地事件表方法是将事件和业务数据保存在同一个数据库中，使用一个额外的事件恢复服务来恢复事件，由本地事物保证更新业务和发布事件的原子性。
-但是业务系统和事件系统耦合比较紧密，额外的事件数据库操作也会给数据库带来额外的压力，可能成为瓶颈。
-1.2 外部事件 此方法是将事件持久化到外部的事件系统，事件系统需要提供实时事件服务以接受微服务发布的事件，同时事件系统还需要提供事件恢复服务来确认恢复事件。
-1.3 不足 此过程可能出现重复消费的情况。
-2 补偿模式 一般来讲，异常一般是由以下两种情况造成的：
-业务异常：业务逻辑产生的错误，比如余额不足、库存不足等。
-技术异常：非业务逻辑产生的异常，比如网络连接异常、超时等。
-补偿模式就是使用一个额外的协调服务来协调各个需要保证一致性的其他服务。协调服务按顺序调用每一个服务，如果某个服务调用异常就取消之前所有已经调用成功的服务。
-建议仅用于技术异常的情况。对于业务异常来讲，应该尽可能的去优化业务模式，以避免要求补偿事务。
-2.1 常用手段 在实现补偿模式时应该做到两点：
-首先要确定失败的步骤和状态，从而确定要补偿的范围。 其次要能提供补偿操作使用的业务数据。 可以通过记录完整的业务流水的方法来实现上面两点要求。但是对于一个通用的补偿框架来说，预先知道微服务需要记录的业务要素是不可能的，那么就需要一种办法来保证业务流水的可扩展性，实践中主要有两种方法：大表和关联表。
-大表，顾明思议就是设计时除了必须的字段外，还需要预留大量的备用字段，框架可以提供辅助工具来将业务数据映射到备用字段中。大表对于框架层实现起来比较简单，但是也有一些难点，比如预留多少个字段合适，每个字段又需要预留多长。还有一个难点是如果仅从数据层面来查询数据，很难一眼看出备用字段的业务含义，维护过程不友好。 关联表，分为技术表和业务表。技术表中保存为实现补偿操作所需要的技术数据，业务表中保存业务数据。通过在技术表中增加业务表名和业务表主键来建立和业务数据的关联。关联表更灵活，能支持不同业务类型记录不同的业务要素。但是在框架的实现上难度较高，每次查询都需要复杂的关联动作，性能会受到影响。 2.2 重试 补偿过程作为一个服务，在调用的时候也会出现不成功的情况，这时就要通过重试机制来保证补偿的成功率。因此要求补偿操作具有幂等性。
-但是也不是盲目的重试，我们需要根据服务执行失败的原因来选择不同的策略：
-因业务因素导致失败，需要停止重试。 罕见的异常，如网络中断，传输过程中数据丢失，应该立即重试。 如果是因为系统繁忙，此时需要等待一段时间再重试。 2.3 不足 在补偿模式中有一个明显的缺陷是隔离性，从第一个服务开始一直到补偿完成，不一致性是对其他服务可见的。另外补偿模式过分依赖协调服务的健壮性，如果协调服务异常，则没办法达到一致性。
-3 TCC 模式 TCC，是 Try，Confirm 和 Cancel 的缩写。一个完整的 TCC 业务一般是由一个主业务和若干个从业务组成。
-Try 完成所有业务检查 预留必须的业务资源 Confirm 真正执行业务 不做任何业务检查 只使用 Try 阶段预留的业务资源 满足幂等性 Cancel 释放 Try 阶段预留的业务资源 满足幂等性 3....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 18:59:55 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 最终一致性的实现手段" href=https://zhenfeng-zhu.github.io/posts/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Reactive 微服务
-</h2>
-</header>
-<section class=entry-content>
-<p>Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive 便出现了。
-Reactive 编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。
-在 reactive 编程中，刺激信号是数据的转移，叫做 streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。
-Reactive 系统：一种架构风格，其基于异步消息来构建响应式的分布式系统。
-reactive 系统使用了消息驱动的方法。所有的构建通过异步消息的发送和接收来交互。消息投递的逻辑由底层的实现决定。发送者不会阻塞着等待回复，它们可能会稍后才接收到回复。
-reactive 系统会有两个重要的特征：
-伸缩性——可以横向伸缩
-伸缩性来自消息传递的解耦。消息被发送到一个地址之后，可以被一组消费者按照一种负载均衡方法消费。当 reactive 系统遇到负载高峰时，它可以创造出新的消费者，并在此之后销毁它们。
-恢复性——可以处理错误并且恢复
-首先，这种消息交互模式允许组件在其本地处理错误，组件不需要等待消息，因此当一个组件发生错误时，其他组件仍然会正常工作。其次，当一个处理消息的组件发生错误后，消息可以可以传递给在相同地址注册的其他组件。
-reactive 微服务系统是由 reactive 微服务组成的。这些微服务有下面四个特征：
-自治性 异步性 恢复性 伸缩性 Reactive 微服务是可自治的。他们可以根据周围的服务是否可用来调整自己的行为。自治性往往伴随着孤立性；Reactive 微服务可以在本地处理错误、独立地完成任务，并在必要时和其他服务合作。它们使用异步消息传递的机制和其他服务沟通；它们也会接收消息并且对其作出回应。
-得益于异步消息机制，reactive 微服务可以处理错误并根据情况调整自己的行为。错误不会被扩散，而是在靠近错误源头的地方被处理掉。当一个微服务挂掉之后，它的消费者微服务要能够处理错误并避免扩散。这一孤立原则是避免错误逐层上浮而毁掉整个系统的关键。可恢复性不只是关于处理错误，它还涉及到自愈性；一个 reactive 微服务应该能够从错误中恢复并且对错误进行补救。
-最后，reactive 微服务必须是可伸缩的，这样系统才可以根据负载情况来调整节点数量。这一特性意味着将会有一系列的限制，比如不能有在内存中的状态，要能够在必要时同步状态信息，或者要能够将消息路由到状态信息相同的节点。
-Vert.x Vert.x 是一个用于构建 reactive 和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用 Vert.x 构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。
-传统编程模式
-int res = compute(1, 2); 在这段代码中，是在等待 compute 函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个 handler：
-compute(1, 2, res -> { // called with the result }); 在上述代码中，compute 函数不再返回一个结果，而是传一个 handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在 vert....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 17:57:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Reactive 微服务" href=https://zhenfeng-zhu.github.io/posts/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

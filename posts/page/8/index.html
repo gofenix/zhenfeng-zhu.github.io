@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
@@ -71,6 +71,63 @@
 <header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
+</figure>
+<header class=entry-header>
+<h2>openfaas
+</h2>
+</header>
+<section class=entry-content>
+<p>对于 mac 环境来讲，首先安装新版 docker:
+brew cask install docker 然后启动 docker。
+命令行登陆 docker hub
+docker login 启动 docker swarm
+docker swarm init 安装 faas-cli
+brew install faas-cli clone 下来代码：
+git clone https://github.com/openfaas/faas 然后执行
+./deploy_stack.sh 部署一些示例
+faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。
+安装 grafana 进行监控
+docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
+常用命令：
+faas-cli new --list faas-cli build -f ....</p>
+</section>
+<footer class=entry-footer><span title="2018-06-24 15:43:46 +0000 UTC">June 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to openfaas" href=https://zhenfeng-zhu.github.io/posts/openfaas/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>java-reactive-web
+</h2>
+</header>
+<section class=entry-content>
+<p>Spring web mvc： 传统 servlet web
+spring web flux： Reactive web
+编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程
+In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow....</p>
+</section>
+<footer class=entry-footer><span title="2018-06-23 15:05:32 +0000 UTC">June 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to java-reactive-web" href=https://zhenfeng-zhu.github.io/posts/java-reactive-web/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>kafka
+</h2>
+</header>
+<section class=entry-content>
+<p>启动 zookeeper
+bin/zookeeper-server-start.sh config/zookeeper.properties 启动 kafka
+bin/kafka-server-start.sh config/server.properties 创建一个主题
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect
+echo -e "zhisheng\ntian" > test.txt ls
+zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e "zhisheng\ntian" > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器...</p>
+</section>
+<footer class=entry-footer><span title="2018-06-21 17:49:46 +0000 UTC">June 21, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to kafka" href=https://zhenfeng-zhu.github.io/posts/kafka/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>译：vertx-kotlin-coroutine
@@ -203,55 +260,6 @@ Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎�
 </section>
 <footer class=entry-footer><span title="2018-04-22 15:41:21 +0000 UTC">April 22, 2018</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to node 学习笔记" href=https://zhenfeng-zhu.github.io/posts/node-learning/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>node 的 redis 实战
-</h2>
-</header>
-<section class=entry-content>
-<p>Node.js Redis 客户端模块 为了追新，这里我使用的 yarn，毕竟我是 HDD（面向热点编程）编程实践者。
-模块安装
-yarn add redis 模块使用实例
-const redis = require('redis') const client = redis.createClient('6379', '127.0.0.1') client.on("error", function (err) { console.log("Error " + err); }); client.set("string key", "string val", redis.print); client.hset("hash key", "hashtest 1", "some value", redis.print); client.hset(["hash key", "hashtest 2", "some other value"], redis.print); client.hkeys("hash key", function (err, replies) { console.log(replies.length + " replies:"); replies.forEach(function (reply, i) { console.log(" " + i + ": " + reply); }); client....</p>
-</section>
-<footer class=entry-footer><span title="2018-04-13 10:00:12 +0000 UTC">April 13, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to node 的 redis 实战" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84redis%E5%AE%9E%E6%88%98/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>谈谈 web 框架
-</h2>
-</header>
-<section class=entry-content>
-<p>这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对 web 框架的理解。自己了解的也不是很多，也请多多指教。
-写程序免不了要做 web 相关的，现在由于前后端的分离，后端一般只提供 rest 接口，前端一般使用 node 来做渲染。在之前使用 jsp 那一套的时候，基本上都要写 html+js 的前端的一套，也要写后端 java 的 CRUD。
-我理解的 web 框架中，大致是分为这么两类：
-router 框架 mvc 框架 mvc 类框架 mvc，初级程序员面试笔试的时候必考的一个知识点。model-view-controller，即模型-视图-控制器。
-m，模型主要用于封装与应用程序相关的数据以及对数据的处理方法。 v，在 View 中一般没有程序上的逻辑。为了实现 View 上的刷新功能，View 需要访问它监视的数据模型（Model），因此应该事先在被它监视的数据那里注册。 c，用于控制应用程序的流程。 我了解比较多的 mvc 框架是 spring mvc。spring、spring mvc 和 spring boot 等，他们并不是一个概念，也不是仅仅用于 web 开发。但是在这里我就不分那么细，统一用 spring 来代替。这里所说的 spring 都是指狭义上的 web 开发方面。
-在做 web 开发的时候，项目目录一般是这样的：
-$ tree [16:23:43] . ├── mvnw ├── mvnw.cmd ├── pom.xml └── src ├── main │ ├── java │ │ └── com │ │ └── example │ │ └── demo │ │ └── DemoApplication....</p>
-</section>
-<footer class=entry-footer><span title="2018-04-08 16:01:48 +0000 UTC">April 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 谈谈 web 框架" href=https://zhenfeng-zhu.github.io/posts/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>技术栈
-</h2>
-</header>
-<section class=entry-content>
-<p>创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。
-技术栈 Docker docker 是一个容器，以前就看过 docker 相关的东西，但是没有仔细研究，docker 的命令会用一些，在工作中使用了，看了一本 docker 的书，能够编写 docker 的 compose 文件。
-rancher rancher 是一个做容器管理的。我们把主机添加到 rancher 中，他就可以自动做到 LB，服务的发现编排。我们部署的时候只需要编写 catalog，他就可以自动发现 docker 应用，然后拉取镜像，部署到相关的机器上，很是方便。
-aws 近期主要是对 aws 的进行公司服务的部署，搭建一套 rancher 的环境。aws 的服务特别多，ec2 是实例主机，就和虚拟机一样，VPC 就像机房，ec2 依托于 VPC 而存在，在这基础上又了解了子网、DHCP 弹性 IP 等等。
-kotlin 之前自己用 kotlin 开发过一个博客，对 kotlin 的感觉是有些东西写的很爽，但是还是觉得 java 好用一些，对 kotlin 的态度是用不用都无所谓。
-guice 这个我之前都读错了，我读成了盖斯，其实是和果汁的英文发音很像，ju 斯。只是一个依赖注入框架，只是单纯的去做 DI，比 spring 更轻量级一些。
-需要我们编写 AppModule.java 去手动配置哪个类注入哪个类。
-rxjava rxjava 我都没有找到一个系统的教程，不知道该从哪里学习。...</p>
-</section>
-<footer class=entry-footer><span title="2018-04-05 09:49:06 +0000 UTC">April 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 技术栈" href=https://zhenfeng-zhu.github.io/posts/%E6%8A%80%E6%9C%AF%E6%A0%88/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

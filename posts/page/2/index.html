@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
@@ -71,6 +71,68 @@
 <header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
+</figure>
+<header class=entry-header>
+<h2>Openfaas Workshop Lab7
+</h2>
+</header>
+<section class=entry-content>
+<p>实验 7–异步函数 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab7 \ && cd lab7 同步与异步地调用一个函数 当你同步调用一个函数时，一个连接会通过网关连接到你的函数，并且在整个执行过程中保持开放。同步调用是*阻塞的，所以你应该看到你的客户端暂停，变得不活跃，直到该函数完成其任务。
+网关使用的路由是。/function/&lt;function_name>。 你必须等待，直到它完成 你在调用后得到结果 你知道它是通过还是失败 异步任务以类似的方式运行，但有一些区别。
+网关使用不同的路由：/async-function/&lt;function_name>。 客户端从网关得到一个立即的202 接受的响应。 该函数稍后使用一个队列工作器来调用 默认情况下，结果被丢弃 让我们试一试快速演示。
+faas-cli new --lang dockerfile long-task --prefix="&lt;your-docker-username-here>" 编辑long-task/Dockerfile并将 fprocess 改为sleep 1。
+现在构建、部署并同步调用你的函数 10 次，像这样。
+echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task echo -n "" | faas-cli invoke long-task 现在异步调用该函数 10 次。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-04 13:44:02 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab7" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab7/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
+</figure>
+<header class=entry-header>
+<h2>Openfaas Workshop Lab6
+</h2>
+</header>
+<section class=entry-content>
+<p>实验 6–你的函数的 HTML 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab6\ && cd lab6 从一个函数中生成并返回基本的 HTML 函数可以返回 HTML，并将Content-Type设置为text/html。因此，函数返回的 HTML 可以通过浏览器进行渲染。让我们创建一个简单的函数，生成并返回一个基本的 HTML。
+faas-cli new --lang python3 show-html --prefix="&lt;your-docker-username-here>" 编辑handler.py。
+def handle(req): """handle a request to the function Args: req (str): request body """ html = '&lt;html>&lt;h2>Hi, from your function!&lt;/h2>&lt;/html>' return html 这将返回 HTML 给调用者。 还有一件事我们应该做的是设置响应的Content-Type'。我们100%确定这个函数将返回一个HTML，所以Content-Type应该总是text/html。我们可以利用show-html.yml文件中的environment`部分来设置。
+编辑show-html.yml。
+provider: name: openfaas gateway: http://127.0.0.1:8080 functions: show-html: lang: python3 handler: ./show-html image: &lt;your-docker-username-here>/show-html environment: content_type: text/html environment中的content_type键将设置响应的Content-Type。
+现在构建、推送和部署该函数。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-04 13:43:59 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab6" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab6/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
+</figure>
+<header class=entry-header>
+<h2>Openfaas Workshop Lab5
+</h2>
+</header>
+<section class=entry-content>
+<p>Lab 5 - 创建一个 GitHub 机器人 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab5\ && cd lab5 我们将使用 OpenFaaS 的函数来创建一个名为 issue-bot的 GitHub 机器人。
+问题机器人的工作是通过分析 描述 字段的情绪来分流新的问题，然后它将应用一个积极或审查的标签。这将有助于维护者在繁忙的工作中，可以优先考虑哪些问题需要首先处理。
+问题机器人的图示](./diagram/issue-bot.png)
+获取一个 GitHub 账户 注册一个GitHub 账户，如果你还没有一个账户。
+创建一个新的仓库，并将其称为bot-test。
+注意：我们将只使用这个仓库作为创建问题的测试场所。你不需要在那里提交任何代码。
+建立一个带有入口的隧道 你需要接收来自 GitHub 的 webhooks。幸运的是，inlets 让这一切变得非常快速和简单。它可以按月或按年订阅，所以如果你不确定是否全年都需要它，你可以只付一个月的钱。
+inlets 有一个叫做 inlets-operator 的 Kubernetes 集成。你可以用它来设置 LoadBalancers 或带有 TLS 的 Ingress。它的工作原理是为你创建一个云虚拟机，并在那里运行一个隧道服务器，然后为你运行一个隧道客户端作为一个 Pod，你就可以获得传入流量。
+在你喜欢的云提供商（如 DigitalOcean）的 API 页面下创建一个写入访问令牌，然后将内容保存到digital-ocean-api-token.txt。
+设置完订阅后，将你的密钥保存到$HOME/.inlets/LICENSE，然后运行以下程序。
+arkade install inlets-operator \ --provider digitalocean \ --region lon1 \ --token-file $HOME/digital-ocean-api-token....</p>
+</section>
+<footer class=entry-footer><span title="2022-01-04 13:43:56 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab5" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab5/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>Blockchain 数据结构分析
@@ -188,62 +250,6 @@ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.
 </section>
 <footer class=entry-footer><span title="2021-03-30 09:57:01 +0800 +0800">March 30, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Openfaas Workshop Lab2" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>Openfaas Workshop Lab1b
-</h2>
-</header>
-<section class=entry-content>
-<p>Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。
-Linux export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/ MacOS export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/ Windows export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/windows/amd64/kubectl.exe chmod +x kubectl.exe mkdir -p $HOME/bin/ mv kubectl $HOME/bin/ 设置一个 Kubernetes 集群 你可以在使用 Kubernetes 的同时按照实验进行操作，但你可能需要沿途做一些小改动。网关的服务地址从http://gateway:8080改为http://gateway.openfaas:8080。这些差异已经尽可能地被记录下来，每个实验室都提供了替代方案。
-在你的笔记本电脑上创建一个本地集群 k3s 使用 k3d 如果你的电脑上有 Docker，那么你可以使用 Rancher 实验室托管的k3d工具。它安装了一个轻量级的 Kubernetes 版本，叫做k3s，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的电脑上运行。...</p>
-</section>
-<footer class=entry-footer><span title="2021-03-30 09:55:20 +0800 +0800">March 30, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Openfaas Workshop Lab1b" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1b/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>Openfaas Workshop Lab1
-</h2>
-</header>
-<section class=entry-content>
-<p>Lab 1 - 为 OpenFaaS 做准备 OpenFaaS 需要一个Kubernetes集群来运行。你可以使用一个单节点集群或多节点集群，不管是在你的笔记本电脑上还是在云端。
-任何 OpenFaaS 函数的基本原件都是一个 Docker 镜像，它是使用faas-cli工具链构建的。
-前提条件 让我们来安装 Docker、OpenFaaS CLI 以及设置 Kubernetes。
-Docker 适用于 Mac
-Docker CE for Mac Edge Edition 适用于 Windows
-仅使用 Windows 10 Pro 或企业版 安装Docker CE for Windows 请确保通过使用 Windows 任务栏通知区的 Docker 菜单来使用Linux容器的 Docker 守护程序。
-安装Git Bash 当你安装 git bash 时，选择以下选项。install UNIX commands和use true-type font。
-注意：请在所有步骤中使用Git Bash：不要试图使用PowerShell、WSL或Bash for Windows。
-Linux - Ubuntu 或 Debian...</p>
-</section>
-<footer class=entry-footer><span title="2021-03-30 09:54:25 +0800 +0800">March 30, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Openfaas Workshop Lab1" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab1/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>Openfaas Workshop
-</h2>
-</header>
-<section class=entry-content>
-<p>openfaas-workshop 这是一个自定进度的研讨会，学习如何使用 OpenFaaS 构建、部署和运行无服务器函数。
-在这个工作坊中，你将首先把 OpenFaaS 部署到你的笔记本电脑或使用 Docker for Mac 或 Windows 的远程集群。然后你将对 OpenFaaS 的用户界面、CLI 和函数商店进行测试。在用 Python 构建、部署和调用你自己的无服务器函数之后，你将继续学习以下内容：用 pip 管理依赖关系，通过安全秘密处理 API 令牌，用 Prometheus 监控函数，异步调用函数以及将函数连接起来创建应用程序。实验的高潮是让你创建自己的 GitHub 机器人，可以自动响应问题。同样的方法可以通过 IFTTT.com 连接到在线事件流–这将使你能够建立机器人、自动回复器以及与社交媒体和物联网设备的集成。
-最后，实验室涵盖了更多的高级主题，并给出了进一步学习的建议。
-译文
-日本語 简体中文 免费学习，作为 GitHub 赞助商表示感谢 OpenFaaS 连同这些材料都是免费提供的，需要时间和精力来维护。
-成为OpenFaaS on GitHub的赞助商。 要求 我们在Lab 1中讲解了如何安装这些需求。请在参加讲师指导的研讨会之前做Lab 1。
-函数将用 Python 语言编写，所以有编程或脚本经验者优先。 安装推荐的代码编辑器/IDE VSCode 对于 Windows，安装Git Bash 首选的操作系统。MacOS, Windows 10 Pro/Enterprise, Ubuntu Linux Docker。
-Docker CE for Mac/Windows 边缘版。 Docker CE for Linux 注意：作为最后的手段，如果你有一台不兼容的 PC，你可以在https://labs....</p>
-</section>
-<footer class=entry-footer><span title="2021-03-30 09:53:12 +0800 +0800">March 30, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Openfaas Workshop" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

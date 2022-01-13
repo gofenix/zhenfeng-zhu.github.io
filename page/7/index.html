@@ -15,7 +15,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/index.xml>
 <link rel=alternate type=application/json href=https://zhenfeng-zhu.github.io/index.json>
 <noscript>
@@ -68,6 +68,65 @@
 </nav>
 </header>
 <main class=main>
+<article class=post-entry>
+<header class=entry-header>
+<h2>faas-provider
+</h2>
+</header>
+<section class=entry-content>
+<p>faas-provider 是一个模板，只要实现了这个模板的接口，就可以自定义实现自己的 provider。
+faas-provider OpenFaaS 官方提供了两套后台 provider：
+Docker Swarm Kubernetes 这两者在部署和调用函数的时候流程图如下：
+部署一个函数
+调用一个函数
+provider 要提供的一些 API 有：
+List / Create / Delete 一个函数 /system/functions
+方法: GET / POST / DELETE
+获取一个函数 /system/function/{name:[-a-zA-Z_0-9]+}
+方法: GET
+伸缩一个函数 /system/scale-function/{name:[-a-zA-Z_0-9]+}
+方法: POST
+调用一个函数 /function/{name:[-a-zA-Z_0-9]+}
+方法: POST
+在 provider 的 server.go 的 serve 方法，可以看到这个 serve 方法创建了几个路由，接受一个 FaaSHandler 对象。
+// Serve load your handlers into the correct OpenFaaS route spec....</p>
+</section>
+<footer class=entry-footer><span title="2018-08-01 19:53:23 +0000 UTC">August 1, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to faas-provider" href=https://zhenfeng-zhu.github.io/posts/faas-provider/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>gateway-reading
+</h2>
+</header>
+<section class=entry-content>
+<p>OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：
+UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。
+源码分析 依赖 github.com/gorilla/mux github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/nats-queue-worker github.com/prometheus/client_golang mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。
+go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。
+client_golang 是 Prometheus 的客户端。
+项目结构 ├── Dockerfile ├── Dockerfile.arm64 ├── Dockerfile.armhf ├── Gopkg.lock ├── Gopkg.toml ├── README.md ├── assets ├── build.sh ├── handlers │ ├── alerthandler.go │ ├── alerthandler_test....</p>
+</section>
+<footer class=entry-footer><span title="2018-08-01 09:15:35 +0000 UTC">August 1, 2018</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to gateway-reading" href=https://zhenfeng-zhu.github.io/posts/gateway-reading/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>NATS streaming
+</h2>
+</header>
+<section class=entry-content>
+<p>市面上常见到的和 Nats 功能类似的消息通信系统有：
+ActiveMQ（Java 编写）、KafKa（Scala 编写）、RabbitMq（Ruby 编写）、Nats（之前是 Ruby 编写现已修改为 Go）、Redis（C 语言编写）、Kestrel（Scala 编写不常用）、NSQ（Go 语言编写），这些消息通信系统在 Broker 吞吐量方面的比较：
+可以看到 NATS 的吞吐量特别高， NATS 原来是使用 Ruby 编写，可以实现每秒 150k 消息，后来使用 Go 语言重写，能够达到每秒 8-11 百万个消息，整个程序很小只有 3M Docker image，它不支持持久化消息，如果你离线，你就不能获得消息。关于 NATS 的详细介绍，请参考上篇文章：NATS 简介
+NATS Streaming NATS Streaming 是由 NATS 驱动的数据流系统，也是由 go 语言写成的，在保证吞吐量和时延的基础上，解决了 Nats 消息投递一致性的问题。nats streaming 可以和核心 nats 平台无缝嵌入，扩展和互动。
+功能 除了 nats 平台的一些功能，nats streaming 还支持以下的：
+增强的消息协议 消息/事件持久化 至少一次投递 发布者速率限制 每个订阅者的速率匹配/限制 可重复消费 持久订阅 使用 首先安装 nats-streaming-server 服务，有多种方式，这里介绍两种：
+homebrew...</p>
+</section>
+<footer class=entry-footer><span title="2018-07-30 14:51:26 +0000 UTC">July 30, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to NATS streaming" href=https://zhenfeng-zhu.github.io/posts/nats-streaming/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>nats 简介
@@ -190,63 +249,6 @@ Docker CE for Linux 你可以从Docker Store中安装 Docker CE...</p>
 </section>
 <footer class=entry-footer><span title="2018-06-25 18:04:09 +0000 UTC">June 25, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 译：openfaas-workshop-Lab1" href=https://zhenfeng-zhu.github.io/posts/workshop-lab1/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>openfaas
-</h2>
-</header>
-<section class=entry-content>
-<p>对于 mac 环境来讲，首先安装新版 docker:
-brew cask install docker 然后启动 docker。
-命令行登陆 docker hub
-docker login 启动 docker swarm
-docker swarm init 安装 faas-cli
-brew install faas-cli clone 下来代码：
-git clone https://github.com/openfaas/faas 然后执行
-./deploy_stack.sh 部署一些示例
-faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。
-安装 grafana 进行监控
-docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
-常用命令：
-faas-cli new --list faas-cli build -f ....</p>
-</section>
-<footer class=entry-footer><span title="2018-06-24 15:43:46 +0000 UTC">June 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to openfaas" href=https://zhenfeng-zhu.github.io/posts/openfaas/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>java-reactive-web
-</h2>
-</header>
-<section class=entry-content>
-<p>Spring web mvc： 传统 servlet web
-spring web flux： Reactive web
-编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程
-In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow....</p>
-</section>
-<footer class=entry-footer><span title="2018-06-23 15:05:32 +0000 UTC">June 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to java-reactive-web" href=https://zhenfeng-zhu.github.io/posts/java-reactive-web/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>kafka
-</h2>
-</header>
-<section class=entry-content>
-<p>启动 zookeeper
-bin/zookeeper-server-start.sh config/zookeeper.properties 启动 kafka
-bin/kafka-server-start.sh config/server.properties 创建一个主题
-bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者
-bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect
-echo -e "zhisheng\ntian" > test.txt ls
-zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ echo -e "zhisheng\ntian" > test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ ls LICENSE NOTICE bin config libs logs site-docs test.txt zhuzhenfengdeMacBook-Pro➜ kafka_2.12-1.1.0 ᐅ 启动连接器...</p>
-</section>
-<footer class=entry-footer><span title="2018-06-21 17:49:46 +0000 UTC">June 21, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to kafka" href=https://zhenfeng-zhu.github.io/posts/kafka/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

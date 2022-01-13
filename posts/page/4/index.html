@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
@@ -71,6 +71,55 @@
 <header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>业务代码的成长机会
+</h2>
+</header>
+<section class=entry-content>
+<p>对于大部分公司而言，能够写底层代码或者中间件代码的人总是有限的，写业务代码会面临更高的复杂度。这里分三个层次来看其中的机会：
+第一个层次，让代码写的不一样。可从代码规范、可读性、可扩展性等角度着手，这也是程序员的基本功。 第二个层次，考虑业务问题和技术问题的匹配。可从写业务代码中理解需求，并做好分析设计。被动接收需求和实现接口，确实成长空间不大。 第三个层次，总结相关方法体系，成为业务及技术双料专家。 </p>
+</section>
+<footer class=entry-footer><span title="2021-02-17 17:45:40 +0800 +0800">February 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 业务代码的成长机会" href=https://zhenfeng-zhu.github.io/posts/%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84%E6%88%90%E9%95%BF%E6%9C%BA%E4%BC%9A/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>unix 哲学
+</h2>
+</header>
+<section class=entry-content>
+<p> 让每个程序都做好一件事。要做一件新的工作，写一个新程序，而不是通过添加“功能”让老程序复杂化。 期待每个程序的输出成为另一个程序的输入。不要将无关信息混入输出。避免使用严格的列数据或二进制输入格式。不要坚持交互式输入。 设计和构建软件，甚至是操作系统，要尽早尝试，最好在几周内完成。不要犹豫，扔掉笨拙的部分，重建它们。 优先使用工具来减轻编程任务，即使必须曲线救国编写工具，且在用完后很可能要扔掉大部分。 </p>
+</section>
+<footer class=entry-footer><span title="2021-02-17 16:46:52 +0800 +0800">February 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to unix 哲学" href=https://zhenfeng-zhu.github.io/posts/unix-philosophy/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Web 前端性能优化
+</h2>
+</header>
+<section class=entry-content>
+<p>一般来说 web 前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN 服务等等。web 前端优化主要从如下三个方面入手：
+浏览器访问优化 减少 http 请求
+http 协议是一个无状态的，每次请求都需要建立通信链路进行传输，在服务器端，一般每个请求都会分配一个线程去处理。
+减少 http 请求的主要手段是合并 CSS、合并 js、合并图片。
+使用浏览器缓存
+css、js、Logo、图标等静态资源文件更新频率较低，可以将这些文件缓存在浏览器中。
+在更新 js 等文件的时候，一般不是将文件内容更新，而是生成一个新的文件，然后更新 html 的引用。
+更新静态资源的时候，也是要逐量更新，以避免用户浏览器的大量缓存失效，造成服务器负载增加、网络堵塞。
+启用压缩
+在服务器对文件压缩，然后在浏览器端解压缩，可以减少通信传输的数据量。
+CSS 放在页面最上面，js 放在页面最下面
+浏览器会在下载完全部 CSS 之后才对整个页面进行渲染，而浏览器是在加载 js 之后就立即执行，有可能会阻塞整个页面。因此最好的做法就是把 CSS 放在最上面，js 放在最下面。但是如果是页面解析的时候就用到 js，也是要相应的 js 放在上面。
+减少 cookie 传输
+cookie 会包含在每次请求和响应中，太大的 cookie 会影响数据传输，需要慎重考虑哪些数据写入 cookie 中。
+对于某些静态资源的访问，如 css 和 js 等，发送 cookie 没意义，可以考虑静态资源使用独立域名访问，避免请求静态资源时发送 cookie。
+CDN 加速 CDN（content distribute network，内容分发网络）的本质仍然是一个缓存。将缓存放在离用户最近的地方，使得用户可以以最快的速度获取数据。...</p>
+</section>
+<footer class=entry-footer><span title="2020-11-20 16:01:49 +0800 +0800">November 20, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Web 前端性能优化" href=https://zhenfeng-zhu.github.io/posts/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>大型网站发展历程
@@ -194,51 +243,6 @@ clickhouse 的独特功能 真正的列式数据库管理系统 </p>
 </section>
 <footer class=entry-footer><span title="2019-09-29 02:19:03.574 +0000 UTC">September 29, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 每日学习 2" href=https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>每日学习-2019-09-24
-</h2>
-</header>
-<section class=entry-content>
-<p>开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里可能有相同名称的变量，必须找到正确的那个，这个过程就是引用消解。 函数引用消解 命名空间引用消解 左值和右值 左值取的是变量的地址或者说是变量的引用，获得地址之后，我们就可以把新值写进去。 右值就是我们常说的值。 不是所有的表达式都能生成一个合格的左值。 属性计算 上下文分析或者说语义分析的一种算法。 属性文法的主要思路是计算机科学的重要开拓者，是在上下文无关文法的基础上做了一些增强，使之可以计算属性值。 过程 类型和作用域解析 类型的消解 引用的消解和 S 属性的类型推导 做类型检查 做一些语义合法性检查 趣谈 Linux 操作系统 Namespace 技术：内部创业公司应该独立运营 为了隔离不同类型的资源，Linux 内核里面有如下几种不同类型的 namespace：
-UTS，表示不同的 namespace 可以配置不同的 hostname User，可以配置不同的用户和组 Mount，文件系统挂载点是隔离的 PID，有完全独立的 pid Network，有独立的网络协议栈 </p>
-</section>
-<footer class=entry-footer><span title="2019-09-29 02:17:46.822 +0000 UTC">September 29, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 每日学习-2019-09-24" href=https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>tmux
-</h2>
-</header>
-<section class=entry-content>
-<p>折腾一下 tmux
-安装 brew install tmux 概念 session：理解为一个会话，持久保存工作状态。 window：可以理解为我们常说的 tab 页。 pane：一个 window 被分成若干个 pane，理解为 iterm 的分屏。 session 新建
-tmux new -s your-session-name 断开
-tmux detach 恢复
-tmux attach-session -t your-session-name 或者 tmux a -t your-session-name 关闭
-kill-server kill-session kill-window kill-pane tmux kill-session -t your-session-name tmux kill-server 查看
-tmux list-session tmux ls tmux 的基础配置 prefix 是 tmux 的前缀键，默认是 ctrl+b 。只有按下前缀键，才会激活 tmux，然后再按其他的键进行 tmux 操作。这样可以避免与其他应用的快捷键进行冲突。
-配置前缀 需要去 tmux.conf 中去配置...</p>
-</section>
-<footer class=entry-footer><span title="2019-08-28 12:03:46.801 +0000 UTC">August 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to tmux" href=https://zhenfeng-zhu.github.io/posts/tmux/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>crystal 开发环境
-</h2>
-</header>
-<section class=entry-content>
-<p>突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。
-安装 crystal brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang
-安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。
-$ git clone https://github.com/crystal-lang-tools/scry.git $ cd scry $ shards build -v Dependencies are satisfied Building: scry crystal build -o /Users/lucas/Documents/demos/crystal/scry/bin/scry src/scry.cr /Users/lucas/Documents/demos/crystal/scry/bin/scry 就是编译出来的二进制的路径
-配置插件 "crystal-lang.compiler": "crystal", "crystal-lang.server": "/Users/lucas/Documents/demos/crystal/scry/bin/scry", "crystal-lang.maxNumberOfProblems": 20, "crystal-lang.mainFile": "${workspaceRoot}/src/main.cr", "crystal-lang.processesLimit": 5, "crystal-lang.hover": true, "crystal-lang.problems": "build", "crystal-lang.implementations": true, "crystal-lang.completion": true, "crystal-lang.logLevel": "info", 把上面的配置加到 vscode 的 settings 文件中，就可以愉快的开发啦。</p>
-</section>
-<footer class=entry-footer><span title="2019-08-27 14:03:12 +0000 UTC">August 27, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to crystal 开发环境" href=https://zhenfeng-zhu.github.io/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

@@ -16,7 +16,7 @@
 <link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <link rel=alternate type=application/rss+xml href=https://zhenfeng-zhu.github.io/posts/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
@@ -71,6 +71,51 @@
 <header class=page-header><div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a></div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>每日学习-2019-09-24
+</h2>
+</header>
+<section class=entry-content>
+<p>开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里可能有相同名称的变量，必须找到正确的那个，这个过程就是引用消解。 函数引用消解 命名空间引用消解 左值和右值 左值取的是变量的地址或者说是变量的引用，获得地址之后，我们就可以把新值写进去。 右值就是我们常说的值。 不是所有的表达式都能生成一个合格的左值。 属性计算 上下文分析或者说语义分析的一种算法。 属性文法的主要思路是计算机科学的重要开拓者，是在上下文无关文法的基础上做了一些增强，使之可以计算属性值。 过程 类型和作用域解析 类型的消解 引用的消解和 S 属性的类型推导 做类型检查 做一些语义合法性检查 趣谈 Linux 操作系统 Namespace 技术：内部创业公司应该独立运营 为了隔离不同类型的资源，Linux 内核里面有如下几种不同类型的 namespace：
+UTS，表示不同的 namespace 可以配置不同的 hostname User，可以配置不同的用户和组 Mount，文件系统挂载点是隔离的 PID，有完全独立的 pid Network，有独立的网络协议栈 </p>
+</section>
+<footer class=entry-footer><span title="2019-09-29 02:17:46.822 +0000 UTC">September 29, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 每日学习-2019-09-24" href=https://zhenfeng-zhu.github.io/posts/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>tmux
+</h2>
+</header>
+<section class=entry-content>
+<p>折腾一下 tmux
+安装 brew install tmux 概念 session：理解为一个会话，持久保存工作状态。 window：可以理解为我们常说的 tab 页。 pane：一个 window 被分成若干个 pane，理解为 iterm 的分屏。 session 新建
+tmux new -s your-session-name 断开
+tmux detach 恢复
+tmux attach-session -t your-session-name 或者 tmux a -t your-session-name 关闭
+kill-server kill-session kill-window kill-pane tmux kill-session -t your-session-name tmux kill-server 查看
+tmux list-session tmux ls tmux 的基础配置 prefix 是 tmux 的前缀键，默认是 ctrl+b 。只有按下前缀键，才会激活 tmux，然后再按其他的键进行 tmux 操作。这样可以避免与其他应用的快捷键进行冲突。
+配置前缀 需要去 tmux.conf 中去配置...</p>
+</section>
+<footer class=entry-footer><span title="2019-08-28 12:03:46.801 +0000 UTC">August 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to tmux" href=https://zhenfeng-zhu.github.io/posts/tmux/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>crystal 开发环境
+</h2>
+</header>
+<section class=entry-content>
+<p>突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。
+安装 crystal brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang
+安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。
+$ git clone https://github.com/crystal-lang-tools/scry.git $ cd scry $ shards build -v Dependencies are satisfied Building: scry crystal build -o /Users/lucas/Documents/demos/crystal/scry/bin/scry src/scry.cr /Users/lucas/Documents/demos/crystal/scry/bin/scry 就是编译出来的二进制的路径
+配置插件 "crystal-lang.compiler": "crystal", "crystal-lang.server": "/Users/lucas/Documents/demos/crystal/scry/bin/scry", "crystal-lang.maxNumberOfProblems": 20, "crystal-lang.mainFile": "${workspaceRoot}/src/main.cr", "crystal-lang.processesLimit": 5, "crystal-lang.hover": true, "crystal-lang.problems": "build", "crystal-lang.implementations": true, "crystal-lang.completion": true, "crystal-lang.logLevel": "info", 把上面的配置加到 vscode 的 settings 文件中，就可以愉快的开发啦。</p>
+</section>
+<footer class=entry-footer><span title="2019-08-27 14:03:12 +0000 UTC">August 27, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to crystal 开发环境" href=https://zhenfeng-zhu.github.io/posts/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/></a>
+</article>
 <article class=post-entry>
 <header class=entry-header>
 <h2>crystal 简介
@@ -206,73 +251,6 @@ docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统�
 </section>
 <footer class=entry-footer><span title="2018-10-08 15:29:21 +0000 UTC">October 8, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to kubernetes" href=https://zhenfeng-zhu.github.io/posts/kubernetes/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>watchdog
-</h2>
-</header>
-<section class=entry-content>
-<p>监视器
-监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图展示了它是如何工作的：
-上图：一个小型的 web 服务，可以为每个传入的 HTTP 请求分配所需要的进程。
-每个函数都需要嵌入这个二进制文件并将其作为ENTRYPOINT 或 CMD，实际上是把它作为容器的初始化进程。一旦你的进程被创建分支，监视器就会通过stdin 传递 HTTP 请求并从stdout中读取 HTTP 响应。这意味着你的程序无需知道 web 和 HTTP 的任何信息。
-轻松创建新函数 从 CLI 创建一个函数
-创建函数最简单的方法是使用 FaaS CLI 和模板。CLI 抽象了所有 Docker 的知识，使得你只需要编写所支持语言的 handler 文件即可。
-你的第一个使用 OpenFaaS 的无服务器 Python 函数 阅读有关 FaaS CLI 的教程 深入研究 Package your function 打包你的函数
-如果你不想使用 CLI 或者现有的二进制文件或镜像，可以使用下面的方法去打包函数：
-使用一个现有的或者一个新的 Docker 镜像作为基础镜像 FROM 通过curl 或 ADD https://从 Releases 页面 添加 fwatchdog 二进制文件 为每个你要运行的函数设置 fprocess(函数进程) 环境变量 Expose port 8080 暴露端口 8080 Set the CMD to fwatchdog 设置 CMD为fwatchdog 一个echo函数的示例 Dockerfile：...</p>
-</section>
-<footer class=entry-footer><span title="2018-09-06 16:23:57 +0000 UTC">September 6, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to watchdog" href=https://zhenfeng-zhu.github.io/posts/watchdog/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>queue-worker
-</h2>
-</header>
-<section class=entry-content>
-<p>queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
-网关的路由是：/function/&lt;function_name> 必须等待 在结束的时候得到结果 明确知道是成功还是失败 异步函数会有一些差异：
-网关的路由是：/async-function/&lt;function_name> 客户端获得 202 的即时响应码 从 queue-worker 中调用函数 默认情况下，结果是被丢弃的。 查看 queue-worker 的日志 docker service logs -f func_queue-worker 利用 requestbin 和 X-Callback-Url 获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
-更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。 源码分析 依赖项 github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。
-faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：...</p>
-</section>
-<footer class=entry-footer><span title="2018-09-06 16:23:12 +0000 UTC">September 6, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to queue-worker" href=https://zhenfeng-zhu.github.io/posts/queue-worker/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>区块链学习笔记
-</h2>
-</header>
-<section class=entry-content>
-<p>本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。
-理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html
-区块链中提到的账本，记账等词汇是和会计无关的词汇。
-我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：
-时间 用途 金额 2018-08-23 借 100 2018-08-22 还 200 2018-08-21 借 50 2018-08-20 还 1000 如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。
-但是区块链的记账形式是：
-可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。
-所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。
-之所以采用区块链来做分布式记账，主要是区块链有如下好处：
-去中心化
-传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。
-与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。
-可追溯
-安全
-安全分为很多层，区块链只能做到存储层的安全。
-区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。
-不可篡改
-很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。
-撰改是指非法修改区块链数据，而修改则是合法变更数据。
-通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。
-多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。
-采用区块链作为账本的时候，会面临如下几个问题：
-不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan....</p>
-</section>
-<footer class=entry-footer><span title="2018-08-23 15:14:02 +0000 UTC">August 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 区块链学习笔记" href=https://zhenfeng-zhu.github.io/posts/blockchain/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
