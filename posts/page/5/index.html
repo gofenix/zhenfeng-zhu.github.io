@@ -73,6 +73,28 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>hive 常用函数
+</h2>
+</header>
+<section class=entry-content>
+<p>json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path)
+解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。
+path 就是 ‘$.字段名’。
+如果该字段的 value 也是 json，就可以一直点下去。
+如果该字段的 value 是数组，就可以用 ‘$.字段名[0]'，类似这样下标的形式去访问。
+explode explode(array)
+经常和 lateral view 一起使用，将数组中的元素拆分成多行显示。
+substr substr(string A, int start, int len)
+返回字符串 A 从 start 位置开始，长度为 len 的字符串
+json_tuple json_tuple(string json_string, col1, col2, …)
+经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。
+parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)...</p>
+</section>
+<footer class=entry-footer><span title="2020-04-16 17:59:03 +0800 +0800">April 16, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to hive 常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>mysql 的学习
 </h2>
 </header>
@@ -204,37 +226,6 @@ cpu 主动消费 cpu 周期所花费的时间，不包括睡眠或者 io 等待 
 </section>
 <footer class=entry-footer><span title="2019-08-26 06:53:32.176 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to go 进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>mysql
-</h2>
-</header>
-<section class=entry-content>
-<p>MySQL 基本架构 客户端
-server 层
-连接器：管理连接，权限验证
-查询缓存：命中规则，直接返回结果 8.0 之后全部删除了这个模块
-分析器：词法分析，语法分析
-优化器：执行计划生成，索引选择
-执行器：操作引擎，返回结果
-存储引擎：存储数据，提供读写接口
-数据库中的长连接指连接成功之后，如果客户端持续有请求，则一直使用同一个连接。短连接是指每次执行完很少的几次查询之后就断开连接，下次再重新建立。
-如果全部使用长连接，会导致 mysql 内存涨的很快，可能出现 OOM，因此要定期断开长连接，或者在执行一个比较大的操作之后，执行 mysql_reset_connection 重置一下。
-日志系统 redo log 重做日志 redo log 是 innodb 引擎特有的。物理日志，记录的是某个数据页上做了什么修改。循环写入。
-WAL 技术：Write-Ahead Logging：关键点就是先写日志，再写磁盘。当一条记录更新时，先把记录写到 redolog 中，更新到内存，这时这个更新操作就成功了。然后 innodb 引擎就会在适当的时候，将这个操作记录更新到磁盘中。因此在数据库异常重启的时候，之前的提交的记录不会丢失。
-binlog 归档日志 binlog 是 server 层实现的，所有的引擎都可以使用。binlog 是逻辑日志，记录的是这个语句的原始逻辑。binlog 是写到一定大小后，切换下一个，不会覆盖以前的日志。
-因此一个 update 操作就是：
-找到该行
-判断数据页是否在内存中，如果是返回行数据，否则从磁盘读入到内存中。
-将值进行更新，写入新行
-新行更新到内存
-写入 redolog，处于 prepare 阶段
-写入 binlog
-提交事务，处于 commit 阶段。...</p>
-</section>
-<footer class=entry-footer><span title="2018-12-01 15:54:53 +0000 UTC">December 1, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to mysql" href=https://zhenfeng-zhu.github.io/posts/mysql/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

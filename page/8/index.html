@@ -69,6 +69,27 @@
 </header>
 <main class=main>
 <article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
+</figure>
+<header class=entry-header>
+<h2>openfaas-workshop-lab4
+</h2>
+</header>
+<section class=entry-content>
+<p>实验 4–更深入地使用函数 在开始本实验之前，为你的文件创建一个新的文件夹。由于本实验是建立在早期实验的基础上的，所以请复制 lab3。
+$ cp -r lab3 lab4\ && cd lab4 通过环境变量注入配置 能够控制一个函数在运行时的行为方式是很有用的，我们至少可以通过两种方式来实现这一点。
+在部署时 *在部署时设置环境变量
+我们在Lab 3中用write_debug做了这个 - 你也可以在这里设置任何你想要的自定义环境变量 - 例如，如果你想为你的hello world函数配置一种语言，你可以引入一个spoken_language变量。
+使用 HTTP 上下文–querystring / headers *使用 querystring 和 HTTP headers
+另一个更动态的、可以在每个请求层面上改变的选项是使用查询字符串和 HTTP 头信息，两者都可以通过faas-cli或curl传递。
+这些头信息通过环境变量暴露出来，所以它们很容易在你的函数中被使用。所以任何头信息都以Http_为前缀，所有-连字符都被替换成_下划线。
+让我们用 querystring 和一个列出所有环境变量的函数来试试。
+使用 BusyBox 的内置命令，部署一个打印环境变量的函数。 faas-cli deploy --name env --fprocess="env" --image="function/alpine:latest" 用一个查询字符串调用该函数。 $ echo "" | faas-cli invoke env --query workshop=1 PATH=/usr/local/bin:/usr/local/bin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_Connection=close Http_Content_Type=text/plain Http_X_Call_Id=cdbed396-a20a-43fe-9123-1d5a122c976d Http_X_Forwarded_For=10....</p>
+</section>
+<footer class=entry-footer><span title="2018-07-02 09:32:59 +0000 UTC">July 2, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to openfaas-workshop-lab4" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab4/></a>
+</article>
+<article class=post-entry>
 <header class=entry-header>
 <h2>ubuntu-docker-sudo
 </h2>
@@ -235,26 +256,6 @@ val vertx = Vertx.vertx() vertx.deployVerticle(ExampleVerticle()) launch(vertx.d
 </section>
 <footer class=entry-footer><span title="2018-05-20 14:17:07 +0000 UTC">May 20, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to elasticsearch" href=https://zhenfeng-zhu.github.io/posts/elasticsearch/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>git 常用操作
-</h2>
-</header>
-<section class=entry-content>
-<p>整理一下常用的 git 操作，不用再到处找了。
-git 放弃本地修改，强制更新 git fetch --all git reset --hard origin/master git 修改远程仓库地址 git remote set-url origin url cherry-pick 当你通过一番挣扎终于搞定一个 bug,顺手提交到 git 服务器,心里一阵暗爽. 这时发现你当前所在的分支是 master !!!
-这个分支不是开发者用来提交代码的,可惜现在剁手也晚了.
-先切换到 master git checkout master git log 复制提交的 commit id
-切换到 dev, cherry-pick
-git checkout dev git cherry-pic ${commit_id} 常用开发流程 git checkout -b feature1
-git commit 之后，进行 rebase
-git pull –rebase
-gca!
-git rvm</p>
-</section>
-<footer class=entry-footer><span title="2018-05-14 10:04:02 +0000 UTC">May 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to git 常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
