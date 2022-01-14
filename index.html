@@ -92,6 +92,26 @@
 </footer>
 </article>
 <article class=post-entry>
+<header class=entry-header>
+<h2>Chapter5 函数式编程
+</h2>
+</header>
+<section class=entry-content>
+<p>函数式编程 到目前为止，你已经专注于熟悉 Clojure 提供的工具：不可变的数据结构、函数、抽象，等等。在这一章中，你将学习如何思考你的编程任务，以最好的方式利用这些工具。你将开始把你的经验整合到一个新的函数式编程思维中。
+你将学到的核心概念包括：什么是纯函数，为什么它们很有用；如何使用不可变的数据结构，为什么它们比可变的表亲更有优势；如何将数据和函数分开，给你带来更多的力量和灵活性；以及为什么对一小部分数据抽象进行编程会很强大。一旦你把所有这些知识塞进你的大脑，你就会有一个全新的解决问题的方法
+在学习了这些主题之后，你将通过编写一个基于终端的游戏来运用你所学到的一切，这个游戏的灵感来自于美国各地 Cracker Barrel 餐馆中的一种古老而神秘的思维训练装置。Peg Thing!
+纯函数：什么和为什么 除了 “println “和 “rand”，到目前为止，你所使用的所有函数都是纯函数。是什么使它们成为纯函数，为什么会有这样的问题？如果一个函数符合两个条件，它就是纯函数。
+如果给出相同的参数，它总是返回相同的结果。这被称为引用透明度，你可以把它添加到你的 5 美元编程术语列表中。 它不能引起任何副作用。也就是说，该函数不能做出任何在函数本身之外可以观察到的改变–例如，通过改变一个外部可访问的可改变对象或写到一个文件。 这些特性使你更容易推理你的程序，因为这些函数是完全隔离的，无法影响你系统的其他部分。当你使用它们时，你不必问自己，“我调用这个函数会破坏什么？” 它们也是一致的：你永远不需要搞清楚为什么给一个函数传递相同的参数会导致不同的返回值，因为这永远不会发生。
+纯函数和算术一样稳定，没有问题（你最后一次为两个数字相加而烦恼是什么时候？） 它们是巨大的函数小砖块，你可以自信地将其作为你程序的基础。让我们更详细地看看引用透明性和无副作用，看看它们到底是什么，以及它们是如何发挥作用的。
+纯函数是引用透明的 为了在调用相同参数时返回相同的结果，纯函数只依靠 1）自己的参数和 2）不可变的值来决定其返回值。例如，数学函数是引用透明的。
+(+ 1 2) ; => 3 如果一个函数依赖于一个不可变的值，那么它就是引用透明的。字符串`”, Daniel-san “是不可变的，所以下面的函数也是引用透明的。
+(defn wisdom [words] (str words ", Daniel-san")) (wisdom "Always bathe on Fridays") ; => "Always bathe on Fridays, Daniel-san" 相比之下，下面的函数在相同的参数下不会产生相同的结果；因此，它们在指称上是不透明的。任何依赖随机数生成器的函数都不可能是指称透明的。
+(defn year-end-evaluation [] (if (> (rand) 0.5) "You get a raise!" "Better luck next year!...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-14 10:00:07 +0800 +0800">January 14, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter5 函数式编程" href=https://zhenfeng-zhu.github.io/posts/chapter5/></a>
+</article>
+<article class=post-entry>
 <figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
 </figure>
 <header class=entry-header>
@@ -261,33 +281,6 @@ bool 布尔值，对应 java 中的 boolean byte 有符号字节，对应 java �
 </section>
 <footer class=entry-footer><span title="2022-01-06 10:29:52 +0800 +0800">January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 修复 Vscode Git Cannot Use Api Proposal ScmValidation" href=https://zhenfeng-zhu.github.io/posts/fix-vscode-git-cannot-use-api-proposal-scmvalidation/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Gavin Wood: Web3 去中心化技术是维护自由民主的唯一希望
-</h2>
-</header>
-<section class=entry-content>
-<p>Gavin Wood 在 2014 年创造了 Web3（最初是 Web 3.0）这个词。当时，他刚开始帮助开发以太坊，这是一种在知名度和市场规模上仅次于比特币的加密货币。如今，他经营着支持去中心化技术项目的 Web3 基金会，以及专注于为 Web3 构建区块链基础设施的公司 Parity Technologies。居住在瑞士的 Gavin 上周通过视频与我讨论了 Web 2.0 出错的地方、他对未来的展望，以及为什么我们都需要更少的信任。以下采访是我们谈话的记录的整理版。
-WIRED：据我所知，Web3 最基本的想法是当前的 Web2.0 不好。因此，在我们讨论 Web3 会带来什么之前，你会怎么描述现在的问题？
-Gavin Wood：我认为 Web 2.0 的模型与互联网出现之前的社会模型非常相似。如果你回到 500 年前，人们基本上只在他们的小村庄和乡镇，并与他们认识的人进行交易。从广义上讲，他们依靠社会结构来确保他们的期望是可信的，并且很可能会真正发生，比如，这些苹果没有腐烂，或者这个马蹄铁在三周后不会破裂。
-这种机制运行很好，因为在城镇之间移动既困难又耗时且成本高昂。所以你有相当高的可信度，就会有人留下来，他们并不想被流放。
-但是随着社会变得更大规模，我们有了城市、国家和国际组织，我们开始关注这种奇怪的品牌声誉问题。我们创建了这些强大但受监管的机构，监管机构原则上确保满足我们的期望。想要在特定行业开展业务，你必须满足某些法定要求。
-这不是一个很好的解决方案，原因有几个。其中之一是，去监管新兴产业非常困难。政府的行动是比较缓慢的，需要一段时间才能赶上。另一个是监管机构不完善。尤其是当他们与行业密切合作时，行业和监管机构之间通常会存在一些旋转门关系。
-另一个是监管机构的支持力度非常有限，也就是政府投入多少资金。因此，监管将是不完整的。他们能够监管最大的罪犯，但他们无法在任何地方都保持真正强大的影响力。当然，监管机构和法律因司法管辖区而异。如果你去欧盟的某个地方，那么 xx 活动就可以了；如果你去别的地方，那就不行了。随着我们成为一个非常国际化的社会，这实际上意味着你的期望仍未得到满足。
-所以我们需要超越这一点。但不幸的是，Web 2.0 仍然存在于这种非常中心化的模型中。
-WIRED：我们真的在谈论技术的失败吗？还是我们在谈论治理、监管和竞争政策的失败？因为听起来你是在说：这是监管的失败，但答案却不是更好的监管，而是需要有一个新的技术层，因为监管失败是不可避免的。我是否正确描述了您的观点？
-Gavin Wood：是的，这个模型坏了。
-WIRED：那么让我们来谈谈应该用什么来代替它。我们一直在讨论为什么 Web 2.0 不起作用。你对 Web3 的定义是什么？
-Gavin Wood：Less trust, more truth。更少的信任，更多的事实。
-WIRED：“less trust”是什么意思？
-Gavin Wood：我对信任有一个特殊的含义，它本质上是信仰。这是一种信念（faith），即某些事情会发生的信仰，世界会以某种方式运转，而没有任何真实的证据或理性的论据来说明为什么会发生这种情况。所以我们想要的更少的信任，我们想要更多的事实真相。我真正想表达的意思是在 Web3 下更加可以相信我们的期望会得到满足。
-WIRED：这听起来像是在说“减少盲目信仰，增加信誉的可信度”。
-Gavin Wood：可以说是，也可以说不是。我认为信任本身实际上围绕着坏事。信任意味着你将某种权力授予其他人或某个组织，他们将能够以某种任意方式使用该权力。一旦它成为可信的信任，它就不再是真正的信任。它会有一个机制，一个基本原理，一个论点，一个逻辑机制。无论如何，但在我看来，这不是信任。
-WIRED：已经写到 Web3 将打破像 Google 和 Facebook 这样的垄断企业平台。你能解释一下它将如何做到这一点吗？...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-05 10:20:39 +0800 +0800">January 5, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Gavin Wood: Web3 去中心化技术是维护自由民主的唯一希望" href=https://zhenfeng-zhu.github.io/posts/what-is-web3/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

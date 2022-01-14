@@ -70,6 +70,21 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Geth
+</h2>
+</header>
+<section class=entry-content>
+<p>Geth 简介 go-ethereum
+go-ethereum 客户端通常被称为 geth，它是个命令行界面，执行在 Go 上实现的完整以太坊节点。通过安装和运行 geth，可以参与到以太坊前台实时网络并进行以下操作：
+挖掘真的以太币 在不同地址间转移资金 创建合约，发送交易 探索区块历史 及很多其他 网站: http://ethereum.github.io/go-ethereum/ Github: https://github.com/ethereum/go-ethereum 维基百科: https://github.com/ethereum/go-ethereum/wiki/geth Gitter: https://gitter.im/ethereum/go-ethereum
+mac 下安装 geth 首先安装 homebrew， 使用 brew 安装即可。在安装 geth 的时候，会将 go 也安装上。 brew tap ethereum/ethereum brew install ethereum 在命令行输入 geth —help，如果出现
+zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum command line interface Copyright 2013-2017 The go-ethereum Authors USAGE: geth [options] command [command options] [arguments....</p>
+</section>
+<footer class=entry-footer><span title="2020-11-20 10:07:39 +0800 +0800">November 20, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Geth" href=https://zhenfeng-zhu.github.io/posts/geth/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>hive 常用函数
 </h2>
 </header>
@@ -209,20 +224,6 @@ def shout(x) # Notice that both Int32 and String respond_to `to_s` x.to_s.upcase
 </section>
 <footer class=entry-footer><span title="2019-08-26 06:54:14.652 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>go 进阶
-</h2>
-</header>
-<section class=entry-content>
-<p>Diagnostics go 提供了一系列诊断逻辑和性能问题的工具。
-profiling 分析 tracing 跟踪 debuging 调试 运行时统计信息和事件 Profiling profiling 信息可以在 go test 或者 net/http/pprof 包的时候使用。
-runtime/pprof 包有：
-cpu 主动消费 cpu 周期所花费的时间，不包括睡眠或者 io 等待 heap 报告内存分配采样； 当前或历史内存使用状况 检测内存泄露 threadcreate 报告创建新的系统线程 goroutine 当前所有协程的堆栈跟踪 block 显示 goroutine 阻塞等待同步原语的位置。 默认不开启，使用 runtime.SetBlockProfileRate 启用 mutex 报告锁竞争。 如果认为自己的程序因为互斥锁导致 cpu 不能充分利用的时候，使用这个。 默认也是不开启，使用 runtime.SetMutexProfileFraction 启用。 其他可用的的性能分析工具...</p>
-</section>
-<footer class=entry-footer><span title="2019-08-26 06:53:32.176 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to go 进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

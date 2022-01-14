@@ -73,6 +73,20 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>go 进阶
+</h2>
+</header>
+<section class=entry-content>
+<p>Diagnostics go 提供了一系列诊断逻辑和性能问题的工具。
+profiling 分析 tracing 跟踪 debuging 调试 运行时统计信息和事件 Profiling profiling 信息可以在 go test 或者 net/http/pprof 包的时候使用。
+runtime/pprof 包有：
+cpu 主动消费 cpu 周期所花费的时间，不包括睡眠或者 io 等待 heap 报告内存分配采样； 当前或历史内存使用状况 检测内存泄露 threadcreate 报告创建新的系统线程 goroutine 当前所有协程的堆栈跟踪 block 显示 goroutine 阻塞等待同步原语的位置。 默认不开启，使用 runtime.SetBlockProfileRate 启用 mutex 报告锁竞争。 如果认为自己的程序因为互斥锁导致 cpu 不能充分利用的时候，使用这个。 默认也是不开启，使用 runtime.SetMutexProfileFraction 启用。 其他可用的的性能分析工具...</p>
+</section>
+<footer class=entry-footer><span title="2019-08-26 06:53:32.176 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to go 进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>mysql
 </h2>
 </header>
@@ -274,19 +288,6 @@ brew tap paritytech/paritytech brew install parity 创世区块 创世区块的�
 </section>
 <footer class=entry-footer><span title="2018-08-22 16:51:13 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 基于以太坊的 Parity 联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>dive-into-redis
-</h2>
-</header>
-<section class=entry-content>
-<p>redis 持久化，
-机制有两种：
-快照：全量备份，二进制序列化，存储紧凑 AOF 日志：连续的增量备份，内存数据修改的文本 </p>
-</section>
-<footer class=entry-footer><span title="2018-08-20 09:39:08 +0000 UTC">August 20, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
