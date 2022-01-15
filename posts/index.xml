@@ -24,8 +24,8 @@ Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。
 总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 &amp;ldquo;lein new app playsync &amp;ldquo;创建一个新的 Leiningen 项目，名为playsync。然后，打开project.clj文件，将 core.async 添加到:dependencies向量中，使其内容如下。
 [[org.clojure/clojure &amp;quot;1.9.0&amp;quot;] [org.clojure/core.async &amp;quot;0.1.346.0-17112a-alpha&amp;quot;]] 注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
 接下来，打开src/playsync/core.clj，使其看起来像这样。
-(ns playsync.core (:require [clojure.core.async :作为一个 :引用 [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;！！！去陈缓冲区关闭！线程 alts! alts!!!超时]])) 现在，当你在 REPL 中打开它时，你将拥有最常用的 core.async 函数供你使用。很好! 在创建像热狗售卖机那样复杂和革命性的东西之前，先创建一个进程，简单地打印它收到的消息。
-(def echo-chan (chan)) (go (println (&amp;lt;! echo-chan)) ) (&amp;gt;!</description>
+(ns playsync.core (:require [clojure.core.async :as a :refer [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;!! go chan buffer close! thread alts! alts!! timeout]])) 现在，当你在 REPL 中打开它时，你将拥有最常用的 core.async 函数供你使用。很好! 在创建像热狗售卖机那样复杂和革命性的东西之前，先创建一个进程，简单地打印它收到的消息。
+(def echo-chan (chan)) (go (println (&amp;lt;!</description>
     </item>
     
     <item>
