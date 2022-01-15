@@ -9,7 +9,25 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 15 Jan 2022 12:42:26 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jan 2022 12:56:01 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chapter11</title>
+      <link>https://zhenfeng-zhu.github.io/posts/chapter11/</link>
+      <pubDate>Sat, 15 Jan 2022 12:56:01 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/chapter11/</guid>
+      <description>用 core.async 掌握并发进程 有一天，当你走在大街上时，你会惊讶、好奇，并有点厌恶地发现一台热狗自动贩卖机。你的头皮被有罪的好奇心刺痛，你会忍不住掏出三块钱，看看这个装置是否真的能工作。在 &amp;ldquo;咔嚓 &amp;ldquo;一声接受了你的钱后，它弹出了一个新鲜的热狗，包括面包和所有的东西。
+自动售货机表现出简单的行为：当它收到钱时，它会放出一个热狗，然后为下一次购买做准备。当它的热狗用完时，它就会停止。我们周围的热狗自动售货机以不同的面貌出现，它们是独立的实体，同时对世界上的事件作出反应。你最喜欢的咖啡店的浓缩咖啡机，你小时候喜欢的宠物仓鼠&amp;ndash;所有的东西都可以被分解成一组行为，这些行为遵循一般的形式 &amp;ldquo;当x发生时，做y&amp;quot;。甚至我们写的程序也只是美化的热狗贩卖机，每一个都是独立的进程，等待着下一个事件的发生，无论是击键、超时，还是套接字上的数据到达。
+Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。 本章描述了思考这种编程风格的有用模型，以及你在实际编写代码时需要了解的实际细节。你将学习如何使用通道在由 go 块和thread创建的独立进程之间进行通信；了解一些关于 Clojure 如何通过停放和阻塞有效地管理线程；如何使用alts!!；以及一种更直接的创建队列的方法。最后，你将学习如何用进程管道来踢回调的屁股。
+进程的入门 core.async 的核心是*进程，一个并发运行的逻辑单元，对事件做出反应。进程对应于我们对现实世界的心理模型：实体之间的互动和响应是独立的，没有某种中央控制机制的牵制。你把钱放进机器里，就会有一个热狗出来，所有这些都不需要光照派或老大哥来策划整个事情。这与你迄今为止一直在探索的并发性观点不同，在那里，你定义的任务要么只是控制主线程的扩展（例如，用pmap实现数据并行），要么是你没有兴趣与之交流的任务（如用future创建的一次性任务）。
+把自动售货机看成是一个进程可能很奇怪：自动售货机是名词和事物，而进程是动词和行为。为了获得正确的思维方式，可以尝试将现实世界的物体定义为其事件驱动的行为的总和。当一粒种子被浇水时，它就会发芽；当母亲看着她的新生儿时，她就会感受到爱；而当你观看《星战》第一集时，你会充满愤怒和绝望。如果你想变得超级哲学，可以考虑是否有可能将每个事物的本质定义为它所识别的事件的集合，以及它如何做出反应。现实是否只是热狗售卖机的组成？
+总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 &amp;ldquo;lein new app playsync &amp;ldquo;创建一个新的 Leiningen 项目，名为playsync。然后，打开project.clj文件，将 core.async 添加到:dependencies向量中，使其内容如下。
+[[org.clojure/clojure &amp;quot;1.9.0&amp;quot;] [org.clojure/core.async &amp;quot;0.1.346.0-17112a-alpha&amp;quot;]] 注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
+接下来，打开src/playsync/core.clj，使其看起来像这样。
+(ns playsync.core (:require [clojure.core.async :作为一个 :引用 [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;！！！去陈缓冲区关闭！线程 alts! alts!!!超时]])) 现在，当你在 REPL 中打开它时，你将拥有最常用的 core.async 函数供你使用。很好! 在创建像热狗售卖机那样复杂和革命性的东西之前，先创建一个进程，简单地打印它收到的消息。
+(def echo-chan (chan)) (go (println (&amp;lt;! echo-chan)) ) (&amp;gt;!</description>
+    </item>
+    
     <item>
       <title>Chapter10</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter10/</link>

@@ -73,6 +73,26 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Chapter11
+</h2>
+</header>
+<section class=entry-content>
+<p>用 core.async 掌握并发进程 有一天，当你走在大街上时，你会惊讶、好奇，并有点厌恶地发现一台热狗自动贩卖机。你的头皮被有罪的好奇心刺痛，你会忍不住掏出三块钱，看看这个装置是否真的能工作。在 “咔嚓 “一声接受了你的钱后，它弹出了一个新鲜的热狗，包括面包和所有的东西。
+自动售货机表现出简单的行为：当它收到钱时，它会放出一个热狗，然后为下一次购买做准备。当它的热狗用完时，它就会停止。我们周围的热狗自动售货机以不同的面貌出现，它们是独立的实体，同时对世界上的事件作出反应。你最喜欢的咖啡店的浓缩咖啡机，你小时候喜欢的宠物仓鼠–所有的东西都可以被分解成一组行为，这些行为遵循一般的形式 “当x发生时，做y"。甚至我们写的程序也只是美化的热狗贩卖机，每一个都是独立的进程，等待着下一个事件的发生，无论是击键、超时，还是套接字上的数据到达。
+Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。 本章描述了思考这种编程风格的有用模型，以及你在实际编写代码时需要了解的实际细节。你将学习如何使用通道在由 go 块和thread创建的独立进程之间进行通信；了解一些关于 Clojure 如何通过停放和阻塞有效地管理线程；如何使用alts!!；以及一种更直接的创建队列的方法。最后，你将学习如何用进程管道来踢回调的屁股。
+进程的入门 core.async 的核心是*进程，一个并发运行的逻辑单元，对事件做出反应。进程对应于我们对现实世界的心理模型：实体之间的互动和响应是独立的，没有某种中央控制机制的牵制。你把钱放进机器里，就会有一个热狗出来，所有这些都不需要光照派或老大哥来策划整个事情。这与你迄今为止一直在探索的并发性观点不同，在那里，你定义的任务要么只是控制主线程的扩展（例如，用pmap实现数据并行），要么是你没有兴趣与之交流的任务（如用future创建的一次性任务）。
+把自动售货机看成是一个进程可能很奇怪：自动售货机是名词和事物，而进程是动词和行为。为了获得正确的思维方式，可以尝试将现实世界的物体定义为其事件驱动的行为的总和。当一粒种子被浇水时，它就会发芽；当母亲看着她的新生儿时，她就会感受到爱；而当你观看《星战》第一集时，你会充满愤怒和绝望。如果你想变得超级哲学，可以考虑是否有可能将每个事物的本质定义为它所识别的事件的集合，以及它如何做出反应。现实是否只是热狗售卖机的组成？
+总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 “lein new app playsync “创建一个新的 Leiningen 项目，名为playsync。然后，打开project.clj文件，将 core.async 添加到:dependencies向量中，使其内容如下。
+[[org.clojure/clojure "1.9.0"] [org.clojure/core.async "0.1.346.0-17112a-alpha"]] 注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
+接下来，打开src/playsync/core.clj，使其看起来像这样。
+(ns playsync.core (:require [clojure.core.async :作为一个 :引用 [>! &lt;! >!! &lt;！！！去陈缓冲区关闭！线程 alts! alts!!!超时]])) 现在，当你在 REPL 中打开它时，你将拥有最常用的 core.async 函数供你使用。很好! 在创建像热狗售卖机那样复杂和革命性的东西之前，先创建一个进程，简单地打印它收到的消息。
+(def echo-chan (chan)) (go (println (&lt;! echo-chan)) ) (>!...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 12:56:01 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter11" href=https://zhenfeng-zhu.github.io/posts/chapter11/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Chapter10
 </h2>
 </header>
@@ -273,24 +293,6 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 </section>
 <footer class=entry-footer><span title="2022-01-13 10:43:56 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器" href=https://zhenfeng-zhu.github.io/posts/chapter2/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Chapter1 构建、运行和 REPL
-</h2>
-</header>
-<section class=entry-content>
-<p>构建、运行和 REPL 在本章中，你将预先投入少量时间来熟悉建立和运行 Clojure 程序的快速、傻瓜式方法。让一个真正的程序运行起来感觉很好。达到了这个里程碑，你就可以自由地进行实验，分享你的工作，并向那些仍在使用上个世纪的语言的同事幸灾乐祸。这将有助于保持你的积极性!
-你还将学习如何使用*Read-Eval-Print Loop（REPL）*在一个正在运行的 Clojure 进程中即时运行代码，这使你能够快速测试你对语言的理解并更有效地学习。
-但首先，我将简要地介绍 Clojure。接下来，我将介绍 Leiningen，这是 Clojure 事实上的标准构建工具。在本章结束时，你将知道如何做以下事情。
-用 Leiningen 创建一个新的 Clojure 项目 构建该项目以创建一个可执行的 JAR 文件 执行 JAR 文件 在 Clojure REPL 中执行代码 First Things First: 什么是 Clojure Clojure 是由 Rich Hickey 在一座神话般的火山中铸造的。他使用 Lisp、函数式编程和他自己的一绺史诗般的头发的合金，创造了一种令人愉快而强大的语言。它的 Lisp 遗产使你有能力写出比大多数非 Lisp 语言更有表现力的代码，而它对函数式编程的独特理解将使你作为一个程序员的思维更敏锐。此外，Clojure 为你提供了更好的工具来处理复杂的领域（如并发编程），这些领域在传统上被认为会使开发人员陷入多年的治疗中。
-不过，在谈论 Clojure 时，重要的是要牢记 Clojure 语言和 Clojure 编译器之间的区别。Clojure 语言是一种强调函数的 Lisp 方言，其语法和语义与任何实现都无关。编译器是一个可执行的 JAR 文件，clojure.jar，它接收用 Clojure 语言编写的代码并将其编译为 Java 虚拟机（JVM）字节码。你会看到Clojure被用来指代语言和编译器，如果你不知道它们是独立的东西，就会感到困惑。但现在你意识到了，你就会好起来。
-这种区分是必要的，因为与大多数编程语言如 Ruby、Python、C 和其他许多语言不同，Clojure 是一种托管语言。Clojure 程序在 JVM 中执行，并依赖 JVM 的核心功能，如线程和垃圾收集。Clojure 还针对 JavaScript 和微软的通用语言运行时（CLR），但本书只关注 JVM 的实现。...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-13 10:26:48 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter1 构建、运行和 REPL" href=https://zhenfeng-zhu.github.io/posts/chapter1/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

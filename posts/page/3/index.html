@@ -75,6 +75,28 @@
 <figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
 </figure>
 <header class=entry-header>
+<h2>Openfaas Workshop Lab8
+</h2>
+</header>
+<section class=entry-content>
+<p>Lab 8 - 高级函数 - 超时 在开始这个实验之前，为你的文件创建一个新的文件夹。
+$ mkdir -p lab8 \ && cd lab8 用read_timeout扩展超时时间 timeout对应于一个函数可以运行多长时间，直到被执行。它对防止分布式系统中的误操作很重要。
+有几个地方可以为你的函数配置超时，在每个地方都可以通过使用环境变量来完成。
+函数超时
+read_timeout - 允许函数通过 HTTP 读取一个请求的时间
+write_timeout - 允许函数在 HTTP 上写一个响应的时间
+exec_timeout - 一个函数在被终止前可以运行的最大时间。
+API 网关的默认时间是 20 秒，所以我们来测试一下在一个函数上设置一个更短的超时时间。
+faas-cli new --lang python3 sleep-for --prefix="&lt;your-docker-username-here>" 编辑handler.py。
+import time import os def handle(req): """handle a request to the function Args: req (str): request body """ sleep_duration = int(os....</p>
+</section>
+<footer class=entry-footer><span title="2022-01-04 13:44:05 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Openfaas Workshop Lab8" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab8/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
+</figure>
+<header class=entry-header>
 <h2>Openfaas Workshop Lab7
 </h2>
 </header>
@@ -227,29 +249,6 @@ def gen_blogs(m) do m |> File.read!() |> Earmark....</p>
 </section>
 <footer class=entry-footer><span title="2021-07-23 09:33:18 +0800 +0800">July 23, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 如何从零开始写一个静态网站生成器" href=https://zhenfeng-zhu.github.io/posts/how-to-write-a-static-site-generator/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>Openfaas Workshop Lab2
-</h2>
-</header>
-<section class=entry-content>
-<p>实验室 2–测试东西 在开始这个实验之前，创建一个新的文件夹。
-$ mkdir -p lab2 \ && cd lab2 使用 UI 门户 现在你可以测试一下 OpenFaaS 的用户界面了。
-如果你已经设置了一个$OPENFAAS_URL，那么就可以得到这个 URL，然后点击它。
-echo $OPENFAAS_URL http://127.0.0.1:31112 如果你没有设置"$OPENFAAS_URL"，那么默认情况下是这样的。http://127.0.0.1:8080.
-我们可以部署一些样本函数，然后用它们来测试一下。
-faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 你可以在用户界面中试用它们，比如将 Markdown 代码转换为 HTML 的 Markdown 函数。
-在Request字段中键入以下内容。
-## The **OpenFaaS** _workshop_ 现在点击Invoke，看到响应出现在屏幕的下半部分。
-即。
-&lt;h2>The &lt;strong>OpenFaaS&lt;/strong> &lt;em>workshop&lt;/em>&lt;/h2> 你将看到以下字段显示。
-状态 - 该函数是否准备好运行。在状态显示准备好之前，你将不能从用户界面调用该函数。 Replicas - 在集群中运行的函数的副本数量 镜像 - 发布在 Docker Hub 或 Docker 资源库中的 Docker 图像名称和版本 调用次数 - 这显示了该函数被调用的次数，每 5 秒更新一次 点击Invoke若干次，看到Invocation count的增加。...</p>
-</section>
-<footer class=entry-footer><span title="2021-03-30 09:57:01 +0800 +0800">March 30, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Openfaas Workshop Lab2" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab2/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

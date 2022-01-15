@@ -73,6 +73,24 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>node 学习笔记
+</h2>
+</header>
+<section class=entry-content>
+<p>写 node 也有一段时间了，整理一下学习笔记，共同进步
+什么是 node 首先看一下什么是 node.js
+Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效 Node.js 的包管理器 npm，是全球最大的开源库生态系统 模块系统是 node 最基本也是最常用的。一般可以分为四类：
+原生模块 文件模块 第三方模块 自定义模块 node 社区崇尚 DRY 文化，即 Don’t repeate yourself。这种文化使得 node 的生态异常繁荣，同样也由于某些包的质量低下引来了一些诟病。
+谈谈自定义模块 我们在写 node 程序的时候，一般都是在写自定义模块。
+创建模块
+// b.js function FunA(){ return "hello world"; } // 暴露方法FunA module.exports = FunA; 加载模块
+// a.js const FunA=require('....</p>
+</section>
+<footer class=entry-footer><span title="2018-04-22 15:41:21 +0000 UTC">April 22, 2018</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to node 学习笔记" href=https://zhenfeng-zhu.github.io/posts/node-learning/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>node 的 redis 实战
 </h2>
 </header>
@@ -211,21 +229,6 @@ interface User{ void login(); void logout(); } 在 java 中，继承的类必须
 </section>
 <footer class=entry-footer><span title="2018-03-24 19:02:48 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Spring Data Jpa 实战" href=https://zhenfeng-zhu.github.io/posts/spring-data-jpa%E5%AE%9E%E6%88%98/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>spring boot 多数据源配置
-</h2>
-</header>
-<section class=entry-content>
-<p>spring boot 多数据源配置 在单数据源的情况下，Spring Boot 的配置非常简单，只需要在 application.properties 文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数据库拆分或是引入其他数据库，从而我们需要配置多个数据源。
-1 准备 1.1 禁止 DataSourceAutoConfiguration 首先要将 spring boot 自带的DataSourceAutoConfiguration禁掉，因为它会读取application.properties文件的spring.datasource.*属性并自动配置单数据源。在@SpringBootApplication注解中添加exclude属性即可：
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) public class DemoApplication { public static void main(String[] args) { SpringApplication.run(JpaDemoApplication.class, args); } } 1.2 配置数据库连接 然后在application.properties中配置多数据源连接信息：
-spring.datasource.primary.url=jdbc:mysql://localhost:3306/test spring.datasource.primary.username=root spring.datasource.primary.password=root spring.datasource.primary.driver-class-name=com.mysql.jdbc.Driver spring.datasource.secondary.url=jdbc:mysql://localhost:3306/test1 spring.datasource.secondary.username=root spring.datasource.secondary.password=root spring.datasource.secondary.driver-class-name=com.mysql.jdbc.Driver 1.3 手段创建数据源 由于我们禁掉了自动数据源配置，因些下一步就需要手动将这些数据源创建出来：
-@Configuration public class DataSourceConfig { @Bean(name = "primaryDataSource") // @Qualifier(value = "primaryDataSource") @ConfigurationProperties(prefix = "spring.datasource.primary") public DataSource primaryDataSource(){ return DataSourceBuilder.create().build(); } @Bean(name = "secondaryDataSource") // @Qualifier(value = "secondaryDataSource") @ConfigurationProperties(prefix = "spring....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 19:01:37 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to spring boot 多数据源配置" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

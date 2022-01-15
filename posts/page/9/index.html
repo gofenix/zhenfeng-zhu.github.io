@@ -72,6 +72,25 @@
 <h1>Posts</h1>
 </header>
 <article class=post-entry>
+<header class=entry-header>
+<h2>译：openfaas-workshop-Lab1
+</h2>
+</header>
+<section class=entry-content>
+<p>今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存储和数据库的功能等。并需要部署运行应用程序和依赖的软件到基础设施之上。假设我们不想在这些细节上花费精力，是否有一种简单的架构模型能够满足我们这种想法？这个答案已经存在，这就是今天软件架构世界中新鲜但是很热门的一个话题——Serverless（无服务器）架构。
+目前已经有一批优秀的 serverless 架构开源项目，OpenFaas 就是其中的佼佼者。奈何其中的中文资料比较少，我也是边学边翻译，希望能够抛砖引玉，助力 serverless 的发展。
+这是一个自学研讨会，学习如何构建、部署和运行 OpenFaas 函数。
+Lab1 - OpenFaas 的准备工作 OpenFaas 可以在 Docker Swarm 和 Kubernetes 的过几个主要平台之上运行。在此教程里，我们将会在的您本地电脑使用 Docker Swarm 来入门。
+预备条件 Docker Mac
+Docker CE for Mac Edge Edition Windows
+仅针对 windows10 专业版或企业版 安装Docker CE for Windows 安装Git Bash 备注：所有步骤中请使用 Git Bash：不要尝试使用 WSL 或 Bash for Windows。
+Linux - Ubuntu 或 Debian
+Docker CE for Linux 你可以从Docker Store中安装 Docker CE...</p>
+</section>
+<footer class=entry-footer><span title="2018-06-25 18:04:09 +0000 UTC">June 25, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 译：openfaas-workshop-Lab1" href=https://zhenfeng-zhu.github.io/posts/workshop-lab1/></a>
+</article>
+<article class=post-entry>
 <figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
 </figure>
 <header class=entry-header>
@@ -242,24 +261,6 @@ import { a } from "./module"; 所以自己也想要这么写，但是每次运�
 </section>
 <footer class=entry-footer><span title="2018-05-05 15:32:59 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to node 踩坑" href=https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>node 学习笔记
-</h2>
-</header>
-<section class=entry-content>
-<p>写 node 也有一段时间了，整理一下学习笔记，共同进步
-什么是 node 首先看一下什么是 node.js
-Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效 Node.js 的包管理器 npm，是全球最大的开源库生态系统 模块系统是 node 最基本也是最常用的。一般可以分为四类：
-原生模块 文件模块 第三方模块 自定义模块 node 社区崇尚 DRY 文化，即 Don’t repeate yourself。这种文化使得 node 的生态异常繁荣，同样也由于某些包的质量低下引来了一些诟病。
-谈谈自定义模块 我们在写 node 程序的时候，一般都是在写自定义模块。
-创建模块
-// b.js function FunA(){ return "hello world"; } // 暴露方法FunA module.exports = FunA; 加载模块
-// a.js const FunA=require('....</p>
-</section>
-<footer class=entry-footer><span title="2018-04-22 15:41:21 +0000 UTC">April 22, 2018</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to node 学习笔记" href=https://zhenfeng-zhu.github.io/posts/node-learning/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
