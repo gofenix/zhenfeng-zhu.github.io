@@ -118,7 +118,7 @@ Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个�
 多方法 多方法为你提供了一种直接的、灵活的方法，将多态性引入你的代码中。使用多方法，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 “你有预订吗？“和 “聚会人数？"，然后给你安排相应的座位。同样，当你调用一个多方法时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
 (ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf [were-creature] (str (:name were-creature) " will howl and murder")) ➌ (defmethod full-moon-behavior :simmons [were-creature] (str (:name were-creature) " will encourage people and sweat to the oldies")) (full-moon-behavior {:were-type :wolf ➍ :name "Rachel from next door"}) ; => "Rachel from next door will howl and murder" (full-moon-behavior {:name "Andy the baker" ➎ :were-type :simmons}) ; => "Andy the baker will encourage people and sweat to the oldies" 这个多方法显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。...</p>
 </section>
-<footer class=entry-footer><span title="2022-01-15 21:29:04 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<footer class=entry-footer><span title="2022-01-15 21:29:04 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Chapter13" href=https://zhenfeng-zhu.github.io/posts/chapter13/></a>
 </article>
 <article class="post-entry tag-entry">
