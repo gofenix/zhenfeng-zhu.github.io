@@ -153,14 +153,14 @@ Clojure 有很多功能，可以让你轻松实现并行化。虽然 Lady Gaga �
 在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。
 在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重评估、变量捕获和宏感染。
 宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。
-(when boolean-expression 表达式-1 表达式-2 表达式-3 ... 表达式-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
+(when boolean-expression expression-1 expression-2 expression-3 ... expression-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
 在这个宏扩展中，你可以看到when是用if和do来实现的。
-(macroexpand '(when boolean-expression 表达式-1 表达式-2 表达式-3)) ; => (if boolean-expression (做表达式-1 表达式-2 表达式-3)) 这表明宏是 Clojure 开发中不可或缺的一部分–它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。
+(macroexpand '(when boolean-expression expression-1 expression-2 expression-3)) ; => (if boolean-expression (do expression-1 expression-2 expression-3)) 这表明宏是 Clojure 开发中不可或缺的一部分–它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。
 解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以评估的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。
 作为一个例子，这里有我们的老朋友infix宏。
-(defmacro infix "当你为你的童年的符号而憔悴时，使用这个宏" [infix] (list (second infixed) (list (second infixed) (first infixed) (last infixed)) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。...</p>
+(defmacro infix "Use this macro when you pine for the notation of your childhood" [infixed] (list (second infixed) (first infixed) (last infixed))) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。...</p>
 </section>
-<footer class=entry-footer><span title="2022-01-15 12:22:42 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
+<footer class=entry-footer><span title="2022-01-15 12:22:42 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Chapter8" href=https://zhenfeng-zhu.github.io/posts/chapter8/></a>
 </article>
 <article class=post-entry>
