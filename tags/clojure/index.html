@@ -127,21 +127,20 @@ Clojure 有很多功能，可以让你轻松实现并行化。虽然 Lady Gaga �
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Chapter7 Clojure 炼金术。阅读、评估和宏
+<h2>Chapter7 Clojure 炼金术：读取器、评估和宏
 </h2>
 </header>
 <section class=entry-content>
-<p>Clojure 炼金术：阅读、评估和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Clojure 提供了一种工具，使哲学家的石头看起来只是一个小饰品：*宏。
+<p>Clojure 炼金术：读取器、评估器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Clojure 提供了一种工具，使哲学家的石头看起来只是一个小饰品：*宏。
 宏允许你将任意的表达式转化为有效的 Clojure，因此你可以扩展语言本身以满足你的需求。而且，你甚至不需要是一个穿长袍的老家伙或老太太来使用它们
 为了获得这种能力，请考虑这个微不足道的宏。
-(defmacro backwards [形式］ (反向形式)) (backwards (" backwards" " am" "I" str)) ; => "我是倒退的" backwards宏允许 Clojure 成功地评估表达式(" backwards" " am" "I" str)，尽管它没有遵循 Clojure 的内置语法规则，这些规则要求表达式的操作数首先出现（更不用说表达式不能按相反顺序书写的规则）。如果没有 “向后”，这个表达式会比几千年来的炼金术士用他们的一生来追求不可能实现的长生不老的方法更难失败。有了`向后'，*你就创造了你自己的语法！*你扩展了 Clojure，这样你就可以随心所欲地写代码了 我告诉你，这比把铅变成金子要好得多!
+(defmacro backwards [form] (reverse form)) (backwards (" backwards" " am" "I" str)) ; => "I am backwards" backwards宏允许 Clojure 成功地 Eval 表达式(" backwards" " am" "I" str)，尽管它没有遵循 Clojure 的内置语法规则，这些规则要求表达式的操作数首先出现（更不用说表达式不能按相反顺序书写的规则）。如果没有 “向后”，这个表达式会比几千年来的炼金术士用他们的一生来追求不可能实现的长生不老的方法更难失败。有了`向后'，*你就创造了你自己的语法！*你扩展了 Clojure，这样你就可以随心所欲地写代码了 我告诉你，这比把铅变成金子要好得多!
 本章为你提供了编写自己的宏所需的概念基础，使你能够疯狂地编写自己的宏。它解释了 Clojure 评估模型的元素：读取器，评估器，和宏扩展器。这就像 Clojure 元素的周期表。想想周期表是如何揭示原子的特性的：同一列的元素行为相似，因为它们有相同的核电荷。如果没有元素周期表及其基础理论，我们就会像过去的炼金术士一样，随意地把东西混在一起，看看什么东西会爆炸。但是，随着对元素的深入了解，你可以看到为什么东西会爆炸，并学会如何有目的地炸毁东西。
 A Overview of Clojure’s Evaluation Model Clojure（像所有的 Lisps）有一个不同于大多数其他语言的评估模型：它有一个两阶段的系统，它读文本源代码，产生 Clojure 数据结构。然后对这些数据结构进行*评估。Clojure 遍历数据结构，并根据数据结构的类型执行函数应用或 var 查找等操作。例如，当 Clojure 读取文本(+ 1 2)时，结果是一个列表数据结构，其第一个元素是一个+符号，后面是数字 1 和 2。这个数据结构被传递给 Clojure 的评估器，评估器查找+对应的函数，并将该函数应用于 1 和 2。
-在源代码、数据和评估之间有这种关系的语言被称为homoiconic（顺便说一句，如果你在浴室的镜子前熄灯说三次homoiconic，约翰-麦卡锡的幽灵就会出现并给你一个小括号）。同源语言使你能够将你的代码作为一组数据结构进行推理，你可以通过程序进行操作。为了说明这一点，让我们在编译的土地上走一圈。
-编程语言需要一个编译器或解释器来将你写的代码（由 Unicode 字符组成）翻译成其他东西：机器指令、其他编程语言的代码，等等。在这个过程中，编译器会构建一个抽象语法树（AST），这是一个代表你的程序的数据结构。你可以把 AST 看作是评价器的输入，你可以把它看作是一个遍历该树的函数，以产生机器代码或其他什么作为其输出。...</p>
+在源代码、数据和评估之间有这种关系的语言被称为homoiconic（顺便说一句，如果你在浴室的镜子前熄灯说三次homoiconic，约翰-麦卡锡的幽灵就会出现并给你一个小括号）。同源语言使你能够将你的代码作为一组数据结构进行推理，你可以通过程序进行操作。为了说明这一点，让我们在编译的土地上走一圈。...</p>
 </section>
 <footer class=entry-footer><span title="2022-01-15 12:14:36 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter7 Clojure 炼金术。阅读、评估和宏" href=https://zhenfeng-zhu.github.io/posts/chapter7/></a>
+<a class=entry-link aria-label="post link to Chapter7 Clojure 炼金术：读取器、评估和宏" href=https://zhenfeng-zhu.github.io/posts/chapter7/></a>
 </article>
 <article class="post-entry tag-entry">
 <figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
