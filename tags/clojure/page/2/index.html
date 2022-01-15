@@ -72,10 +72,83 @@
 <h1>clojure</h1>
 </header>
 <article class="post-entry tag-entry">
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
 </figure>
 <header class=entry-header>
-<h2>Chapter3 Clojure 速成班
+<h2>Chapter6 组织你的项目
+</h2>
+</header>
+<section class=entry-content>
+<p>组织你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你的代码库带来秩序。幸运的是，Clojure 提供了一套工具，专门用来帮助这个侏儒与混乱的力量不断斗争。
+这些工具通过将相关的函数和数据分组来帮助你组织你的代码。它们还可以防止名称冲突，这样你就不会意外地覆盖别人的代码，反之亦然。在这个充满悬念和神秘的故事中，请和我一起学习如何使用这些工具，并解决一生中的抢劫案吧 在这个传奇故事的最后，你将了解以下内容。
+`def’是做什么的
+什么是命名空间以及如何使用它们
+命名空间和文件系统之间的关系
+如何使用refer、alias、require、use和ns。
+如何使用文件系统来组织 Clojure 项目
+我先来介绍一下 Clojure 的组织系统，它的工作原理很像一个库。Melvil 兴奋地颤抖着!
+你的项目是一个库 现实世界中的图书馆存储对象的集合，如书籍、杂志和 DVD。他们使用寻址系统，所以当你得到一个物体的地址时，你可以导航到物理空间并检索到该物体。
+当然，没有人能够直接知道一本书或 DVD 的地址是什么。这就是为什么图书馆要记录一个物体的标题和它的地址之间的联系，并提供工具来搜索这些记录。在计算机之前的旧时代，图书馆提供卡片目录，即装满纸质卡片的柜子，其中包含每本书的标题、作者、“地址”（杜威十进制或国会图书馆编号）和其他信息。
+例如，要找到《达芬奇密码》，你可以翻阅书名目录（按书名排序的卡片），直到你找到正确的卡片。在那张卡片上，你会看到地址813.54（如果它使用杜威十进制系统），浏览图书馆，找到达芬奇密码所在的书架，并参与你一生中的文学和/或仇恨阅读冒险。
+在 Clojure 中想象一个类似的设置是很有用的。我认为 Clojure 是将对象（如数据结构和函数）存储在一组巨大的编号架上。没有人能够直接知道一个对象被存储在哪个架子上。相反，我们给 Clojure 一个标识符，它用来检索该对象。
+为了使之成功，Clojure 必须维护我们的标识符和货架地址之间的关联。它通过使用namespaces来做到这一点。命名空间包含了人类友好的符号和书架地址的引用之间的映射，被称为vars，很像卡片目录。
+从技术上讲，命名空间是 “clojure.lang.Namespace “类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用*ns*来引用当前的命名空间，你可以用(ns-name *ns*)来获得其名称。
+(ns-name *ns*) ; => user 例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=>。
+当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。
+至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象–在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要评估它，而是把它当作数据。接下来的几个例子显示了当你引用一个表单时会发生什么。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-14 12:40:41 +0800 +0800">January 14, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter6 组织你的项目" href=https://zhenfeng-zhu.github.io/posts/chapter6/></a>
+</article>
+<article class="post-entry tag-entry">
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
+</figure>
+<header class=entry-header>
+<h2>Chapter5 函数式编程
+</h2>
+</header>
+<section class=entry-content>
+<p>函数式编程 到目前为止，你已经专注于熟悉 Clojure 提供的工具：不可变的数据结构、函数、抽象，等等。在这一章中，你将学习如何思考你的编程任务，以最好的方式利用这些工具。你将开始把你的经验整合到一个新的函数式编程思维中。
+你将学到的核心概念包括：什么是纯函数，为什么它们很有用；如何使用不可变的数据结构，为什么它们比可变的表亲更有优势；如何将数据和函数分开，给你带来更多的力量和灵活性；以及为什么对一小部分数据抽象进行编程会很强大。一旦你把所有这些知识塞进你的大脑，你就会有一个全新的解决问题的方法
+在学习了这些主题之后，你将通过编写一个基于终端的游戏来运用你所学到的一切，这个游戏的灵感来自于美国各地 Cracker Barrel 餐馆中的一种古老而神秘的思维训练装置。Peg Thing!
+纯函数：什么和为什么 除了 “println “和 “rand”，到目前为止，你所使用的所有函数都是纯函数。是什么使它们成为纯函数，为什么会有这样的问题？如果一个函数符合两个条件，它就是纯函数。
+如果给出相同的参数，它总是返回相同的结果。这被称为引用透明度，你可以把它添加到你的 5 美元编程术语列表中。 它不能引起任何副作用。也就是说，该函数不能做出任何在函数本身之外可以观察到的改变–例如，通过改变一个外部可访问的可改变对象或写到一个文件。 这些特性使你更容易推理你的程序，因为这些函数是完全隔离的，无法影响你系统的其他部分。当你使用它们时，你不必问自己，“我调用这个函数会破坏什么？” 它们也是一致的：你永远不需要搞清楚为什么给一个函数传递相同的参数会导致不同的返回值，因为这永远不会发生。
+纯函数和算术一样稳定，没有问题（你最后一次为两个数字相加而烦恼是什么时候？） 它们是巨大的函数小砖块，你可以自信地将其作为你程序的基础。让我们更详细地看看引用透明性和无副作用，看看它们到底是什么，以及它们是如何发挥作用的。
+纯函数是引用透明的 为了在调用相同参数时返回相同的结果，纯函数只依靠 1）自己的参数和 2）不可变的值来决定其返回值。例如，数学函数是引用透明的。
+(+ 1 2) ; => 3 如果一个函数依赖于一个不可变的值，那么它就是引用透明的。字符串`”, Daniel-san “是不可变的，所以下面的函数也是引用透明的。
+(defn wisdom [words] (str words ", Daniel-san")) (wisdom "Always bathe on Fridays") ; => "Always bathe on Fridays, Daniel-san" 相比之下，下面的函数在相同的参数下不会产生相同的结果；因此，它们在指称上是不透明的。任何依赖随机数生成器的函数都不可能是指称透明的。
+(defn year-end-evaluation [] (if (> (rand) 0.5) "You get a raise!" "Better luck next year!...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-14 10:00:07 +0800 +0800">January 14, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter5 函数式编程" href=https://zhenfeng-zhu.github.io/posts/chapter5/></a>
+</article>
+<article class="post-entry tag-entry">
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
+</figure>
+<header class=entry-header>
+<h2>Chapter4 深入研究核心函数
+</h2>
+</header>
+<section class=entry-content>
+<p>核心函数的深入研究 如果你像我一样是焦虑的、以青少年为中心的准肥皂剧*《吸血鬼日记》的超级粉丝，你一定记得主角埃琳娜开始质疑她苍白的、神秘的暗恋者的行为的那一集。“为什么当我的膝盖被刮伤时，他立刻消失得无影无踪？“和 “为什么当我的手指被划破时，他的脸变成了一个怪异的死亡面具？“等等。
+如果你已经开始玩 Clojure 的核心函数，你可能也会问自己类似的问题。“为什么map'会返回一个列表，而我给它的是一个向量？"和 "为什么reduce’会把我的 map 当成一个向量列表？“等等。(不过，有了 Clojure，你至少可以免于思考作为一个 17 岁孩子的深刻的存在恐惧，直到永远）。
+在这一章中，你将了解到 Clojure 的深邃、黑暗、嗜血、超自然的****，我的意思是，在这一章中，你将了解到 Clojure 的编程到抽象的基本概念以及序列和集合的抽象。你还会了解到疯狂的序列*。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你试着使用它们时发生了什么。
+接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、向量、Map 和集合。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
+最后，你将学会如何解析和查询 CSV 中的吸血鬼数据，以确定在你的家乡潜伏着哪些诺斯费拉图。
+从编程到抽象 为了理解对抽象的编程，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中映射一个哈希图（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
+原因是 Clojure 在*序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first'、rest’和cons'，我们稍后会仔细研究），它就能与map'、`reduce’以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
+我认为抽象是操作的命名集合。如果你能在一个对象上执行一个抽象的所有操作，那么这个对象就是该抽象的一个实例。我甚至在编程之外也是这样想的。例如，电池抽象包括 “将导电介质连接到其阳极和阴极 “的操作，而该操作的输出是电流。电池是用锂还是用土豆做的并不重要。只要它对定义电池的一系列操作做出反应，它就是一个电池。
+同样地，map并不关心列表、向量、集合和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。
+把列表、向量、集合和 Map 当作序列对待 如果你把map操作独立于任何编程语言，甚至是编程，它的基本行为是用一个函数ƒ从现有的序列x导出一个新的序列y，这样y1 = ƒ(x1), y2 = ƒ(x2), ....</p>
+</section>
+<footer class=entry-footer><span title="2022-01-13 17:39:28 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter4 深入研究核心函数" href=https://zhenfeng-zhu.github.io/posts/chapter4/></a>
+</article>
+<article class="post-entry tag-entry">
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
+</figure>
+<header class=entry-header>
+<h2>Chapter3 速成班
 </h2>
 </header>
 <section class=entry-content>
@@ -90,13 +163,13 @@
 (+ 1 2 3) ; => 6 (str "It was the panda " "in the library " "with a dust buster") ; => "It was the panda in the library with a dust buster" 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种形式都是有效的。这里有一个不是形式的东西，因为它没有一个结束的小括号。...</p>
 </section>
 <footer class=entry-footer><span title="2022-01-13 11:12:19 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;15 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter3 Clojure 速成班" href=https://zhenfeng-zhu.github.io/posts/chapter3/></a>
+<a class=entry-link aria-label="post link to Chapter3 速成班" href=https://zhenfeng-zhu.github.io/posts/chapter3/></a>
 </article>
 <article class="post-entry tag-entry">
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
 </figure>
 <header class=entry-header>
-<h2>Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器
+<h2>Chapter2 如何使用 Emacs
 </h2>
 </header>
 <section class=entry-content>
@@ -109,10 +182,10 @@
 OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用程序。其他选项，如 Aquamacs，应该是为了使 Emacs 更 “像 Mac”，但从长远来看是有问题的，因为它们的设置与标准 Emacs 有很大的不同，以至于很难使用 Emacs 手册或跟随教程。 Ubuntu按照*https://launchpad....</p>
 </section>
 <footer class=entry-footer><span title="2022-01-13 10:43:56 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器" href=https://zhenfeng-zhu.github.io/posts/chapter2/></a>
+<a class=entry-link aria-label="post link to Chapter2 如何使用 Emacs" href=https://zhenfeng-zhu.github.io/posts/chapter2/></a>
 </article>
 <article class="post-entry tag-entry">
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
 </figure>
 <header class=entry-header>
 <h2>Chapter1 构建、运行和 REPL
@@ -130,7 +203,7 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 <a class=entry-link aria-label="post link to Chapter1 构建、运行和 REPL" href=https://zhenfeng-zhu.github.io/posts/chapter1/></a>
 </article>
 <article class="post-entry tag-entry">
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
 </figure>
 <header class=entry-header>
 <h2>Introduction
@@ -153,10 +226,10 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 <a class=entry-link aria-label="post link to Introduction" href=https://zhenfeng-zhu.github.io/posts/introduction/></a>
 </article>
 <article class="post-entry tag-entry">
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
 </figure>
 <header class=entry-header>
-<h2>Acknowledgments
+<h2>Acknowledgments 鸣谢
 </h2>
 </header>
 <section class=entry-content>
@@ -169,13 +242,13 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 最后，要感谢 No Starch 出版社的各位同仁，感谢你们对本书的帮助，使之成为我无比自豪的作品。感谢你们的高标准。感谢你们不断地促使本书更加清晰，甚至提出笑话。(Seph 的 “蜡球 “编辑仍然让我开怀大笑。) Seph Kramer, Riley Hoffman, Hayley Baker, Alison Law, Tyler Ortman, Anne Marie Walker: 谢谢你们!</p>
 </section>
 <footer class=entry-footer><span title="2022-01-13 10:06:10 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Acknowledgments" href=https://zhenfeng-zhu.github.io/posts/acknowledgments/></a>
+<a class=entry-link aria-label="post link to Acknowledgments 鸣谢" href=https://zhenfeng-zhu.github.io/posts/acknowledgments/></a>
 </article>
 <article class="post-entry tag-entry">
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
 </figure>
 <header class=entry-header>
-<h2>Foreword
+<h2>Foreword 前言
 </h2>
 </header>
 <section class=entry-content>
@@ -190,7 +263,7 @@ Clojure 是本书的主题，但在某种程度上它–或者说它的创造者
 Alan Dipert</p>
 </section>
 <footer class=entry-footer><span title="2022-01-13 10:04:46 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Foreword" href=https://zhenfeng-zhu.github.io/posts/foreword/></a>
+<a class=entry-link aria-label="post link to Foreword 前言" href=https://zhenfeng-zhu.github.io/posts/foreword/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

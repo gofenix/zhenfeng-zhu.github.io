@@ -9,7 +9,22 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 15 Jan 2022 21:41:09 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jan 2022 21:45:17 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Farewell 永别了</title>
+      <link>https://zhenfeng-zhu.github.io/posts/farewell/</link>
+      <pubDate>Sat, 15 Jan 2022 21:45:17 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/farewell/</guid>
+      <description>永别了 正如 Semisonic 在 90 年代的热门歌曲 &amp;ldquo;Closing Time &amp;ldquo;所告诉我们的那样，每一个新的开始都来自于其他一些开始的结束。恭喜你，高贵的读者，完成了这次 Clojure 之旅。我希望你发现它是有价值的，我也希望你期待着更多的东西！相信我，还有更多的东西等着你。
+相信我，还有很多东西。我最喜欢 Clojure 的一点是，它有一个完整的世界可以探索。逻辑编程、解析器、类型系统……只要你能说出计算机科学的一个有趣领域，你就可以用 Clojure 来研究它。我把我对下一步要去哪里的建议留给你。
+如果你想对 Clojure 生态系统有一个广泛的了解，请查看The Clojure Toolbox，它列出了数百个 Clojure 项目，并按照它们所解决的问题进行组织。
+如果你对网络编程感兴趣，一个很好的开始是 Luminus 框架（Luminus - 一个 Clojure 网络框架）。它的文档非常好，你很快就会有一个网站在运行。
+要想了解 Clojure 的最新动态，Eric Normand 的 Clojure Gazzette 是一个很好的资源（注册每周功能编程通讯）。当然，还有 Clojure 邮件列表（https://groups.google.com/forum/#!forum/clojure）和 Clojure subreddit 也是一个有用的、友好的地方（http://www.reddit.com/r/clojure）。
+如果 Twitter 是你选择的社交媒体，那么@swannodette (David Nolen), @gigasquid (Carin Meier), @puredanger (Alex Miller), @ztellman (Zach Tellman), @bbatsov (Bozidar Batsov) 和 @stuartsierra (Stuart Sierra) 是你的小红帽。你也可以关注我，@nonrecursive!
+再见了，小茶杯，祝你 Clojuring 愉快</description>
+    </item>
+    
     <item>
       <title>AppendixB Boot，花哨的 Clojure 构建框架</title>
       <link>https://zhenfeng-zhu.github.io/posts/appendixb/</link>
@@ -37,21 +52,21 @@ Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个�
     </item>
     
     <item>
-      <title>Chapter13</title>
+      <title>Chapter13 抽象</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter13/</link>
       <pubDate>Sat, 15 Jan 2022 21:29:04 +0800</pubDate>
       
       <guid>https://zhenfeng-zhu.github.io/posts/chapter13/</guid>
-      <description>用多方法、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社交媒体上闲聊，玩龙与地下城，戴帽子。也许更重要的是，你可以用抽象的概念来思考和交流。
+      <description>用 Multimethods、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社交媒体上闲聊，玩龙与地下城，戴帽子。也许更重要的是，你可以用抽象的概念来思考和交流。
 抽象思考的能力确实是人类最好的特征之一。它可以让你规避你的认知极限，将不同的细节捆绑在一起，形成一个整齐的概念包，让你可以在工作记忆中持有。你不需要去想 &amp;ldquo;可挤压的红球鼻子装饰 &amp;ldquo;这种笨重的想法，而只需要 &amp;ldquo;小丑鼻子 &amp;ldquo;这个概念。
 在 Clojure 中，一个抽象是一个操作的集合，而数据类型实现抽象。例如，seq 抽象由 &amp;ldquo;first &amp;ldquo;和 &amp;ldquo;rest &amp;ldquo;等操作组成，而向量数据类型是该抽象的实现；它对所有 seq 操作做出响应。像[:seltzer :water]这样的特定向量是该数据类型的*实例。
 编程语言越是让你以抽象的方式思考和写作，你的生产力就越高。例如，如果你知道一个数据结构是 seq 抽象的一个实例，你就可以立即调用一个大的知识网，了解哪些函数可以与数据结构一起工作。因此，你会花时间去实际使用这个数据结构，而不是不断地去查找关于它如何工作的文档。同样地，如果你扩展一个数据结构，使其与 seq 抽象一起工作，你就可以在上面使用大量的 seq 函数库。
-在第四章中，你了解到 Clojure 是以抽象的方式编写的。这很强大，因为在 Clojure 中，你可以专注于你可以用数据结构实际做的事情，而不用担心实现的细枝末节。本章向你介绍了创建和实现你自己的抽象的世界。你将学习多方法、协议和记录的基础知识。
+在第四章中，你了解到 Clojure 是以抽象的方式编写的。这很强大，因为在 Clojure 中，你可以专注于你可以用数据结构实际做的事情，而不用担心实现的细枝末节。本章向你介绍了创建和实现你自己的抽象的世界。你将学习 Multimethods、协议和记录的基础知识。
 多态性 我们在 Clojure 中实现抽象的主要方式是将一个操作名称与一个以上的算法联系起来。这种技术被称为多态性。例如，在列表上执行 &amp;ldquo;conj &amp;ldquo;的算法与向量的算法不同，但我们把它们统一在同一个名字下，以表明它们实现了同一个概念，即向这个数据结构添加一个元素。
 因为 Clojure 的许多数据类型都依赖于 Java 的标准库，所以本章中使用了一点 Java。例如，Clojure 的字符串只是 Java 的字符串，是 Java 类java.lang.String的实例。要在 Java 中定义你自己的数据类型，你要使用类。Clojure 提供了额外的类型结构。 记录和类型。本书只涉及记录。
-在我们学习记录之前，让我们看看多方法，这是我们定义多态行为的第一个工具。
-多方法 多方法为你提供了一种直接的、灵活的方法，将多态性引入你的代码中。使用多方法，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 &amp;ldquo;你有预订吗？&amp;ldquo;和 &amp;ldquo;聚会人数？&amp;quot;，然后给你安排相应的座位。同样，当你调用一个多方法时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
-(ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf [were-creature] (str (:name were-creature) &amp;quot; will howl and murder&amp;quot;)) ➌ (defmethod full-moon-behavior :simmons [were-creature] (str (:name were-creature) &amp;quot; will encourage people and sweat to the oldies&amp;quot;)) (full-moon-behavior {:were-type :wolf ➍ :name &amp;quot;Rachel from next door&amp;quot;}) ; =&amp;gt; &amp;quot;Rachel from next door will howl and murder&amp;quot; (full-moon-behavior {:name &amp;quot;Andy the baker&amp;quot; ➎ :were-type :simmons}) ; =&amp;gt; &amp;quot;Andy the baker will encourage people and sweat to the oldies&amp;quot; 这个多方法显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。</description>
+在我们学习记录之前，让我们看看 Multimethods，这是我们定义多态行为的第一个工具。
+Multimethods Multimethods为你提供了一种直接的、灵活的方法，将多态性引入你的代码中。使用 Multimethods，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 &amp;ldquo;你有预订吗？&amp;ldquo;和 &amp;ldquo;聚会人数？&amp;quot;，然后给你安排相应的座位。同样，当你调用一个 Multimethods 时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
+(ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf [were-creature] (str (:name were-creature) &amp;quot; will howl and murder&amp;quot;)) ➌ (defmethod full-moon-behavior :simmons [were-creature] (str (:name were-creature) &amp;quot; will encourage people and sweat to the oldies&amp;quot;)) (full-moon-behavior {:were-type :wolf ➍ :name &amp;quot;Rachel from next door&amp;quot;}) ; =&amp;gt; &amp;quot;Rachel from next door will howl and murder&amp;quot; (full-moon-behavior {:name &amp;quot;Andy the baker&amp;quot; ➎ :were-type :simmons}) ; =&amp;gt; &amp;quot;Andy the baker will encourage people and sweat to the oldies&amp;quot; 这个 Multimethods 显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。</description>
     </item>
     
     <item>
@@ -70,7 +85,41 @@ JVM 开发人员用 JVM 这个词来指代一些不同的东西。你会听到�
     </item>
     
     <item>
-      <title>Chapter9 并发和并行</title>
+      <title>Chapter11 core.async</title>
+      <link>https://zhenfeng-zhu.github.io/posts/chapter11/</link>
+      <pubDate>Sat, 15 Jan 2022 12:56:01 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/chapter11/</guid>
+      <description>用 core.async 掌握并发进程 有一天，当你走在大街上时，你会惊讶、好奇，并有点厌恶地发现一台热狗自动贩卖机。你的头皮被有罪的好奇心刺痛，你会忍不住掏出三块钱，看看这个装置是否真的能工作。在 &amp;ldquo;咔嚓 &amp;ldquo;一声接受了你的钱后，它弹出了一个新鲜的热狗，包括面包和所有的东西。
+自动售货机表现出简单的行为：当它收到钱时，它会放出一个热狗，然后为下一次购买做准备。当它的热狗用完时，它就会停止。我们周围的热狗自动售货机以不同的面貌出现，它们是独立的实体，同时对世界上的事件作出反应。你最喜欢的咖啡店的浓缩咖啡机，你小时候喜欢的宠物仓鼠&amp;ndash;所有的东西都可以被分解成一组行为，这些行为遵循一般的形式 &amp;ldquo;当x发生时，做y&amp;quot;。甚至我们写的程序也只是美化的热狗贩卖机，每一个都是独立的进程，等待着下一个事件的发生，无论是击键、超时，还是套接字上的数据到达。
+Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。 本章描述了思考这种编程风格的有用模型，以及你在实际编写代码时需要了解的实际细节。你将学习如何使用通道在由 go 块和thread创建的独立进程之间进行通信；了解一些关于 Clojure 如何通过停放和阻塞有效地管理线程；如何使用alts!!；以及一种更直接的创建队列的方法。最后，你将学习如何用进程管道来踢回调的屁股。
+进程的入门 core.async 的核心是*进程，一个并发运行的逻辑单元，对事件做出反应。进程对应于我们对现实世界的心理模型：实体之间的互动和响应是独立的，没有某种中央控制机制的牵制。你把钱放进机器里，就会有一个热狗出来，所有这些都不需要光照派或老大哥来策划整个事情。这与你迄今为止一直在探索的并发性观点不同，在那里，你定义的任务要么只是控制主线程的扩展（例如，用pmap实现数据并行），要么是你没有兴趣与之交流的任务（如用future创建的一次性任务）。
+把自动售货机看成是一个进程可能很奇怪：自动售货机是名词和事物，而进程是动词和行为。为了获得正确的思维方式，可以尝试将现实世界的物体定义为其事件驱动的行为的总和。当一粒种子被浇水时，它就会发芽；当母亲看着她的新生儿时，她就会感受到爱；而当你观看《星战》第一集时，你会充满愤怒和绝望。如果你想变得超级哲学，可以考虑是否有可能将每个事物的本质定义为它所识别的事件的集合，以及它如何做出反应。现实是否只是热狗售卖机的组成？
+总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 &amp;ldquo;lein new app playsync &amp;ldquo;创建一个新的 Leiningen 项目，名为playsync。然后，打开project.clj文件，将 core.async 添加到:dependencies向量中，使其内容如下。
+[[org.clojure/clojure &amp;quot;1.9.0&amp;quot;] [org.clojure/core.async &amp;quot;0.1.346.0-17112a-alpha&amp;quot;]] 注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
+接下来，打开src/playsync/core.clj，使其看起来像这样。
+(ns playsync.core (:require [clojure.core.async :as a :refer [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;!! go chan buffer close! thread alts! alts!! timeout]])) 现在，当你在 REPL 中打开它时，你将拥有最常用的 core.async 函数供你使用。很好! 在创建像热狗售卖机那样复杂和革命性的东西之前，先创建一个进程，简单地打印它收到的消息。
+(def echo-chan (chan)) (go (println (&amp;lt;!</description>
+    </item>
+    
+    <item>
+      <title>Chapter10 形而上学</title>
+      <link>https://zhenfeng-zhu.github.io/posts/chapter10/</link>
+      <pubDate>Sat, 15 Jan 2022 12:42:26 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/chapter10/</guid>
+      <description>Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸 三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。
+Rich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的meta-freakin-physics。
+在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，atom、ref和var引用类型。(Clojure 还有一个额外的引用类型，agents，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。
+形而上学试图用最广泛的术语来回答两个基本问题。
+ 那里有什么？ 它是什么样子的？  为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？
+面向对象的形而上学 OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。
+棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。
+class CuddleZombie # attr_accessor is just a shorthand way for creating getters and # setters for the listed instance variables attr_accessor :cuddle_hunger_level, :percent_deteriorated def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0) self.cuddle_hunger_level = cuddle_hunger_level self.percent_deteriorated = percent_deteriorated end end fred = CuddleZombie.</description>
+    </item>
+    
+    <item>
+      <title>Chapter9 并发的艺术</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter9/</link>
       <pubDate>Sat, 15 Jan 2022 12:30:14 +0800</pubDate>
       
@@ -80,7 +129,7 @@ JVM 开发人员用 JVM 这个词来指代一些不同的东西。你会听到�
 &amp;ldquo;在这种新模式下学习编程将是有趣和迷人的，真的。但请注意：它也充满了危险。你必须学习并发和并行编程*，这是一门神圣的艺术，使你的应用结构安全地管理多个同时执行的任务。
 &amp;ldquo;你从对并发和并行概念的概述开始学习这门艺术。然后，你将学习困扰每个从业者的三个小妖精：参考单元、互斥和矮人狂战士。你还将学习三种有助于你的工具：Future、许诺和延迟&amp;rdquo;。
 然后我会用键盘拍拍你的肩膀，示意你可以开始了。
-＃＃并发和并行的概念 并发和并行编程在程序执行的各个层面都涉及到很多混乱的细节，从硬件到操作系统，到编程语言库，再到从你的内心涌出的、落在编辑器中的代码。但在你为这些细节烦恼之前，在这一节中，我将介绍围绕并发和并行的高级概念。
+并发和并行的概念 并发和并行编程在程序执行的各个层面都涉及到很多混乱的细节，从硬件到操作系统，到编程语言库，再到从你的内心涌出的、落在编辑器中的代码。但在你为这些细节烦恼之前，在这一节中，我将介绍围绕并发和并行的高级概念。
 管理多个任务与同时执行任务 并发指的是在同一时间管理一个以上的任务。 任务只是意味着 &amp;ldquo;需要完成的事情&amp;rdquo;，它并不意味着任何有关硬件或软件的实现。我们可以用 Lady Gaga 的歌曲《电话》来说明并发性。Gaga 唱道
  I cannot text you with a drink in my hand, eh
  这里，她在解释她只能管理一个任务（喝酒）。她断然拒绝了她可以处理一个以上的任务的建议。然而，如果她决定同时处理任务，她会唱歌。
@@ -112,7 +161,7 @@ JVM 开发人员用 JVM 这个词来指代一些不同的东西。你会听到�
     </item>
     
     <item>
-      <title>Chapter7 Clojure 炼金术：读取器、评估和宏</title>
+      <title>Chapter7 炼金术</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter7/</link>
       <pubDate>Sat, 15 Jan 2022 12:14:36 +0800</pubDate>
       
@@ -127,12 +176,12 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     </item>
     
     <item>
-      <title>Chapter6 整理你的项目：一个图书管理员的故事</title>
+      <title>Chapter6 组织你的项目</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter6/</link>
       <pubDate>Fri, 14 Jan 2022 12:40:41 +0800</pubDate>
       
       <guid>https://zhenfeng-zhu.github.io/posts/chapter6/</guid>
-      <description>整理你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你的代码库带来秩序。幸运的是，Clojure 提供了一套工具，专门用来帮助这个侏儒与混乱的力量不断斗争。
+      <description>组织你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你的代码库带来秩序。幸运的是，Clojure 提供了一套工具，专门用来帮助这个侏儒与混乱的力量不断斗争。
 这些工具通过将相关的函数和数据分组来帮助你组织你的代码。它们还可以防止名称冲突，这样你就不会意外地覆盖别人的代码，反之亦然。在这个充满悬念和神秘的故事中，请和我一起学习如何使用这些工具，并解决一生中的抢劫案吧 在这个传奇故事的最后，你将了解以下内容。
   `def&amp;rsquo;是做什么的
   什么是命名空间以及如何使用它们
@@ -170,7 +219,7 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     </item>
     
     <item>
-      <title>Chapter4 核心函数的深入研究</title>
+      <title>Chapter4 深入研究核心函数</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter4/</link>
       <pubDate>Thu, 13 Jan 2022 17:39:28 +0800</pubDate>
       
@@ -188,7 +237,7 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     </item>
     
     <item>
-      <title>Chapter3 Clojure 速成班</title>
+      <title>Chapter3 速成班</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter3/</link>
       <pubDate>Thu, 13 Jan 2022 11:12:19 +0800</pubDate>
       
@@ -205,7 +254,7 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     </item>
     
     <item>
-      <title>Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器</title>
+      <title>Chapter2 如何使用 Emacs</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter2/</link>
       <pubDate>Thu, 13 Jan 2022 10:43:56 +0800</pubDate>
       
@@ -253,7 +302,7 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     </item>
     
     <item>
-      <title>Acknowledgments</title>
+      <title>Acknowledgments 鸣谢</title>
       <link>https://zhenfeng-zhu.github.io/posts/acknowledgments/</link>
       <pubDate>Thu, 13 Jan 2022 10:06:10 +0800</pubDate>
       
@@ -268,7 +317,7 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     </item>
     
     <item>
-      <title>Foreword</title>
+      <title>Foreword 前言</title>
       <link>https://zhenfeng-zhu.github.io/posts/foreword/</link>
       <pubDate>Thu, 13 Jan 2022 10:04:46 +0800</pubDate>
       
