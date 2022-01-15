@@ -92,6 +92,96 @@
 </footer>
 </article>
 <article class=post-entry>
+<header class=entry-header>
+<h2>Chapter10
+</h2>
+</header>
+<section class=entry-content>
+<p>Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸 三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。
+Rich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的meta-freakin-physics。
+在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，atom、ref和var引用类型。(Clojure 还有一个额外的引用类型，agents，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。
+形而上学试图用最广泛的术语来回答两个基本问题。
+那里有什么？ 它是什么样子的？ 为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？
+面向对象的形而上学 OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。
+棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。
+class CuddleZombie # attr_accessor只是一种速记方式，用于为所列实例变量创建getters和 # 为列出的实例变量创建获取器和设置器 attr_accessor :cuddle_hunger_level, : percent_deteriorated def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0) self.cuddle_hunger_level = cuddle_hunger_level self. percent_deteriorated = percent_deteriorated 结束 结束 fred = CuddleZombie.new(2, 3) fred.cuddle_hunger_level # => 2 fred....</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 12:42:26 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter10" href=https://zhenfeng-zhu.github.io/posts/chapter10/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Chapter9
+</h2>
+</header>
+<section class=entry-content>
+<p>并发和并行编程的神圣艺术 如果我是一个庄园的主人，而你是我的继承人，我会在你的第 13 个命名日让你坐下来，告诉你：“计算的世界正在改变，小姑娘，你必须为多核处理器的新世界做好准备，以免你被它践踏。
+“好好听着。近年来，CPU 的时钟速度几乎没有增加，但双核和四核计算机已经变得很普遍。物理定律是残酷而绝对的，它们要求提高时钟速度需要成倍的功率。领域内最好的工程师不太可能很快克服这一限制，如果有的话。因此，你可以预期单台机器上的内核不断增加的趋势将继续下去–作为一个程序员，你将知道如何充分利用现代硬件的期望也是如此。
+“在这种新模式下学习编程将是有趣和迷人的，真的。但请注意：它也充满了危险。你必须学习并发和并行编程*，这是一门神圣的艺术，使你的应用结构安全地管理多个同时执行的任务。
+“你从对并发和并行概念的概述开始学习这门艺术。然后，你将学习困扰每个从业者的三个小妖精：参考单元、互斥和矮人狂战士。你还将学习三种有助于你的工具：期货、许诺和延迟”。
+然后我会用键盘拍拍你的肩膀，示意你可以开始了。
+＃＃并发和并行的概念 并发和并行编程在程序执行的各个层面都涉及到很多混乱的细节，从硬件到操作系统，到编程语言库，再到从你的内心涌出的、落在编辑器中的代码。但在你为这些细节烦恼之前，在这一节中，我将介绍围绕并发和并行的高级概念。
+管理多个任务与同时执行任务 并发指的是在同一时间管理一个以上的任务。 任务只是意味着 “需要完成的事情”，它并不意味着任何有关硬件或软件的实现。我们可以用 Lady Gaga 的歌曲《电话》来说明并发性。Gaga 唱道
+我不能给你发短信，手里拿着饮料，嗯
+这里，她在解释她只能管理一个任务（喝酒）。她断然拒绝了她可以处理一个以上的任务的建议。然而，如果她决定同时处理任务，她会唱歌。
+我将放下这杯酒给你发短信，然后把我的手机拿开，继续喝酒，嗯？
+在这个假设的宇宙中，Lady Gaga 正在处理两个任务：喝酒和发短信。然而，她并没有同时执行这两项任务。相反，她在这两个任务之间进行切换，或者说是交错。请注意，在交错过程中，你不必在切换之前完全完成一项任务：Gaga 可以打一个字，放下手机，拿起饮料喝一口，然后换回手机，再打一个字。
+平行性指的是同时执行一个以上的任务。如果加加夫人平行地执行她的两项任务，她会唱歌。
+我可以用一只手给你发短信，而我用另一只手喝酒，嗯？
+平行性是并发性的一个子类：在你同时执行多个任务之前，你首先要管理多个任务。
+Clojure 有很多功能，可以让你轻松实现并行化。虽然 Lady Gaga 系统是通过在多只手上同时执行任务来实现并行的，但计算机系统一般是通过在多个处理器上同时执行任务来实现并行的。
+将并行性与分布式区分开来是很重要的。分布式计算是并行计算的一个特殊版本，处理器在不同的计算机中，任务通过网络分布到计算机上。这就像 Lady Gaga 问 Beyoncé，“请在我喝酒时给这家伙发短信”。尽管你可以借助库在 Clojure 中进行分布式编程，但本书只涉及并行编程，在这里我用parallel只指同居的处理器。如果你对分布式编程感兴趣，可以去看看 Kyle Kingsbury 的Call Me Maybe系列，网址是https://aphyr.com/*。
+阻塞和异步任务 并发编程的主要用例之一是用于阻塞操作。阻塞实际上是指等待一个操作的完成。你最常听到的是与 I/O 操作有关的，比如读取文件或等待 HTTP 请求的完成。让我们用 Lady Gaga 并发的例子来研究这个问题。
+如果 Lady Gaga 给她的对话者发短信，然后拿着手机站在那里，盯着屏幕等待回应，而不喝水，那么你会说读下一条短信操作是阻塞的，这些任务是*同步执行的。
+相反，如果她把手机收起来，这样她就可以喝酒了，直到手机发出哔哔声或振动来提醒她，那么阅读下一条短信任务就不是阻塞的，你会说她是在*异步地处理这个任务。
+并发编程和并行编程 并发编程和并行编程指的是将一个任务分解成可以并行执行的子任务的技术，以及管理程序同时执行多个任务时产生的风险。在本章的其余部分，我将交替使用这两个术语，因为两者的风险几乎是一样的。
+为了更好地理解这些风险以及 Clojure 如何帮助你避免这些风险，让我们来看看 Clojure 中是如何实现并发和并行的。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 12:30:14 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter9" href=https://zhenfeng-zhu.github.io/posts/chapter9/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Chapter8
+</h2>
+</header>
+<section class=entry-content>
+<p>编写宏程序 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在
+凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。“终于来了！“我的大脑涌动着。“这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！”
+从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水–喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。
+就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。
+在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。
+在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重评估、变量捕获和宏感染。
+宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。
+(when boolean-expression 表达式-1 表达式-2 表达式-3 ... 表达式-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
+在这个宏扩展中，你可以看到when是用if和do来实现的。
+(macroexpand '(when boolean-expression 表达式-1 表达式-2 表达式-3)) ; => (if boolean-expression (做表达式-1 表达式-2 表达式-3)) 这表明宏是 Clojure 开发中不可或缺的一部分–它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。
+解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以评估的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。
+作为一个例子，这里有我们的老朋友infix宏。
+(defmacro infix "当你为你的童年的符号而憔悴时，使用这个宏" [infix] (list (second infixed) (list (second infixed) (first infixed) (last infixed)) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 12:22:42 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter8" href=https://zhenfeng-zhu.github.io/posts/chapter8/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Chapter7 Clojure 炼金术。阅读、评估和宏
+</h2>
+</header>
+<section class=entry-content>
+<p>Clojure 炼金术：阅读、评估和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Clojure 提供了一种工具，使哲学家的石头看起来只是一个小饰品：*宏。
+宏允许你将任意的表达式转化为有效的 Clojure，因此你可以扩展语言本身以满足你的需求。而且，你甚至不需要是一个穿长袍的老家伙或老太太来使用它们
+为了获得这种能力，请考虑这个微不足道的宏。
+(defmacro backwards [形式］ (反向形式)) (backwards (" backwards" " am" "I" str)) ; => "我是倒退的" backwards宏允许 Clojure 成功地评估表达式(" backwards" " am" "I" str)，尽管它没有遵循 Clojure 的内置语法规则，这些规则要求表达式的操作数首先出现（更不用说表达式不能按相反顺序书写的规则）。如果没有 “向后”，这个表达式会比几千年来的炼金术士用他们的一生来追求不可能实现的长生不老的方法更难失败。有了`向后'，*你就创造了你自己的语法！*你扩展了 Clojure，这样你就可以随心所欲地写代码了 我告诉你，这比把铅变成金子要好得多!
+本章为你提供了编写自己的宏所需的概念基础，使你能够疯狂地编写自己的宏。它解释了 Clojure 评估模型的元素：读取器，评估器，和宏扩展器。这就像 Clojure 元素的周期表。想想周期表是如何揭示原子的特性的：同一列的元素行为相似，因为它们有相同的核电荷。如果没有元素周期表及其基础理论，我们就会像过去的炼金术士一样，随意地把东西混在一起，看看什么东西会爆炸。但是，随着对元素的深入了解，你可以看到为什么东西会爆炸，并学会如何有目的地炸毁东西。
+A Overview of Clojure’s Evaluation Model Clojure（像所有的 Lisps）有一个不同于大多数其他语言的评估模型：它有一个两阶段的系统，它读文本源代码，产生 Clojure 数据结构。然后对这些数据结构进行*评估。Clojure 遍历数据结构，并根据数据结构的类型执行函数应用或 var 查找等操作。例如，当 Clojure 读取文本(+ 1 2)时，结果是一个列表数据结构，其第一个元素是一个+符号，后面是数字 1 和 2。这个数据结构被传递给 Clojure 的评估器，评估器查找+对应的函数，并将该函数应用于 1 和 2。
+在源代码、数据和评估之间有这种关系的语言被称为homoiconic（顺便说一句，如果你在浴室的镜子前熄灯说三次homoiconic，约翰-麦卡锡的幽灵就会出现并给你一个小括号）。同源语言使你能够将你的代码作为一组数据结构进行推理，你可以通过程序进行操作。为了说明这一点，让我们在编译的土地上走一圈。
+编程语言需要一个编译器或解释器来将你写的代码（由 Unicode 字符组成）翻译成其他东西：机器指令、其他编程语言的代码，等等。在这个过程中，编译器会构建一个抽象语法树（AST），这是一个代表你的程序的数据结构。你可以把 AST 看作是评价器的输入，你可以把它看作是一个遍历该树的函数，以产生机器代码或其他什么作为其输出。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 12:14:36 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter7 Clojure 炼金术。阅读、评估和宏" href=https://zhenfeng-zhu.github.io/posts/chapter7/></a>
+</article>
+<article class=post-entry>
 <figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
 </figure>
 <header class=entry-header>
@@ -221,83 +311,6 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 </section>
 <footer class=entry-footer><span title="2022-01-13 10:26:48 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Chapter1 构建、运行和 REPL" href=https://zhenfeng-zhu.github.io/posts/chapter1/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Introduction
-</h2>
-</header>
-<section class=entry-content>
-<p>简介 在你的内心深处，你一直都知道你注定要学习 Clojure。 每当你高举着键盘，为一个难以理解的类层次结构而痛苦地哭泣时；每当你晚上躺在床上，为一个突变引起的海森堡虫而哭泣扰乱你的亲人时；每当一个竞赛条件使你拔掉更多你不断减少的头发时，你的某个秘密部分已经知道一定有一个更好的办法。
-现在，终于，你面前的教学材料将使你与你渴望已久的编程语言结合起来。
-学习一种新的编程语言：穿越四个迷宫的旅程 为了最大限度地发挥 Clojure 的作用，你需要在每个学习新语言的程序员面临的四个迷宫中找到自己的路。
-工具之林 友好而高效的编程环境使你能够轻松地尝试你的想法。你将学习如何设置你的环境。 语言之山 随着你的攀登，你将获得 Clojure 的语法、语义和数据结构方面的知识。你将学习如何使用最强大的编程工具之一–宏，并学习如何利用 Clojure 的并发结构来简化你的生活。 神器之洞 在它的深处，你将学会构建、运行和发布你自己的程序，以及如何使用代码库。你还将学习 Clojure 与 Java 虚拟机（JVM）的关系。 心态的云堡 在其稀薄的空气中，你将了解 Lisp 和函数式编程的原因和方法。你将了解渗透在 Clojure 中的简单哲学，以及如何像 Clojurist 一样解决问题。 别搞错了，你要工作。但这本书会让你感觉到工作是令人振奋的，而不是疲惫的。这是因为本书遵循三个准则。
-它采取了甜点优先的方法，给你提供了你需要的开发工具和语言细节，以便立即开始玩真正的程序。 它假定你对 JVM、函数式编程或 Lisp 没有经验。它详细地涵盖了这些主题，所以当你构建和运行 Clojure 程序时，你会对你正在做的事情感到自信。 它避开了 真实世界 的例子，而选择了更有趣的练习，如 攻击霍比特人 和 追踪闪亮的吸血鬼 。 到最后，你将能够使用 Clojure–现存的最令人兴奋和最有趣的编程语言之一!
-本书是如何组织的 本书分为三个部分，以便更好地指导你完成你的勇敢探索，勇敢的初出茅庐的 Clojurist。
-第一部分：环境设置 为了保持动力和高效学习，你需要实际写代码和构建可执行文件。这些章节将带领你快速浏览你所需要的工具，以便轻松地编写程序。这样，你就可以专注于学习 Clojure，而不是摆弄你的环境。
-第 1 章：构建、运行和 REPL
-让一个真正的程序运行起来，有一种强大的激励作用。一旦你能做到这一点，你就可以自由地进行实验，而且你可以真正地分享你的工作
-在这短短的一章中，你将投入少量时间来熟悉建立和运行 Clojure 程序的快速方法。你将学习如何在一个正在运行的 Clojure 进程中使用读-评-印循环（REPL）来实验代码。这将收紧你的反馈回路，帮助你更有效地学习。
-第二章：如何使用 Emacs，一个优秀的 Clojure 编辑器...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-13 10:11:25 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Introduction" href=https://zhenfeng-zhu.github.io/posts/introduction/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Acknowledgments
-</h2>
-</header>
-<section class=entry-content>
-<p>鸣谢 有很多人帮助我诞生了这个奇怪的婴儿，我对他们的支持感到谦卑和感激。
-首先，感谢我的妻子杰西，她为这本书绘制了插图，使它具有我所希望的视觉特性。也感谢你的支持，感谢你在我处于疯狂的作家模式时容忍我。(附注：通过一本编程书的封面感谢我的妻子，感觉很奇怪。）
-感谢我在麦肯锡的朋友和同事，他们阅读了早期的修订稿并鼓励我继续写作。其中最重要的是 Pat Shaughnessy、Alex Rothenberg、Thomas Newton、Jalil Fanaian、Chris Parker、Mark Daggett、Christian Lilley，以及 Mike Morreale。你们都太伟大了；请搬到达勒姆。
-感谢我的朋友布里奇特-希勒（Bridget Hillyer）一直以来的支持和积极性。我总是觉得你是我的后盾，这对我来说意义重大。也感谢我的朋友乔-杰克逊，感谢他阅读、听我喋喋不休、提供反馈，并感谢他在我面前对其他人大谈这本书，让我感觉很酷。Alan Dipert，朋友，技术评论员，现在的同事，我向你表示万分感谢，感谢你出色的技术编辑，感谢你首先将我引入 Clojure。
-我不知道是否每个作家都会不断地问自己：“我到底为什么要这样做？是否有人会读它？“但我肯定会这样做。因此，我想感谢所有在这本书的最初网络版本编写过程中写信给我并建议进行编辑的友好人士。这些积极的反馈使我感到有信心，我正在做一件有意义的事情。同样地，感谢所有购买 Leanpub 版本的人
-非常感谢 Clojure 社区领导人 Eric Normand、David Nolen 和 Alex Miller 对本书的积极宣传。在下一届 Conj 大会上见!
-最后，要感谢 No Starch 出版社的各位同仁，感谢你们对本书的帮助，使之成为我无比自豪的作品。感谢你们的高标准。感谢你们不断地促使本书更加清晰，甚至提出笑话。(Seph 的 “蜡球 “编辑仍然让我开怀大笑。) Seph Kramer, Riley Hoffman, Hayley Baker, Alison Law, Tyler Ortman, Anne Marie Walker: 谢谢你们!</p>
-</section>
-<footer class=entry-footer><span title="2022-01-13 10:06:10 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Acknowledgments" href=https://zhenfeng-zhu.github.io/posts/acknowledgments/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Foreword
-</h2>
-</header>
-<section class=entry-content>
-<p>前言 当你阅读这本搞笑的书时，你会在某个时刻经历一个非常严肃的时刻。这是你向自己承认，在了解了一些 Clojure 之后，编程变得更加有趣的时刻。这也是你在这本书上的投资，包括金钱和时间，得到回报的时刻–有兴趣。
-幽默与严肃性有一定的关系。对严肃的事情开玩笑是合适的，但只有在适当的时间过去之后。例如，当我想起我最喜欢的叔叔的最后一句话时，我花了很多年才能够破涕为笑。“拿着我的啤酒”。
-这本书的工作方式正好相反。它在严肃事件发生之前，甚至在严肃事件发生期间，适时地指出了真正有趣的事情–那一刻你意识到你因为 Clojure 而更喜欢编程。它在做到这一点的同时，并没有掩盖你将要学习的 Clojure 编程的深层技术层面。
-这种方法令人耳目一新，因为我读过的大多数编程书籍都比骆驼的屁还干。我们很幸运，丹尼尔是一位出色的程序员和作家，他的妻子杰斯是一位同样出色的插图画家。我们特别幸运的是，他们两个都疯了，决定在完全相同的时间写一本书。
-Clojure 是本书的主题，但在某种程度上它–或者说它的创造者 Rich Hickey–也是作者之一，因为 Clojure 是有史以来最优雅的编程语言。就像早午餐的概念一样，Clojure 是如此的优雅，以至于如果不以某种方式提高他们的水平，就很难告诉别人关于它的任何事情。
-优雅是编程语言家族中许多方言经常被赋予的品质，这些方言被统称为 Lisp，Clojure 就是其中之一。所有的 Lisp 都是由数学家 John McCarthy 在 1958 年做出的一系列简单而美丽的发现演变而来。
-自 1958 年以来，出现了许多 Lisps 和 Lisp 书籍。还有更多的 Lisps 和书籍即将问世。作为过去和未来的人工制品，每一种都适合它们的作者在各自的时代所面临的独特的约束和欲望的组合。
-我发现 Clojure，以及这本关于它的特殊书籍，特别适合现在。我希望你也会这样。
-Alan Dipert</p>
-</section>
-<footer class=entry-footer><span title="2022-01-13 10:04:46 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Foreword" href=https://zhenfeng-zhu.github.io/posts/foreword/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Thrfit 入门
-</h2>
-</header>
-<section class=entry-content>
-<p>本文主要介绍 Thrift 的 IDL 基本语法。
-IDL Thrift 采用 IDL（Interface Definition Language）来定义通用的服务接口，然后通过 Thrift 提供的编译器，可以将服务接口编译成不同语言编写的代码，通过这个方式来实现跨语言的功能。
-基本类型 thrift基本支持所有的 Java 基本类型以及引用类型。
-bool 布尔值，对应 java 中的 boolean byte 有符号字节，对应 java 中的 byte i16 16 位有符号整型，对应 java 中的 short i32 32 位有符号整型，对应 java 中的 int i64 64 位有符号整型，对应 java 中的 long double 64 位浮点型，对应 java 中的 double string 字符串，对应 java 中的 String binary 对应 java 中的 byte[] struct 结构体 struct 有以下的一些约束：...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-06 10:41:45 +0800 +0800">January 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Thrfit 入门" href=https://zhenfeng-zhu.github.io/posts/thrfit-get-started/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

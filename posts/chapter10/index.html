@@ -1,0 +1,790 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Chapter10 | Awesome Fenix</title>
+<meta name=keywords content>
+<meta name=description content="Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸 三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。
+Rich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的meta-freakin-physics。
+在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，atom、ref和var引用类型。(Clojure 还有一个额外的引用类型，agents，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。
+形而上学试图用最广泛的术语来回答两个基本问题。
+ 那里有什么？ 它是什么样子的？  为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？
+面向对象的形而上学 OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。
+棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。
+class CuddleZombie # attr_accessor只是一种速记方式，用于为所列实例变量创建getters和 # 为列出的实例变量创建获取器和设置器 attr_accessor :cuddle_hunger_level, : percent_deteriorated def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0) self.cuddle_hunger_level = cuddle_hunger_level self. percent_deteriorated = percent_deteriorated 结束 结束 fred = CuddleZombie.new(2, 3) fred.cuddle_hunger_level # => 2 fred.">
+<meta name=author content="Fenix">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/posts/chapter10/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://zhenfeng-zhu.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://zhenfeng-zhu.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://zhenfeng-zhu.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://zhenfeng-zhu.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://zhenfeng-zhu.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.92.0">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-216295420-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="Chapter10">
+<meta property="og:description" content="Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸 三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。
+Rich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的meta-freakin-physics。
+在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，atom、ref和var引用类型。(Clojure 还有一个额外的引用类型，agents，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。
+形而上学试图用最广泛的术语来回答两个基本问题。
+ 那里有什么？ 它是什么样子的？  为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？
+面向对象的形而上学 OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。
+棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。
+class CuddleZombie # attr_accessor只是一种速记方式，用于为所列实例变量创建getters和 # 为列出的实例变量创建获取器和设置器 attr_accessor :cuddle_hunger_level, : percent_deteriorated def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0) self.cuddle_hunger_level = cuddle_hunger_level self. percent_deteriorated = percent_deteriorated 结束 结束 fred = CuddleZombie.new(2, 3) fred.cuddle_hunger_level # => 2 fred.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/posts/chapter10/"><meta property="og:image" content="https://zhenfeng-zhu.github.io/papermod-cover.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-15T12:42:26+08:00">
+<meta property="article:modified_time" content="2022-01-15T12:42:26+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://zhenfeng-zhu.github.io/papermod-cover.png">
+<meta name=twitter:title content="Chapter10">
+<meta name=twitter:description content="Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸 三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。
+Rich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的meta-freakin-physics。
+在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，atom、ref和var引用类型。(Clojure 还有一个额外的引用类型，agents，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。
+形而上学试图用最广泛的术语来回答两个基本问题。
+ 那里有什么？ 它是什么样子的？  为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？
+面向对象的形而上学 OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。
+棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。
+class CuddleZombie # attr_accessor只是一种速记方式，用于为所列实例变量创建getters和 # 为列出的实例变量创建获取器和设置器 attr_accessor :cuddle_hunger_level, : percent_deteriorated def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0) self.cuddle_hunger_level = cuddle_hunger_level self. percent_deteriorated = percent_deteriorated 结束 结束 fred = CuddleZombie.new(2, 3) fred.cuddle_hunger_level # => 2 fred.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://zhenfeng-zhu.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Chapter10","item":"https://zhenfeng-zhu.github.io/posts/chapter10/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Chapter10","name":"Chapter10","description":"Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸 三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。\nRich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的meta-freakin-physics。\n在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，atom、ref和var引用类型。(Clojure 还有一个额外的引用类型，agents，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。\n形而上学试图用最广泛的术语来回答两个基本问题。\n 那里有什么？ 它是什么样子的？  为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？\n面向对象的形而上学 OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。\n棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。\nclass CuddleZombie # attr_accessor只是一种速记方式，用于为所列实例变量创建getters和 # 为列出的实例变量创建获取器和设置器 attr_accessor :cuddle_hunger_level, : percent_deteriorated def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0) self.cuddle_hunger_level = cuddle_hunger_level self. percent_deteriorated = percent_deteriorated 结束 结束 fred = CuddleZombie.new(2, 3) fred.cuddle_hunger_level # =\u0026gt; 2 fred.","keywords":[""],"articleBody":"Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸 三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。\nRich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的meta-freakin-physics。\n在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，atom、ref和var引用类型。(Clojure 还有一个额外的引用类型，agents，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。\n形而上学试图用最广泛的术语来回答两个基本问题。\n 那里有什么？ 它是什么样子的？  为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？\n面向对象的形而上学 OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。\n棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。\nclass CuddleZombie # attr_accessor只是一种速记方式，用于为所列实例变量创建getters和 # 为列出的实例变量创建获取器和设置器 attr_accessor :cuddle_hunger_level, : percent_deteriorated def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0) self.cuddle_hunger_level = cuddle_hunger_level self. percent_deteriorated = percent_deteriorated 结束 结束 fred = CuddleZombie.new(2, 3) fred.cuddle_hunger_level # = 2 fred.%_deteriorated # = 3 fred.cuddle_hunger_level = 3 fred.cuddle_hunger_level # 3  10-1. 用 Ruby 建立抱团僵尸行为模型  在这个例子中，你创建了一个抱团僵尸，fred，有两个属性。cuddle_hunger_level和percent_deteriorated。fred一开始的cuddle_hunger_level是 2，但是你可以把它改成任何你想要的东西，它仍然是好的’Fred，同一个拥抱僵尸。在这种情况下，你把它的`cuddle_hunger_level’改为 3。\n你可以看到，这个对象只是一个花哨的引用单元。在多线程环境下，它也会受到同样的非确定性结果的影响。例如，如果两个线程试图用fred.cuddle_hunger_level = fred.cuddle_hunger_level + 1这样的方式来增加 Fred 的饥饿度，其中一个增量可能会丢失，就像《三个小妖精》中两个线程向X写入的例子一样。参考单元格、相互排斥和矮人狂战士 “中的例子。\n即使你只在一个单独的线程上进行读取，程序仍将是非确定性的。例如，假设你正在进行关于抱团僵尸行为的研究。你想记录一个僵尸的饥饿程度，只要它达到 50%的恶化程度，但你想在另一个线程上进行，以提高性能，使用类似清单 10-1 中的代码。\nif fred.percent_deteriorated = 50 Thread.new { database_logger.log(fred.cuddle_hunger_level) } 结束  这段 Ruby 代码在并发执行时并不安全。  问题是，另一个线程可能在实际写入之前改变fred。\n例如，图 10-1 显示了两个从上到下执行的线程。在这种情况下，将 5 写入数据库是正确的，但 10 却被写入了。\n图 10-1：记录不一致的抱团僵尸数据\n这将是很不幸的。当你试图从拥抱僵尸的启示中恢复时，你不希望你的数据是不一致的。然而，没有办法保留一个对象在某一特定时刻的状态。\n此外，为了同时改变cuddle_hunger_level和percent_deteriorated，你必须特别小心。否则，fred有可能被视为不一致的状态，因为另一个线程可能会在你打算同时进行的两个变化之间读取fred`对象，像这样。\nfred.cuddle_hunger_level = fred.cuddle_hunger_level + 1 # 在这个时候，另一个线程可以读取fred的属性并 # \"感知 \"到fred处于不一致的状态，除非你使用一个mutex fred. percent_deteriorated = fred. percent_deteriorated + 1 这是另一个版本的互斥问题。在面向对象编程（OOP）中，你可以用mutex来手动解决这个问题，它可以确保在 mutex 的持续时间内，每次只有一个线程可以访问一个资源（在本例中，就是fred对象）。\n对象永远不稳定的事实并不妨碍我们把它们当作程序的基本构件。事实上，这被认为是 OOP 的一个优势。状态如何变化并不重要；你仍然可以与一个稳定的接口进行交互，一切都会正常工作。这符合我们对世界的直观感觉。一块蜡仍然是同一块蜡，即使它的属性发生了变化：如果我改变了它的颜色，融化了它，然后把它倒在我的敌人的脸上，我仍然会认为它是我开始时的那个蜡对象。\n另外，在 OOP 中，对象也会做事。它们相互作用，在程序运行时改变状态。同样，这也符合我们对世界的直观感觉：变化是对象相互作用的结果。一个人的对象推到一个门的对象上，进入一个房子的对象。\nClojure 形而上学 在 Clojure 形而上学中，我们会说，我们永远不会遇到两次相同的拥抱僵尸。拥抱僵尸并不是一个独立于其变异而存在于世界上的离散事物：它实际上是一连串的价值。\n术语值经常被 Clojurists 使用，其具体含义可能与你的习惯不同。价值是*原子性的，即它们在一个更大的系统中形成一个单一的不可还原的单位或组成部分；它们是不可分割的、不变的、稳定的实体。数字是价值：数字 15 变异为另一个数字是没有意义的。当你从 15 加减时，你并没有改变 15 这个数字；你只是得到了一个不同的数字。Clojure 的数据结构也是价值，因为它们是不可改变的。当你在一个地图上使用assoc时，你不会修改原来的地图；相反，你会派生出一个新的地图。\n所以一个值不会改变，但是你可以对一个值应用一个过程来产生一个新的值。例如，假设我们从一个值F1开始，然后我们把拥抱僵尸过程应用到F1*，产生值F2。然后这个过程又被应用到F2的值上，产生F3的值，以此类推。\n这导致了对身份的不同概念。Clojure 形而上学不是像 OO 形而上学那样把身份理解为变化的对象所固有的，而是把身份理解为我们人类强加给由一个过程随时间产生的一连串不变的值的东西。我们使用名字来指定身份。名字Fred是指一系列单独的状态F1、F2、F3等等的方便方法。从这个角度来看，不存在所谓的可改变的状态。相反，state指的是某个时间点上的身份值。\nRich Hickey 用电话号码的比喻来解释状态。 Alan 的电话号码已经改变了 10 次，但我们将永远用同一个名字来称呼这些号码，即Alan 的电话号码。艾伦五年前的电话号码与今天的电话号码是不同的数值，两者是艾伦电话号码身份的两种状态。\n当你考虑到在你的程序中你是在处理关于世界的信息时，这是有意义的。与其说信息发生了变化，不如说你收到了新的信息。周五中午 12 点，“抱抱僵尸 “弗雷德处于 50%的腐烂状态。在下午 1 点，他是 60%的腐烂。这都是你可以处理的事实，引入一个新的事实并不会使以前的事实失效。即使弗雷德的衰变率从 50%增加到 60%，但在下午 12:00 时他处于 50%的衰变状态仍然是事实。\n图 10-2 显示了你可以如何将价值、过程、身份和状态可视化。\n图 10-2：价值、过程、身份和状态\n这些价值不会相互作用，也不能被改变。它们不能*做任何事情。只有在以下情况下才会发生变化：a）一个过程产生了一个新的值；b）我们选择将身份与新的值联系起来。\n为了处理这种变化，Clojure 使用参考类型。参考类型让你在 Clojure 中管理身份。使用它们，你可以命名一个身份并检索其状态。让我们来看看其中最简单的，原子。\n原子 Clojure 的原子引用类型允许你赋予一连串的相关值以身份。下面是你如何创建一个原子。\n(def fred (atom {:cuddle-hunger-level 0 :%-deteriorated 0})) 这将创建一个新的原子，并将其与名称fred绑定。这个原子*引用了{:cuddle-hunger-level 0 :percent-deteriorated 0}的值，你可以说这是它的当前状态。\n要得到一个原子的当前状态，你要解除对它的引用。下面是 Fred 的当前状态。\n@fred ; = {:cuddle-hunger-level 0, : percent-deteriorated 0}. 与期货、延迟和承诺不同，解除对原子（或任何其他引用类型）的引用将永远不会阻塞。当你解除对期货、延迟和承诺的引用时，就像你在说 “我现在需要一个值，我会一直等到我得到它”，所以这个操作会阻塞是合理的。然而，当你解除引用类型的引用时，就像你在说 “给我我现在引用的值”，所以操作不会阻塞是有道理的，因为它不需要等待任何东西。\n在清单 10-1 中的 Ruby 例子中，我们看到当你试图在一个单独的线程上记录数据时，对象数据可能会发生变化。当使用原子来管理状态时就不会发生这种危险，因为每个状态都是不可改变的。下面是你如何用println来记录一个僵尸的状态。\n(let [zombie-state @fred) (如果 (= (:%-deteriorated zombie-state) 50) (future (println (:cuddle-hunger-level zombie-state)))))) 清单 10-1 中的 Ruby 例子的问题是，它需要两步来读取僵尸的两个属性，而其他线程可能在这两步之间改变这些属性。然而，通过使用原子来引用不可变的数据结构，你只需要执行一次读取，并且返回的数据结构不会被其他线程改变。\n要更新原子，使其指向一个新的状态，你可以使用swap!。这似乎是矛盾的，因为我说过，原子值是不变的。的确，它们是不变的。但是现在我们正在使用原子的参考类型，一个指向原子值的结构。原子值不会改变，但是引用类型可以被更新并被分配一个新的值。\nswap!接收一个原子和一个函数作为参数。它将函数应用于原子的当前状态以产生一个新的值，然后它更新原子以引用这个新的值。新的值也被返回。下面是你如何将 Fred 的拥抱饥饿度提高 1。\n(swap! fred) (fn [current-state] (merge-with + current-state {:cuddle-hunger-level 1})) ; = {:cuddle-hunger-level 1, :%-deteriorated 0}。 取消引用fred将返回新的状态。\n@fred ; = {:cuddle-hunger-level 1, :percent-deteriorated 0}。 与 Ruby 不同，fred不可能处于不一致的状态，因为你可以同时更新饥饿度和恶化百分比，像这样。\n(swap! fred (fn [current-state] (merge-with + current-state {:cuddle-hunger-level 1 :%-deteriorated 1})) ; = {:cuddle-hunger-level 2, :percent-deteriorated 1}。 这段代码传递给swap!一个只需要一个参数的函数，current-state。你也可以传递swap!一个需要多个参数的函数。例如，你可以创建一个需要两个参数的函数，一个是僵尸状态，另一个是增加其拥抱饥饿度的数量。\n(defn increase-cuddle-hunger-level [zombie-state increase-by］ (merge-with + zombie-state {:cuddle-hunger-level increase-by}) 让我们在僵尸状态下快速测试一下increase-cuddle-hunger-level。\n(increase-cuddle-hunger-level @fred 10) ; = {:cuddle-hunger-level 12, : percent-deteriorated 1}. 注意，这段代码实际上并没有更新fred，因为我们没有使用swap!，我们只是对increase-cuddle-hunger-level做了一个正常的函数调用，它返回一个结果。\n现在用附加参数调用swap!，@fred将被更新，就像这样。\n(swap! fred increase-cuddle-hunger-level 10) ; = {:cuddle-hunger-level 12, : percent-deteriorated 1}. @fred ; = {:cuddle-hunger-level 12, :%-deteriorated 1}. 或者你可以用 Clojure 的内置函数来表达整个事情。update-in函数需要三个参数：一个集合，一个用于识别要更新的值的向量，以及一个更新该值的函数。它还可以接受额外的参数，这些参数将被传递给更新函数。下面是几个例子。\n(update-in {:a {:b 3}} [:a :b] inc) ; = {:a {:b 4}}. (update-in {:a {:b 3}} [:a :b] + 10) ; = {:a {:b 13}} (update-in {:a :b 3}) 在第一个例子中，你正在更新地图{:a {:b 3}}。Clojure使用向量[:a :b]来遍历嵌套图；:a产生嵌套图{:b 3}，:b产生值3。Clojure将inc函数应用于3，并返回一个替换了3`的新地图。\n下面是你如何使用update-in函数来改变 Fred 的状态。\n(swap! fred update-in [:cuddle-hunger-level] + 10) ; = {:cuddle-hunger-level 22, : percent-deteriorated 1}. 通过使用原子，你可以保留过去的状态。你可以解除引用一个原子来检索状态 1，然后更新该原子，创建状态 2，并仍然使用状态 1。\n(让 [num (atom 1) s1 @num] 。 (swap! num inc) (println \"状态1:\" s1) (println \"当前状态:\" @num)) ; = 状态1：1 ; = 当前状态：2 这段代码创建了一个名为 “num “的原子，检索其状态，更新其状态，然后打印其过去的状态和当前的状态，表明当我说你可以保留过去的状态时，我并不是要欺骗你，因此你可以信任我所有的东西–包括你的真实姓名，我保证只说出你的真实姓名，以拯救你脱离致命的危险。\n这一切都很有趣，但如果两个独立的线程调用”（交换！弗雷德增加-拥抱-饥饿等级 1）“会发生什么？是否有可能像清单 10-1 中的 Ruby 例子那样，其中一个增量被丢失？\n答案是否定的! swap!实现了比较和设置的语义，意味着它在内部做了以下工作。\n 它读取原子的当前状态。  然后将更新函数应用于该状态。   接下来，它检查它在步骤 1 中读取的值是否与原子的当前值相同。 4.如果是，那么swap!就更新原子以引用步骤 2 的结果。 5.如果不是，那么swap!重试，从第 1 步开始再次经历这个过程。  这个过程保证了没有交换会丢失。\n关于swap!需要注意的一个细节是，原子更新是同步发生的；它们将阻塞其线程。例如，如果你的更新函数由于某种原因调用了Thread/sleep 1000，那么当swap!完成时，线程将阻塞至少一秒钟。\n有时你会想更新一个原子而不检查它的当前值。例如，你可能会开发一种血清，将一个抱枕僵尸的饥饿度和恶化度设置为零。对于这些情况，你可以使用reset!函数。\n(reset! fred {:cuddle-hunger-level 0 :%-恶化 0}) 这就涵盖了 atoms 的所有核心功能! 总结一下：原子实现了 Clojure 的状态概念。它们允许你为一系列不可变的值赋予一个身份。它们通过比较和设置语义为引用单元和互斥问题提供了解决方案。它们还允许你处理过去的状态，而不用担心它们会在原地变异。\n除了这些核心特性外，原子还与其他引用类型共享两个特性。你可以在原子上附加watches和validators。现在让我们来看看这些。\n手表和验证器 观察器允许你超级猥琐地检查你的参考类型的一举一动。验证器允许你有超强的控制力，限制哪些状态是可以允许的。钟表和验证器都是普通的函数。\n手表 一个watch是一个函数，它需要四个参数：一个键，被监视的引用，它的前一个状态，以及它的新状态。你可以为一个引用类型注册任意数量的手表。\n比方说，一个僵尸的洗牌速度（以每小时洗牌次数衡量，或称 SPH）取决于其饥饿程度和恶化程度。下面是你的计算方法，用拥抱的饥饿程度乘以它的完整程度。\n(defn shuffle-speed [僵尸］ (* (:cuddle-hunger-level zombie) (- 100 (:%-deteriorated zombie))))) 我们还可以说，每当僵尸的洗牌速度达到 5000SPH 的危险水平时，你都想得到提醒。否则，你想被告知一切都很好。下面是一个观察函数，你可以用来在 SPH 超过 5000 时打印一个警告信息，否则打印一个一切正常的信息。\n(defn shuffle-alert [key watched old-state new-state] (让 [sph (shuffle-alert)) (让 [sph (shuffle-speed new-state)] (如果 ( sph 5000) (如果 ( sph 5000) (做 (println \"Run, you fool!\") (println \"这个僵尸的SPH现在是\" sph) (println \"这个消息是由\" key)提供给你的) (做 (println \"All's well with \" key) (println \"Cuddle hunger: \" (:cuddle-hunger-level new-state)) (println \"恶化的百分比。\" (:%-deteriorated new-state)) (println \"SPH: \" sph))))) 观察函数有四个参数：一个可以用来报告的键，被观察的原子，原子更新前的状态，以及原子更新后的状态。这个观察函数计算新状态的洗牌速度，如果它过高，就打印一个警告信息，当洗牌速度安全时，就打印一个一切正常的信息，如上所述。在这两组信息中，key被用来让你知道信息的来源。\n你可以用add-watch把这个函数附加到fred上。add-watch的一般形式是（add-watch ref key watch-fn）。在这个例子中，我们要重置fred的状态，添加shuffle-alert的观察函数，然后多次更新fred的状态以触发shuffle-alert。\n(reset! fred {:cuddle-hunger-level 22 :%-deteriorated 2}) (add-watch fred :fred-shuffle-alert shuffle-alert) (swap! fred update-in [:percent-deteriorated] + 1) ; = All's well with :fred-shuffle-alert ; = 拥抱的饥饿感: 22 ; = 恶化的百分比。 3 ; = SPH: 2134 (swap! fred update-in [:cuddle-hunger-level] + 30) ; = 快跑，你这个傻瓜! ; = 该僵尸的SPH现在是5044 ; = 这个消息是由 :fred-shuffle-alert 提供的。 这个观察函数的例子没有使用watched或old-state，但如果有需要，它们就在那里。现在我们来谈谈验证器。\n验证器 验证器可以让你指定一个引用可以有哪些状态。例如，这里有一个验证器，你可以用来确保一个僵尸的:%-deteriorated在 0 到 100 之间。\n(defn percent-deteriorated-validator [{:key [percent-deteriorated]}] (和 (= percent-deteriorated) (并且 (=%-deteriorated 0) (正如你所看到的，验证器只需要一个参数。当你给一个引用添加验证器时，该引用被修改，这样，每当它被更新时，它将调用这个验证器，并将更新函数返回的值作为其参数。如果验证器因返回 “false “或抛出一个异常而失败，引用将不会改变以指向新的值。\n你可以在创建原子时附加一个验证器。\n(def bobby (atom {:cuddle-hunger-level 0 :percent-deteriorated 0}. :验证器 percent-deteriorated-validator)) (swap! bobby update-in [:percent-deteriorated] + 200) ; 这将抛出 \"无效的参考状态\" 在这个例子中，percent-deteriorated-validator返回false，原子更新失败。\n你可以抛出一个异常，以获得一个更具描述性的错误信息。\n(defn percent-deteriorated-validator [{:keys [percent-deteriorated]}]。 (or (and (= percent-deteriorated 0) (相当不错! 现在让我们来看看裁判。\n原子是管理独立身份状态的理想选择。但有时，我们需要表达一个事件应该同时更新一个以上的身份的状态。 Refs是这种情况下的完美工具。\n一个典型的例子是记录 sock gnome 交易。我们都知道，袜子侏儒从世界各地的每一个干衣机中取出一只袜子。他们用这些袜子来孵化他们的孩子。作为对这种*\"*礼物 “的回报，袜子地精保护你的家不被 El Chupacabra 入侵。如果你最近没有被 El Chupacabra 拜访，你要感谢袜子侏儒。\n为了建立袜子转移的模型，我们需要表达的是，一个烘干机失去了一只袜子，一个地精同时得到了一只袜子。这一刻，袜子属于烘干机；下一刻，它属于地精。这只袜子不应该同时属于烘干机和侏儒，也不应该同时属于这两个人。\n为袜子转移建模 你可以用 refs 来模拟这个 sock 传输。Refs 允许你使用事务语义来更新多个身份的状态。这些交易有三个特点。\n 它们是原子性的，意味着所有的参考文献都被更新，或者都不被更新。 它们是一致的，这意味着引用总是显示为有效的状态。一个 sock 总是属于一个 dryer 或一个 gnome，但绝不是两者都属于。 它们是隔离的，这意味着事务的行为就像它们是连续执行的一样；如果两个线程同时运行改变同一参考信息的事务，一个事务将重试。这类似于原子的比较和设置语义。  你可能认识到这些是数据库事务的 ACID 属性中的A、C和I。你可以认为 Refs 给你提供了与数据库事务相同的并发安全性，只是在内存中的数据。\nClojure 使用*软件事务性内存（STM）*来实现这种行为。STM 非常酷，但当你开始使用 Clojure 时，你不需要对它了解太多；你只需要知道如何使用它，这就是本节要告诉你的。\n让我们开始转移一些袜子吧! 首先，你需要编码一些袜子和 gnome 的创建技术。下面的代码定义了一些袜子品种，然后定义了几个辅助函数。 sock-count'将被用来帮助记录每一种袜子有多少只属于地精或烘干机，而generate-sock-gnome’将创建一个新的、没有袜子的地精。\n(def sock-varieties #{\"darned\" \"argyle\" \"wool\" \"horsehair\" \"mulleted\" \"被动攻击\" \"条纹\" \"波尔卡圆点\" \"运动型\"\"商务型\"\"权力型\"\"隐形型\"\"高勒型\"}) (defn sock-count [sock-variety count] （袜子品种计数 {:variety sock-variety :count计数}) (defn generate-sock-gnome \"创建一个没有袜子的初始袜套状态\" [name] {:name {:name名称 :socks #{}}) 现在你可以创建你的实际参照物了。侏儒将有 0 只袜子。另一方面，烘干机将有一组由袜子品种集生成的袜子对。下面是我们的参考文献。\n(def sock-gnome (ref (generate-sock-gnome \"Barumpharumph\") )) (def dryer (ref {:name \"LG 1337\" :socks (set (map #(sock-count % 2) sock-varieties))})) 你可以像解除对原子的引用一样解除对 ref 的引用。在这个例子中，你的袜子的顺序可能会不同，因为我们使用的是一个无序的集合。\n(:socks @dryer) ; = #{{:品种 \"passive-aggressive\", :count 2} {:品种 \"power\", :count 2}. {:品种 \"运动型\", :计数2} {:品种 \"商务型\", :计数2} {:品种 \"雅戈尔\", :计数2} {:品种 \"马鬃\", :计数2} {:品种 \"gollumed\", :count 2} {:品种 \"darned\", :count 2} {:品种 \"圆点\", :数量2} {:品种 \"羊毛\", :数量2} {:品种 \"mulleted\", :count 2} {:品种 \"striped\", :count 2} {:品种 \"隐形\", :数量2}}{:品种 \"隐形\", :数量2}}。 现在一切都准备好了，可以进行转移了。我们要修改sock-gnome参数，以显示它获得了一只袜子，并修改dryer参数，以显示它失去了一只袜子。你用alter'来修改引用，而且你必须在一个事务中使用alter'。 dosync启动一个事务并定义其范围；你把所有的事务操作放在其主体中。这里我们使用这些工具来定义一个`steal-sock’函数，然后在我们的两个参考文件上调用它。\n(defn steal-sock [gnome dryer] (dosync (when-let [pair (some #(if (= (:count %) 2) %) (:socks @dryer)) ] (让 [uped-count (sock-count (:variety pair) 1)] (alter gnome upd-in) (alter gnome update-in [:socks] conj updated-count) (alter dryer update-in [:socks] disj pair) (alter dryer update-in [:socks] conj updated-count)))))) (窃取-袜子-袜子-烘干机) (:socks @sock-gnome) ; = #{{:品种 \"被动攻击\", :计数1}}. 现在团子有一只被动攻击型的袜子，而烘干机少了一只（你的团子可能偷了一只不同的袜子，因为袜子是以无序的方式存储的）。让我们确保所有被动攻击的袜子都被计算在内。\n(defn similar-socks [target-sock sock-set］ (filter #(= (:variety %) (:variety target-sock) ) sock-set)) (similar-socks (first (:socks @sock-gnome)) (:socks @dryer)) ; = ({:品种 \"被动攻击\", :计数 1}) 这里有几个细节需要注意：当你改变一个引用时，这个改变在当前事务之外并不立即可见。这使得你可以在一个事务中对dryer调用alter两次，而不用担心dryer会在不一致的状态下被读取。同样的，如果你改变一个引用，然后在同一个事务中deref它，deref将返回新的状态。\n这里有一个例子来证明这个交易中状态的想法。\n(def counter (ref 0)) (未来 (dosync (alter counter inc) (println @counter) (Thread/sleep 500) (alter counter inc) (println @counter))) (Thread/sleep 250) (println @counter) 这将依次打印出 1、0 和 2。首先，你创建了一个引用，counter，用来保存数字 0。然后你用future创建一个新的线程来运行一个事务。在事务线程中，你增加计数器并打印它，然后数字 1 被打印出来。同时，主线程等待了 250 毫秒，也打印了计数器的值。然而，主线程上的计数器的值仍然是 0–主线程是在事务之外的，不能访问事务的状态。这就像事务有自己的私有区域，用于尝试对状态的改变，而世界上的其他人在事务完成之前不能知道它们。这在事务代码中得到了进一步说明：在它第一次打印之后，它再次将计数器从 1 增加到 2，并打印出结果 2。\n事务只有在结束时才会尝试提交其变更。提交的工作原理类似于原子的比较和设置语义。每个引用都会被检查，看它在你第一次试图改变它之后是否有变化。如果有任何个引用发生了变化，那么个引用都不会被更新，事务会被重试。例如，如果事务 A 和事务 B 在同一时间被尝试，并且事件按以下顺序发生，事务 A 将被重试。\n 事务 A： alter gnome 交易 B: alter gnome 交易 B：改变烘干机 交易 B：改变烘干机 事务 B：提交-成功地更新 gnome 和 dryer 事务 A：改变 dryer 事务 A：改变烘干机 事务 A：提交失败，因为 dryer 和 gnome 已经改变；重试。  这就是你的工作! 安全、简单、并发地协调状态变化。但这还不是全部! Refs 还有一个可疑的长袖子的技巧：commute。\n通勤 commute允许你在一个事务中更新一个 ref 的状态，就像 alter一样。然而，它在提交时的行为是完全不同的。下面是`alter’的行为方式。\n 在事务之外，读取 Ref 的当前状态。 2.将当前状态与引用者在事务中开始时的状态进行比较。  如果两者不同，则重试交易。    否则，提交改变后的引用状态。    另一方面，commute在提交时的行为是这样的。\n 在事务之外，读取引用的当前状态。  使用当前状态再次运行commute函数。   提交结果。  正如你所看到的，commute并不强迫事务重试。这可以帮助提高性能，但重要的是，只有当你确定你的 refs 不可能最终处于无效状态时才使用 commute'。让我们看看commute`的安全和不安全使用的例子。\n下面是一个安全使用的例子。sleep-print-update函数返回更新的状态，但同时也睡眠了指定的毫秒数，所以我们可以强制事务重叠。它打印了它试图更新的状态，所以我们可以深入了解正在发生的事情。\n(defn sleep-print-update [sleep-time thread-name update-fn] (fn [state] ) (fn [state] (Thread/sleep sleep-time) (println (str thread-name \": \" state)) (update-fn state))) (def counter (ref 0)) (future (dosync (commute counter (sleep-print-update 100 \"Thread A\" inc))))) (未来 (dosync (commute counter (sleep-print-update 150 \"Thread B\" inc))))) 下面是打印的时间线。\n线程A。0 | 100ms 线程B：0 | 150ms 线程A: 0 | 200ms 线程B: 1 | 300ms 请注意，最后打印的一行是 “线程 B：1”。这意味着sleep-print-update在第二次运行时收到1作为状态参数。这是有道理的，因为此时线程 A 已经提交了它的结果。如果你在事务运行后解除对counter的引用，你会发现其值是2。\n现在，这里有一个不安全交换的例子。\n(def receiver-a (ref #{}) (def receiver-b (ref #{})) (def giver (ref #{1})) (do (future (dosync (let [gift (first @giver)] ) (Thread/sleep 10) (commute receiver-a conj gift) (commute giver disj gift)))) (future (dosync (let [gift (first @giver)] ) (Thread/sleep 50) (commute receiver-b conj gift) (commute giver disj gift))))) @receiver-a ; = #{1} @接收者-b ; = #{1} @接受者 ; = #{} 1被赋予了receiver-a和receiver-b，你最终得到了两个1的实例，这对你的程序是无效的。这个例子的不同之处在于，应用的函数，基本上是#(conj % gift)和#(disj % gift)，是由giver的状态派生的。一旦giver发生变化，派生的函数就会产生一个无效的状态，但是commute并不关心产生的状态是无效的，无论如何都会提交结果。这里的教训是，尽管commute可以帮助你加快程序的速度，但你必须明智地决定何时使用它。\n现在你已经准备好开始安全、理智地使用 Refs 了。引用还有一些细微的差别，我在此不做介绍，但如果你对它们感到好奇，你可以研究ensure函数和write skew现象。\n接下来是本书涉及的最后一种参考文献类型。 vars。\nVars 你已经在第 6 章中了解了一些关于 vars 的知识。简单的说, vars是符号和对象之间的关联。你可以用def创建新的变量。\n尽管 vars 并不像原子和 refs 那样用来管理状态，但它们确实有一些并发的技巧：你可以动态地绑定它们，并且可以改变它们的根。让我们先来看看动态绑定。\n动态绑定 当我第一次介绍def时，我恳请你把它当作定义一个常量。事实证明，vars 比这更灵活：你可以创建一个动态的 var，它的绑定可以被改变。动态变量对于创建一个全局名称是非常有用的，它应该在不同的情况下指代不同的值。\n创建和绑定动态变量 首先，创建一个动态 var。\n(def:dynamic *notification-address* \"dobby@elf.org\") 注意这里有两个重要的细节。首先，你用^:dynamic向 Clojure 发出信号，表明一个 var 是动态的。第二，var 的名字是由星号括起来的。Lispers 称这些为earmuffs，这很可爱。Clojure 要求你将动态变量的名字用耳罩括起来。这有助于向其他程序员发出该变量的动态性的信号。\n与普通变量不同，你可以通过使用binding来临时改变动态变量的值。\n(binding [*notification-address* \"test@elf.org\") *notification-address*) ; = \"test@elf.org\" 你也可以堆叠绑定（就像你可以用let）。\n(绑定 [*notification-address* \"tester-1@elf.org\"] (println *notification-address*) (绑定 [*notification-address* \"tester-2@elf.org\") (println *notification-address*)) (println *notification-address*)) ; = tester-1@elf.org ; = tester-2@elf.org ;= tester-1@elf.org 现在你知道了如何动态绑定一个 var，让我们看看一个真实世界的应用。\n动态 var 的用途 比方说，你有一个发送通知邮件的函数。在这个例子中，我们将只是返回一个字符串，但假装这个函数真的发送了电子邮件。\n(defn notify [消息］ (str \"TO: \" *notification-address* \"\\n\" \"MESSAGE: \" message)) (notify \"I fell.\") ; = \"TO: dobby@elf.org\\nMESSAGE: I fell.\" 如果你想测试这个函数，而不在每次你的规格运行时向多比发送垃圾邮件，怎么办？这时就需要binding来帮忙了。\n(binding [*notification-address* \"test@elf.org\"] (notify \"test!\")) ; = \"TO: test@elf.org\\nMESSAGE: test!\" 当然，你可以直接定义notify来接受一个电子邮件地址作为参数。事实上，这通常是正确的选择。为什么要用动态变量来代替呢？\n动态变量最常被用来命名一个或多个函数的目标资源。在这个例子中，你可以把电子邮件地址看作是你写给它的资源。事实上，Clojure 为这个目的提供了大量的内置动态变量。 例如，\"out“代表打印操作的标准输出。在你的程序中，你可以重新绑定*out*，使打印语句写到一个文件中，就像这样。\n(绑定 [*out* (clojure.java.io/writer \"print-output\")) (println \"一个用尾巴抱着猫的人，会学到 一些他无法用其他方式学到的东西。 -- 马克-吐温\") (slurp \"print-output\") ; = 一个抓着猫的尾巴的人学到了 的人学到了他无法用其他方式学到的东西。 --马克-吐温 这比每次调用 “println “都传递一个输出目的地要轻松得多。动态变量是一种指定通用资源的好方法，同时保留了在特殊情况下改变它的灵活性。\n动态变量也被用于配置。例如，内置的 var*print-length*允许你指定 Clojure 应该打印一个集合中的多少个项目。\n(println [\"Print\" \"all\" \"the\" \"things!\"] ) ; = [Print all the things!］ (绑定 [*print-length* 1] 。 (println [\"Print\" \"just\" \"one!\"] )。 ; = [打印...] 。 最后，可以对已经绑定的动态变量进行set!。到目前为止，你所看到的例子允许你将信息输入到一个函数，而不需要将信息作为参数传入，而set!允许你将信息输出到一个函数，而不需要将其作为参数返回。\n例如，假设你是一个心灵感应者，但你的读心能力有点延迟。你只有在了解别人的想法对你有用的时候，才能读懂他们的想法。不过，不要觉得太糟糕，你仍然是一个心灵感应者，这很了不起。总之，假设你想穿过一座由巨魔看守的桥，如果你不回答他的谜语，他就会吃掉你。他的谜语是 “我想的是 1 和 2 之间的哪个数字？” 在巨魔吞噬你的情况下，你至少可以知道巨魔到底在想什么而死。\n在这个例子中，你创建了动态 var *troll-thought*来传达巨魔的想法，从troll-riddle函数中出来。\n(def:dynamic *troll-thought* nil) (defn troll-riddle [你的答案] 。 (让[数字 \"人肉\"] ➊ (when (thread-bound? #'*troll-thought*) ➋ (set! *troll-thought* number)) (如果 (= number your-answer) \"TROLL：你可以过桥了！\" \"TROLL：该吃你了，多汁的人类！\"））。 (绑定 [*troll-thought* nil]) (println (troll-riddle 2)) (println \"succulent humanan: Oooooh! The answer was\" *troll-thought*)) ; = 巨魔：该吃你了，多汁的人类! ; = 多产的人类：哦！答案是人肉。答案是人肉 你在➊处使用thread-bound?函数来检查 var 是否已经被绑定，如果是，你就set! *troll-thought*到➋处的巨魔的思想。\n变量在绑定之外返回到它的原始值。\n*troll-thought* ; = nil 注意，你必须将#'*troll-thought*（包括#'），而不是troll-thought，传递给函数thread-bound?。这是因为thread-bound?`将 var 本身作为一个参数，而不是它所指向的值。\n每线程绑定 关于绑定的最后一点要注意：如果你从一个手动创建的线程中访问一个动态绑定的 var，该 var 将评估为原始值。如果你是 Clojure（和 Java）的新手，这个特性不会立即发生作用；你可以跳过这一节，以后再来讨论它。\n具有讽刺意味的是，这种绑定行为使我们无法在 REPL 中轻松创建一个有趣的演示，因为 REPL 绑定了*out*。就好像你在 REPL 中运行的所有代码都被隐含地包裹在类似(binding[out repl-printer] your-code的东西中。如果你创建一个新的线程，out`就不会被绑定到 REPL 打印机上。\n下面的例子使用了一些基本的 Java 互操作。即使它看起来很陌生，下面代码的要点也应该很清楚，你将在第 12 章中准确地了解发生了什么。\n这段代码向 REPL 打印输出。\n(.write *out* \"prints to repl\") ; = 打印到rep 下面的代码没有打印输出到 REPL，因为*out*没有绑定到 REPL 打印机。\n(.start (Thread. #(.write *out* \"printts to standard out\")) 你可以通过使用这个愚蠢的代码来解决这个问题。\n(让 [out *out*] (.start (线程。#(绑定 [*out* out] (.write *out* \"printts to repl from thread\"))))) 或者你可以使用bound-fn，它将所有当前的绑定带到新的线程中。\n(.start (Thread. (bound-fn [] (.write *out* \"printts to repl from thread\")))) let绑定捕获了*out*，所以我们可以在子线程中重新绑定它，这是很傻的。重点是，绑定不会被传递到手动创建的线程中。然而，它们确实被传递给了期货。这就是所谓的 “绑定传递”。在本章中，我们一直在从期货中打印，没有任何问题，比如说。\n关于动态绑定就到此为止。让我们把注意力转向最后一个 var 主题：改变 var 的根。\n改变变量根值 当你创建一个新的 var 时，你提供的初始值是它的根。\n(def power-source \"hair\") 在这个例子中，\"头发\"是power-source的根值。Clojure 允许你用函数alter-var-root永久地改变这个根值。\n(alter-var-root #'power-source (fn [_] \"7-eleven parking lot\") 动力源 ; = \"7-eleven停车场\" 就像使用swap!来更新一个原子或alter!来更新一个 ref 一样，你使用alter-var-root和一个函数来更新一个 var 的状态。在这种情况下，函数只是返回一个新的字符串，与之前的值没有关系，不像alter!的例子，我们使用inc来从当前的数字衍生出一个新数字。\n你几乎不会想这样做。你尤其不想这样做来执行简单的变量赋值。如果你这样做了，你就会不顾一切地把绑定的变量创建为一个可变的变量，这与 Clojure 的理念相悖；最好是使用你在第 5 章学到的函数式编程技术。\n你也可以用with-redefs暂时改变一个 var 的根。这与绑定的工作原理类似，只是改变的内容会出现在子线程中。下面是一个例子。\n(with-redefs [*out* *out*) (doto (Thread. #(println \"with redefs 允许我在 REPL 中显示\") .开始 .join)) with-redefs可以用于任何 var，而不仅仅是动态的。因为它有如此深远的影响，你应该只在测试时使用它。例如，你可以用它来重新定义一个从网络调用中返回数据的函数，这样该函数就会返回模拟数据而不需要实际进行网络请求。\n现在你知道所有关于 vars 的知识了吧! 尽量不要用它们来伤害你自己或你认识的任何人。\n使用 pmap 的无状态并发性和并行性 到目前为止，本章的重点是那些旨在减少并发编程中固有风险的工具。你已经了解了共享访问可变状态所带来的危险，以及 Clojure 是如何实现状态的重新概念化，从而帮助你安全地编写并发程序。\n但通常情况下，你会想把那些完全独立的任务并发化。没有对易变状态的共享访问；因此，并发运行这些任务没有任何风险，你也不必费心使用我刚才说过的任何工具。\n事实证明，Clojure 让你可以很容易地编写代码来实现无状态并发。在这一节中，你将了解到pmap，它几乎免费为你提供了并发性能的好处。\nmap是并行化的完美候选者：当你使用它时，你所做的只是通过对现有集合的每个元素应用一个函数，从现有集合中派生出一个新集合。不需要维护状态；每个函数的应用都是完全独立的。Clojure 通过pmap使执行并行映射变得容易。通过pmap，Clojure 在一个单独的线程上处理映射函数的每个应用的运行。\n为了比较map和pmap，我们需要大量的例子数据，为了生成这些数据，我们将使用repeatedly函数。这个函数接收另一个函数作为参数，并返回一个懒惰序列。懒惰序列的元素是通过调用传递的函数生成的，像这样。\n(defn always-1 [] 1) (取5 (重复always-1)) ; = (1 1 1 1 1) 下面是你如何创建一个 0 到 9 之间的随机数的懒人序列。\n(取5 (重复 (部分rand-int 10)) ; = (1 5 0 3 4) 让我们使用repeatedly来创建示例数据，该数据由 3000 个随机字符串序列组成，每个字符串长 7000 个字符。我们将比较map和pmap，用它们在这里创建的orc-names序列上运行clojure.string/lowercase。\n(def alphabet-length 26) ;; 字母的矢量，A-Z (def letters (mapv (comp str char (partial + 65)) (range alphabet-length) )) (defn random-string \"返回一个指定长度的随机字符串\" [长度］ (apply str (take length ( repeatedly #(rand-nth letters)))))) (defn random-string-list [list-length string-length］ (doall (take list-length (repeaterly (partial random-string string-length)))))) (def orc-names (random-string-list 3000 7000)) 因为map和pmap是懒惰的，我们必须强迫它们实现。但我们不希望将结果打印到 REPL 中，因为那会花费很多时间。dorun函数做了我们需要的事情：它实现了序列，但返回nil。\n(time (dorun (map clojure.string/lower-case orc-names)) ; = \"耗时：270.182 msecs\" (time (dorun (pmap clojure.string/lower-case orc-names))) ; = \"耗时：147.562 msecs\" 用map串行执行的时间是pmap的 1.8 倍，而你所要做的只是增加一个额外的字母 你的性能可能会更好，这取决于你的计算机有多少个内核；这段代码是在双核机器上运行的。\n你可能会想，为什么并行版本所花的时间不正好是串行版本的一半。毕竟，两个核心的时间应该只有单核心的一半，不是吗？原因是，在创建和协调线程的过程中，总是会有一些开销。有时，事实上，这种开销所花费的时间会使每个函数应用的时间相形见绌，pmap'实际上会比map’花费更多时间。图 10-3 显示了你如何能直观地看到这一点。\n图 10-3：并行化开销会使任务时间相形见绌，导致性能下降。\n如果我们对 20000 个缩写的兽人名字运行一个函数，每个 300 个字符的长度，我们就可以看到这种效果的作用。\n(def orc-name-abbrevs (random-string-list 20000 300)) (time (dorun (map clojure.string/lower-case orc-name-abbrevs)) ; = \"耗时：78.23 msecs\" (time (dorun (pmap clojure.string/lower-case orc-name-abbrevs)) )) ; = \"耗时：124.727 msecs\" 现在pmap实际上需要 1.6 倍的*时间。\n解决这个问题的方法是增加粒度，或者说每个并行化任务所做的工作量。在这种情况下，任务是对集合中的一个元素应用映射函数。粒度不是用任何标准单位来衡量的，但你会说pmap的粒度默认是 1。将粒度增加到 2 意味着你将映射函数应用于两个元素，而不是一个，所以任务所在的线程正在做更多的工作。图 10-4 显示了增加粒度是如何提高性能的。\n图 10-4：可视化的粒度与并行化开销的关系\n为了在 Clojure 中实现这一点，你可以通过使用partition-all使每个线程对多个元素应用clojure.string/lower-case，而不是仅仅一个元素，来增加粒度。 partition-all接收一个 seq，并将其分成指定长度的 seq。\n(def numbers [1 2 3 4 5 6 7 8 9 10]) (partition-all 3 numbers) ; = ((1 2 3) (4 5 6) (7 8 9) (10)) 现在假设你开始时的代码是这样的。\n(pmap inc numbers) 在这种情况下，颗粒大小是 1，因为每个线程都对一个元素应用了inc。\n现在假设你把代码改成这样。\n(pmap (fn [number-group] (doall (map inc number-group)) (partition-all 3 numbers)) ; = ((2 3 4) (5 6 7) (8 9 10) (11)) 这里有几件事要做。首先，你现在将颗粒大小增加到了三个，因为每个线程现在执行了三个inc函数的应用，而不是一个。第二，注意你必须在映射函数中调用doall。这迫使由(map inc number-group)返回的懒惰序列在线程内实现。第三，我们需要取消对结果的分组。下面是我们如何做到这一点。\n(应用concat (pmap (fn [number-group] (doall (map inc number-group)) (partition-all 3 numbers)) 使用这个技术，我们可以增加 orc 名称低 ase 化的粒度，这样每个线程在 1000 个名称上运行clojure.string/lower-case而不是只有一个。\n(时间 (dorun (apply concat (pmap (fn [name] (doall (map clojure.string/lower-case name)) (partition-all 1000 orc-name-abbrevs))))) ; = \"耗费的时间。44.677 msecs\" 并行版本再次花费了近一半的时间。为了好玩，我们可以把这个技术概括为一个叫做 “ppmap “的函数，代表分区的 pmap。它可以接收一个以上的集合，就像map一样。\n(defn ppmap \"分区的pmap，用于将地图操作分组，使并行的 开销是值得的\" [grain-size f \u0026 colls] (apply concat (apply pmap (fn [\u0026 pgroups] (doall (apply map f pgroups)) (map (partial partition-all grain-size) colls)))) (时间 (dorun (ppmap 1000 clojure.string/lower-case orc-name-abbrevs)) ; = \"耗费的时间。44.902 msecs\" 我不知道你怎么想的，但我觉得这东西就是好玩。要想获得更多的乐趣，可以看看 clojure.core.reducers 库（http://clojure.org/reducers/）。 这个库提供了 seq 函数的替代实现，如map和reduce，通常比它们在clojure.core中的表亲更快。其代价是它们并不懒惰。总的来说，clojure.core.reducers 库为创建和使用ppmap这样的函数提供了一种更精细和可组合的方式。\n摘要 在本章中，你学到了比大多数人更多的关于安全处理并发任务的知识。你了解了支撑 Clojure 引用类型的形而上学。在 Clojure 的形而上学中，状态是某个时间点上的身份值，而身份是指由某个过程产生的一连串值的一种方便的方式。值是原子性的，就像数字是原子性的一样。它们是不可改变的，这使得它们可以安全地并发工作；你不必担心在你使用它们时其他线程会改变它们。\n原子引用类型允许你创建一个身份，你可以使用swap!和reset!安全地更新引用新值。当你想使用事务语义更新多个身份时，ref 引用类型很方便，你用alter!和commute!更新它。\n此外，你学会了如何通过使用pmap和 core.reducers 库进行无状态数据转换来提高性能。呜呼!\n练习   创建一个初始值为 0 的原子，使用swap!将其递增几次，然后取消引用。\n  创建一个函数，使用期货来并行处理从*http://www.braveclojure.com/random-quote*下载随机报价的任务，使用(slurp \"http://www.braveclojure.com/random-quote\")。期货应该更新一个原子，指的是所有引语的总字数。该函数将把要下载的引语数量作为参数，并返回原子的最终值。请记住，在返回原子的最终值之前，你需要确保所有的期货已经完成。下面是你如何调用它和一个示例结果。\n(quote-word-count 5) ; = {\"赭石 \"8, \"光滑 \"2}.   在一个游戏中创建两个角色的代表。第一个角色有 15 个命中率，总共有 40 个。第二个角色在他的库存中有一个治疗药水。使用参照物和交易来模拟治疗药水的消耗和第一个角色的治疗。\n  ","wordCount":"1808","inLanguage":"en","datePublished":"2022-01-15T12:42:26+08:00","dateModified":"2022-01-15T12:42:26+08:00","author":{"@type":"Person","name":"Fenix"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://zhenfeng-zhu.github.io/posts/chapter10/"},"publisher":{"@type":"Organization","name":"Awesome Fenix","logo":{"@type":"ImageObject","url":"https://zhenfeng-zhu.github.io/favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://zhenfeng-zhu.github.io accesskey=h title="Awesome Fenix (Alt + H)">Awesome Fenix</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://zhenfeng-zhu.github.io/archives/ title=Archives>
+<span>Archives</span>
+</a>
+</li>
+<li>
+<a href=https://zhenfeng-zhu.github.io/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+<li>
+<a href=https://zhenfeng-zhu.github.io/about title=About>
+<span>About</span>
+</a>
+</li>
+<li>
+<a href=https://zhenfeng-zhu.github.io/search/ title=🔍>
+<span>🔍</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://zhenfeng-zhu.github.io>Home</a>&nbsp;»&nbsp;<a href=https://zhenfeng-zhu.github.io/posts/>Posts</a></div>
+<h1 class=post-title>
+Chapter10
+</h1>
+<div class=post-meta><span title="2022-01-15 12:42:26 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Fenix&nbsp;|&nbsp;<a href=https://github.com/zhenfeng-zhu/zhenfeng-zhu.github.io/tree/main/content/posts/Chapter10.md rel="noopener noreferrer" target=_blank>修改本文章</a>
+</div>
+</header> <div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#clojure-metaphysics-%e5%8e%9f%e5%ad%90refsvars-%e5%92%8c%e6%8b%a5%e6%8a%b1%e5%83%b5%e5%b0%b8 aria-label="Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸">Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸</a><ul>
+<li>
+<a href=#%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%9a%84%e5%bd%a2%e8%80%8c%e4%b8%8a%e5%ad%a6 aria-label=面向对象的形而上学>面向对象的形而上学</a></li>
+<li>
+<a href=#clojure-%e5%bd%a2%e8%80%8c%e4%b8%8a%e5%ad%a6 aria-label="Clojure 形而上学">Clojure 形而上学</a></li>
+<li>
+<a href=#%e5%8e%9f%e5%ad%90 aria-label=原子>原子</a></li>
+<li>
+<a href=#%e6%89%8b%e8%a1%a8%e5%92%8c%e9%aa%8c%e8%af%81%e5%99%a8 aria-label=手表和验证器>手表和验证器</a><ul>
+<li>
+<a href=#%e6%89%8b%e8%a1%a8 aria-label=手表>手表</a></li>
+<li>
+<a href=#%e9%aa%8c%e8%af%81%e5%99%a8 aria-label=验证器>验证器</a></li>
+<li>
+<a href=#%e4%b8%ba%e8%a2%9c%e5%ad%90%e8%bd%ac%e7%a7%bb%e5%bb%ba%e6%a8%a1 aria-label=为袜子转移建模>为袜子转移建模</a></li>
+<li>
+<a href=#%e9%80%9a%e5%8b%a4 aria-label=通勤>通勤</a></li></ul>
+</li>
+<li>
+<a href=#vars aria-label=Vars>Vars</a><ul>
+<li>
+<a href=#%e5%8a%a8%e6%80%81%e7%bb%91%e5%ae%9a aria-label=动态绑定>动态绑定</a><ul>
+<li>
+<a href=#%e5%88%9b%e5%bb%ba%e5%92%8c%e7%bb%91%e5%ae%9a%e5%8a%a8%e6%80%81%e5%8f%98%e9%87%8f aria-label=创建和绑定动态变量>创建和绑定动态变量</a></li>
+<li>
+<a href=#%e5%8a%a8%e6%80%81-var-%e7%9a%84%e7%94%a8%e9%80%94 aria-label="动态 var 的用途">动态 var 的用途</a></li>
+<li>
+<a href=#%e6%af%8f%e7%ba%bf%e7%a8%8b%e7%bb%91%e5%ae%9a aria-label=每线程绑定>每线程绑定</a></li></ul>
+</li>
+<li>
+<a href=#%e6%94%b9%e5%8f%98%e5%8f%98%e9%87%8f%e6%a0%b9%e5%80%bc aria-label=改变变量根值>改变变量根值</a></li></ul>
+</li>
+<li>
+<a href=#%e4%bd%bf%e7%94%a8-pmap-%e7%9a%84%e6%97%a0%e7%8a%b6%e6%80%81%e5%b9%b6%e5%8f%91%e6%80%a7%e5%92%8c%e5%b9%b6%e8%a1%8c%e6%80%a7 aria-label="使用 pmap 的无状态并发性和并行性">使用 pmap 的无状态并发性和并行性</a></li>
+<li>
+<a href=#%e6%91%98%e8%a6%81 aria-label=摘要>摘要</a></li>
+<li>
+<a href=#%e7%bb%83%e4%b9%a0 aria-label=练习>练习</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=clojure-metaphysics-原子refsvars-和拥抱僵尸>Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸<a hidden class=anchor aria-hidden=true href=#clojure-metaphysics-原子refsvars-和拥抱僵尸>#</a></h1>
+<p>三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。</p>
+<p>Rich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的<em>meta-freakin-physics</em>。</p>
+<p>在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，<em>atom</em>、<em>ref</em>和<em>var</em>引用类型。(Clojure 还有一个额外的引用类型，<em>agents</em>，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。</p>
+<p>形而上学试图用最广泛的术语来回答两个基本问题。</p>
+<ul>
+<li>那里有什么？</li>
+<li>它是什么样子的？</li>
+</ul>
+<p>为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？</p>
+<h2 id=面向对象的形而上学>面向对象的形而上学<a hidden class=anchor aria-hidden=true href=#面向对象的形而上学>#</a></h2>
+<p>OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。</p>
+<p>棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。</p>
+<pre tabindex=0><code>class CuddleZombie
+  # attr_accessor只是一种速记方式，用于为所列实例变量创建getters和
+  # 为列出的实例变量创建获取器和设置器
+  attr_accessor :cuddle_hunger_level, : percent_deteriorated
+
+  def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0)
+    self.cuddle_hunger_level = cuddle_hunger_level
+    self. percent_deteriorated = percent_deteriorated
+  结束
+结束
+
+fred = CuddleZombie.new(2, 3)
+fred.cuddle_hunger_level # =&gt; 2
+fred.%_deteriorated # =&gt; 3
+
+fred.cuddle_hunger_level = 3
+fred.cuddle_hunger_level #&gt; 3
+</code></pre><ol>
+<li>10-1. 用 Ruby 建立抱团僵尸行为模型</li>
+</ol>
+<p>在这个例子中，你创建了一个抱团僵尸，<code>fred</code>，有两个属性。<code>cuddle_hunger_level</code>和<code>percent_deteriorated</code>。<code>fred</code>一开始的<code>cuddle_hunger_level</code>是 2，但是你可以把它改成任何你想要的东西，它仍然是好的&rsquo;Fred，同一个拥抱僵尸。在这种情况下，你把它的`cuddle_hunger_level&rsquo;改为 3。</p>
+<p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/zombie-metaphysics/cuddle-zombie.png alt>
+</p>
+<p>你可以看到，这个对象只是一个花哨的引用单元。在多线程环境下，它也会受到同样的非确定性结果的影响。例如，如果两个线程试图用<code>fred.cuddle_hunger_level = fred.cuddle_hunger_level + 1</code>这样的方式来增加 Fred 的饥饿度，其中一个增量可能会丢失，就像《三个小妖精》中两个线程向<code>X</code>写入的例子一样。参考单元格、相互排斥和矮人狂战士 &ldquo;中的例子。</p>
+<p>即使你只在一个单独的线程上进行读取，程序仍将是非确定性的。例如，假设你正在进行关于抱团僵尸行为的研究。你想记录一个僵尸的饥饿程度，只要它达到 50%的恶化程度，但你想在另一个线程上进行，以提高性能，使用类似清单 10-1 中的代码。</p>
+<pre tabindex=0><code>if fred.percent_deteriorated &gt;= 50
+  Thread.new { database_logger.log(fred.cuddle_hunger_level) }
+结束
+</code></pre><ol>
+<li>这段 Ruby 代码在并发执行时并不安全。</li>
+</ol>
+<p>问题是，另一个线程可能在实际写入之前改变<code>fred</code>。</p>
+<p>例如，图 10-1 显示了两个从上到下执行的线程。在这种情况下，将 5 写入数据库是正确的，但 10 却被写入了。</p>
+<p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/zombie-metaphysics/fred-read.png alt>
+</p>
+<p>图 10-1：记录不一致的抱团僵尸数据</p>
+<p>这将是很不幸的。当你试图从拥抱僵尸的启示中恢复时，你不希望你的数据是不一致的。然而，没有办法保留一个对象在某一特定时刻的状态。</p>
+<p>此外，为了同时改变<code>cuddle_hunger_level</code>和<code>percent_deteriorated</code>，你必须特别小心。否则，<code>fred</code>有可能被视为不一致的状态，因为另一个线程可能会在你打算同时进行的两个变化之间<code>读取</code>fred`对象，像这样。</p>
+<pre tabindex=0><code>fred.cuddle_hunger_level = fred.cuddle_hunger_level + 1
+# 在这个时候，另一个线程可以读取fred的属性并
+# &quot;感知 &quot;到fred处于不一致的状态，除非你使用一个mutex
+fred. percent_deteriorated = fred. percent_deteriorated + 1
+</code></pre><p>这是另一个版本的互斥问题。在面向对象编程（OOP）中，你可以用<em>mutex</em>来手动解决这个问题，它可以确保在 mutex 的持续时间内，每次只有一个线程可以访问一个资源（在本例中，就是<code>fred</code>对象）。</p>
+<p>对象永远不稳定的事实并不妨碍我们把它们当作程序的基本构件。事实上，这被认为是 OOP 的一个优势。状态如何变化并不重要；你仍然可以与一个稳定的接口进行交互，一切都会正常工作。这符合我们对世界的直观感觉。一块蜡仍然是同一块蜡，即使它的属性发生了变化：如果我改变了它的颜色，融化了它，然后把它倒在我的敌人的脸上，我仍然会认为它是我开始时的那个蜡对象。</p>
+<p>另外，在 OOP 中，对象也会做事。它们相互作用，在程序运行时改变状态。同样，这也符合我们对世界的直观感觉：变化是对象相互作用的结果。一个人的对象推到一个门的对象上，进入一个房子的对象。</p>
+<h2 id=clojure-形而上学>Clojure 形而上学<a hidden class=anchor aria-hidden=true href=#clojure-形而上学>#</a></h2>
+<p>在 Clojure 形而上学中，我们会说，我们永远不会遇到两次相同的拥抱僵尸。拥抱僵尸并不是一个独立于其变异而存在于世界上的离散事物：它实际上是一连串的<em>价值</em>。</p>
+<p>术语<em>值</em>经常被 Clojurists 使用，其具体含义可能与你的习惯不同。价值是*原子性的，即它们在一个更大的系统中形成一个单一的不可还原的单位或组成部分；它们是不可分割的、不变的、稳定的实体。数字是价值：数字 15 变异为另一个数字是没有意义的。当你从 15 加减时，你并没有改变 15 这个数字；你只是得到了一个不同的数字。Clojure 的数据结构也是价值，因为它们是不可改变的。当你在一个地图上使用<code>assoc</code>时，你不会修改原来的地图；相反，你会派生出一个新的地图。</p>
+<p>所以一个值不会改变，但是你可以对一个值应用一个<em>过程来产生一个新的值。例如，假设我们从一个值</em>F1<em>开始，然后我们把</em>拥抱僵尸<em>过程应用到</em>F1*，产生值<em>F2</em>。然后这个过程又被应用到<em>F2</em>的值上，产生<em>F3</em>的值，以此类推。</p>
+<p>这导致了对<em>身份</em>的不同概念。Clojure 形而上学不是像 OO 形而上学那样把身份理解为变化的对象所固有的，而是把身份理解为我们人类强加给由一个过程随时间产生的一连串不变的值的东西。我们使用<em>名字</em>来指定身份。名字<em>Fred</em>是指一系列单独的状态<em>F1</em>、<em>F2</em>、<em>F3</em>等等的方便方法。从这个角度来看，不存在所谓的可改变的状态。相反，<em>state</em>指的是某个时间点上的身份值。</p>
+<p>Rich Hickey 用电话号码的比喻来解释状态。 <em>Alan 的电话号码</em>已经改变了 10 次，但我们将永远用同一个名字来称呼这些号码，即<em>Alan 的电话号码</em>。艾伦五年前的电话号码与今天的电话号码是不同的数值，两者是艾伦电话号码身份的两种状态。</p>
+<p>当你考虑到在你的程序中你是在处理关于世界的信息时，这是有意义的。与其说信息发生了变化，不如说你收到了新的信息。周五中午 12 点，&ldquo;抱抱僵尸 &ldquo;弗雷德处于 50%的腐烂状态。在下午 1 点，他是 60%的腐烂。这都是你可以处理的事实，引入一个新的事实并不会使以前的事实失效。即使弗雷德的衰变率从 50%增加到 60%，但在下午 12:00 时他处于 50%的衰变状态仍然是事实。</p>
+<p>图 10-2 显示了你可以如何将价值、过程、身份和状态可视化。</p>
+<p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/zombie-metaphysics/fp-metaphysics.png alt>
+</p>
+<p>图 10-2：价值、过程、身份和状态</p>
+<p>这些价值不会相互作用，也不能被改变。它们不能*做任何事情。只有在以下情况下才会发生变化：a）一个过程产生了一个新的值；b）我们选择将身份与新的值联系起来。</p>
+<p>为了处理这种变化，Clojure 使用<em>参考类型</em>。参考类型让你在 Clojure 中管理身份。使用它们，你可以命名一个身份并检索其状态。让我们来看看其中最简单的，<em>原子</em>。</p>
+<h2 id=原子>原子<a hidden class=anchor aria-hidden=true href=#原子>#</a></h2>
+<p>Clojure 的原子引用类型允许你赋予一连串的相关值以身份。下面是你如何创建一个原子。</p>
+<pre tabindex=0><code>(def fred (atom {:cuddle-hunger-level 0
+                 :%-deteriorated 0}))
+</code></pre><p>这将创建一个新的原子，并将其与名称<code>fred</code>绑定。这个原子*引用了<code>{:cuddle-hunger-level 0 :percent-deteriorated 0}</code>的值，你可以说这是它的当前状态。</p>
+<p>要得到一个原子的当前状态，你要解除对它的引用。下面是 Fred 的当前状态。</p>
+<pre tabindex=0><code>@fred
+; =&gt; {:cuddle-hunger-level 0, : percent-deteriorated 0}.
+</code></pre><p>与期货、延迟和承诺不同，解除对原子（或任何其他引用类型）的引用将永远不会阻塞。当你解除对期货、延迟和承诺的引用时，就像你在说 &ldquo;我现在需要一个值，我会一直等到我得到它&rdquo;，所以这个操作会阻塞是合理的。然而，当你解除引用类型的引用时，就像你在说 &ldquo;给我我现在引用的值&rdquo;，所以操作不会阻塞是有道理的，因为它不需要等待任何东西。</p>
+<p>在清单 10-1 中的 Ruby 例子中，我们看到当你试图在一个单独的线程上记录数据时，对象数据可能会发生变化。当使用原子来管理状态时就不会发生这种危险，因为每个状态都是不可改变的。下面是你如何用<code>println</code>来记录一个僵尸的状态。</p>
+<pre tabindex=0><code>(let [zombie-state @fred)
+  (如果 (&gt;= (:%-deteriorated zombie-state) 50)
+    (future (println (:cuddle-hunger-level zombie-state))))))
+</code></pre><p>清单 10-1 中的 Ruby 例子的问题是，它需要两步来读取僵尸的两个属性，而其他线程可能在这两步之间改变这些属性。然而，通过使用原子来引用不可变的数据结构，你只需要执行一次读取，并且返回的数据结构不会被其他线程改变。</p>
+<p>要更新原子，使其指向一个新的状态，你可以使用<code>swap!</code>。这似乎是矛盾的，因为我说过，原子值是不变的。的确，它们是不变的。但是现在我们正在使用原子的<em>参考类型</em>，一个指向原子值的结构。原子值不会改变，但是引用类型可以被更新并被分配一个新的值。</p>
+<p><code>swap!</code>接收一个原子和一个函数作为参数。它将函数应用于原子的当前状态以产生一个新的值，然后它更新原子以引用这个新的值。新的值也被返回。下面是你如何将 Fred 的拥抱饥饿度提高 1。</p>
+<pre tabindex=0><code>(swap! fred)
+       (fn [current-state]
+         (merge-with + current-state {:cuddle-hunger-level 1}))
+; =&gt; {:cuddle-hunger-level 1, :%-deteriorated 0}。
+</code></pre><p>取消引用<code>fred</code>将返回新的状态。</p>
+<pre tabindex=0><code>@fred
+; =&gt; {:cuddle-hunger-level 1, :percent-deteriorated 0}。
+</code></pre><p>与 Ruby 不同，<code>fred</code>不可能处于不一致的状态，因为你可以同时更新饥饿度和恶化百分比，像这样。</p>
+<pre tabindex=0><code>(swap! fred
+       (fn [current-state]
+         (merge-with + current-state {:cuddle-hunger-level 1
+                                      :%-deteriorated 1}))
+; =&gt; {:cuddle-hunger-level 2, :percent-deteriorated 1}。
+</code></pre><p>这段代码传递给<code>swap!</code>一个只需要一个参数的函数，<code>current-state</code>。你也可以传递<code>swap!</code>一个需要多个参数的函数。例如，你可以创建一个需要两个参数的函数，一个是僵尸状态，另一个是增加其拥抱饥饿度的数量。</p>
+<pre tabindex=0><code>(defn increase-cuddle-hunger-level
+  [zombie-state increase-by］
+  (merge-with + zombie-state {:cuddle-hunger-level increase-by})
+</code></pre><p>让我们在僵尸状态下快速测试一下<code>increase-cuddle-hunger-level</code>。</p>
+<pre tabindex=0><code>(increase-cuddle-hunger-level @fred 10)
+; =&gt; {:cuddle-hunger-level 12, : percent-deteriorated 1}.
+</code></pre><p>注意，这段代码实际上并没有更新<code>fred</code>，因为我们没有使用<code>swap!</code>，我们只是对<code>increase-cuddle-</code>hunger<code>-level</code>做了一个正常的函数调用，它返回一个结果。</p>
+<p>现在用附加参数调用<code>swap!</code>，<code>@fred</code>将被更新，就像这样。</p>
+<pre tabindex=0><code>(swap! fred increase-cuddle-hunger-level 10)
+; =&gt; {:cuddle-hunger-level 12, : percent-deteriorated 1}.
+
+@fred
+; =&gt; {:cuddle-hunger-level 12, :%-deteriorated 1}.
+</code></pre><p>或者你可以用 Clojure 的内置函数来表达整个事情。<code>update-in</code>函数需要三个参数：一个集合，一个用于识别要更新的值的向量，以及一个更新该值的函数。它还可以接受额外的参数，这些参数将被传递给更新函数。下面是几个例子。</p>
+<pre tabindex=0><code>(update-in {:a {:b 3}} [:a :b] inc)
+; =&gt; {:a {:b 4}}.
+
+(update-in {:a {:b 3}} [:a :b] + 10)
+; =&gt; {:a {:b 13}} (update-in {:a :b 3})
+</code></pre><p>在第一个例子中，你正在更新地图<code>{:a {:b 3}}。Clojure使用向量</code>[:a :b]<code>来遍历嵌套图；</code>:a<code>产生嵌套图</code>{:b 3}<code>，</code>:b<code>产生值</code>3<code>。Clojure将</code>inc<code>函数应用于</code>3<code>，并返回一个替换了</code>3`的新地图。</p>
+<p>下面是你如何使用<code>update-in</code>函数来改变 Fred 的状态。</p>
+<pre tabindex=0><code>(swap! fred update-in [:cuddle-hunger-level] + 10)
+; =&gt; {:cuddle-hunger-level 22, : percent-deteriorated 1}.
+</code></pre><p>通过使用原子，你可以保留过去的状态。你可以解除引用一个原子来检索状态 1，然后更新该原子，创建状态 2，并仍然使用状态 1。</p>
+<pre tabindex=0><code>(让 [num (atom 1)
+      s1 @num] 。
+  (swap! num inc)
+  (println &quot;状态1:&quot; s1)
+  (println &quot;当前状态:&quot; @num))
+; =&gt; 状态1：1
+; =&gt; 当前状态：2
+</code></pre><p>这段代码创建了一个名为 &ldquo;num &ldquo;的原子，检索其状态，更新其状态，然后打印其过去的状态和当前的状态，表明当我说你可以保留过去的状态时，我并不是要欺骗你，因此你可以信任我所有的东西&ndash;包括你的真实姓名，我保证只说出你的真实姓名，以拯救你脱离致命的危险。</p>
+<p>这一切都很有趣，但如果两个独立的线程调用&rdquo;（交换！弗雷德增加-拥抱-饥饿等级 1）&ldquo;会发生什么？是否有可能像清单 10-1 中的 Ruby 例子那样，其中一个增量被丢失？</p>
+<p>答案是否定的! <code>swap!</code>实现了<em>比较和设置</em>的语义，意味着它在内部做了以下工作。</p>
+<ol>
+<li>它读取原子的当前状态。</li>
+<li>
+<ol start=2>
+<li>然后将更新函数应用于该状态。</li>
+</ol>
+</li>
+<li>接下来，它检查它在步骤 1 中读取的值是否与原子的当前值相同。</li>
+<li>4.如果是，那么<code>swap!</code>就更新原子以引用步骤 2 的结果。</li>
+<li>5.如果不是，那么<code>swap!</code>重试，从第 1 步开始再次经历这个过程。</li>
+</ol>
+<p>这个过程保证了没有交换会丢失。</p>
+<p>关于<code>swap!</code>需要注意的一个细节是，原子更新是同步发生的；它们将阻塞其线程。例如，如果你的更新函数由于某种原因调用了<code>Thread/sleep 1000</code>，那么当<code>swap!</code>完成时，线程将阻塞至少一秒钟。</p>
+<p>有时你会想更新一个原子而不检查它的当前值。例如，你可能会开发一种血清，将一个抱枕僵尸的饥饿度和恶化度设置为零。对于这些情况，你可以使用<code>reset!</code>函数。</p>
+<pre tabindex=0><code>(reset! fred {:cuddle-hunger-level 0
+              :%-恶化 0})
+</code></pre><p>这就涵盖了 atoms 的所有核心功能! 总结一下：原子实现了 Clojure 的状态概念。它们允许你为一系列不可变的值赋予一个身份。它们通过比较和设置语义为引用单元和互斥问题提供了解决方案。它们还允许你处理过去的状态，而不用担心它们会在原地变异。</p>
+<p>除了这些核心特性外，原子还与其他引用类型共享两个特性。你可以在原子上附加<em>watches</em>和<em>validators</em>。现在让我们来看看这些。</p>
+<h2 id=手表和验证器>手表和验证器<a hidden class=anchor aria-hidden=true href=#手表和验证器>#</a></h2>
+<p>观察器允许你超级猥琐地检查你的参考类型的一举一动。验证器允许你有超强的控制力，限制哪些状态是可以允许的。钟表和验证器都是普通的函数。</p>
+<h3 id=手表>手表<a hidden class=anchor aria-hidden=true href=#手表>#</a></h3>
+<p>一个<em>watch</em>是一个函数，它需要四个参数：一个键，被监视的引用，它的前一个状态，以及它的新状态。你可以为一个引用类型注册任意数量的手表。</p>
+<p>比方说，一个僵尸的洗牌速度（以每小时洗牌次数衡量，或称 SPH）取决于其饥饿程度和恶化程度。下面是你的计算方法，用拥抱的饥饿程度乘以它的完整程度。</p>
+<pre tabindex=0><code>(defn shuffle-speed
+  [僵尸］
+  (* (:cuddle-hunger-level zombie)
+     (- 100 (:%-deteriorated zombie)))))
+</code></pre><p>我们还可以说，每当僵尸的洗牌速度达到 5000SPH 的危险水平时，你都想得到提醒。否则，你想被告知一切都很好。下面是一个观察函数，你可以用来在 SPH 超过 5000 时打印一个警告信息，否则打印一个一切正常的信息。</p>
+<pre tabindex=0><code>(defn shuffle-alert
+  [key watched old-state new-state] (让 [sph (shuffle-alert))
+  (让 [sph (shuffle-speed new-state)] (如果 (&gt; sph 5000)
+    (如果 (&gt; sph 5000)
+      (做
+        (println &quot;Run, you fool!&quot;)
+        (println &quot;这个僵尸的SPH现在是&quot; sph)
+        (println &quot;这个消息是由&quot; key)提供给你的)
+      (做
+        (println &quot;All's well with &quot; key)
+        (println &quot;Cuddle hunger: &quot; (:cuddle-hunger-level new-state))
+        (println &quot;恶化的百分比。&quot; (:%-deteriorated new-state))
+        (println &quot;SPH: &quot; sph)))))
+</code></pre><p>观察函数有四个参数：一个可以用来报告的键，被观察的原子，原子更新前的状态，以及原子更新后的状态。这个观察函数计算新状态的洗牌速度，如果它过高，就打印一个警告信息，当洗牌速度安全时，就打印一个一切正常的信息，如上所述。在这两组信息中，<code>key</code>被用来让你知道信息的来源。</p>
+<p>你可以用<code>add-watch</code>把这个函数附加到<code>fred</code>上。<code>add-watch</code>的一般形式是<code>（add-watch</code> ref key watch-fn<code>）</code>。在这个例子中，我们要重置<code>fred</code>的状态，添加<code>shuffle-alert</code>的观察函数，然后多次更新<code>fred</code>的状态以触发<code>shuffle-alert</code>。</p>
+<pre tabindex=0><code>(reset! fred {:cuddle-hunger-level 22
+              :%-deteriorated 2})
+(add-watch fred :fred-shuffle-alert shuffle-alert)
+(swap! fred update-in [:percent-deteriorated] + 1)
+; =&gt; All's well with :fred-shuffle-alert
+; =&gt; 拥抱的饥饿感: 22
+; =&gt; 恶化的百分比。 3
+; =&gt; SPH: 2134
+
+(swap! fred update-in [:cuddle-hunger-level] + 30)
+; =&gt; 快跑，你这个傻瓜!
+; =&gt; 该僵尸的SPH现在是5044
+; =&gt; 这个消息是由 :fred-shuffle-alert 提供的。
+</code></pre><p>这个观察函数的例子没有使用<code>watched</code>或<code>old-state</code>，但如果有需要，它们就在那里。现在我们来谈谈验证器。</p>
+<h3 id=验证器>验证器<a hidden class=anchor aria-hidden=true href=#验证器>#</a></h3>
+<p><em>验证器</em>可以让你指定一个引用可以有哪些状态。例如，这里有一个验证器，你可以用来确保一个僵尸的<code>:%-deteriorated</code>在 0 到 100 之间。</p>
+<pre tabindex=0><code>(defn percent-deteriorated-validator
+  [{:key [percent-deteriorated]}] (和 (&gt;= percent-deteriorated)
+  (并且 (&gt;=%-deteriorated 0)
+       (&lt;=%-deteriorated 100)))
+</code></pre><p>正如你所看到的，验证器只需要一个参数。当你给一个引用添加验证器时，该引用被修改，这样，每当它被更新时，它将调用这个验证器，并将更新函数返回的值作为其参数。如果验证器因返回 &ldquo;false &ldquo;或抛出一个异常而失败，引用将不会改变以指向新的值。</p>
+<p>你可以在创建原子时附加一个验证器。</p>
+<pre tabindex=0><code>(def bobby
+  (atom
+   {:cuddle-hunger-level 0 :percent-deteriorated 0}.
+    :验证器 percent-deteriorated-validator))
+(swap! bobby update-in [:percent-deteriorated] + 200)
+; 这将抛出 &quot;无效的参考状态&quot;
+</code></pre><p>在这个例子中，<code>percent-deteriorated-validator</code>返回<code>false</code>，原子更新失败。</p>
+<p>你可以抛出一个异常，以获得一个更具描述性的错误信息。</p>
+<pre tabindex=0><code>(defn percent-deteriorated-validator
+  [{:keys [percent-deteriorated]}]。
+  (or (and (&gt;= percent-deteriorated 0)
+           (&lt;=%-deteriorated 100))
+      (抛出 (IllegalStateException. &quot;That's not mathy!&quot; )))))
+(def bobby
+  (atom
+   {:cuddle-hunger-level 0 :percent-deteriorated 0}。
+    :验证器 percent-deteriorated-validator))
+(swap! bobby update-in [:percent-deteriorated] + 200)
+; 这将抛出 &quot;IllegalStateException。这不是数学问题！&quot;
+</code></pre><p>相当不错! 现在让我们来看看裁判。</p>
+<p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/zombie-metaphysics/sock-gnome.png alt>
+</p>
+<p>原子是管理独立身份状态的理想选择。但有时，我们需要表达一个事件应该同时更新一个以上的身份的状态。 <em>Refs</em>是这种情况下的完美工具。</p>
+<p>一个典型的例子是记录 sock gnome 交易。我们都知道，袜子侏儒从世界各地的每一个干衣机中取出一只袜子。他们用这些袜子来孵化他们的孩子。作为对这种*"*礼物 &ldquo;的回报，袜子地精保护你的家不被 El Chupacabra 入侵。如果你最近没有被 El Chupacabra 拜访，你要感谢袜子侏儒。</p>
+<p>为了建立袜子转移的模型，我们需要表达的是，一个烘干机失去了一只袜子，一个地精同时得到了一只袜子。这一刻，袜子属于烘干机；下一刻，它属于地精。这只袜子不应该同时属于烘干机和侏儒，也不应该同时属于这两个人。</p>
+<h3 id=为袜子转移建模>为袜子转移建模<a hidden class=anchor aria-hidden=true href=#为袜子转移建模>#</a></h3>
+<p>你可以用 refs 来模拟这个 sock 传输。Refs 允许你使用事务语义来更新多个身份的状态。这些交易有三个特点。</p>
+<ul>
+<li>它们是<em>原子性的</em>，意味着所有的参考文献都被更新，或者都不被更新。</li>
+<li>它们是<em>一致的</em>，这意味着引用总是显示为有效的状态。一个 sock 总是属于一个 dryer 或一个 gnome，但绝不是两者都属于。</li>
+<li>它们是<em>隔离的</em>，这意味着事务的行为就像它们是连续执行的一样；如果两个线程同时运行改变同一参考信息的事务，一个事务将重试。这类似于原子的比较和设置语义。</li>
+</ul>
+<p>你可能认识到这些是数据库事务的 ACID 属性中的<em>A</em>、<em>C</em>和<em>I</em>。你可以认为 Refs 给你提供了与数据库事务相同的并发安全性，只是在内存中的数据。</p>
+<p>Clojure 使用*软件事务性内存（STM）*来实现这种行为。STM 非常酷，但当你开始使用 Clojure 时，你不需要对它了解太多；你只需要知道如何使用它，这就是本节要告诉你的。</p>
+<p>让我们开始转移一些袜子吧! 首先，你需要编码一些袜子和 gnome 的创建技术。下面的代码定义了一些袜子品种，然后定义了几个辅助函数。 <code>sock-count'将被用来帮助记录每一种袜子有多少只属于地精或烘干机，而</code>generate-sock-gnome&rsquo;将创建一个新的、没有袜子的地精。</p>
+<pre tabindex=0><code>(def sock-varieties
+  #{&quot;darned&quot; &quot;argyle&quot; &quot;wool&quot; &quot;horsehair&quot; &quot;mulleted&quot;
+    &quot;被动攻击&quot; &quot;条纹&quot; &quot;波尔卡圆点&quot;
+    &quot;运动型&quot;&quot;商务型&quot;&quot;权力型&quot;&quot;隐形型&quot;&quot;高勒型&quot;})
+
+(defn sock-count
+  [sock-variety count] （袜子品种计数
+  {:variety sock-variety
+   :count计数})
+
+(defn generate-sock-gnome
+  &quot;创建一个没有袜子的初始袜套状态&quot;
+  [name] {:name
+  {:name名称
+   :socks #{}})
+</code></pre><p>现在你可以创建你的实际参照物了。侏儒将有 0 只袜子。另一方面，烘干机将有一组由袜子品种集生成的袜子对。下面是我们的参考文献。</p>
+<pre tabindex=0><code>(def sock-gnome (ref (generate-sock-gnome &quot;Barumpharumph&quot;) ))
+(def dryer (ref {:name &quot;LG 1337&quot;
+                 :socks (set (map #(sock-count % 2) sock-varieties))}))
+</code></pre><p>你可以像解除对原子的引用一样解除对 ref 的引用。在这个例子中，你的袜子的顺序可能会不同，因为我们使用的是一个无序的集合。</p>
+<pre tabindex=0><code>(:socks @dryer)
+; =&gt; #{{:品种 &quot;passive-aggressive&quot;, :count 2} {:品种 &quot;power&quot;, :count 2}.
+       {:品种 &quot;运动型&quot;, :计数2} {:品种 &quot;商务型&quot;, :计数2}
+       {:品种 &quot;雅戈尔&quot;, :计数2} {:品种 &quot;马鬃&quot;, :计数2}
+       {:品种 &quot;gollumed&quot;, :count 2} {:品种 &quot;darned&quot;, :count 2}
+       {:品种 &quot;圆点&quot;, :数量2} {:品种 &quot;羊毛&quot;, :数量2}
+       {:品种 &quot;mulleted&quot;, :count 2} {:品种 &quot;striped&quot;, :count 2}
+       {:品种 &quot;隐形&quot;, :数量2}}{:品种 &quot;隐形&quot;, :数量2}}。
+</code></pre><p>现在一切都准备好了，可以进行转移了。我们要修改<code>sock-gnome</code>参数，以显示它获得了一只袜子，并修改<code>dryer</code>参数，以显示它失去了一只袜子。你用<code>alter'来修改引用，而且你必须在一个事务中使用</code>alter'。 <code>dosync</code>启动一个事务并定义其范围；你把所有的事务操作放在其主体中。这里我们使用这些工具来定义一个`steal-sock&rsquo;函数，然后在我们的两个参考文件上调用它。</p>
+<pre tabindex=0><code>(defn steal-sock
+  [gnome dryer]
+  (dosync
+   (when-let [pair (some #(if (= (:count %) 2) %) (:socks @dryer)) ]
+     (让 [uped-count (sock-count (:variety pair) 1)] (alter gnome upd-in)
+       (alter gnome update-in [:socks] conj updated-count)
+       (alter dryer update-in [:socks] disj pair)
+       (alter dryer update-in [:socks] conj updated-count))))))
+(窃取-袜子-袜子-烘干机)
+
+(:socks @sock-gnome)
+; =&gt; #{{:品种 &quot;被动攻击&quot;, :计数1}}.
+</code></pre><p>现在团子有一只被动攻击型的袜子，而烘干机少了一只（你的团子可能偷了一只不同的袜子，因为袜子是以无序的方式存储的）。让我们确保所有被动攻击的袜子都被计算在内。</p>
+<pre tabindex=0><code>(defn similar-socks
+  [target-sock sock-set］
+  (filter #(= (:variety %) (:variety target-sock) ) sock-set))
+
+(similar-socks (first (:socks @sock-gnome)) (:socks @dryer))
+; =&gt; ({:品种 &quot;被动攻击&quot;, :计数 1})
+</code></pre><p>这里有几个细节需要注意：当你<code>改变</code>一个引用时，这个改变在当前事务之外并不立即可见。这使得你可以在一个事务中对<code>dryer</code>调用<code>alter</code>两次，而不用担心<code>dryer</code>会在不一致的状态下被读取。同样的，如果你<code>改变</code>一个引用，然后在同一个事务中<code>deref</code>它，<code>deref</code>将返回新的状态。</p>
+<p>这里有一个例子来证明这个交易中状态的想法。</p>
+<pre tabindex=0><code>(def counter (ref 0))
+(未来
+  (dosync
+   (alter counter inc)
+   (println @counter)
+   (Thread/sleep 500)
+   (alter counter inc)
+   (println @counter)))
+(Thread/sleep 250)
+(println @counter)
+</code></pre><p>这将依次打印出 1、0 和 2。首先，你创建了一个引用，<code>counter</code>，用来保存数字 0。然后你用<code>future</code>创建一个新的线程来运行一个事务。在事务线程中，你增加计数器并打印它，然后数字 1 被打印出来。同时，主线程等待了 250 毫秒，也打印了计数器的值。然而，主线程上的计数器的值仍然是 0&ndash;主线程是在事务之外的，不能访问事务的状态。这就像事务有自己的私有区域，用于尝试对状态的改变，而世界上的其他人在事务完成之前不能知道它们。这在事务代码中得到了进一步说明：在它第一次打印之后，它再次将计数器从 1 增加到 2，并打印出结果 2。</p>
+<p>事务只有在结束时才会尝试提交其变更。提交的工作原理类似于原子的比较和设置语义。每个引用都会被检查，看它在你第一次试图改变它之后是否有变化。如果有任何<em>个引用发生了变化，那么</em>个引用都不会被更新，事务会被重试。例如，如果事务 A 和事务 B 在同一时间被尝试，并且事件按以下顺序发生，事务 A 将被重试。</p>
+<ol>
+<li>事务 A： alter gnome</li>
+<li>交易 B: alter gnome</li>
+<li>交易 B：改变烘干机</li>
+<li>交易 B：改变烘干机</li>
+<li>事务 B：提交-成功地更新 gnome 和 dryer</li>
+<li>事务 A：改变 dryer</li>
+<li>事务 A：改变烘干机</li>
+<li>事务 A：提交失败，因为 dryer 和 gnome 已经改变；重试。</li>
+</ol>
+<p>这就是你的工作! 安全、简单、并发地协调状态变化。但这还不是全部! Refs 还有一个可疑的长袖子的技巧：<code>commute</code>。</p>
+<h3 id=通勤>通勤<a hidden class=anchor aria-hidden=true href=#通勤>#</a></h3>
+<p><code>commute</code>允许你在一个事务中更新一个 ref 的状态，就像 <code>alter</code>一样。然而，它在提交时的行为是完全不同的。下面是`alter&rsquo;的行为方式。</p>
+<ol>
+<li>在事务之外，读取 Ref 的当前状态。</li>
+<li>2.将当前状态与引用者在事务中开始时的状态进行比较。</li>
+<li>
+<ol start=3>
+<li>如果两者不同，则重试交易。</li>
+</ol>
+</li>
+<li>
+<ol start=4>
+<li>否则，提交改变后的引用状态。</li>
+</ol>
+</li>
+</ol>
+<p>另一方面，<code>commute</code>在提交时的行为是这样的。</p>
+<ol>
+<li>在事务之外，读取引用的当前状态。</li>
+<li>
+<ol start=2>
+<li>使用当前状态再次运行<code>commute</code>函数。</li>
+</ol>
+</li>
+<li>提交结果。</li>
+</ol>
+<p>正如你所看到的，<code>commute</code>并不强迫事务重试。这可以帮助提高性能，但重要的是，只有当你确定你的 refs 不可能最终处于无效状态时才使用 <code>commute'。让我们看看</code>commute`的安全和不安全使用的例子。</p>
+<p>下面是一个安全使用的例子。<code>sleep-print-update</code>函数返回更新的状态，但同时也睡眠了指定的毫秒数，所以我们可以强制事务重叠。它打印了它试图更新的状态，所以我们可以深入了解正在发生的事情。</p>
+<pre tabindex=0><code>(defn sleep-print-update
+  [sleep-time thread-name update-fn] (fn [state] )
+  (fn [state]
+    (Thread/sleep sleep-time)
+    (println (str thread-name &quot;: &quot; state))
+    (update-fn state)))
+(def counter (ref 0))
+(future (dosync (commute counter (sleep-print-update 100 &quot;Thread A&quot; inc)))))
+(未来 (dosync (commute counter (sleep-print-update 150 &quot;Thread B&quot; inc)))))
+</code></pre><p>下面是打印的时间线。</p>
+<pre tabindex=0><code>线程A。0 | 100ms
+线程B：0 | 150ms
+线程A: 0 | 200ms 
+线程B: 1 | 300ms
+</code></pre><p>请注意，最后打印的一行是 &ldquo;线程 B：1&rdquo;。这意味着<code>sleep-print-update</code>在第二次运行时收到<code>1</code>作为状态参数。这是有道理的，因为此时线程 A 已经提交了它的结果。如果你在事务运行后解除对<code>counter</code>的引用，你会发现其值是<code>2</code>。</p>
+<p>现在，这里有一个不安全交换的例子。</p>
+<pre tabindex=0><code>(def receiver-a (ref #{})
+(def receiver-b (ref #{}))
+(def giver (ref #{1}))
+(do (future (dosync (let [gift (first @giver)] )
+                      (Thread/sleep 10)
+                      (commute receiver-a conj gift)
+                      (commute giver disj gift))))
+    (future (dosync (let [gift (first @giver)] )
+                      (Thread/sleep 50)
+                      (commute receiver-b conj gift)
+                      (commute giver disj gift)))))
+
+@receiver-a
+; =&gt; #{1}
+
+@接收者-b
+; =&gt; #{1}
+
+@接受者
+; =&gt; #{}
+</code></pre><p><code>1</code>被赋予了<code>receiver-a</code>和<code>receiver-b</code>，你最终得到了两个<code>1</code>的实例，这对你的程序是无效的。这个例子的不同之处在于，应用的函数，基本上是<code>#(conj % gift)</code>和<code>#(disj % gift)</code>，是由<code>giver</code>的状态派生的。一旦<code>giver</code>发生变化，派生的函数就会产生一个无效的状态，但是<code>commute</code>并不关心产生的状态是无效的，无论如何都会提交结果。这里的教训是，尽管<code>commute</code>可以帮助你加快程序的速度，但你必须明智地决定何时使用它。</p>
+<p>现在你已经准备好开始安全、理智地使用 Refs 了。引用还有一些细微的差别，我在此不做介绍，但如果你对它们感到好奇，你可以研究<code>ensure</code>函数和<em>write skew</em>现象。</p>
+<p>接下来是本书涉及的最后一种参考文献类型。 <em>vars</em>。</p>
+<h2 id=vars>Vars<a hidden class=anchor aria-hidden=true href=#vars>#</a></h2>
+<p>你已经在第 6 章中了解了一些关于 vars 的知识。简单的说, <em>vars</em>是符号和对象之间的关联。你可以用<code>def</code>创建新的变量。</p>
+<p>尽管 vars 并不像原子和 refs 那样用来管理状态，但它们确实有一些并发的技巧：你可以动态地绑定它们，并且可以改变它们的根。让我们先来看看动态绑定。</p>
+<h3 id=动态绑定>动态绑定<a hidden class=anchor aria-hidden=true href=#动态绑定>#</a></h3>
+<p>当我第一次介绍<code>def</code>时，我恳请你把它当作定义一个常量。事实证明，vars 比这更灵活：你可以创建一个<em>动态</em>的 var，它的绑定可以被改变。动态变量对于创建一个全局名称是非常有用的，它应该在不同的情况下指代不同的值。</p>
+<h4 id=创建和绑定动态变量>创建和绑定动态变量<a hidden class=anchor aria-hidden=true href=#创建和绑定动态变量>#</a></h4>
+<p>首先，创建一个动态 var。</p>
+<pre tabindex=0><code>(def:dynamic *notification-address* &quot;dobby@elf.org&quot;)
+</code></pre><p>注意这里有两个重要的细节。首先，你用<code>^:dynamic</code>向 Clojure 发出信号，表明一个 var 是动态的。第二，var 的名字是由星号括起来的。Lispers 称这些为<em>earmuffs</em>，这很可爱。Clojure 要求你将动态变量的名字用耳罩括起来。这有助于向其他程序员发出该变量的<em>动态性</em>的信号。</p>
+<p>与普通变量不同，你可以通过使用<code>binding</code>来临时改变动态变量的值。</p>
+<pre tabindex=0><code>(binding [*notification-address* &quot;test@elf.org&quot;)
+  *notification-address*)
+; =&gt; &quot;test@elf.org&quot;
+</code></pre><p>你也可以堆叠绑定（就像你可以用<code>let</code>）。</p>
+<pre tabindex=0><code>(绑定 [*notification-address* &quot;tester-1@elf.org&quot;]
+  (println *notification-address*)
+  (绑定 [*notification-address* &quot;tester-2@elf.org&quot;)
+    (println *notification-address*))
+  (println *notification-address*))
+; =&gt; tester-1@elf.org
+; =&gt; tester-2@elf.org
+;=&gt; tester-1@elf.org
+</code></pre><p>现在你知道了如何动态绑定一个 var，让我们看看一个真实世界的应用。</p>
+<h4 id=动态-var-的用途>动态 var 的用途<a hidden class=anchor aria-hidden=true href=#动态-var-的用途>#</a></h4>
+<p>比方说，你有一个发送通知邮件的函数。在这个例子中，我们将只是返回一个字符串，但假装这个函数真的发送了电子邮件。</p>
+<pre tabindex=0><code>(defn notify
+  [消息］
+  (str &quot;TO: &quot; *notification-address* &quot;\n&quot;
+       &quot;MESSAGE: &quot; message))
+(notify &quot;I fell.&quot;)
+; =&gt; &quot;TO: dobby@elf.org\nMESSAGE: I fell.&quot;
+</code></pre><p>如果你想测试这个函数，而不在每次你的规格运行时向多比发送垃圾邮件，怎么办？这时就需要<code>binding</code>来帮忙了。</p>
+<pre tabindex=0><code>(binding [*notification-address* &quot;test@elf.org&quot;]
+  (notify &quot;test!&quot;))
+; =&gt; &quot;TO: test@elf.org\nMESSAGE: test!&quot;
+</code></pre><p>当然，你可以直接定义<code>notify</code>来接受一个电子邮件地址作为参数。事实上，这通常是正确的选择。为什么要用动态变量来代替呢？</p>
+<p>动态变量最常被用来命名一个或多个函数的目标资源。在这个例子中，你可以把电子邮件地址看作是你写给它的资源。事实上，Clojure 为这个目的提供了大量的内置动态变量。 例如，"<em>out</em>&ldquo;代表打印操作的标准输出。在你的程序中，你可以重新绑定<code>*out*</code>，使打印语句写到一个文件中，就像这样。</p>
+<pre tabindex=0><code>(绑定 [*out* (clojure.java.io/writer &quot;print-output&quot;))
+  (println &quot;一个用尾巴抱着猫的人，会学到 
+一些他无法用其他方式学到的东西。
+-- 马克-吐温&quot;)
+(slurp &quot;print-output&quot;)
+; =&gt; 一个抓着猫的尾巴的人学到了
+     的人学到了他无法用其他方式学到的东西。
+     --马克-吐温
+</code></pre><p>这比每次调用 &ldquo;println &ldquo;都传递一个输出目的地要轻松得多。动态变量是一种指定通用资源的好方法，同时保留了在特殊情况下改变它的灵活性。</p>
+<p>动态变量也被用于配置。例如，内置的 var<code>*print-length*</code>允许你指定 Clojure 应该打印一个集合中的多少个项目。</p>
+<pre tabindex=0><code>(println [&quot;Print&quot; &quot;all&quot; &quot;the&quot; &quot;things!&quot;] )
+; =&gt; [Print all the things!］
+
+(绑定 [*print-length* 1] 。
+  (println [&quot;Print&quot; &quot;just&quot; &quot;one!&quot;] )。
+; =&gt; [打印...] 。
+</code></pre><p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/zombie-metaphysics/troll.png alt>
+</p>
+<p>最后，可以对已经绑定的动态变量进行<code>set!</code>。到目前为止，你所看到的例子允许你将信息<em>输入到一个函数，而不需要将信息作为参数传入，而<code>set!</code>允许你将信息</em>输出到一个函数，而不需要将其作为参数返回。</p>
+<p>例如，假设你是一个心灵感应者，但你的读心能力有点延迟。你只有在了解别人的想法对你有用的时候，才能读懂他们的想法。不过，不要觉得太糟糕，你仍然是一个心灵感应者，这很了不起。总之，假设你想穿过一座由巨魔看守的桥，如果你不回答他的谜语，他就会吃掉你。他的谜语是 &ldquo;我想的是 1 和 2 之间的哪个数字？&rdquo; 在巨魔吞噬你的情况下，你至少可以知道巨魔到底在想什么而死。</p>
+<p>在这个例子中，你创建了动态 var <code>*troll-thought*</code>来传达巨魔的想法，从<code>troll-riddle</code>函数中出来。</p>
+<pre tabindex=0><code>(def:dynamic *troll-thought* nil)
+(defn troll-riddle
+  [你的答案] 。
+  (让[数字 &quot;人肉&quot;]
+➊ (when (thread-bound? #'*troll-thought*)
+➋ (set! *troll-thought* number))
+    (如果 (= number your-answer)
+      &quot;TROLL：你可以过桥了！&quot;
+      &quot;TROLL：该吃你了，多汁的人类！&quot;））。
+
+(绑定 [*troll-thought* nil])
+  (println (troll-riddle 2))
+  (println &quot;succulent humanan: Oooooh! The answer was&quot; *troll-thought*))
+
+; =&gt; 巨魔：该吃你了，多汁的人类!
+; =&gt; 多产的人类：哦！答案是人肉。答案是人肉
+</code></pre><p>你在➊处使用<code>thread-bound?</code>函数来检查 var 是否已经被绑定，如果是，你就<code>set! *troll-thought*</code>到➋处的巨魔的思想。</p>
+<p>变量在绑定之外返回到它的原始值。</p>
+<pre tabindex=0><code>*troll-thought*
+; =&gt; nil
+</code></pre><p>注意，你必须将<code>#'*troll-thought*</code>（包括<code>#'），而不是</code><em>troll-thought</em><code>，传递给函数</code>thread-bound?<code>。这是因为</code>thread-bound?`将 var 本身作为一个参数，而不是它所指向的值。</p>
+<h4 id=每线程绑定>每线程绑定<a hidden class=anchor aria-hidden=true href=#每线程绑定>#</a></h4>
+<p>关于绑定的最后一点要注意：如果你从一个手动创建的线程中访问一个动态绑定的 var，该 var 将评估为原始值。如果你是 Clojure（和 Java）的新手，这个特性不会立即发生作用；你可以跳过这一节，以后再来讨论它。</p>
+<p>具有讽刺意味的是，这种绑定行为使我们无法在 REPL 中轻松创建一个有趣的演示，因为 REPL 绑定了<code>*out*</code>。就好像你在 REPL 中运行的所有代码都被隐含地包裹在类似<code>(</code>binding[<em>out</em> repl-printer] your-code<code>的东西中。如果你创建一个新的线程，</code><em>out</em>`就不会被绑定到 REPL 打印机上。</p>
+<p>下面的例子使用了一些基本的 Java 互操作。即使它看起来很陌生，下面代码的要点也应该很清楚，你将在第 12 章中准确地了解发生了什么。</p>
+<p>这段代码向 REPL 打印输出。</p>
+<pre tabindex=0><code>(.write *out* &quot;prints to repl&quot;)
+; =&gt; 打印到rep
+</code></pre><p>下面的代码没有打印输出到 REPL，因为<code>*out*</code>没有绑定到 REPL 打印机。</p>
+<pre tabindex=0><code>(.start (Thread. #(.write *out* &quot;printts to standard out&quot;))
+</code></pre><p>你可以通过使用这个愚蠢的代码来解决这个问题。</p>
+<pre tabindex=0><code>(让 [out *out*]
+  (.start
+   (线程。#(绑定 [*out* out]
+               (.write *out* &quot;printts to repl from thread&quot;)))))
+</code></pre><p>或者你可以使用<code>bound-fn</code>，它将所有当前的绑定带到新的线程中。</p>
+<pre tabindex=0><code>(.start (Thread. (bound-fn [] (.write *out* &quot;printts to repl from thread&quot;))))
+</code></pre><p><code>let</code>绑定捕获了<code>*out*</code>，所以我们可以在子线程中重新绑定它，这是很傻的。重点是，绑定不会被传递到<em>手动</em>创建的线程中。然而，它们确实被传递给了期货。这就是所谓的 &ldquo;绑定传递&rdquo;。在本章中，我们一直在从期货中打印，没有任何问题，比如说。</p>
+<p>关于动态绑定就到此为止。让我们把注意力转向最后一个 var 主题：改变 var 的<em>根</em>。</p>
+<h3 id=改变变量根值>改变变量根值<a hidden class=anchor aria-hidden=true href=#改变变量根值>#</a></h3>
+<p>当你创建一个新的 var 时，你提供的初始值是它的<em>根</em>。</p>
+<pre tabindex=0><code>(def power-source &quot;hair&quot;)
+</code></pre><p>在这个例子中，<code>"头发"</code>是<code>power-source</code>的根值。Clojure 允许你用函数<code>alter-var-root</code>永久地改变这个根值。</p>
+<pre tabindex=0><code>(alter-var-root #'power-source (fn [_] &quot;7-eleven parking lot&quot;)
+动力源
+; =&gt; &quot;7-eleven停车场&quot;
+</code></pre><p>就像使用<code>swap!</code>来更新一个原子或<code>alter!</code>来更新一个 ref 一样，你使用<code>alter-var-root</code>和一个函数来更新一个 var 的状态。在这种情况下，函数只是返回一个新的字符串，与之前的值没有关系，不像<code>alter!</code>的例子，我们使用<code>inc</code>来从当前的数字衍生出一个新数字。</p>
+<p>你几乎不会想这样做。你尤其不想这样做来执行简单的变量赋值。如果你这样做了，你就会不顾一切地把绑定的变量创建为一个可变的变量，这与 Clojure 的理念相悖；最好是使用你在第 5 章学到的函数式编程技术。</p>
+<p>你也可以用<code>with-redefs</code>暂时改变一个 var 的根。这与绑定的工作原理类似，只是改变的内容会出现在子线程中。下面是一个例子。</p>
+<pre tabindex=0><code>(with-redefs [*out* *out*)
+        (doto (Thread. #(println &quot;with redefs 允许我在 REPL 中显示&quot;)
+          .开始
+          .join))
+</code></pre><p><code>with-redefs</code>可以用于任何 var，而不仅仅是动态的。因为它有如此深远的影响，你应该只在测试时使用它。例如，你可以用它来重新定义一个从网络调用中返回数据的函数，这样该函数就会返回模拟数据而不需要实际进行网络请求。</p>
+<p>现在你知道所有关于 vars 的知识了吧! 尽量不要用它们来伤害你自己或你认识的任何人。</p>
+<h2 id=使用-pmap-的无状态并发性和并行性>使用 pmap 的无状态并发性和并行性<a hidden class=anchor aria-hidden=true href=#使用-pmap-的无状态并发性和并行性>#</a></h2>
+<p>到目前为止，本章的重点是那些旨在减少并发编程中固有风险的工具。你已经了解了共享访问可变状态所带来的危险，以及 Clojure 是如何实现状态的重新概念化，从而帮助你安全地编写并发程序。</p>
+<p>但通常情况下，你会想把那些完全独立的任务并发化。没有对易变状态的共享访问；因此，并发运行这些任务没有任何风险，你也不必费心使用我刚才说过的任何工具。</p>
+<p>事实证明，Clojure 让你可以很容易地编写代码来实现无状态并发。在这一节中，你将了解到<code>pmap</code>，它几乎免费为你提供了并发性能的好处。</p>
+<p><code>map</code>是并行化的完美候选者：当你使用它时，你所做的只是通过对现有集合的每个元素应用一个函数，从现有集合中派生出一个新集合。不需要维护状态；每个函数的应用都是完全独立的。Clojure 通过<code>pmap</code>使执行并行映射变得容易。通过<code>pmap</code>，Clojure 在一个单独的线程上处理映射函数的每个应用的运行。</p>
+<p>为了比较<code>map</code>和<code>pmap</code>，我们需要大量的例子数据，为了生成这些数据，我们将使用<code>repeatedly</code>函数。这个函数接收另一个函数作为参数，并返回一个懒惰序列。懒惰序列的元素是通过调用传递的函数生成的，像这样。</p>
+<pre tabindex=0><code>(defn always-1
+  []
+  1)
+(取5 (重复always-1))
+; =&gt; (1 1 1 1 1)
+</code></pre><p>下面是你如何创建一个 0 到 9 之间的随机数的懒人序列。</p>
+<pre tabindex=0><code>(取5 (重复 (部分rand-int 10))
+; =&gt; (1 5 0 3 4)
+</code></pre><p>让我们使用<code>repeatedly</code>来创建示例数据，该数据由 3000 个随机字符串序列组成，每个字符串长 7000 个字符。我们将比较<code>map</code>和<code>pmap</code>，用它们在这里创建的<code>orc-names</code>序列上运行<code>clojure.string/lowercase</code>。</p>
+<pre tabindex=0><code>(def alphabet-length 26)
+
+;; 字母的矢量，A-Z
+(def letters (mapv (comp str char (partial + 65)) (range alphabet-length) ))
+
+(defn random-string
+  &quot;返回一个指定长度的随机字符串&quot;
+  [长度］
+  (apply str (take length ( repeatedly #(rand-nth letters))))))
+
+(defn random-string-list
+  [list-length string-length］
+  (doall (take list-length (repeaterly (partial random-string string-length))))))
+
+(def orc-names (random-string-list 3000 7000))
+</code></pre><p>因为<code>map</code>和<code>pmap</code>是懒惰的，我们必须强迫它们实现。但我们不希望将结果打印到 REPL 中，因为那会花费很多时间。<code>dorun</code>函数做了我们需要的事情：它实现了序列，但返回<code>nil</code>。</p>
+<pre tabindex=0><code>(time (dorun (map clojure.string/lower-case orc-names))
+; =&gt; &quot;耗时：270.182 msecs&quot;
+
+(time (dorun (pmap clojure.string/lower-case orc-names)))
+; =&gt; &quot;耗时：147.562 msecs&quot;
+</code></pre><p>用<code>map</code>串行执行的时间是<code>pmap</code>的 1.8 倍，而你所要做的只是增加一个额外的字母 你的性能可能会更好，这取决于你的计算机有多少个内核；这段代码是在双核机器上运行的。</p>
+<p>你可能会想，为什么并行版本所花的时间不正好是串行版本的一半。毕竟，两个核心的时间应该只有单核心的一半，不是吗？原因是，在创建和协调线程的过程中，总是会有一些开销。有时，事实上，这种开销所花费的时间会使每个函数应用的时间相形见绌，<code>pmap'实际上会比</code>map&rsquo;花费更多时间。图 10-3 显示了你如何能直观地看到这一点。</p>
+<p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/zombie-metaphysics/pmap-small-grain.png alt>
+</p>
+<p>图 10-3：并行化开销会使任务时间相形见绌，导致性能下降。</p>
+<p>如果我们对 20000 个缩写的兽人名字运行一个函数，每个 300 个字符的长度，我们就可以看到这种效果的作用。</p>
+<pre tabindex=0><code>(def orc-name-abbrevs (random-string-list 20000 300))
+(time (dorun (map clojure.string/lower-case orc-name-abbrevs))
+; =&gt; &quot;耗时：78.23 msecs&quot;
+(time (dorun (pmap clojure.string/lower-case orc-name-abbrevs)) ))
+; =&gt; &quot;耗时：124.727 msecs&quot;
+</code></pre><p>现在<code>pmap</code>实际上需要 1.6 倍的*时间。</p>
+<p>解决这个问题的方法是增加<em>粒度</em>，或者说每个并行化任务所做的工作量。在这种情况下，任务是对集合中的一个元素应用映射函数。粒度不是用任何标准单位来衡量的，但你会说<code>pmap</code>的粒度默认是 1。将粒度增加到 2 意味着你将映射函数应用于两个元素，而不是一个，所以任务所在的线程正在做更多的工作。图 10-4 显示了增加粒度是如何提高性能的。</p>
+<p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/zombie-metaphysics/ppmap.png alt>
+</p>
+<p>图 10-4：可视化的粒度与并行化开销的关系</p>
+<p>为了在 Clojure 中实现这一点，你可以通过使用<code>partition-all</code>使每个线程对多个元素应用<code>clojure.string/lower-case</code>，而不是仅仅一个元素，来增加粒度。 <code>partition-all</code>接收一个 seq，并将其分成指定长度的 seq。</p>
+<pre tabindex=0><code>(def numbers [1 2 3 4 5 6 7 8 9 10])
+(partition-all 3 numbers)
+; =&gt; ((1 2 3) (4 5 6) (7 8 9) (10))
+</code></pre><p>现在假设你开始时的代码是这样的。</p>
+<pre tabindex=0><code>(pmap inc numbers)
+</code></pre><p>在这种情况下，颗粒大小是 1，因为每个线程都对一个元素应用了<code>inc</code>。</p>
+<p>现在假设你把代码改成这样。</p>
+<pre tabindex=0><code>(pmap (fn [number-group] (doall (map inc number-group))
+      (partition-all 3 numbers))
+; =&gt; ((2 3 4) (5 6 7) (8 9 10) (11))
+</code></pre><p>这里有几件事要做。首先，你现在将颗粒大小增加到了三个，因为每个线程现在执行了三个<code>inc</code>函数的应用，而不是一个。第二，注意你必须在映射函数中调用<code>doall</code>。这迫使由<code>(map inc number-group)</code>返回的懒惰序列在线程内实现。第三，我们需要取消对结果的分组。下面是我们如何做到这一点。</p>
+<pre tabindex=0><code>(应用concat
+       (pmap (fn [number-group] (doall (map inc number-group))
+             (partition-all 3 numbers))
+</code></pre><p>使用这个技术，我们可以增加 orc 名称低 ase 化的粒度，这样每个线程在 1000 个名称上运行<code>clojure.string/lower-case</code>而不是只有一个。</p>
+<pre tabindex=0><code>(时间
+ (dorun
+  (apply concat
+         (pmap (fn [name] (doall (map clojure.string/lower-case name))
+               (partition-all 1000 orc-name-abbrevs)))))
+; =&gt; &quot;耗费的时间。44.677 msecs&quot;
+</code></pre><p>并行版本再次花费了近一半的时间。为了好玩，我们可以把这个技术概括为一个叫做 &ldquo;ppmap &ldquo;的函数，代表<em>分区的 pmap</em>。它可以接收一个以上的集合，就像<code>map</code>一样。</p>
+<pre tabindex=0><code>(defn ppmap
+  &quot;分区的pmap，用于将地图操作分组，使并行的
+  开销是值得的&quot;
+  [grain-size f &amp; colls]
+  (apply concat
+   (apply pmap
+          (fn [&amp; pgroups] (doall (apply map f pgroups))
+          (map (partial partition-all grain-size) colls))))
+(时间 (dorun (ppmap 1000 clojure.string/lower-case orc-name-abbrevs))
+; =&gt; &quot;耗费的时间。44.902 msecs&quot;
+</code></pre><p>我不知道你怎么想的，但我觉得这东西就是好玩。要想获得更多的乐趣，可以看看 clojure.core.reducers 库（<em><a href=http://clojure.org/reducers/>http://clojure.org/reducers/</a></em>）。 这个库提供了 seq 函数的替代实现，如<code>map</code>和<code>reduce</code>，通常比它们在<code>clojure.core</code>中的表亲更快。其代价是它们并不懒惰。总的来说，clojure.core.reducers 库为创建和使用<code>ppmap</code>这样的函数提供了一种更精细和可组合的方式。</p>
+<h2 id=摘要>摘要<a hidden class=anchor aria-hidden=true href=#摘要>#</a></h2>
+<p>在本章中，你学到了比大多数人更多的关于安全处理并发任务的知识。你了解了支撑 Clojure 引用类型的形而上学。在 Clojure 的形而上学中，状态是某个时间点上的身份值，而身份是指由某个过程产生的一连串值的一种方便的方式。值是原子性的，就像数字是原子性的一样。它们是不可改变的，这使得它们可以安全地并发工作；你不必担心在你使用它们时其他线程会改变它们。</p>
+<p>原子引用类型允许你创建一个身份，你可以使用<code>swap!</code>和<code>reset!</code>安全地更新引用新值。当你想使用事务语义更新多个身份时，ref 引用类型很方便，你用<code>alter!</code>和<code>commute!</code>更新它。</p>
+<p>此外，你学会了如何通过使用<code>pmap</code>和 core.reducers 库进行无状态数据转换来提高性能。呜呼!</p>
+<h2 id=练习>练习<a hidden class=anchor aria-hidden=true href=#练习>#</a></h2>
+<ol>
+<li>
+<p>创建一个初始值为 0 的原子，使用<code>swap!</code>将其递增几次，然后取消引用。</p>
+</li>
+<li>
+<p>创建一个函数，使用期货来并行处理从*<a href=http://www.braveclojure.com/random-quote>http://www.braveclojure.com/random-quote</a>*下载随机报价的任务，使用<code>(slurp "http://www.braveclojure.com/random-quote")</code>。期货应该更新一个原子，指的是所有引语的总字数。该函数将把要下载的引语数量作为参数，并返回原子的最终值。请记住，在返回原子的最终值之前，你需要确保所有的期货已经完成。下面是你如何调用它和一个示例结果。</p>
+<pre tabindex=0><code>(quote-word-count 5)
+; =&gt; {&quot;赭石 &quot;8, &quot;光滑 &quot;2}.
+</code></pre></li>
+<li>
+<p>在一个游戏中创建两个角色的代表。第一个角色有 15 个命中率，总共有 40 个。第二个角色在他的库存中有一个治疗药水。使用参照物和交易来模拟治疗药水的消耗和第一个角色的治疗。</p>
+</li>
+</ol>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+</ul>
+<nav class=paginav>
+<a class=next href=https://zhenfeng-zhu.github.io/posts/chapter9/>
+<span class=title>Next Page »</span>
+<br>
+<span>Chapter9</span>
+</a>
+</nav>
+<div class=share-buttons>
+<a target=_blank rel="noopener noreferrer" aria-label="share Chapter10 on twitter" href="https://twitter.com/intent/tweet/?text=Chapter10&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fchapter10%2f&hashtags="><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Chapter10 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fchapter10%2f&title=Chapter10&summary=Chapter10&source=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fchapter10%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Chapter10 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fchapter10%2f&title=Chapter10"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Chapter10 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fchapter10%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Chapter10 on whatsapp" href="https://api.whatsapp.com/send?text=Chapter10%20-%20https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fchapter10%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Chapter10 on telegram" href="https://telegram.me/share/url?text=Chapter10&url=https%3a%2f%2fzhenfeng-zhu.github.io%2fposts%2fchapter10%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
+</a>
+</div>
+</footer><script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://zhenfeng-zhu.github.io>Awesome Fenix</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>
