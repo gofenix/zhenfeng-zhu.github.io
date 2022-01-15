@@ -73,6 +73,100 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>小议 async/await 和 coroutine
+</h2>
+</header>
+<section class=entry-content>
+<p>Being happy doesn’t mean that everything is perfect. It means that you decided to look beyond the imperfections.
+后端编程，涉及最多的就是并发。简单理解就是：
+并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行多个任务。可以理解为一个是 manage，一个是 run。
+并发一般特指 IO，IO 是独立于 CPU 的设备，IO 设备通常远远慢于 CPU，所以我们引入了并发的概念，让 CPU 可以一次性发起多个 IO 操作而不用等待 IO 设备做完一个操作再做令一个。原理就是非阻塞操作+事件通知。
+硬件底层上我其实不关心，主要就是在写程序上，如何简单的去写并发的代码。在语法层面上对并发做的比较好的，很适合做服务端，比如 go，比如 node，又比如某些函数式语言。我最近最近主要使用的是 node 和 kotlin。
+那么在写并发代码的时候，就会时不时的想这样一个问题：
+一个问题 当代码遇到一个“暂时不能完成”的流程时（例如建立一个 tcp 链接，可能需要 5ms 才能建立），他不想阻塞在这里睡眠，想暂时离开现场去干点别的事情（例如看看另外一个已经建立的链接是否可以收包了）。问题是：离开现场后，当你回来的时候，上下文还像你走的时候吗？
+跳转离开，在任何语言里都有 2 种最基本的方法：1）从当前函数返回； 2）调用一个新的函数。 前者会把上下文中的局部变量和函数参数全部摧毁，除非他返回前把这些变量找个别的地方保存起来；后者则能保护住整个上下文的内存（除了协程切换后会摧毁一些寄存器），而且跳转回来也是常规方法：函数返回。
+在写 node 的时候，基本上是无脑上 async/await。每次看到回调函数的时候，强迫症就犯了，总是想方设法将那个方法转成 promise，然后使用 await 获得结果。无脑尝试了 bluebird 和 node 的 util，虽然有些是很好用的，但是有的还是无法达到我预期的。靠着无脑的 async/await，实现了很多功能，代码写起来也是快的飞起，但是只顾着做业务而不深入思考的话，是一个不好的表现，所以我就停下来搜了很多 async/await 的东西，特别是从阮一峰老师那里收获了很多。...</p>
+</section>
+<footer class=entry-footer><span title="2018-05-21 19:37:14 +0000 UTC">May 21, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 小议 async/await 和 coroutine" href=https://zhenfeng-zhu.github.io/posts/async/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>elasticsearch
+</h2>
+</header>
+<section class=entry-content>
+<p>以前没有好好学的东西，现在在工作中慢慢的补回来了。
+基础概念 索引 es 是将数据存储在一个或者多个索引（index）中。
+索引就像是数据库。
+文档 文档是 es 的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。
+文档就像数据库中的一条条记录。
+类型 每个文档都有一个类型与之相对应。
+类型就像数据库中的表。
+映射 所有文档在被写入到 es 中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。
+节点 单个 es 服务实例就是一个节点。
+集群 多个协同工作的 es 节点的集合就是集群。
+分片 es 将数据分散到多个物理的 Lucene 索引上，这些物理 Lucene 索引被称为分片。
+副本 副本就是每个分片都做冗余处理，一个宕机之后，不影响服务。
+快速入门 安装 es 的安装很简单，我这里使用的是 mac，下载下来 zip 包，解压即可使用。
+[elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ./bin/elasticsearch Java HotSpot(TM) 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9....</p>
+</section>
+<footer class=entry-footer><span title="2018-05-20 14:17:07 +0000 UTC">May 20, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to elasticsearch" href=https://zhenfeng-zhu.github.io/posts/elasticsearch/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>git 常用操作
+</h2>
+</header>
+<section class=entry-content>
+<p>整理一下常用的 git 操作，不用再到处找了。
+git 放弃本地修改，强制更新 git fetch --all git reset --hard origin/master git 修改远程仓库地址 git remote set-url origin url cherry-pick 当你通过一番挣扎终于搞定一个 bug,顺手提交到 git 服务器,心里一阵暗爽. 这时发现你当前所在的分支是 master !!!
+这个分支不是开发者用来提交代码的,可惜现在剁手也晚了.
+先切换到 master git checkout master git log 复制提交的 commit id
+切换到 dev, cherry-pick
+git checkout dev git cherry-pic ${commit_id} 常用开发流程 git checkout -b feature1
+git commit 之后，进行 rebase
+git pull –rebase
+gca!
+git rvm</p>
+</section>
+<footer class=entry-footer><span title="2018-05-14 10:04:02 +0000 UTC">May 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to git 常用操作" href=https://zhenfeng-zhu.github.io/posts/git/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>node 的 cluster
+</h2>
+</header>
+<section class=entry-content>
+<p>我们知道 js 是运行单线程的，也就是说一个 node 进程只能运行在一个 cpu 上。那么如果用 node 来做 web server 的话，就无法享受到多核运算的好处。
+一个问题就是：
+如何榨干服务器资源，利用多核CPU的并发优势。 node 官方提供的解决方案是 cluster。
+1 cluster 是什么 简单来说：
+在服务器上同时启动多个进程。 每个进程都跑的是同一份源码。 这些进程可以同时监听一个端口。 其中：
+负责启动其他进程的叫做 master 进程，不做具体工作，只负责启动其他进程。 其他被启动的叫 worker 进程。他们接收请求，对外提供服务。 worker 进程的数量一般根据服务器的 cpu 核数来决定，这样就可以完美利用多核资源。 以下是官方文档的一个例子：
+const cluster = require('cluster'); const http = require('http'); const numCPUs = require('os').cpus().length; if (cluster.isMaster) { console.log(`主进程 ${process.pid} 正在运行`); // 衍生工作进程。 for (let i = 0; i &lt; numCPUs; i++) { cluster....</p>
+</section>
+<footer class=entry-footer><span title="2018-05-05 15:45:47 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to node 的 cluster" href=https://zhenfeng-zhu.github.io/posts/node%E7%9A%84cluster/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>node 踩坑
+</h2>
+</header>
+<section class=entry-content>
+<p>module 首先第一个就是 es6 的 module。
+看到别人写的
+import { a } from "./module"; 所以自己也想要这么写，但是每次运行的时候都会报错。
+// demo2.js export const a = "hello"; //demo1.js import { a } from "./demo2"; function hello() { console.log(a); } zhuzhenfengdeMacBook-Pro :: node/node-example » node demo1.js /Users/zhuzhenfeng/Documents/github/node/node-example/demo1.js:1 (function (exports, require, module, __filename, __dirname) { import { a } from "./demo2"; ^ SyntaxError: Unexpected token { at new Script (vm.js:74:7) at createScript (vm.js:246:10) at Object.runInThisContext (vm.js:298:10) at Module._compile (internal/modules/cjs/loader.js:646:28) at Object....</p>
+</section>
+<footer class=entry-footer><span title="2018-05-05 15:32:59 +0000 UTC">May 5, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to node 踩坑" href=https://zhenfeng-zhu.github.io/posts/node%E8%B8%A9%E5%9D%91/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>node 学习笔记
 </h2>
 </header>
@@ -148,87 +242,6 @@ rxjava rxjava 我都没有找到一个系统的教程，不知道该从哪里学
 </section>
 <footer class=entry-footer><span title="2018-04-04 16:01:31 +0000 UTC">April 4, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 同步一个 fork" href=https://zhenfeng-zhu.github.io/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Go 语言体会
-</h2>
-</header>
-<section class=entry-content>
-<p>最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。
-语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置 我最早听说协程，是在大三找实习的时候，那个时候面试会问线程和进程的关系，问的深一些就是协程和线程的区别。游戏公司基本都用 lua，看了 lua 的资料后，对协程有了一些自己的了解，随后就是在做 Unity 相关的开发，在 unity 中使用了很多的协程，但是在 unity 中使用的协程好像跟主流的不太一样，在看了 go 之后，豁然开朗。
-goroutine 使用的内存比线程更少，go 在运行的时候会自动在配置的一组逻辑处理器上调度执行。比如：
-func log(msg string){ ... } go log("") 使用关键字 go，即可让 log 函数在一个 goroutine 里执行了。
-并发最难的部分是要确保其他并发运行的进程、线程或者 goroutine 不会以外的修改数据。go 使用了 Channel 的方式来解决这个问题。对于通道模式，保证同一时刻只会有一个 goroutine 修改数据。
-说起 go 的语言简单，其实主要是他的类型比较简单。go 使用的是组合模式，只需要将一个类型嵌入到另外一个类型就可以复用所有的功能。而且 go 还具有独特的接口实现机制，允许用户对行为进行建模，在 go 中不需要声明某个类型实现了某个接口，编译器会自动判断一个实例是使用什么接口。
-对于 java 来说，所有的设计都是围绕着接口展开，于是在设计模式中，就是面向接口编程：
-interface User{ void login(); void logout(); } 在 java 中，继承的类必须显式声明继承了此接口。而在 go 中接口只是描述一个动作，如果说是实现这个接口，只需要让某个实例实现了这个接口中的所有方法就行了。...</p>
-</section>
-<footer class=entry-footer><span title="2018-04-04 13:48:57 +0000 UTC">April 4, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Go 语言体会" href=https://zhenfeng-zhu.github.io/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>关于时间管理
-</h2>
-</header>
-<section class=entry-content>
-<p>主动管理时间，敢于说不。
-有目标向前看，没目标向钱看。</p>
-</section>
-<footer class=entry-footer><span title="2018-03-25 20:28:42 +0000 UTC">March 25, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 关于时间管理" href=https://zhenfeng-zhu.github.io/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>一致性哈希算法
-</h2>
-</header>
-<section class=entry-content>
-<p>当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：
-如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。
-1 hash 取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。
-可以将传入的 key 按照 $$ index=hash(key) % N $$ 这样来计算出需要存放的节点。
-这样可以满足数据的均匀分配，但是这个算法的容错性和扩展性比较差。比如增加或者删除一个节点的时候，所有的 key 都要重新计算，显然这样的成本比较高，为此需要一个算法来满足均匀的同时也要有良好的容错性和扩展性。
-2 一致性 hash 算法 一致性 hash 算法是将所有的哈希值构成了一个环，其范围是 0~2^32-1。如图：
-之后将各个服务器节点散列到这个环上，可以用节点的 IP，hostname 这样唯一性的字段作为 key 进行 hash。散列之后如下：
-之后需要将数据定位到对应的节点上，使用同样的 hash 函数将 key 也映射到这个环上。
-这样就按照顺时针方向就可以将 k1 定位到 N1 节点，k2 定位到 N3 节点，k3 定位到 N2 节点。
-2.1 容错性 假设 N1 宕机了：
-依然根据顺时针方向，k2 和 k3 保持不变，只有 k1 被重新映射到了 N3。这样就很好的保证了容错性，当一个节点宕机时只会影响到少部分数据。
-2.2 扩展性 当新增一个节点时：
-在 N2 和 N3 之间新增了一个节点 N4，这时受影响的数据只有 k3，其余的数据也是保持不变。...</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 19:03:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 一致性哈希算法" href=https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Spring Boot 启动原理分析
-</h2>
-</header>
-<section class=entry-content>
-<p>Spring Boot 启动原理分析 我们在开发 spring boot 应用的时候，一般会遇到如下的启动类：
-@SpringBootApplication public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } } 从这段代码可以看出，注解@SpringBootApplication 和 SpringApplication.run()是比较重要的两个东西。
-1 @SpringApplication 注解 @Target(ElementType.TYPE) @Retention(RetentionPolicy.RUNTIME) @Documented @Inherited @SpringBootConfiguration @EnableAutoConfiguration @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class), @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) }) public @interface SpringBootApplication { ... } 在这段代码里，比较重要的只有三个注解：
-@Configuration（@SpringBootConfiguration 点开查看发现里面还是应用了@Configuration） @EnableAutoConfiguration @ComponentScan 其实，我们使用这三个注解来修饰 springboot 的启动类也可以正常运行,如下所示：
-@ComponentScan @EnableAutoConfiguration @Configuration public class DemoApplication { public static void main(String[] args) { SpringApplication....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 19:03:22 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Spring Boot 启动原理分析" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Spring Data Jpa 实战
-</h2>
-</header>
-<section class=entry-content>
-<p>为了解决抽象各个 Java 实体基本的“增删改查”操作，我们通常会以泛型的方式封装一个模板 Dao 来进行抽象简化，但是这样依然不是很方便，我们需要针对每个实体编写一个继承自泛型模板 Dao 的接口，再编写该接口的实现。虽然一些基础的数据访问已经可以得到很好的复用，但是在代码结构上针对每个实体都会有一堆 Dao 的接口和实现。
-由于模板 Dao 的实现，使得这些具体实体的 Dao 层已经变的非常“薄”，有一些具体实体的 Dao 实现可能完全就是对模板 Dao 的简单代理，并且往往这样的实现类可能会出现在很多实体上。Spring-data-jpa 的出现正可以让这样一个已经很“薄”的数据访问层变成只是一层接口的编写方式。
-1 工程配置 1.1 pom &lt;?xml version="1.0" encoding="UTF-8"?> &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"> &lt;modelVersion>4.0.0&lt;/modelVersion> &lt;groupId>com.example&lt;/groupId> &lt;artifactId>jpa-demo&lt;/artifactId> &lt;version>0.0.1-SNAPSHOT&lt;/version> &lt;packaging>jar&lt;/packaging> &lt;name>jpa-demo&lt;/name> &lt;description>Demo project for Spring Boot&lt;/description> &lt;parent> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-parent&lt;/artifactId> &lt;version>1.5.9.RELEASE&lt;/version> &lt;relativePath/> &lt;!-- lookup parent from repository --> &lt;/parent> &lt;properties> &lt;project.build.sourceEncoding>UTF-8&lt;/project.build.sourceEncoding> &lt;project.reporting.outputEncoding>UTF-8&lt;/project.reporting.outputEncoding> &lt;java.version>1.8&lt;/java.version> &lt;/properties> &lt;dependencies> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-data-jpa&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-web&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>mysql&lt;/groupId> &lt;artifactId>mysql-connector-java&lt;/artifactId> &lt;scope>runtime&lt;/scope> &lt;/dependency> &lt;dependency> &lt;groupId>org....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 19:02:48 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Spring Data Jpa 实战" href=https://zhenfeng-zhu.github.io/posts/spring-data-jpa%E5%AE%9E%E6%88%98/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

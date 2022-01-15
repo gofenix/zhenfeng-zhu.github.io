@@ -73,6 +73,90 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Geth 私链
+</h2>
+</header>
+<section class=entry-content>
+<p>在上一篇文章《Geth 入门》中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。
+genesis.json { "config": { "chainId": 10, "homesteadBlock": 0, "eip155Block": 0, "eip158Block": 0 }, "coinbase" : "0x0000000000000000000000000000000000000000", "difficulty" : "0x40000", "extraData" : "", "gasLimit" : "0xffffffff", "nonce" : "0x0000000000000042", "mixhash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000", "timestamp" : "0x00", "alloc": { } } 参数 描述 nonce nonce 就是一个 64 位随机数，用于挖矿 mixhash 与 nonce 配合用于挖矿，由上一个区块的一部分生成的 hash difficulty 设置当前区块的难度，如果难度过大，cpu 挖矿就很难，这里设置较小难度 alloc 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以 coinbase 矿工的账号，随便填 timestamp 设置创世块的时间戳 parentHash 上一个区块的 hash 值，因为是创世块，所以这个值是 0 extraData 附加信息，随便填，可以填你的个性信息 gasLimit 该值设置对 GAS 的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。 config Fatal: failed to write genesis block: genesis has no chain configuration ：这个错误信息，就是说，你的 json 文件中，缺少 config 部分。看到这个信息，我们不需要把 geth 退回到 v1....</p>
+</section>
+<footer class=entry-footer><span title="2020-11-20 15:59:22 +0800 +0800">November 20, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Geth 私链" href=https://zhenfeng-zhu.github.io/posts/geth-%E7%A7%81%E9%93%BE/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Geth
+</h2>
+</header>
+<section class=entry-content>
+<p>Geth 简介 go-ethereum
+go-ethereum 客户端通常被称为 geth，它是个命令行界面，执行在 Go 上实现的完整以太坊节点。通过安装和运行 geth，可以参与到以太坊前台实时网络并进行以下操作：
+挖掘真的以太币 在不同地址间转移资金 创建合约，发送交易 探索区块历史 及很多其他 网站: http://ethereum.github.io/go-ethereum/ Github: https://github.com/ethereum/go-ethereum 维基百科: https://github.com/ethereum/go-ethereum/wiki/geth Gitter: https://gitter.im/ethereum/go-ethereum
+mac 下安装 geth 首先安装 homebrew， 使用 brew 安装即可。在安装 geth 的时候，会将 go 也安装上。 brew tap ethereum/ethereum brew install ethereum 在命令行输入 geth —help，如果出现
+zhuzhenengdeMBP:blog zhuzhenfeng$ geth --help NAME: geth - the go-ethereum command line interface Copyright 2013-2017 The go-ethereum Authors USAGE: geth [options] command [command options] [arguments....</p>
+</section>
+<footer class=entry-footer><span title="2020-11-20 10:07:39 +0800 +0800">November 20, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Geth" href=https://zhenfeng-zhu.github.io/posts/geth/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>hive 常用函数
+</h2>
+</header>
+<section class=entry-content>
+<p>json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path)
+解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。
+path 就是 ‘$.字段名’。
+如果该字段的 value 也是 json，就可以一直点下去。
+如果该字段的 value 是数组，就可以用 ‘$.字段名[0]'，类似这样下标的形式去访问。
+explode explode(array)
+经常和 lateral view 一起使用，将数组中的元素拆分成多行显示。
+substr substr(string A, int start, int len)
+返回字符串 A 从 start 位置开始，长度为 len 的字符串
+json_tuple json_tuple(string json_string, col1, col2, …)
+经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。
+parse_url, regexp_replace, regexp_extract parse_url parse_url(string urlString, string partToExtract, string keyToExtract)...</p>
+</section>
+<footer class=entry-footer><span title="2020-04-16 17:59:03 +0800 +0800">April 16, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to hive 常用函数" href=https://zhenfeng-zhu.github.io/posts/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>mysql 的学习
+</h2>
+</header>
+<section class=entry-content>
+<p>SQL 条件语句 IF if(exp1, exp2, exp3)
+exp1 是条件，条件为 true 的话，是 exp2，否则是 exp3
+case when case 列名 when 条件 then 结果 else 其他结果 end 别名 IFNULL IFNULL(exp1, exp2)
+在 exp1 的值不为 null 的情况下，返回 exp1，如果 exp1 位 null，返回 exp2 的值。</p>
+</section>
+<footer class=entry-footer><span title="2020-04-16 17:34:30 +0800 +0800">April 16, 2020</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to mysql 的学习" href=https://zhenfeng-zhu.github.io/posts/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>clickhouse
+</h2>
+</header>
+<section class=entry-content>
+<p>ClickHouse ClickHouse 是一个用于联机分析（Online Analytical Processing：OLAP）的列式数据库管理系统(DBMS)。通过使用 OLAP 工具，用户能够从多个角度交互地分析多维数据。
+OLAP 由三个基本的分析操作组成：上卷（roll-up）、钻取（drill-down）、切片（slicing）和切块（dicing）。
+上卷（roll-up）：涉及可以在一个或多个维度中累积和计算的数据的聚合。例如，所有的销售办事处汇总到销售部门，以预测销售趋势。
+钻取（drill-down）：是一种允许用户浏览详细信息的技术。例如，用户可以查看组成一个地区销售额的单个产品的销售额。
+切片（slicing）和切块（dicing）：用户可以从 OLAP 多维数据集中取出（切片）一组特定的数据，并从不同的角度查看（切块）切片。这些角度有时被称为维度（例如按销售人员、按日期、按客户、按产品或按地区查看相同的销售情况等）。
+传统行式数据库中，处于同一行中的数据总是被物理的存在一起。列式数据库总是将同一列的数据存储在一起，不同列的数据分开存储。
+行式数据库：mysql，pg
+列式数据库：vertica，druid
+OLAP 的关键特征 大多是读请求 数据总是以相当大的批（>1000w）进行写入 不修改已经添加的数据 每次查询都从数据库中读取大量的行，但是同时又仅需要少量的列 宽表，即每个表包含大量的列 较少的查询（通常每台服务器每秒数百个查询或更少） 对于简单的查询，允许延迟大约 50ms 列中的数据相对较小：数字和短字符串 处理单个查询时需要高吞吐量（每个服务器每秒高达数十亿行） 事务不是必须的 对数据一致性要求低 每一个查询除了一个大表外都很小 查询结果明显小于数据源，换句话说，数据被过滤或者聚合之后能够被放在单台服务器的内存中 列式数据库更适合 OLAP 场景 Input/Output 分析类的查询，通常只需要读取表的一小部分列。 数据总是打包成批量读取，列压缩更容易 IO 降低了 CPU 由于执行一个查询需要处理大量的行，因此在整个向量上执行所有操作将比在每一行上执行所有操作更加高效。同时这将有助于实现一个几乎没有调用成本的查询引擎。
+向量引擎 代码生成 为了提高 CPU 效率，查询语言必须是声明型的(SQL 或 MDX)， 或者至少一个向量(J，K)。 查询应该只包含隐式循环，允许进行优化。
+clickhouse 的独特功能 真正的列式数据库管理系统 </p>
+</section>
+<footer class=entry-footer><span title="2019-10-12 06:48:01.338 +0000 UTC">October 12, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to clickhouse" href=https://zhenfeng-zhu.github.io/posts/clickhouse/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>每日学习 2
 </h2>
 </header>
@@ -141,102 +225,6 @@ def shout(x) # Notice that both Int32 and String respond_to `to_s` x.to_s.upcase
 </section>
 <footer class=entry-footer><span title="2019-08-27 02:14:18.124 +0000 UTC">August 27, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to crystal 简介" href=https://zhenfeng-zhu.github.io/posts/crystal%E7%AE%80%E4%BB%8B/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>socket
-</h2>
-</header>
-<section class=entry-content>
-<p>Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
-二层到四层，即 mac、ip 和传输等层都是 Linux 内核中处理。应用层的如浏览器、Nginx 和 Tomcat 等都是用户态的。
-传输层的 tcp 和 udp 里都有端口的概念，不同应用监听不同的段即可。
-应用层和内核的互通机制，就是通过 socket 系统调用。其实 socket 哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是 socket。...</p>
-</section>
-<footer class=entry-footer><span title="2019-08-26 06:54:14.652 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>go 进阶
-</h2>
-</header>
-<section class=entry-content>
-<p>Diagnostics go 提供了一系列诊断逻辑和性能问题的工具。
-profiling 分析 tracing 跟踪 debuging 调试 运行时统计信息和事件 Profiling profiling 信息可以在 go test 或者 net/http/pprof 包的时候使用。
-runtime/pprof 包有：
-cpu 主动消费 cpu 周期所花费的时间，不包括睡眠或者 io 等待 heap 报告内存分配采样； 当前或历史内存使用状况 检测内存泄露 threadcreate 报告创建新的系统线程 goroutine 当前所有协程的堆栈跟踪 block 显示 goroutine 阻塞等待同步原语的位置。 默认不开启，使用 runtime.SetBlockProfileRate 启用 mutex 报告锁竞争。 如果认为自己的程序因为互斥锁导致 cpu 不能充分利用的时候，使用这个。 默认也是不开启，使用 runtime.SetMutexProfileFraction 启用。 其他可用的的性能分析工具...</p>
-</section>
-<footer class=entry-footer><span title="2019-08-26 06:53:32.176 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to go 进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>mysql
-</h2>
-</header>
-<section class=entry-content>
-<p>MySQL 基本架构 客户端
-server 层
-连接器：管理连接，权限验证
-查询缓存：命中规则，直接返回结果 8.0 之后全部删除了这个模块
-分析器：词法分析，语法分析
-优化器：执行计划生成，索引选择
-执行器：操作引擎，返回结果
-存储引擎：存储数据，提供读写接口
-数据库中的长连接指连接成功之后，如果客户端持续有请求，则一直使用同一个连接。短连接是指每次执行完很少的几次查询之后就断开连接，下次再重新建立。
-如果全部使用长连接，会导致 mysql 内存涨的很快，可能出现 OOM，因此要定期断开长连接，或者在执行一个比较大的操作之后，执行 mysql_reset_connection 重置一下。
-日志系统 redo log 重做日志 redo log 是 innodb 引擎特有的。物理日志，记录的是某个数据页上做了什么修改。循环写入。
-WAL 技术：Write-Ahead Logging：关键点就是先写日志，再写磁盘。当一条记录更新时，先把记录写到 redolog 中，更新到内存，这时这个更新操作就成功了。然后 innodb 引擎就会在适当的时候，将这个操作记录更新到磁盘中。因此在数据库异常重启的时候，之前的提交的记录不会丢失。
-binlog 归档日志 binlog 是 server 层实现的，所有的引擎都可以使用。binlog 是逻辑日志，记录的是这个语句的原始逻辑。binlog 是写到一定大小后，切换下一个，不会覆盖以前的日志。
-因此一个 update 操作就是：
-找到该行
-判断数据页是否在内存中，如果是返回行数据，否则从磁盘读入到内存中。
-将值进行更新，写入新行
-新行更新到内存
-写入 redolog，处于 prepare 阶段
-写入 binlog
-提交事务，处于 commit 阶段。...</p>
-</section>
-<footer class=entry-footer><span title="2018-12-01 15:54:53 +0000 UTC">December 1, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to mysql" href=https://zhenfeng-zhu.github.io/posts/mysql/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>graphql
-</h2>
-</header>
-<section class=entry-content>
-<p>graphql 经常被认为是聚焦于前端的技术。
-核心概念 SDL：schema definition language（模式定义语言） 如：
-type Person{ name: String! age: Int! } 这个类型有两个字段，name 和 age，他们的类型是 String 和 Int。！的意思代表他们是必需的。
-type Post{ title: String! author: Person! } 接下来的 Post 也有两个字段，其中 Person 也是可以作为一个类型。
-也可以这样，在 Person 中添加一个 post：
-type Person{ name: String! age: Int! posts: [Post!]! } 通过 Query 获取数据 基本查询 客户端发送下面的数据给服务器
-{ allPersons { name } } allPersons 是根字段（root field），它下面的成为查询的 payload，这里仅包含了一个 name。
-服务器返回的结果会是这样的：
-{ "allPersons": [ { "name": "Johnny" }, { "name": "Sarah" }, { "name": "Alice" } ] } 可以看到只返回了 name 字段，age 字段是不会返回的。...</p>
-</section>
-<footer class=entry-footer><span title="2018-11-08 18:28:13 +0000 UTC">November 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to graphql" href=https://zhenfeng-zhu.github.io/posts/graphql/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>go-best-practice
-</h2>
-</header>
-<section class=entry-content>
-<p> 短变量名称在声明和上次使用之间的距离很短时效果很好。 长变量名称需要证明自己的合理性; 名称越长，需要提供的价值越高。冗长的名称与页面上的重量相比，信号量较小。 请勿在变量名称中包含类型名称。 常量应该描述它们持有的值，而不是该如何使用。 对于循环和分支使用单字母变量，参数和返回值使用单个字，函数和包级别声明使用多个单词 方法、接口和包使用单个词。 请记住，包的名称是调用者用来引用名称的一部分，因此要好好利用这一点。 变量的名称应描述其内容，而不是内容的类型。
-典型错误：
-var usersMap map[string]*User 如果users的描述性都不够用，那么usersMap也不会。
-声明变量但没有初始化时，请使用 var。
-在声明和初始化时，使用:=。
-关于变量和常量的注释应描述其内容而非其目的 任何既不明显也不简短的公共功能必须予以注释。 无论长度或复杂程度如何，对库中的任何函数都必须进行注释 在编写函数之前，请编写描述函数的注释。 如果你发现很难写出注释，那么这就表明你将要编写的代码很难理解。
-以包所提供的内容来命名，而不是它包含的内容。
-避免使用类似base，common或util的包名称 尽早return而不是深度嵌套 使用internal包来减少公共 API 不鼓励使用nil作为参数 首选可变参数函数而非[]T参数 通过消除错误来消除错误处理 使用github.com/pkg/errors包装errors 永远不要启动一个停止不了的 goroutine </p>
-</section>
-<footer class=entry-footer><span title="2018-11-07 17:16:07 +0000 UTC">November 7, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to go-best-practice" href=https://zhenfeng-zhu.github.io/posts/go-best-practice/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

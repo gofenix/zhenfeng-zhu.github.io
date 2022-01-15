@@ -70,6 +70,102 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>socket
+</h2>
+</header>
+<section class=entry-content>
+<p>Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
+二层到四层，即 mac、ip 和传输等层都是 Linux 内核中处理。应用层的如浏览器、Nginx 和 Tomcat 等都是用户态的。
+传输层的 tcp 和 udp 里都有端口的概念，不同应用监听不同的段即可。
+应用层和内核的互通机制，就是通过 socket 系统调用。其实 socket 哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是 socket。...</p>
+</section>
+<footer class=entry-footer><span title="2019-08-26 06:54:14.652 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>go 进阶
+</h2>
+</header>
+<section class=entry-content>
+<p>Diagnostics go 提供了一系列诊断逻辑和性能问题的工具。
+profiling 分析 tracing 跟踪 debuging 调试 运行时统计信息和事件 Profiling profiling 信息可以在 go test 或者 net/http/pprof 包的时候使用。
+runtime/pprof 包有：
+cpu 主动消费 cpu 周期所花费的时间，不包括睡眠或者 io 等待 heap 报告内存分配采样； 当前或历史内存使用状况 检测内存泄露 threadcreate 报告创建新的系统线程 goroutine 当前所有协程的堆栈跟踪 block 显示 goroutine 阻塞等待同步原语的位置。 默认不开启，使用 runtime.SetBlockProfileRate 启用 mutex 报告锁竞争。 如果认为自己的程序因为互斥锁导致 cpu 不能充分利用的时候，使用这个。 默认也是不开启，使用 runtime.SetMutexProfileFraction 启用。 其他可用的的性能分析工具...</p>
+</section>
+<footer class=entry-footer><span title="2019-08-26 06:53:32.176 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to go 进阶" href=https://zhenfeng-zhu.github.io/posts/go%E8%BF%9B%E9%98%B6/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>mysql
+</h2>
+</header>
+<section class=entry-content>
+<p>MySQL 基本架构 客户端
+server 层
+连接器：管理连接，权限验证
+查询缓存：命中规则，直接返回结果 8.0 之后全部删除了这个模块
+分析器：词法分析，语法分析
+优化器：执行计划生成，索引选择
+执行器：操作引擎，返回结果
+存储引擎：存储数据，提供读写接口
+数据库中的长连接指连接成功之后，如果客户端持续有请求，则一直使用同一个连接。短连接是指每次执行完很少的几次查询之后就断开连接，下次再重新建立。
+如果全部使用长连接，会导致 mysql 内存涨的很快，可能出现 OOM，因此要定期断开长连接，或者在执行一个比较大的操作之后，执行 mysql_reset_connection 重置一下。
+日志系统 redo log 重做日志 redo log 是 innodb 引擎特有的。物理日志，记录的是某个数据页上做了什么修改。循环写入。
+WAL 技术：Write-Ahead Logging：关键点就是先写日志，再写磁盘。当一条记录更新时，先把记录写到 redolog 中，更新到内存，这时这个更新操作就成功了。然后 innodb 引擎就会在适当的时候，将这个操作记录更新到磁盘中。因此在数据库异常重启的时候，之前的提交的记录不会丢失。
+binlog 归档日志 binlog 是 server 层实现的，所有的引擎都可以使用。binlog 是逻辑日志，记录的是这个语句的原始逻辑。binlog 是写到一定大小后，切换下一个，不会覆盖以前的日志。
+因此一个 update 操作就是：
+找到该行
+判断数据页是否在内存中，如果是返回行数据，否则从磁盘读入到内存中。
+将值进行更新，写入新行
+新行更新到内存
+写入 redolog，处于 prepare 阶段
+写入 binlog
+提交事务，处于 commit 阶段。...</p>
+</section>
+<footer class=entry-footer><span title="2018-12-01 15:54:53 +0000 UTC">December 1, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to mysql" href=https://zhenfeng-zhu.github.io/posts/mysql/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>graphql
+</h2>
+</header>
+<section class=entry-content>
+<p>graphql 经常被认为是聚焦于前端的技术。
+核心概念 SDL：schema definition language（模式定义语言） 如：
+type Person{ name: String! age: Int! } 这个类型有两个字段，name 和 age，他们的类型是 String 和 Int。！的意思代表他们是必需的。
+type Post{ title: String! author: Person! } 接下来的 Post 也有两个字段，其中 Person 也是可以作为一个类型。
+也可以这样，在 Person 中添加一个 post：
+type Person{ name: String! age: Int! posts: [Post!]! } 通过 Query 获取数据 基本查询 客户端发送下面的数据给服务器
+{ allPersons { name } } allPersons 是根字段（root field），它下面的成为查询的 payload，这里仅包含了一个 name。
+服务器返回的结果会是这样的：
+{ "allPersons": [ { "name": "Johnny" }, { "name": "Sarah" }, { "name": "Alice" } ] } 可以看到只返回了 name 字段，age 字段是不会返回的。...</p>
+</section>
+<footer class=entry-footer><span title="2018-11-08 18:28:13 +0000 UTC">November 8, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to graphql" href=https://zhenfeng-zhu.github.io/posts/graphql/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>go-best-practice
+</h2>
+</header>
+<section class=entry-content>
+<p> 短变量名称在声明和上次使用之间的距离很短时效果很好。 长变量名称需要证明自己的合理性; 名称越长，需要提供的价值越高。冗长的名称与页面上的重量相比，信号量较小。 请勿在变量名称中包含类型名称。 常量应该描述它们持有的值，而不是该如何使用。 对于循环和分支使用单字母变量，参数和返回值使用单个字，函数和包级别声明使用多个单词 方法、接口和包使用单个词。 请记住，包的名称是调用者用来引用名称的一部分，因此要好好利用这一点。 变量的名称应描述其内容，而不是内容的类型。
+典型错误：
+var usersMap map[string]*User 如果users的描述性都不够用，那么usersMap也不会。
+声明变量但没有初始化时，请使用 var。
+在声明和初始化时，使用:=。
+关于变量和常量的注释应描述其内容而非其目的 任何既不明显也不简短的公共功能必须予以注释。 无论长度或复杂程度如何，对库中的任何函数都必须进行注释 在编写函数之前，请编写描述函数的注释。 如果你发现很难写出注释，那么这就表明你将要编写的代码很难理解。
+以包所提供的内容来命名，而不是它包含的内容。
+避免使用类似base，common或util的包名称 尽早return而不是深度嵌套 使用internal包来减少公共 API 不鼓励使用nil作为参数 首选可变参数函数而非[]T参数 通过消除错误来消除错误处理 使用github.com/pkg/errors包装errors 永远不要启动一个停止不了的 goroutine </p>
+</section>
+<footer class=entry-footer><span title="2018-11-07 17:16:07 +0000 UTC">November 7, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to go-best-practice" href=https://zhenfeng-zhu.github.io/posts/go-best-practice/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>kubernetes
 </h2>
 </header>
@@ -188,106 +284,6 @@ const {startWith, when, goto, stay, stop} = botkit....</p>
 </section>
 <footer class=entry-footer><span title="2018-08-22 19:39:12 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>基于以太坊的 Parity 联盟链部署
-</h2>
-</header>
-<section class=entry-content>
-<p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity 是可以构建出一个基于 PoA 共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
-部署联盟链 parity 的文档：https://wiki.parity.io/Demo-PoA-tutorial
-安装 首先是下载 parity，在 mac 下是直接 brew 安装即可。
-brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
-// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0 节点：...</p>
-</section>
-<footer class=entry-footer><span title="2018-08-22 16:51:13 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 基于以太坊的 Parity 联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>dive-into-redis
-</h2>
-</header>
-<section class=entry-content>
-<p>redis 持久化，
-机制有两种：
-快照：全量备份，二进制序列化，存储紧凑 AOF 日志：连续的增量备份，内存数据修改的文本 </p>
-</section>
-<footer class=entry-footer><span title="2018-08-20 09:39:08 +0000 UTC">August 20, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to dive-into-redis" href=https://zhenfeng-zhu.github.io/posts/dive-into-redis/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>golang 踩坑
-</h2>
-</header>
-<section class=entry-content>
-<p>一 x509 error when using HTTPS inside a Docker container
-因为 docker 中没有 CA 证书。
-普通的镜像解决办法
-FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是 alpine 的参考这个：
-FROM docker.finogeeks.club/base/alpine MAINTAINER "zhuzhenfeng@finogeeks.club" RUN set -ex \ && apk add --no-cache ca-certificates COPY src/wallet/wallet /opt/wallet ENTRYPOINT /opt/wallet 二 panic: runtime error: invalid memory address or nil pointer dereference [signal 0xb code=0x1 addr=0x38 pc=0x26df]
-“An error is returned if caused by client policy (such as CheckRedirect), or if there was an HTTP protocol error....</p>
-</section>
-<footer class=entry-footer><span title="2018-08-14 20:10:55 +0000 UTC">August 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to golang 踩坑" href=https://zhenfeng-zhu.github.io/posts/golang%E8%B8%A9%E5%9D%91/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>以太坊开发总结
-</h2>
-</header>
-<section class=entry-content>
-<p>最近因公司项目需要，做为一个打杂工程师，操起键盘和笔记本开始了以太坊的踩坑之旅。以太坊的开发比较新，变化也比较多，还好有@cctanfujun的手把手带领下，半只脚踏入了以太坊的开发的大门。
-在这篇文章中，我将会简单介绍一下以太坊的基本概念，以及我现在用到的一些工具，还有具体的一个开发流程。因为我还没有接触到如何上主链，所以这些都是基于测试链讲解。希望能给大家带来一些帮助。
-什么是区块链
-相信大家对区块链都有自己的理解，不仅仅是互联网公司，传统企业也在“币改转型”。
-**简言之，区块链就是数据库。**它是特定数据的数据库，里面的数据不断增长，具有非凡特性：
-一旦数据存储于数据库，永远都无法被修改或删除。区块链上的每个记录会被永久保存下来。 没有单独的个人或组织能维护该数据库。必须要上千个人才行，每个人都有数据库的副本。 什么是以太坊？
-以太坊（英语：Ethereum）是一个开源的有智能合约功能的公共区块链平台[1][2]。通过其专用加密货币以太币（Ether，又称“以太币”）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。
-为什么选择以太坊？
-智能合约
-代币
-资料相对完善，相对容易开发
-大佬对以太坊比较熟悉
-大佬对以太坊比较熟悉
-大佬对以太坊比较熟悉
-重要的事情说三遍，有一个经验丰富的人带领，做东西肯定事半功倍。
-自己动手写区块链
-这里提供两个教程，一个是书，一个是视频。其中视频和书是对应的，不清楚是不是同一个作者。
-Blockchain Tutorial
-私有区块链，我们一起 GO
-以太坊开发
-由于我是专注于后端的开发，现在的技术栈是
-node go 正式进入以太坊的开发。这是我这段时间接触到的一些资源：
-go-ethereum：也就是 geth，官方的 go 版本的客户端
-solidity：智能合约编程语言
-truffle：智能合约的编程框架，基于 nodejs
-Ganache：启动了多个节点本地私链
-Rinkeby：以太坊测试链
-Etherscan：以太坊区块链浏览器，可以查询交易...</p>
-</section>
-<footer class=entry-footer><span title="2018-08-10 18:57:09 +0000 UTC">August 10, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 以太坊开发总结" href=https://zhenfeng-zhu.github.io/posts/eth-tools/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>以太坊
-</h2>
-</header>
-<section class=entry-content>
-<p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
-首先先把 go 的依赖下载下来：
-go get -u -v github.com/ethereum/go-ethereum 有时候下载的很慢，可以从 github 上拉下来代码。
-账户 以太坊的地址在离线状态下也可以创建到。
-创建账户有两种方式：
-以公钥和私钥的形式创建 func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return "", nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println("address: ", address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println("privateKey: ", privateKey) return address, nil } 这种方式一般用的比较少。
-以 keystore 的形式创建 keystore 会创建一个文件，这个文件如下所示：
-{ "address": "d93688757810e644f0b9c162102d9c598813f0dd", "crypto": { "cipher": "aes-128-ctr", "ciphertext": "71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed", "cipherparams": { "iv": "620c73001081c014a862ce80003a4648" }, "kdf": "scrypt", "kdfparams": { "dklen": 32, "n": 262144, "p": 1, "r": 8, "salt": "bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741" }, "mac": "2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d" }, "id": "e4dd5384-56a8-4ec7-b6e0-492dcd3742e9", "version": 3 } 在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。...</p>
-</section>
-<footer class=entry-footer><span title="2018-08-07 20:09:26 +0000 UTC">August 7, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 以太坊" href=https://zhenfeng-zhu.github.io/posts/%E4%BB%A5%E5%A4%AA%E5%9D%8A/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

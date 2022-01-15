@@ -73,6 +73,86 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>kotlin 快速入门
+</h2>
+</header>
+<section class=entry-content>
+<p>快速浏览一下 Kotlin 的语法。
+基本语法 包定义和引用 在源文件头部：
+package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参数并返回 Int 类型的值： fun sum(a: Int, b: Int): Int { return a + b } 带有方法体，返回推断类型数据的定义方式，例如： fun sum(a: Int, b: Int) = a + b 返回无意义类型的定义方式： fun printSum(a: Int, b: Int): Unit { println("sum of $aand $bis ${a + b}") } 或者省略 Unit：
+fun printSum(a: Int, b: Int) { println("sum of $aand $bis ${a + b}") } 变量定义 只赋值一次（只读）本地变量，val： val a:Int = 1 // 指定初始值 val b = 2 // 类型自推断为 `Int` val c:Int // 当不指定初始值时需要指定类型 c = 3 // 延迟赋值 可变变量， var： var x = 5 // 类型自推断为 `Int` x += 1 顶层变量 val PI = 3....</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 17:56:45 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to kotlin 快速入门" href=https://zhenfeng-zhu.github.io/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>RxJava2 快速入门
+</h2>
+</header>
+<section class=entry-content>
+<p>RxJava2 快速入门 引入依赖 compile 'io.reactivex.rxjava2:rxjava:2.0.1' 写法 简单版本 private static void helloSimple() { Consumer&lt;String> consumer = new Consumer&lt;String>() { @Override public void accept(String s) throws Exception { System.out.println("consumer accept is " + s); } }; Observable.just("hello world").subscribe(consumer); } 复杂版本 private static void helloComplex() { Observer&lt;String> observer = new Observer&lt;String>() { @Override public void onSubscribe(Disposable d) { System.out.println("onSubscribe: " + d); } @Override public void onNext(String s) { System.out.println("onNext: " + s); } @Override public void onError(Throwable e) { System....</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 17:55:56 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to RxJava2 快速入门" href=https://zhenfeng-zhu.github.io/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>领域实体类
+</h2>
+</header>
+<section class=entry-content>
+<p>在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。
+pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。 根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 17:53:42 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 领域实体类" href=https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>docker
+</h2>
+</header>
+<section class=entry-content>
+<p>docker 常用命令 docker 获取镜像
+docker pull
+新建并启动
+docker run
+列出镜像
+docker image ls
+docker images
+删除虚悬镜像
+docker image prune
+删除本地镜像
+docker iamge rm
+查看应用信息
+docker logs
+dockerfile 一般步骤 在一个目录里，新建一个文件，命名为 Dockerfile 在 Dockerfile 的目录内，执行 docker build 常用指令 FROM 指定基础镜像，且是第一条命令
+RUN 执行命令
+shell 格式
+exec 格式
+COPY 和 ADD 指令是复制文件...</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 17:42:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to docker" href=https://zhenfeng-zhu.github.io/posts/docker/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>express
+</h2>
+</header>
+<section class=entry-content>
+<p>Express 快速入门 安装 npm init npm install --save express hello world var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序
+node app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。
+express 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
+express --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
+DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。...</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 17:41:01 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to express" href=https://zhenfeng-zhu.github.io/posts/express/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>碎碎念
 </h2>
 </header>

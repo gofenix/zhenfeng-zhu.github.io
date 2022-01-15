@@ -73,6 +73,87 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Go 语言体会
+</h2>
+</header>
+<section class=entry-content>
+<p>最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。
+语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置 我最早听说协程，是在大三找实习的时候，那个时候面试会问线程和进程的关系，问的深一些就是协程和线程的区别。游戏公司基本都用 lua，看了 lua 的资料后，对协程有了一些自己的了解，随后就是在做 Unity 相关的开发，在 unity 中使用了很多的协程，但是在 unity 中使用的协程好像跟主流的不太一样，在看了 go 之后，豁然开朗。
+goroutine 使用的内存比线程更少，go 在运行的时候会自动在配置的一组逻辑处理器上调度执行。比如：
+func log(msg string){ ... } go log("") 使用关键字 go，即可让 log 函数在一个 goroutine 里执行了。
+并发最难的部分是要确保其他并发运行的进程、线程或者 goroutine 不会以外的修改数据。go 使用了 Channel 的方式来解决这个问题。对于通道模式，保证同一时刻只会有一个 goroutine 修改数据。
+说起 go 的语言简单，其实主要是他的类型比较简单。go 使用的是组合模式，只需要将一个类型嵌入到另外一个类型就可以复用所有的功能。而且 go 还具有独特的接口实现机制，允许用户对行为进行建模，在 go 中不需要声明某个类型实现了某个接口，编译器会自动判断一个实例是使用什么接口。
+对于 java 来说，所有的设计都是围绕着接口展开，于是在设计模式中，就是面向接口编程：
+interface User{ void login(); void logout(); } 在 java 中，继承的类必须显式声明继承了此接口。而在 go 中接口只是描述一个动作，如果说是实现这个接口，只需要让某个实例实现了这个接口中的所有方法就行了。...</p>
+</section>
+<footer class=entry-footer><span title="2018-04-04 13:48:57 +0000 UTC">April 4, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Go 语言体会" href=https://zhenfeng-zhu.github.io/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>关于时间管理
+</h2>
+</header>
+<section class=entry-content>
+<p>主动管理时间，敢于说不。
+有目标向前看，没目标向钱看。</p>
+</section>
+<footer class=entry-footer><span title="2018-03-25 20:28:42 +0000 UTC">March 25, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 关于时间管理" href=https://zhenfeng-zhu.github.io/posts/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>一致性哈希算法
+</h2>
+</header>
+<section class=entry-content>
+<p>当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：
+如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。
+1 hash 取模 随机放置就不多说了。通常最容易想到的方案是哈希取模了。
+可以将传入的 key 按照 $$ index=hash(key) % N $$ 这样来计算出需要存放的节点。
+这样可以满足数据的均匀分配，但是这个算法的容错性和扩展性比较差。比如增加或者删除一个节点的时候，所有的 key 都要重新计算，显然这样的成本比较高，为此需要一个算法来满足均匀的同时也要有良好的容错性和扩展性。
+2 一致性 hash 算法 一致性 hash 算法是将所有的哈希值构成了一个环，其范围是 0~2^32-1。如图：
+之后将各个服务器节点散列到这个环上，可以用节点的 IP，hostname 这样唯一性的字段作为 key 进行 hash。散列之后如下：
+之后需要将数据定位到对应的节点上，使用同样的 hash 函数将 key 也映射到这个环上。
+这样就按照顺时针方向就可以将 k1 定位到 N1 节点，k2 定位到 N3 节点，k3 定位到 N2 节点。
+2.1 容错性 假设 N1 宕机了：
+依然根据顺时针方向，k2 和 k3 保持不变，只有 k1 被重新映射到了 N3。这样就很好的保证了容错性，当一个节点宕机时只会影响到少部分数据。
+2.2 扩展性 当新增一个节点时：
+在 N2 和 N3 之间新增了一个节点 N4，这时受影响的数据只有 k3，其余的数据也是保持不变。...</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 19:03:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 一致性哈希算法" href=https://zhenfeng-zhu.github.io/posts/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Spring Boot 启动原理分析
+</h2>
+</header>
+<section class=entry-content>
+<p>Spring Boot 启动原理分析 我们在开发 spring boot 应用的时候，一般会遇到如下的启动类：
+@SpringBootApplication public class DemoApplication { public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args); } } 从这段代码可以看出，注解@SpringBootApplication 和 SpringApplication.run()是比较重要的两个东西。
+1 @SpringApplication 注解 @Target(ElementType.TYPE) @Retention(RetentionPolicy.RUNTIME) @Documented @Inherited @SpringBootConfiguration @EnableAutoConfiguration @ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class), @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) }) public @interface SpringBootApplication { ... } 在这段代码里，比较重要的只有三个注解：
+@Configuration（@SpringBootConfiguration 点开查看发现里面还是应用了@Configuration） @EnableAutoConfiguration @ComponentScan 其实，我们使用这三个注解来修饰 springboot 的启动类也可以正常运行,如下所示：
+@ComponentScan @EnableAutoConfiguration @Configuration public class DemoApplication { public static void main(String[] args) { SpringApplication....</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 19:03:22 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Spring Boot 启动原理分析" href=https://zhenfeng-zhu.github.io/posts/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Spring Data Jpa 实战
+</h2>
+</header>
+<section class=entry-content>
+<p>为了解决抽象各个 Java 实体基本的“增删改查”操作，我们通常会以泛型的方式封装一个模板 Dao 来进行抽象简化，但是这样依然不是很方便，我们需要针对每个实体编写一个继承自泛型模板 Dao 的接口，再编写该接口的实现。虽然一些基础的数据访问已经可以得到很好的复用，但是在代码结构上针对每个实体都会有一堆 Dao 的接口和实现。
+由于模板 Dao 的实现，使得这些具体实体的 Dao 层已经变的非常“薄”，有一些具体实体的 Dao 实现可能完全就是对模板 Dao 的简单代理，并且往往这样的实现类可能会出现在很多实体上。Spring-data-jpa 的出现正可以让这样一个已经很“薄”的数据访问层变成只是一层接口的编写方式。
+1 工程配置 1.1 pom &lt;?xml version="1.0" encoding="UTF-8"?> &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"> &lt;modelVersion>4.0.0&lt;/modelVersion> &lt;groupId>com.example&lt;/groupId> &lt;artifactId>jpa-demo&lt;/artifactId> &lt;version>0.0.1-SNAPSHOT&lt;/version> &lt;packaging>jar&lt;/packaging> &lt;name>jpa-demo&lt;/name> &lt;description>Demo project for Spring Boot&lt;/description> &lt;parent> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-parent&lt;/artifactId> &lt;version>1.5.9.RELEASE&lt;/version> &lt;relativePath/> &lt;!-- lookup parent from repository --> &lt;/parent> &lt;properties> &lt;project.build.sourceEncoding>UTF-8&lt;/project.build.sourceEncoding> &lt;project.reporting.outputEncoding>UTF-8&lt;/project.reporting.outputEncoding> &lt;java.version>1.8&lt;/java.version> &lt;/properties> &lt;dependencies> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-data-jpa&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>org.springframework.boot&lt;/groupId> &lt;artifactId>spring-boot-starter-web&lt;/artifactId> &lt;/dependency> &lt;dependency> &lt;groupId>mysql&lt;/groupId> &lt;artifactId>mysql-connector-java&lt;/artifactId> &lt;scope>runtime&lt;/scope> &lt;/dependency> &lt;dependency> &lt;groupId>org....</p>
+</section>
+<footer class=entry-footer><span title="2018-03-24 19:02:48 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Spring Data Jpa 实战" href=https://zhenfeng-zhu.github.io/posts/spring-data-jpa%E5%AE%9E%E6%88%98/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>spring boot 多数据源配置
 </h2>
 </header>
@@ -173,86 +254,6 @@ package com.learning.guice; public interface LogService { void log(String msg); 
 </section>
 <footer class=entry-footer><span title="2018-03-24 17:57:15 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Guice 快速入门" href=https://zhenfeng-zhu.github.io/posts/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>kotlin 快速入门
-</h2>
-</header>
-<section class=entry-content>
-<p>快速浏览一下 Kotlin 的语法。
-基本语法 包定义和引用 在源文件头部：
-package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参数并返回 Int 类型的值： fun sum(a: Int, b: Int): Int { return a + b } 带有方法体，返回推断类型数据的定义方式，例如： fun sum(a: Int, b: Int) = a + b 返回无意义类型的定义方式： fun printSum(a: Int, b: Int): Unit { println("sum of $aand $bis ${a + b}") } 或者省略 Unit：
-fun printSum(a: Int, b: Int) { println("sum of $aand $bis ${a + b}") } 变量定义 只赋值一次（只读）本地变量，val： val a:Int = 1 // 指定初始值 val b = 2 // 类型自推断为 `Int` val c:Int // 当不指定初始值时需要指定类型 c = 3 // 延迟赋值 可变变量， var： var x = 5 // 类型自推断为 `Int` x += 1 顶层变量 val PI = 3....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 17:56:45 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to kotlin 快速入门" href=https://zhenfeng-zhu.github.io/posts/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>RxJava2 快速入门
-</h2>
-</header>
-<section class=entry-content>
-<p>RxJava2 快速入门 引入依赖 compile 'io.reactivex.rxjava2:rxjava:2.0.1' 写法 简单版本 private static void helloSimple() { Consumer&lt;String> consumer = new Consumer&lt;String>() { @Override public void accept(String s) throws Exception { System.out.println("consumer accept is " + s); } }; Observable.just("hello world").subscribe(consumer); } 复杂版本 private static void helloComplex() { Observer&lt;String> observer = new Observer&lt;String>() { @Override public void onSubscribe(Disposable d) { System.out.println("onSubscribe: " + d); } @Override public void onNext(String s) { System.out.println("onNext: " + s); } @Override public void onError(Throwable e) { System....</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 17:55:56 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to RxJava2 快速入门" href=https://zhenfeng-zhu.github.io/posts/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>领域实体类
-</h2>
-</header>
-<section class=entry-content>
-<p>在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。
-pojo 类：这是普通的 java 类，具有一部分的 get 和 set 方法。 dto 类：data transfer object 数据传输对象类，泛指用于展示层与服务层之间传输的对象。 vo 类：vo 有两种说法，一种是 view object，一种是 value object。 po 类：persisent object 持久对象。和 pojo 类一样，也是只有 get set 方法，但是这种类一般是用于持久层。 bo 类：business object，业务对象，表示应用程序领域内事物的所有实体类。 do 类：domain object，领域对象，就是从现实中抽象出来的有形或者无形的业务实体。 根据我的经验来看，大部分人都没有分那么清楚，一般是把数据类放在 domain 包，或者 entity 包里。再细分一下的话，可以把 dto 类单独提取到一个包里。</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 17:53:42 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 领域实体类" href=https://zhenfeng-zhu.github.io/posts/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>docker
-</h2>
-</header>
-<section class=entry-content>
-<p>docker 常用命令 docker 获取镜像
-docker pull
-新建并启动
-docker run
-列出镜像
-docker image ls
-docker images
-删除虚悬镜像
-docker image prune
-删除本地镜像
-docker iamge rm
-查看应用信息
-docker logs
-dockerfile 一般步骤 在一个目录里，新建一个文件，命名为 Dockerfile 在 Dockerfile 的目录内，执行 docker build 常用指令 FROM 指定基础镜像，且是第一条命令
-RUN 执行命令
-shell 格式
-exec 格式
-COPY 和 ADD 指令是复制文件...</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 17:42:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to docker" href=https://zhenfeng-zhu.github.io/posts/docker/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>express
-</h2>
-</header>
-<section class=entry-content>
-<p>Express 快速入门 安装 npm init npm install --save express hello world var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序
-node app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。
-express 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
-express --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
-DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。...</p>
-</section>
-<footer class=entry-footer><span title="2018-03-24 17:41:01 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to express" href=https://zhenfeng-zhu.github.io/posts/express/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

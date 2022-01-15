@@ -72,6 +72,119 @@
 <figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
 </figure>
 <header class=entry-header>
+<h2>Chapter6 整理你的项目：一个图书管理员的故事
+</h2>
+</header>
+<section class=entry-content>
+<p>整理你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你的代码库带来秩序。幸运的是，Clojure 提供了一套工具，专门用来帮助这个侏儒与混乱的力量不断斗争。
+这些工具通过将相关的函数和数据分组来帮助你组织你的代码。它们还可以防止名称冲突，这样你就不会意外地覆盖别人的代码，反之亦然。在这个充满悬念和神秘的故事中，请和我一起学习如何使用这些工具，并解决一生中的抢劫案吧 在这个传奇故事的最后，你将了解以下内容。
+`def’是做什么的
+什么是命名空间以及如何使用它们
+命名空间和文件系统之间的关系
+如何使用refer、alias、require、use和ns。
+如何使用文件系统来组织 Clojure 项目
+我先来介绍一下 Clojure 的组织系统，它的工作原理很像一个库。Melvil 兴奋地颤抖着!
+你的项目是一个库 现实世界中的图书馆存储对象的集合，如书籍、杂志和 DVD。他们使用寻址系统，所以当你得到一个物体的地址时，你可以导航到物理空间并检索到该物体。
+当然，没有人能够直接知道一本书或 DVD 的地址是什么。这就是为什么图书馆要记录一个物体的标题和它的地址之间的联系，并提供工具来搜索这些记录。在计算机之前的旧时代，图书馆提供卡片目录，即装满纸质卡片的柜子，其中包含每本书的标题、作者、“地址”（杜威十进制或国会图书馆编号）和其他信息。
+例如，要找到《达芬奇密码》，你可以翻阅书名目录（按书名排序的卡片），直到你找到正确的卡片。在那张卡片上，你会看到地址813.54（如果它使用杜威十进制系统），浏览图书馆，找到达芬奇密码所在的书架，并参与你一生中的文学和/或仇恨阅读冒险。
+在 Clojure 中想象一个类似的设置是很有用的。我认为 Clojure 是将对象（如数据结构和函数）存储在一组巨大的编号架上。没有人能够直接知道一个对象被存储在哪个架子上。相反，我们给 Clojure 一个标识符，它用来检索该对象。
+为了使之成功，Clojure 必须维护我们的标识符和货架地址之间的关联。它通过使用namespaces来做到这一点。命名空间包含了人类友好的符号和书架地址的引用之间的映射，被称为vars，很像卡片目录。
+从技术上讲，命名空间是 “clojure.lang.Namespace “类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用*ns*来引用当前的命名空间，你可以用(ns-name *ns*)来获得其名称。
+(ns-name *ns*) ; => user 例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=>。
+当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。
+至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象–在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要评估它，而是把它当作数据。接下来的几个例子显示了当你引用一个表单时会发生什么。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-14 12:40:41 +0800 +0800">January 14, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter6 整理你的项目：一个图书管理员的故事" href=https://zhenfeng-zhu.github.io/posts/chapter6/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+</figure>
+<header class=entry-header>
+<h2>Chapter5 函数式编程
+</h2>
+</header>
+<section class=entry-content>
+<p>函数式编程 到目前为止，你已经专注于熟悉 Clojure 提供的工具：不可变的数据结构、函数、抽象，等等。在这一章中，你将学习如何思考你的编程任务，以最好的方式利用这些工具。你将开始把你的经验整合到一个新的函数式编程思维中。
+你将学到的核心概念包括：什么是纯函数，为什么它们很有用；如何使用不可变的数据结构，为什么它们比可变的表亲更有优势；如何将数据和函数分开，给你带来更多的力量和灵活性；以及为什么对一小部分数据抽象进行编程会很强大。一旦你把所有这些知识塞进你的大脑，你就会有一个全新的解决问题的方法
+在学习了这些主题之后，你将通过编写一个基于终端的游戏来运用你所学到的一切，这个游戏的灵感来自于美国各地 Cracker Barrel 餐馆中的一种古老而神秘的思维训练装置。Peg Thing!
+纯函数：什么和为什么 除了 “println “和 “rand”，到目前为止，你所使用的所有函数都是纯函数。是什么使它们成为纯函数，为什么会有这样的问题？如果一个函数符合两个条件，它就是纯函数。
+如果给出相同的参数，它总是返回相同的结果。这被称为引用透明度，你可以把它添加到你的 5 美元编程术语列表中。 它不能引起任何副作用。也就是说，该函数不能做出任何在函数本身之外可以观察到的改变–例如，通过改变一个外部可访问的可改变对象或写到一个文件。 这些特性使你更容易推理你的程序，因为这些函数是完全隔离的，无法影响你系统的其他部分。当你使用它们时，你不必问自己，“我调用这个函数会破坏什么？” 它们也是一致的：你永远不需要搞清楚为什么给一个函数传递相同的参数会导致不同的返回值，因为这永远不会发生。
+纯函数和算术一样稳定，没有问题（你最后一次为两个数字相加而烦恼是什么时候？） 它们是巨大的函数小砖块，你可以自信地将其作为你程序的基础。让我们更详细地看看引用透明性和无副作用，看看它们到底是什么，以及它们是如何发挥作用的。
+纯函数是引用透明的 为了在调用相同参数时返回相同的结果，纯函数只依靠 1）自己的参数和 2）不可变的值来决定其返回值。例如，数学函数是引用透明的。
+(+ 1 2) ; => 3 如果一个函数依赖于一个不可变的值，那么它就是引用透明的。字符串`”, Daniel-san “是不可变的，所以下面的函数也是引用透明的。
+(defn wisdom [words] (str words ", Daniel-san")) (wisdom "Always bathe on Fridays") ; => "Always bathe on Fridays, Daniel-san" 相比之下，下面的函数在相同的参数下不会产生相同的结果；因此，它们在指称上是不透明的。任何依赖随机数生成器的函数都不可能是指称透明的。
+(defn year-end-evaluation [] (if (> (rand) 0.5) "You get a raise!" "Better luck next year!...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-14 10:00:07 +0800 +0800">January 14, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter5 函数式编程" href=https://zhenfeng-zhu.github.io/posts/chapter5/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+</figure>
+<header class=entry-header>
+<h2>Chapter4 核心函数的深入研究
+</h2>
+</header>
+<section class=entry-content>
+<p>核心函数的深入研究 如果你像我一样是焦虑的、以青少年为中心的准肥皂剧*《吸血鬼日记》的超级粉丝，你一定记得主角埃琳娜开始质疑她苍白的、神秘的暗恋者的行为的那一集。“为什么当我的膝盖被刮伤时，他立刻消失得无影无踪？“和 “为什么当我的手指被划破时，他的脸变成了一个怪异的死亡面具？“等等。
+如果你已经开始玩 Clojure 的核心函数，你可能也会问自己类似的问题。“为什么map'会返回一个列表，而我给它的是一个向量？"和 "为什么reduce’会把我的 map 当成一个向量列表？“等等。(不过，有了 Clojure，你至少可以免于思考作为一个 17 岁孩子的深刻的存在恐惧，直到永远）。
+在这一章中，你将了解到 Clojure 的深邃、黑暗、嗜血、超自然的****，我的意思是，在这一章中，你将了解到 Clojure 的编程到抽象的基本概念以及序列和集合的抽象。你还会了解到疯狂的序列*。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你试着使用它们时发生了什么。
+接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、向量、Map 和集合。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
+最后，你将学会如何解析和查询 CSV 中的吸血鬼数据，以确定在你的家乡潜伏着哪些诺斯费拉图。
+从编程到抽象 为了理解对抽象的编程，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中映射一个哈希图（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
+原因是 Clojure 在*序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first'、rest’和cons'，我们稍后会仔细研究），它就能与map'、`reduce’以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
+我认为抽象是操作的命名集合。如果你能在一个对象上执行一个抽象的所有操作，那么这个对象就是该抽象的一个实例。我甚至在编程之外也是这样想的。例如，电池抽象包括 “将导电介质连接到其阳极和阴极 “的操作，而该操作的输出是电流。电池是用锂还是用土豆做的并不重要。只要它对定义电池的一系列操作做出反应，它就是一个电池。
+同样地，map并不关心列表、向量、集合和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。
+把列表、向量、集合和 Map 当作序列对待 如果你把map操作独立于任何编程语言，甚至是编程，它的基本行为是用一个函数ƒ从现有的序列x导出一个新的序列y，这样y1 = ƒ(x1), y2 = ƒ(x2), ....</p>
+</section>
+<footer class=entry-footer><span title="2022-01-13 17:39:28 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter4 核心函数的深入研究" href=https://zhenfeng-zhu.github.io/posts/chapter4/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+</figure>
+<header class=entry-header>
+<h2>Chapter3 Clojure 速成班
+</h2>
+</header>
+<section class=entry-content>
+<p>做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的特点是它是一种 Lisp 语言。在本章中，你将探索构成这个 Lisp 核心的元素：语法、函数和数据。它们将共同为你在 Clojure 中表示和解决问题打下坚实的基础。
+在打下这个基础之后，你将能够编写一些超级重要的代码。在最后一节中，你将通过创建一个霍比特人的模型，并编写一个函数将其打在一个随机的位置上，从而将一切联系起来。超级! 重要的!
+当你阅读本章时，我建议你在 REPL 中输入例子并运行它们。用一种新的语言编程是一种技能，就像约德尔舞或花样游泳一样，你必须通过练习来学习它。 请留意它!
+语法 Clojure 的语法很简单。像所有的 Lisp 一样，它采用了统一的结构、少量的特殊运算符，以及从藏在麻省理工学院下面的小括号矿井中不断提供的小括号，Lisp 就是在那里诞生的。
+形式 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。
+数据结构的字面表示（如数字、字符串、Map 和向量） 操作 我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure 形式。但不要太纠结于术语。Clojure 评价每一个表单，以产生一个值。这些字面表达都是有效的形式。
+1 "a string" ["a" "vector" "of" "strings"] 当然，你的代码很少包含自由浮动的字元，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的形式都是：*开括号，*操作符，*操作数，闭括号。
+(operator operand1 operand2 ... operandn) 请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。
+(+ 1 2 3) ; => 6 (str "It was the panda " "in the library " "with a dust buster") ; => "It was the panda in the library with a dust buster" 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种形式都是有效的。这里有一个不是形式的东西，因为它没有一个结束的小括号。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-13 11:12:19 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;15 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter3 Clojure 速成班" href=https://zhenfeng-zhu.github.io/posts/chapter3/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+</figure>
+<header class=entry-header>
+<h2>Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器
+</h2>
+</header>
+<section class=entry-content>
+<p>如何使用 Emacs，一个优秀的 Clojure 编辑器 在你掌握 Clojure 的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用 Emacs，但你当然也可以使用任何你想要的编辑器。如果你不遵循本章中关于 Emacs 的详尽说明，或者你选择使用一个不同的编辑器，那么至少值得投入一些时间来设置你的编辑器，以便与 REPL 一起工作。我推荐的两个在社区中受到好评的替代品是Cursive和Nightcode。
+我推荐 Emacs 的原因是，它提供了与 Clojure REPL 的紧密集成，这使你可以在写作时立即尝试你的代码。这种紧密的反馈回路在学习 Clojure 和以后编写真正的 Clojure 程序时都很有用。Emacs 也很适合与任何 Lisp 方言一起工作；事实上，Emacs 是用一种叫做 Emacs Lisp（elisp）的 Lisp 方言编写的。
+在本章结束时，你的 Emacs 设置将看起来像图 2-1。
+图 2-1: 使用 Clojure 的典型 Emacs 设置：一边是代码，另一边是 REPL。
+为了达到这个目的，你将从安装 Emacs 开始，设置一个适合新人的 Emacs 配置。然后你将学习基础知识：如何打开、编辑和保存文件，以及如何使用基本的键绑定与 Emacs 进行交互。最后，你将学习如何实际编辑 Clojure 代码并与 REPL 进行交互。
+安装 你应该使用 Emacs 的最新主要版本，即 Emacs 24，用于你工作的平台。
+OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用程序。其他选项，如 Aquamacs，应该是为了使 Emacs 更 “像 Mac”，但从长远来看是有问题的，因为它们的设置与标准 Emacs 有很大的不同，以至于很难使用 Emacs 手册或跟随教程。 Ubuntu按照*https://launchpad....</p>
+</section>
+<footer class=entry-footer><span title="2022-01-13 10:43:56 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器" href=https://zhenfeng-zhu.github.io/posts/chapter2/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+</figure>
+<header class=entry-header>
 <h2>Chapter1 构建、运行和 REPL
 </h2>
 </header>
@@ -162,118 +275,6 @@ bool 布尔值，对应 java 中的 boolean byte 有符号字节，对应 java �
 </section>
 <footer class=entry-footer><span title="2022-01-06 10:41:45 +0800 +0800">January 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Thrfit 入门" href=https://zhenfeng-zhu.github.io/posts/thrfit-get-started/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>修复 Vscode Git Cannot Use Api Proposal ScmValidation
-</h2>
-</header>
-<section class=entry-content>
-<p>问题表现 某天，我的 vscode 的 git 管理出现了问题。
-类似这个样子。
-解决方式 @builtin @id:vscode.git 直接卸载了。
-出现原因 应该是某个公司的插件给我自动装上导致的</p>
-</section>
-<footer class=entry-footer><span title="2022-01-06 10:29:52 +0800 +0800">January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 修复 Vscode Git Cannot Use Api Proposal ScmValidation" href=https://zhenfeng-zhu.github.io/posts/fix-vscode-git-cannot-use-api-proposal-scmvalidation/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Gavin Wood: Web3 去中心化技术是维护自由民主的唯一希望
-</h2>
-</header>
-<section class=entry-content>
-<p>Gavin Wood 在 2014 年创造了 Web3（最初是 Web 3.0）这个词。当时，他刚开始帮助开发以太坊，这是一种在知名度和市场规模上仅次于比特币的加密货币。如今，他经营着支持去中心化技术项目的 Web3 基金会，以及专注于为 Web3 构建区块链基础设施的公司 Parity Technologies。居住在瑞士的 Gavin 上周通过视频与我讨论了 Web 2.0 出错的地方、他对未来的展望，以及为什么我们都需要更少的信任。以下采访是我们谈话的记录的整理版。
-WIRED：据我所知，Web3 最基本的想法是当前的 Web2.0 不好。因此，在我们讨论 Web3 会带来什么之前，你会怎么描述现在的问题？
-Gavin Wood：我认为 Web 2.0 的模型与互联网出现之前的社会模型非常相似。如果你回到 500 年前，人们基本上只在他们的小村庄和乡镇，并与他们认识的人进行交易。从广义上讲，他们依靠社会结构来确保他们的期望是可信的，并且很可能会真正发生，比如，这些苹果没有腐烂，或者这个马蹄铁在三周后不会破裂。
-这种机制运行很好，因为在城镇之间移动既困难又耗时且成本高昂。所以你有相当高的可信度，就会有人留下来，他们并不想被流放。
-但是随着社会变得更大规模，我们有了城市、国家和国际组织，我们开始关注这种奇怪的品牌声誉问题。我们创建了这些强大但受监管的机构，监管机构原则上确保满足我们的期望。想要在特定行业开展业务，你必须满足某些法定要求。
-这不是一个很好的解决方案，原因有几个。其中之一是，去监管新兴产业非常困难。政府的行动是比较缓慢的，需要一段时间才能赶上。另一个是监管机构不完善。尤其是当他们与行业密切合作时，行业和监管机构之间通常会存在一些旋转门关系。
-另一个是监管机构的支持力度非常有限，也就是政府投入多少资金。因此，监管将是不完整的。他们能够监管最大的罪犯，但他们无法在任何地方都保持真正强大的影响力。当然，监管机构和法律因司法管辖区而异。如果你去欧盟的某个地方，那么 xx 活动就可以了；如果你去别的地方，那就不行了。随着我们成为一个非常国际化的社会，这实际上意味着你的期望仍未得到满足。
-所以我们需要超越这一点。但不幸的是，Web 2.0 仍然存在于这种非常中心化的模型中。
-WIRED：我们真的在谈论技术的失败吗？还是我们在谈论治理、监管和竞争政策的失败？因为听起来你是在说：这是监管的失败，但答案却不是更好的监管，而是需要有一个新的技术层，因为监管失败是不可避免的。我是否正确描述了您的观点？
-Gavin Wood：是的，这个模型坏了。
-WIRED：那么让我们来谈谈应该用什么来代替它。我们一直在讨论为什么 Web 2.0 不起作用。你对 Web3 的定义是什么？
-Gavin Wood：Less trust, more truth。更少的信任，更多的事实。
-WIRED：“less trust”是什么意思？
-Gavin Wood：我对信任有一个特殊的含义，它本质上是信仰。这是一种信念（faith），即某些事情会发生的信仰，世界会以某种方式运转，而没有任何真实的证据或理性的论据来说明为什么会发生这种情况。所以我们想要的更少的信任，我们想要更多的事实真相。我真正想表达的意思是在 Web3 下更加可以相信我们的期望会得到满足。
-WIRED：这听起来像是在说“减少盲目信仰，增加信誉的可信度”。
-Gavin Wood：可以说是，也可以说不是。我认为信任本身实际上围绕着坏事。信任意味着你将某种权力授予其他人或某个组织，他们将能够以某种任意方式使用该权力。一旦它成为可信的信任，它就不再是真正的信任。它会有一个机制，一个基本原理，一个论点，一个逻辑机制。无论如何，但在我看来，这不是信任。
-WIRED：已经写到 Web3 将打破像 Google 和 Facebook 这样的垄断企业平台。你能解释一下它将如何做到这一点吗？...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-05 10:20:39 +0800 +0800">January 5, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Gavin Wood: Web3 去中心化技术是维护自由民主的唯一希望" href=https://zhenfeng-zhu.github.io/posts/what-is-web3/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>Openfaas Workshop Lab11
-</h2>
-</header>
-<section class=entry-content>
-<p>Lab 11 - 高级函数 - 使用 HMAC 的信任 前言 用于微服务的传统认证策略与函数的工作原理完全相同。在这个实验室中，我们将讨论使用共享秘密和基于哈希的消息验证码（HMAC）的几种可用方法之一。有关其他认证策略和想法，请参见。openfaas-function-auth
-这绝不是一个广泛的清单，安全和认证是一个复杂的领域，最好留给专家使用经过试验的方法。
-准备好你的环境 在开始这个实验之前，创建一个新的文件夹
-mkdir -p lab11\`bash && cd lab11 也要确保你的faas-cli'版本是0.7.4’或以上，使用以下命令。
-faas-cli version 什么是 HMAC 如果没有任何形式的认证或信任，我们的函数可能会暴露给任何能猜到其 URL 的人。如果我们的函数可以在互联网或本地网络上访问，那么它们就可能被坏的行为者调用。默认情况下，函数会对任何请求做出响应。然而，如果我们想控制对函数的访问，我们可以使用基于哈希的消息验证码（HMAC）来验证信息的来源。
-来自[alexellis/hmac]（https://github.com/alexellis/hmac）。
-HMAC 使用发送方/接收方提前共享的对称密钥。发送方在想要传输信息时将产生一个哈希值–该数据与有效载荷一起发送。然后，收件人将用共享密钥签署有效载荷，如果哈希值匹配，则假定有效载荷来自发件人。
-这样我们就可以避免我们的函数被无效的甚至是危险的信息所调用。
-使用 HMAC 我们将使用 faas-cli 提供的--sign标志来包含一个头，其中包含使用我们用--key标志提供的共享密钥创建的散列信息。
-注意: --sign和--key必须同时存在。
-让我们首先通过部署-env函数来检查该标志的作用，该函数将打印函数中可访问的所有环境变量。
-faas-cli deploy --name env --fprocess="env" --image="function/alpine:new" 调用不带--sign标志的函数。 $ echo "The message" | faas-cli invoke env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin HOSTNAME=d2c1a2cb20c2 fprocess=env HOME=/root Http_X_Call_Id=b84947c6-2970-4fcf-ba3b-66dde6943999 Http_X_Forwarded_For=10.255.0.2:34974 Http_X_Forwarded_Host=127.0.0.1:8080 Http_Content_Length=0 Http_Accept_Encoding=gzip Http_Content_Type=text/plain Http_User_Agent=Go-http-client/1....</p>
-</section>
-<footer class=entry-footer><span title="2022-01-04 13:44:15 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Openfaas Workshop Lab11" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab11/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>Openfaas Workshop Lab10
-</h2>
-</header>
-<section class=entry-content>
-<p>Lab 10 - 高级函数 - 秘密 在开始本实验室之前，为你的文件创建一个新的文件夹。由于本实验室是建立在先前的实验室基础上的，因此请复制 lab5。
-$ cp -r lab5 lab10\ && cd lab10 使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。
-来自 Docker 文档。
-… 秘密是一团数据，如密码、SSH 私钥、SSL 证书或其他数据，不应通过网络传输或未经加密存储在 Docker 文件或应用程序的源代码中。
-这是一个比环境变量更安全的选择。环境变量更容易使用，但最适合于非保密的配置项目。 似乎很适合用于存储auth_token值。
-请参阅docs中关于秘密的更多信息和它的设计。
-创建一个秘密 秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或'-‘组成，并且必须以一个字母数字字符开始和结束
-从一个终端运行以下命令。
-echo -n &lt;auth_token> | faas-cli secret create auth-token 测试秘密是否被创建。
-faas-cli secret ls 注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
-kubectl get secret auth-token -n openfaas-fn -o json 注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。
-当秘密被函数挂载时，它将以文件形式出现在/var/openfaas/secrets/auth-token下。这可以由handler....</p>
-</section>
-<footer class=entry-footer><span title="2022-01-04 13:44:12 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Openfaas Workshop Lab10" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab10/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png alt>
-</figure>
-<header class=entry-header>
-<h2>Openfaas Workshop Lab9
-</h2>
-</header>
-<section class=entry-content>
-<p>Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运作的。
-前提条件 在完成了Lab 1中对 OpenFaaS 的设置后，你将拥有触发自动扩展所需的一切。
-多个工具可以用来创建足够的流量来触发自动扩展 - 在这个例子中，`curl’将被使用，因为它很容易在 Mac 和 Linux 上使用，并在 Windows 上与 Git Bash 打包。
-自动扩展的背景 开箱即用的 OpenFaaS 是这样配置的，它将根据 Prometheus 测量的 每秒请求指标进行自动扩展。 这个指标是在流量通过 API 网关的时候捕获的。如果超过了定义的 每秒请求的阈值，AlertManager 就会启动。这个阈值应该被重新配置为适合生产使用的水平，因为在这个例子中，为了演示，它被设置为一个低值。
-在文档网站中找到更多关于自动缩放的信息。
-每次警报被 AlertManager 触发时，API 网关将把你的函数的一定数量的副本添加到集群中。OpenFaaS 有两个配置选项，允许指定复制的起始/最低数量，也允许停止复制的最大数量。
-你可以通过设置com.openfaas.scale.min来控制函数的最小复制量，目前默认值为1。
-你可以通过设置com.openfaas.scale.max来控制一个函数可以产生的最大复制量，目前默认值是20。
-注意: 如果你把com.openfaas.scale.min和com.openfaas.scale.max设置成相同的值，你就会禁用自动缩放函数。
-查看 Prometheus 你需要运行这个端口转发命令，以便能够在http://127.0.0.1:9090访问 Prometheus。
-kubectl port-forward deployment/prometheus 9090:9090 -n openfaas 现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code="200"} [20s])作为查询来实现。导致一个看起来像这样的页面。...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-04 13:44:09 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Openfaas Workshop Lab9" href=https://zhenfeng-zhu.github.io/posts/openfaas-workshop-lab9/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

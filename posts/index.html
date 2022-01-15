@@ -73,6 +73,90 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Farewell
+</h2>
+</header>
+<section class=entry-content>
+<p>永别了 正如 Semisonic 在 90 年代的热门歌曲 “Closing Time “所告诉我们的那样，每一个新的开始都来自于其他一些开始的结束。恭喜你，高贵的读者，完成了这次 Clojure 之旅。我希望你发现它是有价值的，我也希望你期待着更多的东西！相信我，还有更多的东西等着你。
+相信我，还有很多东西。我最喜欢 Clojure 的一点是，它有一个完整的世界可以探索。逻辑编程、解析器、类型系统……只要你能说出计算机科学的一个有趣领域，你就可以用 Clojure 来研究它。我把我对下一步要去哪里的建议留给你。
+如果你想对 Clojure 生态系统有一个广泛的了解，请查看The Clojure Toolbox，它列出了数百个 Clojure 项目，并按照它们所解决的问题进行组织。
+如果你对网络编程感兴趣，一个很好的开始是 Luminus 框架（Luminus - 一个 Clojure 网络框架）。它的文档非常好，你很快就会有一个网站在运行。
+要想了解 Clojure 的最新动态，Eric Normand 的 Clojure Gazzette 是一个很好的资源（注册每周功能编程通讯）。当然，还有 Clojure 邮件列表（https://groups.google.com/forum/#!forum/clojure）和 Clojure subreddit 也是一个有用的、友好的地方（http://www.reddit.com/r/clojure）。
+如果 Twitter 是你选择的社交媒体，那么@swannodette (David Nolen), @gigasquid (Carin Meier), @puredanger (Alex Miller), @ztellman (Zach Tellman), @bbatsov (Bozidar Batsov) 和 @stuartsierra (Stuart Sierra) 是你的小红帽。你也可以关注我，@nonrecursive!
+再见了，小茶杯，祝你 Clojuring 愉快</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 21:45:17 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Farewell" href=https://zhenfeng-zhu.github.io/posts/farewell/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>AppendixB Boot，花哨的 Clojure 构建框架
+</h2>
+</header>
+<section class=entry-content>
+<p>Boot，花哨的 Clojure 构建框架 Boot 是 Leiningen 的替代品，提供同样的功能。Leiningen 更受欢迎（截至 2015 年夏天），但我个人喜欢用 Boot 工作，因为它更容易扩展。本附录解释了 Boot 的基本概念，并指导你编写你的第一个 Boot 任务。如果你对使用 Boot 构建项目感兴趣，请查看它的 GitHub README（GitHub - boot-clj/boot: Build tooling for Clojure.）和它的 wiki（Home - boot-clj/boot Wiki - GitHub）。
+注意 截至本文写作时，Boot 对 Windows 的支持有限。Boot 团队欢迎大家的贡献!
+Boot 的抽象 Boot 由 Micha Niskin 和 Alan Dipert 创建，是对 Clojure 工具领域的一个有趣而强大的补充。从表面上看，它是构建 Clojure 应用程序和从命令行运行 Clojure 任务的一种便捷方式。深入研究一下，你会发现 Boot 就像 Git 和 Unix 的爱情结晶，它提供的抽象使你在操作系统和应用程序的交叉点上编写代码时更加愉快。
+Unix 提供了我们都很熟悉的抽象，以至于我们认为它们是理所当然的。(偶尔带你的电脑去吃一顿好的餐厅会死吗？) 进程抽象让你把程序推理成独立的逻辑单元，可以通过 STDIN 和 STDOUT 文件描述符轻松地组成一个流处理管道。这些抽象使某些类型的操作，如文本处理，变得非常直接。
+同样，Boot 也提供了一些抽象，使得独立的操作很容易被组合成构建工具最终要做的那种复杂、协调的操作，比如将 ClojureScript 转换为 JavaScript。 Boot 的任务抽象让你可以轻松地定义逻辑单元，通过文件集合进行通信。文件集合抽象可以跟踪不断变化的构建环境，并提供一个定义明确、可靠的任务协调方法。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 21:41:09 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to AppendixB Boot，花哨的 Clojure 构建框架" href=https://zhenfeng-zhu.github.io/posts/appendixb/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>AppendixA 用 Leiningen 构建和开发
+</h2>
+</header>
+<section class=entry-content>
+<p>用 Leiningen 构建和开发 用任何语言编写软件都需要生成工件，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为依赖，以确保它们被加载到你正在构建的项目中。Clojurists 中最流行的管理工件的工具是 Leiningen，本附录将告诉你如何使用它。你还将学习如何使用 Leiningen 来完全增强你的开发经验，使用插件。
+Artifact Ecosystem 因为 Clojure 托管在 Java 虚拟机（JVM）上，所以 Clojure 的工件是以 JAR 文件的形式分发的（在第 12 章有介绍）。Java 地已经有一个处理 JAR 文件的完整的工件生态系统，Clojure 也使用它。神器生态系统并不是一个官方的编程术语；我用它来指代用于识别和分发神器的一套工具、资源和惯例。Java 的生态系统是围绕着 Maven 构建工具发展起来的，由于 Clojure 使用这个生态系统，你会经常看到对 Maven 的引用。Maven 是一个巨大的工具，可以执行各种古怪的项目管理任务。值得庆幸的是，你不需要获得 Maven 学的博士学位就能成为一名有效的 Clojurist。你需要知道的唯一特征是，Maven 规定了一种识别 Clojure 项目所遵守的工件的模式，它还规定了如何在 Maven 仓库中托管这些工件，Maven *仓库只是存储工件以供分发的服务器。
+Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个版本。你可以在project.clj文件中为你的项目指定这些。以下是你在第一章创建的clojure-noob项目的project.clj第一行的内容。
+(defproject clojure-noob "0.1.0-SNAPSHOT" clojure-noob是你项目的组 ID 和工件 ID，"0.1.0-SNAPSHOT"是其版本。一般来说，版本是永久性的；如果你将一个版本为 0.1.0 的工件部署到存储库，你不能对该工件进行修改并使用相同的版本号进行部署。您需要改变版本号。(许多程序员喜欢 Semantic Versioning 系统，您可以在*Semantic Versioning 2.0.0 | Semantic Versioning.*中阅读到这一系统。） 如果你想表明该版本是一个正在进行的工作，并且你计划不断地更新它，你可以在你的版本号后面加上-SNAPSHOT。
+如果你想让你的组 ID 与你的工件 ID 不同，你可以用斜线将两者分开，像这样。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 21:39:36 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to AppendixA 用 Leiningen 构建和开发" href=https://zhenfeng-zhu.github.io/posts/appendixa/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Chapter13
+</h2>
+</header>
+<section class=entry-content>
+<p>用多方法、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社交媒体上闲聊，玩龙与地下城，戴帽子。也许更重要的是，你可以用抽象的概念来思考和交流。
+抽象思考的能力确实是人类最好的特征之一。它可以让你规避你的认知极限，将不同的细节捆绑在一起，形成一个整齐的概念包，让你可以在工作记忆中持有。你不需要去想 “可挤压的红球鼻子装饰 “这种笨重的想法，而只需要 “小丑鼻子 “这个概念。
+在 Clojure 中，一个抽象是一个操作的集合，而数据类型实现抽象。例如，seq 抽象由 “first “和 “rest “等操作组成，而向量数据类型是该抽象的实现；它对所有 seq 操作做出响应。像[:seltzer :water]这样的特定向量是该数据类型的*实例。
+编程语言越是让你以抽象的方式思考和写作，你的生产力就越高。例如，如果你知道一个数据结构是 seq 抽象的一个实例，你就可以立即调用一个大的知识网，了解哪些函数可以与数据结构一起工作。因此，你会花时间去实际使用这个数据结构，而不是不断地去查找关于它如何工作的文档。同样地，如果你扩展一个数据结构，使其与 seq 抽象一起工作，你就可以在上面使用大量的 seq 函数库。
+在第四章中，你了解到 Clojure 是以抽象的方式编写的。这很强大，因为在 Clojure 中，你可以专注于你可以用数据结构实际做的事情，而不用担心实现的细枝末节。本章向你介绍了创建和实现你自己的抽象的世界。你将学习多方法、协议和记录的基础知识。
+多态性 我们在 Clojure 中实现抽象的主要方式是将一个操作名称与一个以上的算法联系起来。这种技术被称为多态性。例如，在列表上执行 “conj “的算法与向量的算法不同，但我们把它们统一在同一个名字下，以表明它们实现了同一个概念，即向这个数据结构添加一个元素。
+因为 Clojure 的许多数据类型都依赖于 Java 的标准库，所以本章中使用了一点 Java。例如，Clojure 的字符串只是 Java 的字符串，是 Java 类java.lang.String的实例。要在 Java 中定义你自己的数据类型，你要使用类。Clojure 提供了额外的类型结构。 记录和类型。本书只涉及记录。
+在我们学习记录之前，让我们看看多方法，这是我们定义多态行为的第一个工具。
+多方法 多方法为你提供了一种直接的、灵活的方法，将多态性引入你的代码中。使用多方法，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 “你有预订吗？“和 “聚会人数？"，然后给你安排相应的座位。同样，当你调用一个多方法时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
+(ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf [were-creature] (str (:name were-creature) " will howl and murder")) ➌ (defmethod full-moon-behavior :simmons [were-creature] (str (:name were-creature) " will encourage people and sweat to the oldies")) (full-moon-behavior {:were-type :wolf ➍ :name "Rachel from next door"}) ; => "Rachel from next door will howl and murder" (full-moon-behavior {:name "Andy the baker" ➎ :were-type :simmons}) ; => "Andy the baker will encourage people and sweat to the oldies" 这个多方法显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 21:29:04 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter13" href=https://zhenfeng-zhu.github.io/posts/chapter13/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Chapter12 与 Java 的互操作
+</h2>
+</header>
+<section class=entry-content>
+<p>与 JVM 一起工作 在每个 Clojurist 的生命中都会有这么一天，她必须从纯函数和不可变数据结构的庇护所冒险进入野蛮的 Java 大陆。这段艰难的旅程是必要的，因为 Clojure 是在 Java 虚拟机（JVM）上托管的，这赋予了它三个基本特性。
+赋予它三个基本特征。首先，你运行 Clojure 应用程序的方式与你运行 Java 应用程序的方式相同。第二，你需要使用 Java 对象来实现核心功能，如读取文件和处理日期。第三，Java 有一个庞大的有用库的生态系统，你需要对 Java 有一定的了解才能使用它们。
+这样一来，Clojure 就有点像一个乌托邦社区，被放置在一个乌托邦国家的中间。显然，你更愿意与其他乌托邦人互动，但偶尔你也需要与当地人交谈，以便完成工作。
+这一章就像一本短语书和 Java 国家的文化介绍之间的交叉。你将了解什么是 JVM，它是如何运行程序的，以及如何为它编译程序。本章还将为你简要介绍常用的 Java 类和方法，并解释如何使用 Clojure 与它们互动。你将学会如何思考和理解 Java，以便将任何 Java 库纳入你的 Clojure 程序中。
+要运行本章的例子，你需要在电脑上安装 1.6 或更高版本的 Java 开发工具包（JDK）。你可以通过在终端运行javac -version来检查。你应该看到类似 “java 1.8.0_40 “的内容；如果没有，请访问http://www.oracle.com/，下载最新的 JDK。
+JVM 开发人员用 JVM 这个词来指代一些不同的东西。你会听到他们说，“Clojure 在the JVM 上运行”，你也会听到，“Clojure 程序在a JVM 中运行”。在第一种情况下，JVM 指的是一个抽象概念–Java 虚拟机的一般模型。在第二种情况下，它指的是一个进程–一个正在运行的程序的实例。我们将专注于 JVM 模型，但当我们谈论运行中的 JVM 进程时，我将指出来。
+为了理解 JVM，让我们回头看看普通的计算机是如何工作的。在计算机心脏的深处是它的 CPU，而 CPU 的工作是执行像加和无符号乘法这样的操作。你可能听说过程序员将这些指令编码在打卡机上、灯泡里、乌龟壳的神圣缝隙里，或者什么的，但现在这些操作在汇编语言中用 ADD 和 MUL 这样的记忆符号表示。CPU 架构（X86、ARMv7，等等）决定了哪些操作可以作为该架构的指令集的一部分。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-15 20:55:18 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter12 与 Java 的互操作" href=https://zhenfeng-zhu.github.io/posts/chapter12/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Chapter11
 </h2>
 </header>
@@ -171,119 +255,6 @@ A Overview of Clojure’s Evaluation Model Clojure（像所有的 Lisps）有一
 </section>
 <footer class=entry-footer><span title="2022-01-15 12:14:36 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Chapter7 Clojure 炼金术：读取器、评估和宏" href=https://zhenfeng-zhu.github.io/posts/chapter7/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Chapter6 整理你的项目：一个图书管理员的故事
-</h2>
-</header>
-<section class=entry-content>
-<p>整理你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你的代码库带来秩序。幸运的是，Clojure 提供了一套工具，专门用来帮助这个侏儒与混乱的力量不断斗争。
-这些工具通过将相关的函数和数据分组来帮助你组织你的代码。它们还可以防止名称冲突，这样你就不会意外地覆盖别人的代码，反之亦然。在这个充满悬念和神秘的故事中，请和我一起学习如何使用这些工具，并解决一生中的抢劫案吧 在这个传奇故事的最后，你将了解以下内容。
-`def’是做什么的
-什么是命名空间以及如何使用它们
-命名空间和文件系统之间的关系
-如何使用refer、alias、require、use和ns。
-如何使用文件系统来组织 Clojure 项目
-我先来介绍一下 Clojure 的组织系统，它的工作原理很像一个库。Melvil 兴奋地颤抖着!
-你的项目是一个库 现实世界中的图书馆存储对象的集合，如书籍、杂志和 DVD。他们使用寻址系统，所以当你得到一个物体的地址时，你可以导航到物理空间并检索到该物体。
-当然，没有人能够直接知道一本书或 DVD 的地址是什么。这就是为什么图书馆要记录一个物体的标题和它的地址之间的联系，并提供工具来搜索这些记录。在计算机之前的旧时代，图书馆提供卡片目录，即装满纸质卡片的柜子，其中包含每本书的标题、作者、“地址”（杜威十进制或国会图书馆编号）和其他信息。
-例如，要找到《达芬奇密码》，你可以翻阅书名目录（按书名排序的卡片），直到你找到正确的卡片。在那张卡片上，你会看到地址813.54（如果它使用杜威十进制系统），浏览图书馆，找到达芬奇密码所在的书架，并参与你一生中的文学和/或仇恨阅读冒险。
-在 Clojure 中想象一个类似的设置是很有用的。我认为 Clojure 是将对象（如数据结构和函数）存储在一组巨大的编号架上。没有人能够直接知道一个对象被存储在哪个架子上。相反，我们给 Clojure 一个标识符，它用来检索该对象。
-为了使之成功，Clojure 必须维护我们的标识符和货架地址之间的关联。它通过使用namespaces来做到这一点。命名空间包含了人类友好的符号和书架地址的引用之间的映射，被称为vars，很像卡片目录。
-从技术上讲，命名空间是 “clojure.lang.Namespace “类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用*ns*来引用当前的命名空间，你可以用(ns-name *ns*)来获得其名称。
-(ns-name *ns*) ; => user 例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=>。
-当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。
-至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象–在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要评估它，而是把它当作数据。接下来的几个例子显示了当你引用一个表单时会发生什么。...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-14 12:40:41 +0800 +0800">January 14, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter6 整理你的项目：一个图书管理员的故事" href=https://zhenfeng-zhu.github.io/posts/chapter6/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Chapter5 函数式编程
-</h2>
-</header>
-<section class=entry-content>
-<p>函数式编程 到目前为止，你已经专注于熟悉 Clojure 提供的工具：不可变的数据结构、函数、抽象，等等。在这一章中，你将学习如何思考你的编程任务，以最好的方式利用这些工具。你将开始把你的经验整合到一个新的函数式编程思维中。
-你将学到的核心概念包括：什么是纯函数，为什么它们很有用；如何使用不可变的数据结构，为什么它们比可变的表亲更有优势；如何将数据和函数分开，给你带来更多的力量和灵活性；以及为什么对一小部分数据抽象进行编程会很强大。一旦你把所有这些知识塞进你的大脑，你就会有一个全新的解决问题的方法
-在学习了这些主题之后，你将通过编写一个基于终端的游戏来运用你所学到的一切，这个游戏的灵感来自于美国各地 Cracker Barrel 餐馆中的一种古老而神秘的思维训练装置。Peg Thing!
-纯函数：什么和为什么 除了 “println “和 “rand”，到目前为止，你所使用的所有函数都是纯函数。是什么使它们成为纯函数，为什么会有这样的问题？如果一个函数符合两个条件，它就是纯函数。
-如果给出相同的参数，它总是返回相同的结果。这被称为引用透明度，你可以把它添加到你的 5 美元编程术语列表中。 它不能引起任何副作用。也就是说，该函数不能做出任何在函数本身之外可以观察到的改变–例如，通过改变一个外部可访问的可改变对象或写到一个文件。 这些特性使你更容易推理你的程序，因为这些函数是完全隔离的，无法影响你系统的其他部分。当你使用它们时，你不必问自己，“我调用这个函数会破坏什么？” 它们也是一致的：你永远不需要搞清楚为什么给一个函数传递相同的参数会导致不同的返回值，因为这永远不会发生。
-纯函数和算术一样稳定，没有问题（你最后一次为两个数字相加而烦恼是什么时候？） 它们是巨大的函数小砖块，你可以自信地将其作为你程序的基础。让我们更详细地看看引用透明性和无副作用，看看它们到底是什么，以及它们是如何发挥作用的。
-纯函数是引用透明的 为了在调用相同参数时返回相同的结果，纯函数只依靠 1）自己的参数和 2）不可变的值来决定其返回值。例如，数学函数是引用透明的。
-(+ 1 2) ; => 3 如果一个函数依赖于一个不可变的值，那么它就是引用透明的。字符串`”, Daniel-san “是不可变的，所以下面的函数也是引用透明的。
-(defn wisdom [words] (str words ", Daniel-san")) (wisdom "Always bathe on Fridays") ; => "Always bathe on Fridays, Daniel-san" 相比之下，下面的函数在相同的参数下不会产生相同的结果；因此，它们在指称上是不透明的。任何依赖随机数生成器的函数都不可能是指称透明的。
-(defn year-end-evaluation [] (if (> (rand) 0.5) "You get a raise!" "Better luck next year!...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-14 10:00:07 +0800 +0800">January 14, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter5 函数式编程" href=https://zhenfeng-zhu.github.io/posts/chapter5/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Chapter4 核心函数的深入研究
-</h2>
-</header>
-<section class=entry-content>
-<p>核心函数的深入研究 如果你像我一样是焦虑的、以青少年为中心的准肥皂剧*《吸血鬼日记》的超级粉丝，你一定记得主角埃琳娜开始质疑她苍白的、神秘的暗恋者的行为的那一集。“为什么当我的膝盖被刮伤时，他立刻消失得无影无踪？“和 “为什么当我的手指被划破时，他的脸变成了一个怪异的死亡面具？“等等。
-如果你已经开始玩 Clojure 的核心函数，你可能也会问自己类似的问题。“为什么map'会返回一个列表，而我给它的是一个向量？"和 "为什么reduce’会把我的 map 当成一个向量列表？“等等。(不过，有了 Clojure，你至少可以免于思考作为一个 17 岁孩子的深刻的存在恐惧，直到永远）。
-在这一章中，你将了解到 Clojure 的深邃、黑暗、嗜血、超自然的****，我的意思是，在这一章中，你将了解到 Clojure 的编程到抽象的基本概念以及序列和集合的抽象。你还会了解到疯狂的序列*。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你试着使用它们时发生了什么。
-接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、向量、Map 和集合。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
-最后，你将学会如何解析和查询 CSV 中的吸血鬼数据，以确定在你的家乡潜伏着哪些诺斯费拉图。
-从编程到抽象 为了理解对抽象的编程，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中映射一个哈希图（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
-原因是 Clojure 在*序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first'、rest’和cons'，我们稍后会仔细研究），它就能与map'、`reduce’以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
-我认为抽象是操作的命名集合。如果你能在一个对象上执行一个抽象的所有操作，那么这个对象就是该抽象的一个实例。我甚至在编程之外也是这样想的。例如，电池抽象包括 “将导电介质连接到其阳极和阴极 “的操作，而该操作的输出是电流。电池是用锂还是用土豆做的并不重要。只要它对定义电池的一系列操作做出反应，它就是一个电池。
-同样地，map并不关心列表、向量、集合和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。
-把列表、向量、集合和 Map 当作序列对待 如果你把map操作独立于任何编程语言，甚至是编程，它的基本行为是用一个函数ƒ从现有的序列x导出一个新的序列y，这样y1 = ƒ(x1), y2 = ƒ(x2), ....</p>
-</section>
-<footer class=entry-footer><span title="2022-01-13 17:39:28 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter4 核心函数的深入研究" href=https://zhenfeng-zhu.github.io/posts/chapter4/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Chapter3 Clojure 速成班
-</h2>
-</header>
-<section class=entry-content>
-<p>做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的特点是它是一种 Lisp 语言。在本章中，你将探索构成这个 Lisp 核心的元素：语法、函数和数据。它们将共同为你在 Clojure 中表示和解决问题打下坚实的基础。
-在打下这个基础之后，你将能够编写一些超级重要的代码。在最后一节中，你将通过创建一个霍比特人的模型，并编写一个函数将其打在一个随机的位置上，从而将一切联系起来。超级! 重要的!
-当你阅读本章时，我建议你在 REPL 中输入例子并运行它们。用一种新的语言编程是一种技能，就像约德尔舞或花样游泳一样，你必须通过练习来学习它。 请留意它!
-语法 Clojure 的语法很简单。像所有的 Lisp 一样，它采用了统一的结构、少量的特殊运算符，以及从藏在麻省理工学院下面的小括号矿井中不断提供的小括号，Lisp 就是在那里诞生的。
-形式 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。
-数据结构的字面表示（如数字、字符串、Map 和向量） 操作 我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure 形式。但不要太纠结于术语。Clojure 评价每一个表单，以产生一个值。这些字面表达都是有效的形式。
-1 "a string" ["a" "vector" "of" "strings"] 当然，你的代码很少包含自由浮动的字元，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的形式都是：*开括号，*操作符，*操作数，闭括号。
-(operator operand1 operand2 ... operandn) 请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。
-(+ 1 2 3) ; => 6 (str "It was the panda " "in the library " "with a dust buster") ; => "It was the panda in the library with a dust buster" 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种形式都是有效的。这里有一个不是形式的东西，因为它没有一个结束的小括号。...</p>
-</section>
-<footer class=entry-footer><span title="2022-01-13 11:12:19 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;15 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter3 Clojure 速成班" href=https://zhenfeng-zhu.github.io/posts/chapter3/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
-</figure>
-<header class=entry-header>
-<h2>Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器
-</h2>
-</header>
-<section class=entry-content>
-<p>如何使用 Emacs，一个优秀的 Clojure 编辑器 在你掌握 Clojure 的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用 Emacs，但你当然也可以使用任何你想要的编辑器。如果你不遵循本章中关于 Emacs 的详尽说明，或者你选择使用一个不同的编辑器，那么至少值得投入一些时间来设置你的编辑器，以便与 REPL 一起工作。我推荐的两个在社区中受到好评的替代品是Cursive和Nightcode。
-我推荐 Emacs 的原因是，它提供了与 Clojure REPL 的紧密集成，这使你可以在写作时立即尝试你的代码。这种紧密的反馈回路在学习 Clojure 和以后编写真正的 Clojure 程序时都很有用。Emacs 也很适合与任何 Lisp 方言一起工作；事实上，Emacs 是用一种叫做 Emacs Lisp（elisp）的 Lisp 方言编写的。
-在本章结束时，你的 Emacs 设置将看起来像图 2-1。
-图 2-1: 使用 Clojure 的典型 Emacs 设置：一边是代码，另一边是 REPL。
-为了达到这个目的，你将从安装 Emacs 开始，设置一个适合新人的 Emacs 配置。然后你将学习基础知识：如何打开、编辑和保存文件，以及如何使用基本的键绑定与 Emacs 进行交互。最后，你将学习如何实际编辑 Clojure 代码并与 REPL 进行交互。
-安装 你应该使用 Emacs 的最新主要版本，即 Emacs 24，用于你工作的平台。
-OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用程序。其他选项，如 Aquamacs，应该是为了使 Emacs 更 “像 Mac”，但从长远来看是有问题的，因为它们的设置与标准 Emacs 有很大的不同，以至于很难使用 Emacs 手册或跟随教程。 Ubuntu按照*https://launchpad....</p>
-</section>
-<footer class=entry-footer><span title="2022-01-13 10:43:56 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Chapter2 如何使用 Emacs，一个优秀的 Clojure 编辑器" href=https://zhenfeng-zhu.github.io/posts/chapter2/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

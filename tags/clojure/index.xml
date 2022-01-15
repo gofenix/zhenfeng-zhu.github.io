@@ -9,7 +9,66 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 15 Jan 2022 12:30:14 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jan 2022 21:41:09 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AppendixB Boot，花哨的 Clojure 构建框架</title>
+      <link>https://zhenfeng-zhu.github.io/posts/appendixb/</link>
+      <pubDate>Sat, 15 Jan 2022 21:41:09 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/appendixb/</guid>
+      <description>Boot，花哨的 Clojure 构建框架 Boot 是 Leiningen 的替代品，提供同样的功能。Leiningen 更受欢迎（截至 2015 年夏天），但我个人喜欢用 Boot 工作，因为它更容易扩展。本附录解释了 Boot 的基本概念，并指导你编写你的第一个 Boot 任务。如果你对使用 Boot 构建项目感兴趣，请查看它的 GitHub README（GitHub - boot-clj/boot: Build tooling for Clojure.）和它的 wiki（Home - boot-clj/boot Wiki - GitHub）。
+注意 截至本文写作时，Boot 对 Windows 的支持有限。Boot 团队欢迎大家的贡献!
+Boot 的抽象 Boot 由 Micha Niskin 和 Alan Dipert 创建，是对 Clojure 工具领域的一个有趣而强大的补充。从表面上看，它是构建 Clojure 应用程序和从命令行运行 Clojure 任务的一种便捷方式。深入研究一下，你会发现 Boot 就像 Git 和 Unix 的爱情结晶，它提供的抽象使你在操作系统和应用程序的交叉点上编写代码时更加愉快。
+Unix 提供了我们都很熟悉的抽象，以至于我们认为它们是理所当然的。(偶尔带你的电脑去吃一顿好的餐厅会死吗？) 进程抽象让你把程序推理成独立的逻辑单元，可以通过 STDIN 和 STDOUT 文件描述符轻松地组成一个流处理管道。这些抽象使某些类型的操作，如文本处理，变得非常直接。
+同样，Boot 也提供了一些抽象，使得独立的操作很容易被组合成构建工具最终要做的那种复杂、协调的操作，比如将 ClojureScript 转换为 JavaScript。 Boot 的任务抽象让你可以轻松地定义逻辑单元，通过文件集合进行通信。文件集合抽象可以跟踪不断变化的构建环境，并提供一个定义明确、可靠的任务协调方法。</description>
+    </item>
+    
+    <item>
+      <title>AppendixA 用 Leiningen 构建和开发</title>
+      <link>https://zhenfeng-zhu.github.io/posts/appendixa/</link>
+      <pubDate>Sat, 15 Jan 2022 21:39:36 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/appendixa/</guid>
+      <description>用 Leiningen 构建和开发 用任何语言编写软件都需要生成工件，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为依赖，以确保它们被加载到你正在构建的项目中。Clojurists 中最流行的管理工件的工具是 Leiningen，本附录将告诉你如何使用它。你还将学习如何使用 Leiningen 来完全增强你的开发经验，使用插件。
+Artifact Ecosystem 因为 Clojure 托管在 Java 虚拟机（JVM）上，所以 Clojure 的工件是以 JAR 文件的形式分发的（在第 12 章有介绍）。Java 地已经有一个处理 JAR 文件的完整的工件生态系统，Clojure 也使用它。神器生态系统并不是一个官方的编程术语；我用它来指代用于识别和分发神器的一套工具、资源和惯例。Java 的生态系统是围绕着 Maven 构建工具发展起来的，由于 Clojure 使用这个生态系统，你会经常看到对 Maven 的引用。Maven 是一个巨大的工具，可以执行各种古怪的项目管理任务。值得庆幸的是，你不需要获得 Maven 学的博士学位就能成为一名有效的 Clojurist。你需要知道的唯一特征是，Maven 规定了一种识别 Clojure 项目所遵守的工件的模式，它还规定了如何在 Maven 仓库中托管这些工件，Maven *仓库只是存储工件以供分发的服务器。
+Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个版本。你可以在project.clj文件中为你的项目指定这些。以下是你在第一章创建的clojure-noob项目的project.clj第一行的内容。
+(defproject clojure-noob &amp;quot;0.1.0-SNAPSHOT&amp;quot; clojure-noob是你项目的组 ID 和工件 ID，&amp;quot;0.1.0-SNAPSHOT&amp;quot;是其版本。一般来说，版本是永久性的；如果你将一个版本为 0.1.0 的工件部署到存储库，你不能对该工件进行修改并使用相同的版本号进行部署。您需要改变版本号。(许多程序员喜欢 Semantic Versioning 系统，您可以在*Semantic Versioning 2.0.0 | Semantic Versioning.*中阅读到这一系统。） 如果你想表明该版本是一个正在进行的工作，并且你计划不断地更新它，你可以在你的版本号后面加上-SNAPSHOT。
+如果你想让你的组 ID 与你的工件 ID 不同，你可以用斜线将两者分开，像这样。</description>
+    </item>
+    
+    <item>
+      <title>Chapter13</title>
+      <link>https://zhenfeng-zhu.github.io/posts/chapter13/</link>
+      <pubDate>Sat, 15 Jan 2022 21:29:04 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/chapter13/</guid>
+      <description>用多方法、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社交媒体上闲聊，玩龙与地下城，戴帽子。也许更重要的是，你可以用抽象的概念来思考和交流。
+抽象思考的能力确实是人类最好的特征之一。它可以让你规避你的认知极限，将不同的细节捆绑在一起，形成一个整齐的概念包，让你可以在工作记忆中持有。你不需要去想 &amp;ldquo;可挤压的红球鼻子装饰 &amp;ldquo;这种笨重的想法，而只需要 &amp;ldquo;小丑鼻子 &amp;ldquo;这个概念。
+在 Clojure 中，一个抽象是一个操作的集合，而数据类型实现抽象。例如，seq 抽象由 &amp;ldquo;first &amp;ldquo;和 &amp;ldquo;rest &amp;ldquo;等操作组成，而向量数据类型是该抽象的实现；它对所有 seq 操作做出响应。像[:seltzer :water]这样的特定向量是该数据类型的*实例。
+编程语言越是让你以抽象的方式思考和写作，你的生产力就越高。例如，如果你知道一个数据结构是 seq 抽象的一个实例，你就可以立即调用一个大的知识网，了解哪些函数可以与数据结构一起工作。因此，你会花时间去实际使用这个数据结构，而不是不断地去查找关于它如何工作的文档。同样地，如果你扩展一个数据结构，使其与 seq 抽象一起工作，你就可以在上面使用大量的 seq 函数库。
+在第四章中，你了解到 Clojure 是以抽象的方式编写的。这很强大，因为在 Clojure 中，你可以专注于你可以用数据结构实际做的事情，而不用担心实现的细枝末节。本章向你介绍了创建和实现你自己的抽象的世界。你将学习多方法、协议和记录的基础知识。
+多态性 我们在 Clojure 中实现抽象的主要方式是将一个操作名称与一个以上的算法联系起来。这种技术被称为多态性。例如，在列表上执行 &amp;ldquo;conj &amp;ldquo;的算法与向量的算法不同，但我们把它们统一在同一个名字下，以表明它们实现了同一个概念，即向这个数据结构添加一个元素。
+因为 Clojure 的许多数据类型都依赖于 Java 的标准库，所以本章中使用了一点 Java。例如，Clojure 的字符串只是 Java 的字符串，是 Java 类java.lang.String的实例。要在 Java 中定义你自己的数据类型，你要使用类。Clojure 提供了额外的类型结构。 记录和类型。本书只涉及记录。
+在我们学习记录之前，让我们看看多方法，这是我们定义多态行为的第一个工具。
+多方法 多方法为你提供了一种直接的、灵活的方法，将多态性引入你的代码中。使用多方法，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 &amp;ldquo;你有预订吗？&amp;ldquo;和 &amp;ldquo;聚会人数？&amp;quot;，然后给你安排相应的座位。同样，当你调用一个多方法时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
+(ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf [were-creature] (str (:name were-creature) &amp;quot; will howl and murder&amp;quot;)) ➌ (defmethod full-moon-behavior :simmons [were-creature] (str (:name were-creature) &amp;quot; will encourage people and sweat to the oldies&amp;quot;)) (full-moon-behavior {:were-type :wolf ➍ :name &amp;quot;Rachel from next door&amp;quot;}) ; =&amp;gt; &amp;quot;Rachel from next door will howl and murder&amp;quot; (full-moon-behavior {:name &amp;quot;Andy the baker&amp;quot; ➎ :were-type :simmons}) ; =&amp;gt; &amp;quot;Andy the baker will encourage people and sweat to the oldies&amp;quot; 这个多方法显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。</description>
+    </item>
+    
+    <item>
+      <title>Chapter12 与 Java 的互操作</title>
+      <link>https://zhenfeng-zhu.github.io/posts/chapter12/</link>
+      <pubDate>Sat, 15 Jan 2022 20:55:18 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/posts/chapter12/</guid>
+      <description>与 JVM 一起工作 在每个 Clojurist 的生命中都会有这么一天，她必须从纯函数和不可变数据结构的庇护所冒险进入野蛮的 Java 大陆。这段艰难的旅程是必要的，因为 Clojure 是在 Java 虚拟机（JVM）上托管的，这赋予了它三个基本特性。
+赋予它三个基本特征。首先，你运行 Clojure 应用程序的方式与你运行 Java 应用程序的方式相同。第二，你需要使用 Java 对象来实现核心功能，如读取文件和处理日期。第三，Java 有一个庞大的有用库的生态系统，你需要对 Java 有一定的了解才能使用它们。
+这样一来，Clojure 就有点像一个乌托邦社区，被放置在一个乌托邦国家的中间。显然，你更愿意与其他乌托邦人互动，但偶尔你也需要与当地人交谈，以便完成工作。
+这一章就像一本短语书和 Java 国家的文化介绍之间的交叉。你将了解什么是 JVM，它是如何运行程序的，以及如何为它编译程序。本章还将为你简要介绍常用的 Java 类和方法，并解释如何使用 Clojure 与它们互动。你将学会如何思考和理解 Java，以便将任何 Java 库纳入你的 Clojure 程序中。
+要运行本章的例子，你需要在电脑上安装 1.6 或更高版本的 Java 开发工具包（JDK）。你可以通过在终端运行javac -version来检查。你应该看到类似 &amp;ldquo;java 1.8.0_40 &amp;ldquo;的内容；如果没有，请访问http://www.oracle.com/，下载最新的 JDK。
+JVM 开发人员用 JVM 这个词来指代一些不同的东西。你会听到他们说，&amp;ldquo;Clojure 在the JVM 上运行&amp;rdquo;，你也会听到，&amp;ldquo;Clojure 程序在a JVM 中运行&amp;rdquo;。在第一种情况下，JVM 指的是一个抽象概念&amp;ndash;Java 虚拟机的一般模型。在第二种情况下，它指的是一个进程&amp;ndash;一个正在运行的程序的实例。我们将专注于 JVM 模型，但当我们谈论运行中的 JVM 进程时，我将指出来。
+为了理解 JVM，让我们回头看看普通的计算机是如何工作的。在计算机心脏的深处是它的 CPU，而 CPU 的工作是执行像加和无符号乘法这样的操作。你可能听说过程序员将这些指令编码在打卡机上、灯泡里、乌龟壳的神圣缝隙里，或者什么的，但现在这些操作在汇编语言中用 ADD 和 MUL 这样的记忆符号表示。CPU 架构（X86、ARMv7，等等）决定了哪些操作可以作为该架构的指令集的一部分。</description>
+    </item>
+    
     <item>
       <title>Chapter9 并发和并行</title>
       <link>https://zhenfeng-zhu.github.io/posts/chapter9/</link>
