@@ -92,6 +92,37 @@
 </footer>
 </article>
 <article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+</figure>
+<header class=entry-header>
+<h2>Chapter6 整理你的项目：一个图书管理员的故事
+</h2>
+</header>
+<section class=entry-content>
+<p>整理你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你的代码库带来秩序。幸运的是，Clojure 提供了一套工具，专门用来帮助这个侏儒与混乱的力量不断斗争。
+这些工具通过将相关的函数和数据分组来帮助你组织你的代码。它们还可以防止名称冲突，这样你就不会意外地覆盖别人的代码，反之亦然。在这个充满悬念和神秘的故事中，请和我一起学习如何使用这些工具，并解决一生中的抢劫案吧 在这个传奇故事的最后，你将了解以下内容。
+`def’是做什么的
+什么是命名空间以及如何使用它们
+命名空间和文件系统之间的关系
+如何使用refer、alias、require、use和ns。
+如何使用文件系统来组织 Clojure 项目
+我先来介绍一下 Clojure 的组织系统，它的工作原理很像一个库。Melvil 兴奋地颤抖着!
+你的项目是一个库 现实世界中的图书馆存储对象的集合，如书籍、杂志和 DVD。他们使用寻址系统，所以当你得到一个物体的地址时，你可以导航到物理空间并检索到该物体。
+当然，没有人能够直接知道一本书或 DVD 的地址是什么。这就是为什么图书馆要记录一个物体的标题和它的地址之间的联系，并提供工具来搜索这些记录。在计算机之前的旧时代，图书馆提供卡片目录，即装满纸质卡片的柜子，其中包含每本书的标题、作者、“地址”（杜威十进制或国会图书馆编号）和其他信息。
+例如，要找到《达芬奇密码》，你可以翻阅书名目录（按书名排序的卡片），直到你找到正确的卡片。在那张卡片上，你会看到地址813.54（如果它使用杜威十进制系统），浏览图书馆，找到达芬奇密码所在的书架，并参与你一生中的文学和/或仇恨阅读冒险。
+在 Clojure 中想象一个类似的设置是很有用的。我认为 Clojure 是将对象（如数据结构和函数）存储在一组巨大的编号架上。没有人能够直接知道一个对象被存储在哪个架子上。相反，我们给 Clojure 一个标识符，它用来检索该对象。
+为了使之成功，Clojure 必须维护我们的标识符和货架地址之间的关联。它通过使用namespaces来做到这一点。命名空间包含了人类友好的符号和书架地址的引用之间的映射，被称为vars，很像卡片目录。
+从技术上讲，命名空间是 “clojure.lang.Namespace “类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用*ns*来引用当前的命名空间，你可以用(ns-name *ns*)来获得其名称。
+(ns-name *ns*) ; => user 例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=>。
+当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。
+至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象–在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要评估它，而是把它当作数据。接下来的几个例子显示了当你引用一个表单时会发生什么。...</p>
+</section>
+<footer class=entry-footer><span title="2022-01-14 12:40:41 +0800 +0800">January 14, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to Chapter6 整理你的项目：一个图书管理员的故事" href=https://zhenfeng-zhu.github.io/posts/chapter6/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201131821608.png alt>
+</figure>
 <header class=entry-header>
 <h2>Chapter5 函数式编程
 </h2>
@@ -267,20 +298,6 @@ bool 布尔值，对应 java 中的 boolean byte 有符号字节，对应 java �
 </section>
 <footer class=entry-footer><span title="2022-01-06 10:41:45 +0800 +0800">January 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Thrfit 入门" href=https://zhenfeng-zhu.github.io/posts/thrfit-get-started/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>修复 Vscode Git Cannot Use Api Proposal ScmValidation
-</h2>
-</header>
-<section class=entry-content>
-<p>问题表现 某天，我的 vscode 的 git 管理出现了问题。
-类似这个样子。
-解决方式 @builtin @id:vscode.git 直接卸载了。
-出现原因 应该是某个公司的插件给我自动装上导致的</p>
-</section>
-<footer class=entry-footer><span title="2022-01-06 10:29:52 +0800 +0800">January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 修复 Vscode Git Cannot Use Api Proposal ScmValidation" href=https://zhenfeng-zhu.github.io/posts/fix-vscode-git-cannot-use-api-proposal-scmvalidation/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

@@ -73,6 +73,20 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>修复 Vscode Git Cannot Use Api Proposal ScmValidation
+</h2>
+</header>
+<section class=entry-content>
+<p>问题表现 某天，我的 vscode 的 git 管理出现了问题。
+类似这个样子。
+解决方式 @builtin @id:vscode.git 直接卸载了。
+出现原因 应该是某个公司的插件给我自动装上导致的</p>
+</section>
+<footer class=entry-footer><span title="2022-01-06 10:29:52 +0800 +0800">January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 修复 Vscode Git Cannot Use Api Proposal ScmValidation" href=https://zhenfeng-zhu.github.io/posts/fix-vscode-git-cannot-use-api-proposal-scmvalidation/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Gavin Wood: Web3 去中心化技术是维护自由民主的唯一希望
 </h2>
 </header>
@@ -265,21 +279,6 @@ arkade install inlets-operator \ --provider digitalocean \ --region lon1 \ --tok
 </section>
 <footer class=entry-footer><span title="2022-01-04 10:04:05 +0800 +0800">January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Blockchain 数据结构分析" href=https://zhenfeng-zhu.github.io/posts/blockchain-schema/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>轻服务 nodejs 助力爬虫 web3
-</h2>
-</header>
-<section class=entry-content>
-<p>周末的时候，写了一个简单的小项目，用来抓取 web3 的文章，然后存到本地。最后选取了公司对外的轻服务：https://qingfuwu.cn/docs/nodejs/
-整项目用到了两个库
-axios：用来做 http 请求 cheerio：用来解析 html 观察目标网页的格式 我们以巴比特为例：https://www.8btc.com/web3.0，打开控制台，定位到正文的 div，可以发现是 article-list。
-右键复制一下 selector，然后在代码中这样实现就可以了。
-抓取网页信息 const cheerio = require('cheerio').default const axios = require('axios').default async function getData() { const data = await (await axios.get('https://www.8btc.com/web3.0', { headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36' } })).data const $ = cheerio.load(data) let list = [] $('#news > div.articles-list').find('.article-info').each( (item, elem) => { const href = $(elem)....</p>
-</section>
-<footer class=entry-footer><span title="2021-12-20 09:58:58 +0800 +0800">December 20, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 轻服务 nodejs 助力爬虫 web3" href=https://zhenfeng-zhu.github.io/posts/how-to-crawl-a-web-in-nodejs/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

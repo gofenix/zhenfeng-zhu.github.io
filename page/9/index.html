@@ -70,6 +70,25 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>小议 async/await 和 coroutine
+</h2>
+</header>
+<section class=entry-content>
+<p>Being happy doesn’t mean that everything is perfect. It means that you decided to look beyond the imperfections.
+后端编程，涉及最多的就是并发。简单理解就是：
+并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行多个任务。可以理解为一个是 manage，一个是 run。
+并发一般特指 IO，IO 是独立于 CPU 的设备，IO 设备通常远远慢于 CPU，所以我们引入了并发的概念，让 CPU 可以一次性发起多个 IO 操作而不用等待 IO 设备做完一个操作再做令一个。原理就是非阻塞操作+事件通知。
+硬件底层上我其实不关心，主要就是在写程序上，如何简单的去写并发的代码。在语法层面上对并发做的比较好的，很适合做服务端，比如 go，比如 node，又比如某些函数式语言。我最近最近主要使用的是 node 和 kotlin。
+那么在写并发代码的时候，就会时不时的想这样一个问题：
+一个问题 当代码遇到一个“暂时不能完成”的流程时（例如建立一个 tcp 链接，可能需要 5ms 才能建立），他不想阻塞在这里睡眠，想暂时离开现场去干点别的事情（例如看看另外一个已经建立的链接是否可以收包了）。问题是：离开现场后，当你回来的时候，上下文还像你走的时候吗？
+跳转离开，在任何语言里都有 2 种最基本的方法：1）从当前函数返回； 2）调用一个新的函数。 前者会把上下文中的局部变量和函数参数全部摧毁，除非他返回前把这些变量找个别的地方保存起来；后者则能保护住整个上下文的内存（除了协程切换后会摧毁一些寄存器），而且跳转回来也是常规方法：函数返回。
+在写 node 的时候，基本上是无脑上 async/await。每次看到回调函数的时候，强迫症就犯了，总是想方设法将那个方法转成 promise，然后使用 await 获得结果。无脑尝试了 bluebird 和 node 的 util，虽然有些是很好用的，但是有的还是无法达到我预期的。靠着无脑的 async/await，实现了很多功能，代码写起来也是快的飞起，但是只顾着做业务而不深入思考的话，是一个不好的表现，所以我就停下来搜了很多 async/await 的东西，特别是从阮一峰老师那里收获了很多。...</p>
+</section>
+<footer class=entry-footer><span title="2018-05-21 19:37:14 +0000 UTC">May 21, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to 小议 async/await 和 coroutine" href=https://zhenfeng-zhu.github.io/posts/async/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>elasticsearch
 </h2>
 </header>
@@ -220,24 +239,6 @@ rxjava rxjava 我都没有找到一个系统的教程，不知道该从哪里学
 </section>
 <footer class=entry-footer><span title="2018-04-04 16:01:31 +0000 UTC">April 4, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 同步一个 fork" href=https://zhenfeng-zhu.github.io/posts/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Go 语言体会
-</h2>
-</header>
-<section class=entry-content>
-<p>最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。
-语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置 我最早听说协程，是在大三找实习的时候，那个时候面试会问线程和进程的关系，问的深一些就是协程和线程的区别。游戏公司基本都用 lua，看了 lua 的资料后，对协程有了一些自己的了解，随后就是在做 Unity 相关的开发，在 unity 中使用了很多的协程，但是在 unity 中使用的协程好像跟主流的不太一样，在看了 go 之后，豁然开朗。
-goroutine 使用的内存比线程更少，go 在运行的时候会自动在配置的一组逻辑处理器上调度执行。比如：
-func log(msg string){ ... } go log("") 使用关键字 go，即可让 log 函数在一个 goroutine 里执行了。
-并发最难的部分是要确保其他并发运行的进程、线程或者 goroutine 不会以外的修改数据。go 使用了 Channel 的方式来解决这个问题。对于通道模式，保证同一时刻只会有一个 goroutine 修改数据。
-说起 go 的语言简单，其实主要是他的类型比较简单。go 使用的是组合模式，只需要将一个类型嵌入到另外一个类型就可以复用所有的功能。而且 go 还具有独特的接口实现机制，允许用户对行为进行建模，在 go 中不需要声明某个类型实现了某个接口，编译器会自动判断一个实例是使用什么接口。
-对于 java 来说，所有的设计都是围绕着接口展开，于是在设计模式中，就是面向接口编程：
-interface User{ void login(); void logout(); } 在 java 中，继承的类必须显式声明继承了此接口。而在 go 中接口只是描述一个动作，如果说是实现这个接口，只需要让某个实例实现了这个接口中的所有方法就行了。...</p>
-</section>
-<footer class=entry-footer><span title="2018-04-04 13:48:57 +0000 UTC">April 4, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Go 语言体会" href=https://zhenfeng-zhu.github.io/posts/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

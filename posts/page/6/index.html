@@ -73,6 +73,20 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>socket
+</h2>
+</header>
+<section class=entry-content>
+<p>Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。
+二层到四层，即 mac、ip 和传输等层都是 Linux 内核中处理。应用层的如浏览器、Nginx 和 Tomcat 等都是用户态的。
+传输层的 tcp 和 udp 里都有端口的概念，不同应用监听不同的段即可。
+应用层和内核的互通机制，就是通过 socket 系统调用。其实 socket 哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是 socket。...</p>
+</section>
+<footer class=entry-footer><span title="2019-08-26 06:54:14.652 +0000 UTC">August 26, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
+<a class=entry-link aria-label="post link to socket" href=https://zhenfeng-zhu.github.io/posts/socket/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>go 进阶
 </h2>
 </header>
@@ -273,21 +287,6 @@ const {startWith, when, goto, stay, stop} = botkit....</p>
 </section>
 <footer class=entry-footer><span title="2018-08-22 19:39:12 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to 谈谈聊天机器人框架的实现原理" href=https://zhenfeng-zhu.github.io/posts/botbuilder/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>基于以太坊的 Parity 联盟链部署
-</h2>
-</header>
-<section class=entry-content>
-<p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity 是可以构建出一个基于 PoA 共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。
-部署联盟链 parity 的文档：https://wiki.parity.io/Demo-PoA-tutorial
-安装 首先是下载 parity，在 mac 下是直接 brew 安装即可。
-brew tap paritytech/paritytech brew install parity 创世区块 创世区块的配置文件：
-// demo-spec.json { "name": "DemoPoA", "engine": { "authorityRound": { "params": { "stepDuration": "5", "validators": { "list": [ "0x00bd138abd70e2f00903268f3db08f2d25677c9e", "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2" ] } } } }, "params": { "gasLimitBoundDivisor": "0x400", "maximumExtraDataSize": "0x20", "minGasLimit": "0x1388", "networkID": "0x2323", "eip155Transition": 0, "validateChainIdTransition": 0, "eip140Transition": 0, "eip211Transition": 0, "eip214Transition": 0, "eip658Transition": 0 }, "genesis": { "seal": { "authorityRound": { "step": "0x0", "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" } }, "difficulty": "0x20000", "gasLimit": "0x5B8D80" }, "accounts": { "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } }, "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } }, "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } }, "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } }, "0x004ec07d2329997267ec62b4166639513386f32e": { "balance": "10000000000000000000000" } } } node0 node0 节点：...</p>
-</section>
-<footer class=entry-footer><span title="2018-08-22 16:51:13 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to 基于以太坊的 Parity 联盟链部署" href=https://zhenfeng-zhu.github.io/posts/parity/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
