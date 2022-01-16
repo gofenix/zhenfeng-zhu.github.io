@@ -196,7 +196,7 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
 从技术上讲，命名空间是 &amp;ldquo;clojure.lang.Namespace &amp;ldquo;类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用*ns*来引用当前的命名空间，你可以用(ns-name *ns*)来获得其名称。
 (ns-name *ns*) ; =&amp;gt; user 例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=&amp;gt;。
 当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。
-至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象&amp;ndash;在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要评估它，而是把它当作数据。接下来的几个例子显示了当你引用一个表单时会发生什么。</description>
+至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象&amp;ndash;在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要评估它，而是把它当作数据。接下来的几个例子显示了当你引用一个 Form 时会发生什么。</description>
     </item>
     
     <item>
@@ -246,7 +246,7 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
 当你阅读本章时，我建议你在 REPL 中输入例子并运行它们。用一种新的语言编程是一种技能，就像约德尔舞或花样游泳一样，你必须通过练习来学习它。 请留意它!
 语法 Clojure 的语法很简单。像所有的 Lisp 一样，它采用了统一的结构、少量的特殊运算符，以及从藏在麻省理工学院下面的小括号矿井中不断提供的小括号，Lisp 就是在那里诞生的。
 形式 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。
- 数据结构的字面表示（如数字、字符串、Map 和 Vector） 操作  我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure 形式。但不要太纠结于术语。Clojure 评价每一个表单，以产生一个值。这些字面表达都是有效的形式。
+ 数据结构的字面表示（如数字、字符串、Map 和 Vector） 操作  我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure 形式。但不要太纠结于术语。Clojure 求值每一个 Form，以产生一个值。这些字面意义的表达都是有效的形式。
 1 &amp;quot;a string&amp;quot; [&amp;quot;a&amp;quot; &amp;quot;vector&amp;quot; &amp;quot;of&amp;quot; &amp;quot;strings&amp;quot;] 当然，你的代码很少包含自由浮动的字元，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的形式都是：*开括号，*操作符，*操作数，闭括号。
 (operator operand1 operand2 ... operandn) 请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。
 (+ 1 2 3) ; =&amp;gt; 6 (str &amp;quot;It was the panda &amp;quot; &amp;quot;in the library &amp;quot; &amp;quot;with a dust buster&amp;quot;) ; =&amp;gt; &amp;quot;It was the panda in the library with a dust buster&amp;quot; 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种形式都是有效的。这里有一个不是形式的东西，因为它没有一个结束的小括号。</description>
