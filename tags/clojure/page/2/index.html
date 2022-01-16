@@ -136,7 +136,7 @@
 接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、Vector、Map 和 Set。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
 最后，你将学会如何解析和查询 CSV 中的吸血鬼数据，以确定在你的家乡潜伏着哪些诺斯费拉图。
 从编程到抽象 为了理解对抽象的编程，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中 Map 一个哈希图（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
-原因是 Clojure 在*序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first'、rest’和cons'，我们稍后会仔细研究），它就能与map'、`reduce’以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
+原因是 Clojure 在*序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first、rest和cons，我们稍后会仔细研究），它就能与map、reduce以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
 我认为抽象是操作的命名集合。如果你能在一个对象上执行一个抽象的所有操作，那么这个对象就是该抽象的一个实例。我甚至在编程之外也是这样想的。例如，电池抽象包括 “将导电介质连接到其阳极和阴极 “的操作，而该操作的输出是电流。电池是用锂还是用土豆做的并不重要。只要它对定义电池的一系列操作做出反应，它就是一个电池。
 同样地，map并不关心列表、Vector、Set 和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。...</p>
 </section>
