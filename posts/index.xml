@@ -224,15 +224,14 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
       
       <guid>https://zhenfeng-zhu.github.io/posts/chapter4/</guid>
       <description>核心函数的深入研究 如果你像我一样是焦虑的、以青少年为中心的准肥皂剧*《吸血鬼日记》*的超级粉丝，你一定记得主角埃琳娜开始质疑她苍白的、神秘的暗恋者的行为的那一集。&amp;ldquo;为什么当我的膝盖被刮伤时，他立刻消失得无影无踪？&amp;ldquo;和 &amp;ldquo;为什么当我的手指被划破时，他的脸变成了一个怪异的死亡面具？&amp;ldquo;等等。
-如果你已经开始把玩 Clojure 的核心函数，你可能也会问自己类似的问题。&amp;ldquo;为什么map会返回一个列表，而我给它的是一个 Vector？&amp;ldquo;和 &amp;ldquo;为什么reduce会把我的 map 当成一个 Vector 列表？&amp;ldquo;等等。(不过，有了 Clojure，你至少可以免于思考作为一个 17 岁孩子的深刻的存在恐惧，直到永远）。
-在这一章中，你将了解到 Clojure 的深邃、黑暗、嗜血、超自然的****，我的意思是，在这一章中，你将了解到 Clojure 的编程到抽象的基本概念以及序列和集合的抽象。你还会了解到疯狂的序列*。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你试着使用它们时发生了什么。
-接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、Vector、Map 和集合。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
+如果你已经开始把玩 Clojure 的核心函数，你可能也会问自己类似的问题。&amp;ldquo;为什么map会返回一个列表，而我给它的是一个 Vector？&amp;ldquo;和 &amp;ldquo;为什么reduce会把我的 map 当成一个 Vector？&amp;ldquo;等等。(不过，有了 Clojure，你至少可以免于思考作为一个 17 岁孩子的深刻的存在恐惧，直到永远）。
+在这一章中，你将了解到 Clojure 的深邃、黑暗、嗜血、超自然的cough，我的意思是，在这一章中，你将了解到 Clojure 的抽象的基本概念以及序列和集合的抽象。你还会了解到疯狂的序列。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你试着使用它们时发生了什么。
+接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、Vector、Map 和 Set。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
 最后，你将学会如何解析和查询 CSV 中的吸血鬼数据，以确定在你的家乡潜伏着哪些诺斯费拉图。
 从编程到抽象 为了理解对抽象的编程，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中 Map 一个哈希图（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
 原因是 Clojure 在*序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first&#39;、rest&amp;rsquo;和cons&#39;，我们稍后会仔细研究），它就能与map&#39;、`reduce&amp;rsquo;以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
 我认为抽象是操作的命名集合。如果你能在一个对象上执行一个抽象的所有操作，那么这个对象就是该抽象的一个实例。我甚至在编程之外也是这样想的。例如，电池抽象包括 &amp;ldquo;将导电介质连接到其阳极和阴极 &amp;ldquo;的操作，而该操作的输出是电流。电池是用锂还是用土豆做的并不重要。只要它对定义电池的一系列操作做出反应，它就是一个电池。
-同样地，map并不关心列表、Vector、集合和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。
-把列表、Vector、集合和 Map 当作序列对待 如果你把map操作独立于任何编程语言，甚至是编程，它的基本行为是用一个函数ƒ从现有的序列x导出一个新的序列y，这样y1 = ƒ(x1), y2 = ƒ(x2), .</description>
+同样地，map并不关心列表、Vector、Set 和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。</description>
     </item>
     
     <item>
