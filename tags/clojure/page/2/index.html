@@ -91,7 +91,7 @@
 当然，没有人能够直接知道一本书或 DVD 的地址是什么。这就是为什么图书馆要记录一个物体的标题和它的地址之间的联系，并提供工具来搜索这些记录。在计算机之前的旧时代，图书馆提供卡片目录，即装满纸质卡片的柜子，其中包含每本书的标题、作者、“地址”（杜威十进制或国会图书馆编号）和其他信息。
 例如，要找到《达芬奇密码》，你可以翻阅书名目录（按书名排序的卡片），直到你找到正确的卡片。在那张卡片上，你会看到地址813.54（如果它使用杜威十进制系统），浏览图书馆，找到达芬奇密码所在的书架，并参与你一生中的文学和/或仇恨阅读冒险。
 在 Clojure 中想象一个类似的设置是很有用的。我认为 Clojure 是将对象（如数据结构和函数）存储在一组巨大的编号架上。没有人能够直接知道一个对象被存储在哪个架子上。相反，我们给 Clojure 一个标识符，它用来检索该对象。
-为了使之成功，Clojure 必须维护我们的标识符和货架地址之间的关联。它通过使用namespaces来做到这一点。命名空间包含了人类友好的符号和书架地址的引用之间的映射，被称为vars，很像卡片目录。
+为了使之成功，Clojure 必须维护我们的标识符和货架地址之间的关联。它通过使用namespaces来做到这一点。命名空间包含了人类友好的符号和书架地址的引用之间的 Map，被称为vars，很像卡片目录。
 从技术上讲，命名空间是 “clojure.lang.Namespace “类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用*ns*来引用当前的命名空间，你可以用(ns-name *ns*)来获得其名称。
 (ns-name *ns*) ; => user 例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=>。
 当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。
@@ -131,17 +131,17 @@
 </header>
 <section class=entry-content>
 <p>核心函数的深入研究 如果你像我一样是焦虑的、以青少年为中心的准肥皂剧*《吸血鬼日记》的超级粉丝，你一定记得主角埃琳娜开始质疑她苍白的、神秘的暗恋者的行为的那一集。“为什么当我的膝盖被刮伤时，他立刻消失得无影无踪？“和 “为什么当我的手指被划破时，他的脸变成了一个怪异的死亡面具？“等等。
-如果你已经开始玩 Clojure 的核心函数，你可能也会问自己类似的问题。“为什么map'会返回一个列表，而我给它的是一个向量？"和 "为什么reduce’会把我的 map 当成一个向量列表？“等等。(不过，有了 Clojure，你至少可以免于思考作为一个 17 岁孩子的深刻的存在恐惧，直到永远）。
+如果你已经开始玩 Clojure 的核心函数，你可能也会问自己类似的问题。“为什么map'会返回一个列表，而我给它的是一个Vector？"和 "为什么reduce’会把我的 map 当成一个 Vector 列表？“等等。(不过，有了 Clojure，你至少可以免于思考作为一个 17 岁孩子的深刻的存在恐惧，直到永远）。
 在这一章中，你将了解到 Clojure 的深邃、黑暗、嗜血、超自然的****，我的意思是，在这一章中，你将了解到 Clojure 的编程到抽象的基本概念以及序列和集合的抽象。你还会了解到疯狂的序列*。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你试着使用它们时发生了什么。
-接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、向量、Map 和集合。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
+接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、Vector、Map 和集合。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
 最后，你将学会如何解析和查询 CSV 中的吸血鬼数据，以确定在你的家乡潜伏着哪些诺斯费拉图。
-从编程到抽象 为了理解对抽象的编程，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中映射一个哈希图（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
+从编程到抽象 为了理解对抽象的编程，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中 Map 一个哈希图（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
 原因是 Clojure 在*序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first'、rest’和cons'，我们稍后会仔细研究），它就能与map'、`reduce’以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
 我认为抽象是操作的命名集合。如果你能在一个对象上执行一个抽象的所有操作，那么这个对象就是该抽象的一个实例。我甚至在编程之外也是这样想的。例如，电池抽象包括 “将导电介质连接到其阳极和阴极 “的操作，而该操作的输出是电流。电池是用锂还是用土豆做的并不重要。只要它对定义电池的一系列操作做出反应，它就是一个电池。
-同样地，map并不关心列表、向量、集合和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。
-把列表、向量、集合和 Map 当作序列对待 如果你把map操作独立于任何编程语言，甚至是编程，它的基本行为是用一个函数ƒ从现有的序列x导出一个新的序列y，这样y1 = ƒ(x1), y2 = ƒ(x2), ....</p>
+同样地，map并不关心列表、Vector、集合和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。
+把列表、Vector、集合和 Map 当作序列对待 如果你把map操作独立于任何编程语言，甚至是编程，它的基本行为是用一个函数ƒ从现有的序列x导出一个新的序列y，这样y1 = ƒ(x1), y2 = ƒ(x2), ....</p>
 </section>
-<footer class=entry-footer><span title="2022-01-13 17:39:28 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Fenix</footer>
+<footer class=entry-footer><span title="2022-01-13 17:39:28 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Chapter4 深入研究核心函数" href=https://zhenfeng-zhu.github.io/posts/chapter4/></a>
 </article>
 <article class="post-entry tag-entry">
@@ -157,7 +157,7 @@
 当你阅读本章时，我建议你在 REPL 中输入例子并运行它们。用一种新的语言编程是一种技能，就像约德尔舞或花样游泳一样，你必须通过练习来学习它。 请留意它!
 语法 Clojure 的语法很简单。像所有的 Lisp 一样，它采用了统一的结构、少量的特殊运算符，以及从藏在麻省理工学院下面的小括号矿井中不断提供的小括号，Lisp 就是在那里诞生的。
 形式 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。
-数据结构的字面表示（如数字、字符串、Map 和向量） 操作 我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure 形式。但不要太纠结于术语。Clojure 评价每一个表单，以产生一个值。这些字面表达都是有效的形式。
+数据结构的字面表示（如数字、字符串、Map 和 Vector） 操作 我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure 形式。但不要太纠结于术语。Clojure 评价每一个表单，以产生一个值。这些字面表达都是有效的形式。
 1 "a string" ["a" "vector" "of" "strings"] 当然，你的代码很少包含自由浮动的字元，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的形式都是：*开括号，*操作符，*操作数，闭括号。
 (operator operand1 operand2 ... operandn) 请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。
 (+ 1 2 3) ; => 6 (str "It was the panda " "in the library " "with a dust buster") ; => "It was the panda in the library with a dust buster" 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种形式都是有效的。这里有一个不是形式的东西，因为它没有一个结束的小括号。...</p>
@@ -195,7 +195,7 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 <p>构建、运行和 REPL 在本章中，你将预先投入少量时间来熟悉建立和运行 Clojure 程序的快速、傻瓜式方法。让一个真正的程序运行起来感觉很好。达到了这个里程碑，你就可以自由地进行实验，分享你的工作，并向那些仍在使用上个世纪的语言的同事幸灾乐祸。这将有助于保持你的积极性!
 你还将学习如何使用*Read-Eval-Print Loop（REPL）*在一个正在运行的 Clojure 进程中即时运行代码，这使你能够快速测试你对语言的理解并更有效地学习。
 但首先，我将简要地介绍 Clojure。接下来，我将介绍 Leiningen，这是 Clojure 事实上的标准构建工具。在本章结束时，你将知道如何做以下事情。
-用 Leiningen 创建一个新的 Clojure 项目 构建该项目以创建一个可执行的 JAR 文件 执行 JAR 文件 在 Clojure REPL 中执行代码 First Things First: 什么是 Clojure Clojure 是由 Rich Hickey 在一座神话般的火山中铸造的。他使用 Lisp、函数式编程和他自己的一绺史诗般的头发的合金，创造了一种令人愉快而强大的语言。它的 Lisp 遗产使你有能力写出比大多数非 Lisp 语言更有表现力的代码，而它对函数式编程的独特理解将使你作为一个程序员的思维更敏锐。此外，Clojure 为你提供了更好的工具来处理复杂的领域（如并发编程），这些领域在传统上被认为会使开发人员陷入多年的治疗中。
+用 Leiningen 创建一个新的 Clojure 项目 构建该项目以创建一个可执行的 JAR 文件 执行 JAR 文件 在 Clojure REPL 中执行代码 第一重要的事: 什么是 Clojure Clojure 是由 Rich Hickey 在一座神话般的火山中铸造的。他使用 Lisp、函数式编程和他自己的一绺史诗般的头发的合金，创造了一种令人愉快而强大的语言。它的 Lisp 遗产使你有能力写出比大多数非 Lisp 语言更有表现力的代码，而它对函数式编程的独特理解将使你作为一个程序员的思维更敏锐。此外，Clojure 为你提供了更好的工具来处理复杂的领域（如并发编程），这些领域在传统上被认为会使开发人员陷入多年的治疗中。
 不过，在谈论 Clojure 时，重要的是要牢记 Clojure 语言和 Clojure 编译器之间的区别。Clojure 语言是一种强调函数的 Lisp 方言，其语法和语义与任何实现都无关。编译器是一个可执行的 JAR 文件，clojure.jar，它接收用 Clojure 语言编写的代码并将其编译为 Java 虚拟机（JVM）字节码。你会看到Clojure被用来指代语言和编译器，如果你不知道它们是独立的东西，就会感到困惑。但现在你意识到了，你就会好起来。
 这种区分是必要的，因为与大多数编程语言如 Ruby、Python、C 和其他许多语言不同，Clojure 是一种托管语言。Clojure 程序在 JVM 中执行，并依赖 JVM 的核心功能，如线程和垃圾收集。Clojure 还针对 JavaScript 和微软的通用语言运行时（CLR），但本书只关注 JVM 的实现。...</p>
 </section>
@@ -213,14 +213,13 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 <p>简介 在你的内心深处，你一直都知道你注定要学习 Clojure。 每当你高举着键盘，为一个难以理解的类层次结构而痛苦地哭泣时；每当你晚上躺在床上，为一个突变引起的海森堡虫而哭泣扰乱你的亲人时；每当一个竞赛条件使你拔掉更多你不断减少的头发时，你的某个秘密部分已经知道一定有一个更好的办法。
 现在，终于，你面前的教学材料将使你与你渴望已久的编程语言结合起来。
 学习一种新的编程语言：穿越四个迷宫的旅程 为了最大限度地发挥 Clojure 的作用，你需要在每个学习新语言的程序员面临的四个迷宫中找到自己的路。
-工具之林 友好而高效的编程环境使你能够轻松地尝试你的想法。你将学习如何设置你的环境。 语言之山 随着你的攀登，你将获得 Clojure 的语法、语义和数据结构方面的知识。你将学习如何使用最强大的编程工具之一–宏，并学习如何利用 Clojure 的并发结构来简化你的生活。 神器之洞 在它的深处，你将学会构建、运行和发布你自己的程序，以及如何使用代码库。你还将学习 Clojure 与 Java 虚拟机（JVM）的关系。 心态的云堡 在其稀薄的空气中，你将了解 Lisp 和函数式编程的原因和方法。你将了解渗透在 Clojure 中的简单哲学，以及如何像 Clojurist 一样解决问题。 别搞错了，你要工作。但这本书会让你感觉到工作是令人振奋的，而不是疲惫的。这是因为本书遵循三个准则。
+工具之林 友好而高效的编程环境使你能够轻松地尝试你的想法。你将学习如何设置你的环境。 语言之山 随着你的攀登，你将获得 Clojure 的语法、语义和数据结构方面的知识。你将学习如何使用最强大的编程工具之一–宏，并学习如何利用 Clojure 的并发结构来简化你的生活。 神器之洞 在它的深处，你将学会构建、运行和发布你自己的程序，以及如何使用代码库。你还将学习 Clojure 与 Java 虚拟机（JVM）的关系。 心态云堡 在其稀薄的空气中，你将了解 Lisp 和函数式编程的原因和方法。你将了解渗透在 Clojure 中的简单哲学，以及如何像 Clojurist 一样解决问题。 别搞错了，你要工作。但这本书会让你感觉到工作是令人振奋的，而不是疲惫的。这是因为本书遵循三个准则。
 它采取了甜点优先的方法，给你提供了你需要的开发工具和语言细节，以便立即开始玩真正的程序。 它假定你对 JVM、函数式编程或 Lisp 没有经验。它详细地涵盖了这些主题，所以当你构建和运行 Clojure 程序时，你会对你正在做的事情感到自信。 它避开了 真实世界 的例子，而选择了更有趣的练习，如 攻击霍比特人 和 追踪闪亮的吸血鬼 。 到最后，你将能够使用 Clojure–现存的最令人兴奋和最有趣的编程语言之一!
 本书是如何组织的 本书分为三个部分，以便更好地指导你完成你的勇敢探索，勇敢的初出茅庐的 Clojurist。
 第一部分：环境设置 为了保持动力和高效学习，你需要实际写代码和构建可执行文件。这些章节将带领你快速浏览你所需要的工具，以便轻松地编写程序。这样，你就可以专注于学习 Clojure，而不是摆弄你的环境。
 第 1 章：构建、运行和 REPL
 让一个真正的程序运行起来，有一种强大的激励作用。一旦你能做到这一点，你就可以自由地进行实验，而且你可以真正地分享你的工作
-在这短短的一章中，你将投入少量时间来熟悉建立和运行 Clojure 程序的快速方法。你将学习如何在一个正在运行的 Clojure 进程中使用读-评-印循环（REPL）来实验代码。这将收紧你的反馈回路，帮助你更有效地学习。
-第二章：如何使用 Emacs，一个优秀的 Clojure 编辑器...</p>
+在这短短的一章中，你将投入少量时间来熟悉建立和运行 Clojure 程序的快速方法。你将学习如何在一个正在运行的 Clojure 进程中使用 read-eval-print 循环（REPL）来实验代码。这将收紧你的反馈回路，帮助你更有效地学习。...</p>
 </section>
 <footer class=entry-footer><span title="2022-01-13 10:11:25 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Fenix</footer>
 <a class=entry-link aria-label="post link to Introduction 简介" href=https://zhenfeng-zhu.github.io/posts/introduction/></a>
@@ -229,20 +228,20 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 <figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
 </figure>
 <header class=entry-header>
-<h2>Acknowledgments 鸣谢
+<h2>Acknowledgments 致谢
 </h2>
 </header>
 <section class=entry-content>
-<p>鸣谢 有很多人帮助我诞生了这个奇怪的婴儿，我对他们的支持感到谦卑和感激。
+<p>致谢 有很多人帮助我诞生了这个奇怪的婴儿，我对他们的支持感到感激。
 首先，感谢我的妻子杰西，她为这本书绘制了插图，使它具有我所希望的视觉特性。也感谢你的支持，感谢你在我处于疯狂的作家模式时容忍我。(附注：通过一本编程书的封面感谢我的妻子，感觉很奇怪。）
-感谢我在麦肯锡的朋友和同事，他们阅读了早期的修订稿并鼓励我继续写作。其中最重要的是 Pat Shaughnessy、Alex Rothenberg、Thomas Newton、Jalil Fanaian、Chris Parker、Mark Daggett、Christian Lilley，以及 Mike Morreale。你们都太伟大了；请搬到达勒姆。
-感谢我的朋友布里奇特-希勒（Bridget Hillyer）一直以来的支持和积极性。我总是觉得你是我的后盾，这对我来说意义重大。也感谢我的朋友乔-杰克逊，感谢他阅读、听我喋喋不休、提供反馈，并感谢他在我面前对其他人大谈这本书，让我感觉很酷。Alan Dipert，朋友，技术评论员，现在的同事，我向你表示万分感谢，感谢你出色的技术编辑，感谢你首先将我引入 Clojure。
+感谢我在麦肯锡的朋友和同事，他们阅读了早期的修订稿并鼓励我继续写作。其中最重要的是 Pat Shaughnessy、Alex Rothenberg、Thomas Newton、Jalil Fanaian、Chris Parker、Mark Daggett、Christian Lilley，以及 Mike Morreale。你们都太伟大了；请搬到 Durham。
+感谢我的朋友布里奇特-希勒（Bridget Hillyer）一直以来的支持。我总是觉得你是我的后盾，这对我来说意义重大。也感谢我的朋友乔-杰克逊，感谢他阅读、听我喋喋不休、并为我提供反馈，并感谢他在我面前对其他人大谈这本书，让我感觉很酷。Alan Dipert，朋友，技术评论员，现在的同事，我向你表示万分感谢，感谢你出色的技术编辑，感谢你首先将我引入 Clojure。
 我不知道是否每个作家都会不断地问自己：“我到底为什么要这样做？是否有人会读它？“但我肯定会这样做。因此，我想感谢所有在这本书的最初网络版本编写过程中写信给我并建议进行编辑的友好人士。这些积极的反馈使我感到有信心，我正在做一件有意义的事情。同样地，感谢所有购买 Leanpub 版本的人
 非常感谢 Clojure 社区领导人 Eric Normand、David Nolen 和 Alex Miller 对本书的积极宣传。在下一届 Conj 大会上见!
 最后，要感谢 No Starch 出版社的各位同仁，感谢你们对本书的帮助，使之成为我无比自豪的作品。感谢你们的高标准。感谢你们不断地促使本书更加清晰，甚至提出笑话。(Seph 的 “蜡球 “编辑仍然让我开怀大笑。) Seph Kramer, Riley Hoffman, Hayley Baker, Alison Law, Tyler Ortman, Anne Marie Walker: 谢谢你们!</p>
 </section>
 <footer class=entry-footer><span title="2022-01-13 10:06:10 +0800 +0800">January 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Fenix</footer>
-<a class=entry-link aria-label="post link to Acknowledgments 鸣谢" href=https://zhenfeng-zhu.github.io/posts/acknowledgments/></a>
+<a class=entry-link aria-label="post link to Acknowledgments 致谢" href=https://zhenfeng-zhu.github.io/posts/acknowledgments/></a>
 </article>
 <article class="post-entry tag-entry">
 <figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt>
@@ -252,13 +251,13 @@ OS X从*http://emacsformacosx.com*安装 vanilla Emacs 作为一个 Mac 应用�
 </h2>
 </header>
 <section class=entry-content>
-<p>前言 当你阅读这本搞笑的书时，你会在某个时刻经历一个非常严肃的时刻。这是你向自己承认，在了解了一些 Clojure 之后，编程变得更加有趣的时刻。这也是你在这本书上的投资，包括金钱和时间，得到回报的时刻–有兴趣。
+<p>前言 当你阅读这本搞笑的书时，你会在某个时刻经历一个非常严肃的时刻。在了解了一些 Clojure 之后，编程变得更加有趣。这也是你在这本书上的投资，包括金钱和时间，得到回报的时刻–有趣。
 幽默与严肃性有一定的关系。对严肃的事情开玩笑是合适的，但只有在适当的时间过去之后。例如，当我想起我最喜欢的叔叔的最后一句话时，我花了很多年才能够破涕为笑。“拿着我的啤酒”。
 这本书的工作方式正好相反。它在严肃事件发生之前，甚至在严肃事件发生期间，适时地指出了真正有趣的事情–那一刻你意识到你因为 Clojure 而更喜欢编程。它在做到这一点的同时，并没有掩盖你将要学习的 Clojure 编程的深层技术层面。
 这种方法令人耳目一新，因为我读过的大多数编程书籍都比骆驼的屁还干。我们很幸运，丹尼尔是一位出色的程序员和作家，他的妻子杰斯是一位同样出色的插图画家。我们特别幸运的是，他们两个都疯了，决定在完全相同的时间写一本书。
 Clojure 是本书的主题，但在某种程度上它–或者说它的创造者 Rich Hickey–也是作者之一，因为 Clojure 是有史以来最优雅的编程语言。就像早午餐的概念一样，Clojure 是如此的优雅，以至于如果不以某种方式提高他们的水平，就很难告诉别人关于它的任何事情。
-优雅是编程语言家族中许多方言经常被赋予的品质，这些方言被统称为 Lisp，Clojure 就是其中之一。所有的 Lisp 都是由数学家 John McCarthy 在 1958 年做出的一系列简单而美丽的发现演变而来。
-自 1958 年以来，出现了许多 Lisps 和 Lisp 书籍。还有更多的 Lisps 和书籍即将问世。作为过去和未来的人工制品，每一种都适合它们的作者在各自的时代所面临的独特的约束和欲望的组合。
+优雅是编程语言家族中许多 Lisp 方言经常被赋予的品质，Clojure 就是其中之一。所有的 Lisp 都是由数学家 John McCarthy 在 1958 年做出的一系列简单而美丽的发现演变而来。
+自 1958 年以来，出现了许多 Lisp 方言 和 Lisp 书籍。还有更多的 Lisp 方言 和书籍即将问世。作为过去和未来的神器，每一种都适合它们的作者在各自的时代所面临的独特的约束和欲望的组合。
 我发现 Clojure，以及这本关于它的特殊书籍，特别适合现在。我希望你也会这样。
 Alan Dipert</p>
 </section>
