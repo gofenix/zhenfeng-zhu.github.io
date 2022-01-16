@@ -149,12 +149,12 @@ class CuddleZombie # attr_accessor is just a shorthand way for creating getters 
 从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水&amp;ndash;喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。
 就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。
 在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。
-在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重评估、变量捕获和宏感染。
+在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。
 宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。
 (when boolean-expression expression-1 expression-2 expression-3 ... expression-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
 在这个宏扩展中，你可以看到when是用if和do来实现的。
 (macroexpand &#39;(when boolean-expression expression-1 expression-2 expression-3)) ; =&amp;gt; (if boolean-expression (do expression-1 expression-2 expression-3)) 这表明宏是 Clojure 开发中不可或缺的一部分&amp;ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。
-解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以评估的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。
+解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。
 作为一个例子，这里有我们的老朋友infix宏。
 (defmacro infix &amp;quot;Use this macro when you pine for the notation of your childhood&amp;quot; [infixed] (list (second infixed) (first infixed) (last infixed))) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。</description>
     </item>
@@ -165,13 +165,13 @@ class CuddleZombie # attr_accessor is just a shorthand way for creating getters 
       <pubDate>Sat, 15 Jan 2022 12:14:36 +0800</pubDate>
       
       <guid>https://zhenfeng-zhu.github.io/posts/chapter7/</guid>
-      <description>Clojure 炼金术：读取器、评估器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Clojure 提供了一种工具，使哲学家的石头看起来只是一个小饰品：*宏。
+      <description>Clojure 炼金术：读取器、求值器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Clojure 提供了一种工具，使哲学家的石头看起来只是一个小饰品：*宏。
 宏允许你将任意的表达式转化为有效的 Clojure，因此你可以扩展语言本身以满足你的需求。而且，你甚至不需要是一个穿长袍的老家伙或老太太来使用它们
 为了获得这种能力，请考虑这个微不足道的宏。
 (defmacro backwards [form] (reverse form)) (backwards (&amp;quot; backwards&amp;quot; &amp;quot; am&amp;quot; &amp;quot;I&amp;quot; str)) ; =&amp;gt; &amp;quot;I am backwards&amp;quot; backwards宏允许 Clojure 成功地 Eval 表达式(&amp;quot; backwards&amp;quot; &amp;quot; am&amp;quot; &amp;quot;I&amp;quot; str)，尽管它没有遵循 Clojure 的内置语法规则，这些规则要求表达式的操作数首先出现（更不用说表达式不能按相反顺序书写的规则）。如果没有 &amp;ldquo;向后&amp;rdquo;，这个表达式会比几千年来的炼金术士用他们的一生来追求不可能实现的长生不老的方法更难失败。有了`向后&#39;，*你就创造了你自己的语法！*你扩展了 Clojure，这样你就可以随心所欲地写代码了 我告诉你，这比把铅变成金子要好得多!
-本章为你提供了编写自己的宏所需的概念基础，使你能够疯狂地编写自己的宏。它解释了 Clojure 评估模型的元素：读取器，评估器，和宏扩展器。这就像 Clojure 元素的周期表。想想周期表是如何揭示原子的特性的：同一列的元素行为相似，因为它们有相同的核电荷。如果没有元素周期表及其基础理论，我们就会像过去的炼金术士一样，随意地把东西混在一起，看看什么东西会爆炸。但是，随着对元素的深入了解，你可以看到为什么东西会爆炸，并学会如何有目的地炸毁东西。
-A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps）有一个不同于大多数其他语言的评估模型：它有一个两阶段的系统，它读文本源代码，产生 Clojure 数据结构。然后对这些数据结构进行*评估。Clojure 遍历数据结构，并根据数据结构的类型执行函数应用或 var 查找等操作。例如，当 Clojure 读取文本(+ 1 2)时，结果是一个列表数据结构，其第一个元素是一个+符号，后面是数字 1 和 2。这个数据结构被传递给 Clojure 的评估器，评估器查找+对应的函数，并将该函数应用于 1 和 2。
-在源代码、数据和评估之间有这种关系的语言被称为homoiconic（顺便说一句，如果你在浴室的镜子前熄灯说三次homoiconic，约翰-麦卡锡的幽灵就会出现并给你一个小括号）。同源语言使你能够将你的代码作为一组数据结构进行推理，你可以通过程序进行操作。为了说明这一点，让我们在编译的土地上走一圈。</description>
+本章为你提供了编写自己的宏所需的概念基础，使你能够疯狂地编写自己的宏。它解释了 Clojure 求值模型的元素：读取器，求值器，和宏扩展器。这就像 Clojure 元素的周期表。想想周期表是如何揭示原子的特性的：同一列的元素行为相似，因为它们有相同的核电荷。如果没有元素周期表及其基础理论，我们就会像过去的炼金术士一样，随意地把东西混在一起，看看什么东西会爆炸。但是，随着对元素的深入了解，你可以看到为什么东西会爆炸，并学会如何有目的地炸毁东西。
+A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps）有一个不同于大多数其他语言的求值模型：它有一个两阶段的系统，它读文本源代码，产生 Clojure 数据结构。然后对这些数据结构进行*求值。Clojure 遍历数据结构，并根据数据结构的类型执行函数应用或 var 查找等操作。例如，当 Clojure 读取文本(+ 1 2)时，结果是一个列表数据结构，其第一个元素是一个+符号，后面是数字 1 和 2。这个数据结构被传递给 Clojure 的求值器，求值器查找+对应的函数，并将该函数应用于 1 和 2。
+在源代码、数据和求值之间有这种关系的语言被称为homoiconic（顺便说一句，如果你在浴室的镜子前熄灯说三次homoiconic，约翰-麦卡锡的幽灵就会出现并给你一个小括号）。同源语言使你能够将你的代码作为一组数据结构进行推理，你可以通过程序进行操作。为了说明这一点，让我们在编译的土地上走一圈。</description>
     </item>
     
     <item>
@@ -196,7 +196,7 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
 从技术上讲，命名空间是 &amp;ldquo;clojure.lang.Namespace &amp;ldquo;类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用*ns*来引用当前的命名空间，你可以用(ns-name *ns*)来获得其名称。
 (ns-name *ns*) ; =&amp;gt; user 例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=&amp;gt;。
 当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。
-至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象&amp;ndash;在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要评估它，而是把它当作数据。接下来的几个例子显示了当你引用一个 Form 时会发生什么。</description>
+至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象&amp;ndash;在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要求值它，而是把它当作数据。接下来的几个例子显示了当你引用一个 Form 时会发生什么。</description>
     </item>
     
     <item>
@@ -245,11 +245,11 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
 在打下这个基础之后，你将能够编写一些超级重要的代码。在最后一节中，你将通过创建一个霍比特人的模型，并编写一个函数将其打在一个随机的位置上，从而将一切联系起来。超级! 重要的!
 当你阅读本章时，我建议你在 REPL 中输入例子并运行它们。用一种新的语言编程是一种技能，就像约德尔舞或花样游泳一样，你必须通过练习来学习它。 请留意它!
 语法 Clojure 的语法很简单。像所有的 Lisp 一样，它采用了统一的结构、少量的特殊运算符，以及从藏在麻省理工学院下面的小括号矿井中不断提供的小括号，Lisp 就是在那里诞生的。
-形式 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。
- 数据结构的字面表示（如数字、字符串、Map 和 Vector） 操作  我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure 形式。但不要太纠结于术语。Clojure 求值每一个 Form，以产生一个值。这些字面意义的表达都是有效的形式。
-1 &amp;quot;a string&amp;quot; [&amp;quot;a&amp;quot; &amp;quot;vector&amp;quot; &amp;quot;of&amp;quot; &amp;quot;strings&amp;quot;] 当然，你的代码很少包含自由浮动的字元，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的形式都是：*开括号，*操作符，*操作数，闭括号。
+Form 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。
+ 数据结构的字面表示（如数字、字符串、Map 和 Vector） 操作  我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure Form。但不要太纠结于术语。Clojure 求值每一个 Form，以产生一个值。这些字面意义的表达都是有效的 Form。
+1 &amp;quot;a string&amp;quot; [&amp;quot;a&amp;quot; &amp;quot;vector&amp;quot; &amp;quot;of&amp;quot; &amp;quot;strings&amp;quot;] 当然，你的代码很少包含自由浮动的字符，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的 Form 都是：开括号，操作符，操作数，闭括号。
 (operator operand1 operand2 ... operandn) 请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。
-(+ 1 2 3) ; =&amp;gt; 6 (str &amp;quot;It was the panda &amp;quot; &amp;quot;in the library &amp;quot; &amp;quot;with a dust buster&amp;quot;) ; =&amp;gt; &amp;quot;It was the panda in the library with a dust buster&amp;quot; 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种形式都是有效的。这里有一个不是形式的东西，因为它没有一个结束的小括号。</description>
+(+ 1 2 3) ; =&amp;gt; 6 (str &amp;quot;It was the panda &amp;quot; &amp;quot;in the library &amp;quot; &amp;quot;with a dust buster&amp;quot;) ; =&amp;gt; &amp;quot;It was the panda in the library with a dust buster&amp;quot; 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种 Form 都是有效的。这里有一个不是 Form 的东西，因为它没有一个结束的小括号。</description>
     </item>
     
     <item>
