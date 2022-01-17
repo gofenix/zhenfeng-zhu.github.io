@@ -137,10 +137,10 @@ Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个�
 在 Clojure 中，一个抽象是一个操作的集合，而数据类型实现抽象。例如，seq 抽象由 “first “和 “rest “等操作组成，而 Vector 数据类型是该抽象的实现；它对所有 seq 操作做出响应。像[:seltzer :water]这样的特定 Vector 是该数据类型的*实例。
 编程语言越是让你以抽象的方式思考和写作，你的生产力就越高。例如，如果你知道一个数据结构是 seq 抽象的一个实例，你就可以立即调用一个大的知识网，了解哪些函数可以与数据结构一起工作。因此，你会花时间去实际使用这个数据结构，而不是不断地去查找关于它如何工作的文档。同样地，如果你扩展一个数据结构，使其与 seq 抽象一起工作，你就可以在上面使用大量的 seq 函数库。
 在第四章中，你了解到 Clojure 是以抽象的方式编写的。这很强大，因为在 Clojure 中，你可以专注于你可以用数据结构实际做的事情，而不用担心实现的细枝末节。本章向你介绍了创建和实现你自己的抽象的世界。你将学习 Multimethods、协议和记录的基础知识。
-多态性 我们在 Clojure 中实现抽象的主要方式是将一个操作名称与一个以上的算法联系起来。这种技术被称为多态性。例如，在列表上执行 “conj “的算法与 Vector 的算法不同，但我们把它们统一在同一个名字下，以表明它们实现了同一个概念，即向这个数据结构添加一个元素。
+多态 我们在 Clojure 中实现抽象的主要方式是将一个操作名称与一个以上的算法联系起来。这种技术被称为多态。例如，在列表上执行 “conj “的算法与 Vector 的算法不同，但我们把它们统一在同一个名字下，以表明它们实现了同一个概念，即向这个数据结构添加一个元素。
 因为 Clojure 的许多数据类型都依赖于 Java 的标准库，所以本章中使用了一点 Java。例如，Clojure 的字符串只是 Java 的字符串，是 Java 类java.lang.String的实例。要在 Java 中定义你自己的数据类型，你要使用类。Clojure 提供了额外的类型结构。 记录和类型。本书只涉及记录。
 在我们学习记录之前，让我们看看 Multimethods，这是我们定义多态行为的第一个工具。
-Multimethods Multimethods为你提供了一种直接的、灵活的方法，将多态性引入你的代码中。使用 Multimethods，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 “你有预订吗？“和 “聚会人数？"，然后给你安排相应的座位。同样，当你调用一个 Multimethods 时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
+Multimethods Multimethods为你提供了一种直接的、灵活的方法，将多态引入你的代码中。使用 Multimethods，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 “你有预订吗？“和 “聚会人数？"，然后给你安排相应的座位。同样，当你调用一个 Multimethods 时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
 (ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf [were-creature] (str (:name were-creature) " will howl and murder")) ➌ (defmethod full-moon-behavior :simmons [were-creature] (str (:name were-creature) " will encourage people and sweat to the oldies")) (full-moon-behavior {:were-type :wolf ➍ :name "Rachel from next door"}) ; => "Rachel from next door will howl and murder" (full-moon-behavior {:name "Andy the baker" ➎ :were-type :simmons}) ; => "Andy the baker will encourage people and sweat to the oldies" 这个 Multimethods 显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。...</p>
 </section>
 <footer class=entry-footer><span title="2022-01-15 21:29:04 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Fenix</footer>

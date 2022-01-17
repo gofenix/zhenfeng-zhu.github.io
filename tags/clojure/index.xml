@@ -62,10 +62,10 @@ Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个�
 在 Clojure 中，一个抽象是一个操作的集合，而数据类型实现抽象。例如，seq 抽象由 &amp;ldquo;first &amp;ldquo;和 &amp;ldquo;rest &amp;ldquo;等操作组成，而 Vector 数据类型是该抽象的实现；它对所有 seq 操作做出响应。像[:seltzer :water]这样的特定 Vector 是该数据类型的*实例。
 编程语言越是让你以抽象的方式思考和写作，你的生产力就越高。例如，如果你知道一个数据结构是 seq 抽象的一个实例，你就可以立即调用一个大的知识网，了解哪些函数可以与数据结构一起工作。因此，你会花时间去实际使用这个数据结构，而不是不断地去查找关于它如何工作的文档。同样地，如果你扩展一个数据结构，使其与 seq 抽象一起工作，你就可以在上面使用大量的 seq 函数库。
 在第四章中，你了解到 Clojure 是以抽象的方式编写的。这很强大，因为在 Clojure 中，你可以专注于你可以用数据结构实际做的事情，而不用担心实现的细枝末节。本章向你介绍了创建和实现你自己的抽象的世界。你将学习 Multimethods、协议和记录的基础知识。
-多态性 我们在 Clojure 中实现抽象的主要方式是将一个操作名称与一个以上的算法联系起来。这种技术被称为多态性。例如，在列表上执行 &amp;ldquo;conj &amp;ldquo;的算法与 Vector 的算法不同，但我们把它们统一在同一个名字下，以表明它们实现了同一个概念，即向这个数据结构添加一个元素。
+多态 我们在 Clojure 中实现抽象的主要方式是将一个操作名称与一个以上的算法联系起来。这种技术被称为多态。例如，在列表上执行 &amp;ldquo;conj &amp;ldquo;的算法与 Vector 的算法不同，但我们把它们统一在同一个名字下，以表明它们实现了同一个概念，即向这个数据结构添加一个元素。
 因为 Clojure 的许多数据类型都依赖于 Java 的标准库，所以本章中使用了一点 Java。例如，Clojure 的字符串只是 Java 的字符串，是 Java 类java.lang.String的实例。要在 Java 中定义你自己的数据类型，你要使用类。Clojure 提供了额外的类型结构。 记录和类型。本书只涉及记录。
 在我们学习记录之前，让我们看看 Multimethods，这是我们定义多态行为的第一个工具。
-Multimethods Multimethods为你提供了一种直接的、灵活的方法，将多态性引入你的代码中。使用 Multimethods，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 &amp;ldquo;你有预订吗？&amp;ldquo;和 &amp;ldquo;聚会人数？&amp;quot;，然后给你安排相应的座位。同样，当你调用一个 Multimethods 时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
+Multimethods Multimethods为你提供了一种直接的、灵活的方法，将多态引入你的代码中。使用 Multimethods，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 &amp;ldquo;你有预订吗？&amp;ldquo;和 &amp;ldquo;聚会人数？&amp;quot;，然后给你安排相应的座位。同样，当你调用一个 Multimethods 时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
 (ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf [were-creature] (str (:name were-creature) &amp;quot; will howl and murder&amp;quot;)) ➌ (defmethod full-moon-behavior :simmons [were-creature] (str (:name were-creature) &amp;quot; will encourage people and sweat to the oldies&amp;quot;)) (full-moon-behavior {:were-type :wolf ➍ :name &amp;quot;Rachel from next door&amp;quot;}) ; =&amp;gt; &amp;quot;Rachel from next door will howl and murder&amp;quot; (full-moon-behavior {:name &amp;quot;Andy the baker&amp;quot; ➎ :were-type :simmons}) ; =&amp;gt; &amp;quot;Andy the baker will encourage people and sweat to the oldies&amp;quot; 这个 Multimethods 显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。</description>
     </item>
     
@@ -228,8 +228,8 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
 在这一章中，你将了解到 Clojure 的深邃、黑暗、嗜血、超自然的cough，我的意思是，在这一章中，你将了解到 Clojure 的抽象的基本概念以及序列和集合的抽象。你还会了解到疯狂的序列。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你试着使用它们时发生了什么。
 接下来，你将获得更多关于你最需要使用的函数的经验。你将学习如何用函数map、reduce、into、conj、concat、some、filter、take、drop、sort、sort-by和identity来处理列表、Vector、Map 和 Set。你还将学习如何用apply、partial和complement创建新的函数。所有这些信息将帮助你了解如何以 Clojure 的方式做事，它将为你编写自己的代码以及阅读和学习他人的项目打下坚实的基础。
 最后，你将学会如何解析和查询 CSV 中的吸血鬼数据，以确定在你的家乡潜伏着哪些诺斯费拉图。
-从编程到抽象 为了理解对抽象的编程，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中 Map 一个哈希图（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
-原因是 Clojure 在*序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first、rest和cons，我们稍后会仔细研究），它就能与map、reduce以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
+从编程到抽象 为了理解从编程到抽象，让我们把 Clojure 与一种没有考虑到这个原则的语言进行比较。Emacs Lisp（elisp）。在 elisp 中，你可以使用mapcar函数来导出一个新的列表，这与你在 Clojure 中使用map的方式相似。然而，如果你想在 elisp 中 Map 一个哈希 Map（类似于 Clojure 的 map 数据结构），你需要使用maphash函数，而在 Clojure 中你仍然可以只使用map。换句话说，elisp 使用两个不同的、针对数据结构的函数来实现map操作，而 Clojure 只使用一个。你也可以在 Clojure 中对 map 调用reduce，而 elisp 并没有提供一个函数来减少散列 map。
+原因是 Clojure 在序列抽象方面定义了map和reduce函数，而不是在具体的数据结构方面。只要数据结构响应核心序列操作（函数first、rest和cons，我们稍后会仔细研究），它就能与map、reduce以及其他大量的序列函数免费工作。这就是 Clojurists 所说的抽象编程，也是 Clojure 哲学的一个核心原则。
 我认为抽象是操作的命名集合。如果你能在一个对象上执行一个抽象的所有操作，那么这个对象就是该抽象的一个实例。我甚至在编程之外也是这样想的。例如，电池抽象包括 &amp;ldquo;将导电介质连接到其阳极和阴极 &amp;ldquo;的操作，而该操作的输出是电流。电池是用锂还是用土豆做的并不重要。只要它对定义电池的一系列操作做出反应，它就是一个电池。
 同样地，map并不关心列表、Vector、Set 和 Map 是如何实现的。它只关心它是否能对它们进行序列操作。让我们看看map是如何在序列抽象中定义的，这样你就能理解一般的抽象编程。</description>
     </item>
