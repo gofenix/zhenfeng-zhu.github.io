@@ -1,0 +1,2003 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>node 学习笔记 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="写 node 也有一段时间了，整理一下学习笔记，共同进步 什么是 node 首先看一下什么是 node.js Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/node-learning/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="node 学习笔记">
+<meta property="og:description" content="写 node 也有一段时间了，整理一下学习笔记，共同进步 什么是 node 首先看一下什么是 node.js Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/node-learning/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-04-22T15:41:21+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="node 学习笔记">
+<meta itemprop=description content="写 node 也有一段时间了，整理一下学习笔记，共同进步 什么是 node 首先看一下什么是 node.js Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱"><meta itemprop=datePublished content="2018-04-22T15:41:21+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="8846">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="node 学习笔记">
+<meta name=twitter:description content="写 node 也有一段时间了，整理一下学习笔记，共同进步 什么是 node 首先看一下什么是 node.js Node 是一个服务器端 JavaScript Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境 Node.js 使用了一个事件驱"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>node 学习笔记</h1>
+<div class=post-meta>
+<span class=post-time> 2018-04-22 </span>
+<span class=more-meta> 约 8846 字 </span>
+<span class=more-meta> 预计阅读 18 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#什么是-node>什么是 node</a></li>
+<li><a href=#谈谈自定义模块>谈谈自定义模块</a></li>
+<li><a href=#常用的原生模块>常用的原生模块</a>
+<ul>
+<li><a href=#http>http</a></li>
+<li><a href=#url>url</a>
+<ul>
+<li><a href=#字符串转对象>字符串转对象</a></li>
+<li><a href=#对象转字符串>对象转字符串</a></li>
+<li><a href=#拼接>拼接</a></li>
+</ul>
+</li>
+<li><a href=#querystring>querystring</a>
+<ul>
+<li><a href=#字符串转对象-1>字符串转对象</a></li>
+<li><a href=#对象转字符串-1>对象转字符串</a></li>
+</ul>
+</li>
+<li><a href=#fs>fs</a>
+<ul>
+<li><a href=#读取文本----异步读取>读取文本 &ndash; 异步读取</a></li>
+<li><a href=#读取文本----同步读取>读取文本 &ndash; 同步读取</a></li>
+<li><a href=#写入文本----覆盖写入>写入文本 &ndash; 覆盖写入</a></li>
+<li><a href=#写入文本----追加写入>写入文本 &ndash; 追加写入</a></li>
+<li><a href=#图片读取>图片读取</a></li>
+</ul>
+</li>
+<li><a href=#stream-流处理>stream 流处理</a></li>
+<li><a href=#路由>路由</a></li>
+</ul>
+</li>
+<li><a href=#fetch>fetch</a></li>
+<li><a href=#async>Async</a></li>
+<li><a href=#express-框架>express 框架</a>
+<ul>
+<li><a href=#简单使用>简单使用</a></li>
+<li><a href=#路由-1>路由</a></li>
+<li><a href=#中间件>中间件</a></li>
+<li><a href=#文件上传>文件上传</a></li>
+</ul>
+</li>
+<li><a href=#操作数据库>操作数据库</a>
+<ul>
+<li><a href=#操作-mongodb>操作 MongoDB</a></li>
+<li><a href=#操作-mysql>操作 MySql</a></li>
+</ul>
+</li>
+<li><a href=#session>session</a></li>
+<li><a href=#token>Token</a></li>
+<li><a href=#web-socket>web socket</a></li>
+<li><a href=#kafka-node>kafka-node</a></li>
+<li><a href=#node-单元测试>Node 单元测试</a>
+<ul>
+<li><a href=#tdd-vs-bdd>TDD VS. BDD</a></li>
+<li><a href=#测试框架实践>测试框架实践</a>
+<ul>
+<li><a href=#mocha>mocha</a></li>
+<li><a href=#chai>chai</a></li>
+</ul>
+</li>
+<li><a href=#覆盖率>覆盖率</a></li>
+</ul>
+</li>
+<li><a href=#引入-typescript>引入 typescript</a>
+<ul>
+<li><a href=#安装>安装</a></li>
+<li><a href=#新项目引入-ts>新项目引入 ts</a>
+<ul>
+<li><a href=#tsconfigjson-配置文件>tsconfig.json 配置文件</a></li>
+<li><a href=#使用第三方模块>使用第三方模块</a></li>
+<li><a href=#单元测试>单元测试</a></li>
+</ul>
+</li>
+<li><a href=#旧项目迁移>旧项目迁移</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>写 node 也有一段时间了，整理一下学习笔记，共同进步</p>
+<h1 id=什么是-node>什么是 node</h1>
+<p>首先看一下什么是 node.js</p>
+<ul>
+<li>Node 是一个服务器端 JavaScript</li>
+<li>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境</li>
+<li>Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效</li>
+<li>Node.js 的包管理器 npm，是全球最大的开源库生态系统</li>
+</ul>
+<p>模块系统是 node 最基本也是最常用的。一般可以分为四类：</p>
+<ul>
+<li>原生模块</li>
+<li>文件模块</li>
+<li>第三方模块</li>
+<li>自定义模块</li>
+</ul>
+<p>node 社区崇尚 DRY 文化，即 Don&rsquo;t repeate yourself。这种文化使得 node 的生态异常繁荣，同样也由于某些包的质量低下引来了一些诟病。</p>
+<h1 id=谈谈自定义模块>谈谈自定义模块</h1>
+<p>我们在写 node 程序的时候，一般都是在写自定义模块。</p>
+<ul>
+<li>
+<p>创建模块</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// b.js
+function FunA(){
+    return &#34;hello world&#34;;
+}
+
+// 暴露方法FunA
+module.exports = FunA;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>加载模块</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// a.js
+const FunA=require(&#39;./b.js&#39;);
+
+// 运行FunA
+const name=FunA();
+console.log(name);
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>在做模块到处的时候有两种方式：</p>
+<ul>
+<li>
+<p>module.exports</p>
+<p>module.exports 就 Node.js 用于对外暴露，或者说对外开放指定访问权限的一个对象。</p>
+<p>一个模块中有且仅有一个 module.exports，如果有多个那后面的则会覆盖前面的。</p>
+</li>
+<li>
+<p>exports</p>
+<p>exports 是 module 对象的一个属性，同时它也是一个对象。在很多时候一个 js 文件有多个需要暴露的方法或是对象，module.exports 又只能暴露一个，那这个时候就要用到 exports:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>function FunA(){
+    return &#39;Tom&#39;;
+}
+
+function FunB(){
+    return &#39;Sam&#39;;
+}
+
+exports.FunA = FunA;
+exports.FunB = FunB;
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>//FunA = exports,exports 是一个对象
+var FunA = require(&#39;./b.js&#39;);
+var name1 = FunA.FunA();// 运行 FunA，name = &#39;Tom&#39;
+var name2 = FunA.FunB();// 运行 FunB，name = &#39;Sam&#39;
+console.log(name1);
+console.log(name2);
+</code></pre></td></tr></table>
+</div>
+</div><p>当然在引入的时候也可以这样写：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>//FunA = exports,exports 是一个对象
+var {FunA, FunB} = require(&#39;./b.js&#39;);
+var name1 = FunA();// 运行 FunA，name = &#39;Tom&#39;
+var name2 = FunB();// 运行 FunB，name = &#39;Sam&#39;
+console.log(name1);
+console.log(name2);
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h1 id=常用的原生模块>常用的原生模块</h1>
+<p>常用的原生模块有如下四个：</p>
+<ul>
+<li>http</li>
+<li>url</li>
+<li>queryString</li>
+<li>fs</li>
+</ul>
+<h2 id=http>http</h2>
+<p>所有后端的语言要想运行起来，都得有服务器。node 通过原生的 http 模块来搭建服务器：</p>
+<ol>
+<li>加载 http 模块</li>
+<li>调用 http.createServer() 方法创建服务，方法接受一个回调函数，回调函数中有两个参数，第一个是请求体，第二个是响应体。</li>
+<li>在回调函数中一定要使用 response.end() 方法，用于结束当前请求，不然当前请求会一直处在等待的状态。</li>
+<li>调用 listen 监听一个端口。</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>//原生模块
+var http = require(&#39;http&#39;);
+
+http.createServer(function(reqeust, response){
+    response.end(&#39;Hello Node&#39;);
+}).listen(8080);
+</code></pre></td></tr></table>
+</div>
+</div><p>处理参数</p>
+<ul>
+<li>
+<p>get</p>
+<p>当 get 请求的时候，服务器通过 request.method 来判断当前的请求方式并通过 request.url 来获取当前的请求参数：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var http = require(&#39;http&#39;);
+var url = require(&#39;url&#39;);
+
+http.createServer(function(req, res){
+    var params = url.parse(req.url, true).query;
+    res.end(params);
+
+}).listen(3000);
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>post</p>
+<p>post 请求则不能通过 url 来获取，这时候就得对请求体进行事件监听。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var http = require(&#39;http&#39;);
+var util = require(&#39;util&#39;);
+var querystring = require(&#39;querystring&#39;);
+
+http.createServer(function(req, res){
+    // 定义了一个post变量，用于暂存请求体的信息
+    var post = &#39;&#39;;     
+
+    // 通过req的data事件监听函数，每当接受到请求体的数据，就累加到post变量中
+    req.on(&#39;data&#39;, function(chunk){    
+        post += chunk;
+    });
+
+    // 在end事件触发后，通过querystring.parse将post解析为真正的POST请求格式，然后向客户端返回。
+    req.on(&#39;end&#39;, function(){    
+        post = querystring.parse(post);
+        res.end(util.inspect(post));
+    });
+}).listen(3000);
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id=url>url</h2>
+<p>url 和 http 是配合使用的。一般情况下 url 都是字符串类型的，包含的信息也比较多，比如有：协议、主机名、端口、路径、参数、锚点等。如果是对字符串进行直接解析的话，相当麻烦，node 提供的 url 模块便可轻松解决这一类的问题。</p>
+<h3 id=字符串转对象>字符串转对象</h3>
+<ul>
+<li>格式：url.parse(urlstring, boolean)</li>
+<li>参数
+<ul>
+<li>urlstring：字符串格式的 url</li>
+<li>boolean：在 url 中有参数，默认参数为字符串，如果此参数为 true，则会自动将参数转转对象</li>
+</ul>
+</li>
+<li>常用属性
+<ul>
+<li>href： 解析前的完整原始 URL，协议名和主机名已转为小写</li>
+<li>protocol： 请求协议，小写</li>
+<li>host： url 主机名，包括端口信息，小写</li>
+<li>hostname: 主机名，小写</li>
+<li>port: 主机的端口号</li>
+<li>pathname: URL 中路径，下面例子的 /one</li>
+<li>search: 查询对象，即：queryString，包括之前的问号“?”</li>
+<li>path: pathname 和 search 的合集</li>
+<li>query: 查询字符串中的参数部分（问号后面部分字符串），或者使用 querystring.parse() 解析后返回的对象</li>
+<li>hash: 锚点部分（即：“#”及其后的部分）</li>
+</ul>
+</li>
+</ul>
+<h3 id=对象转字符串>对象转字符串</h3>
+<ul>
+<li>格式：url.format(urlObj)</li>
+<li>参数 urlObj 在格式化的时候会做如下处理
+<ul>
+<li>href: 会被忽略，不做处理</li>
+<li>protocol：无论末尾是否有冒号都会处理，协议包括 http, https, ftp, gopher, file 后缀是 :// (冒号-斜杠-斜杠)</li>
+<li>hostname：如果 host 属性没被定义，则会使用此属性</li>
+<li>port：如果 host 属性没被定义，则会使用此属性</li>
+<li>host：优先使用，将会替代 hostname 和 port</li>
+<li>pathname：将会同样处理无论结尾是否有/ (斜杠)</li>
+<li>search：将会替代 query 属性，无论前面是否有 ? (问号)，都会同样的处理</li>
+<li>query：(object 类型; 详细请看 querystring) 如果没有 search,将会使用此属性.</li>
+<li>hash：无论前面是否有# (井号, 锚点)，都会同样处理</li>
+</ul>
+</li>
+</ul>
+<h3 id=拼接>拼接</h3>
+<p>当有多个 url 需要拼接处理的时候，可以用到 url.resolve</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var url = require(&#39;url&#39;);
+url.resolve(&#39;http://dk-lan.com/&#39;, &#39;/one&#39;)// &#39;http://dk-lan.com/one&#39;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=querystring>querystring</h2>
+<p>url 是对 url 字符串的处理，而 querystring 就是仅针对参数的处理。</p>
+<h3 id=字符串转对象-1>字符串转对象</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var str = &#39;firstname=dk&amp;url=http%3A%2F%2Fdk-lan.com&amp;lastname=tom&amp;passowrd=123456&#39;;
+var param = querystring.parse(param);
+//结果
+//{firstname:&#34;dk&#34;, url:&#34;http://dk-lan.com&#34;, lastname: &#39;tom&#39;, passowrd: 123456};
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=对象转字符串-1>对象转字符串</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var querystring = require(&#39;querystring&#39;);
+
+var obj = {firstname:&#34;dk&#34;, url:&#34;http://dk-lan.com&#34;, lastname: &#39;tom&#39;, passowrd: 123456};
+//将对象转换成字符串
+var param = querystring.stringify(obj);
+//结果
+//firstname=dk&amp;url=http%3A%2F%2Fdk-lan.com&amp;lastname=tom&amp;passowrd=123456
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=fs>fs</h2>
+<p>任何服务端语言都不能缺失文件的读写操作。</p>
+<h3 id=读取文本----异步读取>读取文本 &ndash; 异步读取</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var fs = require(&#39;fs&#39;);
+// 异步读取
+// 参数1：文件路径，
+// 参数2：读取文件后的回调
+fs.readFile(&#39;demoFile.txt&#39;, function (err, data) {
+   if (err) {
+       return console.error(err);
+   }
+   console.log(&#34;异步读取: &#34; + data.toString());
+});
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=读取文本----同步读取>读取文本 &ndash; 同步读取</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var fs = require(&#39;fs&#39;);
+var data = fs.readFileSync(&#39;demoFile.txt&#39;);
+console.log(&#34;同步读取: &#34; + data.toString());
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=写入文本----覆盖写入>写入文本 &ndash; 覆盖写入</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var fs = require(&#39;fs&#39;);
+//每次写入文本都会覆盖之前的文本内容
+fs.writeFile(&#39;input.txt&#39;, &#39;抵制一切不利于中国和世界和平的动机！&#39;,  function(err) {
+   if (err) {
+       return console.error(err);
+   }
+   console.log(&#34;数据写入成功！&#34;);
+   console.log(&#34;--------我是分割线-------------&#34;)
+   console.log(&#34;读取写入的数据！&#34;);
+   fs.readFile(&#39;input.txt&#39;, function (err, data) {
+      if (err) {
+         return console.error(err);
+      }
+      console.log(&#34;异步读取文件数据: &#34; + data.toString());
+   });
+});
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=写入文本----追加写入>写入文本 &ndash; 追加写入</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var fs = require(&#39;fs&#39;);
+fs.appendFile(&#39;input.txt&#39;, &#39;愿世界和平！&#39;, function (err) {
+   if (err) {
+       return console.error(err);
+   }
+   console.log(&#34;数据写入成功！&#34;);
+   console.log(&#34;--------我是分割线-------------&#34;)
+   console.log(&#34;读取写入的数据！&#34;);
+   fs.readFile(&#39;input.txt&#39;, function (err, data) {
+      if (err) {
+         return console.error(err);
+      }
+      console.log(&#34;异步读取文件数据: &#34; + data.toString());
+   });
+});
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=图片读取>图片读取</h3>
+<p>图片读取不同于文本，因为文本读出来可以直接用 console.log() 打印，但图片则需要在浏览器中显示，所以需要先搭建 web 服务，然后把以字节方式读取的图片在浏览器中渲染。</p>
+<ol>
+<li>图片读取是以字节的方式</li>
+<li>图片在浏览器的渲染因为没有 img 标签，所以需要设置响应头为 image</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var http = require(&#39;http&#39;);
+var fs = require(&#39;fs&#39;);
+var content =  fs.readFileSync(&#39;001.jpg&#39;, &#34;binary&#34;);
+
+http.createServer(function(request, response){
+    response.writeHead(200, {&#39;Content-Type&#39;: &#39;image/jpeg&#39;});
+    response.write(content, &#34;binary&#34;);
+    response.end();
+}).listen(8888);
+
+console.log(&#39;Server running at http://127.0.0.1:8888/&#39;);
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=stream-流处理>stream 流处理</h2>
+<p>对 http 服务器发起请求的 request 对象就是一个 Stream，还有 stdout（标准输出）。往往用于打开大型的文本文件，创建一个读取操作的数据流。所谓大型文本文件，指的是文本文件的体积很大，读取操作的缓存装不下，只能分成几次发送，每次发送会触发一个 data 事件，发送结束会触发 end 事件。</p>
+<p>主要分为</p>
+<ul>
+<li>读取流</li>
+<li>写入流</li>
+<li>管道流</li>
+<li>链式流</li>
+</ul>
+<p>这几种流都是 fs 的一部分。</p>
+<h2 id=路由>路由</h2>
+<p>在 BS 架构中，路由的概念都是一样的，可以理解为根据客户端请求的 url 映射到不同的方法实现。一般 web 框架中都会有相应的路由模块。但是在原生 node 中去处理的话只能是解析 url 来进行映射，实现起来不够简洁。</p>
+<h1 id=fetch>fetch</h1>
+<p>axios 是一种对 ajax 的封装，fetch 是一种浏览器原生实现的请求方式，跟 ajax 对等。</p>
+<p>在现在发起 http 请求里，都是通过 fetch 来发送请求，和 ajax 类似。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>const fetch=require(&#39;isomorphic-fetch&#39;);
+
+const options={
+    header:{},
+    body:JSON.strify({}),
+    method: &#39;&#39;
+}
+
+try{
+    const res=await fetch(&#39;url&#39;, options);
+}catch(err){
+    
+}
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=async>Async</h1>
+<p>Node.js 是一个异步机制的服务端语言，在大量异步的场景下需要按顺序执行，那正常做法就是回调嵌套回调，回调嵌套太多的问题被称之回调地狱。</p>
+<p>Node.js 为解决这一问题推出了异步控制流 ———— Async</p>
+<p>Async/Await</p>
+<p>Async/Await 就 ES7 的方案，结合 ES6 的 Promise 对象，使用前请确定 Node.js 的版本是 7.6 以上。</p>
+<p>Async/await 的主要益处是可以避免回调地狱（callback hell），且以最接近同步代码的方式编写异步代码。</p>
+<p>基本规则</p>
+<ul>
+<li>async 表示这是一个 async 函数，await 只能用在这个函数里面。</li>
+<li>await 表示在这里等待 promise 返回结果了，再继续执行。</li>
+<li>await 后面跟着的应该是一个 promise 对象</li>
+</ul>
+<h1 id=express-框架>express 框架</h1>
+<p>使用 node，都绕不开 express。</p>
+<h2 id=简单使用>简单使用</h2>
+<p>express 的使用比较简单，由于我最早接触的是 spring 那套 web 框架，所以在使用到 express 的时候觉得 node 的 web 特别轻量简单。</p>
+<p>加载模块</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>const express=require(&#39;express&#39;);
+const app=express();
+</code></pre></td></tr></table>
+</div>
+</div><p>监听端口 8080</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>app.listen(3000, ()=&gt;consloe.log(&#39;running&#39;));
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=路由-1>路由</h2>
+<p>express 对路由的处理特别简单，配合中间件 body parser，很方便的提供 rest 接口：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>app.get(&#39;/&#39;, (req, res)=&gt;{
+    res.send(&#39;hello world&#39;);
+})
+</code></pre></td></tr></table>
+</div>
+</div><p><code>response.send()</code> 可理解为 <code>response.end()</code>，其中一个不同点在于 <code>response.send()</code> 参数可为对象。</p>
+<p>Node.js 默认是不能访问静态资源文件（<em>.html、</em>.js、<em>.css、</em>.jpg 等），如果要访问服务端的静态资源文件则要用到方法 <code>sendFile</code></p>
+<p>__dirname 为 Node.js 的系统变量，指向文件的绝对路径。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>app.get(&#39;/index.html&#39;, function (req, res) {
+   res.sendFile( __dirname + &#34;/&#34; + &#34;index.html&#34; );
+});
+</code></pre></td></tr></table>
+</div>
+</div><p>Express &ndash; GET 参数接收之路径方式</p>
+<p>访问地址：<code>http://localhost:8080/getusers/admin/18</code>，可通过 <code>request.params</code> 来获取参数</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>app.get(&#39;/getUsers/:username/:age&#39;, function(request, response){
+    var params = {
+        username: request.params.username,
+        age: request.params.age
+    }
+    response.send(params);
+})
+</code></pre></td></tr></table>
+</div>
+</div><p>Express &ndash; POST</p>
+<ul>
+<li>post 参数接收，可依赖第三方模块 body-parser 进行转换会更方便、更简单，该模块用于处理 JSON, Raw, Text 和 URL 编码的数据。</li>
+<li>安装 body-parser <code>npm install body-parser</code></li>
+<li>参数接受和 GET 基本一样，不同的在于 GET 是 <code>request.query</code> 而 POST 的是 <code>request.body</code></li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var bodyParser = require(&#39;body-parser&#39;);
+// 创建 application/x-www-form-urlencoded 编码解析
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+app.post(&#39;/getUsers&#39;, urlencodedParser, function (request, response) {
+    var params = {
+        username: request.body.username,
+        age: request.body.age
+    }
+   response.send(params);
+});
+</code></pre></td></tr></table>
+</div>
+</div><p>Express &ndash; 跨域支持(放在最前面)</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>app.all(&#39;*&#39;, function(req, res, next) {
+    res.header(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;);
+    res.header(&#34;Access-Control-Allow-Headers&#34;, &#34;Content-Type,Content-Length, Authorization, Accept,X-Requested-With&#34;);
+    res.header(&#34;Access-Control-Allow-Methods&#34;,&#34;PUT,POST,GET,DELETE,OPTIONS&#34;);
+    res.header(&#34;X-Powered-By&#34;,&#39; 3.2.1&#39;)
+    if(req.method==&#34;OPTIONS&#34;) {
+      res.send(200);/*让options请求快速返回*/
+    } else{
+      next();
+    }
+});
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=中间件>中间件</h2>
+<p>express 的中间件编写——过滤器</p>
+<p>简单使用</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>const express = require(&#39;express&#39;)
+const app = express();
+
+let filter = (req, res, next) =&gt; {
+    if(req.params.name == &#39;admin&#39; &amp;&amp; req.params.pwd == &#39;admin&#39;){
+        next()
+    } else {
+        next(&#39;用户名密码不正确&#39;)
+    }
+    
+}
+
+app.get(&#39;/:name/:pwd&#39;, filter, (req, res) =&gt; {
+    res.send(&#39;ok&#39;)
+}).listen(88)
+</code></pre></td></tr></table>
+</div>
+</div><p>这里写了一个 filter 方法，有一个 next 参数。在路由的时候，把 filter 作为一个参数，则就可以先执行 filter 函数，然后执行路由的逻辑。</p>
+<p>如果想要全局使用的话，就直接使用 use 方法即可。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>app.use(filter);
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=文件上传>文件上传</h2>
+<p>前面说到的 body-parser 不支持文件上传，那么使用 multer 则可以实现。</p>
+<h1 id=操作数据库>操作数据库</h1>
+<p>node 一般会使用 mongo 和 mysql，使用下面这个例子即可：</p>
+<h2 id=操作-mongodb>操作 MongoDB</h2>
+<p>官方 api <code>http://mongodb.github.io/node-mongodb-native/</code></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var mongodb = require(&#39;mongodb&#39;);
+var MongoClient = mongodb.MongoClient;
+var db;
+
+MongoClient.connect(&#34;mongodb://localhost:27017/test1705candel&#34;, function(err, database) {
+  if(err) throw err;
+
+  db = database;
+});
+
+module.exports = {
+    insert: function(_collection, _data, _callback){
+        var i = db.collection(_collection).insert(_data).then(function(result){
+            _callback(result);
+        });
+    },
+    select: function(_collection, _condition, _callback){
+        var i = db.collection(_collection).find(_condition || {}).toArray(function(error, dataset){
+            _callback({status: true, data: dataset});
+        })
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=操作-mysql>操作 MySql</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var mysql = require(&#39;mysql&#39;);
+
+//创建连接池
+var pool  = mysql.createPool({
+  host     : &#39;localhost&#39;,
+  user     : &#39;root&#39;,
+  password : &#39;root&#39;,
+  port: 3306,
+  database: &#39;1000phone&#39;,
+  multipleStatements: true
+});
+
+
+module.exports = {
+    select: function(tsql, callback){
+        pool.query(tsql, function(error, rows){
+      if(rows.length &gt; 1){
+        callback({rowsCount: rows[1][0][&#39;rowsCount&#39;], data: rows[0]});
+      } else {
+        callback(rows);
+      }
+        })
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=session>session</h1>
+<p>Session 是一种记录客户状态的机制，不同的是 Cookie 保存在客户端浏览器中，而 Session 保存在服务器上的进程中。</p>
+<p>客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上，这就是 Session。客户端浏览器再次访问时只需要从该 Session 中查找该客户的状态就可以了。</p>
+<p>如果说 Cookie 机制是通过检查客户身上的“通行证”来确定客户身份的话，那么 Session 机制就是通过检查服务器上的“客户明细表”来确认客户身份。</p>
+<p>Session 相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</p>
+<p>Session 不能跨域。</p>
+<p>node 操作 session 和 cookie 也很简单，也是通过中间件的形式。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>const express = require(&#39;express&#39;)
+const path = require(&#39;path&#39;)
+const app = express();
+
+const bodyParser = require(&#39;body-parser&#39;);
+
+const cp = require(&#39;cookie-parser&#39;);
+const session = require(&#39;express-session&#39;);
+
+app.use(cp());
+app.use(session({
+    secret: &#39;12345&#39;,//用来对session数据进行加密的字符串.这个属性值为必须指定的属性
+    name: &#39;testapp&#39;,   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+    cookie: {maxAge: 5000 },  //设置maxAge是5000ms，即5s后session和相应的cookie失效过期
+    resave: false,
+    saveUninitialized: true,    
+}))
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, &#39;/&#39;)));
+
+app.get(&#39;/setsession&#39;, (request, response) =&gt; {
+    request.session.user = {username: &#39;admin&#39;};
+    response.send(&#39;set session success&#39;);
+})
+
+app.get(&#39;/getsession&#39;, (request, response) =&gt; {
+    response.send(request.session.user);
+})
+
+app.get(&#39;/delsession&#39;, (request, response) =&gt; {
+    delete reqeust.session.user;
+    response.send(request.session.user);
+})
+
+app.listen(88)
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=token>Token</h1>
+<p>Token 的特点</p>
+<ul>
+<li>随机性</li>
+<li>不可预测性</li>
+<li>时效性</li>
+<li>无状态、可扩展</li>
+<li>跨域</li>
+</ul>
+<p>基于 Token 的身份验证场景</p>
+<ol>
+<li>客户端使用用户名和密码请求登录</li>
+<li>服务端收到请求，验证登录是否成功</li>
+<li>验证成功后，服务端会返回一个 Token 给客户端，反之，返回身份验证失败的信息</li>
+<li>客户端收到 Token 后把 Token 用一种方式(cookie/localstorage/sessionstorage/其他)存储起来</li>
+<li>客户端每次发起请求时都选哦将 Token 发给服务端</li>
+<li>服务端收到请求后，验证 Token 的合法性，合法就返回客户端所需数据，反之，返回验证失败的信息</li>
+</ol>
+<p>Token 身份验证实现 —— jsonwebtoken</p>
+<p>先安装第三方模块 jsonwebtoken <code>npm install jsonwebtoken</code></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>const express = require(&#39;express&#39;)
+const path = require(&#39;path&#39;)
+const app = express();
+const bodyParser = require(&#39;body-parser&#39;);
+const jwt = require(&#39;jsonwebtoken&#39;);
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, &#39;/&#39;)));
+
+app.all(&#39;*&#39;, function(req, res, next) {
+    res.header(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;);
+    res.header(&#34;Access-Control-Allow-Headers&#34;, &#34;Content-Type,Content-Length, Auth, Accept,X-Requested-With&#34;);
+    res.header(&#34;Access-Control-Allow-Methods&#34;,&#34;PUT,POST,GET,DELETE,OPTIONS&#34;);
+    res.header(&#34;X-Powered-By&#34;,&#39; 3.2.1&#39;)
+    if(req.method==&#34;OPTIONS&#34;) {
+          res.sendStatus(200);/*让options请求快速返回*/
+    } else{
+          next();
+    }
+});
+
+
+app.get(&#39;/createtoken&#39;, (request, response) =&gt; {
+    //要生成 token 的主题信息
+    let user = {
+        username: &#39;admin&#39;,
+    }
+    //这是加密的 key（密钥）
+    let secret = &#39;dktoken&#39;;
+    //生成 Token
+    let token = jwt.sign(user, secret, {
+        &#39;expiresIn&#39;: 60*60*24 // 设置过期时间, 24 小时
+    })      
+    response.send({status: true, token});
+})
+
+app.post(&#39;/verifytoken&#39;, (request, response) =&gt; {
+    //这是加密的 key（密钥），和生成 token 时的必须一样
+    let secret = &#39;dktoken&#39;;
+    let token = request.headers[&#39;auth&#39;];
+    if(!token){
+        response.send({status: false, message: &#39;token不能为空&#39;});
+    }
+    jwt.verify(token, secret, (error, result) =&gt; {
+        if(error){
+            response.send({status: false});
+        } else {
+            response.send({status: true, data: result});
+        }
+    })
+})
+
+app.listen(88)
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=web-socket>web socket</h1>
+<p>HTTP 协议可以总结几个特点：</p>
+<ul>
+<li>一次性的、无状态的短连接：客户端发起请求、服务端响应、结束。</li>
+<li>被动性响应：只有当客户端请求时才被执行，给予响应，不能主动向客户端发起响应。</li>
+<li>信息安全性：得在服务器添加 SSL 证书，访问时用 HTTPS。</li>
+<li>跨域：服务器默认不支持跨域，可在服务端设置支持跨域的代码或对应的配置。</li>
+</ul>
+<p>TCP 协议可以总结几个特点：</p>
+<ul>
+<li>有状态的长连接：客户端发起连接请求，服务端响应并建立连接，连接会一直保持直到一方主动断开。</li>
+<li>主动性：建立起与客户端的连接后，服务端可主动向客户端发起调用。</li>
+<li>信息安全性：同样可以使用 SSL 证书进行信息加密，访问时用 WSS 。</li>
+<li>跨域：默认支持跨域。</li>
+</ul>
+<p>安装第三方模块 ws：<code>npm install ws</code></p>
+<p>开启一个 WebSocket 的服务器，端口为 8080</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var socketServer = require(&#39;ws&#39;).Server;
+var wss = new socketServer({
+    port: 8080
+});
+</code></pre></td></tr></table>
+</div>
+</div><p>也可以利用 Express 来开启 WebSocket 的服务器</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var app = require(&#39;express&#39;)();
+var server = require(&#39;http&#39;).Server(app);
+
+var socketServer = require(&#39;ws&#39;).Server;
+var wss = new socketServer({server: server, port: 8080});
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>用 on 来进行事件监听</li>
+<li>connection：连接监听，当客户端连接到服务端时触发该事件</li>
+<li>close：连接断开监听，当客户端断开与服务器的连接时触发</li>
+<li>message：消息接受监听，当客户端向服务端发送信息时触发该事件</li>
+<li>send: 向客户端推送信息</li>
+</ul>
+<p>soket.io 可以理解为对 WebSocket 的一种封装。好比前端的 jQuery 对原生 javascript 的封装。
+soket.io 依靠事件驱动的模式，灵活的使用了自定义事件和调用事件来完成更多的场景，不必依赖过多的原生事件。</p>
+<ul>
+<li>安装第三方模块 <code>npm install express socket.io</code></li>
+<li>开户 Socket 服务器，端口为 88</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var express = require(&#39;express&#39;);
+var app = express();
+var http = require(&#39;http&#39;).Server(app);
+var io = require(&#39;socket.io&#39;)(http);
+http.listen(88);
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>用 on 来进行事件监听和定义事件</li>
+<li>connection：监听客户端连接,回调函数会传递本次连接的 socket</li>
+<li>emit：触发用客户端的事件</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>io.on(&#39;connection&#39;, function(client){
+    //把当前登录的用户保存到对象 onlinePersons，并向所有在线的用户发起上线提示
+    //serverLogin 为自定义事件，供客户端调用
+    client.on(&#39;serverLogin&#39;, function(_person){
+        var _personObj = JSON.parse(_person);
+        onlinePersons[_personObj.id] = _personObj;
+        //向所有在线的用户发起上线提示
+        //触发客户端的 clientTips 事件
+        //clientTips 为客户端的自定义事件
+        io.emit(&#39;clientTips&#39;, JSON.stringify(onlinePersons));
+    })
+
+    //当监听到客户端有用户在移动，就向所有在线用户发起移动信息，触发客户端 clientMove 事件
+    //serverMove 为自定义事件，供客户端调用
+    client.on(&#39;serverMove&#39;, function(_person){
+        var _personObj = JSON.parse(_person);
+        onlinePersons[_personObj.id] = _personObj;
+        console.log(&#39;serverLogin&#39;, onlinePersons);
+        //clientTips 为客户端的自定义事件
+        io.emit(&#39;clientMove&#39;, _person);
+    });
+})
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=kafka-node>kafka-node</h1>
+<p>node 也可以去读写 kafka，而且很简单。只需要引入 kafka 的库即可。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>yarn add kafka-node
+</code></pre></td></tr></table>
+</div>
+</div><p>具体 api 可以看文档：<a href=https://github.com/SOHU-Co/kafka-node>https://github.com/SOHU-Co/kafka-node</a></p>
+<p>生产者</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var kafka = require(&#39;..&#39;);
+var Producer = kafka.Producer;
+var KeyedMessage = kafka.KeyedMessage;
+var Client = kafka.Client;
+var client = new Client(&#39;localhost:2181&#39;);
+var argv = require(&#39;optimist&#39;).argv;
+var topic = argv.topic || &#39;topic1&#39;;
+var p = argv.p || 0;
+var a = argv.a || 0;
+var producer = new Producer(client, { requireAcks: 1 });
+
+producer.on(&#39;ready&#39;, function () {
+  var message = &#39;a message&#39;;
+  var keyedMessage = new KeyedMessage(&#39;keyed&#39;, &#39;a keyed message&#39;);
+
+  producer.send([
+    { topic: topic, partition: p, messages: [message, keyedMessage], attributes: a }
+  ], function (err, result) {
+    console.log(err || result);
+    process.exit();
+  });
+});
+
+producer.on(&#39;error&#39;, function (err) {
+  console.log(&#39;error&#39;, err);
+});
+</code></pre></td></tr></table>
+</div>
+</div><p>消费者</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>&#39;use strict&#39;;
+
+var kafka = require(&#39;..&#39;);
+var Consumer = kafka.Consumer;
+var Offset = kafka.Offset;
+var Client = kafka.Client;
+var argv = require(&#39;optimist&#39;).argv;
+var topic = argv.topic || &#39;topic1&#39;;
+
+var client = new Client(&#39;localhost:2181&#39;);
+var topics = [{ topic: topic, partition: 1 }, { topic: topic, partition: 0 }];
+var options = { autoCommit: false, fetchMaxWaitMs: 1000, fetchMaxBytes: 1024 * 1024 };
+
+var consumer = new Consumer(client, topics, options);
+var offset = new Offset(client);
+
+consumer.on(&#39;message&#39;, function (message) {
+  console.log(message);
+});
+
+consumer.on(&#39;error&#39;, function (err) {
+  console.log(&#39;error&#39;, err);
+});
+
+/*
+* If consumer get `offsetOutOfRange` event, fetch data from the smallest(oldest) offset
+*/
+consumer.on(&#39;offsetOutOfRange&#39;, function (topic) {
+  topic.maxNum = 2;
+  offset.fetch([topic], function (err, offsets) {
+    if (err) {
+      return console.error(err);
+    }
+    var min = Math.min.apply(null, offsets[topic.topic][topic.partition]);
+    consumer.setOffset(topic.topic, topic.partition, min);
+  });
+});
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=node-单元测试>Node 单元测试</h1>
+<p>以 function 为最小单位，验证特定情况下的 input 和 output 是否正确。</p>
+<ul>
+<li>防止改 A 坏 B，避免不能跑的代码比能跑的还多。</li>
+<li>明确指出问题所在、告知正确的行为是什么，减少 debug 的时间。</li>
+</ul>
+<p>对于 node 来说，单元测试也很容易做。</p>
+<p>测试主要分为两种，TDD 和 BDD。</p>
+<h2 id=tdd-vs-bdd>TDD VS. BDD</h2>
+<p>比较 TDD 与 BDD 的差异。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>TDD</th>
+<th>BDD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全名</td>
+<td>测试驱动开发 Test-Driven Development</td>
+<td>行为驱动开发 Behavior Driven Development</td>
+</tr>
+<tr>
+<td>定义</td>
+<td>在开发前先撰写测试程式，以确保程式码品质与符合验收规格。</td>
+<td>TDD 的进化版。除了实作前先写测试外，还要写一份「可以执行的规格」。</td>
+</tr>
+<tr>
+<td>特性</td>
+<td>从测试去思考程式如何实作。强调小步前进、快速且持续回馈、拥抱变化、重视沟通、满足需求。</td>
+<td>从用户的需求出发，强调系统行为。使用自然语言描述测试案例，以减少使用者和工程师的沟通成本。测试后的输出结果可以直接做为文件阅读。</td>
+</tr>
+</tbody>
+</table>
+<p>从代码层面来看：</p>
+<p>TDD</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>suite(&#39;Array&#39;, ()=&gt;{
+    setup(()={
+        
+    });
+    
+    test(&#39;equal -1 when index beyond array length&#39;, ()=&gt;{
+       assert.equal(-1, [1,2,3].indexOf(4)); 
+    });
+})
+</code></pre></td></tr></table>
+</div>
+</div><p>BDD</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>describe(&#39;Array&#39;, function() {
+  before(function() {
+  });
+
+  it(&#39;should return -1 when no such index&#39;, function() {
+    [1,2,3].indexOf(4).should.equal(-1);
+  });
+});
+</code></pre></td></tr></table>
+</div>
+</div><p>对比了这两种类型的语法之后，我选择了 BDD。</p>
+<h2 id=测试框架实践>测试框架实践</h2>
+<p>在 node 社区，比较成熟的是 mocha。mocha 本身是不提供断言库的，一般来说断言库比较常用的是 chai。mocha 和 chai，合起来就被戏称为抹茶。</p>
+<p>mocha 一般需要全局安装，chai 安装到项目目录下即可。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>yarn global add mocha
+
+yarn add chai
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=mocha>mocha</h3>
+<h4 id=语法说明>语法说明</h4>
+<ul>
+<li><code>describe()</code>：描述场景或圈出特定区块，例如：标明测试的功能或 function。</li>
+<li><code>it()</code>：撰写测试案例（Test Case）。</li>
+<li><code>before()</code>：在所有测试开始前会执行的代码。</li>
+<li><code>after()</code>：在所有测试结束后会执行的代码。</li>
+<li><code>beforeEach()</code>：在每个 Test Case 开始前执行的代码。</li>
+<li><code>afterEach()</code>：在每个 Test Case 结束后执行的代码。</li>
+</ul>
+<h4 id=代码示例>代码示例</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>describe(&#39;hooks&#39;, function() { 
+  before(function() {
+    
+  });
+
+  after(function() {
+    
+  });
+
+  beforeEach(function() {
+    
+  });
+
+  afterEach(function() {
+    
+  });
+
+  
+  it(&#39;should ...&#39;, function() {
+    
+  });
+});
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=chai>chai</h3>
+<h4 id=assert>assert</h4>
+<p>assert(expression, message)：测试这个项目的 expression 是否为真，若为假则显示错误消息 message。</p>
+<h4 id=expect--should>Expect / Should</h4>
+<p>预期 3 等于（===）2。这是使用可串连的操作符 来完成断言。这些可串联的有 to、is、have 等。它很像英文，用很口语的方式做判断。</p>
+<h2 id=覆盖率>覆盖率</h2>
+<p>既然是给功能代码写单元测试，那就应该有个指标去衡量单元测试覆盖了哪些功能代码，这就是接下来要介绍的测试覆盖率。</p>
+<p>在 Node.js 中，我们使用 istanbul 作为覆盖率统计的工具，istanbul 可以帮助我们统计到代码的语句覆盖率、分支覆盖率、函数覆盖率以及行覆盖率。</p>
+<p>全局安装：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>yarn global add istanbul
+</code></pre></td></tr></table>
+</div>
+</div><p>只需要使用 istanbul cover 就可以得到覆盖率。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>istanbul cover simple.js
+</code></pre></td></tr></table>
+</div>
+</div><p>可以和 mocha 配合使用：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>isbuntal cover _mocha test/simple-test.js
+</code></pre></td></tr></table>
+</div>
+</div><p>mocha 和 _mocha 是两个不同的命令，前者会新建一个进程执行测试，而后者是在当前进程（即 istanbul 所在的进程）执行测试，只有这样， istanbul 才会捕捉到覆盖率数据。其他测试框架也是如此，必须在同一个进程执行测试。</p>
+<h1 id=引入-typescript>引入 typescript</h1>
+<p>typescript 其实就是加了类型的 js。</p>
+<p>所谓类型，就是约定变量的内存布局。js 作为一个动态弱类型的语言，在开发大型项目的时候，不免可能出现问题，所以有类型的语言可以在编译期就能检测到错误，减少 debug 的时间。</p>
+<h2 id=安装>安装</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>yarn global add typescript
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=新项目引入-ts>新项目引入 ts</h2>
+<p>现在新建文件<code>server.ts</code>：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>import</span> <span class=o>*</span> <span class=kr>as</span> <span class=nx>http</span> <span class=kr>from</span> <span class=s1>&#39;http&#39;</span><span class=p>;</span>
+
+<span class=kr>const</span> <span class=nx>server</span> <span class=o>=</span> <span class=nx>http</span><span class=p>.</span><span class=nx>createServer</span><span class=p>(</span><span class=kd>function</span> <span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>res</span><span class=p>.</span><span class=nx>end</span><span class=p>(</span><span class=s1>&#39;Hello, world&#39;</span><span class=p>);</span>
+<span class=p>});</span>
+
+<span class=nx>server</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=mi>3000</span><span class=p>,</span> <span class=kd>function</span> <span class=p>()</span> <span class=p>{</span>
+  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;server is listening&#39;</span><span class=p>);</span>
+<span class=p>});</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为了能执行此文件，需要通过 <strong>tsc</strong> 命令来编译该 TypeScript 源码：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>tsc server.ts
+</code></pre></td></tr></table>
+</div>
+</div><p>如果没有什么意外的话，此时控制台会打印出以下的出错信息：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>server.ts(1,23): error TS2307: Cannot find module &#39;http&#39;.
+</code></pre></td></tr></table>
+</div>
+</div><p>这表示没有找到<code>http</code>这个模块定义（TyprScript 编译时是通过查找模块的 typings 声明文件来判断模块是否存在的，而不是根据真实的 js 文件，下文会详细解释），但是我们当前目录下还是生成了一个新的文件<code>server.js</code>，我们可以试着执行它：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>node server.js
+</code></pre></td></tr></table>
+</div>
+</div><p>如果一切顺利，那么控制台将会打印出 <strong>server is listening</strong> 这样的信息，并且我们在浏览器中访问 <a href=http://127.0.0.1:3000/>http://127.0.0.1:3000</a>时也能看到正确的结果：<strong>Hello, world</strong></p>
+<p>现在再回过头来看看刚才的编译错误信息。由于这是一个 Node.js 项目，typescript 语言中并没有定义<code>http</code>这个模块，所以我们需要安装 Node.js 运行环境的声明文件：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>yarn global add @types/node 
+</code></pre></td></tr></table>
+</div>
+</div><p>安装完毕之后，再重复上文的编译过程，此时 <strong>tsc</strong> 不再报错了。</p>
+<p>大多数时候，为了方便我们可以直接使用 <strong>ts-node</strong> 命令执行 TypeScript 源文件而不需要预先编译。首先执行以下命令安装 <strong>ts-node</strong>：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>yarn global add -g ts-node
+</code></pre></td></tr></table>
+</div>
+</div><p>然后使用 <strong>ts-node</strong> 命令执行即可：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>ts-node --no-cache server.ts
+</code></pre></td></tr></table>
+</div>
+</div><p>说明：使用 <strong>ts-node</strong> 执行 TypeScript 程序时，为了提高编译速度，默认会缓存未修改过的 <strong>.ts</strong> 文件，但有时候会导致一些 Bug，所以建议启动时加上 <code>--no-cache</code> 参数。</p>
+<h3 id=tsconfigjson-配置文件>tsconfig.json 配置文件</h3>
+<p>每个 TypeScript 项目都需要一个 <strong>tsconfig.json</strong> 文件来指定相关的配置，比如告诉 TypeScript 编译器要将代码转换成 ES5 还是 ES6 代码等。</p>
+<p>可以使用 tsc 命令生成。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>tsc --init
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=使用第三方模块>使用第三方模块</h3>
+<p>一般情况下在 TypeScript 中是不能”<em>直接</em>“使用 npm 上的模块的，比如我们要使用 express 模块，先执行以下命令安装：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>yarn add express
+</code></pre></td></tr></table>
+</div>
+</div><p>然后新建文件 <code>server.ts</code> :</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>import</span> <span class=o>*</span> <span class=kr>as</span> <span class=nx>express</span> <span class=kr>from</span> <span class=s1>&#39;express&#39;</span><span class=p>;</span>
+
+<span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=nx>express</span><span class=p>();</span>
+<span class=nx>app</span><span class=p>.</span><span class=kr>get</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>,</span> <span class=kd>function</span> <span class=p>(</span><span class=nx>req</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>res</span><span class=p>.</span><span class=nx>end</span><span class=p>(</span><span class=s1>&#39;hello, world&#39;</span><span class=p>);</span>
+<span class=p>})</span>
+
+<span class=nx>app</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=mi>3000</span><span class=p>,</span> <span class=kd>function</span> <span class=p>()</span> <span class=p>{</span>
+  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;server is listening&#39;</span><span class=p>);</span>
+<span class=p>});</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后使用以下命令执行：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>ts-node server.ts
+</code></pre></td></tr></table>
+</div>
+</div><p>如果不出意外，我们将会看到这样的报错信息：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>src/server.ts(1,26): error TS7016: Could not find a declaration file for module &#39;express&#39;.
+</code></pre></td></tr></table>
+</div>
+</div><p>报错的信息表明没有找到<code>express</code>模块的声明文件。由于 TypeScript 项目最终会编译成 JavaScript 代码执行，当我们在 TypeScript 源码中引入这些被编译成 JavaScript 的模块时，它需要相应的声明文件（<strong>.d.ts</strong>文件）来知道该模块类型信息，这些声明文件可以通过设置<code>tsconfig.json</code>中的<code>declaration: true</code>来自动生成。而那些不是使用 TypeScript 编写的模块，也可以通过手动编写声明文件来兼容 TypeScript。</p>
+<p>当遇到缺少模块声明文件的情况，开发者可以尝试通过 yarn addl @types/xxx 来安装模块声明文件即可。</p>
+<p>现在我们尝试执行以下命令安装 <strong>express</strong> 模块的声明文件：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>yarn add @types/express
+</code></pre></td></tr></table>
+</div>
+</div><p>没有意外，果然能成功安装。现在再通过 <strong>ts-node</strong> 来执行的时候，发现已经没有报错了。</p>
+<h3 id=单元测试>单元测试</h3>
+<p>直接使用 mocha 和 chai，进行 ts 的测试。</p>
+<h2 id=旧项目迁移>旧项目迁移</h2>
+<p>通常来说这个过程包括了以下步骤：</p>
+<ul>
+<li>添加 <code>tsconfig.json</code></li>
+<li>将你的源代码文件扩展名从 <code>.js</code> 改成 <code>.ts</code>。使用 <code>any</code> 来开始<em>抑止</em>错误。</li>
+<li>使用 TypeScript 来编写新的代码并且尽可能少地使用 <code>any</code>。</li>
+<li>返回到旧代码里并且开始加入类型标注和解决发现的 bugs。</li>
+<li>为第三方 JavaScript 代码使用环境定义。</li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/node%E8%B8%A9%E5%9D%91/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">node 踩坑</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/node%E7%9A%84redis%E5%AE%9E%E6%88%98/>
+<span class="next-text nav-default">node 的 redis 实战</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

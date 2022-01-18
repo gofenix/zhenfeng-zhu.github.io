@@ -1,0 +1,1050 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Chapter12 与 Java 的互操作 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="与 JVM 一起工作 在每个 Clojurist 的生命中都会有这么一天，她必须从纯函数和不可变数据结构的庇护所冒险进入野蛮的 Java 大陆。这段艰难的旅程是必要的，因为 Clojure 是在 Java"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/chapter12/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Chapter12 与 Java 的互操作">
+<meta property="og:description" content="与 JVM 一起工作 在每个 Clojurist 的生命中都会有这么一天，她必须从纯函数和不可变数据结构的庇护所冒险进入野蛮的 Java 大陆。这段艰难的旅程是必要的，因为 Clojure 是在 Java">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter12/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-15T20:55:18+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Chapter12 与 Java 的互操作">
+<meta itemprop=description content="与 JVM 一起工作 在每个 Clojurist 的生命中都会有这么一天，她必须从纯函数和不可变数据结构的庇护所冒险进入野蛮的 Java 大陆。这段艰难的旅程是必要的，因为 Clojure 是在 Java"><meta itemprop=datePublished content="2022-01-15T20:55:18+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="11668">
+<meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Chapter12 与 Java 的互操作">
+<meta name=twitter:description content="与 JVM 一起工作 在每个 Clojurist 的生命中都会有这么一天，她必须从纯函数和不可变数据结构的庇护所冒险进入野蛮的 Java 大陆。这段艰难的旅程是必要的，因为 Clojure 是在 Java"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Chapter12 与 Java 的互操作</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-15 </span>
+<span class=more-meta> 约 11668 字 </span>
+<span class=more-meta> 预计阅读 24 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#与-jvm-一起工作>与 JVM 一起工作</a>
+<ul>
+<li><a href=#jvm>JVM</a></li>
+<li><a href=#编写编译和运行一个-java-程序>编写、编译和运行一个 Java 程序</a>
+<ul>
+<li><a href=#面向对象的编程在世界最微小的果壳中的应用>面向对象的编程在世界最微小的果壳中的应用</a></li>
+<li><a href=#ahoy-world>Ahoy, World</a></li>
+</ul>
+</li>
+<li><a href=#包和导入>包和导入</a></li>
+<li><a href=#jar-文件>JAR 文件</a></li>
+<li><a href=#clojurejar>clojure.jar</a></li>
+<li><a href=#java-interop>Java Interop</a>
+<ul>
+<li><a href=#互通语法>互通语法</a></li>
+<li><a href=#导入>导入</a></li>
+</ul>
+</li>
+<li><a href=#常用的-java-类>常用的 Java 类</a>
+<ul>
+<li><a href=#系统类>系统类</a></li>
+<li><a href=#日期类>日期类</a></li>
+</ul>
+</li>
+<li><a href=#文件和输入输出>文件和输入/输出</a></li>
+<li><a href=#资源>资源</a></li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=与-jvm-一起工作>与 JVM 一起工作</h1>
+<p>在每个 Clojurist 的生命中都会有这么一天，她必须从纯函数和不可变数据结构的庇护所冒险进入野蛮的 Java 大陆。这段艰难的旅程是必要的，因为 Clojure 是在 Java 虚拟机（JVM）上托管的，这赋予了它三个基本特性。</p>
+<p>赋予它三个基本特征。首先，你运行 Clojure 应用程序的方式与你运行 Java 应用程序的方式相同。第二，你需要使用 Java 对象来实现核心功能，如读取文件和处理日期。第三，Java 有一个庞大的有用库的生态系统，你需要对 Java 有一定的了解才能使用它们。</p>
+<p>这样一来，Clojure 就有点像一个乌托邦社区，被放置在一个乌托邦国家的中间。显然，你更愿意与其他乌托邦人互动，但偶尔你也需要与当地人交谈，以便完成工作。</p>
+<p>这一章就像一本短语书和 Java 国家的文化介绍之间的交叉。你将了解什么是 JVM，它是如何运行程序的，以及如何为它编译程序。本章还将为你简要介绍常用的 Java 类和方法，并解释如何使用 Clojure 与它们互动。你将学会如何思考和理解 Java，以便将任何 Java 库纳入你的 Clojure 程序中。</p>
+<p>要运行本章的例子，你需要在电脑上安装 1.6 或更高版本的 Java 开发工具包（JDK）。你可以通过在终端运行<code>javac -version</code>来检查。你应该看到类似 &ldquo;java 1.8.0_40 &ldquo;的内容；如果没有，请访问<a href=http://www.oracle.com/technetwork/java/javase/downloads/index.html><em>http://www.oracle.com/</em></a>，下载最新的 JDK。</p>
+<h2 id=jvm>JVM</h2>
+<p>开发人员用 JVM 这个词来指代一些不同的东西。你会听到他们说，&ldquo;Clojure 在<em>the</em> JVM 上运行&rdquo;，你也会听到，&ldquo;Clojure 程序在<em>a</em> JVM 中运行&rdquo;。在第一种情况下，JVM 指的是一个抽象概念&ndash;Java 虚拟机的一般模型。在第二种情况下，它指的是一个进程&ndash;一个正在运行的程序的实例。我们将专注于 JVM 模型，但当我们谈论运行中的 JVM 进程时，我将指出来。</p>
+<p>为了理解 JVM，让我们回头看看普通的计算机是如何工作的。在计算机心脏的深处是它的 CPU，而 CPU 的工作是执行像<em>加和</em>无符号乘法这样的操作。你可能听说过程序员将这些指令编码在打卡机上、灯泡里、乌龟壳的神圣缝隙里，或者<em>什么的，但现在这些操作在汇编语言中用 ADD 和 MUL 这样的记忆符号表示。CPU 架构（X86、ARMv7，等等）决定了哪些操作可以作为该架构的</em>指令集的一部分。</p>
+<p>由于用汇编语言编程并不有趣，人们发明了像 C 和 C++这样的高级语言，将其编译成 CPU 可以理解的指令。大体上说，这个过程是</p>
+<ol>
+<li>编译器读取源代码。</li>
+<li>编译器输出一个包含机器指令的文件。</li>
+<li>CPU 执行这些指令。</li>
+</ol>
+<p>在图 12-1 中注意到，最终，你必须将程序翻译成 CPU 能够理解的指令，而 CPU 并不关心你用哪种编程语言来产生这些指令。</p>
+<p>JVM 类似于计算机，它也需要将代码翻译成低级别的指令，称为<em>Java 字节码</em>。然而，作为一个<em>虚拟</em>机器，这种翻译是作为软件而不是硬件实现的。运行中的 JVM 通过将字节码实时翻译成主机可以理解的机器代码来执行，这个过程被称为<em>及时**编译</em>。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/java/compile.png alt></p>
+<p>图 12-1：C 语言程序如何被翻译成机器码的高级概述</p>
+<p>为了让一个程序在 JVM 上运行，它必须被编译成 Java 字节码。通常，当你编译程序时，产生的字节码被保存在一个*.class<em>文件中。然后你会把这些文件打包在</em>Java 归档*文件（JAR 文件）中。就像 CPU 不关心你用哪种编程语言来生成机器指令一样，JVM 也不关心你如何创建字节码。它不关心你是否使用 Scala、JRuby、Clojure，甚至是 Java 来创建 Java 字节码。一般来说，这个过程就像图 12-2 中所示的那样。</p>
+<ol>
+<li>Java 编译器读取源代码。</li>
+<li>编译器输出字节码，通常是在一个 JAR 文件中。</li>
+<li>JVM 执行字节码。</li>
+<li>VM 向 CPU 发送机器指令。</li>
+</ol>
+<p>当有人说 Clojure 在 JVM 上运行时，他们的意思之一是 Clojure 程序被编译成 Java 字节码，JVM 进程执行它们。从操作的角度来看，这意味着你对待 Clojure 程序和 Java 程序是一样的。你把它们编译成 JAR 文件，并使用<code>java</code>命令运行它们。如果客户需要一个在 JVM 上运行的程序，你可以偷偷地用 Clojure 而不是 Java 来编写，他们不会知道的。从外面看，你无法分辨 Java 和 Clojure 程序之间的区别，就像你无法分辨 C 和 C++程序之间的区别一样。Clojure 可以让你变得富有成效，而且是偷偷摸摸的。</p>
+<p>！<a href=https://www.braveclojure.com/assets/images/cftbat/java/jvm-compile.png></a></p>
+<p>图 12-2：Java 程序产生 JVM 字节码，但 JVM 仍然需要产生机器指令，就像 C 语言编译器一样。</p>
+<h2 id=编写编译和运行一个-java-程序>编写、编译和运行一个 Java 程序</h2>
+<p>让我们来看看一个真正的 Java 程序是如何工作的。在本节中，你将了解到 Java 所使用的面向对象的范式。然后，你将用 Java 建立一个简单的海盗短语书。这将帮助你对 JVM 感到更加舒适，它将为即将到来的 Java 互操作（编写直接使用 Java 类、对象和方法的 Clojure 代码）一节做好准备，如果有一个恶棍试图在公海上破坏你的战利品，它就会派上用场。为了把所有的信息联系在一起，你将在本章的最后偷看一些 Clojure 的 Java 代码。</p>
+<h3 id=面向对象的编程在世界最微小的果壳中的应用>面向对象的编程在世界最微小的果壳中的应用</h3>
+<p>Java 是一种面向对象的语言，所以如果你想了解你在 Clojure 编程中使用 Java 库或编写 Java 互操作代码时发生了什么，你就需要了解面向对象编程（OOP）是如何工作的。你也会在 Clojure 文档中发现面向对象的术语，所以学习这些概念很重要。如果你精通 OOP，可以随意跳过本节。对于那些需要两分钟了解的人来说，这里是：OOP 的核心角色是<em>类</em>、<em>对象</em>和<em>方法</em>。</p>
+<p>我认为对象是真正的、真正的、可笑的蠢货机器人。它们是那种永远不会引起哲学辩论的机器人，即强迫有知觉的生物进行永久的奴役的伦理。这些机器人只做两件事：他们响应命令和维护数据。在我的想象中，它们通过在小 Hello Kitty 剪贴板上写下东西来做这件事。</p>
+<p>想象一下，一个制造这些机器人的工厂。机器人所理解的命令集和它所维护的数据集都是由制造机器人的工厂决定的。在 OOP 术语中，工厂对应于类，androids 对应于对象，而命令对应于方法。例如，你可能有一个<code>ScaryClown'工厂（类），它生产的androids（对象）响应</code>makeBalloonArt&rsquo;命令（方法）。这个安卓机一直跟踪它所拥有的气球的数量，然后在气球的数量发生变化时更新这个数字。它可以用<code>balloonCount</code>报告这个数字，用<code>receiveBalloons</code>接收任何数量的气球。下面是你如何与代表小丑 Belly Rubs 的 Java 对象进行交互。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>ScaryClown bellyRubsTheClown = new ScaryClown();
+bellyRubsTheClown.balloonCount();
+// =&gt; 0
+
+bellyRubsTheClown.receiveBalloons(2);
+bellyRubsTheClown.balloonCount();
+// =&gt; 2
+
+bellyRubsTheClown.makeBalloonArt();
+// =&gt; &#34;Belly Rubs makes a balloon shaped like a clown, because Belly Rubs
+// =&gt; is trying to scare you and nothing is scarier than clowns.&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>这个例子告诉你如何使用<code>ScaryClown</code>类创建一个新的对象<code>bellyRubsTheClown</code>。它还向你展示了如何在该对象上调用方法（如<code>气球计数'、</code>接收气球&rsquo;和`制作气球艺术'），大概是为了让你能吓唬孩子。</p>
+<p>你应该知道 OOP 的最后一个方面，或者至少是它在 Java 中的实现方式，就是你也可以向工厂发送命令。在 OOP 术语中，你会说，类也有方法。例如，内置类<code>Math</code>有许多类方法，包括<code>Math.abs</code>，它返回一个数字的绝对值。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>Math.abs(-50)
+// =&gt; 50
+</code></pre></td></tr></table>
+</div>
+</div><p>我希望这些小丑没有给你造成太大的创伤。现在让我们把你的 OOP 知识用在工作上吧!</p>
+<h3 id=ahoy-world>Ahoy, World</h3>
+<p>继续前进，创建一个名为<em>phrasebook</em>的新目录。在该目录中，创建一个名为<em>PiratePhrases.java</em>的文件，并编写以下内容。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>public class PiratePhrases
+{
+    public static void main(String[] args)
+    {
+        System.out.println(&#34;Shiver me timbers!!&#34;);
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这个非常简单的程序将在你运行时向你的终端打印 &ldquo;Shiver me timbers!!!&ldquo;这句话。(这就是海盗说 &ldquo;你好，世界！&ldquo;的方式），当你运行它时，它将打印到你的终端。它由一个类<code>PiratePhrases</code>和一个属于该类的静态方法<code>main</code>组成。静态方法本质上是类的方法。</p>
+<p>在你的终端，用 javac PiratePhrases.java 命令编译<code>PiratePhrases</code>源代码。如果你打的字都是正确的，**你的心是纯洁的，你应该看到一个名为<em>PiratePhrases.class</em>的文件。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>$ ls
+PiratePhrases.class PiratePhrases.java
+</code></pre></td></tr></table>
+</div>
+</div><p>你刚刚编译了你的第一个 Java 程序，我的朋友! 现在用<code>java PiratePhrases</code>运行它。你应该看到这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>Shiver me timbers!!!
+</code></pre></td></tr></table>
+</div>
+</div><p>这里发生的事情是你用 Java 编译器<code>javac</code>创建了一个 Java 类文件，<em>PiratePhrases.class</em>。这个文件包含了大量的 Java 字节码（好吧，对于这么大的程序，也许只有一个字节）。</p>
+<p>当你运行 &ldquo;java PiratePhrases &ldquo;时，JVM 首先查看了你的<em>classpath</em>，寻找一个名为 &ldquo;PiratePhrases &ldquo;的类。classpath 是文件系统的路径列表，JVM 通过搜索来寻找定义类的文件。默认情况下，classpath 包括你运行 java 时所在的目录。试着运行 java -classpath /tmp PiratePhrases，你会得到一个错误，尽管<em>PiratePhrases.class</em>就在你的当前目录中。</p>
+<p>注意 你可以在你的 classpath 上有多个路径，如果你在 Mac 上或运行 Linux，可以用冒号隔开，如果你在使用 Windows，可以用分号。例如，classpath /tmp:/var/maven:.包括/tmp、/var/maven 和.目录。</p>
+<p>在 Java 中，每个文件只允许有一个公有类，而且文件名必须与类名一致。这就是为什么<code>java</code>知道要尝试在<em>PiratePhrases.class</em>中寻找<code>PiratePhrases</code>类的字节码。在<code>java</code>找到<code>PiratePhrases</code>类的字节码后，它执行了该类的<code>main</code>方法。Java 与 C 语言类似，只要你说 &ldquo;运行某些东西，并使用这个类作为入口点&rdquo;，它就会一直运行这个类的<code>main'方法；因此，这个方法必须是</code>public'，你可以在`PiratePhrases&rsquo;的源代码中看到。</p>
+<p>在下一节，你将学习如何处理跨越多个文件的程序代码，以及如何使用 Java 库。</p>
+<h2 id=包和导入>包和导入</h2>
+<p>为了了解如何使用多文件程序和 Java 库，我们将编译并运行一个程序。本节对 Clojure 有直接的影响，因为你将使用同样的想法和术语来与 Java 库进行交互。</p>
+<p>让我们从几个定义开始。</p>
+<ul>
+<li><strong>包</strong>与 Clojure 的命名空间类似，包提供了代码组织。包包含类，包名对应于文件系统的目录。如果一个文件中有 &ldquo;package com.shapemaster &ldquo;一行，那么目录<em>com/shapemaster</em>一定存在于你的 classpath 上。在该目录中会有定义类的文件。</li>
+<li><strong>import</strong> Java 允许你导入类，这基本上意味着你可以不使用它们的命名空间前缀来引用它们。所以如果你在<code>com.shapemaster</code>中有一个名为<code>Square</code>的类，你可以在<code>.java</code>文件的顶部写上<code>import``com.shapemaster.Square;</code>或<code>import com.shapemaster.*;</code>，以便在你的代码中使用<code>Square</code>而不是<code>com.shapemaster.Square</code>。</li>
+</ul>
+<p>让我们试试使用<code>package</code>和<code>import</code>。在这个例子中，你将创建一个名为<code>pirate_phrases</code>的包，它有两个类，<code>问候'和</code>告别'。 首先，浏览你的<em>phrasebook</em>，在该目录下创建另一个目录，<em>pirate_phrases</em>。创建<em>pirate_phrases</em>是必要的，因为 Java 包的名称与文件系统的目录相对应。然后，在<em>pirate_phrases</em>目录下创建<em>Greetings.java</em>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=err>➊</span> <span class=kn>package</span> <span class=nx>pirate_phrases</span><span class=p>;</span>
+
+<span class=nx>public</span> <span class=nx>class</span> <span class=nx>Greetings</span>
+<span class=p>{</span>
+    <span class=nx>public</span> <span class=nx>static</span> <span class=nx>void</span> <span class=nf>hello</span><span class=p>()</span>
+    <span class=p>{</span>
+        <span class=nx>System</span><span class=p>.</span><span class=nx>out</span><span class=p>.</span><span class=nb>println</span><span class=p>(</span><span class=s>&#34;Shiver me timbers!!!&#34;</span><span class=p>);</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在➊，<code>package pirate_phrases;</code>表示这个类将是<code>pirate_phrases</code>包的一部分。现在在<em>pirate_phrases</em>目录下创建<em>Farewells.java</em>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>pirate_phrases</span><span class=p>;</span>
+
+<span class=nx>public</span> <span class=nx>class</span> <span class=nx>Farewells</span>
+<span class=p>{</span>
+    <span class=nx>public</span> <span class=nx>static</span> <span class=nx>void</span> <span class=nf>goodbye</span><span class=p>()</span>
+    <span class=p>{</span>
+        <span class=nx>System</span><span class=p>.</span><span class=nx>out</span><span class=p>.</span><span class=nb>println</span><span class=p>(</span><span class=s>&#34;A fair turn of the tide ter ye thar, ye magnificent sea friend!!&#34;</span><span class=p>);</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在在<em>phrasebook</em>目录下创建<em>PirateConversation.java</em>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>import pirate_phrases.*;
+
+public class PirateConversation
+{
+    public static void main(String[] args)
+    {
+        Greetings greetings = new Greetings();
+        greetings.hello();
+
+        Farewells farewells = new Farewells();
+        farewells.goodbye();
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>第一行，<code>import pirate_phrases.*;</code>，导入了<code>pirate_phrases</code>包中的所有类，其中包含<code>问候'和</code>告别&rsquo;类。</p>
+<p>如果你在<em>phrasebook</em>目录下运行<code>javac PirateConversation.java</code>，接着运行<code>java PirateConversation</code>，你应该看到这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>Shiver me timbers!!!
+A fair turn of the tide ter ye thar, ye magnificent sea friend!!
+</code></pre></td></tr></table>
+</div>
+</div><p>亲爱的读者，她在那里吹了起来。她确实在吹。</p>
+<p>注意，当你编译一个 Java 程序时，Java 会在你的 classpath 中搜索包。试着输入以下内容。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cd pirate_phrases
+javac ../PirateConversation.java
+</code></pre></td></tr></table>
+</div>
+</div><p>你会得到这个结果。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=p>..</span><span class=o>/</span><span class=nx>PirateConversation</span><span class=p>.</span><span class=nx>java</span><span class=p>:</span><span class=mi>1</span><span class=p>:</span> <span class=kt>error</span><span class=p>:</span> <span class=kn>package</span> <span class=nx>pirate_phrases</span> <span class=nx>does</span> <span class=nx>not</span> <span class=nx>exist</span>
+<span class=kn>import</span> <span class=nx>pirate_phrases</span><span class=p>.</span><span class=o>*</span><span class=p>;</span>
+<span class=p>^</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>轰隆隆! Java 编译器刚刚告诉你，让你羞愧地垂下头来，也许还会哭泣一下。</p>
+<p>为什么？它认为<code>pirate_phrases</code>包不存在。但这很愚蠢，对吗？你是在<em>pirate_phrases</em>目录下！你是在<em>pirate_phrases</em>目录下。</p>
+<p>这里发生的情况是，默认的 classpath 只包括当前的目录，在这种情况下是<em>pirate_phrases</em>。 <code>javac</code>试图找到<em>phrasebook/pirate_phrases/pirate_phrases</em>目录，但该目录并不存在。当你在<em>phrasebook</em>目录下运行<code>javac ../PirateConversation.java</code>时，<code>javac</code>试图找到<em>phrasebook/pirate_phrases</em>目录，该目录确实存在。在不改变目录的情况下，尝试运行 javac -classpath ../ ../PirateConversation.java。吓我一跳，居然成功了! 这是因为你手动将 classpath 设置为<em>pirate_phrases</em>的父目录，也就是<em>phrasebook</em>。从那里，<code>javac</code>可以成功地找到<em>pirate_phrases</em>目录。</p>
+<p>综上所述，包组织了代码，并要求有一个匹配的目录结构。导入类可以让你引用它们，而不需要预留整个类的包名。 <code>javac</code>和 Java 使用 classpath 查找包。</p>
+<h2 id=jar-文件>JAR 文件</h2>
+<p>JAR 文件允许你将所有的*.class<em>文件捆绑成一个单一的文件。导航到你的</em>phrasebook*目录并运行以下程序。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>jar cvfe conversation.jar PirateConversation PirateConversation.class
+pirate_phrases/*.class
+java -jar conversation.jar
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就能正确显示海盗对话了。你把所有的类文件捆绑在<em>conversation.jar</em>中。使用<code>e</code>标志，你还指出<code>PirateConversation</code>类是<em>入口点</em>。入口点是包含 JAR 整体运行时应该执行的<code>main'方法的类，</code>jar&rsquo;将这些信息存储在 JAR 文件中的<em>META-INF/MANIFEST.MF</em>文件中。如果你要阅读该文件，它将包含这一行。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>Main-Class: PirateConversation
+</code></pre></td></tr></table>
+</div>
+</div><p>顺便说一下，当你执行 JAR 文件时，你不必担心你在哪个目录下，相对于文件而言。你可以换到<em>pirate_phrases</em>目录，然后运行<code>java -jar .../conversation.jar</code>，就可以正常工作了。原因是 JAR 文件维护了目录结构。你可以用 jar tf conversation.jar 查看它的内容，它的输出是这样的。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>META-INF/
+meta-inf/manifest.mf
+PirateConversation.class
+pirate_phrases/Farewells.class
+Pirate_phrases/Greetings.class
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以看到，JAR 文件包括<em>pirate_phrases</em>目录。关于 JARs 还有一个有趣的事实：它们实际上只是带有*.jar*扩展名的 ZIP 文件。你可以像对待其他 ZIP 文件一样对待它们。</p>
+<h2 id=clojurejar>clojure.jar</h2>
+<p>现在你已经准备好看看 Clojure 在引擎盖下是如何工作的了! 下载[1.9.0 稳定版]（<a href=http://repo1.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.9.0.zip>http://repo1.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.9.0.zip</a>）并运行它。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>java -jar clojure-1.7.0.jar
+</code></pre></td></tr></table>
+</div>
+</div><p>你应该看到最舒心的景象，Clojure REPL。它究竟是如何启动的呢？让我们看看 JAR 文件中的<em>META-INF/MANIFEST.MF</em>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: hudson
+Build-Jdk: 1.7.0_20
+Main-Class: clojure.main
+</code></pre></td></tr></table>
+</div>
+</div><p>看起来，<code>clojure.main</code>被指定为入口点。这个类是怎么来的？嗯，看看 GitHub 上的<em>clojure/main.java</em>，网址是*<a href=https://github.com/clojure/clojure/blob/master/src/jvm/clojure/main.java>https://github.com/clojure/clojure/blob/master/src/jvm/clojure/main.java</a>*。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=cm>/**
+</span><span class=cm> *   Copyright (c) Rich Hickey. All rights reserved.
+</span><span class=cm> *   The use and distribution terms for this software are covered by the
+</span><span class=cm> *   Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
+</span><span class=cm> *   which can be found in the file epl-v10.html at the root of this distribution.
+</span><span class=cm> *   By using this software in any fashion, you are agreeing to be bound by
+</span><span class=cm> *   the terms of this license.
+</span><span class=cm> *   You must not remove this notice, or any other, from this software.
+</span><span class=cm> **/</span>
+
+<span class=kn>package</span> <span class=nx>clojure</span><span class=p>;</span>
+
+<span class=kn>import</span> <span class=nx>clojure</span><span class=p>.</span><span class=nx>lang</span><span class=p>.</span><span class=nx>Symbol</span><span class=p>;</span>
+<span class=kn>import</span> <span class=nx>clojure</span><span class=p>.</span><span class=nx>lang</span><span class=p>.</span><span class=nx>Var</span><span class=p>;</span>
+<span class=kn>import</span> <span class=nx>clojure</span><span class=p>.</span><span class=nx>lang</span><span class=p>.</span><span class=nx>RT</span><span class=p>;</span>
+
+<span class=nx>public</span> <span class=nx>class</span> <span class=nx>main</span><span class=p>{</span>
+
+<span class=nx>final</span> <span class=nx>static</span> <span class=nx>private</span> <span class=nx>Symbol</span> <span class=nx>CLOJURE_MAIN</span> <span class=p>=</span> <span class=nx>Symbol</span><span class=p>.</span><span class=nf>intern</span><span class=p>(</span><span class=s>&#34;clojure.main&#34;</span><span class=p>);</span>
+<span class=nx>final</span> <span class=nx>static</span> <span class=nx>private</span> <span class=nx>Var</span> <span class=nx>REQUIRE</span> <span class=p>=</span> <span class=nx>RT</span><span class=p>.</span><span class=kd>var</span><span class=p>(</span><span class=s>&#34;clojure.core&#34;</span><span class=p>,</span> <span class=s>&#34;require&#34;</span><span class=p>);</span>
+<span class=nx>final</span> <span class=nx>static</span> <span class=nx>private</span> <span class=nx>Var</span> <span class=nx>LEGACY_REPL</span> <span class=p>=</span> <span class=nx>RT</span><span class=p>.</span><span class=kd>var</span><span class=p>(</span><span class=s>&#34;clojure.main&#34;</span><span class=p>,</span> <span class=s>&#34;legacy-repl&#34;</span><span class=p>);</span>
+<span class=nx>final</span> <span class=nx>static</span> <span class=nx>private</span> <span class=nx>Var</span> <span class=nx>LEGACY_SCRIPT</span> <span class=p>=</span> <span class=nx>RT</span><span class=p>.</span><span class=kd>var</span><span class=p>(</span><span class=s>&#34;clojure.main&#34;</span><span class=p>,</span> <span class=s>&#34;legacy-script&#34;</span><span class=p>);</span>
+<span class=nx>final</span> <span class=nx>static</span> <span class=nx>private</span> <span class=nx>Var</span> <span class=nx>MAIN</span> <span class=p>=</span> <span class=nx>RT</span><span class=p>.</span><span class=kd>var</span><span class=p>(</span><span class=s>&#34;clojure.main&#34;</span><span class=p>,</span> <span class=s>&#34;main&#34;</span><span class=p>);</span>
+
+<span class=nx>public</span> <span class=nx>static</span> <span class=nx>void</span> <span class=nf>legacy_repl</span><span class=p>(</span><span class=nx>String</span><span class=p>[]</span> <span class=nx>args</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>REQUIRE</span><span class=p>.</span><span class=nf>invoke</span><span class=p>(</span><span class=nx>CLOJURE_MAIN</span><span class=p>);</span>
+    <span class=nx>LEGACY_REPL</span><span class=p>.</span><span class=nf>invoke</span><span class=p>(</span><span class=nx>RT</span><span class=p>.</span><span class=nf>seq</span><span class=p>(</span><span class=nx>args</span><span class=p>));</span>
+<span class=p>}</span>
+
+<span class=nx>public</span> <span class=nx>static</span> <span class=nx>void</span> <span class=nf>legacy_script</span><span class=p>(</span><span class=nx>String</span><span class=p>[]</span> <span class=nx>args</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>REQUIRE</span><span class=p>.</span><span class=nf>invoke</span><span class=p>(</span><span class=nx>CLOJURE_MAIN</span><span class=p>);</span>
+    <span class=nx>LEGACY_SCRIPT</span><span class=p>.</span><span class=nf>invoke</span><span class=p>(</span><span class=nx>RT</span><span class=p>.</span><span class=nf>seq</span><span class=p>(</span><span class=nx>args</span><span class=p>));</span>
+<span class=p>}</span>
+
+<span class=nx>public</span> <span class=nx>static</span> <span class=nx>void</span> <span class=nf>main</span><span class=p>(</span><span class=nx>String</span><span class=p>[]</span> <span class=nx>args</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>REQUIRE</span><span class=p>.</span><span class=nf>invoke</span><span class=p>(</span><span class=nx>CLOJURE_MAIN</span><span class=p>);</span>
+    <span class=nx>MAIN</span><span class=p>.</span><span class=nf>applyTo</span><span class=p>(</span><span class=nx>RT</span><span class=p>.</span><span class=nf>seq</span><span class=p>(</span><span class=nx>args</span><span class=p>));</span>
+<span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>正如你所看到的，该文件定义了一个名为<code>main</code>的类。它属于 &ldquo;clojure &ldquo;包，并定义了一个 &ldquo;公共静态 &ldquo;的 &ldquo;main &ldquo;方法，JVM 完全乐意将其作为一个入口点。以这种方式来看，Clojure 是一个 JVM 程序，就像其他程序一样。</p>
+<p>这并不是一个深入的 Java 教程，但我希望它有助于澄清程序员在谈论 Clojure &ldquo;在 JVM 上运行 &ldquo;或成为一种 &ldquo;托管 &ldquo;语言时的意思。在下一节中，你将继续探索 JVM 的魅力，学习如何在你的 Clojure 项目中使用额外的 Java 库。</p>
+<p>Clojure 应用程序 JARs</p>
+<p>你现在知道 Java 是如何运行 Java JARs 的，但它是如何运行捆绑为 JARs 的 Clojure 应用程序的呢？毕竟，Clojure 应用程序没有类，不是吗？</p>
+<p>事实证明，你可以通过在命名空间声明中加入<code>(:gen-class)</code>指令，让 Clojure 编译器为一个命名空间生成一个类。(你可以在你创建的第一个 Clojure 程序中看到这一点，即第一章的<em>clojure-noob</em>。还记得那个程序吗，小茶壶？） 这意味着编译器会产生必要的字节码，使 JVM 把命名空间当作定义了一个 Java 类。</p>
+<p>你在程序的<em>project.clj</em>文件中，使用<code>:main</code>属性，为你的程序设置入口点的命名空间。对于<em>clojure-noob</em>，你应该看到<code>:main ^:skip-aot clojure-noob.core</code>。当 Leiningen 编译这个文件时，它将添加一个<em>meta-inf/manifest.mf</em>文件，该文件包含了生成的 JAR 文件的入口点。</p>
+<p>因此，如果你在命名空间中定义了一个<code>-main</code>函数，并包括<code>(:gen-class)</code>指令，同时在你的<em>project.clj</em>文件中设置了<code>:main</code>，你的程序在被编译为 JAR 时，将拥有 Java 运行它所需的一切。你可以在你的终端中试用这个方法，浏览你的<em>clojure-noob</em>目录并运行这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>lein uberjar
+java -jar target/uberjar/clojure-noob-0.1.0-SNAPSHOT-standalone.jar
+</code></pre></td></tr></table>
+</div>
+</div><p>你应该看到打印出来的两条信息。&ldquo;清洁度仅次于神性 &ldquo;和 &ldquo;I&rsquo;m a little teapot!&rdquo; 注意，你不需要 Leiningen 来运行这个 JAR 文件；你可以把它发送给朋友和邻居，只要他们安装了 Java，就可以运行它。</p>
+<h2 id=java-interop>Java Interop</h2>
+<p>Rich Hickey 对 Clojure 的设计目标之一是创造一种<em>实用的语言。出于这个原因，Clojure 的设计是为了使你能够轻松地与 Java 类和对象进行交互，这意味着你可以使用 Java 广泛的本地功能和它的巨大生态系统。使用 Java 类、对象和方法的能力被称为</em>Java interop*。在本节中，你将学习如何使用 Clojure 的互操作语法，如何导入 Java 包，以及如何使用最常用的 Java 类。</p>
+<h3 id=互通语法>互通语法</h3>
+<p>使用 Clojure 的互操作语法，与 Java 对象和类的交互是很直接的。让我们从对象互操作语法开始。</p>
+<p>你可以使用<code>(.</code>methodName object)来调用一个对象的方法。例如，因为所有的 Clojure 字符串都是作为 Java 字符串实现的，所以你可以对它们调用 Java 方法。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(.toUpperCase &#34;By Bluebeard&#39;s bananas!&#34; )
+; =&gt; &#34;by bluebeard&#39;s bananas!&#34;
+
+➊ (.indexOf &#34;Let&#39;s synergize our bleeding edges&#34; &#34;y&#34;) 
+; =&gt; 7
+</code></pre></td></tr></table>
+</div>
+</div><p>这些等同于这个 Java。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>&#34;By Bluebeard&#39;s bananas!&#34;.toUpperCase()
+&#34;Let&#39;s synergize our bleeding edges&#34;.indexOf(&#34;y&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p>注意，Clojure 的语法允许你向 Java 方法传递参数。在这个例子中，在➊，你把参数<code>"y"</code>传给了<code>indexOf</code>方法。</p>
+<p>你也可以调用类上的静态方法和访问类的静态字段。观察一下!</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>➊ (java.lang.Math/abs -3) 
+; =&gt; 3
+
+➋ java.lang.Math/PI 
+; =&gt; 3.141592653589793
+</code></pre></td></tr></table>
+</div>
+</div><p>在➊，你调用了<code>java.lang.Math</code>类的<code>abs</code>静态方法，在➋，你访问了该类的<code>PI</code>静态字段。</p>
+<p>所有这些例子（除了<code>java.lang.Math/PI</code>）都使用了扩展到使用*dot 特殊形式的宏。一般来说，你不需要使用点的特殊形式，除非你想写自己的宏来与 Java 对象和类交互。尽管如此，下面是每个例子后面的宏扩展。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(macroexpand-1 &#39;(.toUpperCase &#34;By Bluebeard&#39;s bananas!&#34;))
+; =&gt; (. &#34;By Bluebeard&#39;s bananas!&#34; toUpperCase)
+
+(macroexpand-1 &#39;(.indexOf &#34;Let&#39;s synergize our bleeding edges&#34; &#34;y&#34;))
+; =&gt; (. &#34;Let&#39;s synergize our bleeding edges&#34; indexOf &#34;y&#34;)
+
+(macroexpand-1 &#39;(Math/abs -3))
+; =&gt; (. Math abs -3)
+</code></pre></td></tr></table>
+</div>
+</div><p>这是点运算符的一般形式。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(. object-expr-or-classname-symbol method-or-member-symbol optional-args*)
+</code></pre></td></tr></table>
+</div>
+</div><p>点运算符还有一些功能，如果你有兴趣进一步探索它，你可以看看 clojure.org 关于 Java 互操作的文档*<a href=http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form>http://clojure.org/java_interop#Java%20Interop-The%20Dot%20special%20form</a>*。</p>
+<p>创建和变异对象</p>
+<p>上一节告诉你如何调用已经存在的对象的方法。本节向你展示如何创建新的对象以及如何与它们进行交互。</p>
+<p>你可以通过两种方式创建一个新的对象。<code>(new ClassName optional-args)</code>和<code>(ClassName. optional-args)</code>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(new String)
+; =&gt; &#34;&#34;
+
+(String.)
+; =&gt; &#34;&#34;
+
+(String. &#34;To Davey Jones&#39;s Locker with ye hardies&#34;)
+; =&gt; &#34;To Davey Jones&#39;s Locker with ye hardies&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>大多数人使用点的版本，<code>(ClassName.)</code>。</p>
+<p>要修改一个对象，你要像上一节那样调用其上的方法。为了研究这个问题，让我们使用<code>java.util.Stack</code>。这个类代表了一个后进先出（LIFO）的对象堆栈，或者只是<em>堆栈</em>。<em>堆栈</em>是一种常见的数据结构，它们之所以被称为堆栈，是因为你可以把它们想象成一摞实物，比如说，一摞你刚刚掠夺来的金币。当你向你的堆栈添加一个硬币时，你就把它添加到堆栈的顶部。当你取出一枚金币时，你就把它从上面移走。因此，最后添加的对象就是第一个被移除的对象。</p>
+<p>与 Clojure 数据结构不同，Java 堆栈是可变的。你可以向它们添加项目和删除项目，改变对象而不是派生出一个新的值。下面是你如何创建一个堆栈并向其添加一个对象。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(java.util.Stack.)
+; =&gt; []
+
+➊ (let [stack (java.util.Stack.)] 
+  (.push stack &#34;Latest episode of Game of Thrones, ho!&#34;)
+  stack)
+; =&gt; [&#34;Latest episode of Game of Thrones, ho!&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>这里有几个有趣的细节。首先，你需要为<code>stack</code>创建一个<code>let</code>绑定，就像你在➊看到的那样，并把它作为<code>let</code>形式的最后一个表达式。如果你不这样做，整个表达式的值将是字符串<code>"Game of Thrones, ho!"</code>，因为那是<code>push</code>的返回值。</p>
+<p>第二，Clojure 用方括号来打印堆栈，与它用于 Vector 的文本表示法相同，这可能会让你感到困惑，因为它不是一个 Vector。然而，你可以使用 Clojure 的<code>seq</code>函数来读取堆栈中的数据结构，比如<code>first</code>，。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [stack (java.util.Stack.)]
+  (.push stack &#34;Latest episode of Game of Thrones, ho!&#34;)
+  (first stack))
+; =&gt; &#34;Latest episode of Game of Thrones, ho!&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>但是你不能使用像<code>conj</code>和<code>into</code>这样的函数来添加元素到栈中。如果你这样做，你会得到一个异常。使用 Clojure 函数读取堆栈是可能的，因为 Clojure 扩展了对<code>java.util.Stack</code>的抽象，这个主题你将在第 13 章学习。</p>
+<p>Clojure 提供了<code>doto</code>宏，它允许你更简洁地在同一个对象上执行多个方法。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(doto (java.util.Stack.)
+  (.push &#34;Latest episode of Game of Thrones, ho!&#34;)
+  (.push &#34;Whoops, I meant &#39;Land, ho!&#39;&#34;))
+; =&gt; [&#34;Latest episode of Game of Thrones, ho!&#34; &#34;Whoops, I meant &#39;Land, ho!&#39;&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p><code>doto</code>宏返回对象，而不是任何方法调用的返回值，它更容易理解。如果你用<code>macroexpand-1</code>展开它，你可以看到它的结构与你刚才在前面的例子中看到的<code>let</code>表达式相同。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(macroexpand-1
+ &#39;(doto (java.util.Stack.)
+    (.push &#34;Latest episode of Game of Thrones, ho!&#34;)
+    (.push &#34;Whoops, I meant &#39;Land, ho!&#39;&#34;)))
+; =&gt; (clojure.core/let
+      [G__2876 (java.util.Stack.)]
+      (.push G__2876 &#34;Latest episode of Game of Thrones, ho!&#34;)
+      (.push G__2876 &#34;Whoops, I meant &#39;Land, ho!&#39;&#34;)
+      G__2876)
+</code></pre></td></tr></table>
+</div>
+</div><p>很方便!</p>
+<h3 id=导入>导入</h3>
+<p>在 Clojure 中，导入的效果和 Java 中的一样：你可以使用类，而不需要打出整个包的前缀。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(import java.util.Stack)
+(Stack.)
+; =&gt; []
+</code></pre></td></tr></table>
+</div>
+</div><p>你也可以使用这种一般形式一次导入多个类。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(import [package.name1 ClassName1 ClassName2]
+        [package.name2 ClassName3 ClassName4])
+</code></pre></td></tr></table>
+</div>
+</div><p>下面是一个例子。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(import [java.util Date Stack]
+        [java.net Proxy URI])
+
+(Date.)
+; =&gt; #inst &#34;2016-09-19T20:40:02.733-00:00&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>但通常情况下，你会在<code>ns</code>宏中做所有的导入工作，像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns pirate.talk
+  (:import [java.util Date Stack].
+           [java.net Proxy URI])
+</code></pre></td></tr></table>
+</div>
+</div><p>这两种不同的导入类的方法有相同的结果，但通常第二种方法更可取，因为对于阅读你的代码的人来说，在<code>ns</code>声明中看到所有涉及命名的代码很方便。</p>
+<p>这就是你导入类的方法! 很简单。为了使生活更加简单，Clojure 自动导入了<code>java.lang</code>中的类，包括<code>java.lang.String</code>和<code>java.lang.Math</code>，这就是为什么你能够使用<code>String</code>而不用前面的包名。</p>
+<h2 id=常用的-java-类>常用的 Java 类</h2>
+<p>为了完善本章，让我们快速浏览一下你最可能用到的 Java 类。</p>
+<h3 id=系统类>系统类</h3>
+<p>系统 &ldquo;类具有有用的类字段和方法，可以与程序运行的环境进行交互。你可以用它来获取环境变量，与标准输入、标准输出和错误输出流进行交互。</p>
+<p>最有用的方法和成员是<code>exit</code>、<code>getenv</code>和<code>getProperty</code>。你可能在第 5 章中认识<code>System/exit</code>，在那里你用它来退出 Peg Thing 游戏。`System/exit&rsquo;可以终止当前程序，你可以把状态代码作为参数传给它。如果你对状态代码不熟悉，我推荐维基百科的 &ldquo;退出状态 &ldquo;文章，网址是*<a href=http://en.wikipedia.org/wiki/Exit_status>退出状态-维基百科</a>*。</p>
+<p><code>System/getenv</code>将以 Map 形式返回所有系统的环境变量。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(System/getenv)
+{&#34;USER&#34; &#34;the-incredible-bulk&#34;
+ &#34;JAVA_ARCH&#34; &#34;x86_64&#34; }
+</code></pre></td></tr></table>
+</div>
+</div><p>环境变量的一个常见用途是配置你的程序。</p>
+<p>JVM 有自己的属性列表，与计算机的环境变量分开，如果需要读取它们，可以使用<code>System/getProperty</code>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>➊ (System/getProperty &#34;user.dir&#34;)
+; =&gt; &#34;/Users/dabulk/projects/dabook&#34;
+
+➋ (System/getProperty &#34;java.version&#34;)
+; =&gt; &#34;1.7.0_17&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>第一个调用➊返回 JVM 启动的目录，第二个调用➋返回 JVM 的版本。</p>
+<h3 id=日期类>日期类</h3>
+<p>Java 有很好的工具来处理日期问题。我不会对<code>java.util.Date</code>类做太多的介绍，因为在线的 API 文档（可在*<a href=http://docs.oracle.com/javase/7/docs/api/java/util/Date.html>Date (Java Platform SE 7 )</a>*)很详尽。<mark>作为</mark>一个 Clojure 开发者，你应该知道这个<code>date</code>类的三个特点。首先，Clojure 允许你使用这样的形式将日期表示为字面意义。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>#inst &#34;2016-09-19T20:40:02.733-00:00&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>第二，如果你想自定义如何将日期转换成字符串，或者你想将字符串转换成日期，你需要使用<code>java.util.DateFormat</code>类。第三，如果你要做的任务是比较日期或试图在日期上添加分钟、小时或其他时间单位，你应该使用极其有用的 clj-time 库（你可以在*<a href=https://github.com/clj-time/clj-time>GitHub - clj-time/clj-time: 一个用于 Clojure 的日期和时间库，包装了 Joda 时间库。</a>*)。</p>
+<h2 id=文件和输入输出>文件和输入/输出</h2>
+<p>在这一节中，你将了解到 Java 的输入/输出（IO）方法，以及 Clojure 如何简化它。<code>clojure.java.io</code>命名空间提供了许多方便的函数来简化 IO（<em><a href=https://clojure.github.io/clojure/clojure.java.io-api.html>clojure.java.io - Clojure v1.10.3 API 文档</a></em>）。这很好，因为 Java 的 IO 并不完全是简单的。因为在你的编程生涯中，你可能会在某些时候想要执行 IO，让我们开始把你的思想触角缠绕在它上面。</p>
+<p>IO 涉及到资源，无论是文件、套接字、缓冲区，还是其他什么。Java 有独立的类来读取资源的内容，写入其内容，以及与资源的属性进行交互。</p>
+<p>例如，<code>java.io.File</code>类用于与文件的属性进行交互。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [file (java.io.File. &#34;/&#34;)]
+➊   (println (.exists file))  
+➋   (println (.canWrite file))
+➌   (println (.getPath file))) 
+; =&gt; true
+; =&gt; false
+; =&gt; /
+</code></pre></td></tr></table>
+</div>
+</div><p><img src=https://www.braveclojure.com/assets/images/cftbat/java/lion.png alt></p>
+<p>在其他任务中，你可以用它来检查一个文件是否存在，获得文件的读/写/执行权限，并获得其文件系统路径，你可以在➊、➋和➌分别看到。</p>
+<p>在这个能力列表中，明显缺少读和写。要读一个文件，你可以使用<code>java.io.BufferedReader</code>类或者<code>java.io.FileReader</code>。同样地，你可以使用<code>java.io.BufferedWriter</code>或<code>java.io.FileWriter</code>类来写。其他类也可用于读写，你选择哪一个取决于你的具体需求。读取器和写入器类的接口都有相同的基本方法集；读取器实现了<code>读取'、</code>关闭&rsquo;等，而写入器实现了<code>添加'、</code>写入'、<code>关闭'和</code>刷新'。Java 给你提供了各种 IO 工具。一个愤世嫉俗的人可能会说，Java 给你的绳子足以让你上吊，如果你找到这样一个人，我希望你能给他一个拥抱。</p>
+<p>不管怎么说，Clojure 使你的读写更容易，因为它包括了统一不同种类资源的读写的函数。例如，<code>spit</code>写到一个资源，而<code>slurp</code>从一个资源中读出。下面是一个使用它们来写和读一个文件的例子。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(spit &#34;/tmp/hercules-todo-list&#34;
+&#34;- kill dat lion brov
+- chop up what nasty multi-headed snake thing&#34;)
+
+(slurp &#34;/tmp/hercules-todo-list&#34;)
+
+; =&gt; &#34;- kill dat lion brov
+      - chop up what nasty multi-headed snake thing&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>你也可以对代表文件以外的资源的对象使用这些函数。下一个例子使用了一个<code>StringWriter</code>，它允许你对一个字符串进行 IO 操作。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [s (java.io.StringWriter.)]
+  (spit s &#34;- capture cerynian hind like for real&#34;)
+  (.toString s))
+; =&gt; &#34;- capture cerynian hind like for real&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>你也可以使用 &ldquo;slurp &ldquo;从<code>StringReader</code>中读取。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [s (java.io.StringReader. &#34;- get erymanthian pig what with the tusks&#34;)]
+  (slurp s))
+; =&gt; &#34;- get erymanthian pig what with the tusks&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>此外，你可以对资源使用<code>读</code>和<code>写</code>方法。使用哪种方法并没有什么区别；<code>spit</code>和<code>slurp</code>很方便，因为它们只需使用一个代表文件系统路径或 URL 的字符串。</p>
+<p><code>with-open</code>宏是另一种便利：它在其主体的末尾隐含地关闭一个资源，确保你不会因为忘记手动关闭资源而意外地占用资源。<code>reader</code>函数是一个方便的工具，根据<code>clojure.java.io</code>API 文档，&ldquo;试图将其参数强制到一个开放的<code>java.io.Reader</code>"。当你不想使用<code>slurp</code>时，这很方便，因为你不想尝试完整地读取一个资源，你也不想弄清楚你需要使用哪个 Java 类。如果你想一行一行地读取一个文件，你可以使用<code>reader</code>和<code>with-open</code>以及<code>line-seq</code>函数。下面是如何打印 Hercules 待办事项清单的第一项的。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(with-open [todo-list-rdr (clojure.java.io/reader &#34;/tmp/hercules-todo-list&#34;)]
+  (println (first (line-seq todo-list-rdr))))
+; =&gt; - kill dat lion brov
+</code></pre></td></tr></table>
+</div>
+</div><p>这应该足以让你在 Clojure 中开始使用 IO。如果你想做更复杂的任务，一定要看看<a href=https://clojure.github.io/clojure/clojure.java.io-api.html><code>clojure.java.io</code> docs</a>，<code>[java.nio.file](https://docs.oracle.com/javase/7/docs/api/java/nio/file/package-summary.html)</code>包文档，或<code>[java.io](http://docs.oracle.com/javase/7/docs/api/java/io/package-summary.html)</code>包文档。</p>
+<h2 id=资源>资源</h2>
+<ul>
+<li>&ldquo;Java 虚拟机和编译器的解释&rdquo;。 <em><a href="https://www.youtube.com/watch?v=XjNwyXx2os8">Java 虚拟机和编译器的解释&ndash;YouTube</a></em></li>
+<li>clojure.org Java 互操作文档。 <em><a href=http://clojure.org/java_interop>Clojure - Java Interop</a></em></li>
+<li>维基百科的 &ldquo;退出状态 &ldquo;文章。 <em><a href=http://en.wikipedia.org/wiki/Exit_status>退出状态 - 维基百科</a></em></li>
+</ul>
+<h2 id=总结>总结</h2>
+<p>在本章中，你了解了 Clojure 被托管在 JVM 上的含义。Clojure 程序被编译成 Java 字节码并在 JVM 进程中执行。Clojure 程序也可以访问 Java 库，你可以使用 Clojure 的互操作设施轻松地与它们交互。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/clojure/>clojure</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/chapter13/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Chapter13 抽象</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/chapter11/>
+<span class="next-text nav-default">Chapter11 core.async</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

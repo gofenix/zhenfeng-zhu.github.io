@@ -1,3 +1,2 @@
 User-agent: *
-Disallow:
 Sitemap: https://zhenfeng-zhu.github.io/sitemap.xml

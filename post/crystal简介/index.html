@@ -1,0 +1,447 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>crystal 简介 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。 Fast as C, Slick as Ruby 语法 crystal 的语法和 Ruby 比较类似。 1 2 3 4 5 6 7 8 9 10 # A very basic HTTP server require &amp;#34;http/server&amp;#34; server ="><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/crystal%E7%AE%80%E4%BB%8B/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="crystal 简介">
+<meta property="og:description" content="关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。 Fast as C, Slick as Ruby 语法 crystal 的语法和 Ruby 比较类似。 1 2 3 4 5 6 7 8 9 10 # A very basic HTTP server require &#34;http/server&#34; server =">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/crystal%E7%AE%80%E4%BB%8B/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2019-08-27T02:14:18+00:00">
+<meta property="article:modified_time" content="2019-08-27T02:14:18+00:00">
+<meta itemprop=name content="crystal 简介">
+<meta itemprop=description content="关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。 Fast as C, Slick as Ruby 语法 crystal 的语法和 Ruby 比较类似。 1 2 3 4 5 6 7 8 9 10 # A very basic HTTP server require &#34;http/server&#34; server ="><meta itemprop=datePublished content="2019-08-27T02:14:18+00:00">
+<meta itemprop=dateModified content="2019-08-27T02:14:18+00:00">
+<meta itemprop=wordCount content="703">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="crystal 简介">
+<meta name=twitter:description content="关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。 Fast as C, Slick as Ruby 语法 crystal 的语法和 Ruby 比较类似。 1 2 3 4 5 6 7 8 9 10 # A very basic HTTP server require &#34;http/server&#34; server ="><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>crystal 简介</h1>
+<div class=post-meta>
+<span class=post-time> 2019-08-27 </span>
+<span class=more-meta> 约 703 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#语法>语法</a></li>
+<li><a href=#类型系统>类型系统</a></li>
+<li><a href=#空引用检查>空引用检查</a></li>
+<li><a href=#宏>宏</a></li>
+<li><a href=#并发>并发</a></li>
+<li><a href=#c-绑定>C 绑定</a></li>
+<li><a href=#依赖管理>依赖管理</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>关注 crystal 也有一段时间了，看到多线程的 pr 已经提了，今天简单写一下。</p>
+<blockquote>
+<p>Fast as C, Slick as Ruby</p>
+</blockquote>
+<h1 id=语法>语法</h1>
+<p>crystal 的语法和 Ruby 比较类似。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=c1># A very basic HTTP server</span>
+<span class=nb>require</span> <span class=s2>&#34;http/server&#34;</span>
+
+<span class=n>server</span> <span class=o>=</span> <span class=no>HTTP</span><span class=o>::</span><span class=no>Server</span><span class=o>.</span><span class=n>new</span> <span class=k>do</span> <span class=o>|</span><span class=n>context</span><span class=o>|</span>
+  <span class=n>context</span><span class=o>.</span><span class=n>response</span><span class=o>.</span><span class=n>content_type</span> <span class=o>=</span> <span class=s2>&#34;text/plain&#34;</span>
+  <span class=n>context</span><span class=o>.</span><span class=n>response</span><span class=o>.</span><span class=n>print</span> <span class=s2>&#34;Hello world, got </span><span class=si>#{</span><span class=n>context</span><span class=o>.</span><span class=n>request</span><span class=o>.</span><span class=n>path</span><span class=si>}</span><span class=s2>!&#34;</span>
+<span class=k>end</span>
+
+<span class=nb>puts</span> <span class=s2>&#34;Listening on http://127.0.0.1:8080&#34;</span>
+<span class=n>server</span><span class=o>.</span><span class=n>listen</span><span class=p>(</span><span class=mi>8080</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=类型系统>类型系统</h1>
+<p>crystal 的一大卖点就是静态类型系统，但是写起来又和脚本语言类似。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=k>def</span> <span class=nf>shout</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+  <span class=c1># Notice that both Int32 and String respond_to `to_s`</span>
+  <span class=n>x</span><span class=o>.</span><span class=n>to_s</span><span class=o>.</span><span class=n>upcase</span>
+<span class=k>end</span>
+
+<span class=n>foo</span> <span class=o>=</span> <span class=no>ENV</span><span class=o>[</span><span class=s2>&#34;FOO&#34;</span><span class=o>]</span><span class=p>?</span> <span class=o>||</span> <span class=mi>10</span>
+
+<span class=n>typeof</span><span class=p>(</span><span class=n>foo</span><span class=p>)</span> <span class=c1># =&gt; (Int32 | String)</span>
+<span class=n>typeof</span><span class=p>(</span><span class=n>shout</span><span class=p>(</span><span class=n>foo</span><span class=p>))</span> <span class=c1># =&gt; String</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=空引用检查>空引用检查</h1>
+<p>crystal 可以在编译的时候检查空引用，避免出现空指针异常。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=k>if</span> <span class=nb>rand</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span> <span class=o>&gt;</span> <span class=mi>0</span>
+  <span class=n>my_string</span> <span class=o>=</span> <span class=s2>&#34;hello world&#34;</span>
+<span class=k>end</span>
+
+<span class=nb>puts</span> <span class=n>my_string</span><span class=o>.</span><span class=n>upcase</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果运行上述的代码，执行结果如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ crystal hello_world.cr
+Error in hello_world.cr:5: undefined method <span class=s1>&#39;upcase&#39;</span> <span class=k>for</span> Nil <span class=o>(</span>compile-time <span class=nb>type</span> is <span class=o>(</span>String <span class=p>|</span> Nil<span class=o>))</span>
+
+puts my_string.upcase
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=宏>宏</h1>
+<p>另一个重要的特性是宏。通过宏，可以实现向 ruby 那么强大的元编程。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=k>class</span> <span class=nc>Object</span>
+  <span class=k>def</span> <span class=nf>has_instance_var?</span><span class=p>(</span><span class=nb>name</span><span class=p>)</span> <span class=p>:</span> <span class=no>Bool</span>
+    <span class=p>{{</span> <span class=vi>@type</span><span class=o>.</span><span class=n>instance_vars</span><span class=o>.</span><span class=n>map</span> <span class=o>&amp;.</span><span class=n>name</span><span class=o>.</span><span class=n>stringify</span> <span class=p>}}</span><span class=o>.</span><span class=n>includes?</span> <span class=nb>name</span>
+  <span class=k>end</span>
+<span class=k>end</span>
+
+<span class=n>person</span> <span class=o>=</span> <span class=no>Person</span><span class=o>.</span><span class=n>new</span> <span class=s2>&#34;John&#34;</span><span class=p>,</span> <span class=mi>30</span>
+<span class=n>person</span><span class=o>.</span><span class=n>has_instance_var?</span><span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>)</span> <span class=c1>#=&gt; true</span>
+<span class=n>person</span><span class=o>.</span><span class=n>has_instance_var?</span><span class=p>(</span><span class=s2>&#34;birthday&#34;</span><span class=p>)</span> <span class=c1>#=&gt; false</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=并发>并发</h1>
+<p>crystal 的并发是通过绿色线程实现的，即 fibers。和 Go 的并发模式很像，也是基于 channel 的 CSP 模型。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=n>channel</span> <span class=o>=</span> <span class=no>Channel</span><span class=p>(</span><span class=no>Int32</span><span class=p>)</span><span class=o>.</span><span class=n>new</span>
+<span class=n>total_lines</span> <span class=o>=</span> <span class=mi>0</span>
+<span class=n>files</span> <span class=o>=</span> <span class=no>Dir</span><span class=o>.</span><span class=n>glob</span><span class=p>(</span><span class=s2>&#34;*.txt&#34;</span><span class=p>)</span>
+
+<span class=n>files</span><span class=o>.</span><span class=n>each</span> <span class=k>do</span> <span class=o>|</span><span class=n>f</span><span class=o>|</span>
+  <span class=n>spawn</span> <span class=k>do</span>
+    <span class=n>lines</span> <span class=o>=</span> <span class=no>File</span><span class=o>.</span><span class=n>read</span><span class=p>(</span><span class=n>f</span><span class=p>)</span><span class=o>.</span><span class=n>lines</span><span class=o>.</span><span class=n>size</span>
+    <span class=n>channel</span><span class=o>.</span><span class=n>send</span> <span class=n>lines</span>
+  <span class=k>end</span>
+<span class=k>end</span>
+
+<span class=n>files</span><span class=o>.</span><span class=n>size</span><span class=o>.</span><span class=n>times</span> <span class=k>do</span>
+  <span class=n>total_lines</span> <span class=o>+=</span> <span class=n>channel</span><span class=o>.</span><span class=n>receive</span>
+<span class=k>end</span>
+
+<span class=nb>puts</span> <span class=n>total_lines</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=c-绑定>C 绑定</h1>
+<p>C 语言一般用来实现比较底层的系统，而且 C 的生态丰富，一般现代语言都会提供 C 绑定，来复用 C 的生态。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=c1># Fragment of the BigInt implementation that uses GMP</span>
+<span class=err>@</span><span class=o>[</span><span class=no>Link</span><span class=p>(</span><span class=s2>&#34;gmp&#34;</span><span class=p>)</span><span class=o>]</span>
+<span class=n>lib</span> <span class=no>LibGMP</span>
+  <span class=k>alias</span> <span class=no>Int</span> <span class=o>=</span> <span class=no>LibC</span><span class=o>::</span><span class=no>Int</span>
+  <span class=k>alias</span> <span class=no>ULong</span> <span class=o>=</span> <span class=no>LibC</span><span class=o>::</span><span class=no>ULong</span>
+
+  <span class=n>struct</span> <span class=no>MPZ</span>
+    <span class=n>_mp_alloc</span> <span class=p>:</span> <span class=no>Int32</span>
+    <span class=n>_mp_size</span> <span class=p>:</span> <span class=no>Int32</span>
+    <span class=n>_mp_d</span> <span class=p>:</span> <span class=no>ULong</span><span class=o>*</span>
+  <span class=k>end</span>
+
+  <span class=n>fun</span> <span class=n>init_set_str</span> <span class=o>=</span> <span class=n>__gmpz_init_set_str</span><span class=p>(</span><span class=n>rop</span> <span class=p>:</span> <span class=no>MPZ</span><span class=o>*</span><span class=p>,</span> <span class=n>str</span> <span class=p>:</span> <span class=no>UInt8</span><span class=o>*</span><span class=p>,</span> <span class=n>base</span> <span class=p>:</span> <span class=no>Int</span><span class=p>)</span> <span class=p>:</span> <span class=no>Int</span>
+  <span class=n>fun</span> <span class=n>cmp</span> <span class=o>=</span> <span class=n>__gmpz_cmp</span><span class=p>(</span><span class=n>op1</span> <span class=p>:</span> <span class=no>MPZ</span><span class=o>*</span><span class=p>,</span> <span class=n>op2</span> <span class=p>:</span> <span class=no>MPZ</span><span class=o>*</span><span class=p>)</span> <span class=p>:</span> <span class=no>Int</span>
+<span class=k>end</span>
+
+<span class=n>struct</span> <span class=no>BigInt</span> <span class=o>&lt;</span> <span class=no>Int</span>
+  <span class=k>def</span> <span class=nf>initialize</span><span class=p>(</span><span class=n>str</span> <span class=p>:</span> <span class=nb>String</span><span class=p>,</span> <span class=n>base</span> <span class=o>=</span> <span class=mi>10</span><span class=p>)</span>
+    <span class=n>err</span> <span class=o>=</span> <span class=no>LibGMP</span><span class=o>.</span><span class=n>init_set_str</span><span class=p>(</span><span class=n>out</span> <span class=vi>@mpz</span><span class=p>,</span> <span class=n>str</span><span class=p>,</span> <span class=n>base</span><span class=p>)</span>
+    <span class=k>raise</span> <span class=no>ArgumentError</span><span class=o>.</span><span class=n>new</span><span class=p>(</span><span class=s2>&#34;invalid BigInt: </span><span class=si>#{</span><span class=n>str</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span> <span class=k>if</span> <span class=n>err</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span>
+  <span class=k>end</span>
+
+  <span class=k>def</span> <span class=nf>&lt;=&gt;</span><span class=p>(</span><span class=n>other</span> <span class=p>:</span> <span class=no>BigInt</span><span class=p>)</span>
+    <span class=no>LibGMP</span><span class=o>.</span><span class=n>cmp</span><span class=p>(</span><span class=n>mpz</span><span class=p>,</span> <span class=n>other</span><span class=p>)</span>
+  <span class=k>end</span>
+<span class=k>end</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=依赖管理>依赖管理</h1>
+<p>任何一个偏工程性的语言，都会提供一个包管理系统。crystal 的包管理是 shards，其实和 go module 类似。这种项目级别的包管理其实更为实用一些。</p>
+<p>但是 go 的任何一个项目，其实都可以是一个包，crystal 还是会有一些限制的。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=nb>name</span><span class=p>:</span> <span class=n>my</span><span class=o>-</span><span class=n>project</span>
+<span class=ss>version</span><span class=p>:</span> <span class=mi>0</span><span class=o>.</span><span class=mi>1</span>
+<span class=ss>license</span><span class=p>:</span> <span class=no>MIT</span>
+
+<span class=ss>crystal</span><span class=p>:</span> <span class=mi>0</span><span class=o>.</span><span class=mi>21</span><span class=o>.</span><span class=mi>0</span>
+
+<span class=ss>dependencies</span><span class=p>:</span>
+  <span class=ss>mysql</span><span class=p>:</span>
+    <span class=ss>github</span><span class=p>:</span> <span class=n>crystal</span><span class=o>-</span><span class=n>lang</span><span class=o>/</span><span class=n>crystal</span><span class=o>-</span><span class=n>mysql</span>
+    <span class=ss>version</span><span class=p>:</span> <span class=o>~&gt;</span> <span class=mi>0</span><span class=o>.</span><span class=mi>3</span><span class=o>.</span><span class=mi>1</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2019-08-27
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">crystal 开发环境</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/socket/>
+<span class="next-text nav-default">socket</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

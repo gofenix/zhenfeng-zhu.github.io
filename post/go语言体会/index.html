@@ -1,0 +1,492 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Go 语言体会 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。 语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置 我最早听说协程"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Go 语言体会">
+<meta property="og:description" content="最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。 语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置 我最早听说协程">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/go%E8%AF%AD%E8%A8%80%E4%BD%93%E4%BC%9A/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-04-04T13:48:57+00:00">
+<meta property="article:modified_time" content="2018-04-04T13:48:57+00:00">
+<meta itemprop=name content="Go 语言体会">
+<meta itemprop=description content="最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。 语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置 我最早听说协程"><meta itemprop=datePublished content="2018-04-04T13:48:57+00:00">
+<meta itemprop=dateModified content="2018-04-04T13:48:57+00:00">
+<meta itemprop=wordCount content="1717">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Go 语言体会">
+<meta name=twitter:description content="最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。 语言简单，上手快。 gorotuine 易发布 垃圾回收 约定大于配置 我最早听说协程"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Go 语言体会</h1>
+<div class=post-meta>
+<span class=post-time> 2018-04-04 </span>
+<span class=more-meta> 约 1717 字 </span>
+<span class=more-meta> 预计阅读 4 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#go-的并发>go 的并发</a>
+<ul>
+<li><a href=#语法>语法</a></li>
+<li><a href=#例子>例子</a></li>
+<li><a href=#channel>channel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>最近公司要统一技术栈，在 kotlin 和 go 之间选。我心里是比较倾向 go 的，主要有如下几点体会。</p>
+<ul>
+<li>语言简单，上手快。</li>
+<li>gorotuine</li>
+<li>易发布</li>
+<li>垃圾回收</li>
+<li>约定大于配置</li>
+</ul>
+<p>我最早听说协程，是在大三找实习的时候，那个时候面试会问线程和进程的关系，问的深一些就是协程和线程的区别。游戏公司基本都用 lua，看了 lua 的资料后，对协程有了一些自己的了解，随后就是在做 Unity 相关的开发，在 unity 中使用了很多的协程，但是在 unity 中使用的协程好像跟主流的不太一样，在看了 go 之后，豁然开朗。</p>
+<p>goroutine 使用的内存比线程更少，go 在运行的时候会自动在配置的一组逻辑处理器上调度执行。比如：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>func log(msg string){
+    ...
+}
+
+go log(&#34;&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p>使用关键字 go，即可让 log 函数在一个 goroutine 里执行了。</p>
+<p>并发最难的部分是要确保其他并发运行的进程、线程或者 goroutine 不会以外的修改数据。go 使用了 Channel 的方式来解决这个问题。对于通道模式，保证同一时刻只会有一个 goroutine 修改数据。</p>
+<p>说起 go 的语言简单，其实主要是他的类型比较简单。go 使用的是组合模式，只需要将一个类型嵌入到另外一个类型就可以复用所有的功能。而且 go 还具有独特的接口实现机制，允许用户对行为进行建模，在 go 中不需要声明某个类型实现了某个接口，编译器会自动判断一个实例是使用什么接口。</p>
+<p>对于 java 来说，所有的设计都是围绕着接口展开，于是在设计模式中，就是面向接口编程：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>interface User{
+    void login();
+    void logout();
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>在 java 中，继承的类必须显式声明继承了此接口。而在 go 中接口只是描述一个动作，如果说是实现这个接口，只需要让某个实例实现了这个接口中的所有方法就行了。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>type Reader interface{
+    Read(p []byte))(n int, err error)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这其实和传统的 oop 语言的接口有着本质的区别，go 中的接口一般只定义一个单一的动作，实际使用的过程中，这更有利于使用组合来复用代码。</p>
+<p>约定大于配置这点，go 在这方面上做的感觉有点儿吹毛求疵了，但是这样也使得程序可读性更强，没有很多垃圾代码。比如 go 的文件结构必须是 src pkg 和 bin 三个包，而且 go 也不允许你声明一个变量却不使用，导入了一个包却不使用，而且程序的代码也有约定，init 方法比 main 方法更早执行。</p>
+<h2 id=go-的并发>go 的并发</h2>
+<p>说到并发，就会想到另外一个概念，并行。可以简单这样的理解：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>并发是同时管理多个事情，而并行是同时做很多事情。也就是并发是manage，并行是run。
+</code></pre></td></tr></table>
+</div>
+</div><p>对于单核处理器来讲，同一时刻只能有一个任务在执行，那么并发就是同时管理多个任务，让他们交替执行。并行是针对于多核处理器的，同一时刻可以把多个任务放在不同的处理器上执行，这样就可以同时执行。</p>
+<p>在 go 里面主要是采用协程来实现并发的，也就是 goroutine。与其他语言不同的是，go 是在语法层面做到的，即 go func();</p>
+<h3 id=语法>语法</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>go f(x, y)
+</code></pre></td></tr></table>
+</div>
+</div><p>go 是关键字，后面跟函数。</p>
+<h3 id=例子>例子</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package main
+
+import (
+ &#34;log&#34;
+ &#34;time&#34;
+)
+
+func doSomething(id int) {
+ log.Printf(&#34;before do job:(%d) \n&#34;, id)
+ time.Sleep(3 * time.Second)
+ log.Printf(&#34;after do job:(%d) \n&#34;, id)
+}
+
+func main() {
+ doSomething(1)
+ doSomething(2)
+ doSomething(3)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这个例子的输出是：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>2018/04/15 17:06:05 before do job:(1) 
+2018/04/15 17:06:08 after do job:(1) 
+2018/04/15 17:06:08 before do job:(2) 
+2018/04/15 17:06:11 after do job:(2) 
+2018/04/15 17:06:11 before do job:(3) 
+2018/04/15 17:06:14 after do job:(3) 
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到是用了 9 秒的时间才完成，如果是采用 goroutine 的话，就很快。很简单，就是在执行 doSomething 之前，加上 go 关键字。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>import (
+ &#34;log&#34;
+ &#34;time&#34;
+)
+
+func doSomething(id int) {
+ log.Printf(&#34;before do job:(%d) \n&#34;, id)
+ time.Sleep(3 * time.Second)
+ log.Printf(&#34;after do job:(%d) \n&#34;, id)
+}
+
+func main() {
+ go doSomething(1)
+ go doSomething(2)
+ go doSomething(3)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>但是这样的话，什么结果也没有，是因为 main 函数本身也是一个 goroutine，main 执行完之后，其他的还没开始，所以什么也看不到。最简单的办法就是让 main 函数等待一段时间再结束，但是这样不够优雅。</p>
+<p>我们应该采用 sync.WaitGroup 来等待所有的 goroutine 结束。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package main
+
+import (
+ &#34;log&#34;
+ &#34;sync&#34;
+ &#34;time&#34;
+)
+
+func doSomething(id int, wg *sync.WaitGroup) {
+ defer wg.Done()
+
+ log.Printf(&#34;before do job:(%d) \n&#34;, id)
+ time.Sleep(3 * time.Second)
+ log.Printf(&#34;after do job:(%d) \n&#34;, id)
+}
+
+func main() {
+ var wg sync.WaitGroup
+ wg.Add(3)
+
+    // 因为我们要修改wg的状态，所以要传指针过去
+ go doSomething(1, &amp;wg)
+ go doSomething(2, &amp;wg)
+ go doSomething(3, &amp;wg)
+
+ wg.Wait()
+ log.Printf(&#34;finish all jobs\n&#34;)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>执行结果是：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>2018/04/15 17:13:14 before do job:(3) 
+2018/04/15 17:13:14 before do job:(2) 
+2018/04/15 17:13:14 before do job:(1) 
+2018/04/15 17:13:17 after do job:(2) 
+2018/04/15 17:13:17 after do job:(1) 
+2018/04/15 17:13:17 after do job:(3) 
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到这次只用了 3 秒左右就执行完了，而且他们的执行顺序也不确定，竞争执行。</p>
+<h3 id=channel>channel</h3>
+<p>每个协程之间要进行通信，那么在通信的时候采用的是 Channel 的形式，即一个 goroutine 将数据传递给 Channel，另一个 goroutine 从 Channel 中读取数据。</p>
+<p>创建 Channel 有两种方式：</p>
+<p>使用内建函数 make 可以创建 channel，举例如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>ch := make(chan int)  // 注意： channel 必须定义其传递的数据类型
+</code></pre></td></tr></table>
+</div>
+</div><p>也可以用 var 声明 channel, 如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var ch chan int
+</code></pre></td></tr></table>
+</div>
+</div><p>以上声明的 channel 都是双向的，意味着可以该 channel 可以发送数据，也可以接收数据。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2018-04-04
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">同步一个 fork</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/>
+<span class="next-text nav-default">关于时间管理</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

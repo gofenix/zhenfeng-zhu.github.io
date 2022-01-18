@@ -1,0 +1,948 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Chapter2 如何使用 Emacs - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="如何使用 Emacs，一个优秀的 Clojure 编辑器 在你掌握 Clojure 的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用 Emacs，但你当然也可以使用任何你想"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/chapter2/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Chapter2 如何使用 Emacs">
+<meta property="og:description" content="如何使用 Emacs，一个优秀的 Clojure 编辑器 在你掌握 Clojure 的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用 Emacs，但你当然也可以使用任何你想">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter2/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-13T10:43:56+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Chapter2 如何使用 Emacs">
+<meta itemprop=description content="如何使用 Emacs，一个优秀的 Clojure 编辑器 在你掌握 Clojure 的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用 Emacs，但你当然也可以使用任何你想"><meta itemprop=datePublished content="2022-01-13T10:43:56+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="13062">
+<meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Chapter2 如何使用 Emacs">
+<meta name=twitter:description content="如何使用 Emacs，一个优秀的 Clojure 编辑器 在你掌握 Clojure 的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用 Emacs，但你当然也可以使用任何你想"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Chapter2 如何使用 Emacs</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-13 </span>
+<span class=more-meta> 约 13062 字 </span>
+<span class=more-meta> 预计阅读 27 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#如何使用-emacs一个优秀的-clojure-编辑器>如何使用 Emacs，一个优秀的 Clojure 编辑器</a>
+<ul>
+<li><a href=#安装>安装</a></li>
+<li><a href=#配置>配置</a></li>
+<li><a href=#emacs-逃逸舱口>Emacs 逃逸舱口</a></li>
+<li><a href=#emacs-缓冲区>Emacs 缓冲区</a></li>
+<li><a href=#与文件一起工作>与文件一起工作</a></li>
+<li><a href=#键绑定和模式>键绑定和模式</a>
+<ul>
+<li><a href=#emacs-是一个-lisp-解释器>Emacs 是一个 Lisp 解释器</a></li>
+<li><a href=#模式>模式</a></li>
+<li><a href=#安装软件包>安装软件包</a></li>
+</ul>
+</li>
+<li><a href=#核心编辑术语和键绑定>核心编辑术语和键绑定</a>
+<ul>
+<li><a href=#点>点</a></li>
+</ul>
+</li>
+<li><a href=#移动>移动</a>
+<ul>
+<li><a href=#带区域的选择>带区域的选择</a></li>
+<li><a href=#杀戮和杀戮环>杀戮和杀戮环</a></li>
+<li><a href=#编辑和帮助>编辑和帮助</a></li>
+</ul>
+</li>
+<li><a href=#使用-emacs-与-clojure>使用 Emacs 与 Clojure</a>
+<ul>
+<li><a href=#开启你的-repl>开启你的 REPL</a></li>
+<li><a href=#如何处理错误>如何处理错误</a></li>
+<li><a href=#paredit>Paredit</a></li>
+</ul>
+</li>
+<li><a href=#继续学习>继续学习</a></li>
+<li><a href=#摘要>摘要</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=如何使用-emacs一个优秀的-clojure-编辑器>如何使用 Emacs，一个优秀的 Clojure 编辑器</h1>
+<p>在你掌握 Clojure 的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用 Emacs，但你当然也可以使用任何你想要的编辑器。如果你不遵循本章中关于 Emacs 的详尽说明，或者你选择使用一个不同的编辑器，那么至少值得投入一些时间来设置你的编辑器，以便与 REPL 一起工作。我推荐的两个在社区中受到好评的替代品是<a href=https://cursive-ide.com/>Cursive</a>和<a href=https://sekao.net/nightcode/>Nightcode</a>。</p>
+<p>我推荐 Emacs 的原因是，它提供了与 Clojure REPL 的紧密集成，这使你可以在写作时立即尝试你的代码。这种紧密的反馈回路在学习 Clojure 和以后编写真正的 Clojure 程序时都很有用。Emacs 也很适合与任何 Lisp 方言一起工作；事实上，Emacs 是用一种叫做 Emacs Lisp（elisp）的 Lisp 方言编写的。</p>
+<p>在本章结束时，你的 Emacs 设置将看起来像图 2-1。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/emacs-final.png alt></p>
+<p>图 2-1: 使用 Clojure 的典型 Emacs 设置：一边是代码，另一边是 REPL。</p>
+<p>为了达到这个目的，你将从安装 Emacs 开始，设置一个适合新人的 Emacs 配置。然后你将学习基础知识：如何打开、编辑和保存文件，以及如何使用基本的键绑定与 Emacs 进行交互。最后，你将学习如何实际编辑 Clojure 代码并与 REPL 进行交互。</p>
+<h2 id=安装>安装</h2>
+<p>你应该使用 Emacs 的最新主要版本，即 Emacs 24，用于你工作的平台。</p>
+<ul>
+<li><strong>OS X</strong>从*<a href=http://emacsformacosx.com/>http://emacsformacosx.com</a>*安装 vanilla Emacs 作为一个 Mac 应用程序。其他选项，如 Aquamacs，应该是为了使 Emacs 更 &ldquo;像 Mac&rdquo;，但从长远来看是有问题的，因为它们的设置与标准 Emacs 有很大的不同，以至于很难使用 Emacs 手册或跟随教程。</li>
+<li><strong>Ubuntu</strong>按照*<a href=https://launchpad.net/~cassou/+archive/emacs>https://launchpad.net/~cassou/+archive/emacs</a>*上的说明。</li>
+<li><strong>Windows</strong>你可以在*<a href=http://ftp.gnu.org/gnu/emacs/windows/>Index of /gnu/emacs/windows</a><em>找到一个二进制文件。在你下载并解压最新版本后，你可以在</em>bin\runemacs.exe*下运行 Emacs 可执行文件。</li>
+</ul>
+<p>安装完 Emacs 后，打开它。你应该看到类似图 2-2 的东西。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/emacs-fresh.png alt></p>
+<p>图 2-2：当你第一次打开 Emacs 时显示的屏幕</p>
+<p>欢迎来到 Emacs 的崇拜！你已经使 Richard Stallman 成为了 Emacs 的一员。你让 Richard Stallman 感到骄傲!</p>
+<h2 id=配置>配置</h2>
+<p>我创建了一个库，里面有为 Clojure 配置 Emacs 所需的所有文件，可在<a href=https://github.com/flyingmachine/emacs-for-clojure/archive/book1.zip>https://github.com/flyingmachine/emacs-for-clojure/archive/book1.zip</a>。</p>
+<p>注意：这些工具一直在更新，所以如果下面的说明对你不起作用，或者你想使用最新的配置，请阅读<a href=https://github.com/flyingmachine/emacs-for-clojure/>GitHub - flyingmachine/emacs-for-clojure</a>上的说明。</p>
+<p>按以下步骤删除你现有的 Emacs 配置并安装对 Clojure 友好的配置。</p>
+<ol>
+<li>
+<p>关闭 Emacs。</p>
+</li>
+<li>
+<p>删除*~/.emacs<em>或</em>~/.emacs.d*，如果它们存在的话。(Windows 用户，你的 Emacs 文件可能在<em>C:\Users\your_user_name\AppData\Roaming*。因此，举例来说，你可以删除</em>C:\Users\jason\AppData\Roaming.emacs.d*）。这是 Emacs 寻找配置文件的地方，删除这些文件和目录将确保你从一个干净的地方开始。</p>
+</li>
+<li>
+<ol start=3>
+<li>下载上面列出的 Emacs 配置压缩文件并解压。其内容应该是一个文件夹，<em>emacs-for-clojure-book1</em>。运行 mv path/to/emacs-for-clojure-book1 ~/.emacs.d。</li>
+</ol>
+</li>
+<li>
+<p>打开 Emacs。</p>
+</li>
+</ol>
+<p>当你打开 Emacs 时，你可能会看到大量的活动，因为 Emacs 正在下载一堆有用的软件包。一旦这些活动停止，继续前进，退出 Emacs，然后再打开它。(如果你没有看到任何活动，那也没关系！退出并重新启动 Emacs。退出并重新启动 Emacs 只是为了好玩）。在你这样做之后，你应该看到一个像图 2-3 那样的窗口。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/emacs-configged.png alt></p>
+<p>图 2-3：Emacs 在安装了你可爱的新配置后的样子</p>
+<p>现在我们已经设置好了一切，让我们来学习如何使用 Emacs!</p>
+<h2 id=emacs-逃逸舱口>Emacs 逃逸舱口</h2>
+<p>在我们进入有趣的东西之前，你需要知道一个重要的 Emacs 键绑定：ctrl-G。这个键绑定可以退出你试图运行的任何 Emacs 命令。所以，如果事情进展不顺利，按住 ctrl，按 G，然后再试一次。它不会关闭 Emacs，也不会使你失去任何工作；它只是取消你当前的行动。</p>
+<h2 id=emacs-缓冲区>Emacs 缓冲区</h2>
+<p>所有的编辑都发生在 Emacs 的*缓冲区中。当你第一次启动 Emacs 时，一个名为 &ldquo;<em>scratch</em>&ldquo;的缓冲区被打开。Emacs 总是在窗口的底部显示当前缓冲区的名称，如图 2-4 所示。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/emacs-buffer-name.png alt></p>
+<p>图 2-4：Emacs 会一直显示当前缓冲区的名称。</p>
+<p>默认情况下，<code>*scratch*</code>缓冲区处理括号和缩进的方式对 Lisp 开发来说是最理想的，但对编写纯文本却很不方便。让我们创建一个新的缓冲区，这样我们就可以在不发生意外的情况下进行游戏。要创建一个缓冲区，请这样做。</p>
+<ol>
+<li>按住 ctrl 键并按下 X 键。</li>
+<li>2.松开 ctrl 键。</li>
+<li>按 B 键。</li>
+</ol>
+<p>我们可以用一个更紧凑的格式来表达同样的序列。 <strong>C-x b</strong>。</p>
+<p>执行这个按键序列后，你会在应用程序的底部看到一个提示，如图 2-5 所示。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/emacs-buffer-prompt.png alt></p>
+<p>图 2-5: 迷你缓冲区是 Emacs 提示你输入的地方。</p>
+<p>这个区域被称为<em>minibuffer</em>，它是 Emacs 提示你输入的地方。现在它正在提示我们输入一个缓冲区的名称。你可以输入一个已经打开的缓冲区的名称，也可以输入一个新的缓冲区名称。输入 emacs-fun-times，然后按回车键。现在你应该看到一个完全空白的缓冲区，可以直接开始输入。你会发现，按键的工作方式与你所期望的差不多。字符在你输入时出现。上、下、左、右方向键会像你所期望的那样移动你，而回车键会创建一个新行。</p>
+<p>你还会注意到，你不会突然长出浓密的 Unix 胡须或穿上 Birkenstocks（除非你一开始就有）。这应该有助于缓解你对使用 Emacs 的任何恐惧感。当你玩够了之后，继续前进，通过输入<strong>C-x k enter</strong>来杀死**的缓冲区。(这可能会让人吃惊，但 Emacs 实际上是很暴力的，它充分使用了<em>杀</em>这个词）。</p>
+<p>现在你已经杀死了<code>emacs-fun-times</code>缓冲区，你应该回到<code>*scratch*</code>缓冲区。一般来说，你可以用<strong>C-x b</strong>创建任意多的新缓冲区。你也可以用同样的命令在缓冲区之间快速切换。当你以这种方式创建一个新的缓冲区时，它只存在于内存中，直到你把它保存为一个文件；缓冲区不一定有文件支持，创建一个缓冲区也不一定会创建一个文件。让我们来学习一下关于文件的工作。</p>
+<h2 id=与文件一起工作>与文件一起工作</h2>
+<p>在 Emacs 中打开文件的键位是<strong>C-x C-f</strong>。注意，当你按下 X 和 F 时，你需要按住 ctrl。导航到*~/.emacs.d/customizations/ui.el*，它可以自定义 Emacs 的外观和你与它的互动方式。Emacs 在一个与文件名相同的新缓冲区中打开文件。让我们转到第 37 行，去掉前面的分号，取消注释。它将看起来像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nf>setq</span> <span class=nv>initial-frame-alist</span> <span class=o>&#39;</span><span class=p>((</span><span class=nf>top</span> <span class=k>. </span><span class=mi>0</span><span class=p>)</span> <span class=p>(</span><span class=nb>left </span><span class=k>. </span><span class=mi>0</span><span class=p>)</span> <span class=p>(</span><span class=nf>width</span> <span class=k>. </span><span class=mi>120</span><span class=p>)</span> <span class=p>(</span><span class=nf>height</span> <span class=k>. </span><span class=mi>80</span><span class=p>))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后改变 &ldquo;width &ldquo;和 &ldquo;height &ldquo;的值，它们为活动窗口设置<em>字符</em>的尺寸。通过改变这些值，你可以设置 Emacs 窗口在每次启动时以某种尺寸打开。一开始可以试试小一点的，比如 80 和 20。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nf>setq</span> <span class=nv>initial-frame-alist</span> <span class=o>&#39;</span><span class=p>((</span><span class=nf>top</span> <span class=k>. </span><span class=mi>0</span><span class=p>)</span> <span class=p>(</span><span class=nb>left </span><span class=k>. </span><span class=mi>0</span><span class=p>)</span> <span class=p>(</span><span class=nf>width</span> <span class=k>. </span><span class=mi>80</span><span class=p>)</span> <span class=p>(</span><span class=nf>height</span> <span class=k>. </span><span class=mi>20</span><span class=p>))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在用下面的键绑定来保存你的文件。 <strong>C-x C-s</strong>。你应该在 Emacs 的底部得到一个信息，如<code>写了/Users/snuffleupagus/</code>.emacs.d/customizations/ui.el`。你也可以尝试使用你在其他应用程序中使用的键绑定来保存你的缓冲区（例如，ctrl-S 或 cmd-S）。你下载的 Emacs 配置应该允许这样做，但如果不允许，也没什么大不了的。</p>
+<p>保存文件后，退出 Emacs 并再次启动它。我敢打赌，它非常小! 请看我在图 2-6 中的例子。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/tinemacs.png alt></p>
+<p>图 2-6：你可以配置 Emacs，使其在每次打开时都设置高度和宽度。</p>
+<p>同样的过程要进行几次，直到 Emacs 以你喜欢的尺寸开始。或者再把这几行注释掉就可以了（在这种情况下，Emacs 将以其默认的宽度和高度打开）。如果你完成了对<em>ui.el</em>的编辑，你可以用<strong>C-x k</strong>关闭其缓冲区。无论如何，你已经完成了在 Emacs 中保存第一个文件的工作 如果发生了一些疯狂的事情，你可以按照<a href=https://www.braveclojure.com/basic-emacs/#Anchor>第 13 页的 &ldquo;配置&rdquo;</a>中的指示来使 Emacs 重新工作。</p>
+<p>如果你想创建一个新的文件，只需使用<strong>C-x C-f</strong>并在迷你缓冲区中输入新文件的路径。一旦你保存了缓冲区，Emacs 就会按照你输入的路径用缓冲区的内容创建一个文件。</p>
+<p>让我们来回顾一下。</p>
+<ol>
+<li>在 Emacs 中，编辑是在缓冲区*.*中进行的。</li>
+<li>要切换到一个缓冲区，使用<strong>C-x b</strong>并在 minibuffer*.*中输入缓冲区的名称。</li>
+<li>要创建一个新的缓冲区，使用<strong>C-x b</strong>并输入一个新的缓冲区名称。</li>
+<li>要打开一个文件，使用<strong>C-x C-f</strong>并导航到该文件。</li>
+<li>
+<ol start=5>
+<li>要将缓冲区保存到文件中，使用<strong>C-x C-s</strong>。</li>
+</ol>
+</li>
+<li>要创建一个新的文件，使用<strong>C-x C-f</strong>并输入新文件的路径。当你保存缓冲区时，Emacs 将在文件系统中创建文件。</li>
+</ol>
+<h2 id=键绑定和模式>键绑定和模式</h2>
+<p>你已经走了很长一段路了! 你现在可以像一个非常基本的编辑器一样使用 Emacs。如果你需要在服务器上使用 Emacs，或者被迫与 Emacs 书呆子配对，这应该能帮助你度过难关。</p>
+<p>然而，要想真正有成效，了解一些关于键绑定的*关键细节对你来说是很有用的（哈哈！）。然后我将介绍 Emacs 模式。之后，我将介绍一些核心术语，并介绍一些超级有用的键绑定。</p>
+<h3 id=emacs-是一个-lisp-解释器>Emacs 是一个 Lisp 解释器</h3>
+<p>术语<em>键绑定</em>源于这样一个事实：Emacs 将<em>键击打</em>绑定到<em>命令</em>上，而这些命令只是 elisp 函数（我将交替使用<em>命令</em>和<em>函数</em>）。例如，<strong>C-x b</strong>被绑定到函数<code>switch-to-buffer</code>。同样地，<strong>C-x C-s</strong>与<code>save-file</code>绑定。</p>
+<p>但 Emacs 甚至比这更进一步。甚至像<strong>f</strong>和<strong>a</strong>这样简单的按键也被绑定到一个函数上，在这个例子中是 &ldquo;self-insert-command&rdquo;，是向你正在编辑的缓冲区添加字符的命令。</p>
+<p>从 Emacs 的角度来看，所有的函数都是平等的，你可以重新定义所有的函数，甚至像<code>save-file</code>这样的核心函数。你可能不会<em>想要</em>重新定义核心函数，但你可以。</p>
+<p>你可以重新定义函数，因为就其核心而言，Emacs 只是一个 Lisp 解释器，恰好加载了代码编辑功能。Emacs 的大部分内容都是用 elisp 编写的，所以从 Emacs 的角度来看，<code>save-file</code>只是一个函数，就像<code>switch-to-buffer</code>和你能运行的几乎所有其他命令一样。不仅如此，你创建的任何函数都被当作内置函数来对待。你甚至可以用 Emacs 来执行 elisp，在它运行时修改 Emacs。</p>
+<p>使用强大的编程语言修改 Emacs 的自由是 Emacs 如此灵活的原因，也是为什么像我这样的人对它如此疯狂。是的，它有很多表面上的复杂性，可能需要花时间去学习。但 Emacs 的底层是 Lisp 的优雅简洁，以及随之而来的无限的可修补性。这种可修补性并不局限于创建和重新定义函数。你还可以创建、重新定义和删除键绑定。从概念上讲，按键绑定只是一个查询表中的条目，它将按键与函数联系起来，而这个查询表是完全可修改的。</p>
+<p>你也可以使用<strong>M-x</strong>函数名称来运行命令，而不需要特定的键绑定（例如，<strong>M-x</strong> save-buffer）。 <em>M</em>代表<em>meta</em>，这是一个现代键盘不具备的键，但在 Windows 和 Linux 上被 Map 到 alt，在 Mac 上则是 option。 <strong>M-x</strong>运行<code>smex</code>命令，它提示你要运行的另一个命令的名称。</p>
+<p>现在你已经了解了键的绑定和功能，你将能够理解什么是模式以及它们是如何工作的。</p>
+<h3 id=模式>模式</h3>
+<p>Emacs 的<em>模式</em>是一个键绑定和功能的集合，它被打包在一起，帮助你在编辑不同类型的文件时提高工作效率。(模式也可以做一些事情，比如告诉 Emacs 如何做语法高亮，但这是次要的，我不会在这里介绍。)</p>
+<p>例如，当你在编辑一个 Clojure 文件时，你会想加载 Clojure 模式。现在我正在写一个 Markdown 文件并使用 Markdown 模式，它有很多专门用于 Markdown 工作的有用的键绑定。在编辑 Clojure 时，最好有一套 Clojure 专用的键绑定，比如<strong>C-c C-k</strong>将当前的缓冲区加载到 REPL 中并进行编译。</p>
+<p>模式有两种类型。 <em>主要</em>模式和<em>次要</em>模式。Markdown 模式和 Clojure 模式是主要模式。主要模式通常在你打开文件时由 Emacs 设置，但你也可以通过运行相关的 Emacs 命令明确地设置模式，例如用<strong>M-x</strong> clojure-mode 或<strong>M-x</strong> major-mode。每次只有一种主要模式是激活的。</p>
+<p>主要模式是针对某种文件类型或语言的 Emacs，而次要模式通常提供对各种文件类型都有用的功能。例如，abbrev 模式 &ldquo;根据预先定义的缩写定义自动展开文本&rdquo;（根据 Emacs 手册<a href=https://www.braveclojure.com/basic-emacs/#footnote-5680-1>1.</a>）。你可以同时激活多个次要模式。</p>
+<p>你可以在*模式行中看到哪些模式处于活动状态，如图 2-7 所示。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/emacs-mode-line.png alt></p>
+<p>图 2-7：模式行显示哪些模式是活动的。</p>
+<p>如果你打开一个文件，而 Emacs 没有为它加载一个主要模式，那么这个模式很有可能存在。你只需要下载它的软件包。说到这个 &mldr; .</p>
+<h3 id=安装软件包>安装软件包</h3>
+<p>许多模式都是以<em>包</em>的形式发布的，这只是存储在包仓库中的 elisp 文件的捆绑。你在本章开始时安装的 Emacs 24，使浏览和安装软件包变得非常容易。 <strong>M-x</strong> package-list-packages 会显示几乎所有可用的软件包；只要确保你先运行<strong>M-x</strong> package-refresh-contents 就能得到最新的列表。你可以用<strong>M-x</strong> package-install 来安装软件包。</p>
+<p>你也可以通过加载你自己的 elisp 文件或你在网上找到的文件来定制 Emacs。Emacs 初学者指南》（见*<a href=http://www.masteringemacs.org/articles/2010/10/04/beginners-guide-to-emacs/>http://www.masteringemacs.org/articles/2010/10/04/beginners-guide-to-emacs/</a>*）在文章底部的 &ldquo;加载新包 &ldquo;一节中对如何加载自定义文件有很好的描述。</p>
+<h2 id=核心编辑术语和键绑定>核心编辑术语和键绑定</h2>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/pirate.png alt></p>
+<p>如果你只想把 Emacs 当做一个文本编辑器来使用，你可以完全跳过这一节！但你将会错过很多东西。但你将会错过一些好东西。在这一节中，我们将介绍 Emacs 的关键术语；如何选择、剪切、复制和粘贴文本；如何选择、剪切、复制和粘贴文本（看到我做了什么吗？ 哈哈哈！）；以及如何有效地在缓冲区内移动。</p>
+<p>要想开始，请在 Emacs 中打开一个新的缓冲区，并将其命名为<em>jack-handy</em>。然后输入以下杰克-汉迪的语录。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=nv>If</span> <span class=nv>you</span> <span class=nv>were</span> <span class=nv>a</span> <span class=nv>pirate</span>, <span class=nv>you</span> <span class=nv>know</span> <span class=nv>what</span> <span class=nv>would</span> <span class=nv>be</span> <span class=nv>the</span> <span class=nv>one</span> <span class=nv>thing</span> <span class=nv>that</span> <span class=nv>would</span>
+<span class=nv>really</span> <span class=nv>make</span> <span class=nv>you</span> <span class=nv>mad?</span> <span class=nv>Treasure</span> <span class=nv>chests</span> <span class=nv>with</span> <span class=nv>no</span> <span class=nv>handles.</span> <span class=nv>How</span> <span class=nv>the</span> <span class=nv>hell</span> <span class=nv>are</span>
+<span class=nv>you</span> <span class=nv>supposed</span> <span class=nv>to</span> <span class=nv>carry</span> <span class=nv>it?!</span>
+
+<span class=nv>The</span> <span class=nv>face</span> <span class=nv>of</span> <span class=nv>a</span> <span class=nv>child</span> <span class=nv>can</span> <span class=nv>say</span> <span class=nv>it</span> <span class=nv>all</span>, <span class=nv>especially</span> <span class=nv>the</span> <span class=nv>mouth</span> <span class=nv>part</span> <span class=nv>of</span> <span class=nv>the</span>
+<span class=nv>face.</span>
+
+<span class=nv>To</span> <span class=nv>me</span>, <span class=nv>boxing</span> <span class=nv>is</span> <span class=nv>like</span> <span class=nv>a</span> <span class=nv>ballet</span>, <span class=nv>except</span> <span class=nv>there</span><span class=ss>&#39;s</span> <span class=nv>no</span> <span class=nv>music</span>, <span class=nv>no</span>
+<span class=nv>choreography</span>, <span class=nb>and </span><span class=nv>the</span> <span class=nv>dancers</span> <span class=nv>hit</span> <span class=nv>each</span> <span class=nv>other.</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>用这个例子来试验本节中的导航和编辑。</p>
+<h3 id=点>点</h3>
+<p>如果你一直在关注，你应该在你的 Emacs 缓冲区看到一个橘红色的矩形。这就是<em>游标</em>，它是<em>点</em>的图形表示。点是所有魔法发生的地方：你在点上插入文本，大多数编辑命令都是与点有关的。即使你的光标看起来是在一个字符的上面，但点实际上是位于该字符和前一个字符之间。</p>
+<p>例如，把你的光标放在<em>If you were a pirate</em>中的<em>f</em>上。点就位于<em>I</em>和<em>f</em>之间。现在，如果你使用<strong>C-k</strong>，从字母<em>f</em>开始的所有文字将消失。 <strong>C-k</strong>运行命令<code>kill-line</code>，它*杀了当前行中从点开始的所有文字（我将在后面讲到更多的杀戮）。用**C-/**撤销这一改变。另外，尝试用正常的操作系统的键绑定来撤消；这也应该是有效的。</p>
+<h2 id=移动>移动</h2>
+<p>你可以像其他编辑器一样用方向键来移动点，但许多键的绑定可以让你更有效地进行导航，如表 2-1 所示。</p>
+<ol>
+<li>表 2-1: 文本导航的键位绑定</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C-a</strong></td>
+<td>移动到行首。</td>
+</tr>
+<tr>
+<td><strong>M-m</strong></td>
+<td>移动到该行的第一个非空格字符。</td>
+</tr>
+<tr>
+<td><strong>C-e</strong></td>
+<td>移动到行尾。</td>
+</tr>
+<tr>
+<td><strong>C-f</strong></td>
+<td>向前移动一个字符。</td>
+</tr>
+<tr>
+<td>*<em>C-b</em> *向后移动一个字符。</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>M-f</strong></td>
+<td>向前移动一个字（我经常用这个）。</td>
+</tr>
+<tr>
+<td><strong>M-b</strong></td>
+<td>向后移动一个字（我也经常用这个）。</td>
+</tr>
+<tr>
+<td><strong>C-s</strong></td>
+<td>Regex 搜索当前缓冲区内的文本，并移动到它。再按一次<strong>C-s</strong>，移到下一个匹配。</td>
+</tr>
+<tr>
+<td><strong>C-r</strong></td>
+<td>与<strong>C-s</strong>相同，但以反向方式搜索。</td>
+</tr>
+<tr>
+<td><strong>M-&lt;</strong></td>
+<td>移到缓冲区的开头。</td>
+</tr>
+<tr>
+<td><strong>M-></strong></td>
+<td>移动到缓冲区的末端。</td>
+</tr>
+<tr>
+<td><strong>M-g g</strong></td>
+<td>转到该行。</td>
+</tr>
+</tbody>
+</table>
+<p>来吧，在你的***缓冲区里试试这些键的绑定!</p>
+<h3 id=带区域的选择>带区域的选择</h3>
+<p>在 Emacs 中，我们并不<em>选择</em>文本。我们创建<em>区域</em>，并通过用<strong>C-spc</strong>（ctrl-spacebar）设置*标记来实现。然后，当你移动点时，标记和点之间的所有东西都是区域。这与 shift 选择文本的基本目的非常相似。</p>
+<p>例如，在你的****缓冲区里做以下事情。</p>
+<ol>
+<li>转到文件的开头。</li>
+<li>使用<strong>C-spc</strong>。</li>
+<li>使用<strong>M-f</strong>两次。你应该看到一个高亮的区域，包括<em>If you</em>。</li>
+<li>
+<ol start=4>
+<li>按退格键。这将会删除<em>如果你</em>。</li>
+</ol>
+</li>
+</ol>
+<p>使用标记而不是 Shift 选择文本的一个很酷的事情是，你可以在设置标记后自由使用 Emacs 的所有移动命令。例如，你可以设置一个标记，然后用<strong>C-s</strong>来搜索缓冲区内几百行的一些文本。这样做将创建一个非常大的区域，而你就不必紧张地按住 Shift 键了。</p>
+<p>区域还可以让你把一个操作限制在缓冲区的有限区域内。试试这个。</p>
+<ol>
+<li>创建一个区域，包括<em>孩子的脸可以说明一切</em>。</li>
+<li>
+<ol start=2>
+<li>使用<strong>M-x</strong>替换字符串，用<em>head</em>替换<em>face</em>。</li>
+</ol>
+</li>
+</ol>
+<p>这将在当前区域内进行替换，而不是在点之后的整个缓冲区内进行替换，这是默认行为。</p>
+<h3 id=杀戮和杀戮环>杀戮和杀戮环</h3>
+<p>在大多数应用程序中，我们可以<em>切割</em>文本，这只是轻微的暴力。我们还可以<em>复制</em>和<em>粘贴</em>。剪切和复制将选择的内容添加到剪贴板上，而粘贴则将剪贴板上的内容复制到当前的应用程序中。在 Emacs 中，我们采取杀人的方法，<em>杀</em>区域，把它们加入到<em>杀圈</em>。当你知道你正在浪费数千字节的文本时，你不觉得<em>勇敢</em>和<em>坚强</em>吗？然后我们可以<em>yank</em>，在点上插入最近杀死的文本。我们还可以<em>复制</em>文本到杀戮环，而不需要真正杀死它。</p>
+<p>为什么要用这些病态的术语呢？嗯，首先，当你听到有人在 Emacs 中谈论杀死东西时，你不会感到害怕。但更重要的是，Emacs 允许你做一些典型的剪切/复制/粘贴剪贴板功能集所不能做的工作。</p>
+<p>Emacs 在杀戮环上存储了多个文本块，你可以循环使用它们。这很酷，因为你可以通过循环来找回你很久之前杀死的文本。让我们来看看这个功能的实际应用。</p>
+<ol>
+<li>在第一行的<em>Treasure</em>这个词上创建一个区域。</li>
+<li>2.使用<strong>M-w</strong>，它与 &ldquo;杀死-循环-保存 &ldquo;命令绑定。一般来说，<strong>M-w</strong>就像复制一样。它将该区域添加到杀戮环中，而不从你的缓冲区中删除它。</li>
+<li>将指针移到最后一行的<em>choreography</em>字样上。</li>
+<li>使用<strong>M-d</strong>，它与<code>kill-word</code>命令绑定。这将把<em>choreogra**phy</em>添加到杀戮环中，并将其从你的缓冲区中删除。</li>
+<li>使用<strong>C-y</strong>。这将把你刚刚杀死的文字<em>choreogra</em>phy*，插入到点的位置。</li>
+<li>使用<strong>M-y</strong>。这将删除<em>choreography</em>，并拉出杀戮环上的下一个项目，<em>Treasure</em>。</li>
+</ol>
+<p>你可以在表 2-2 中看到一些有用的杀戮/拉扯键的绑定。</p>
+<ol>
+<li>表 2-2：杀戮和拉扯的键位绑定 文本</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C-w</strong></td>
+<td>杀戮区域。</td>
+</tr>
+<tr>
+<td><strong>M-w</strong></td>
+<td>复制区域到杀戮环。</td>
+</tr>
+<tr>
+<td><strong>C-y</strong></td>
+<td>绞刑。</td>
+</tr>
+<tr>
+<td><strong>M-y</strong></td>
+<td>在拉动后循环使用杀伤环。</td>
+</tr>
+<tr>
+<td><strong>M-d</strong></td>
+<td>杀字。</td>
+</tr>
+<tr>
+<td><strong>C-k</strong></td>
+<td>杀行。</td>
+</tr>
+</tbody>
+</table>
+<h3 id=编辑和帮助>编辑和帮助</h3>
+<p>表 2-3 显示了一些额外的、有用的编辑键绑定，你应该知道如何处理间距和扩展文本。</p>
+<ol>
+<li>表 2-3：其他有用的编辑键绑定方式</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*<em>Tab</em></td>
+<td>缩进行。</td>
+</tr>
+<tr>
+<td><strong>C-j</strong></td>
+<td>新行和缩进，相当于回车后的 tab。</td>
+</tr>
+<tr>
+<td><strong>M-/</strong></td>
+<td>嬉皮士扩展；循环浏览点之前的文本可能的扩展方式。</td>
+</tr>
+<tr>
+<td>*<em>M-*</em></td>
+<td>删除点周围的所有空格和制表符。(我经常使用这个。)</td>
+</tr>
+</tbody>
+</table>
+<p>Emacs 也有很好的内置帮助。表 2-4 中显示的两个键绑定将为你提供良好的服务。</p>
+<ol>
+<li>表 2-4：内置帮助的键位绑定</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C-h k</strong> <strong>键绑定</strong> 说明与该键绑定的功能。为了使其发挥作用，你在输入<strong>C-h k</strong>后实际执行按键序列。</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>C-h f</strong> *描述功能。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>帮助文本出现在一个新的*窗口中，这个概念我将在本章后面介绍。现在，你可以通过按<strong>C-x o q</strong>关闭帮助窗口。</p>
+<h2 id=使用-emacs-与-clojure>使用 Emacs 与 Clojure</h2>
+<p>接下来，我将解释如何使用 Emacs 来有效地开发一个 Clojure 应用程序。你将学习如何启动一个与 Emacs 相连的 REPL 进程，以及如何与 Emacs 窗口一起工作。然后，我将介绍大量有用的键绑定，用于求值表达式、编译文件和执行其他方便的任务。最后，我将向你展示如何处理 Clojure 的错误，并介绍 Paredit 的一些功能，这是一种可选的次要模式，对编写和编辑 Lisp 风格语言的代码很有用。</p>
+<p>如果你想开始钻研 Clojure 代码，请务必跳过前面的内容！你可以在以后再回来。你可以稍后再回来。</p>
+<h3 id=开启你的-repl>开启你的 REPL</h3>
+<p>正如你在第 1 章中所学到的，REPL 允许你交互地编写和运行 Clojure 代码。REPL 是一个正在运行的 Clojure 程序，它给你一个提示，然后读取你的输入，求值它，打印结果，并循环返回到提示。在第 1 章中，你在终端窗口用<code>lein repl</code>启动了 REPL。在本节中，你将直接在 Clojure 中启动一个 REPL。</p>
+<p>为了将 Emacs 连接到 REPL，你将使用 Emacs 软件包 CIDER，可在*[GitHub - clojure-emacs/cider: The Clojure Interactive Development Environment that Rocks for Emacs]（<a href=https://github.com/clojure-emacs/cider/>https://github.com/clojure-emacs/cider/</a>）*。如果你按照本章前面的配置说明，你应该已经安装了它，但你也可以通过运行<strong>M-x</strong>包-安装，输入 cider，然后按回车键来安装它。</p>
+<p>CIDER 允许你在 Emacs 中启动一个 REPL，并为你提供键绑定，使你能更有效地与 REPL 进行交互。现在就去启动一个 REPL 会话吧。使用 Emacs，打开<em>clojure-noob/**src/clojure_noob/core.clj</em>文件，该文件是你在第一章中创建的。接下来，使用<strong>M-x</strong> cider-jack-in。这将启动 REPL 并创建一个新的缓冲区，在那里你可以与它进行交互。经过短暂的等待（应该不到一分钟），你应该看到类似图 2-8 的东西。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/cider-jack-in.png alt></p>
+<p>图 2-8：运行 M-x cider-jack-in 后你的 Emacs 应该是这样的</p>
+<p>现在我们有两个窗口：我们的<em>core.clj</em>文件在左边打开，REPL 在右边运行。如果你从来没有见过 Emacs 像这样分成两半，不要担心！我将讲述 Emacs 是如何做到的。我一会儿会讲到 Emacs 是如何分割窗口的。同时，在 REPL 中尝试求值一些代码。键入以下加粗的行。当你按下回车键时，你应该看到打印在 REPL 中的结果，显示在每一行代码的后面。这时不要担心代码，我将在下一章中介绍所有这些功能。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=mi>2</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>)</span>
+<span class=c1>; =&gt; 10</span>
+<span class=p>(</span><span class=nb>map inc </span><span class=p>[</span><span class=mi>1</span> <span class=mi>2</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>])</span>
+<span class=c1>; =&gt; (2 3 4 5)</span>
+<span class=p>(</span><span class=nb>reduce + </span><span class=p>[</span><span class=mi>5</span> <span class=mi>6</span> <span class=mi>100</span><span class=p>])</span>
+<span class=c1>; =&gt; 111</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>相当漂亮! 你可以像在第一章中使用<code>lein repl</code>那样使用这个 REPL。你还可以做更多的事情，但在这之前，我将解释如何在分屏 Emacs 中工作。</p>
+<p>###插曲。Emacs 的窗口和框架</p>
+<p>让我们绕道来谈谈 Emacs 是如何处理框架和窗口的，并讨论一些与窗口有关的有用的键绑定方法。如果你已经熟悉了 Emacs 的窗口，请随意跳过这一部分。</p>
+<p>Emacs 是在 1802 年左右发明的，所以它使用的术语与你习惯的略有不同。你通常所说的<em>窗口</em>，Emacs 称之为<em>框架</em>，而框架可以分割成多个<em>窗口</em>。分割成多个窗口允许你一次查看多个缓冲区。你在运行<code>cider-jack-in</code>时已经看到了这种情况（见图 2-9）。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/emacs-windows.png alt></p>
+<p>图 2-9：在 Emacs 中，一个框架包含有窗口。</p>
+<p>表 2-5 显示了用于处理框架和窗口的几个键的绑定情况。</p>
+<ol>
+<li>表 2-5: Emacs 窗口的键位绑定</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C-x o</strong></td>
+<td>将光标切换到另一个窗口。现在试试这个，在你的 Clojure 文件和 REPL 之间切换。</td>
+</tr>
+<tr>
+<td><strong>C-x 1</strong></td>
+<td>删除所有其他窗口，框架中只留下当前窗口。这不会关闭你的缓冲区，也不会导致你失去任何工作。</td>
+</tr>
+<tr>
+<td><strong>C-x 2</strong></td>
+<td>分割框架的上方和下方。</td>
+</tr>
+<tr>
+<td><strong>C-x 3</strong></td>
+<td>并排分割框架。</td>
+</tr>
+<tr>
+<td><strong>C-x 0</strong></td>
+<td>删除当前窗口。</td>
+</tr>
+</tbody>
+</table>
+<p>我鼓励你试试 Emacs 的窗口键绑定。例如，把你的光标放在左边的窗口，也就是有 Clojure 文件的那个，然后使用<strong>C-x 1</strong>。另一个窗口应该消失，而你应该只看到 Clojure 代码。然后做以下工作。</p>
+<ul>
+<li>使用<strong>C-x 3</strong>将窗口再次并排分开。</li>
+<li>使用<strong>C-x o</strong>来切换到右边的窗口。</li>
+<li>使用<strong>C-x b</strong> <em>cider-repl</em>来切换到右边窗口的 CIDER 缓冲区。</li>
+</ul>
+<p>一旦你做了一些实验，设置 Emacs，使它包含两个并排的窗口，左边是 Clojure 代码，右边是 CIDER 缓冲区，就像前面的图片一样。如果你有兴趣了解更多关于窗口和框架的知识，Emacs 手册中有大量的信息：见*<a href=http://www.gnu.org/software/emacs/manual/html_node/elisp/Windows.html#Windows>http://www.gnu.org/software/emacs/manual/html_node/elisp/Windows.html#Windows</a>*。</p>
+<p>现在你可以浏览 Emacs 窗口了，是时候学习一些 Clojure 开发的键绑定了</p>
+<p>###有用的键绑定的丰富内容</p>
+<p>现在你已经准备好学习一些按键绑定，它们将揭示在 Clojure 项目中使用 Emacs 的真正力量。这些命令将使你只需按下几个简单的键就能求值、调整、编译和运行代码。让我们先来看看如何快速求值一个表达式。</p>
+<p>在<em>core.clj</em>的底部，添加以下内容。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nb>println </span><span class=s>&#34;Cleanliness is next to godliness&#34;</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在使用<strong>C-e</strong>导航到行尾，然后使用<strong>C-x C-e</strong>.文本<code>Cleanliness is next to godliness</code>应该出现在 CIDER 缓冲区，如图 2-10 所示。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/cider-eval-last-expression.png alt></p>
+<p>图 2-10：在 REPL 中从另一个缓冲区即时求值代码</p>
+<p>绑定键<strong>C-x C-e</strong>运行<code>cider-eval-last-expression</code>命令。顾名思义，该命令将紧接在点之前的表达式发送到 REPL，然后由 REPL 求值该表达式。你也可以试试<strong>C-u C-x C-e</strong>，它打印出点之后的求值结果。</p>
+<p>现在让我们试着运行我们在第一章中写的<code>-main</code>函数，这样我们就可以让全世界都知道我们是小茶壶。</p>
+<p>在<em>core.clj</em>的缓冲区中，使用<strong>C-c M-n M-n</strong>。这个键绑定将命名空间设置为你当前文件顶部列出的命名空间，所以右边窗口的提示现在应该是<code>clojure-noob.core></code>。我还没有详细介绍命名空间，但现在只要知道命名空间是一种组织机制，使我们能够避免命名冲突就足够了。接下来，在提示符下输入（-main）。REPL 应该打印出 &ldquo;I&rsquo;m a little teapot!&ldquo;多么令人激动啊</p>
+<p>现在让我们创建一个新函数并运行它。在<em>core.clj</em>的底部，添加以下内容。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=kd>defn </span><span class=nv>train</span>
+  <span class=p>[]</span>
+  <span class=p>(</span><span class=nb>println </span><span class=s>&#34;Choo choo!&#34;</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>完成后，保存你的文件并使用<strong>C-c C-k</strong>在 REPL 会话中编译你的当前文件。(现在，如果你在 REPL 中运行 <code>(train)</code>，它将回显 <code>Choo choo!</code>。</p>
+<p>当你还在 REPL 中时，试试<strong>C-↑</strong>（ctrl 加向上箭头键）。 <strong>C-↑</strong>和<strong>C-↓</strong>循环浏览你的 REPL 历史，其中包括你要求 REPL 求值的所有 Clojure 表达式。</p>
+<p>Mac 用户注意：默认情况下，OS X 将<strong>C-↑</strong>、<strong>C-↓</strong>、<strong>C-←</strong>和<strong>C-→</strong>Map 为任务控制命令。你可以通过打开系统偏好设置，然后进入 Keyboard4Shortcuts4Mission Control 来改变你的 Mac 键绑定。</p>
+<p>最后，试试这个。</p>
+<ol>
+<li>在 REPL 提示符下输入（-main）。注意没有结尾的括号。</li>
+<li>按<strong>C-enter</strong>。</li>
+</ol>
+<p>CIDER 应该关闭小括号并求值表达式。这只是 CIDER 为处理这么多小括号而提供的一个很好的小便利。</p>
+<p>CIDER 还有一些键的绑定，在你学习 Clojure 的时候非常好。按<strong>C-c C-d C-d</strong>将显示该符号下的文档，这可以大大节省时间。当你看完文档后，按<strong>q</strong>来关闭文档缓冲区。绑定的键**M-.<strong>将导航到点下符号的源代码，而</strong>M-,**将使你回到原来的缓冲区和位置。最后，<strong>C-c C-d C-a</strong>可以让你在函数名和文档中搜索任意的文本。当你不能完全记住一个函数的名字时，这是一个很好的方法来寻找它。</p>
+<p>CIDER README（<em><a href=https://github.com/clojure-emacs/cider/>GitHub - clojure-emacs/cider: The Clojure Interactive Development Environment that Rocks for Emacs</a></em>)有一个全面的键绑定列表，你可以慢慢学习，但现在，表 2-6 和 2-7 包含了我们刚刚经历的键绑定的总结。</p>
+<ol>
+<li>表 2-6：Clojure 缓冲区的键绑定情况</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>键值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C-c M-n M-n</strong></td>
+<td>切换到当前缓冲区的命名空间。</td>
+</tr>
+<tr>
+<td><strong>C-x C-e</strong></td>
+<td>求值紧邻点的表达式。</td>
+</tr>
+<tr>
+<td><strong>C-c C-k</strong></td>
+<td>编译当前缓冲区。</td>
+</tr>
+<tr>
+<td><strong>C-c C-d C-d</strong></td>
+<td>显示点下符号的文档。</td>
+</tr>
+<tr>
+<td><strong>M-. 和 M-,</strong></td>
+<td>浏览到该点下的符号的源代码，并返回到原来的缓冲区。</td>
+</tr>
+<tr>
+<td><strong>C-c C-d C-a</strong></td>
+<td>Apropros 搜索；在函数名和文档中查找任意文本。</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>表 2-7: CIDER 缓冲区的键绑定方式</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>**C-<strong><strong>↑</strong></strong>, C-**<strong>↓</strong></td>
+<td>循环浏览 REPL 历史。</td>
+</tr>
+<tr>
+<td><strong>C-enter</strong></td>
+<td>关闭圆括号并求值。</td>
+</tr>
+</tbody>
+</table>
+<h3 id=如何处理错误>如何处理错误</h3>
+<p>在这一节中，你将写一些有错误的代码，这样你就可以看到 Emacs 是如何反应的，以及你如何从错误中恢复并继续你的快乐之路。你将在 REPL 缓冲区和 <em>core.clj</em> 缓冲区中进行这项工作。让我们从 REPL 开始。在提示符下，输入(map)并按回车。你应该看到类似图 2-11 的东西。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/basic-emacs/cider-error.png alt></p>
+<p>图 2-11：这就是在 REPL 中运行坏代码时发生的情况。</p>
+<p>正如你所看到的，在没有参数的情况下调用<code>map</code>会使 Clojure 失去理智&ndash;它在你的 REPL 缓冲区中显示一个`ArityException&rsquo;错误信息，并在你的左边窗口中填满文本，看起来像一个疯子的呓语。这些呓语就是<em>堆栈跟踪</em>，它显示了实际抛出异常的函数，以及哪个函数调用了<em>那个</em>函数，沿着函数调用的堆栈。</p>
+<p>Clojure 的堆栈跟踪在你刚开始的时候可能很难解读，但经过一段时间后，你会学会从其中获得有用的信息。CIDER 通过允许你过滤堆栈痕迹来帮你一把，这可以减少噪音，这样你就可以将异常的原因锁定。<code>*cider-error*</code>缓冲区的第 2 行有 Clojure、Java、REPL、Tooling、Duplicates 和 All 等过滤器。你可以点击每个选项来激活该过滤器。你也可以点击每个堆栈跟踪行来跳到相应的源代码。</p>
+<p>下面是如何关闭左边窗口中的堆栈跟踪。</p>
+<ol>
+<li>使用<strong>C-x o</strong>来切换到窗口。</li>
+<li>按<strong>q</strong>关闭堆栈跟踪，回到 CIDER。</li>
+</ol>
+<p>如果你想再次查看错误，你可以切换到<code>*cider-error*</code>缓冲区。你也可以在尝试编译文件时得到错误信息。要看这个，请到<em>core.clj</em>缓冲区，写一些有错误的代码，然后进行编译。</p>
+<ol>
+<li>在结尾处添加<code>(map)</code>。</li>
+<li>使用<strong>C-c C-k</strong>进行编译。</li>
+</ol>
+<p>你应该看到一个<code>*cider-error*</code>缓冲区，类似于你之前看到的那个。同样，按<strong>q</strong>关闭堆栈跟踪。</p>
+<h3 id=paredit>Paredit</h3>
+<p>在 Clojure 缓冲区中写代码时，你可能已经注意到了一些意外的事情发生。例如，每当你输入一个左括号，一个右括号就会立即被插入。</p>
+<p>这要归功于<em>paredit-mode</em>，这是一种次要的模式，它将 Lisp 的大量小括号从一种责任变成了一种资产。Paredit 确保所有的小括号、双引号和大括号都是封闭的，从而减轻了你那可恶的负担。</p>
+<p>Paredit 还提供了键绑定功能，以轻松浏览和改变所有这些括号所创建的结构。在下一节中，我将介绍最有用的键绑定，但你也可以在*<a href=https://github.com/georgek/paredit-cheatsheet/blob/master/paredit-cheatsheet.pdf>https://github.com/georgek/paredit-cheatsheet/blob/master/paredit-cheatsheet.pdf</a>*（在骗局中，红色管子代表点）查看全面的骗局表。</p>
+<p>然而，如果你不习惯，paredit 有时会很烦人。我认为花点时间来学习它是非常值得的，但你可以随时用<strong>M-x</strong> paredit-mode 来禁用它，它可以切换该模式的开启和关闭。</p>
+<p>下面的部分向你展示了最有用的键绑定。</p>
+<h4 id=wrapping-和-slurping>Wrapping 和 Slurping</h4>
+<p><em>Wrapping</em>用小括号包围点之后的表达式。 <em>Slurping</em>将结束的小括号移到右边包括下一个表达式。例如，假设我们用这个开始。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=mi>2</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>而我们想得到这个结果。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=p>(</span><span class=nb>* </span><span class=mi>2</span> <span class=mi>3</span><span class=p>)</span> <span class=mi>4</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们可以把<code>2</code>包起来，加一个星号，然后再把<code>3</code>溜走。首先，放置点，这里表示为一个垂直的管道，<code>|</code>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=err>|</span><span class=mi>2</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后输入<strong>M-(</strong>，与<em>paredit-wrap-round</em>绑定，得到这个结果。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=p>(</span><span class=err>|</span><span class=mi>2</span><span class=p>)</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>加上星号和空格。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure>
+<span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=p>(</span><span class=nb>* </span><span class=err>|</span><span class=mi>2</span><span class=p>)</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>要在 &ldquo;3 &ldquo;上啧啧称奇，请按<strong>C-→</strong>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure>
+<span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=p>(</span><span class=nb>* </span><span class=err>|</span><span class=mi>2</span> <span class=mi>3</span><span class=p>)</span> <span class=mi>4</span><span class=p>)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就可以很容易地增加和扩展括号，而不必浪费宝贵的时间按住方向键来移动点。</p>
+<h4 id=barfing>Barfing</h4>
+<p>假设在前面的例子中，你不小心吐了四条。要解开它（也被称为<em>barfing</em>），将你的光标（<code>|</code>）放在括号内的任何地方。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure>
+<span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=p>(</span><span class=err>|</span><span class=nb>* </span><span class=mi>2</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>))</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>然后使用<strong>C-←</strong>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure>
+<span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=p>(</span><span class=err>|</span><span class=nb>* </span><span class=mi>2</span> <span class=mi>3</span><span class=p>)</span> <span class=mi>4</span><span class=p>)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>Ta-da! 现在你知道如何随意扩展和收缩括号了。</p>
+<h4 id=导航>导航</h4>
+<p>在用 Lisp 方言写作时，你经常会遇到这样的表达式。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure>
+<span class=p>(</span><span class=nb>map </span><span class=p>(</span><span class=nb>comp </span><span class=nv>record</span> <span class=nv>first</span><span class=p>)</span>
+     <span class=p>(</span><span class=nf>d/q</span> <span class=o>&#39;</span><span class=p>[</span><span class=ss>:find</span> <span class=nv>?post</span>
+            <span class=ss>:in</span> <span class=nv>$</span> <span class=nv>?search</span>
+            <span class=ss>:where</span>
+            <span class=p>[(</span><span class=nf>fulltext</span> <span class=nv>$</span> <span class=ss>:post/content</span> <span class=nv>?search</span><span class=p>)</span>
+             <span class=p>[[</span><span class=nv>?post</span> <span class=nv>?content</span><span class=p>]]]]</span>
+          <span class=p>(</span><span class=nf>db/db</span><span class=p>)</span>
+          <span class=p>(</span><span class=ss>:q</span> <span class=nv>params</span><span class=p>))</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>对于这种表达式，快速从一个子表达式跳到下一个子表达式是很有用的。如果你把 point 放在开头的小括号之前，<strong>C-M-f</strong>会把你带到结束的小括号。同样，如果 point 紧跟在闭合小括号之后，<strong>C-M-b</strong>将带你到开头小括号。</p>
+<p>表 2-8 总结了你刚刚学到的 Paredit 键的绑定。</p>
+<ol>
+<li>表 2-8：Paredit 键的绑定方式</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M-x</strong> paredit-mode</td>
+<td>切换 paredit 模式。</td>
+</tr>
+<tr>
+<td><strong>M-(</strong></td>
+<td>括号内点后的表达式(paredit-wrap-round)。</td>
+</tr>
+<tr>
+<td>**C-**→</td>
+<td>Slurp;将结束的小括号向右移动，以包括下一个表达式。</td>
+</tr>
+<tr>
+<td>**C-**←</td>
+<td>Barf；将括号向左移动，排除最后一个表达式。</td>
+</tr>
+<tr>
+<td>*<em>C-M-f</em>,*<em>C-M-b</em></td>
+<td>移动到开头/结尾小括号。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=继续学习>继续学习</h2>
+<p>Emacs 是历史最悠久的编辑器之一，它的追随者对它的热情往往接近狂热。一开始使用它可能会很别扭，但坚持下去，你会在一生中得到充分的回报。</p>
+<p>每当我打开 Emacs 时，我都会感到受到鼓舞。就像一个工匠进入他的工作室一样，我感到一个可能性的领域在我面前打开。我感到这个环境的舒适，它随着时间的推移已经发展到完全适合我&ndash;各种各样的包和键绑定，帮助我日复一日地把想法变成现实。</p>
+<p>在你继续你的 Emacs 之旅时，这些资源将帮助你。</p>
+<ul>
+<li>Emacs 手册<em>提供了优秀、全面的指导。每天早上花点时间看看它吧! 下载 PDF，在旅途中阅读。</em><a href=http://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top>http://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top</a>*。</li>
+<li>*《Emacs 参考卡》*是一个方便的小抄。 <em><a href=http://www.ic.unicamp.br/~helio/disciplinas/MC102/Emacs_Reference_Card.pdf>http://www.ic.unicamp.br/~helio/disciplinas/MC102/Emacs_Reference_Card.pdf</a></em>。</li>
+<li>Mickey Petersen 的<em>Mastering Emacs</em>是最好的 Emacs 资源之一。从阅读指南开始。 <em><a href=http://www.masteringemacs.org/reading-guide/>阅读指南-掌握 Emacs</a></em> 。</li>
+<li>对于更注重视觉效果的人，我推荐手绘的《如何学习 Emacs》。Emacs 24 或更高版本的初学者指南&rdquo;，作者 Sacha Chua。 <em><a href=http://sachachua.com/blog/wp-content/uploads/2013/05/How-to-Learn-Emacs8.png>http://sachachua.com/blog/wp-content/uploads/2013/05/How-to-Learn-Emacs8.png</a></em>。</li>
+<li>只要按<strong>C-h t</strong>就可以看到内置的教程。</li>
+</ul>
+<h2 id=摘要>摘要</h2>
+<p>呜呼! 你已经覆盖了很多地方。你现在知道了 Emacs 作为一个 Lisp 解释器的真正性质。绑定键是执行 elisp 函数的快捷方式，而模式是绑定键和函数的集合。你学会了如何以自己的方式与 Emacs 互动，并掌握了缓冲区、窗口、区域、杀戮和拉动。最后，你学会了如何使用 CIDER 和 paredit 轻松地与 Clojure 工作。</p>
+<p>有了这些来之不易的 Emacs 知识，现在是时候开始认真学习 Clojure 了</p>
+<p><a href=https://www.braveclojure.com/basic-emacs/#footnote-5680-1-backlink>1</a> <em><a href=http://www.gnu.org/software/emacs/manual/html_node/emacs/Minor-Modes.html>http://www.gnu.org/software/emacs/manual/html_node/emacs/Minor-Modes.html</a></em>。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/clojure/>clojure</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/chapter3/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Chapter3 速成班</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/chapter1/>
+<span class="next-text nav-default">Chapter1 构建、运行和 REPL</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

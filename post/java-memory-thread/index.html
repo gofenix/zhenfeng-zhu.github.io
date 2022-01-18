@@ -1,0 +1,401 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Java 内存模型和线程 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="java 内存模型和线程 并发不一定依赖多线程，但是在 java 里面谈论并发，大多与线程脱不开关系。 线程是大多是面试都会问到的问题。我们都知道，线程是比进程更"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/java-memory-thread/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Java 内存模型和线程">
+<meta property="og:description" content="java 内存模型和线程 并发不一定依赖多线程，但是在 java 里面谈论并发，大多与线程脱不开关系。 线程是大多是面试都会问到的问题。我们都知道，线程是比进程更">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/java-memory-thread/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-03-22T19:16:37+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Java 内存模型和线程">
+<meta itemprop=description content="java 内存模型和线程 并发不一定依赖多线程，但是在 java 里面谈论并发，大多与线程脱不开关系。 线程是大多是面试都会问到的问题。我们都知道，线程是比进程更"><meta itemprop=datePublished content="2018-03-22T19:16:37+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="4939">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Java 内存模型和线程">
+<meta name=twitter:description content="java 内存模型和线程 并发不一定依赖多线程，但是在 java 里面谈论并发，大多与线程脱不开关系。 线程是大多是面试都会问到的问题。我们都知道，线程是比进程更"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Java 内存模型和线程</h1>
+<div class=post-meta>
+<span class=post-time> 2018-03-22 </span>
+<span class=more-meta> 约 4939 字 </span>
+<span class=more-meta> 预计阅读 10 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#java-内存模型和线程>java 内存模型和线程</a>
+<ul>
+<li><a href=#1-java-内存模型>1 Java 内存模型</a>
+<ul>
+<li><a href=#11-主内存和工作内存>1.1 主内存和工作内存</a></li>
+<li><a href=#12-内存之间的交互>1.2 内存之间的交互</a></li>
+<li><a href=#13-volatile>1.3 volatile</a></li>
+<li><a href=#14-long-和-double>1.4 long 和 double</a></li>
+<li><a href=#15-原子性可见性和有序性>1.5 原子性、可见性和有序性</a></li>
+<li><a href=#16-先行发生原则>1.6 先行发生原则</a></li>
+</ul>
+</li>
+<li><a href=#2-java-线程>2 Java 线程</a>
+<ul>
+<li><a href=#21-线程的实现>2.1 线程的实现</a></li>
+<li><a href=#22-线程调度>2.2 线程调度</a></li>
+<li><a href=#23-线程的状态转换>2.3 线程的状态转换</a></li>
+</ul>
+</li>
+<li><a href=#3-写在最后>3 写在最后</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=java-内存模型和线程>java 内存模型和线程</h1>
+<blockquote>
+<p>并发不一定依赖多线程，但是在 java 里面谈论并发，大多与线程脱不开关系。</p>
+</blockquote>
+<p>线程是大多是面试都会问到的问题。我们都知道，线程是比进程更轻量级的调度单位，线程之间可以共享内存。之前面试的时候，也是这样回答，迷迷糊糊，没有一个清晰的概念。</p>
+<p>大学的学习的时候，写 C 和 C++，自己都没有用过多线程，看过一个 Windows 编程的书，里面讲多线程的时候，一大堆大写的字母，看着一点都不爽，也是惭愧。后来的实习，写 unity，unity 的 C#使用的是协程。只有在做了 java 后端之后，才知道线程到底是怎么用的。了解了<strong>java 内存模型</strong>之后，仔细看了一些资料，对 java 线程有了更深入的认识，整理写成这篇文章，用来以后参考。</p>
+<h2 id=1-java-内存模型>1 Java 内存模型</h2>
+<p>Java 虚拟机规范试图定义一种 java 内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让 java 程序在各种平台下都能达到一致性内存访问的效果。</p>
+<p>java 内存模型的主要目标是定义程序中各个变量的访问规则，即在虚拟机中将变量存储到内存和从内存中取出变量的底层细节。（这里所说的变量包括了实例字段、静态字段和数组等，但不包括局部变量与方法参数，因为这些是线程私有的，不被共享。）</p>
+<h3 id=11-主内存和工作内存>1.1 主内存和工作内存</h3>
+<p>java 规定所有的变量都存储在<strong>主内存</strong>。每条线程有自己的<strong>工作内存</strong>。</p>
+<p>线程的工作内存中的变量是主内存中该变量的副本，线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同线程间也无法直接访问对方工作内存中的变量，线程间变量值的传递需要通过主内存来完成。</p>
+<h3 id=12-内存之间的交互>1.2 内存之间的交互</h3>
+<p>关于主内存和工作内存之间的具体交互协议，java 内存模型定义了 8 中操作来完成，虚拟机实现的时候必须保证每个操作都是原子的，不可分割的（对于 long 和 double 有例外）</p>
+<ul>
+<li>lock 锁定：作用于主内存变量，代表一个变量是一条线程独占。</li>
+<li>unlock 解锁：作用于主内存变量，把锁定的变量解锁。</li>
+<li>read 读取：作用于主内存变量，把变量值从主内存传到线程的工作内存中，供 load 使用。</li>
+<li>load 载入：作用工作内存变量，把上一个 read 到的值放入到工作内存中的变量中。</li>
+<li>use 使用：作用于工作内存变量，把工作内存中的一个变量的值传递给执行引擎。</li>
+<li>assign：作用于工作内存变量，把执行引擎执行过的值赋给工作内存中的变量。</li>
+<li>store 存储：作用于工作内存变量，把工作内存中的变量值传给主内存，供 write 使用。</li>
+</ul>
+<p>这些操作要满足一定的规则。</p>
+<h3 id=13-volatile>1.3 volatile</h3>
+<p>volatile 可以说是 java 的最轻量级的同步机制。</p>
+<p>当一个变量被定义为 volatile 之后，他就具备两种特性：</p>
+<ul>
+<li>
+<p>保证此变量对所有线程都是可见的</p>
+<p>这里的可见性是指当一个线程修改了某变量的值，新值对于其他线程来讲是立即得知的。而普通变量做不到，因为普通变量需要传递到主内存中才可以做到这点。</p>
+</li>
+<li>
+<p>禁止指令重排</p>
+<p>对于普通变量来说，仅仅会保证在该方法的执行过程中所有依赖赋值结果的地方都能获取到正确的结果，而不能保证变量赋值操作的顺序与程序代码中的执性顺序一致。</p>
+<p>若用 volatile 修饰变量，在编译时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。</p>
+</li>
+</ul>
+<p>volatile 对于单个的共享变量的读/写具有原子性，但是像 num++这种复合操作，volatile 无法保证其原子性。</p>
+<h3 id=14-long-和-double>1.4 long 和 double</h3>
+<p>long 和 double 是一个 64 位的数据类型。</p>
+<p>虚拟机允许将没有被 volatile 修饰的 64 位变量的读写操作分为两次 32 位的操作来进行。因此当多个线程操作一个没有声明为 volatile 的 long 或者 double 变量，可能出现操作半个变量的情况。</p>
+<p>但是这种情况是罕见的，一般商用的虚拟机都是讲 long 和 double 的读写当成原子操作进行的，所以在写代码时不需要将 long 和 double 专门声明为 volatile。</p>
+<h3 id=15-原子性可见性和有序性>1.5 原子性、可见性和有序性</h3>
+<p>java 的内存模型是围绕着在并发过程中如何处理原子性、可见性和有序性。</p>
+<p><strong>原子性</strong></p>
+<p>基本数据类型的访问读写是剧本原子性的。</p>
+<p>如果需要一个更大范围的原子性保证，java 提供了 lock 和 unlock 操作，对应于写代码时就是 synchronized 关键字，因此在 synchronized 块之间的操作也是具备原子性的。</p>
+<p><strong>可见性</strong></p>
+<p>可见性是指当一个线程修改到了一个共享变量的值，其他的线程能够立即得知这个修改。共享变量的读写都是通过主内存作为媒介来处理可见性的。</p>
+<p>volatile 的特殊规则保证了新值可以立即同步到主内存，每次使用前立即从主内存刷新。</p>
+<p>synchronized 同步块的可见性是由”对于一个变量 unlock 操作之前，必须先把此变量同步回内存中“来实现的。</p>
+<p>final 的可见性是指被 final 修饰的字段在构造器中一旦初始化完成，并且构造器没有把 this 的引用传递出去，那么在其他线程中就能看见 final 字段的值。</p>
+<p><strong>有序性</strong></p>
+<p>如果在本线程内观察，所有的操作都是有序的；如果在一个线程内观察另一个线程，所有的操作都是无序的。
+volatile 关键字本身就包含了禁止指令重排的语义，而 synchronized 则是由“一个变量在同一时刻只允许一条线程对其进行 lock 操作”这条规则来实现有序性的。</p>
+<h3 id=16-先行发生原则>1.6 先行发生原则</h3>
+<p>如果 java 内存模型中的所有有序性都是靠着 volatile 和 synchronized 来完成，那有些操作将会变得很繁琐，但是我们在写 java 并发代码的时候没有感受到这一点，都是因为 java 有一个“先行发生”原则。</p>
+<p>先行发生是 java 内存模型中定义的两项操作之间的偏序关系，如果说操作 A 先发生于操作 B，其实就是说在发生 B 之前，A 产生的影响都能被 B 观察到，这里的影响包括修改了内存中共享变量的值、发送了消息、调用了方法等等。</p>
+<ul>
+<li>
+<p>程序次序规则</p>
+<p>在一个线程内，按程序代码控制流顺序执行。</p>
+</li>
+<li>
+<p>管程锁定规则</p>
+<p>unlock 发生在后面时间同一个锁的 lock 操作。</p>
+</li>
+<li>
+<p>volatile 变量规则</p>
+<p>volatile 变量的写操作发生在后面时间的读操作。</p>
+</li>
+<li>
+<p>线程启动规则</p>
+</li>
+<li>
+<p>线程终止规则</p>
+</li>
+<li>
+<p>线程中断规则</p>
+</li>
+<li>
+<p>对象终结规则</p>
+<p>一个对象的初始化完成在 finalize 方法之前。</p>
+</li>
+<li>
+<p>传递性</p>
+<p>如果 A 先行发生 B，B 先行发生 C，那么 A 先行发生 C。</p>
+</li>
+</ul>
+<p>由于指令重排的原因，所以一个操作的时间上的先发生，不代表这个操作就是先行发生；同样一个操作的先行发生，也不代表这个操作必定在时间上先发生。</p>
+<h2 id=2-java-线程>2 Java 线程</h2>
+<h3 id=21-线程的实现>2.1 线程的实现</h3>
+<p>主流的操作系统都提供了线程的实现，java 则是在不同的硬件和操作系统的平台下，对线程的操作提供了统一的处理，一个 Thread 类的实例就代表了一个线程。Thread 类的关键方法都是 native 的，所以 java 的线程实现也都是依赖于平台相关的技术手段来实现的。</p>
+<p>实现线程主要有 3 种方式：使用内核线程实现，使用用户线程实现和使用用户线程加轻量级进程实现。</p>
+<h4 id=211-使用内核线程实现>2.1.1 使用内核线程实现</h4>
+<p>内核线程就是直接由操作系统内核支持的线程，这种线程由内核来完成线程的切换，内核通过操纵调度器对线程进行调度，并负责将线程的任务映射到各个处理器上。</p>
+<p>程序一般不会直接去调用内核线程，而是使用内核线程的一个高级接口——轻量级进程（Light Weigh Process），LWP 就是我们通常意义上所说的线程。</p>
+<p>由于每个轻量级进程都由一个内核线程支持，这种轻量级进程与内核线程之间 1:1 的关系成为一对一线程模型。</p>
+<p><strong>局限性</strong></p>
+<p>虽然由于内核线程的支持，每个轻量级进程都成为了一个独立的调度单元，即使有一个阻塞，也不影响整个进程的工作，但是还是有一定的局限性：</p>
+<ul>
+<li>
+<p>系统调用代价较高</p>
+<p>由于基于内核线程实现，所以各种线程的操作都要进行系统调用。而系统调用的代价比较高，需要在用户态和内核态来回切换。</p>
+</li>
+<li>
+<p>系统支持数量有限</p>
+<p>每个轻量级进程都需要一个内核线程支持，需要消耗一定的内核资源，所以支持的线程数量是有限的。</p>
+</li>
+</ul>
+<h4 id=212-使用用户线程实现>2.1.2 使用用户线程实现</h4>
+<p>指的是完全建立在用户空间的线程库上，系统内核不能感知线程存在的实现。用户线程的建立、同布、销毁和调度完全在用户态中完成，不需要内核帮助。</p>
+<p>如果程序实现得当，则这些线程都不需要切换到内核态，操作非常快速消耗低，可以支持大规模线程数量。这种进程和用户线程之间 1:N 的关系成为一对多线程模型。</p>
+<p><strong>局限性</strong></p>
+<p>不需要系统内核的，既是优势也是劣势。由于没有系统内核支援，所有的操作都需要程序去处理，由于操作系统只是把处理器资源分给进程，那“阻塞如何处理”、“多处理器系统如何将线程映射到其他处理器上”这类问题的解决十分困难，所以现在使用用户线程的越来越少了。</p>
+<h4 id=213-使用用户线程加轻量级进程混合实现>2.1.3 使用用户线程加轻量级进程混合实现</h4>
+<p>在这种混合模式下，既存在用户线程，也存在轻量级进程。</p>
+<p>用户线程还是完全建立在用户空间中，因此用户线程的创建、切换、析构等操作依然廉价，而且支持大规模用户线程并发、而操作系统提供支持的轻量级进程则作为用户线程和内核线程之间的桥梁，这样可以使用内核提供的线程调度和处理器映射，并且用户线程的系统调用要通过轻量级进程来完成，大大降低了整个进程被完全阻塞的风险。</p>
+<p>在这种模式下，用户线程和轻量级进程数量比不固定 N:M，这种模式就是多对多线程模型。</p>
+<h4 id=214-java-线程的实现>2.1.4 java 线程的实现</h4>
+<p>目前的 jdk 版本中，操作系统支持怎样的线程模型，很大程度上就决定了 jvm 的线程是怎么映射的，这点在不同的平台没办法打成一致。线程模型只对线程的并发规模和操作成本产生影响，对编码和运行都没什么差异。</p>
+<p>windows 和 linux 都是一对一的线程模型。</p>
+<h3 id=22-线程调度>2.2 线程调度</h3>
+<p>线程的调度是指系统为线程分配处理器使用权的过程，主要的调度方式有两种：协同式线程调度和抢占式线程调度。</p>
+<h4 id=221-协同式线程调度>2.2.1 协同式线程调度</h4>
+<p>线程的执性时间由线程本身来控制，线程把自己的工作执性完了之后，要主动通知系统切换到另外一个线程上。Lua 的协程就是这样。</p>
+<p><strong>好处</strong></p>
+<p>协同式多线程最大的好处就是实现简单。</p>
+<p>由于线程要把自己的事情干完之后才进行线程切换，切换操作对线程是克制的，所以没有什么线程同步的问题。</p>
+<p><strong>坏处</strong></p>
+<p>坏处也很明显，线程执行时间不可控。甚至如果一个线程写的问题，一直不告诉系统切换，那程序就会一直阻塞。</p>
+<h4 id=222-抢占式线程调度>2.2.2 抢占式线程调度</h4>
+<p>每个线程由系统分配执行时间，线程的切换不是又线程本身来决定。</p>
+<p>使用 yield 方法是可以让出执行时间，但是要获取执行时间，线程本身是没有什么办法的。</p>
+<p>在这种调度模式下，线程的执行时间是系统可控的，也就不会出现一个线程导致整个进程阻塞。</p>
+<h4 id=223-java-线程调度>2.2.3 java 线程调度</h4>
+<p>java 使用的是抢占式线程调度。</p>
+<p>虽然 java 的线程调度是系统来控制的，但是可以通过设置线程优先级的方式，让某些线程多分配一些时间，某些线程少分配一些时间。</p>
+<p>不过线程优先级还是不太靠谱，原因就是 java 的线程是通过映射到系统的原生线程来实现的，所以线程的调度还是取决于操作系统，操作系统的线程优先级不一定和 java 的线程优先级一一对应。而且优先级还可能被系统自行改变。所以我们不能在程序中通过优先级来准确的判断先执行哪一个线程。</p>
+<h3 id=23-线程的状态转换>2.3 线程的状态转换</h3>
+<p>看到网上有好多种说法，不过大致也都是说 5 种状态：新建（new）、可运行（runnable）、运行（running）、阻塞（blocked）和死亡（dead）。</p>
+<p>而深入理解 jvm 虚拟机中说 java 定义了 5 种线程状态，在任一时间点，一个线程只能有其中的一种状态：</p>
+<ul>
+<li>
+<p>新建 new</p>
+</li>
+<li>
+<p>运行 runnable</p>
+<p>包括了操作系统线程状态的 running 和 ready，也就是说处于此状态的线程可能正在执行，也可能正在等待 cpu 给分配执行时间。</p>
+</li>
+<li>
+<p>无限期等待 waiting</p>
+<p>处于这种状态的线程不会被 cpu 分配执行时间，需要被其他线程显示唤醒，能够导致线程陷入无限期等待的方法有：</p>
+<ul>
+<li>没有设置 timeout 参数的 wait 方法。</li>
+<li>没有设置 timeout 参数的 join 方法。</li>
+<li>LockSupport.park 方法。</li>
+</ul>
+</li>
+<li>
+<p>限期等待 timed waiting</p>
+<p>处于这种状态的线程也不会被 cpu 分配执行时间，不过不需要被其他线程显示唤醒，是经过一段时间之后，被操作系统自动唤醒。能够导致线程陷入限期等待的方法有：</p>
+<ul>
+<li>sleep 方法。</li>
+<li>设置 timeout 参数的 wait 方法。</li>
+<li>设置参数的 join 方法。</li>
+<li>LockSupport.parkNanos 方法。</li>
+<li>LockSupport.parkUntil 方法。</li>
+</ul>
+</li>
+<li>
+<p>阻塞 blocked</p>
+<p>线程被阻塞了。在线程等待进入同步区域的时候是这个状态。</p>
+<p>阻塞和等待的区别是：阻塞是排队等待获取一个排他锁，而等待是指等一段时间或者一个唤醒动作。</p>
+</li>
+<li>
+<p>结束 terminated</p>
+<p>已经终止的线程。</p>
+</li>
+</ul>
+<h2 id=3-写在最后>3 写在最后</h2>
+<p>并发处理的广泛应用是使得 Amdahl 定律代替摩尔定律成为计算机性能发展源动力的根本原因，也是人类压榨计算机运算能力的最有力武器。有些问题使用越多的资源就能越快地解决——越多的工人参与收割庄稼，那么就能越快地完成收获。但是另一些任务根本就是串行化的——增加更多的工人根本不可能提高收割速度。</p>
+<p>我们使用线程的重要原因之一是为了支配多处理器的能力，我们必须保证问题被恰当地进行了并行化的分解，并且我们的程序有效地使用了这种并行的潜能。有时候良好的设计原则不得不向现实做出一些让步，我们必须让计算机正确无误的运行，首先保证并发的正确性，才能够在此基础上谈高效，所以线程的安全问题是一个很值得考虑的问题。</p>
+<p>虽然一直说 java 不好，但是 java 带给我的影响确实最大的，从 java 这个平台里学到了很多有用的东西。现在 golang，nodejs，python 等语言，每个都是在一方面能秒 java，可是 java 生态和 java 对软件行业的影响，是无法被超越的，java 这种语言，从出生到现在几十年了，基本上每次软件技术的革命都没有落下，每次都觉得要死的时候，忽然间柳暗花明，枯木逢春。咳咳，扯远了。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/a-month-in-finogeeks/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">碎碎念</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/aws-md/>
+<span class="next-text nav-default">aws.md</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>java-reactive-web - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="Spring web mvc： 传统 servlet web spring web flux： Reactive web 编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程 In"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/java-reactive-web/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="java-reactive-web">
+<meta property="og:description" content="Spring web mvc： 传统 servlet web spring web flux： Reactive web 编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程 In">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/java-reactive-web/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-06-23T15:05:32+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="java-reactive-web">
+<meta itemprop=description content="Spring web mvc： 传统 servlet web spring web flux： Reactive web 编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程 In"><meta itemprop=datePublished content="2018-06-23T15:05:32+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="675">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="java-reactive-web">
+<meta name=twitter:description content="Spring web mvc： 传统 servlet web spring web flux： Reactive web 编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程 In"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>java-reactive-web</h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-23 </span>
+<span class=more-meta> 约 675 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#reactive-概念>Reactive 概念</a>
+<ul>
+<li><a href=#实现框架>实现框架</a></li>
+<li><a href=#特性>特性</a></li>
+</ul>
+</li>
+<li><a href=#reactive-使用场景>Reactive 使用场景</a></li>
+<li><a href=#reactive-理解误区>Reactive 理解误区</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>Spring web mvc： 传统 servlet web</p>
+<p>spring web flux： Reactive web</p>
+<ul>
+<li>编程模式： non-blocking 非阻塞
+<ul>
+<li>nio：同步？异步？</li>
+</ul>
+</li>
+<li>并行模型
+<ul>
+<li>sync 同步</li>
+<li>async 异步</li>
+</ul>
+</li>
+</ul>
+<h1 id=reactive-概念>Reactive 概念</h1>
+<p>Reactive programming： 响应式编程</p>
+<p>In <a href=https://en.wikipedia.org/wiki/Computing>computing</a>, <strong>reactive programming</strong> is a declarative <a href=https://en.wikipedia.org/wiki/Programming_paradigm>programming paradigm</a> concerned with <a href=https://en.wikipedia.org/wiki/Dataflow_programming>data streams</a> and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) <em>data streams</em> with ease, and also communicate that an inferred dependency within the associated <em>execution model</em> exists, which facilitates the automatic propagation of the changed data flow.</p>
+<h2 id=实现框架>实现框架</h2>
+<ul>
+<li>
+<p>RxJava</p>
+<p>ReactiveX is a library for composing asynchronous and event-based programs by using observable sequences.</p>
+<p>这种就是推的模式</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>int[] a=[1, 2, 3]
+
+for(int i: a){
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package com.reactive.demo.reactivedemo;
+
+import java.util.Observable;
+
+/**
+ * todo
+ *
+ * @author zhuzhenfeng
+ * @date 2018/6/23
+ */
+public class ObserverPatternDemo {
+    public static void main(String[] args) {
+        MyObservable observable = new MyObservable();
+
+        // 1 observable   n个observer
+
+        observable.addObserver((o, value) -&gt; {
+            System.out.println(&#34;1 收到数据更新&#34; + value);
+        });
+
+        observable.addObserver((o, value) -&gt; {
+            System.out.println(&#34;2 收到数据更新&#34; + value);
+        });
+
+        observable.setChanged();
+
+        observable.notifyObservers(&#34;hello world&#34;);//  push data 发布数据
+
+
+    }
+
+    public static class MyObservable extends Observable {
+        @Override
+        protected synchronized void setChanged() {
+            super.setChanged();
+        }
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java &#34;-
+2 收到数据更新hello world
+1 收到数据更新hello world
+
+Process finished with exit code 0
+</code></pre></td></tr></table>
+</div>
+</div><p>当时不阻塞，后续回调。非阻塞基本上采用 callback 的形式。</p>
+<p>对于 java 来讲，异步代表切换了线程。</p>
+<p>当前的实现： 同步+非阻塞</p>
+<p>如果是切换了线程，代表是异步 的非阻塞，一般是 gui 程序的。</p>
+</li>
+<li>
+<p>Reactor</p>
+</li>
+</ul>
+<h2 id=特性>特性</h2>
+<ul>
+<li>异步</li>
+<li>非阻塞</li>
+<li>事件驱动</li>
+<li>可能有背压 backpressure</li>
+<li>防止回调地狱</li>
+</ul>
+<h1 id=reactive-使用场景>Reactive 使用场景</h1>
+<p>Long Live 模式： netty 的 io 连接（rpc） timeout</p>
+<p>short live 模式：不太适合 Reactive web，因为这是等待。只是会快速返回，但是并不会给你真正的结果。短频快的连接，不太有用武之地。</p>
+<ul>
+<li>http</li>
+<li>http 超时时间</li>
+</ul>
+<h1 id=reactive-理解误区>Reactive 理解误区</h1>
+<p>web：快速响应</p>
+<p>200 Q->200 T -> 50T</p>
+<p>1-50</p>
+<p>Tomcat connector thread pool(200)->reactive thread pool(50)</p>
+<p>io 连接从 Tomcat->Reactive</p>
+<p>连接</p>
+<p>Reactive thread pool（50）</p>
+<p>不太适合 web 请求。</p>
+<p>webflux 其实并不会提升性能。</p>
+<p><img src=http://ww1.sinaimg.cn/large/b831e4c7gy1fsl9ian4ezj20ma0g7tg4.jpg alt></p>
+<p>少量的线程，少量的内存来做更好的伸缩性，而并不是为了提升更好的性能。使用 Reactive 只会是使单位时间内接受请求的数量增加，单位时间内的处理请求的数量下降。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/openfaas/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">openfaas</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/kafka/>
+<span class="next-text nav-default">kafka</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

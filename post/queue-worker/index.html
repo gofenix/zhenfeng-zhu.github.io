@@ -1,0 +1,659 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>queue-worker - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。 网关的路由是：/funct"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/queue-worker/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="queue-worker">
+<meta property="og:description" content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。 网关的路由是：/funct">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/queue-worker/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-09-06T16:23:12+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="queue-worker">
+<meta itemprop=description content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。 网关的路由是：/funct"><meta itemprop=datePublished content="2018-09-06T16:23:12+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="2025">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="queue-worker">
+<meta name=twitter:description content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。 网关的路由是：/funct"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>queue-worker</h1>
+<div class=post-meta>
+<span class=post-time> 2018-09-06 </span>
+<span class=more-meta> 约 2025 字 </span>
+<span class=more-meta> 预计阅读 5 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#queue-worker-源码分析>queue-worker 源码分析</a>
+<ul>
+<li><a href=#异步函数和同步函数><strong>异步函数和同步函数</strong></a></li>
+<li><a href=#查看-queue-worker-的日志><strong>查看 queue-worker 的日志</strong></a></li>
+<li><a href=#利用-requestbin-和-x-callback-url-获取异步函数的结果><strong>利用 requestbin 和 X-Callback-Url 获取异步函数的结果</strong></a></li>
+<li><a href=#源码分析><strong>源码分析</strong></a></li>
+<li><a href=#依赖项><strong>依赖项</strong></a></li>
+<li><a href=#接口实现类-natsqueue><strong>接口实现类 NatsQueue</strong></a></li>
+<li><a href=#订阅者处理><strong>订阅者处理</strong></a></li>
+<li><a href=#总结><strong>总结</strong></a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=queue-worker-源码分析>queue-worker 源码分析</h1>
+<h2 id=异步函数和同步函数><strong>异步函数和同步函数</strong></h2>
+<p>在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。</p>
+<ul>
+<li>网关的路由是：<code>/function/&lt;function_name></code></li>
+<li>必须等待</li>
+<li>在结束的时候得到结果</li>
+<li>明确知道是成功还是失败</li>
+</ul>
+<p>异步函数会有一些差异：</p>
+<ul>
+<li>网关的路由是：<code>/async-function/&lt;function_name></code></li>
+<li>客户端获得 202 的即时响应码</li>
+<li>从 queue-worker 中调用函数</li>
+<li>默认情况下，结果是被丢弃的。</li>
+</ul>
+<h2 id=查看-queue-worker-的日志><strong>查看 queue-worker 的日志</strong></h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>docker service logs -f func_queue-worker
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=利用-requestbin-和-x-callback-url-获取异步函数的结果><strong>利用 requestbin 和 X-Callback-Url 获取异步函数的结果</strong></h2>
+<p>如果需要获得异步函数的结果，有两个方法：</p>
+<ul>
+<li>更改代码，将结果返回给端点或者消息系统</li>
+<li>利用内置的回调
+内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。
+requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。</li>
+</ul>
+<p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fuzvzbcz2vj30k00b3aar.jpg alt></p>
+<p><img src=https://ws3.sinaimg.cn/large/006tNbRwgy1fuzvztfu66j30k00b2757.jpg alt></p>
+<p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fuzw08o8w3j30k00b1aay.jpg alt></p>
+<h2 id=源码分析><strong>源码分析</strong></h2>
+<h2 id=依赖项><strong>依赖项</strong></h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>github.com/nats-io/go-nats-streaming
+github.com/nats-io/go-nats
+
+github.com/openfaas/faas
+</code></pre></td></tr></table>
+</div>
+</div><p>go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。</p>
+<p>faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package queue
+
+import &#34;net/url&#34;
+import &#34;net/http&#34;
+
+// Request for asynchronous processing
+type Request struct {
+    Header      http.Header
+    Body        []byte
+    Method      string
+    QueryString string
+    Function    string
+    CallbackURL *url.URL `json:&#34;CallbackUrl&#34;`
+}
+
+// CanQueueRequests can take on asynchronous requests
+type CanQueueRequests interface {
+    Queue(req *Request) error
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>从这里我们就可以明白作者的设计思路，只要是实现了这个 CanQueueRequests 接口，就可以作为一个 queue-worker。</p>
+<h2 id=接口实现类-natsqueue><strong>接口实现类 NatsQueue</strong></h2>
+<p>接口的实现类 NatsQueue 是在 handler 包里。它的属性都是 nats 中常用到的，包括 clientId，clusterId，url，连接，主题等，如下所示：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// NatsQueue queue for work
+type NatsQueue struct {
+    nc        stan.Conn    // nats的连接
+    ClientID  string       // nats的clientId
+    ClusterID string       // nats的clusterId
+    NATSURL   string       // nats的URL
+    Topic     string       // 主题
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>它的 queue 方法也很简单，主要做了两件事儿：</p>
+<ol>
+<li>解析传入的 Request 对象，并转为 json 对象 out</li>
+<li>将 out 发布到队列里</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// Queue request for processing
+func (q *NatsQueue) Queue(req *queue.Request) error {
+    var err error
+
+    fmt.Printf(&#34;NatsQueue - submitting request: %s.\n&#34;, req.Function)
+
+    out, err := json.Marshal(req)
+    if err != nil {
+        log.Println(err)
+    }
+
+    err = q.nc.Publish(q.Topic, out)
+
+    return err
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>go 语言没有构造方法，所以 NatsQueue 还用于创建 NatsQueue 的实例的方法，这里就成为工厂方法。这个工厂方法主要就是从配置文件中读取环境变量的值，然后创建一个 nats 的连接，相当于给 NatsQueue 的对象的每个属性进行赋值。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>func CreateNatsQueue(address string, port int, clientConfig NatsConfig) (*NatsQueue, error) {
+    queue1 := NatsQueue{}
+    var err error
+    natsURL := fmt.Sprintf(&#34;nats://%s:%d&#34;, address, port)
+    log.Printf(&#34;Opening connection to %s\n&#34;, natsURL)
+
+    clientID := clientConfig.GetClientID()
+    clusterID := &#34;faas-cluster&#34;
+
+    nc, err := stan.Connect(clusterID, clientID, stan.NatsURL(natsURL))
+    queue1.nc = nc
+
+    return &amp;queue1, err
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这个 CreateNatsQueue 方法是 Gateway 项目中进行调用，我们可以在 Gateway 项目的 main.go 中找到，如果 Gateway 的配置开启了异步函数支持，就会调用该方法，创建一个 NatsQueue 对象，然后把函数放到队列中，这里就不深入讲解：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>if config.UseNATS() {
+        log.Println(&#34;Async enabled: Using NATS Streaming.&#34;)
+        natsQueue, queueErr := natsHandler.CreateNatsQueue(*config.NATSAddress, *config.NATSPort, natsHandler.DefaultNatsConfig{})
+        if queueErr != nil {
+            log.Fatalln(queueErr)
+        }
+
+        faasHandlers.QueuedProxy = handlers.MakeQueuedProxy(metricsOptions, true, natsQueue)
+        faasHandlers.AsyncReport = handlers.MakeAsyncReport(metricsOptions)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>到这里，我相信读者也了解到，Gateway 其实就是一个发布者，将异步请求扔到队列里。接下来肯定要有一个订阅者将请求消费处理。</p>
+<h2 id=订阅者处理><strong>订阅者处理</strong></h2>
+<p>我们都知道，nats streaming 的订阅者订阅到消息之后，会把消息扔给一个回调函数去处理。queue-worker 的订阅者实现也是这样，它的实现并不复杂，所有逻辑都在 main.go 的中。</p>
+<p>我们先看回调函数 mcb 都做了什么：</p>
+<ol>
+<li>首先当然是将消息体反序列化成上面说到的用于异步处理的 Request 对象。</li>
+<li>构造 http 请求的 url 和 querystring，url 的格式如下：
+functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, config.FunctionSuffix, queryString)</li>
+<li>设置 http 的 header，并以 post 的形式向 functionURL 发起请求。</li>
+<li>如果请求失败，设置返回状态码为<code>http.StatusServiceUnavailable</code>，并分别处理 CallbackURL 是否存在的情况。</li>
+<li>如果请求成功，同样也是要分别处理 CallbackURL 是否存在的情况。</li>
+</ol>
+<p>当然在这个 callback 中会根据一些环境变量的存在，选择是否打印日志出来。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>mcb := func(msg *stan.Msg) {
+        i++
+
+        printMsg(msg, i)
+
+        started := time.Now()
+
+        req := queue.Request{}
+        unmarshalErr := json.Unmarshal(msg.Data, &amp;req)
+
+        if unmarshalErr != nil {
+            log.Printf(&#34;Unmarshal error: %s with data %s&#34;, unmarshalErr, msg.Data)
+            return
+        }
+
+        fmt.Printf(&#34;Request for %s.\n&#34;, req.Function)
+
+        if config.DebugPrintBody {
+            fmt.Println(string(req.Body))
+        }
+
+        queryString := &#34;&#34;
+        if len(req.QueryString) &gt; 0 {
+            queryString = fmt.Sprintf(&#34;?%s&#34;, strings.TrimLeft(req.QueryString, &#34;?&#34;))
+        }
+
+        functionURL := fmt.Sprintf(&#34;http://%s%s:8080/%s&#34;, req.Function, config.FunctionSuffix, queryString)
+
+        request, err := http.NewRequest(http.MethodPost, functionURL, bytes.NewReader(req.Body))
+        defer request.Body.Close()
+
+        copyHeaders(request.Header, &amp;req.Header)
+
+        res, err := client.Do(request)
+        var status int
+        var functionResult []byte
+
+        if err != nil {
+            status = http.StatusServiceUnavailable
+
+            log.Println(err)
+            timeTaken := time.Since(started).Seconds()
+
+            if req.CallbackURL != nil {
+                log.Printf(&#34;Callback to: %s\n&#34;, req.CallbackURL.String())
+
+                resultStatusCode, resultErr := postResult(&amp;client, res, functionResult, req.CallbackURL.String())
+                if resultErr != nil {
+                    log.Println(resultErr)
+                } else {
+                    log.Printf(&#34;Posted result: %d&#34;, resultStatusCode)
+                }
+            }
+
+            statusCode, reportErr := postReport(&amp;client, req.Function, status, timeTaken, config.GatewayAddress)
+            if reportErr != nil {
+                log.Println(reportErr)
+            } else {
+                log.Printf(&#34;Posting report - %d\n&#34;, statusCode)
+            }
+            return
+        }
+
+        if res.Body != nil {
+            defer res.Body.Close()
+
+            resData, err := ioutil.ReadAll(res.Body)
+            functionResult = resData
+
+            if err != nil {
+                log.Println(err)
+            }
+
+            if config.WriteDebug {
+                fmt.Println(string(functionResult))
+            } else {
+                fmt.Printf(&#34;Wrote %d Bytes\n&#34;, len(string(functionResult)))
+            }
+        }
+
+        timeTaken := time.Since(started).Seconds()
+
+        fmt.Println(res.Status)
+
+        if req.CallbackURL != nil {
+            log.Printf(&#34;Callback to: %s\n&#34;, req.CallbackURL.String())
+            resultStatusCode, resultErr := postResult(&amp;client, res, functionResult, req.CallbackURL.String())
+            if resultErr != nil {
+                log.Println(resultErr)
+            } else {
+                log.Printf(&#34;Posted result: %d&#34;, resultStatusCode)
+            }
+        }
+
+        statusCode, reportErr := postReport(&amp;client, req.Function, res.StatusCode, timeTaken, config.GatewayAddress)
+
+        if reportErr != nil {
+            log.Println(reportErr)
+        } else {
+            log.Printf(&#34;Posting report - %d\n&#34;, statusCode)
+        }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p><code>postResult</code>函数是用来处理 callbackURL 存在的情况，在这个函数中将结果，以 post 请求调用 callbackURL 发送出去。</p>
+<p><code>postReport</code>函数用来处理 callbackURL 不存在的情况，这里是将结果发到 Gateway 网关的<code>"http://" + gatewayAddress + ":8088/system/async-report"</code>中，我们之后就可以从这个 url 里查询异步函数的执行结果了。</p>
+<h2 id=总结><strong>总结</strong></h2>
+<p>本文主要分析了 NATS Streaming 版本的 queue worker 的实现，通过分析源码我们可以看到 OpenFaaS 在架构的设计很有考究，充分的考虑到了可扩展性，通过定义接口规范，使得开发者很容易实现自定义。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/watchdog/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">watchdog</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/blockchain/>
+<span class="next-text nav-default">区块链学习笔记</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

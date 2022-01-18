@@ -1,0 +1,364 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>docker - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="docker 常用命令 docker 获取镜像 docker pull 新建并启动 docker run 列出镜像 docker image ls docker images 删除虚悬镜像 docker image prune 删除本地镜像 docker iamge rm 查看应用信息 docker logs dockerfile 一般步骤 在一个目录里，新建一个"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/docker/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="docker">
+<meta property="og:description" content="docker 常用命令 docker 获取镜像 docker pull 新建并启动 docker run 列出镜像 docker image ls docker images 删除虚悬镜像 docker image prune 删除本地镜像 docker iamge rm 查看应用信息 docker logs dockerfile 一般步骤 在一个目录里，新建一个">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/docker/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-03-24T17:42:58+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="docker">
+<meta itemprop=description content="docker 常用命令 docker 获取镜像 docker pull 新建并启动 docker run 列出镜像 docker image ls docker images 删除虚悬镜像 docker image prune 删除本地镜像 docker iamge rm 查看应用信息 docker logs dockerfile 一般步骤 在一个目录里，新建一个"><meta itemprop=datePublished content="2018-03-24T17:42:58+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="662">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="docker">
+<meta name=twitter:description content="docker 常用命令 docker 获取镜像 docker pull 新建并启动 docker run 列出镜像 docker image ls docker images 删除虚悬镜像 docker image prune 删除本地镜像 docker iamge rm 查看应用信息 docker logs dockerfile 一般步骤 在一个目录里，新建一个"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>docker</h1>
+<div class=post-meta>
+<span class=post-time> 2018-03-24 </span>
+<span class=more-meta> 约 662 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#docker-常用命令>docker 常用命令</a>
+<ul>
+<li><a href=#docker>docker</a></li>
+<li><a href=#dockerfile>dockerfile</a>
+<ul>
+<li><a href=#一般步骤>一般步骤</a></li>
+<li><a href=#常用指令>常用指令</a></li>
+</ul>
+</li>
+<li><a href=#compose>compose</a>
+<ul>
+<li><a href=#两个重要的概念>两个重要的概念</a></li>
+<li><a href=#一般步骤-1>一般步骤</a></li>
+<li><a href=#常用命令>常用命令</a></li>
+<li><a href=#compose-模板文件>compose 模板文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=docker-常用命令>docker 常用命令</h1>
+<h2 id=docker>docker</h2>
+<ol>
+<li>
+<p>获取镜像</p>
+<p>docker pull</p>
+</li>
+<li>
+<p>新建并启动</p>
+<p>docker run</p>
+</li>
+<li>
+<p>列出镜像</p>
+<p>docker image ls</p>
+<p>docker images</p>
+</li>
+<li>
+<p>删除虚悬镜像</p>
+<p>docker image prune</p>
+</li>
+<li>
+<p>删除本地镜像</p>
+<p>docker iamge rm</p>
+</li>
+<li>
+<p>查看应用信息</p>
+<p>docker logs</p>
+</li>
+</ol>
+<h2 id=dockerfile>dockerfile</h2>
+<h3 id=一般步骤>一般步骤</h3>
+<ul>
+<li>在一个目录里，新建一个文件，命名为 Dockerfile</li>
+<li>在 Dockerfile 的目录内，执行 docker build</li>
+</ul>
+<h3 id=常用指令>常用指令</h3>
+<ol>
+<li>
+<p>FROM 指定基础镜像，且是第一条命令</p>
+</li>
+<li>
+<p>RUN 执行命令</p>
+<p>shell 格式</p>
+<p>exec 格式</p>
+</li>
+<li>
+<p>COPY 和 ADD 指令是复制文件</p>
+</li>
+<li>
+<p>CMD 指令和 RUN 类似，容器启动命令</p>
+<p>shell 格式</p>
+<p>exec 格式</p>
+<p>参数列表格式</p>
+</li>
+<li>
+<p>ENV 设置环境变量</p>
+</li>
+<li>
+<p>EXPOSE 声明对外暴露的端口</p>
+</li>
+<li>
+<p>WORKDIR 指定工作目录</p>
+</li>
+</ol>
+<h2 id=compose>compose</h2>
+<h3 id=两个重要的概念>两个重要的概念</h3>
+<ul>
+<li>service 服务：一个应用的容器，实际上可以包括若干运行相同镜像的实例。</li>
+<li>project 项目：由一组关联的容器组成一个完整业务单元，在 docker-compose.yml 文件中定义。</li>
+</ul>
+<h3 id=一般步骤-1>一般步骤</h3>
+<ul>
+<li>
+<p>在一个项目目录里，新建一个 Dockerfile</p>
+</li>
+<li>
+<p>新建一个文件 docker-compose.yml</p>
+<p>模板格式</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>version: 3.0
+services:
+ web:
+  build: .
+  ports:
+   - &#34;5000:5000&#34;
+
+ redis:
+  images: &#34;redis:alpine&#34;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>docker-compose up 运行项目</p>
+</li>
+</ul>
+<h3 id=常用命令>常用命令</h3>
+<ol>
+<li>docker-compose build 重新构建项目中的服务容器</li>
+<li>config 验证 compose 文件格式是否正确</li>
+<li>down 停止 up 命令所启动的容器</li>
+<li>images 列出 compose 文件中包含的镜像</li>
+<li>exec 进入指定的容器</li>
+<li>kill 强制停止服务容器</li>
+<li>ps 列出目前所有容器</li>
+<li>rm 删除停止状态的容器</li>
+<li>top 显示所有容器的进程</li>
+</ol>
+<h3 id=compose-模板文件>compose 模板文件</h3>
+<p>每个服务都必须通过 image 指令指定镜像或者 build 指令（需要 dockerfile）来构建生成的镜像。</p>
+<ol>
+<li>
+<p>build</p>
+<p>指定 dockerfile 所在的文件夹路径，compose 将会利用它来自动构建这个镜像，然后使用。</p>
+</li>
+<li>
+<p>depends_on</p>
+<p>解决容器的依赖和先后启动问题。但是不会等待完成启动之后再启动，而是在他们启动之后就去启动。</p>
+</li>
+<li>
+<p>environment</p>
+<p>设置环境变量，在这里指定程序或者容器启动时所依赖的环境参数。</p>
+</li>
+<li>
+<p>expose</p>
+<p>指定暴露的端口，只被连接的服务访问。</p>
+</li>
+<li>
+<p>image</p>
+<p>指定镜像名称，如果本地不存在则去拉取这个镜像。</p>
+</li>
+<li>
+<p>labels</p>
+<p>为容器添加 docker 元数据信息，即一些辅助说明。</p>
+</li>
+<li>
+<p>ports</p>
+<p>暴露端口信息，宿主端口:容器端口，或者只指定容器端口。</p>
+</li>
+</ol>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">领域实体类</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/express/>
+<span class="next-text nav-default">express</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

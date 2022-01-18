@@ -1,0 +1,256 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>每日学习-2019-09-24 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="每日学习-2019-09-24">
+<meta property="og:description" content="开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-24/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2019-09-29T02:17:46+00:00">
+<meta property="article:modified_time" content="2019-09-29T02:17:46+00:00">
+<meta itemprop=name content="每日学习-2019-09-24">
+<meta itemprop=description content="开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里"><meta itemprop=datePublished content="2019-09-29T02:17:46+00:00">
+<meta itemprop=dateModified content="2019-09-29T02:17:46+00:00">
+<meta itemprop=wordCount content="452">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="每日学习-2019-09-24">
+<meta name=twitter:description content="开言英语 极客时间 编译原理之美 语义分析（下）：如何做上下文相关情况的处理 语义分析的本质，就是针对上下文相关的情况做处理。 引用消解：不同作用域里"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>每日学习-2019-09-24</h1>
+<div class=post-meta>
+<span class=post-time> 2019-09-29 </span>
+<span class=more-meta> 约 452 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#开言英语>开言英语</a></li>
+<li><a href=#极客时间>极客时间</a>
+<ul>
+<li><a href=#编译原理之美>编译原理之美</a>
+<ul>
+<li><a href=#语义分析下如何做上下文相关情况的处理>语义分析（下）：如何做上下文相关情况的处理</a></li>
+</ul>
+</li>
+<li><a href=#趣谈-linux-操作系统>趣谈 Linux 操作系统</a>
+<ul>
+<li><a href=#namespace-技术内部创业公司应该独立运营>Namespace 技术：内部创业公司应该独立运营</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=开言英语>开言英语</h1>
+<h1 id=极客时间>极客时间</h1>
+<h2 id=编译原理之美>编译原理之美</h2>
+<h3 id=语义分析下如何做上下文相关情况的处理>语义分析（下）：如何做上下文相关情况的处理</h3>
+<ul>
+<li>语义分析的本质，就是针对上下文相关的情况做处理。
+<ul>
+<li>引用消解：不同作用域里可能有相同名称的变量，必须找到正确的那个，这个过程就是引用消解。
+<ul>
+<li>函数引用消解</li>
+<li>命名空间引用消解</li>
+</ul>
+</li>
+<li>左值和右值
+<ul>
+<li>左值取的是变量的地址或者说是变量的引用，获得地址之后，我们就可以把新值写进去。</li>
+<li>右值就是我们常说的值。</li>
+<li>不是所有的表达式都能生成一个合格的左值。</li>
+</ul>
+</li>
+<li>属性计算
+<ul>
+<li>上下文分析或者说语义分析的一种算法。</li>
+<li>属性文法的主要思路是计算机科学的重要开拓者，是在上下文无关文法的基础上做了一些增强，使之可以计算属性值。</li>
+</ul>
+</li>
+<li>过程
+<ul>
+<li>类型和作用域解析</li>
+<li>类型的消解</li>
+<li>引用的消解和 S 属性的类型推导</li>
+<li>做类型检查</li>
+<li>做一些语义合法性检查</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id=趣谈-linux-操作系统>趣谈 Linux 操作系统</h2>
+<h3 id=namespace-技术内部创业公司应该独立运营>Namespace 技术：内部创业公司应该独立运营</h3>
+<p>为了隔离不同类型的资源，Linux 内核里面有如下几种不同类型的 namespace：</p>
+<ul>
+<li>UTS，表示不同的 namespace 可以配置不同的 hostname</li>
+<li>User，可以配置不同的用户和组</li>
+<li>Mount，文件系统挂载点是隔离的</li>
+<li>PID，有完全独立的 pid</li>
+<li>Network，有独立的网络协议栈</li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2019-09-29
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/%E6%AF%8F%E6%97%A5%E5%AD%A6%E4%B9%A0-2019-09-29/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">每日学习 2</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/tmux/>
+<span class="next-text nav-default">tmux</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

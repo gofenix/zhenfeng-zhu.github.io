@@ -1,0 +1,463 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>如何理解可观测性 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="可观测性 可观测性 ≠ 监控 核心不同 监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="如何理解可观测性">
+<meta property="og:description" content="可观测性 可观测性 ≠ 监控 核心不同 监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2021-10-15T09:45:38+08:00">
+<meta property="article:modified_time" content="2021-10-15T09:45:38+08:00">
+<meta itemprop=name content="如何理解可观测性">
+<meta itemprop=description content="可观测性 可观测性 ≠ 监控 核心不同 监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分"><meta itemprop=datePublished content="2021-10-15T09:45:38+08:00">
+<meta itemprop=dateModified content="2021-10-15T09:45:38+08:00">
+<meta itemprop=wordCount content="1825">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="如何理解可观测性">
+<meta name=twitter:description content="可观测性 可观测性 ≠ 监控 核心不同 监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。 观测则以开发为核心，除了监控，它还会对系统进行分"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>如何理解可观测性</h1>
+<div class=post-meta>
+<span class=post-time> 2021-10-15 </span>
+<span class=more-meta> 约 1825 字 </span>
+<span class=more-meta> 预计阅读 4 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#可观测性>可观测性</a>
+<ul>
+<li><a href=#可观测性--监控>可观测性 ≠ 监控</a></li>
+<li><a href=#监控数据来源>监控数据来源</a></li>
+<li><a href=#可观测性的核心概念>可观测性的核心概念</a>
+<ul>
+<li><a href=#--日志logging>- 日志（Logging）</a></li>
+<li><a href=#--度量metrics>- 度量（Metrics）</a></li>
+<li><a href=#--追踪tracing>- 追踪（Tracing）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=可观测性>可观测性</h1>
+<h2 id=可观测性--监控>可观测性 ≠ 监控</h2>
+<ol>
+<li>
+<p>核心不同</p>
+<ul>
+<li>监控以运维为核心，通过各项指标来定义整体的运行状态、失败情况。</li>
+<li>观测则以开发为核心，除了监控，它还会对系统进行分析。</li>
+</ul>
+</li>
+<li>
+<p>维度不同</p>
+<ul>
+<li>监控是从外围的角度，通过各种指标（机器 CPU、负载、网络等维度）来判断整个系统的执行情况。</li>
+<li>可观测性则在上述外部指标基础上，以应用内的各个维度来展开推测，通过二者的数据结合来真实的反应应用的运行情况。</li>
+</ul>
+</li>
+<li>
+<p>展现的信息不同</p>
+<ul>
+<li>有些系统在正常运行时十分稳定，但是一到高并发就会出现问题，此时监控只能汇报问题出现的状况，而可观测性可以很好的通过图形化的方式告知我们问题的原因，不用我们通过经验来猜测。</li>
+</ul>
+</li>
+</ol>
+<p>可观测性打破了开发和运维的原有问题解决方式，不再是运维发现问题开发解决，而是以开发为中心。</p>
+<h2 id=监控数据来源>监控数据来源</h2>
+<ol>
+<li>
+<p>端上访问</p>
+<ol>
+<li>用户体验监控
+<ol>
+<li>web 页面的白屏时间</li>
+<li>dom 元素/资源加载耗时</li>
+<li>文档网络耗时</li>
+<li>app 卡顿率</li>
+<li>崩溃率</li>
+<li>热启动加载时长</li>
+</ol>
+</li>
+<li>日志</li>
+<li>端到端
+<ol>
+<li>用户端到后端的请求状况，访问量、成功率、响应时间等。</li>
+<li>还需要端上所处的地区、网络环境、响应状态码</li>
+</ol>
+</li>
+<li>可用率
+<ol>
+<li>访问是否可用、响应耗时长短的一些指标和 cdn、dns 等公共资源有关系。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>应用程序</p>
+<ol>
+<li>执行情况</li>
+<li>资源消耗</li>
+<li>vm 指标监控</li>
+<li>容量</li>
+<li>服务关系</li>
+<li>应用日志</li>
+<li>健康情况</li>
+</ol>
+</li>
+<li>
+<p>业务监控</p>
+<ol>
+<li>业务指标能很好的体现出系统是否稳定，任何系统如果出现了问题，最先受影响的肯定是业务指标。</li>
+</ol>
+</li>
+<li>
+<p>基础设施</p>
+<ol>
+<li>资源利用
+<ol>
+<li>这个很好理解，像 IO 使用率、cpu 利用率、内存使用率、磁盘使用率、网络使用率等。</li>
+</ol>
+</li>
+<li>通信情况
+<ol>
+<li>主机之间的网络情况。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id=可观测性的核心概念>可观测性的核心概念</h2>
+<h3 id=--日志logging>- 日志（Logging）</h3>
+<p>日志的一般描述是：在特定时间发生的事件，被以结构化的形式记录并产生的文本数据。</p>
+<ol>
+<li>日志的功能</li>
+</ol>
+<ul>
+<li>便于调试</li>
+<li>快速定位问题</li>
+<li>高度定制化</li>
+<li>信息埋点</li>
+<li>追踪数据变化</li>
+<li>数据分析</li>
+</ul>
+<ol start=2>
+<li>日志级别</li>
+</ol>
+<ul>
+<li>debug</li>
+<li>info</li>
+<li>warning</li>
+<li>error</li>
+</ul>
+<ol start=3>
+<li>日志常见来源</li>
+</ol>
+<ul>
+<li>终端</li>
+<li>网关
+<ul>
+<li>访问日志：当服务到达网关之后，就会形成一条日志。</li>
+<li>错误日志：网关执行时出了问题</li>
+</ul>
+</li>
+<li>应用层
+<ul>
+<li>容器启动日志</li>
+<li>请求访问日志</li>
+<li>普通日志</li>
+</ul>
+</li>
+<li>组件层
+<ul>
+<li>mysql 和 redis 等</li>
+<li>应用运行时的日志</li>
+<li>慢查询</li>
+<li>审计</li>
+</ul>
+</li>
+<li>基础层
+<ul>
+<li>偏向运维的日志</li>
+<li>系统日志和 linux 操作日志等</li>
+</ul>
+</li>
+</ul>
+<ol start=4>
+<li>如何写好日志</li>
+</ol>
+<p>寻找编写位置 => 编写日志 => 上线 => 日志 review => 定期修改</p>
+<ul>
+<li>
+<p>选择一个常用的日志框架</p>
+</li>
+<li>
+<p>编写方式从如下几个方面考虑</p>
+<ul>
+<li>日志开发时
+<ul>
+<li>日志编写位置</li>
+<li>写入性能</li>
+<li>占位符</li>
+<li>可读性</li>
+<li>关键信息隐蔽</li>
+</ul>
+</li>
+<li>开发完成后
+<ul>
+<li>减少代码位置信息的输出</li>
+<li>文件分类</li>
+<li>日志 review</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>编写位置</p>
+</li>
+</ul>
+<p>几个比较重要的编写日志的位置：</p>
+<ol>
+<li>系统/应用启动和参数变更：当系统启动时，将相关的参数信息进行打印</li>
+<li>关键操作节点</li>
+<li>大型任务进度上报：防止因为长时间没有处理而无法得知程序的执行状态</li>
+<li>异常</li>
+</ol>
+<ul>
+<li>写入性能</li>
+</ul>
+<p>日志的写入性能受如下几个因素影响：</p>
+<ol>
+<li>日志编写位置，如果是在 for 循环中打印，需要考虑一下是否有必要</li>
+<li>日志数量：大量的写日志质量会降低，而且过多日志也会影响程序的执行效率</li>
+<li>日志编写等级：不正确的等级，会让我们查问题时间增加</li>
+<li>日志的输出级别：线上不建议 debug 模式。</li>
+<li>无用输出参数：大字段、无用字段可以不用输出</li>
+</ol>
+<p>好的日志一定是便于你去排查问题的，在编写日志的时候一定要思考这个日志可以帮你做什么。</p>
+<ul>
+<li>占位符</li>
+</ul>
+<p>日志的编写尽可能的选择基于占位符的编写方式：</p>
+<ol>
+<li>节约性能，在生成高级别的日志时，低级别的日志会不停的叠加字符串而占用过多的内存和 CPU。</li>
+<li>便于编写。先确定日志所要表达的内容，再确认所需要编写的参数，这样写日志的时候目的会更加明确。</li>
+<li>便于查看。更方便的查看日志想表达的意思，而不被参数打乱。</li>
+</ol>
+<ul>
+<li>可读性</li>
+</ul>
+<p>一些容易遗漏的信息，之后要加上：</p>
+<ol>
+<li>会话标识：当前操作的用户和当前请求相关的信息</li>
+<li>请求标识：每个请求都有一个唯一标识，一般会配合链路追踪系统使用，这样可以跨服务追踪</li>
+<li>参数信息</li>
+<li>发生数据的结果</li>
+</ol>
+<ul>
+<li>关键信息隐蔽</li>
+</ul>
+<p>把一些关键的信息模糊掉</p>
+<ul>
+<li>减少代码位置信息的输出</li>
+</ul>
+<p>提升效率</p>
+<ul>
+<li>文件分类</li>
+</ul>
+<p>把不同业务逻辑按不同的文件来分类，不会被干扰</p>
+<ul>
+<li>日志 review</li>
+</ul>
+<p>每一次功能上线时，出了对功能进行回扫，也要确认日志的内容输出情况是不是符合预期</p>
+<ul>
+<li>
+<p>日志管理</p>
+</li>
+<li>
+<p>日志格式</p>
+</li>
+</ul>
+<ol>
+<li>系统之间的格式应该保持一致</li>
+<li>不编写多行日志内容</li>
+<li>不适用日志中的常见内容来分割，比如空格等。</li>
+</ol>
+<ul>
+<li>日志归档</li>
+</ul>
+<p>一般情况下都是按小时或者日期来归档，每天生成一个日志文件，方便管理和查看</p>
+<h3 id=--度量metrics>- 度量（Metrics）</h3>
+<p>统计指标也是我们经常使用的。它是一种可累加的聚合的数值结果，具有原子性。因此，我们可以通过各种数学计算方式来获取一段时间内的数值。</p>
+<h3 id=--追踪tracing>- 追踪（Tracing）</h3>
+<p>链路追踪是将链路的完整行为信息进行记录，然后通过可视化的形式展现出来</p>
+<p>我们一般将数据的来源分为 2 个级别：</p>
+<ol>
+<li>请求级别：数据来源于真实的请求，比如一次 http 调用、rpc 调用等</li>
+<li>聚合级别：真实的请求指标，或是系统的一些参数数据聚合，比如 qps、cpu 使用率</li>
+</ol>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2021-10-15
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/crystal1.2/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Crystal 1.2 版本更新说明</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/how-to-write-a-static-site-generator/>
+<span class="next-text nav-default">如何从零开始写一个静态网站生成器</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

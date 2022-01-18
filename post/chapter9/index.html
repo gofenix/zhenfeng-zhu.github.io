@@ -1,0 +1,808 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Chapter9 并发的艺术 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="并发和并行编程的神圣艺术 如果我是一个庄园的主人，而你是我的继承人，我会在你的第 13 个命名日让你坐下来，告诉你：&amp;ldquo;计算的世界正在改变"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/chapter9/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Chapter9 并发的艺术">
+<meta property="og:description" content="并发和并行编程的神圣艺术 如果我是一个庄园的主人，而你是我的继承人，我会在你的第 13 个命名日让你坐下来，告诉你：&ldquo;计算的世界正在改变">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter9/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-15T12:30:14+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Chapter9 并发的艺术">
+<meta itemprop=description content="并发和并行编程的神圣艺术 如果我是一个庄园的主人，而你是我的继承人，我会在你的第 13 个命名日让你坐下来，告诉你：&ldquo;计算的世界正在改变"><meta itemprop=datePublished content="2022-01-15T12:30:14+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="9976">
+<meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Chapter9 并发的艺术">
+<meta name=twitter:description content="并发和并行编程的神圣艺术 如果我是一个庄园的主人，而你是我的继承人，我会在你的第 13 个命名日让你坐下来，告诉你：&ldquo;计算的世界正在改变"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Chapter9 并发的艺术</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-15 </span>
+<span class=more-meta> 约 9976 字 </span>
+<span class=more-meta> 预计阅读 20 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#并发和并行编程的神圣艺术>并发和并行编程的神圣艺术</a>
+<ul>
+<li><a href=#并发和并行的概念>并发和并行的概念</a>
+<ul>
+<li><a href=#管理多个任务与同时执行任务>管理多个任务与同时执行任务</a></li>
+<li><a href=#阻塞和异步任务>阻塞和异步任务</a></li>
+<li><a href=#并发编程和并行编程>并发编程和并行编程</a></li>
+</ul>
+</li>
+<li><a href=#clojure-实现jvm-线程>Clojure 实现。JVM 线程</a>
+<ul>
+<li><a href=#什么是线程>什么是线程</a></li>
+<li><a href=#三个小妖精参考单元互斥和矮人狂战士>三个小妖精。参考单元、互斥和矮人狂战士</a></li>
+</ul>
+</li>
+<li><a href=#futures-delays-and-promises>Futures, Delays, and Promises</a>
+<ul>
+<li><a href=#future>Future</a></li>
+<li><a href=#延迟>延迟</a></li>
+<li><a href=#promise>Promise</a></li>
+<li><a href=#滚动你自己的队列>滚动你自己的队列</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+<li><a href=#练习>练习</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=并发和并行编程的神圣艺术>并发和并行编程的神圣艺术</h1>
+<p>如果我是一个庄园的主人，而你是我的继承人，我会在你的第 13 个命名日让你坐下来，告诉你：&ldquo;计算的世界正在改变，小姑娘，你必须为多核处理器的新世界做好准备，以免你被它践踏。</p>
+<p>&ldquo;好好听着。近年来，CPU 的时钟速度几乎没有增加，但双核和四核计算机已经变得很普遍。物理定律是残酷而绝对的，它们要求提高时钟速度需要成倍的功率。领域内最好的工程师不太可能很快克服这一限制，如果有的话。因此，你可以预期单台机器上的内核不断增加的趋势将继续下去&ndash;作为一个程序员，你将知道如何充分利用现代硬件的期望也是如此。</p>
+<p>&ldquo;在这种新模式下学习编程将是有趣和迷人的，真的。但请注意：它也充满了危险。你必须学习<em>并发和</em>并行编程*，这是一门神圣的艺术，使你的应用结构安全地管理多个同时执行的任务。</p>
+<p>&ldquo;你从对并发和并行概念的概述开始学习这门艺术。然后，你将学习困扰每个从业者的三个小妖精：参考单元、互斥和矮人狂战士。你还将学习三种有助于你的工具：Future、许诺和延迟&rdquo;。</p>
+<p>然后我会用键盘拍拍你的肩膀，示意你可以开始了。</p>
+<h2 id=并发和并行的概念>并发和并行的概念</h2>
+<p>并发和并行编程在程序执行的各个层面都涉及到很多混乱的细节，从硬件到操作系统，到编程语言库，再到从你的内心涌出的、落在编辑器中的代码。但在你为这些细节烦恼之前，在这一节中，我将介绍围绕并发和并行的高级概念。</p>
+<h3 id=管理多个任务与同时执行任务>管理多个任务与同时执行任务</h3>
+<p><em>并发</em>指的是在同一时间管理一个以上的任务。 <em>任务</em>只是意味着 &ldquo;需要完成的事情&rdquo;，它并不意味着任何有关硬件或软件的实现。我们可以用 Lady Gaga 的歌曲《电话》来说明并发性。Gaga 唱道</p>
+<blockquote>
+<p>I cannot text you with a drink in my hand, eh</p>
+</blockquote>
+<p>这里，她在解释她只能管理一个任务（喝酒）。她断然拒绝了她可以处理一个以上的任务的建议。然而，如果她决定同时处理任务，她会唱歌。</p>
+<blockquote>
+<p>I will put down this drink to text you, then put my phone away and continue drinking, eh</p>
+</blockquote>
+<p>在这个假设的宇宙中，Lady Gaga 正在处理两个任务：喝酒和发短信。然而，她并没有同时执行这两项任务。相反，她在这两个任务之间进行切换，或者说是<em>交错</em>。请注意，在交错过程中，你不必在切换之前完全完成一项任务：Gaga 可以打一个字，放下手机，拿起饮料喝一口，然后换回手机，再打一个字。</p>
+<p><em>平行性</em>指的是同时执行一个以上的任务。如果加加夫人平行地执行她的两项任务，她会唱歌。</p>
+<blockquote>
+<p>I can text you with one hand while I use the other to drink, eh</p>
+</blockquote>
+<p>平行性是并发性的一个子类：在你同时执行多个任务之前，你首先要管理多个任务。</p>
+<p>Clojure 有很多功能，可以让你轻松实现并行化。虽然 Lady Gaga 系统是通过在多只手上同时执行任务来实现并行的，但计算机系统一般是通过在多个处理器上同时执行任务来实现并行的。</p>
+<p>将并行性与<em>分布式区分开来是很重要的。分布式计算是并行计算的一个特殊版本，处理器在不同的计算机中，任务通过网络分布到计算机上。这就像 Lady Gaga 问 Beyoncé，&ldquo;请在我喝酒时给这家伙发短信&rdquo;。尽管你可以借助库在 Clojure 中进行分布式编程，但本书只涉及并行编程，在这里我用</em>parallel<em>只指同居的处理器。如果你对分布式编程感兴趣，可以去看看 Kyle Kingsbury 的</em>Call Me Maybe<em>系列，网址是</em><a href=https://aphyr.com/>https://aphyr.com/</a>*。</p>
+<h3 id=阻塞和异步任务>阻塞和异步任务</h3>
+<p>并发编程的主要用例之一是用于<em>阻塞</em>操作。阻塞实际上是指等待一个操作的完成。你最常听到的是与 I/O 操作有关的，比如读取文件或等待 HTTP 请求的完成。让我们用 Lady Gaga 并发的例子来研究这个问题。</p>
+<p>如果 Lady Gaga 给她的对话者发短信，然后拿着手机站在那里，盯着屏幕等待回应，而不喝水，那么你会说<em>读下一条短信</em>操作是阻塞的，这些任务是*同步执行的。</p>
+<p>相反，如果她把手机收起来，这样她就可以喝酒了，直到手机发出哔哔声或振动来提醒她，那么<em>阅读下一条短信</em>任务就不是阻塞的，你会说她是在*异步地处理这个任务。</p>
+<h3 id=并发编程和并行编程>并发编程和并行编程</h3>
+<p>并发编程和并行编程指的是将一个任务分解成可以并行执行的子任务的技术，以及管理程序同时执行多个任务时产生的风险。在本章的其余部分，我将交替使用这两个术语，因为两者的风险几乎是一样的。</p>
+<p>为了更好地理解这些风险以及 Clojure 如何帮助你避免这些风险，让我们来看看 Clojure 中是如何实现并发和并行的。</p>
+<h2 id=clojure-实现jvm-线程>Clojure 实现。JVM 线程</h2>
+<p>我一直在抽象地使用*任务这个词，指的是一系列相关的操作，而不考虑计算机可能如何实现任务的概念。例如，发短信就是一个由一系列相关操作组成的任务，它与往你脸上倒饮料的操作完全不同。</p>
+<p>在 Clojure 中，你可以把你正常的、<em>串行的代码看作是任务的序列。你可以通过把任务放在 JVM 的</em>线程*上来表示任务可以并发执行。</p>
+<h3 id=什么是线程>什么是线程</h3>
+<p>我很高兴你问这个问题! 一个线程是一个子程序。一个程序可以有很多线程，每个线程执行自己的指令集，同时享受对程序状态的共享访问。</p>
+<p>！<a href=https://www.braveclojure.com/assets/images/cftbat/concurrency/alligator.png></a></p>
+<p>线程管理功能可以存在于计算机的多个层面。例如，操作系统内核通常提供系统调用来创建和管理线程。JVM 提供了自己的独立于平台的线程管理功能，由于 Clojure 程序在 JVM 中运行，所以它们使用 JVM 线程。你将在第 12 章中了解更多关于 JVM 的信息。</p>
+<p>你可以把线程看作是一个实际的、物理的线段，它把一连串的指令串起来。在我看来，这些指令是棉花糖，因为棉花糖很好吃。处理器按顺序执行这些指令。我把这想象成一条鳄鱼在吃这些指令，因为鳄鱼喜欢吃棉花糖（这是事实！）。因此，执行一个程序看起来就像一堆棉花糖串在一条线上，一条鳄鱼沿着这条线逐一吃掉。图 9-1 显示了单核处理器执行单线程程序的这个模型。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/concurrency/single-thread.png alt></p>
+<p>图 9-1：单核处理器执行一个单线程的程序</p>
+<p>一个线程可以*产生一个新的线程来并发地执行任务。在单处理器系统中，处理器在线程之间来回切换（交织）。这里就引入了潜在的并发性问题。尽管处理器按顺序执行每个线程的指令，但它不保证何时在线程之间来回切换。</p>
+<p>图 9-2 显示了两个线程，A 和 B，以及它们的指令如何执行的时间线。我对线程 B 的指令做了阴影处理，以帮助区分它们与线程 A 的指令。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/concurrency/two-threads-one-processor.png alt></p>
+<p>单核处理器执行两个线程</p>
+<p>请注意，这只是一种可能的指令执行顺序。例如，处理器也可以按照 A1、A2、A3、B1、A4、B2、B3 的顺序执行指令。这使程序变得<em>不确定</em>。你不能事先知道结果是什么，因为你无法知道执行顺序，不同的执行顺序会产生不同的结果。</p>
+<p>这个例子显示了通过交织在单个处理器上的并发执行，而多核系统为每个核分配一个线程，允许计算机同时执行一个以上的线程。每个核心按顺序执行其线程的指令，如图 9-3 所示。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/concurrency/two-threads-two-processors.png alt></p>
+<p>两个线程，两个处理器。</p>
+<p>与单核上的交织一样，整体执行顺序没有保证，所以程序是不确定的。当你在程序中加入第二个线程时，它就变得不确定了，这使得你的程序有可能成为三种问题的牺牲品。</p>
+<h3 id=三个小妖精参考单元互斥和矮人狂战士>三个小妖精。参考单元、互斥和矮人狂战士</h3>
+<p>并发编程中有三个核心挑战，也被称为 &ldquo;三个并发妖精&rdquo;。要知道为什么这些是可怕的，想象一下图 9-3 中的程序包括表 9-1 中的假指令。</p>
+<ol>
+<li>非确定结果的程序的指令</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Instruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>WRITE <code>X = 0</code></td>
+</tr>
+<tr>
+<td>A2</td>
+<td>READ <code>X</code></td>
+</tr>
+<tr>
+<td>A3</td>
+<td>WRITE <code>X = X + 1</code></td>
+</tr>
+<tr>
+<td>B1</td>
+<td>READ <code>X</code></td>
+</tr>
+<tr>
+<td>B2</td>
+<td>WRITE <code>X = X + 1</code></td>
+</tr>
+</tbody>
+</table>
+<p>如果处理器遵循 A1, A2, A3, B1, B2 的顺序，那么<code>X</code>的值将是<code>2</code>，正如你所期望的。但是如果它遵循 A1, A2, B1, A3, B2 的顺序，<code>X'的值将是</code>1'，正如你在图 9-4 中看到的那样。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/concurrency/reference-cell.png alt></p>
+<p>两个线程与一个引用单元进行交互</p>
+<p>我们把这称为<em>参考单元</em>问题（第一个并发性妖精）。 当两个线程可以对同一个位置进行读写时，就会出现引用单元问题，而该位置的值取决于读写的顺序。</p>
+<p>第二个并发妖精是<em>互斥</em>。想象一下，两个线程，每个人都试图向一个文件写一个咒语。如果没有任何方法可以要求对文件进行独占性的写入访问，那么这个咒语最终会变成乱码，因为写入指令会被交错使用。考虑一下以下两个咒语。</p>
+<blockquote>
+<p>By the power invested in me<br>
+by the state of California,<br>
+I now pronounce you man and wife
+Thunder, lightning, wind, and rain,<br>
+a delicious sandwich, I summon again</p>
+</blockquote>
+<p>如果你把这些写到一个没有相互排斥的文件中，你可能会得到这样的结果。</p>
+<blockquote>
+<p>By the power invested in me<br>
+by Thunder, lightning, wind, and rain,<br>
+the state of California,<br>
+I now pronounce you a delicious man sandwich, and wife<br>
+I summon again</p>
+</blockquote>
+<p>第三个并发妖精就是我所说的<em>矮人狂战士</em>问题（又称<em>死锁</em>）。想象一下，四个狂暴者围坐在一张粗糙的圆形木桌旁，互相安慰。&ldquo;我知道我对我的孩子很疏远，但我就是不知道如何与他们沟通，&ldquo;一个人咆哮道。其余的人啜饮着咖啡，有意无意地点头，他们的眼角处都有护理纹。</p>
+<p>现在，每个人都知道，矮人狂战士结束舒适的咖啡聚会的仪式是拿起他们的 &ldquo;安慰棒&rdquo;（双刃战斧），互相抓挠对方的背部。每对矮人之间放一把战斧，如图 9-5 所示。</p>
+<p>他们的仪式是这样进行的。</p>
+<ol>
+<li>拿起<em>左边</em>的战斧，如果有的话。</li>
+<li>拿起<em>右边</em>战斧，如果有的话。</li>
+<li>用你的 &ldquo;安慰棒 &ldquo;大力挥舞来安慰你的邻居。</li>
+<li>释放两把战斧。</li>
+<li>重复。</li>
+</ol>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/concurrency/deadlock.png alt></p>
+<p>矮人狂热者在舒适的咖啡聚会中</p>
+<p>按照这个仪式，所有的矮人狂战士完全有可能拿起他们左边的安慰棒，然后无限期地阻挡，同时等待他们右边的安慰棒出现，导致僵局。(顺便说一下，如果你想进一步研究这种现象，它通常被称为<em>吃饭的哲学家问题</em>，但这是一个更无聊的场景）。本书没有详细讨论死锁，但了解这个概念和术语是很好的。</p>
+<p>并发编程有它的小妖精，但有了正确的工具，它是可控的，甚至是有趣的。让我们开始看一下正确的工具。</p>
+<h2 id=futures-delays-and-promises>Futures, Delays, and Promises</h2>
+<p>Future、延迟和 Promise 是用于并发编程的简单、轻便的工具。在这一节中，你将学习每个工具的工作原理，以及如何一起使用它们来抵御引用单元的并发妖精和互斥的并发妖精。你会发现，虽然简单，但这些工具对满足你的并发需求有很大帮助。</p>
+<p>它们通过给予你比串行代码更多的灵活性来做到这一点。当你写串行代码时，你把这三个事件绑定在一起。</p>
+<ul>
+<li>任务定义</li>
+<li>任务执行</li>
+<li>要求任务的结果</li>
+</ul>
+<p>作为一个例子，看一下这个假设的代码，它定义了一个简单的 API 调用任务。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(web-api/get :dwarven-beard-waxes)
+</code></pre></td></tr></table>
+</div>
+</div><p>一旦 Clojure 遇到这个任务定义，它就会执行它。它也需要<em>现在</em>的结果，阻塞直到 API 调用完成。学习并发编程的一部分是学会识别何时不需要这些时间上的联接。Future、延迟和 Promise 允许你把任务定义、任务执行和要求结果分开。继续前进!</p>
+<h3 id=future>Future</h3>
+<p>在 Clojure 中，你可以使用<em>futures</em>来定义一个任务，并把它放在另一个线程上，而不要求立即得到结果。你可以用<code>future</code>宏来创建一个未来。在 REPL 中试试这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(future (Thread/sleep 4000)
+        (println &#34;I&#39;ll print after 4 seconds&#34;))
+(println &#34;I&#39;ll print immediately&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p><code>Thread/sleep</code>告诉当前线程在指定的毫秒数内坐着什么都不做。通常情况下，如果你在你的 REPL 中求值了<code>Thread/sleep</code>，你就不能求值任何其他语句，直到 REPL 完成睡眠；执行你的 REPL 的线程将被阻塞。然而，<code>future</code>创建了一个新的线程，并将你传递给它的每个表达式放在新的线程上，包括<code>Thread/sleep</code>，允许 REPL 的线程继续运行，不受阻塞。</p>
+<p>你可以使用 future 在一个单独的线程上运行任务，然后忘记它们，但你经常想使用任务的结果。<code>future</code>函数返回一个引用值，你可以用它来请求结果。参考值就像干洗店给你的票据：在任何时候你都可以用它来请求你的干净衣服，但是如果你的衣服还没有洗干净，你就必须等待。类似地，你可以使用参考值来请求一个未来的结果，但是如果未来还没有完成计算结果，你就必须等待。</p>
+<p>请求一个未来的结果被称为<em>dereferencing</em>未来，你可以用<code>deref</code>函数或<code>@</code>读者宏来做。一个 future 的结果值是其主体中最后一个被求值的表达式的值。一个 future 的主体只执行一次，它的值被缓存起来。试试下面的方法。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [result (future (println &#34;this prints once&#34;)
+                     (+ 1 1))]
+  (println &#34;deref: &#34; (deref result))
+  (println &#34;@: &#34; @result))
+; =&gt; &#34;this prints once&#34;
+; =&gt; deref: 2
+; =&gt; @: 2
+</code></pre></td></tr></table>
+</div>
+</div><p>请注意，&ldquo;this prints once &ldquo;这个字符串确实只打印了一次，尽管你对 future 进行了两次推断。这表明 future 的主体只运行了一次，结果<code>2</code>被缓存了。</p>
+<p>如果未来程序还没有完成运行，解指未来程序就会阻塞，就像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [result (future (Thread/sleep 3000)
+                     (+ 1 1))]
+  (println &#34;The result is: &#34; @result)
+  (println &#34;It will be at least 3 seconds before I print&#34;))
+; =&gt; The result is: 2
+; =&gt; It will be at least 3 seconds before I print
+</code></pre></td></tr></table>
+</div>
+</div><p>有时你想为一个未来的等待时间设置一个时间限制。要做到这一点，你可以给<code>deref</code>一个等待的毫秒数，以及当<code>deref</code>超时时要返回的值。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(deref (future (Thread/sleep 1000) 0) 10 5)
+; =&gt; 5
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码告诉<code>deref</code>，如果 future 在 10 毫秒内没有返回一个值，则返回值<code>5</code>。</p>
+<p>最后，你可以使用<code>realized?</code>来询问一个 future，看看它是否已经运行完毕。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(realized? (future (Thread/sleep 1000)))
+; =&gt; false
+
+(let [f (future)]
+  @f
+  (realized? f))
+; =&gt; true
+</code></pre></td></tr></table>
+</div>
+</div><p>Future 是一种简单的方法，可以在你的程序中撒上一些并发性。</p>
+<p>就其本身而言，它们让你有能力将任务转移到其他线程上，这可以使你的程序更有效率。它们还可以让你的程序表现得更加灵活，让你控制何时需要一个任务的结果。</p>
+<p>当你解除对一个 future 的引用时，你表明<em>现在</em>需要这个结果，并且在获得这个结果之前应该停止计算。你会看到这如何帮助你处理相互排斥的问题。另外，你也可以忽略这个结果。例如，你可以使用 Future 来异步写入一个日志文件，在这种情况下，你不需要解除对 Future 的引用来获得任何返回值。</p>
+<p>Future 给你带来的灵活性是非常酷的。Clojure 还允许你用延迟和 Promise 来独立处理任务定义和要求结果。</p>
+<h3 id=延迟>延迟</h3>
+<p><em>延迟</em>允许你定义一个任务，而不需要立即执行它或要求得到结果。你可以使用<code>delay</code>创建一个延迟。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def jackson-5-delay
+  (delay (let [message &#34;Just call my name and I&#39;ll be there&#34;]
+           (println &#34;First deref:&#34; message)
+           message)))
+</code></pre></td></tr></table>
+</div>
+</div><p>在这个例子中，没有任何东西被打印出来，因为我们还没有要求对<code>let</code>形式进行求值。你可以求值延迟，并通过解构它或使用<code>force</code>来获得其结果。 <code>force</code>的行为与<code>deref</code>相同，但它更清楚地表达了你正在使一个任务开始，而不是等待一个任务完成。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(force jackson-5-delay)
+; =&gt; First deref: Just call my name and I&#39;ll be there
+; =&gt; &#34;Just call my name and I&#39;ll be there&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>像 Future 一样，延迟只运行一次，其结果被缓存。后续的取消引用将返回 Jackson 5 的信息，而不打印任何东西。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>@jackson-5-delay
+; =&gt; &#34;Just call my name and I&#39;ll be there&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以使用延迟的一种方式是在一组相关的 Future 中的一个 Future 第一次完成时启动一个语句。例如，假设你的应用程序将一组头像上传到一个头像分享网站，并在第一张头像完成后立即通知所有者，如下所示。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def gimli-headshots [&#34;serious.jpg&#34; &#34;fun.jpg&#34; &#34;playful.jpg&#34;])
+(defn email-user
+  [email-address]
+  (println &#34;Sending headshot notification to&#34; email-address))
+(defn upload-document
+  &#34;Needs to be implemented&#34;
+  [headshot]
+  true)
+(let [notify (delay ➊(email-user &#34;and-my-axe@gmail.com&#34;))]
+  (doseq [headshot gimli-headshots]
+    (future (upload-document headshot)
+            ➋(force notify))))
+</code></pre></td></tr></table>
+</div>
+</div><p>在这个例子中，你定义了一个要上传头像的 Vector（<code>gimli-headshots</code>）和两个函数（<code>email-user</code>和<code>upload-document</code>）来假装执行这两个操作。然后你用<code>let</code>将<code>notify</code>绑定到一个延迟。延迟的主体，<code>(email-user "and-my-axe@gmail.com")</code>➊，在创建延迟的时候并没有被求值。相反，当由<code>doseq</code>Form 创建的 Future 之一第一次求值<code>(force notify)</code>➋时，它就被求值了。即使<code>(force notify)</code>将被求值三次，延迟主体只被求值一次。Gimli 会很高兴知道第一张头像什么时候可用，这样他就可以开始调整它并分享它。他也会感谢不被垃圾邮件，而你也会感谢不面对他的矮人之怒。</p>
+<p>这种技术可以帮助你避免相互排斥的并发妖精&ndash;确保每次只有一个线程可以访问特定资源的问题。在这个例子中，延迟守护着电子邮件服务器资源。因为延迟的主体被保证只发射一次，所以你可以确定你永远不会遇到两个线程发送相同邮件的情况。当然，没有线程能够再次使用延迟来发送邮件。对于大多数情况来说，这可能是一个过于激烈的约束，但在像这个例子这样的情况下，它是完美的。</p>
+<h3 id=promise>Promise</h3>
+<p><em>Promise</em>允许你表达你期望的结果，而不需要定义应该产生结果的任务或该任务应该何时运行。你用<code>promise'创建Promise，用</code>deliver&rsquo;向他们传递一个结果。你通过取消引用来获得结果。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def my-promise (promise))
+(deliver my-promise (+ 1 2))
+@my-promise
+; =&gt; 3
+</code></pre></td></tr></table>
+</div>
+</div><p>这里，你创建了一个 promise，然后向它传递一个值。最后，你通过解除对 Promise 的引用来获得该值。解除引用是你表达你期望一个结果的方式，如果你试图在没有首先传递一个值的情况下解除引用`my-promise'，程序将阻塞，直到一个 Promise 被传递，就像 Future 和延迟一样。你只能向一个 Promise 传递一次结果。</p>
+<p>Promise 的一个用途是在一个数据集合中找到第一个满意的元素。例如，假设你正在收集成分以使你的鹦鹉听起来像詹姆斯-厄尔-琼斯。因为詹姆斯-厄尔-琼斯的声音是世界上最顺畅的，所以其中一种成分是顺畅度达到 97 以上的优质牦牛油。你的预算是 100 美元一磅。</p>
+<p>你是一个现代神奇鸟类学艺术的实践者，因此，与其繁琐地浏览每个牦牛油零售网站，不如创建一个脚本，给你提供第一个符合你需求的牦牛油的 URL。</p>
+<p>下面的代码定义了一些牦牛油产品，创建了一个函数来模拟 API 调用，并创建了另一个函数来测试产品是否满意。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def yak-butter-international
+  {:store &#34;Yak Butter International&#34;
+    :price 90
+    :smoothness 90})
+(def butter-than-nothing
+  {:store &#34;Butter Than Nothing&#34;
+   :price 150
+   :smoothness 83})
+;; This is the butter that meets our requirements
+(def baby-got-yak
+  {:store &#34;Baby Got Yak&#34;
+   :price 94
+   :smoothness 99})
+
+(defn mock-api-call
+  [result]
+  (Thread/sleep 1000)
+  result)
+
+(defn satisfactory?
+  &#34;If the butter meets our criteria, return the butter, else return false&#34;
+  [butter]
+  (and (&lt;= (:price butter) 100)
+       (&gt;= (:smoothness butter) 97)
+       butter))
+</code></pre></td></tr></table>
+</div>
+</div><p>该 API 调用在返回结果前等待一秒钟，以模拟执行实际调用的时间。</p>
+<p>为了说明同步检查网站需要多长时间，我们将使用<code>some</code>对集合中的每个元素应用<code>satisfactory?</code>函数，并返回第一个真实的结果，如果没有，则返回 nil。当你同步检查每个站点时，每个站点可能需要超过一秒钟的时间来获得结果，正如下面的代码所示。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(time (some (comp satisfactory? mock-api-call)
+            [yak-butter-international butter-than-nothing baby-got-yak]))
+; =&gt; &#34;Elapsed time: 3002.132 msecs&#34;
+; =&gt; {:store &#34;Baby Got Yak&#34;, :smoothness 99, :price 94}
+</code></pre></td></tr></table>
+</div>
+</div><p>这里我用<code>comp</code>来组合函数，我用<code>time</code>来打印求值一个 Form 的时间。你可以使用 promise 和 futures 来在一个单独的线程上执行每个检查。如果你的计算机有多个核心，这可以把时间减少到一秒钟左右。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(time
+ (let [butter-promise (promise)]
+   (doseq [butter [yak-butter-international butter-than-nothing baby-got-yak]]
+     (future (if-let [satisfactory-butter (satisfactory? (mock-api-call butter))]
+               (deliver butter-promise satisfactory-butter))))
+   (println &#34;And the winner is:&#34; @butter-promise)))
+; =&gt; &#34;Elapsed time: 1002.652 msecs&#34;
+; =&gt; And the winner is: {:store Baby Got Yak, :smoothness 99, :price 94}
+</code></pre></td></tr></table>
+</div>
+</div><p>在这个例子中，你首先创建了一个 Promise，<code>butter-promise</code>，然后创建了三个访问该 Promise 的 Future。每个 Future 的任务是求值一个牦牛黄油网站，如果该网站令人满意，则向 Promise 提供该网站的数据。最后，你解除对<code>butter-promise</code>的引用，导致程序阻塞，直到网站数据被交付。这需要一秒钟而不是三秒钟，因为网站的求值是平行进行的。通过将对结果的要求与结果的实际计算方式脱钩，你可以并行地进行多个计算，并节省一些时间。</p>
+<p>你可以把这看作是一种保护自己不受参考单元格并发性妖精影响的方法。因为 Promise 只能被写入一次，你可以防止非确定性读写产生的那种不一致的状态。</p>
+<p>你可能想知道，如果牦牛油都不满意会怎么样。如果发生这种情况，解除引用将永远阻塞，并绑住线程。为了避免这种情况，你可以加入一个超时。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(让 [p (promise)]
+  (deref p 100 &#34;timed out&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p>这将创建一个 Promise，<code>p'，并试图解除对它的引用。数字100告诉</code>deref<code>等待100毫秒，如果届时没有可用的值，就使用超时值，</code>&ldquo;timed out&rdquo;`。</p>
+<p>我应该提到的最后一个细节是，你也可以使用 Promise 来注册回调，实现与你在 JavaScript 中可能习惯的相同功能。JavaScript 的回调是一种定义代码的方式，一旦其他代码完成，就应该异步执行。下面是如何在 Clojure 中做到这一点。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [ferengi-wisdom-promise (promise)]
+  (future (println &#34;Here&#39;s some Ferengi wisdom:&#34; @ferengi-wisdom-promise))
+  (Thread/sleep 100)
+  (deliver ferengi-wisdom-promise &#34;Whisper your way to success.&#34;))
+; =&gt; Here&#39;s some Ferengi wisdom: Whisper your way to success.
+</code></pre></td></tr></table>
+</div>
+</div><p>这个例子创建了一个立即开始执行的未来。然而，未来的线程是阻塞的，因为它在等待一个值被传递给<code>ferengi-wisdom-promise</code>。100 毫秒后，你交付了值，未来中的`println&rsquo;语句开始运行。</p>
+<p>Future、延迟和 Promise 是在你的应用程序中管理并发性的伟大而简单的方法。在下一节中，我们将看到一个更有趣的方法来控制你的并发应用程序。</p>
+<h3 id=滚动你自己的队列>滚动你自己的队列</h3>
+<p>到目前为止，你已经看到了一些简单的方法来结合 Future、延迟和 Promise，使你的并发程序更加安全。在这一节中，你将使用一个宏来以一种稍微复杂的方式结合 Future 和 Promise。你可能不一定会用到这段代码，但它会更多地展示这些适度的工具的力量。这个宏需要你在头脑中同时持有运行时逻辑和宏扩展逻辑，以了解正在发生的事情；如果你被卡住了，就跳过前面。</p>
+<p>三个并发妖精的一个共同特点是，它们都涉及到任务以不协调的方式并发地访问一个共享资源&ndash;变量、打印机、矮人战斧。如果你想确保每次只有一个任务会访问一个资源，你可以把任务的资源访问部分放在一个序列执行的队列中。这有点像做蛋糕：你和一个朋友可以分别取回原料（鸡蛋、面粉、蝾螈的眼睛，等等），但有些步骤你必须连续执行。你必须在把面糊放进烤箱之前准备好它。图 9-6 说明了这个策略。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/concurrency/enqueue.png alt></p>
+<p>将任务分为串行部分和并发部分，可以让你安全地使你的代码更有效率。</p>
+<p>为了实现排队宏，你要向英国人致敬，因为他们发明了队列。你将使用一个队列来确保英国人习惯的问候语 &ldquo;Ello, gov&rsquo;na! Pip Pip! Cheerio!&ldquo;的正确顺序进行传递。这个演示将涉及到大量的 &ldquo;睡眠&rdquo;，所以这里有一个宏来更简洁地完成这个任务。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=p>(</span><span class=n>defmacro</span><span class=w> </span><span class=n>wait</span><span class=w>
+</span><span class=w>  </span><span class=s2>&#34;Sleep `timeout` seconds before evaluating body&#34;</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=n>timeout</span><span class=w> </span><span class=o>&amp;</span><span class=w> </span><span class=n>body</span><span class=p>]</span><span class=w>
+</span><span class=w>  </span><span class=o>`</span><span class=p>(</span><span class=nf>do</span><span class=w> </span><span class=p>(</span><span class=n>Thread</span><span class=o>/</span><span class=n>sleep</span><span class=w> </span><span class=o>~</span><span class=n>timeout</span><span class=p>)</span><span class=w> </span><span class=o>~@</span><span class=n>body</span><span class=p>))</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这段代码所做的就是接受你给它的任何形式，并在它们之前插入对<code>Thread/sleep</code>的调用，所有这些都被<code>do</code>包裹起来。</p>
+<p>清单 9-1 中的代码将任务分成了并发部分和序列化部分。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [saying3 (promise)]
+  (future (deliver saying3 (wait 100 &#34;Cheerio!&#34;)))
+  @(let [saying2 (promise)]
+     (future (deliver saying2 (wait 400 &#34;Pip pip!&#34;)))
+➊      @(let [saying1 (promise)]
+        (future (deliver saying1 (wait 200 &#34;&#39;Ello, gov&#39;na!&#34;)))
+        (println @saying1)
+        saying1)
+     (println @saying2)
+     saying2)
+  (println @saying3)
+  saying3)
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>9-1. 一个 enqueue 宏调用的扩展</li>
+</ol>
+<p>整体策略是为每个任务（在本例中，打印问候语的一部分）创建一个 Promise，以创建一个相应的未来，将并发计算的值交付给该 Promise。这确保了在任何一个 Promise 被解除引用之前，所有的未来都被创建，并且确保序列化的部分以正确的顺序执行。首先打印<code>saying1'的值-</code>"&lsquo;Ello, gov&rsquo;na!"-然后是<code>saying2'的值，最后是</code>saying3&rsquo;。在<code>let</code>块中返回<code>saying1</code>，并在➊处解除对<code>let</code>块的引用，可以确保在代码继续对<code>saying2</code>做任何事情之前，你已经完全完成了<code>saying1</code>，而且这种模式在<code>saying2</code>和<code>saying3</code>上重复。</p>
+<p>解除对<code>let</code>块的引用似乎很傻，但这样做可以让你用一个宏来抽象这段代码。你肯定想使用宏，因为像前面的例子那样写出的代码会让你发疯（英国人会这么说）。理想情况下，这个宏的工作方式如清单 9-2 所示。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(-&gt; (enqueue ➊saying ➋(wait 200 &#34;&#39;Ello, gov&#39;na!&#34;) ➌(println @saying))
+   ➍(enqueue saying (wait 400 &#34;Pip pip!&#34;) (println @saying))
+    (enqueue saying (wait 100 &#34;Cheerio!&#34;) (println @saying)))
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>这就是你使用 enqueue 的方法。</li>
+</ol>
+<p>该宏让你命名被创建的 Promise➊，定义如何获取价值以交付该 Promise➋，并定义如何处理该 Promise➌。这个宏也可以把另一个<code>enqueue</code>宏调用作为它的第一个参数，这样你就可以把它变成线程➍。清单 9-3 显示了你如何定义<code>enqueue</code>宏。定义完<code>enqueue</code>后，清单 9-2 中的代码将扩展为清单 9-1 中的代码，其中包含所有嵌套的<code>let</code>表达式。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defmacro enqueue
+➊   ([q concurrent-promise-name concurrent serialized]
+➋    `(let [~concurrent-promise-name (promise)]
+      (future (deliver ~concurrent-promise-name ~concurrent))
+➌       (deref ~q)
+      ~serialized
+      ~concurrent-promise-name))
+➍   ([concurrent-promise-name concurrent serialized]
+   `(enqueue (future) ~concurrent-promise-name ~concurrent ~serialized)))
+</code></pre></td></tr></table>
+</div>
+</div><p>1.enqueue 的实现</p>
+<p>首先注意这个宏有两个 arities，以便提供一个缺省值。第一个 arity ➊是真正的工作所在。它有参数<code>q</code>，而第二个 arity 则没有。第二个 arity ➍调用第一个 arity，为<code>q</code>提供了<code>(future)</code>的值；你将在一分钟内看到原因。在➋中，宏返回一个 Form，该 Form 创建了一个 Promise，在一个 future 中传递它的值，取消对提供给<code>q</code>的任何 Form 的引用，求值序列化代码，最后返回 Promise。<code>q</code>通常是一个嵌套的<code>let</code>表达式，由另一个对<code>enqueue</code>的调用返回，如清单 9-2 所示。如果没有为<code>q</code>提供值，宏会提供一个未来，这样在➌的<code>deref</code>就不会引起异常。</p>
+<p>现在我们已经写好了<code>enqueue</code>宏，让我们试试它是否能减少执行时间</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(time @(-&gt; (enqueue saying (wait 200 &#34;&#39;Ello, gov&#39;na!&#34;) (println @saying))
+           (enqueue saying (wait 400 &#34;Pip pip!&#34;) (println @saying))
+           (enqueue saying (wait 100 &#34;Cheerio!&#34;) (println @saying))))
+; =&gt; &#39;Ello, gov&#39;na!
+; =&gt; Pip pip!
+; =&gt; Cheerio!
+; =&gt; &#34;Elapsed time: 401.635 msecs&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>天哪! 问候语是按照正确的顺序传递的，你可以通过耗时看到，睡眠的 &ldquo;工作 &ldquo;是同时进行的。</p>
+<h2 id=总结>总结</h2>
+<p>对于像你这样的程序员来说，学习并发和并行编程技术很重要，这样你就可以设计出在现代硬件上高效运行的程序。并发是指一个程序能够执行一个以上的任务，在 Clojure 中，你可以通过将任务放在不同的线程上来实现。当计算机有一个以上的 CPU 时，程序就会并行执行，这样就可以在同一时间执行一个以上的线程。</p>
+<p>并发编程指的是用于管理三种并发风险的技术：引用单元、互斥和死锁。Clojure 为你提供了三个基本工具，帮助你减轻这些风险：Future、延迟和 Promise。每个工具都可以让你把定义任务、执行任务和要求任务结果这三个事件解耦。Future 让你定义一个任务并立即执行它，允许你稍后或永远不要求结果。 Future 也会缓存其结果。延迟（Delay）让你定义一个稍后才执行的任务，并且延迟的结果会被缓存起来。许诺让你表达你需要一个结果，而不需要知道产生该结果的任务。你只能向一个 Promise 传递一次值。</p>
+<p>在下一章中，你将探索并发编程的哲学层面，并学习更复杂的工具来管理风险。</p>
+<h2 id=练习>练习</h2>
+<ol>
+<li>编写一个函数，将一个字符串作为参数，使用<code>slurp</code>函数在 Bing 和 Google 上搜索它。你的函数应该返回搜索到的第一个页面的 HTML。</li>
+<li>更新你的函数，使其接受第二个参数，包括要使用的搜索引擎。</li>
+<li>创建一个新的函数，将搜索词和搜索引擎作为参数，并从每个搜索引擎的第一页搜索结果中返回一个 URL 的 Vector。</li>
+</ol>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/clojure/>clojure</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/chapter10/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Chapter10 形而上学</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/chapter8/>
+<span class="next-text nav-default">Chapter8 宏</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

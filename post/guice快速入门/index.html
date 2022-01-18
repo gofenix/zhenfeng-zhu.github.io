@@ -1,0 +1,780 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Guice 快速入门 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。 guice 是谷歌推出"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Guice 快速入门">
+<meta property="og:description" content="Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。 guice 是谷歌推出">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-03-24T17:57:15+00:00">
+<meta property="article:modified_time" content="2018-03-24T17:57:15+00:00">
+<meta itemprop=name content="Guice 快速入门">
+<meta itemprop=description content="Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。 guice 是谷歌推出"><meta itemprop=datePublished content="2018-03-24T17:57:15+00:00">
+<meta itemprop=dateModified content="2018-03-24T17:57:15+00:00">
+<meta itemprop=wordCount content="2754">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Guice 快速入门">
+<meta name=twitter:description content="Guice 快速入门 接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。 guice 是谷歌推出"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Guice 快速入门</h1>
+<div class=post-meta>
+<span class=post-time> 2018-03-24 </span>
+<span class=more-meta> 约 2754 字 </span>
+<span class=more-meta> 预计阅读 6 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#guice-快速入门>Guice 快速入门</a>
+<ul>
+<li><a href=#1-基本使用>1 基本使用</a>
+<ul>
+<li><a href=#引入依赖>引入依赖</a></li>
+<li><a href=#项目骨架>项目骨架</a></li>
+<li><a href=#配置依赖注入>配置依赖注入</a></li>
+<li><a href=#单元测试>单元测试</a></li>
+</ul>
+</li>
+<li><a href=#2-基本概念>2 基本概念</a>
+<ul>
+<li><a href=#21-bingdings-绑定>2.1 Bingdings 绑定</a></li>
+<li><a href=#22-作用域>2.2 作用域</a></li>
+<li><a href=#23-注入>2.3 注入</a></li>
+<li><a href=#24-aop>2.4 AOP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=guice-快速入门>Guice 快速入门</h1>
+<p>接手的新项目主要是使用 kotlin+vert.x 来写的，使用 gradle 构建，依赖注入框架使用了 guice。这段时间都是在熟悉代码的过程，恶补一些知识。</p>
+<p>guice 是谷歌推出的一个轻量级的依赖注入框架，当然 spring 也可以实现依赖注入，只是 spring 太庞大了。</p>
+<h2 id=1-基本使用>1 基本使用</h2>
+<h3 id=引入依赖>引入依赖</h3>
+<p>使用 gradle 或者 maven，引入 guice。</p>
+<p>maven:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>&lt;dependency&gt;
+    &lt;groupId&gt;com.google.inject&lt;/groupId&gt;
+    &lt;artifactId&gt;guice&lt;/artifactId&gt;
+    &lt;version&gt;4.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>Gradle:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>compile &#34;com.google.inject:guice:4.1.0&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=项目骨架>项目骨架</h3>
+<p>首先需要一个业务接口，包含一个方法来执行业务逻辑，它的实现非常简单：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package com.learning.guice;
+public interface UserService {
+    void process();
+}
+
+
+package com.learning.guice;
+public class UserServiceImpl implements UserService {
+    @Override
+    public void process() {
+        System.out.println(&#34;我需要做一些业务逻辑&#34;);
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>然后写一个日志的接口：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package com.learning.guice;
+public interface LogService {
+    void log(String msg);
+}
+
+package com.learning.guice;
+public class LogServiceImpl implements LogService {
+    @Override
+    public void log(String msg) {
+        System.out.println(&#34;------LOG: &#34; + msg);
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>最后是一个系统接口和相应的实现，在实现中使用了业务接口和日志接口处理业务逻辑和打印日志信息：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package com.learning.guice;
+public interface Application {
+    void work();
+}
+
+
+package com.learning.guice;
+import com.google.inject.Inject;
+public class MyApp implements Application {
+    private UserService userService;
+    private LogService logService;
+
+    @Inject
+    public MyApp(UserService userService, LogService logService) {
+        this.userService = userService;
+        this.logService = logService;
+    }
+
+    @Override
+    public void work() {
+        userService.process();
+        logService.log(&#34;程序正常运行&#34;);
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=配置依赖注入>配置依赖注入</h3>
+<p>guice 是使用 java 代码来配置依赖。继承 AbstractModule 类，并重写其中的 config 方法。在 config 方法中，调用 AbstractModule 类中提供的方法来配置依赖关系。最常用的是 bind(接口).to(实现类)。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package com.learning.guice;
+
+import com.google.inject.AbstractModule;
+
+public class MyAppModule extends AbstractModule {
+
+    @Override
+    protected void configure() {
+        bind(LogService.class).to(LogServiceImpl.class);
+        bind(UserService.class).to(UserServiceImpl.class);
+        bind(Application.class).to(MyApp.class);
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=单元测试>单元测试</h3>
+<p>guice 配置完之后，我们需要调用 Guice.createInjector 方法传入配置类来创建一个注入器，然后使用注入器中的 getInstance 方法获取目标类。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package com.learning.guice;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class MyAppTest {
+    private static Injector injector;
+
+    @BeforeClass
+    public static void init(){
+        injector= Guice.createInjector(new MyAppModule());
+    }
+
+    @Test
+    public void testMyApp(){
+        Application application=injector.getInstance(Application.class);
+        application.work();
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>程序执行结果是：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java -ea -...
+我需要做一些业务逻辑
+------LOG: 程序正常运行
+
+Process finished with exit code 0
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=2-基本概念>2 基本概念</h2>
+<h3 id=21-bingdings-绑定>2.1 Bingdings 绑定</h3>
+<ul>
+<li>
+<p>链式绑定</p>
+<p>在绑定依赖的时候不仅可以将父类和子类绑定，还可以将子类和子类的子类进行绑定。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>public class BillingModule extends AbstractModule {
+  @Override 
+  protected void configure() {
+    bind(TransactionLog.class).to(DatabaseTransactionLog.class);
+    bind(DatabaseTransactionLog.class).to(MySqlDatabaseTransactionLog.class);
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>在这种情况下，injector 会把所有 TransactionLog 替换为 MySqlDatabaseTransactionLog。</p>
+</li>
+<li>
+<p>注解绑定</p>
+<p>当我们需要将多个同一类型的对象注入不同对象的时候，就需要使用注解区分这些依赖了。最简单的办法就是使用@Named 注解进行区分。</p>
+<p>首先需要在要注入的地方添加@Named 注解。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>public class RealBillingService implements BillingService {
+
+  @Inject
+  public RealBillingService(@Named(&#34;Checkout&#34;) CreditCardProcessor processor,
+      TransactionLog transactionLog) {
+    ...
+  }
+</code></pre></td></tr></table>
+</div>
+</div><p>然后在绑定中添加 annotatedWith 方法指定@Named 中指定的名称。由于编译器无法检查字符串，所以 Guice 官方建议我们保守地使用这种方式。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>bind(CreditCardProcessor.class)
+        .annotatedWith(Names.named(&#34;Checkout&#34;))
+        .to(CheckoutCreditCardProcessor.class);
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>实例绑定</p>
+<p>有时候需要直接注入一个对象的实例，而不是从依赖关系中解析。如果我们要注入基本类型的话只能这么做。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>bind(String.class)
+        .annotatedWith(Names.named(&#34;JDBC URL&#34;))
+        .toInstance(&#34;jdbc:mysql://localhost/pizza&#34;);
+bind(Integer.class)
+        .annotatedWith(Names.named(&#34;login timeout seconds&#34;))
+        .toInstance(10);
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>@Privides 方法</p>
+<p>当一个对象很复杂，无法使用简单的构造器来生成的时候，我们可以使用@Provides 方法，也就是在配置类中生成一个注解了@Provides 的方法。在该方法中我们可以编写任意代码来构造对象。</p>
+<p>@Provides 方法也可以应用@Named 和自定义注解，还可以注入其他依赖，Guice 会在调用方法之前注入需要的对象。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>public class BillingModule extends AbstractModule {
+  @Override
+  protected void configure() {
+    ...
+  }
+
+  @Provides
+  TransactionLog provideTransactionLog() {
+    DatabaseTransactionLog transactionLog = new DatabaseTransactionLog();
+    transactionLog.setJdbcUrl(&#34;jdbc:mysql://localhost/pizza&#34;);
+    transactionLog.setThreadPoolSize(30);
+    return transactionLog;
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Provider 绑定</p>
+<p>如果项目中存在多个比较复杂的对象需要构建，使用@Provide 方法会让配置类变得比较乱。我们可以使用 Guice 提供的 Provider 接口将复杂的代码放到单独的类中。办法很简单，实现 Provider<t>接口的 get 方法即可。在 Provider 类中，我们可以使用@Inject 任意注入对象。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>public class DatabaseTransactionLogProvider implements Provider&lt;TransactionLog&gt; {
+  private final Connection connection;
+
+  @Inject
+  public DatabaseTransactionLogProvider(Connection connection) {
+    this.connection = connection;
+  }
+
+  public TransactionLog get() {
+    DatabaseTransactionLog transactionLog = new DatabaseTransactionLog();
+    transactionLog.setConnection(connection);
+    return transactionLog;
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>然后在 config 方法中，调用.toProvider 方法：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>public class BillingModule extends AbstractModule {
+  @Override
+  protected void configure() {
+    bind(TransactionLog.class)
+        .toProvider(DatabaseTransactionLogProvider.class);
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>无目标绑定</p>
+<p>无目标绑定没有 to 子句</p>
+</li>
+<li>
+<p>构造器绑定</p>
+<p>某些场景下，你能需要把某个类型绑定到任意一个构造函数上。以下情况会有这种需求：1、 @Inject 注解无法被应用到目标构造函数；2、目标类是一个第三方类；3、目标类有多个构造函数参与 DI。</p>
+<p>为了解决这个问题，guice 提供了 toConstructor()绑定 ，它需要你指定要使用的确切的某个目标构造函数，并处理 &ldquo;constructor annot be found&rdquo; 异常：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>public class BillingModule extends AbstractModule {
+  @Override 
+  protected void configure() {
+    try {
+      bind(TransactionLog.class).toConstructor(
+          DatabaseTransactionLog.class.getConstructor(DatabaseConnection.class));
+    } catch (NoSuchMethodException e) {
+      addError(e);
+    }
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>内置绑定</p>
+<p>除了显示绑定和即时绑定 just-in-time bindings，剩下的绑定都属于 injector 的内置绑定。这些绑定只能由 injector 自己创建，不允许外部调用。</p>
+</li>
+<li>
+<p>即时绑定</p>
+<p>当 injector 需要某一个类型的实例的时候，它需要获取一个绑定。在 Module 类中的绑定叫做显式绑定，只要他们可用，injector 就会在任何时候使用它们。如果需要某一类型的实例，但是又没有显式绑定，那么 injector 将会试图创建一个即时绑定（Just-in-time Bindings），也被称为 JIT 绑定 或 隐式绑定。</p>
+</li>
+</ul>
+<h3 id=22-作用域>2.2 作用域</h3>
+<p>默认情况下 Guice 会在每次注入的时候创建一个新对象。如果希望创建一个单例依赖的话，可以在实现类上应用@Singleton 注解。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@Singleton
+public class InMemoryTransactionLog implements TransactionLog {
+  /* everything here should be threadsafe! */
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>或者也可以在配置类中指定。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>bind(TransactionLog.class).to(InMemoryTransactionLog.class).in(Singleton.class);
+</code></pre></td></tr></table>
+</div>
+</div><p>在<code>@Provides</code>方法中也可以指定单例。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@Provides @Singleton
+  TransactionLog provideTransactionLog() {
+    ...
+  }
+</code></pre></td></tr></table>
+</div>
+</div><p>如果一个类型上存在多个冲突的作用域，Guice 会使用 bind()方法中指定的作用域。如果不想使用注解的作用域，可以在 bind()方法中将对象绑定为 Scopes.NO_SCOPE。</p>
+<p>Guice 和它的扩展提供了很多作用域，和 spring 一样，有单例 Singleton，Session 作用域 SessionScoped，Request 请求作用域 RequestScoped 等等。我们可以根据需要选择合适的作用域。</p>
+<h3 id=23-注入>2.3 注入</h3>
+<p>guice 的注入和 spring 类似，而且还做了一些扩展。</p>
+<ul>
+<li>
+<p>构造器注入</p>
+<p>使用 @Inject 注解标记类的构造方法，这个构造方法需要接受类依赖作为参数。大多数构造子将会把接收到的参数分派给内部成员变量。</p>
+</li>
+<li>
+<p>方法注入</p>
+<p>Guice 可以向标注了 @Inject 的方法中注入依赖。依赖项以参数的形式传给方法，Guice 会在调用注入方法前完成依赖项的构建。注入方法可以有任意数量的参数，并且方法名对注入操作不会有任何影响。</p>
+</li>
+<li>
+<p>字段注入</p>
+<p>使用 @Inject 注解标记字段。这是最简洁的注入方式。</p>
+<p>注意：不能给 final 字段加@Inject 注解。</p>
+</li>
+<li>
+<p>可选注入</p>
+<p>有的时候，可能需要一个依赖项存在则进行注入，不存在则不注入。此时可以使用方法注入或字段注入来做这件事，当依赖项不可用的时候 Guice 就会忽略这些注入。如果你需要配置可选注入的话，使用 @Inject(optional = true) 注解就可以了。</p>
+</li>
+<li>
+<p>按需注入</p>
+<p>方法注入和字段注入可以可以用来初始化现有实例，你可以使用 Injector.injectMembers。</p>
+<p>这个不常用。</p>
+</li>
+<li>
+<p>静态注入</p>
+<p>不建议使用静态注入。</p>
+</li>
+<li>
+<p>自动注入</p>
+<p>Guice 会对以下情形做自动注入：</p>
+<ul>
+<li>在绑定语句里，通过 toInstance() 注入实例。</li>
+<li>在绑定语句里，通过 toProvider() 注入 Provider 实例。这些对象会在注入器创建的时候被创建并注入容器。如果它们需要满足其他启动注入，Guice 会在它们被使用前将他们注入进去。</li>
+</ul>
+</li>
+</ul>
+<h3 id=24-aop>2.4 AOP</h3>
+<p>guice 的 aop 功能较弱，时间原因还没研究透，后续继续写。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2018-03-24
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Reactive 微服务</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>
+<span class="next-text nav-default">kotlin 快速入门</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

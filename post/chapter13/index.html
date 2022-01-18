@@ -1,0 +1,672 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Chapter13 抽象 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="用 Multimethods、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/chapter13/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Chapter13 抽象">
+<meta property="og:description" content="用 Multimethods、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter13/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-15T21:29:04+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Chapter13 抽象">
+<meta itemprop=description content="用 Multimethods、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社"><meta itemprop=datePublished content="2022-01-15T21:29:04+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="7507">
+<meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Chapter13 抽象">
+<meta name=twitter:description content="用 Multimethods、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Chapter13 抽象</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-15 </span>
+<span class=more-meta> 约 7507 字 </span>
+<span class=more-meta> 预计阅读 15 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#用-multimethods协议和记录创建和扩展抽象概念>用 Multimethods、协议和记录创建和扩展抽象概念</a>
+<ul>
+<li><a href=#多态>多态</a>
+<ul>
+<li><a href=#multimethods>Multimethods</a></li>
+<li><a href=#协议>协议</a></li>
+</ul>
+</li>
+<li><a href=#记录>记录</a></li>
+<li><a href=#进一步研究>进一步研究</a></li>
+<li><a href=#总结>总结</a></li>
+<li><a href=#练习>练习</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=用-multimethods协议和记录创建和扩展抽象概念>用 Multimethods、协议和记录创建和扩展抽象概念</h1>
+<p>花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社交媒体上闲聊，玩龙与地下城，戴帽子。也许更重要的是，你可以用抽象的概念来思考和交流。</p>
+<p>抽象思考的能力确实是人类最好的特征之一。它可以让你规避你的认知极限，将不同的细节捆绑在一起，形成一个整齐的概念包，让你可以在工作记忆中持有。你不需要去想 &ldquo;可挤压的红球鼻子装饰 &ldquo;这种笨重的想法，而只需要 &ldquo;小丑鼻子 &ldquo;这个概念。</p>
+<p>在 Clojure 中，一个<em>抽象</em>是一个操作的集合，而<em>数据类型</em>实现抽象。例如，seq 抽象由 &ldquo;first &ldquo;和 &ldquo;rest &ldquo;等操作组成，而 Vector 数据类型是该抽象的实现；它对所有 seq 操作做出响应。像<code>[:seltzer :water]</code>这样的特定 Vector 是该数据类型的*实例。</p>
+<p>编程语言越是让你以抽象的方式思考和写作，你的生产力就越高。例如，如果你知道一个数据结构是 seq 抽象的一个实例，你就可以立即调用一个大的知识网，了解哪些函数可以与数据结构一起工作。因此，你会花时间去实际使用这个数据结构，而不是不断地去查找关于它如何工作的文档。同样地，如果你扩展一个数据结构，使其与 seq 抽象一起工作，你就可以在上面使用大量的 seq 函数库。</p>
+<p>在第四章中，你了解到 Clojure 是以抽象的方式编写的。这很强大，因为在 Clojure 中，你可以专注于你可以用数据结构实际做的事情，而不用担心实现的细枝末节。本章向你介绍了创建和实现你自己的抽象的世界。你将学习 Multimethods、协议和记录的基础知识。</p>
+<h2 id=多态>多态</h2>
+<p>我们在 Clojure 中实现抽象的主要方式是将一个操作名称与一个以上的算法联系起来。这种技术被称为<em>多态</em>。例如，在列表上执行 &ldquo;conj &ldquo;的算法与 Vector 的算法不同，但我们把它们统一在同一个名字下，以表明它们实现了同一个概念，即<em>向</em>这个数据结构添加一个元素。</p>
+<p>因为 Clojure 的许多数据类型都依赖于 Java 的标准库，所以本章中使用了一点 Java。例如，Clojure 的字符串只是 Java 的字符串，是 Java 类<code>java.lang.String</code>的实例。要在 Java 中定义你自己的数据类型，你要使用类。Clojure 提供了额外的类型结构。 <em>记录</em>和<em>类型</em>。本书只涉及记录。</p>
+<p>在我们学习记录之前，让我们看看 Multimethods，这是我们定义多态行为的第一个工具。</p>
+<h3 id=multimethods>Multimethods</h3>
+<p><em>Multimethods</em>为你提供了一种直接的、灵活的方法，将多态引入你的代码中。使用 Multimethods，你可以通过定义一个<em>调度函数</em>将一个名字与多个实现联系起来，该函数产生<em>调度值</em>，用来决定使用哪个<em>方法</em>。调度函数就像餐厅里的主人。主人会问你一些问题，比如 &ldquo;你有预订吗？&ldquo;和 &ldquo;聚会人数？"，然后给你安排相应的座位。同样，当你调用一个 Multimethods 时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns were-creatures)
+➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature)))
+➋ (defmethod full-moon-behavior :wolf
+  [were-creature]
+  (str (:name were-creature) &#34; will howl and murder&#34;))
+➌ (defmethod full-moon-behavior :simmons
+  [were-creature]
+  (str (:name were-creature) &#34; will encourage people and sweat to the oldies&#34;))
+
+(full-moon-behavior {:were-type :wolf
+➍                      :name &#34;Rachel from next door&#34;})
+; =&gt; &#34;Rachel from next door will howl and murder&#34;
+
+(full-moon-behavior {:name &#34;Andy the baker&#34;
+➎                      :were-type :simmons})
+; =&gt; &#34;Andy the baker will encourage people and sweat to the oldies&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>这个 Multimethods 显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/multimethods-records-protocols/weresimmons.png alt></p>
+<p>我们在➊处创建 Multimethods。这告诉 Clojure，&ldquo;嘿，创建一个名为<code>full-moon-behavior'的新Multimethods。每当有人调用</code>full-moon-behavior<code>时，在参数上运行调度函数</code>(fn [were-creature] (:were-type were-creature))`。使用该函数的结果，也就是调度值，来决定使用哪个具体方法！&rdquo;</p>
+<p>接下来，我们定义了两个方法，一个是当调度函数返回的值是➋的<code>:wolf</code>时，另一个是当它是➌的<code>:simmons</code>时。方法定义看起来很像函数定义，但主要的区别是，方法名称后面紧跟着<em>dispatch 值</em>。 <code>:wolf</code>和<code>:simmons</code>都是<em>dispatch 值</em>。这与调度*值不同，后者是调度函数的返回值。完整的调度序列是这样的。</p>
+<ol>
+<li>形式<code>(full-moon-behavior {:wer-type :wolf :name "Rachel from next door"})</code>被求值。</li>
+<li>运行<code>full-moon-behavior</code>的调度函数，返回<code>:wolf</code>作为调度值。</li>
+<li>Clojure 将调度值<code>:wolf</code>与为<code>full-moon-behavior</code>定义的所有方法的调度值相比较。这些调度值是<code>:wolf</code>和<code>:simmons</code>。</li>
+<li>因为调度值<code>:wolf</code>等于调度值<code>:wolf</code>，所以<code>:wolf</code>的算法运行。</li>
+</ol>
+<p>不要让术语把你绊倒! 主要的想法是，调度函数返回一些值，这个值被用来决定使用哪个方法定义。</p>
+<p>回到我们的例子! 接下来我们调用该方法两次。在➍处，调度函数返回值&rdquo;:wolf&rdquo;，并使用相应的方法，通知你 &ldquo;隔壁的 Rachel 将嚎叫并杀人&rdquo;。在➏，该函数的行为类似，只是<code>:simmons</code>是调度值。</p>
+<p>你可以定义一个以<code>nil</code>为调度值的方法。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defmethod full-moon-behavior nil
+  [were-creature]
+  (str (:name were-creature) &#34; will stay at home and eat ice cream&#34;))
+
+(full-moon-behavior {:were-type nil
+                     :name &#34;Martin the nurse&#34;})
+; =&gt; &#34;Martin the nurse will stay at home and eat ice cream&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>当你这次调用<code>full-moon-behavior</code>时，你给它的参数<code>:wer-type</code>是<code>nil</code>，所以对应于<code>nil</code>的方法被求值，你被告知`&ldquo;护士 Martin 将呆在家里吃冰淇淋&rdquo;。</p>
+<p>你也可以通过指定<code>:default</code>作为调度值，定义一个默认方法，在没有其他方法匹配的情况下使用。在这个例子中，给出的参数的<code>:were-type</code>与之前定义的方法都不匹配，所以使用了默认方法。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defmethod full-moon-behavior :default
+  [were-creature]
+  (str (:name were-creature) &#34; will stay up all night fantasy footballing&#34;))
+
+(full-moon-behavior {:were-type :office-worker
+                     :name &#34;Jimmy from sales&#34;})
+; =&gt; &#34;Jimmy from sales will stay up all night fantasy footballing&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>Multimethods 的一个很酷的地方是，你可以随时添加新的方法。如果你发布了一个包括<code>wer-creatures</code>命名空间的库，其他人可以继续扩展 Multimethods 来处理新的派发值。这个例子显示，你创建了自己的随机命名空间并包括了<code>wer-creatures</code>命名空间，然后为<code>full-moon-behavior</code>Multimethods 定义了另一个方法。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns random-namespace
+  (:require [were-creatures]))
+(defmethod were-creatures/full-moon-behavior :bill-murray
+  [were-creature]
+  (str (:name were-creature) &#34; will be the most likeable celebrity&#34;))
+(were-creatures/full-moon-behavior {:name &#34;Laura the intern&#34; 
+                                    :were-type :bill-murray})
+; =&gt; &#34;Laura the intern will be the most likeable celebrity&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>你的调度函数可以使用它的任何或所有参数返回任意的值。下一个例子定义了一个 Multimethods，它接收两个参数，并返回一个包含每个参数类型的 Vector。它还定义了该方法的一个实现，当每个参数都是字符串时，该方法将被调用。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns user)
+(defmulti types (fn [x y] [(class x) (class y)]))
+(defmethod types [java.lang.String java.lang.String]
+  [x y]
+  &#34;Two strings!&#34;)
+
+(types &#34;String 1&#34; &#34;String 2&#34;)
+; =&gt; &#34;Two strings!&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>顺便说一下，这就是为什么它们被称为<em>multi</em>methods：它们允许对多个参数进行调度。我没有经常使用这个功能，但我可以看到它被用于角色扮演游戏中，根据法师的主要魔法学校和他的魔法专长来编写方法。无论如何，有它而不需要它总比需要它而没有它好。</p>
+<p>注意 Multimethods 也允许分层调度。Clojure 可以让你建立自定义的层次结构，我不会介绍这些，但你可以通过阅读<a href=http://clojure.org/multimethods/>http://clojure.org/multimethods/</a> 的文档来了解它们。</p>
+<h3 id=协议>协议</h3>
+<p>在大约 93.58%的情况下，你会希望根据参数的类型来调度方法。例如，<code>count</code>需要对 Vector 使用不同的方法，而不是对 map 或 list 使用不同的方法。尽管可以用 Multimethods 进行类型调度，但<em>协议</em>是为类型调度而优化的。它们比 Multimethods 更有效，而且 Clojure 让你很容易简洁地指定协议的实现。</p>
+<p>Multimethods 只是一个多态的操作，而协议是一个<em>集合</em>的一个或多个多态操作。协议操作被称为方法，就像 Multimethods 操作一样。与 Multimethods 不同的是，Multimethods 对调度函数返回的任意值进行调度，而协议方法是根据第一个参数的类型进行调度，如本例所示。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns data-psychology)
+➊(defprotocol ➋Psychodynamics
+  ➌&#34;Plumb the inner depths of your data types&#34;
+  ➍(thoughts [x] &#34;The data type&#39;s innermost thoughts&#34;)
+  ➎(feelings-about [x] [x y] &#34;Feelings about self or other&#34;))
+</code></pre></td></tr></table>
+</div>
+</div><p>首先，在➊有<code>defprotocol</code>。这需要一个名字，<code>Psychodynamics</code> ➋，和一个可选的文件串，<code>"探究你的数据类型的内部深度"</code>➌。接下来是方法签名。一个<em>方法签名</em>由一个名称、一个参数说明和一个可选的文档串组成。第一个方法签名被命名为<code>thoughts</code>➍，只能接受一个参数。第二个名为<code>feelings-about</code>➎，可以接受一个或两个参数。协议有一个限制：方法不能有其余参数。所以像下面这样的行是不允许的。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(feels-about [x] [x &amp; others])
+</code></pre></td></tr></table>
+</div>
+</div><p>通过定义一个协议，你在定义一个抽象，但你还没有定义如何实现这个抽象。这就像你为行为保留了名字（在这个例子中，你保留了<code>思想</code>和<code>感觉-关于</code>），但你还没有定义具体的行为。如果你要求值<code>(thoughts "blorb")</code>，你会得到一个异常，内容是：&ldquo;没有为 java.lang.String 类找到方法的实现：protocol: data-psychology/psychodynamics 的 thoughts。&rdquo; 协议是根据第一个参数的类型分配的，所以当你调用<code>(thoughts "blorb")</code>时，Clojure 试图为字符串查找<code>thoughts</code>方法的实现，但失败了。</p>
+<p>你可以通过<em>扩展</em>字符串数据类型来<em>实现</em><code>Psychodynamics</code>协议来解决这一遗憾。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>➊ (extend-type java.lang.String
+➋   Psychodynamics
+➌   (thoughts [x] (str x &#34; thinks, &#39;Truly, the character defines the data type&#39;&#34;)
+➍   (feelings-about
+    ([x] (str x &#34; is longing for a simpler way of life&#34;))
+    ([x y] (str x &#34; is envious of &#34; y &#34;&#39;s simpler way of life&#34;))))
+
+(thoughts &#34;blorb&#34;)
+➎ ; =&gt; &#34;blorb thinks, &#39;Truly, the character defines the data type&#39;&#34;
+
+(feelings-about &#34;schmorb&#34;)
+; =&gt; &#34;schmorb is longing for a simpler way of life&#34;
+
+(feelings-about &#34;schmorb&#34; 2)
+; =&gt; &#34;schmorb is envious of 2&#39;s simpler way of life&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><code>extend-type</code>后面是你想扩展的类或类型的名称和你想让它支持的协议&ndash;在这个例子中，你在➊处指定了类<code>java.lang.String</code>和你想让它支持的协议<code>Psychodynamics</code>，在➋。之后，你在➌为 &ldquo;thoughts &ldquo;方法和➍为 &ldquo;feelings-about &ldquo;方法提供一个实现。如果你要扩展一个类型来实现一个协议，你必须实现协议中的每一个方法，否则 Clojure 会抛出一个异常。在这种情况下，你不能只实现<code>思想'或只实现</code>感觉'；你必须同时实现这两种方法。</p>
+<p>注意，这些方法的实现不像 Multimethods 那样以<code>defmethod</code>开头。事实上，它们看起来类似于函数定义，只是没有<code>defn'。要定义一个方法的实现，你要写一个以方法名称开头的表格，像</code>thoughts'，然后提供一个参数 Vector 和方法的主体。这些方法也允许重载，就像函数一样，你定义多重性的方法实现与多重性的函数类似。你可以在➍的 &ldquo;feelings-about &ldquo;实现中看到这一点。</p>
+<p>在你扩展了<code>java.lang.String</code>类型以实现<code>Psychodynamics</code>协议后，Clojure 知道如何调度调用<code>(thoughts "blorb")</code>，你会在➎得到字符串`&ldquo;blorb thinks, &lsquo;Truly, the character defines the data type&rsquo;"。</p>
+<p>如果你想提供一个默认的实现，就像你对 multimethods 所做的那样呢？要做到这一点，你可以扩展<code>java.lang.Object</code>。这样做是因为 Java（也就是 Clojure）中的每个类型都是<code>java.lang.Object</code>的后代。如果这不是很有意义（也许是因为你不熟悉面向对象的编程），不要担心，只要知道它是有效的。下面是你如何使用这个技术为<code>Psychodynamics</code>协议提供一个默认实现。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(extend-type java.lang.Object
+  Psychodynamics
+  (thoughts [x] &#34;Maybe the Internet is just a vector for toxoplasmosis&#34;)
+  (feelings-about
+    ([x] &#34;meh&#34;)
+    ([x y] (str &#34;meh about &#34; y))))
+
+(thoughts 3)
+; =&gt; &#34;Maybe the Internet is just a vector for toxoplasmosis&#34;
+
+(feelings-about 3)
+; =&gt; &#34;meh&#34;
+
+(feelings-about 3 &#34;blorb&#34;)
+; =&gt; &#34;meh about blorb&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>因为我们还没有为数字定义一个<code>心理动力学'的实现，Clojure将对</code>思想&rsquo;和<code>感觉-关于'的调用分派给为</code>java.lang.Object&rsquo;定义的实现。</p>
+<p>你可以使用<code>extend-protocol'来代替多次调用</code>extend-type&rsquo;来扩展多个类型，它可以让你一次为多个类型定义协议实现。下面是你如何定义前面的协议实现。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(extend-protocol Psychodynamics
+  java.lang.String
+  (thoughts [x] &#34;Truly, the character defines the data type&#34;)
+  (feelings-about
+    ([x] &#34;longing for a simpler way of life&#34;)
+    ([x y] (str &#34;envious of &#34; y &#34;&#39;s simpler way of life&#34;)))
+
+  java.lang.Object
+  (thoughts [x] &#34;Maybe the Internet is just a vector for toxoplasmosis&#34;)
+  (feelings-about
+    ([x] &#34;meh&#34;)
+    ([x y] (str &#34;meh about &#34; y))))
+</code></pre></td></tr></table>
+</div>
+</div><p>你可能会发现这个技术比使用<code>extend-type</code>更方便。然后，你也可能不觉得。<code>extend-type</code>让你感觉如何？<code>extend-protocol</code>怎么样？来坐在这个沙发上，告诉我这一切。</p>
+<p>值得注意的是，一个协议的方法 &ldquo;属于 &ldquo;它们所定义的命名空间。在这些例子中，&ldquo;心理动力学 &ldquo;方法的完全限定名称是 &ldquo;数据-心理学/想法 &ldquo;和 &ldquo;数据-心理学/感觉-关于&rdquo;。如果你有面向对象的背景，这可能看起来很奇怪，因为方法属于 OOP 中的数据类型。但不要吓坏了! 这只是 Clojure 赋予抽象优先权的另一种方式。这个事实的一个后果是，如果你想让两个不同的协议包括具有相同名称的方法，你需要把协议放在不同的命名空间中。</p>
+<h2 id=记录>记录</h2>
+<p>Clojure 允许你创建<em>records</em>，它是自定义的、类似 Map 的数据类型。它们类似于 Map，因为它们将键和值联系起来，你可以像使用 Map 一样查询它们的值，而且它们像 Map 一样是不可改变的。它们的不同之处在于，你为记录指定*字段。字段是数据的槽；使用它们就像指定一个数据结构应该有哪些键。记录也与 Map 不同，你可以扩展它们来实现协议。</p>
+<p>要创建一个记录，你可以使用<code>defrecord</code>来指定它的名字和字段。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns were-records)
+(defrecord WereWolf [name title])
+</code></pre></td></tr></table>
+</div>
+</div><p>这个记录的名字是<code>WereWolf</code>，它的两个字段是<code>name</code>和<code>title</code>。你可以通过三种方式创建这个记录的实例。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>➊ (WereWolf. &#34;David&#34; &#34;London Tourist&#34;)
+; =&gt; #were_records.WereWolf{:name &#34;David&#34;, :title &#34;London Tourist&#34;}.
+
+➋ (-&gt;WereWolf &#34;Jacob&#34; &#34;Lead Shirt Discarder&#34;)
+; =&gt; #were_records.WereWolf{:name &#34;Jacob&#34;, :title &#34;Lead Shirt Discarder&#34;}。
+
+➌ (map-&gt;WereWolf {:name &#34;Lucian&#34; :title &#34;CEO of Melodrama&#34;})
+; =&gt; #were_records.WereWolf{:name &#34;Lucian&#34;, :title &#34;CEO of Melodrama&#34;}.
+</code></pre></td></tr></table>
+</div>
+</div><p>在➊，我们以创建 Java 对象的方式创建一个实例，使用类实例化的互操作调用。(<em>Interop</em>指的是在 Clojure 中与本地 Java 结构交互的能力)。请注意，参数必须遵循与字段定义相同的顺序。这样做的原因是，记录实际上是被掩盖的 Java 类。</p>
+<p>➋的实例看起来与➊的实例几乎相同，但关键的区别在于<code>->WereWolf</code>是一个函数。当你创建一条记录时，工厂函数<code>-></code>RecordName 和<code>map-></code>RecordName 会自动创建。在➌，<code>map->WereWolf</code>接收一个 map 作为参数，其关键字与记录类型的字段相对应，并返回一个记录。</p>
+<p>如果你想使用其他命名空间的记录类型，你必须导入它，就像你在第 12 章中对 Java 类所做的那样。请注意将命名空间中的所有破折号替换为下划线。这个简单的例子显示了如何在另一个命名空间导入<code>WereWolf</code>记录类型。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns monster-mash
+  (:import [were_records WereWolf])
+(WereWolf. &#34;David&#34; &#34;London Tourist&#34;)
+; =&gt; #were_records.WereWolf{:name &#34;David&#34;, :title &#34;London Tourist&#34;}
+</code></pre></td></tr></table>
+</div>
+</div><p>注意，<code>were_records</code>有一个下划线，而不是破折号。</p>
+<p>你可以用查询 Map 值的方式查询记录值，也可以使用 Java 字段访问互操作。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def jacob (-&gt;WereWolf &#34;Jacob&#34; &#34;Lead Shirt Discarder&#34;)
+➊ (.name jacob) 
+; =&gt; &#34;Jacob&#34;
+
+➋ (:name jacob) 
+; =&gt; &#34;Jacob&#34;
+
+➌ (get jacob :name) 
+;=&gt; &#34;Jacob&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>第一个例子<code>(.name jacob)</code>在➊，使用了 Java 互操作，➋和➌的例子访问<code>:name</code>的方式与使用 map 相同。</p>
+<p>当测试相等时，Clojure 将检查所有字段是否相等，以及两个比较体是否具有相同的类型。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>➊ (= jacob (-&gt;WereWolf &#34;Jacob&#34; &#34;Lead Shirt Discarder&#34;))
+; =&gt; true
+
+➋ (= jacob (WereWolf. &#34;David&#34; &#34;London Tourist&#34;))
+; =&gt; false
+
+➌ (= jacob {:name &#34;Jacob&#34; :title &#34;Lead Shirt Discarder&#34;})
+; =&gt; false
+</code></pre></td></tr></table>
+</div>
+</div><p>➊处的测试返回<code>true</code>，因为<code>jacob'和新创建的记录是同一类型，并且它们的字段是相等的。➋处的测试返回 "false"，因为字段不相等。最后在➌处的测试返回 "false"，因为两个比较对象的类型不一样。</code>jacob&rsquo;是一个`WereWolf&rsquo;记录，而另一个参数是一个 Map。</p>
+<p>任何你能在 Map 上使用的函数，你也能在记录上使用。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(assoc jacob :title &#34;Lead Third Wheel&#34;)
+; =&gt; #were_records.WereWolf{:name &#34;Jacob&#34;, :title &#34;Lead Third Wheel&#34;}。
+</code></pre></td></tr></table>
+</div>
+</div><p>然而，如果你<code>dissoc</code>一个字段，结果的类型将是一个普通的&rsquo;Clojure map；它将不会有与原始记录相同的数据类型。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(dissoc jacob :title)
+; =&gt; {:name &#34;Jacob&#34;} &lt;- that&#39;s not a were_records.WereWolf
+</code></pre></td></tr></table>
+</div>
+</div><p>这至少有两个原因：第一，访问 Map 值比访问记录值要慢，所以如果你要建立一个高性能的程序，就要注意了。第二，当你创建一个新的记录类型时，你可以扩展它来实现一个协议，类似于你之前使用<code>extend-type</code>扩展一个类型。如果你<code>dissoc</code>一个记录，然后试图在结果上调用一个协议方法，记录的协议方法就不会被调用。</p>
+<p>下面是你在定义记录时如何扩展一个协议。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>➊ (defprotocol WereCreature
+➋   (full-moon-behavior [x]))
+
+➌ (defrecord WereWolf [name title]
+  WereCreature
+  (full-moon-behavior [x]
+    (str name &#34; will howl and murder&#34;)))
+
+(full-moon-behavior (map-&gt;WereWolf {:name &#34;Lucian&#34; :title &#34;CEO of Melodrama&#34;}))
+; =&gt; &#34;Lucian will howl and murder&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>我们创建了一个新的协议，<code>WereCreature</code> ➊，有一个方法，<code>full-moon-behavior</code> ➋。在➌，<code>defrecord</code>为<code>WereWolf</code>实现了<code>WereCreature</code>。在<code>full-moon-behavior</code>实现中最有趣的部分是你可以访问<code>name</code>。你还可以访问<code>title'和任何其他可能为你的记录定义的字段。你也可以使用</code>extend-type<code>和</code>extend-protocol`来扩展记录。</p>
+<p>你什么时候应该使用记录，什么时候应该使用 Map？一般来说，如果你发现自己在创建 Map 时反复使用相同的字段，你应该考虑使用记录。这告诉你，这组数据代表了你的应用程序领域的信息，如果你提供一个基于你试图建模的概念的名称，你的代码将更好地传达其目的。不仅如此，记录访问比 Map 访问更有表现力，所以你的程序会变得更有效率一些。最后，如果你想使用协议，你就需要创建一个记录。</p>
+<h2 id=进一步研究>进一步研究</h2>
+<p>Clojure 提供了其他的工具来处理抽象和数据类型。这些工具，我认为是高级的，包括<code>deftype</code>，<code>reify</code>，和<code>proxy</code>。如果你有兴趣了解更多，请查看*<a href=http://clojure.org/reference/datatypes/>http://clojure.org/datatypes/</a>*上关于数据类型的文档。</p>
+<h2 id=总结>总结</h2>
+<p>Clojure 的设计原则之一就是要写到抽象。在本章中，你学到了如何使用 Multimethods 和原型来定义你自己的抽象概念。这些结构提供了多态，允许同一个操作根据它的参数有不同的表现。你还学会了如何用<code>defrecord</code>创建和使用自己的关联数据类型，以及如何扩展记录来实现协议。</p>
+<p>当我刚开始学习 Clojure 时，我对使用 Multimethods、协议和记录感到很害羞。然而，它们在 Clojure 库中经常被使用，所以了解它们的工作原理是很好的。一旦你掌握了它们，它们会帮助你写出更干净的代码。</p>
+<h2 id=练习>练习</h2>
+<ol>
+<li>扩展<code>full-moon-behavior</code>Multimethods，为你自己的 were-creature 类型添加行为。</li>
+<li>创建一个<code>WereSimmons</code>记录类型，然后扩展<code>WereCreature</code>协议。</li>
+<li>创建你自己的协议，然后使用<code>extend-type</code>和<code>extend-protocol</code>来扩展它。</li>
+<li>创建一个角色扮演游戏，使用多重调度来实现行为。</li>
+</ol>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/clojure/>clojure</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/appendixa/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">AppendixA 用 Leiningen 构建和开发</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/chapter12/>
+<span class="next-text nav-default">Chapter12 与 Java 的互操作</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

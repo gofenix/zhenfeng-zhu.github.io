@@ -1,0 +1,554 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>区块链学习笔记 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。 理解区块链的分布式记账"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/blockchain/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="区块链学习笔记">
+<meta property="og:description" content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。 理解区块链的分布式记账">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/blockchain/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-08-23T15:14:02+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="区块链学习笔记">
+<meta itemprop=description content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。 理解区块链的分布式记账"><meta itemprop=datePublished content="2018-08-23T15:14:02+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="4311">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="区块链学习笔记">
+<meta name=twitter:description content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。 理解区块链的分布式记账"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>区块链学习笔记</h1>
+<div class=post-meta>
+<span class=post-time> 2018-08-23 </span>
+<span class=more-meta> 约 4311 字 </span>
+<span class=more-meta> 预计阅读 9 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#理解区块链的分布式记账>理解区块链的分布式记账</a></li>
+<li><a href=#区块链落地的一些问题和解决方案>区块链落地的一些问题和解决方案</a></li>
+<li><a href=#区块链的相关技术>区块链的相关技术</a></li>
+<li><a href=#以太坊常用操作>以太坊常用操作</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<blockquote>
+<p>本文是阅读<a href=http://www.netkiller.cn/blockchain/ch01s10.html>http://www.netkiller.cn/blockchain/ch01s10.html</a> 上的一些笔记。</p>
+</blockquote>
+<h2 id=理解区块链的分布式记账>理解区块链的分布式记账</h2>
+<p><a href=http://www.netkiller.cn/blockchain/ch01s10.html>http://www.netkiller.cn/blockchain/ch01s10.html</a></p>
+<p>区块链中提到的账本，记账等词汇是和会计无关的词汇。</p>
+<p>我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>用途</th>
+<th>金额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2018-08-23</td>
+<td>借</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2018-08-22</td>
+<td>还</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2018-08-21</td>
+<td>借</td>
+<td>50</td>
+</tr>
+<tr>
+<td>2018-08-20</td>
+<td>还</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+<p>如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。</p>
+<p>但是区块链的记账形式是：</p>
+<p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fujnyii772j30ku08twex.jpg alt></p>
+<p>可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。</p>
+<p><strong>所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。</strong></p>
+<p>之所以采用区块链来做分布式记账，主要是区块链有如下好处：</p>
+<ul>
+<li>
+<p>去中心化</p>
+<p>传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。</p>
+<p>与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。</p>
+</li>
+<li>
+<p>可追溯</p>
+</li>
+<li>
+<p>安全</p>
+<p>安全分为很多层，区块链只能做到存储层的安全。</p>
+<p>区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。</p>
+</li>
+<li>
+<p>不可篡改</p>
+<p>很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。</p>
+<p>撰改是指非法修改区块链数据，而修改则是合法变更数据。</p>
+<p>通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。</p>
+<p>多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。</p>
+</li>
+</ul>
+<p>采用区块链作为账本的时候，会面临如下几个问题：</p>
+<ul>
+<li>
+<p>不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan.io 就是把以太坊上的区块重新入库，借助数据库实现数据检索。</p>
+</li>
+<li>
+<p>区块链只能顺序检索，运算成本高。例如在中心化账本中汇总求和操作，区块链必须从头向后遍历。</p>
+</li>
+<li>
+<p>所有账目均在一条链上，不同的分类混在一起，彼此相连。</p>
+</li>
+<li>
+<p>无法归档。</p>
+<p>传统的数据库，我们可以归档一段时间内的数据，而这些归档的数据基本都是冷数据，不会再被查询，归档数据的备份到存储介质上的解决方案也有很多。</p>
+<p>但是区块链的数据都是热数据，任何新增的节点都必须从 0 开始同步，并且保证同步到最新区块，否则可能无法完成交易，数据会一直膨胀下去。</p>
+<p>虽然有算法能够减少同步的量，但是现阶段的体验仍然不好。</p>
+</li>
+<li>
+<p>没有事务处理。</p>
+<p>因为区块链是首尾相连的链式结构，所以只能在尾部加区块，无法修改中间的区块。假设有个区块回滚，该区块的 hash 产生变化，后面的区块都要作废。</p>
+<p>所以当并发执行的时候，可能会出现混乱。因此我们要在应用层做一些处理。</p>
+</li>
+<li>
+<p>性能问题</p>
+</li>
+<li>
+<p>由于是异步执行，无法预测何时完成。</p>
+</li>
+<li>
+<p>交易容易阻塞</p>
+</li>
+<li>
+<p>gas 费用。</p>
+</li>
+</ul>
+<h2 id=区块链落地的一些问题和解决方案>区块链落地的一些问题和解决方案</h2>
+<p>如果要在企业中落地区块链，尝尝有如下解决方案：</p>
+<ul>
+<li>
+<p>解决性能问题</p>
+<p>目前区块链只适合做<strong>低频高价值业务</strong>。</p>
+<p>读取性能通常是没有问题的，但是写入实际上无论你用多少个服务器节点都不能提升，因为写入区块需要做共识算法，这步操作，会在所有节点上进行，同时还需要加密运算，这些操作都是 CPU 密集型操作。</p>
+<p>方案：</p>
+<ul>
+<li>
+<p>通过消息队列技术异步写入，将需要写入的区块放入队列，异步完成上链操作。</p>
+</li>
+<li>
+<p>并行写入，我们可以建设多个区块链平台。多个平台同时服务于业务。</p>
+<p>为了达到去中心化并行写入，我们将在客户端通过算法，匹配服务器。因为如果在平台前面增加负载均衡，加因为这样又回到了中心化系统。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>溯源颗粒度</p>
+<p>对于所要被溯源的物品或者交易来讲，有四种情况，低频低价值，低频高价值，高频高价值，高频低价值 。</p>
+<p>对于低频高价值和高频高价值的业务，尽量做到最小颗粒度。</p>
+<p>对于低频低价值和高频低价值的业务，可以颗粒度更粗。</p>
+</li>
+<li>
+<p>和传统数据库互补</p>
+<p>区块链技术本身是一种追求分布一致性的数据库。</p>
+<p>我们都知道 CAP 理论。CAP 理论是指的是在一个分布式系统中， Consistency（一致性）、 Availability（可用性）、Partition tolerance（分区容错性），三者不可得兼。大多数区块链，放弃了一些可用性，偏向了一致性和分区容错。</p>
+<p>区块链并非能解决所有问题，虽然他也算是一种数据库，它能解决问题十分有限，它的数据管理和查询能力还打不到 NoSQL 的水平，更别提 SQL 的复杂应用。所以在实际的应用中，区块链不能替代传统数据库，只能互补。</p>
+</li>
+<li>
+<p>链上链下数据一致性问题</p>
+<p>既然区块链替代不了传统数据库，那么必然要在项目中同时使用两种技术。这样问题来了，会有两份数据，一份存储在链下，即传统数据库，另外一部分数据上链，这样就有两份重复的数据，那么怎样保证他们的一致性呢？</p>
+<p>区块链和比特币网络不同，比特币是在链上产生的，它与区块链密布可分，是一体的，所以它的数据安全性是自闭环的。而我们的链下数据并不是在区块链中产生的，因此我们在上链的时候，尽量采用如下的方案：</p>
+<ul>
+<li>两端都做一次哈希，可快速对比数据是否一致</li>
+<li>以链上数据为准，因为数据库的数据更容易被篡改</li>
+<li>前端业务走链，后端业务走数据库，因为前台业务是为用户提供服务，所以要走链上数据，而后台是可以管理的，走数据库即可。</li>
+<li>共享数据上链，私有数据不上链。</li>
+</ul>
+</li>
+</ul>
+<h2 id=区块链的相关技术>区块链的相关技术</h2>
+<p>区块链的技术模型自下而上分为；数据层，网路层，共识层，激励层，合约层以及应用层。</p>
+<ul>
+<li>
+<p>数据层，封装了底层数据区块的链式结构，以及相关的非对称公私钥数据加密技术和时间戳等技术，这是整个区块链技术中最底层的数据结构。</p>
+<p>这些技术是构建全球金融系统的基础，数十年的使用证明了它非常安全的可靠性。而区块链，正式巧妙地把这些技术结合在了一起。</p>
+</li>
+<li>
+<p>网络层，包括 P2P 组网机制、数据传播机制和数据验证机制等。</p>
+<p>P2P 组网技术早期应用在 BT 这类 P2P 下载软件中，这就意味着区块链具有自动组网功能。</p>
+</li>
+<li>
+<p>共识层，封装了网络节点的各类共识机制算法。共识机制算法是区块链的核心技术，因为这决定了到底是谁来进行记账，而记账决定方式将会影响整个系统的安全性和可靠性。</p>
+<p>数据层、网络层、共识层是构建区块链技术的必要元素，缺少任何一层都将不能称之为真正意义上的区块链技术。</p>
+<p>目前已经出现了十余种共识机制算法，其中比较最为知名的有工作量证明机制（PoW，Proof of Work）、权益证明机制（PoS，Proof ofStake）、股份授权证明机制（DPoS，Delegated ProofofStake）等。</p>
+</li>
+<li>
+<p>激励层，将经济因素集成到区块链技术体系中来，包括经济激励的发行机制和分配机制等，主要出现在公有链当中。</p>
+<p>在公有链中必须激励遵守规则参与记账的节点，并且惩罚不遵守规则的节点，才能让整个系统朝着良性循环的方向发展。而在私有链当中，则不一定需要进行激励，因为参与记账的节点往往是在链外完成了博弈，通过强制力或自愿来要求参与记账。</p>
+</li>
+<li>
+<p>合约层，封装各类脚本、算法和智能合约，是区块链可编程特性的基础。</p>
+<p>比特币本身就具有简单脚本的编写功能，而以太坊极大的强化了编程语言协议，理论上可以编写实现任何功能的应用。如果把比特币看成是全球账本的话，以太坊可以看作是一台“全球计算机”，任何人都可以上传和执行任意的应用程序，并且程序的有效执行能得到保证。</p>
+</li>
+<li>
+<p>应用层，封装了区块链的各种应用场景和案例，比如搭建在以太坊上的各类区块链应用即部署在应用层，而未来的可编程金融和可编程社会也将会是搭建在应用层。</p>
+</li>
+</ul>
+<p>共识算法</p>
+<ul>
+<li>pow</li>
+<li>pos</li>
+<li>dpos</li>
+<li>poa</li>
+<li>pbft</li>
+<li>raft</li>
+</ul>
+<p>HD Wallet</p>
+<p>BIP32 定义 Hierarchical Deterministic wallet (简称 &ldquo;HD Wallet&rdquo;)，是一个系统可以从单个 seed 产生树状结构储存多组 keypairs（私钥和公钥）。</p>
+<p>BIP39 定义钱包助记词和 seed 生成规则，一般由 12 -24 个单字组成，称为 mnemonic。</p>
+<p>BIP44 基于 BIP32 的系统，赋予树状结构中的各层特殊的意义。让同一个 seed 可以支援多币种、多帐户等 。</p>
+<p>使用助记词生成确定性钱包。</p>
+<p>HD Wallet 采用 2048 个单词，或者汉字作为助记词，这些词库对外公开，很多钱包仅仅使用 path 第一个地址并且没有加密。如果你知道某个用户的助记词中的 11 各词的排列顺序，那么我们就可以通过穷举方法，算出所有地址的私钥，如果碰巧找到了已经在使用的地址。就可以将里面的 ETH 全部转走。</p>
+<h2 id=以太坊常用操作>以太坊常用操作</h2>
+<p>计算 gas 费用</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var estimateGas = eth.estimateGas({from:eth.accounts[1], to: eth.accounts[2], value: web3.toWei(1)})
+
+var cost = estimateGas * gasPrice
+</code></pre></td></tr></table>
+</div>
+</div><p>解锁账户</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>personal.unlockAccount(eth.accounts[3], &#34;12345678&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p>转账</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var txnHash = eth.sendTransaction({from: eth.accounts[3], to: eth.accounts[5], value: eth.getBalance(eth.accounts[3]) - cost, gas: estimateGas})
+</code></pre></td></tr></table>
+</div>
+</div><p>查看交易细节</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>web3.eth.getTransaction(txnHash)
+</code></pre></td></tr></table>
+</div>
+</div><p>获取余额</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>eth.getBalance(eth.accounts[3])
+</code></pre></td></tr></table>
+</div>
+</div><p>keystore 文件</p>
+<p>以太坊的每个外部账户都是由一对密钥（一个公钥和一个私钥）定义的。账户以地址为索引，地址由公钥衍生而来，取公钥的最后 20 个字节。</p>
+<p>每对私钥 /地址都编码在一个钥匙文件里，也就是我们说的 keystore 文件。该文件是 JSON 文本文件，可以用任何文本编辑器打开和浏览。钥匙文件的关键部分——账户私钥，通常用你创建帐户时设置的密码进行加密。如果你丢失了这个文件，你就丢失了私钥，意味着你失去了签署交易的能力，意味着你的资金被永久的锁定在了你的账户里。</p>
+<p>批量转账</p>
+<p>有时我们需要将 Token 发送到多个地址上去。通常的做法就是使用 web.js 写一个循环程序，但是实际使用过程中发现这种做法存在很多问题，常会发生转账失败情况。</p>
+<p>经过分析造成发送失败原因是，频率太高，因为 web.js 是异步操作，当前程序还未完成交易，交易尚未确认的情况下第二笔交易发送出去，这时就会出错。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>web3.eth.getTransactionCount(from).then(function(nonce){
+ // 问题就出在 nonce ， nonce 如同数据库中的序列主键，如果上一个交易没有完成，下一个交易取得 nonce + 1 后与上一个 pending 的交易相同，产生冲突
+} 
+</code></pre></td></tr></table>
+</div>
+</div><p>最好的解方案是在合约中实现批量转账功能，这样需要一个交易 txhash 完成多比交易。</p>
+<p>如果你的 Token 已经在使用了，且没有批量转账的功能怎么解决呢？我们可以在写一个 Token 继承原来的 Token，在新的 Token 中实现批量转账功能。</p>
+<p>代币兑换</p>
+<p>兑换代币通常是指使用 ETH 或者其他币兑换 Token。通常是这样实现的，使用智能合约，将 ETH 达到指定合约地址，合约会打回代币给用户。</p>
+<p>这种方式不用人工参与，也不用开发程序。缺点不能做到实时汇率，需要人工设置汇率。</p>
+<p>ERC20 Token</p>
+<p>ERC20 “描述了实现代币合约的标准功能”，ERC20 是各个代币的标准接口。ERC20 代币仅仅是以太坊代币的子集。为了充分兼容 ERC20，开发者需要将一组特定的函数集成到他们的智能合约中，以便在高层面能够执行以下操作：</p>
+<ul>
+<li>获得代币总供应量</li>
+<li>获得账户余额</li>
+<li>转让代币</li>
+<li>批准花费代币</li>
+</ul>
+<p>最简单的合约如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>pragma solidity ^0.4.24;
+
+contract EncryptToken {
+    uint256 INITIAL_SUPPLY = 666666;
+    mapping(address =&gt; uint256) balances;
+
+    constructor() public {
+        balances[msg.sender] = INITIAL_SUPPLY;
+    }
+
+    function transfer(address to, uint256 amount) public{
+        assert(balances[msg.sender] &gt; amount);
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+    }
+
+    function balanceOf(address owner) constant  public returns (uint256){
+        return balances[owner];
+    }
+
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>使用了 openzeppeline-solidity 的安全标准代币合约是：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>  pragma solidity ^0.4.24;
+  import &#34;openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol&#34;;
+
+  contract BloggerCoin is StandardToken{
+      string public name = &#34;BloggerCoin&#34;;  // 名字
+      string public symbol = &#34;BLC&#34;;   // 简称
+      uint8 public decimals = 4;   // 10的4次方
+      uint256 public INITIAL_SUPPLY = 666666;
+
+      constructor() public{
+          totalSupply_ = INITIAL_SUPPLY;
+          balances[msg.sender] = INITIAL_SUPPLY;
+      }
+  }
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/queue-worker/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">queue-worker</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/botbuilder/>
+<span class="next-text nav-default">谈谈聊天机器人框架的实现原理</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

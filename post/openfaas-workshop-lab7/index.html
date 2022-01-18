@@ -1,0 +1,362 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Openfaas Workshop Lab7 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="实验 7&amp;ndash;异步函数 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab7 \ &amp;amp;&amp;amp; cd lab7 同步与异步地调用一个函数 当你同步调用一个函"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab7/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Openfaas Workshop Lab7">
+<meta property="og:description" content="实验 7&ndash;异步函数 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab7 \ && cd lab7 同步与异步地调用一个函数 当你同步调用一个函">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab7/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-04T13:44:02+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Openfaas Workshop Lab7">
+<meta itemprop=description content="实验 7&ndash;异步函数 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab7 \ && cd lab7 同步与异步地调用一个函数 当你同步调用一个函"><meta itemprop=datePublished content="2022-01-04T13:44:02+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="1405">
+<meta itemprop=keywords content="openfaas,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Openfaas Workshop Lab7">
+<meta name=twitter:description content="实验 7&ndash;异步函数 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab7 \ && cd lab7 同步与异步地调用一个函数 当你同步调用一个函"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Openfaas Workshop Lab7</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-04 </span>
+<span class=more-meta> 约 1405 字 </span>
+<span class=more-meta> 预计阅读 3 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#实验-7--异步函数>实验 7&ndash;异步函数</a>
+<ul>
+<li><a href=#同步与异步地调用一个函数>同步与异步地调用一个函数</a></li>
+<li><a href=#查看队列工作者的日志>查看队列工作者的日志</a></li>
+<li><a href=#使用一个x-callback-url与-requirebin>使用一个`X-Callback-Url&rsquo;与 requirebin</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=实验-7--异步函数>实验 7&ndash;异步函数</h1>
+<p><img src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png width=500px></img></p>
+<p>在开始这个实验之前，为你的文件创建一个新的文件夹。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>$ mkdir -p lab7 \
+   &amp;&amp; cd lab7
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=同步与异步地调用一个函数>同步与异步地调用一个函数</h2>
+<p>当你同步调用一个函数时，一个连接会通过网关连接到你的函数，并且在整个执行过程中保持开放。同步调用是*阻塞的，所以你应该看到你的客户端暂停，变得不活跃，直到该函数完成其任务。</p>
+<ul>
+<li>网关使用的路由是。<code>/function/&lt;function_name></code>。</li>
+<li>你必须等待，直到它完成</li>
+<li>你在调用后得到结果</li>
+<li>你知道它是通过还是失败</li>
+</ul>
+<p>异步任务以类似的方式运行，但有一些区别。</p>
+<ul>
+<li>网关使用不同的路由：<code>/async-function/&lt;function_name></code>。</li>
+<li>客户端从网关得到一个立即的<em>202 接受</em>的响应。</li>
+<li>该函数稍后使用一个队列工作器来调用</li>
+<li>默认情况下，结果被丢弃</li>
+</ul>
+<p>让我们试一试快速演示。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>faas-cli new --lang dockerfile long-task --prefix=&#34;&lt;your-docker-username-here&gt;&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>编辑<code>long-task/Dockerfile</code>并将 fprocess 改为<code>sleep 1</code>。</p>
+<p>现在构建、部署并同步调用你的函数 10 次，像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+echo -n &#34;&#34; | faas-cli invoke long-task
+</code></pre></td></tr></table>
+</div>
+</div><p>现在异步调用该函数 10 次。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+echo -n &#34;&#34; | faas-cli invoke long-task --async
+</code></pre></td></tr></table>
+</div>
+</div><p>你观察到了什么？第一个例子应该花了 10 秒，而第二个例子会在一秒或更短的时间内返回到你的提示。这项工作仍然需要 10x1 秒来完成，但现在要放在队列中延迟执行。</p>
+<p>异步函数调用非常适用于那些可以推迟到以后执行的任务，或者你不需要客户端上的结果。</p>
+<blockquote>
+<p>一个很好的例子是在接收 GitHub 的 webhooks 时&ndash;可能有一个最大的处理时间，GitHub 会允许你的连接保持开放，一个异步调用接受工作并立即返回。</p>
+</blockquote>
+<h2 id=查看队列工作者的日志>查看队列工作者的日志</h2>
+<p>OpenFaaS 的默认栈使用 NATS 流来排队和延迟执行。你可以用以下命令查看日志。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>kubectl logs deployment/queue-worker -n openfaas
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=使用一个x-callback-url与-requirebin>使用一个`X-Callback-Url&rsquo;与 requirebin</h2>
+<p>如果你需要一个异步调用的函数的结果，你有两个选择。</p>
+<ul>
+<li>改变它的代码，用它的结果通知一个端点或消息系统</li>
+</ul>
+<p>这个选项可能不是在所有情况下都适用，并且需要编写额外的代码。</p>
+<ul>
+<li>利用回调的内置行为</li>
+</ul>
+<p>内置的回调允许对一个函数的调用提供一个 URL，队列工作器将自动报告函数的成功或失败，以及结果。
+一些额外的请求头被发送到回调，完整的列表见<a href=https://docs.openfaas.com/reference/async/#callback-request-headers>回调请求头</a></p>
+<p>前往 requestbin 并创建一个新的 <code>bin</code> &ndash;这将是公共互联网上的一个 URL，可以接收你的函数的结果。</p>
+<blockquote>
+<p>为了这个实验室的目的，一定要取消勾选 <code>私有</code> 复选框，这将使你不需要登录。</p>
+</blockquote>
+<p><a href=https://requestbin.com/>https://requestbin.com/</a></p>
+<p>现在复制 &ldquo;Bin URL &ldquo;并将其粘贴在下面。</p>
+<p>例如(<code>http://requestbin.com/r/1i7i1we1</code>)</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>echo -n &#34;LaterIsBetter&#34; | faas-cli invoke figlet --async --header &#34;X-Callback-Url http://requestbin.com/r/1i7i1we1&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>现在刷新 requestbin 站点上的页面，你将看到来自 <code>figlet</code> 的结果。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain> _          _           ___     ____       _   _            
+| |    __ _| |_ ___ _ _|_ _|___| __ )  ___| |_| |_ ___ _ __ 
+| |   / _` | __/ _ \ &#39;__| |/ __|  _ \ / _ \ __| __/ _ \ &#39;__|
+| |__| (_| | ||  __/ |  | |\__ \ |_) |  __/ |_| ||  __/ |   
+|_____\__,_|\__\___|_| |___|___/____/ \___|\__|\__\___|_|   
+                                                            
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>建议：也可以使用另一个函数作为 <code>X-Callback-Url</code> &ndash;这对于在异步工作负载被处理时通过 Slack 或 Email 通知自己是非常好的。要用结果调用另一个函数，将<code>X-Callback-Url</code>设置为<code>http://gateway:8080/function/&lt;function_name></code>。</p>
+</blockquote>
+<p>现在进入<a href=lab8.md>实验室 8</a></p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/openfaas/>openfaas</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/openfaas-workshop-lab8/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Openfaas Workshop Lab8</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/openfaas-workshop-lab6/>
+<span class="next-text nav-default">Openfaas Workshop Lab6</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

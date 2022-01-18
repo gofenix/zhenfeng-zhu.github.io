@@ -1,0 +1,265 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>hive 常用函数 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path) 解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。 path 就是 &"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="hive 常用函数">
+<meta property="og:description" content="json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path) 解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。 path 就是 &">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/hive%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-04-16T17:59:03+08:00">
+<meta property="article:modified_time" content="2020-04-16T17:59:03+08:00">
+<meta itemprop=name content="hive 常用函数">
+<meta itemprop=description content="json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path) 解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。 path 就是 &"><meta itemprop=datePublished content="2020-04-16T17:59:03+08:00">
+<meta itemprop=dateModified content="2020-04-16T17:59:03+08:00">
+<meta itemprop=wordCount content="516">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="hive 常用函数">
+<meta name=twitter:description content="json 字符串处理 get_json_object lateral_view explode substr json_tuple get_json_object get_json_object(string json_string, string path) 解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。 path 就是 &"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>hive 常用函数</h1>
+<div class=post-meta>
+<span class=post-time> 2020-04-16 </span>
+<span class=more-meta> 约 516 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#json-字符串处理>json 字符串处理</a>
+<ul>
+<li><a href=#get_json_object>get_json_object</a></li>
+<li><a href=#explode>explode</a></li>
+<li><a href=#substr>substr</a></li>
+<li><a href=#json_tuple>json_tuple</a></li>
+</ul>
+</li>
+<li><a href=#parse_url-regexp_replace-regexp_extract>parse_url, regexp_replace, regexp_extract</a>
+<ul>
+<li><a href=#parse_url>parse_url</a></li>
+<li><a href=#regex_replace>regex_replace</a></li>
+</ul>
+</li>
+<li><a href=#json_to_struct>json_to_struct</a></li>
+<li><a href=#union_map>union_map</a></li>
+<li><a href=#lateral-view>lateral view</a></li>
+<li><a href=#from_unix_time>from_unix_time</a></li>
+<li><a href=#row_number>row_number</a></li>
+<li><a href=#coalesce>coalesce</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=json-字符串处理>json 字符串处理</h1>
+<ul>
+<li>get_json_object</li>
+<li>lateral_view</li>
+<li>explode</li>
+<li>substr</li>
+<li>json_tuple</li>
+</ul>
+<h2 id=get_json_object>get_json_object</h2>
+<p>get_json_object(string json_string, string path)</p>
+<p>解析 json 字符串 json_string，返回 path 指定的内容。如果输入的 json 字符串是无效的，那么返回 null。</p>
+<p>path 就是 &lsquo;$.字段名&rsquo;。</p>
+<p>如果该字段的 value 也是 json，就可以一直点下去。</p>
+<p>如果该字段的 value 是数组，就可以用 &lsquo;$.字段名[0]'，类似这样下标的形式去访问。</p>
+<h2 id=explode>explode</h2>
+<p>explode(array)</p>
+<p>经常和 lateral view 一起使用，将数组中的元素拆分成多行显示。</p>
+<h2 id=substr>substr</h2>
+<p>substr(string A, int start, int len)</p>
+<p>返回字符串 A 从 start 位置开始，长度为 len 的字符串</p>
+<h2 id=json_tuple>json_tuple</h2>
+<p>json_tuple(string json_string, col1, col2, &mldr;)</p>
+<p>经常和 lateral view 一起使用，同时解析多个 json 字符串中的多个字段。</p>
+<h1 id=parse_url-regexp_replace-regexp_extract>parse_url, regexp_replace, regexp_extract</h1>
+<h2 id=parse_url>parse_url</h2>
+<p>parse_url(string urlString, string partToExtract, string keyToExtract)</p>
+<p>返回 url 中的指定部分，如 host，path，query 等等。</p>
+<p>partToExtract 是个枚举值：HOST, PATH, QUERY, REF, PROTOCOL, AUTHORITY, FILE, and USERINFO。</p>
+<h2 id=regex_replace>regex_replace</h2>
+<p>regex_extract(string a, string b, string c)</p>
+<p>将字符串 a 中符合正在表达式 b 的部分替换为 c</p>
+<h1 id=json_to_struct>json_to_struct</h1>
+<p>json_to_struct(json, &lsquo;array 或者 map 等&rsquo;)</p>
+<h1 id=union_map>union_map</h1>
+<p>union_map(map(k, v))</p>
+<h1 id=lateral-view>lateral view</h1>
+<h1 id=from_unix_time>from_unix_time</h1>
+<p>from_unix_time(unix 时间戳, &lsquo;yyyyMMddHH&rsquo;)</p>
+<h1 id=row_number>row_number</h1>
+<p>row_number() over (partition by 字段 a order by 计算项 b desc ) rank</p>
+<p>hive 中的分组和组内排序</p>
+<ul>
+<li>rank 是排序的别名</li>
+<li>partition by： 类似于 hive 的建表，分区的意思</li>
+<li>order by： 排序，默认是升序，加 desc 降序</li>
+</ul>
+<p>这个意思就是按字段 a 分区，对计算项 b 进行降序排列</p>
+<p>这个是经常用到计算分区中的排序问题。</p>
+<h1 id=coalesce>coalesce</h1>
+<p>非空查找函数</p>
+<p>coalesce(v1, v2, v3, &mldr;)</p>
+<p>返回参数中的第一个非空值，如果所有值都是 NULL，返回 NULL</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2020-04-16
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/geth/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Geth</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/mysql%E7%9A%84%E5%AD%A6%E4%B9%A0/>
+<span class="next-text nav-default">mysql 的学习</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

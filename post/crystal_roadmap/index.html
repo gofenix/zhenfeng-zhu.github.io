@@ -1,0 +1,268 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Crystal Roadmap - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="This roadmap defines the things that we want to have in the language and plan to do.
+Language Stuff that has to do with the language syntax, semantic and runtime.
+Concurrency Finalize multithreading support, so fibers can run on multiple threads.
+Windows support Finalize support for Windows platform. The compiler already works, but some stdlib features like concurrency support are still missing. Ongoing efforts on #5430.
+Type system review Make a review and possible formalisation of Crystal&amp;rsquo;s type system, with a strong emphasis on generics, type restrictions and the meta-model in general."><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/crystal_roadmap/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Crystal Roadmap">
+<meta property="og:description" content="This roadmap defines the things that we want to have in the language and plan to do.
+Language Stuff that has to do with the language syntax, semantic and runtime.
+Concurrency Finalize multithreading support, so fibers can run on multiple threads.
+Windows support Finalize support for Windows platform. The compiler already works, but some stdlib features like concurrency support are still missing. Ongoing efforts on #5430.
+Type system review Make a review and possible formalisation of Crystal&rsquo;s type system, with a strong emphasis on generics, type restrictions and the meta-model in general.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/crystal_roadmap/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2021-10-28T10:11:41+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Crystal Roadmap">
+<meta itemprop=description content="This roadmap defines the things that we want to have in the language and plan to do.
+Language Stuff that has to do with the language syntax, semantic and runtime.
+Concurrency Finalize multithreading support, so fibers can run on multiple threads.
+Windows support Finalize support for Windows platform. The compiler already works, but some stdlib features like concurrency support are still missing. Ongoing efforts on #5430.
+Type system review Make a review and possible formalisation of Crystal&rsquo;s type system, with a strong emphasis on generics, type restrictions and the meta-model in general."><meta itemprop=datePublished content="2021-10-28T10:11:41+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="350">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Crystal Roadmap">
+<meta name=twitter:description content="This roadmap defines the things that we want to have in the language and plan to do.
+Language Stuff that has to do with the language syntax, semantic and runtime.
+Concurrency Finalize multithreading support, so fibers can run on multiple threads.
+Windows support Finalize support for Windows platform. The compiler already works, but some stdlib features like concurrency support are still missing. Ongoing efforts on #5430.
+Type system review Make a review and possible formalisation of Crystal&rsquo;s type system, with a strong emphasis on generics, type restrictions and the meta-model in general."><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Crystal Roadmap</h1>
+<div class=post-meta>
+<span class=post-time> 2021-10-28 </span>
+<span class=more-meta> 约 350 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#language>Language</a>
+<ul>
+<li><a href=#concurrency>Concurrency</a></li>
+<li><a href=#windows-support>Windows support</a></li>
+<li><a href=#type-system-review>Type system review</a></li>
+<li><a href=#macros-review>Macros review</a></li>
+<li><a href=#exceptions-review>Exceptions review</a></li>
+<li><a href=#incremental-compilation>Incremental compilation</a></li>
+</ul>
+</li>
+<li><a href=#standard-library>Standard library</a></li>
+<li><a href=#tools>Tools</a>
+<ul>
+<li><a href=#documentation>Documentation</a></li>
+<li><a href=#shards>Shards</a></li>
+<li><a href=#playground>Playground</a></li>
+<li><a href=#ide-support>IDE support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>This roadmap defines the things that we want to have in the language and plan to do.</p>
+<h2 id=language>Language</h2>
+<p>Stuff that has to do with the language syntax, semantic and runtime.</p>
+<h3 id=concurrency>Concurrency</h3>
+<p>Finalize multithreading support, so fibers can run on multiple threads.</p>
+<h3 id=windows-support>Windows support</h3>
+<p>Finalize support for Windows platform. The compiler already works, but some stdlib features like concurrency support are still missing.
+Ongoing efforts on <a href=https://github.com/crystal-lang/crystal/pull/5430>#5430</a>.</p>
+<h3 id=type-system-review>Type system review</h3>
+<p>Make a review and possible formalisation of Crystal&rsquo;s type system, with a strong emphasis on generics, type restrictions and the meta-model in general.</p>
+<h3 id=macros-review>Macros review</h3>
+<p>Review the macros intermediate language, to allow for more expressiveness and to provide the compilers with hints with regards to reusing previous runs for incremental compilation.</p>
+<h3 id=exceptions-review>Exceptions review</h3>
+<p>Review the exception layout and hierarchy to allow developers to catch more specific errors, and get more information on what exactly went wrong via variables inside the exception.</p>
+<h3 id=incremental-compilation>Incremental compilation</h3>
+<p>Allow the compiler to re-use information from previous compilations, by defining dependencies between files/modules and only reprocessing changed ones. This feature also opens the door for better IDE integration and tooling.</p>
+<h2 id=standard-library>Standard library</h2>
+<p>Implement the missing or review the existing following modules from the standard library:</p>
+<ul>
+<li>TLS library</li>
+<li>File, FileUtils</li>
+<li>HTTP/2 <a href=https://github.com/crystal-lang/crystal/issues/2125>#2125</a></li>
+<li>XML</li>
+<li>Test mocks</li>
+</ul>
+<h2 id=tools>Tools</h2>
+<p>Improvements or developments on either built-in or external tools for the language.</p>
+<h3 id=documentation>Documentation</h3>
+<p>Improve not only the documentation itself, but the docs generator as well. Add support for links between documents from different packages, alternate READMEs for the docs, better searching options, and easier docs hosting options.</p>
+<h3 id=shards>Shards</h3>
+<p>Improve Crystal&rsquo;s dependency manager for better dependencies version resolution, provide further metadata on the project, support registering executable tasks, better handling of transitive dependencies, and more. Implement centralised discovery of Crystal shards, sorted by category, and including support for the latest versions of the language, as reported by a CI.</p>
+<h3 id=playground>Playground</h3>
+<p>Improve Crystal&rsquo;s playground by adding shards' workbooks to explore the usage of the project&rsquo;s registered dependencies, and other features to discuss.</p>
+<h3 id=ide-support>IDE support</h3>
+<p>Make use of Crystal&rsquo;s compile-time type information to develop better IDE tools, such as in-place documentation, autocomplete or refactoring tools.</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/how-to-crawl-a-web-in-nodejs/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">轻服务 nodejs 助力爬虫 web3</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/crystal1.2/>
+<span class="next-text nav-default">Crystal 1.2 版本更新说明</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

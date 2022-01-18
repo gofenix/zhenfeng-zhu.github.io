@@ -1,0 +1,717 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>基于以太坊的 Parity 联盟链部署 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity 是可以构建出一个基于 PoA 共识的私链，而且兼"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/parity/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="基于以太坊的 Parity 联盟链部署">
+<meta property="og:description" content="公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity 是可以构建出一个基于 PoA 共识的私链，而且兼">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/parity/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-08-22T16:51:13+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="基于以太坊的 Parity 联盟链部署">
+<meta itemprop=description content="公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity 是可以构建出一个基于 PoA 共识的私链，而且兼"><meta itemprop=datePublished content="2018-08-22T16:51:13+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="1598">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="基于以太坊的 Parity 联盟链部署">
+<meta name=twitter:description content="公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity 是可以构建出一个基于 PoA 共识的私链，而且兼"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>基于以太坊的 Parity 联盟链部署</h1>
+<div class=post-meta>
+<span class=post-time> 2018-08-22 </span>
+<span class=more-meta> 约 1598 字 </span>
+<span class=more-meta> 预计阅读 4 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#部署联盟链>部署联盟链</a>
+<ul>
+<li><a href=#安装>安装</a></li>
+<li><a href=#创世区块>创世区块</a></li>
+<li><a href=#node0>node0</a></li>
+<li><a href=#node1>node1</a></li>
+<li><a href=#启动并创建账户>启动并创建账户</a></li>
+<li><a href=#节点互通和转账>节点互通和转账</a></li>
+</ul>
+</li>
+<li><a href=#部署合约>部署合约</a></li>
+<li><a href=#部署以太坊浏览器>部署以太坊浏览器</a></li>
+<li><a href=#思考>思考</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>公司项目中使用公网上的以太坊私链，交易速度比较慢，于是这几天都在鼓捣基于以太坊的联盟链，parity 是可以构建出一个基于 PoA 共识的私链，而且兼容以太坊的合约。这篇文章主要是记录自己的踩坑经历，主要实现了节点的搭建，合约的部署以及本地以太坊浏览器的启动。</p>
+<h2 id=部署联盟链>部署联盟链</h2>
+<p>parity 的文档：<a href=https://wiki.parity.io/Demo-PoA-tutorial>https://wiki.parity.io/Demo-PoA-tutorial</a></p>
+<h3 id=安装>安装</h3>
+<p>首先是下载 parity，在 mac 下是直接 brew 安装即可。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>brew tap paritytech/paritytech
+
+brew install parity
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=创世区块>创世区块</h3>
+<p>创世区块的配置文件：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>// demo-spec.json
+
+{
+  &#34;name&#34;: &#34;DemoPoA&#34;,
+  &#34;engine&#34;: {
+    &#34;authorityRound&#34;: {
+      &#34;params&#34;: {
+        &#34;stepDuration&#34;: &#34;5&#34;,
+        &#34;validators&#34;: {
+          &#34;list&#34;: [
+            &#34;0x00bd138abd70e2f00903268f3db08f2d25677c9e&#34;,
+            &#34;0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2&#34;
+          ]
+        }
+      }
+    }
+  },
+  &#34;params&#34;: {
+    &#34;gasLimitBoundDivisor&#34;: &#34;0x400&#34;,
+    &#34;maximumExtraDataSize&#34;: &#34;0x20&#34;,
+    &#34;minGasLimit&#34;: &#34;0x1388&#34;,
+    &#34;networkID&#34;: &#34;0x2323&#34;,
+    &#34;eip155Transition&#34;: 0,
+    &#34;validateChainIdTransition&#34;: 0,
+    &#34;eip140Transition&#34;: 0,
+    &#34;eip211Transition&#34;: 0,
+    &#34;eip214Transition&#34;: 0,
+    &#34;eip658Transition&#34;: 0
+  },
+  &#34;genesis&#34;: {
+    &#34;seal&#34;: {
+      &#34;authorityRound&#34;: {
+        &#34;step&#34;: &#34;0x0&#34;,
+        &#34;signature&#34;: &#34;0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&#34;
+      }
+    },
+    &#34;difficulty&#34;: &#34;0x20000&#34;,
+    &#34;gasLimit&#34;: &#34;0x5B8D80&#34;
+  },
+  &#34;accounts&#34;: {
+    &#34;0x0000000000000000000000000000000000000001&#34;: {
+      &#34;balance&#34;: &#34;1&#34;,
+      &#34;builtin&#34;: {
+        &#34;name&#34;: &#34;ecrecover&#34;,
+        &#34;pricing&#34;: { &#34;linear&#34;: { &#34;base&#34;: 3000, &#34;word&#34;: 0 } }
+      }
+    },
+    &#34;0x0000000000000000000000000000000000000002&#34;: {
+      &#34;balance&#34;: &#34;1&#34;,
+      &#34;builtin&#34;: {
+        &#34;name&#34;: &#34;sha256&#34;,
+        &#34;pricing&#34;: { &#34;linear&#34;: { &#34;base&#34;: 60, &#34;word&#34;: 12 } }
+      }
+    },
+    &#34;0x0000000000000000000000000000000000000003&#34;: {
+      &#34;balance&#34;: &#34;1&#34;,
+      &#34;builtin&#34;: {
+        &#34;name&#34;: &#34;ripemd160&#34;,
+        &#34;pricing&#34;: { &#34;linear&#34;: { &#34;base&#34;: 600, &#34;word&#34;: 120 } }
+      }
+    },
+    &#34;0x0000000000000000000000000000000000000004&#34;: {
+      &#34;balance&#34;: &#34;1&#34;,
+      &#34;builtin&#34;: {
+        &#34;name&#34;: &#34;identity&#34;,
+        &#34;pricing&#34;: { &#34;linear&#34;: { &#34;base&#34;: 15, &#34;word&#34;: 3 } }
+      }
+    },
+    &#34;0x004ec07d2329997267ec62b4166639513386f32e&#34;: {
+      &#34;balance&#34;: &#34;10000000000000000000000&#34;
+    }
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=node0>node0</h3>
+<p>node0 节点：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=c>## node0.toml</span>
+
+<span class=p>[</span><span class=nx>parity</span><span class=p>]</span>
+<span class=nx>chain</span> <span class=p>=</span> <span class=s2>&#34;demo-spec.json&#34;</span>
+<span class=nx>base_path</span> <span class=p>=</span> <span class=s2>&#34;parity0&#34;</span>
+
+<span class=p>[</span><span class=nx>network</span><span class=p>]</span>
+<span class=nx>port</span> <span class=p>=</span> <span class=mi>30300</span>
+
+<span class=p>[</span><span class=nx>rpc</span><span class=p>]</span>
+<span class=nx>port</span> <span class=p>=</span> <span class=mi>8546</span>
+<span class=nx>apis</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;web3&#34;</span><span class=p>,</span> <span class=s2>&#34;eth&#34;</span><span class=p>,</span> <span class=s2>&#34;net&#34;</span><span class=p>,</span> <span class=s2>&#34;personal&#34;</span><span class=p>,</span> <span class=s2>&#34;parity&#34;</span><span class=p>,</span> <span class=s2>&#34;parity_set&#34;</span><span class=p>,</span> <span class=s2>&#34;traces&#34;</span><span class=p>,</span> <span class=s2>&#34;rpc&#34;</span><span class=p>,</span> <span class=s2>&#34;parity_accounts&#34;</span><span class=p>]</span>
+<span class=nx>interface</span> <span class=p>=</span> <span class=s2>&#34;0.0.0.0&#34;</span>
+<span class=nx>cors</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;*&#34;</span><span class=p>]</span>
+<span class=nx>hosts</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;all&#34;</span><span class=p>]</span>
+
+
+<span class=p>[</span><span class=nx>websockets</span><span class=p>]</span>
+<span class=nx>port</span> <span class=p>=</span> <span class=mi>8456</span>
+
+
+<span class=p>[</span><span class=nx>account</span><span class=p>]</span>
+<span class=nx>password</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;node.pwds&#34;</span><span class=p>]</span>
+
+
+<span class=p>[</span><span class=nx>mining</span><span class=p>]</span>
+<span class=nx>engine_signer</span> <span class=p>=</span> <span class=s2>&#34;0x00bd138abd70e2f00903268f3db08f2d25677c9e&#34;</span>
+<span class=nx>reseal_on_txs</span> <span class=p>=</span> <span class=s2>&#34;none&#34;</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=node1>node1</h3>
+<p>node1 节点：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=c>## node1.toml</span>
+
+<span class=p>[</span><span class=nx>parity</span><span class=p>]</span>
+<span class=nx>chain</span> <span class=p>=</span> <span class=s2>&#34;demo-spec.json&#34;</span>
+<span class=nx>base_path</span> <span class=p>=</span> <span class=s2>&#34;parity1&#34;</span>
+
+
+<span class=p>[</span><span class=nx>network</span><span class=p>]</span>
+<span class=nx>port</span> <span class=p>=</span> <span class=mi>30301</span>
+
+
+<span class=p>[</span><span class=nx>rpc</span><span class=p>]</span>
+<span class=nx>port</span> <span class=p>=</span> <span class=mi>8541</span>
+<span class=nx>apis</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;web3&#34;</span><span class=p>,</span> <span class=s2>&#34;eth&#34;</span><span class=p>,</span> <span class=s2>&#34;net&#34;</span><span class=p>,</span> <span class=s2>&#34;personal&#34;</span><span class=p>,</span> <span class=s2>&#34;parity&#34;</span><span class=p>,</span> <span class=s2>&#34;parity_set&#34;</span><span class=p>,</span> <span class=s2>&#34;traces&#34;</span><span class=p>,</span> <span class=s2>&#34;rpc&#34;</span><span class=p>,</span> <span class=s2>&#34;parity_accounts&#34;</span><span class=p>]</span>
+
+
+
+<span class=p>[</span><span class=nx>websockets</span><span class=p>]</span>
+<span class=nx>port</span> <span class=p>=</span> <span class=mi>8451</span>
+
+
+<span class=p>[</span><span class=nx>ipc</span><span class=p>]</span>
+<span class=nx>disable</span> <span class=p>=</span> <span class=kc>true</span>
+
+
+<span class=p>[</span><span class=nx>account</span><span class=p>]</span>
+<span class=nx>password</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;node.pwds&#34;</span><span class=p>]</span>
+
+
+<span class=p>[</span><span class=nx>mining</span><span class=p>]</span>
+<span class=nx>engine_signer</span> <span class=p>=</span> <span class=s2>&#34;0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2&#34;</span>
+<span class=nx>reseal_on_txs</span> <span class=p>=</span> <span class=s2>&#34;none&#34;</span>
+
+
+<span class=p>[</span><span class=nx>ui</span><span class=p>]</span>
+<span class=nx>disable</span> <span class=p>=</span> <span class=kc>true</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=启动并创建账户>启动并创建账户</h3>
+<p>启动</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>parity --config node0.toml --fat-db=on
+parity --config node1.toml --fat-db=on
+</code></pre></td></tr></table>
+</div>
+</div><p>创建账户：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>curl --data &#39;{&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;parity_newAccountFromPhrase&#34;,&#34;params&#34;:[&#34;node0&#34;, &#34;node0&#34;],&#34;id&#34;:0}&#39; -H &#34;Content-Type: application/json&#34; -X POST localhost:8546
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>curl --data &#39;{&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;parity_newAccountFromPhrase&#34;,&#34;params&#34;:[&#34;user&#34;, &#34;user&#34;],&#34;id&#34;:0}&#39; -H &#34;Content-Type: application/json&#34; -X POST localhost:8546
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>curl --data &#39;{&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;parity_newAccountFromPhrase&#34;,&#34;params&#34;:[&#34;node1&#34;, &#34;node1&#34;],&#34;id&#34;:0}&#39; -H &#34;Content-Type: application/json&#34; -X POST localhost:8541
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就创建了 3 个账户，其中 node0 和 node1 是见证者 user 是初始发钱的。</p>
+<p>因为 parity ui 是要连接 8546 端口，所以这里就让 node0 的 rpc 的端口是 8546。</p>
+<h3 id=节点互通和转账>节点互通和转账</h3>
+<p>让 node0 和 node1 节点相通，其实就是让两个节点成为一个网络：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// 获取node0的encode
+curl --data &#39;{&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;parity_enode&#34;,&#34;params&#34;:[],&#34;id&#34;:0}&#39; -H &#34;Content-Type: application/json&#34; -X POST localhost:8546
+
+// 调用node1的rpc，将node0加入， RESULT就是上一步获取的
+curl --data &#39;{&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;parity_addReservedPeer&#34;,&#34;params&#34;:[&#34;enode://RESULT&#34;],&#34;id&#34;:0}&#39; -H &#34;Content-Type: application/json&#34; -X POST localhost:8541
+</code></pre></td></tr></table>
+</div>
+</div><p>我们先给两个账户转账：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>curl --data &#39;{&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;personal_sendTransaction&#34;,&#34;params&#34;:[{&#34;from&#34;:&#34;0x004ec07d2329997267Ec62b4166639513386F32e&#34;,&#34;to&#34;:&#34;0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e&#34;,&#34;value&#34;:&#34;0xde0b6b3a7640000&#34;}, &#34;user&#34;],&#34;id&#34;:0}&#39; -H &#34;Content-Type: application/json&#34; -X POST localhost:8540
+</code></pre></td></tr></table>
+</div>
+</div><p>从 user 中转了 1 个以太坊到了 node0 账户中，同样再转给 node1。</p>
+<h2 id=部署合约>部署合约</h2>
+<p>再使用 truffle 开发完合约之后，把账户部署到我们刚刚起来的联盟链。部署合约需要消耗一定的 gas，truffle 使用的是 HD wallet 的 Provider，所以我们要先给一个钱包转一些以太币。</p>
+<p>因为这里用的是 metamask，在最初创建钱包的时候有设置 12 个助记词，所以先让钱包连接到 node0 节点：</p>
+<p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fuioo9rlayj30ab0h2gne.jpg alt></p>
+<p>创建一个账户，向那个账户转几个以太币。</p>
+<p>然后在 truffle 中，配置如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// truffle.js
+
+module.exports = {
+  // See &lt;http://truffleframework.com/docs/advanced/configuration&gt;
+  // to customize your Truffle configuration!
+  networks: {
+    development: {
+      host: &#34;127.0.0.1&#34;,
+      port: 8545,
+      network_id: &#34;*&#34;
+    },
+    parity: {
+      provider: function () {
+        return new HDWalletProvider(&#39;这里写助记词&#39;, &#34;http://127.0.0.1:8546&#34;)
+      },
+      network_id: 3,
+      gas: 4700000
+    }
+  }
+};
+</code></pre></td></tr></table>
+</div>
+</div><p>然后在执行部署合约的时候，指定 parity 即可：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>truffle migrate --network parity
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=部署以太坊浏览器>部署以太坊浏览器</h2>
+<p>以太坊的浏览器找了好几个，最后选中了<a href=https://github.com/gobitfly/etherchain-light>etherchain-light</a>。部署起来简单。</p>
+<p>首先 clone 代码到本地，然后 npm 安装依赖。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>git clone https://github.com/gobitfly/etherchain-light --recursive
+
+cd etherchain-light &amp;&amp; yarn
+</code></pre></td></tr></table>
+</div>
+</div><p>一定要用<code>—-recursive</code>，将所有 git 的子模块都下载下来。</p>
+<p>修改 config.js.example 文件为 config.js，然后把 Provider 改为 HttpProvider，连接到 node0 的节点即可。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// config.js
+var web3 = require(&#39;web3&#39;);
+var net = require(&#39;net&#39;);
+
+var config = function () {
+  
+  this.logFormat = &#34;combined&#34;;
+  // this.ipcPath = process.env[&#34;HOME&#34;] + &#34;/.local/share/io.parity.ethereum/jsonrpc.ipc&#34;;
+  // this.provider = new web3.providers.IpcProvider(this.ipcPath, net);
+
+  this.provider = new web3.providers.HttpProvider(&#34;http://127.0.0.1:8546&#34;)
+  
+  // ... 省略其余代码
+}
+
+module.exports = config;
+</code></pre></td></tr></table>
+</div>
+</div><p>执行<code>npm start</code>之后即可将以太坊浏览器运行起来。然后在浏览器中访问<code>http://localhost:3000</code>。</p>
+<h2 id=思考>思考</h2>
+<p>PoA 共识基于权威的共识机制，和基于 raft 协议的共识机制具体哪个更快？</p>
+<p>Parity 文档中没有找到和权限控制相关的模块，用它来做联盟链还有待确定。</p>
+<p>Quorum 是 JP 摩根开源的基于以太坊的联盟链，使用的 raft 算法，可以研究研究。</p>
+<p>还不是很清楚，fabric 已经是联盟链主流的情况下，选择以太坊做联盟链的好处有多大。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/botbuilder/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">谈谈聊天机器人框架的实现原理</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/dive-into-redis/>
+<span class="next-text nav-default">dive-into-redis</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

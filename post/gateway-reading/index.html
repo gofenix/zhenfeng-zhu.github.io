@@ -1,0 +1,1012 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>gateway-reading - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能： UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当 Gateway 作为一个入口，当"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/gateway-reading/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="gateway-reading">
+<meta property="og:description" content="OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能： UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当 Gateway 作为一个入口，当">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/gateway-reading/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-08-01T09:15:35+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="gateway-reading">
+<meta itemprop=description content="OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能： UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当 Gateway 作为一个入口，当"><meta itemprop=datePublished content="2018-08-01T09:15:35+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="4161">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="gateway-reading">
+<meta name=twitter:description content="OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能： UI 部署函数 监控 自动伸缩 架构分析 从图中可以发现，当 Gateway 作为一个入口，当"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>gateway-reading</h1>
+<div class=post-meta>
+<span class=post-time> 2018-08-01 </span>
+<span class=more-meta> 约 4161 字 </span>
+<span class=more-meta> 预计阅读 9 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#架构分析>架构分析</a></li>
+<li><a href=#源码分析>源码分析</a>
+<ul>
+<li><a href=#依赖>依赖</a></li>
+<li><a href=#项目结构>项目结构</a></li>
+<li><a href=#基本的安全验证>基本的安全验证</a></li>
+<li><a href=#代理转发>代理转发</a></li>
+<li><a href=#监控>监控</a></li>
+<li><a href=#ui>UI</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>OpenFaaS 的 Gateway 是一个 golang 实现的请求转发的网关，在这个网关服务中，主要有以下几个功能：</p>
+<ul>
+<li>UI</li>
+<li>部署函数</li>
+<li>监控</li>
+<li>自动伸缩</li>
+</ul>
+<h2 id=架构分析>架构分析</h2>
+<p><img src=https://ws1.sinaimg.cn/large/b831e4c7gy1fttxzimdp3j20sm0hqabx.jpg alt=图：Kubernetes作为Provider的架构图></p>
+<p>从图中可以发现，当 Gateway 作为一个入口，当 CLI 或者 web 页面发来要部署或者调用一个函数的时候，Gateway 会将请求转发给 Provider，同时会将监控指标发给 Prometheus。AlterManager 会根据需求，调用 API 自动伸缩函数。</p>
+<h2 id=源码分析>源码分析</h2>
+<h3 id=依赖>依赖</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>github.com/gorilla/mux
+
+github.com/nats-io/go-nats-streaming
+github.com/nats-io/go-nats
+github.com/openfaas/nats-queue-worker
+
+github.com/prometheus/client_golang
+</code></pre></td></tr></table>
+</div>
+</div><p>mux 是一个用来执行 http 请求的路由和分发的第三方扩展包。</p>
+<p>go-nats-streaming，go-nats，nats-queue-worker 这三个依赖是异步函数的时候才会用到，在分析 queue-worker 的时候有说到 Gateway 也是一个发布者。</p>
+<p>client_golang 是 Prometheus 的客户端。</p>
+<h3 id=项目结构>项目结构</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>├── Dockerfile
+├── Dockerfile.arm64
+├── Dockerfile.armhf
+├── Gopkg.lock
+├── Gopkg.toml
+├── README.md
+├── assets
+├── build.sh
+├── handlers
+│   ├── alerthandler.go
+│   ├── alerthandler_test.go
+│   ├── asyncreport.go
+│   ├── baseurlresolver_test.go
+│   ├── basic_auth.go
+│   ├── basic_auth_test.go
+│   ├── callid_middleware.go
+│   ├── cors.go
+│   ├── cors_test.go
+│   ├── forwarding_proxy.go
+│   ├── forwarding_proxy_test.go
+│   ├── function_cache.go
+│   ├── function_cache_test.go
+│   ├── infohandler.go
+│   ├── metrics.go
+│   ├── queueproxy.go
+│   ├── scaling.go
+│   └── service_query.go
+├── metrics
+│   ├── add_metrics.go
+│   ├── add_metrics_test.go
+│   ├── externalwatcher.go
+│   ├── metrics.go
+│   └── prometheus_query.go
+├── plugin
+│   ├── external.go
+│   └── external_test.go
+├── queue
+│   └── types.go
+├── requests
+│   ├── forward_request.go
+│   ├── forward_request_test.go
+│   ├── prometheus.go
+│   ├── prometheus_test.go
+│   └── requests.go
+├── server.go
+├── tests
+│   └── integration
+├── types
+│   ├── handler_set.go
+│   ├── inforequest.go
+│   ├── load_credentials.go
+│   ├── proxy_client.go
+│   ├── readconfig.go
+│   └── readconfig_test.go
+├── vendor
+│   └── github.com
+└── version
+    └── version.go
+</code></pre></td></tr></table>
+</div>
+</div><p>Gateway 的目录明显多了很多，看源码的时候，首先要找到的是 main 包，从 main 函数看起，就能很容易分析出来项目是如何运行的。</p>
+<p>从 server.go 的 main 函数中我们可以看到，其实有如下几个模块：</p>
+<ul>
+<li>基本的安全验证</li>
+<li>和函数相关的代理转发
+<ul>
+<li>同步函数
+<ul>
+<li>列出函数</li>
+<li>部署函数</li>
+<li>删除函数</li>
+<li>更新函数</li>
+</ul>
+</li>
+<li>异步函数</li>
+</ul>
+</li>
+<li>Prometheus 的监控</li>
+<li>ui</li>
+<li>自动伸缩</li>
+</ul>
+<h3 id=基本的安全验证>基本的安全验证</h3>
+<p>如果配置了开启基本安全验证，会从磁盘中读取密钥：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>var credentials *types.BasicAuthCredentials
+
+if config.UseBasicAuth {
+ var readErr error
+ reader := types.ReadBasicAuthFromDisk{
+  SecretMountPath: config.SecretMountPath,
+ }
+ credentials, readErr = reader.Read()
+
+ if readErr != nil {
+  log.Panicf(readErr.Error())
+ }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>在 Gateway 的配置相关的，都会有一个 read()方法，进行初始化赋值。</p>
+<p>如果 credentials 被赋值之后，就会对一些要加密的 API handler 进行一个修饰，被修饰的 API 有：</p>
+<ul>
+<li>UpdateFunction</li>
+<li>DeleteFunction</li>
+<li>DeployFunction</li>
+<li>ListFunctions</li>
+<li>ScaleFunction</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>if credentials != nil {
+ faasHandlers.UpdateFunction =
+   handlers.DecorateWithBasicAuth(faasHandlers.UpdateFunction, credentials)
+ faasHandlers.DeleteFunction =
+   handlers.DecorateWithBasicAuth(faasHandlers.DeleteFunction, credentials)
+ faasHandlers.DeployFunction =
+   handlers.DecorateWithBasicAuth(faasHandlers.DeployFunction, credentials)
+ faasHandlers.ListFunctions =
+   handlers.DecorateWithBasicAuth(faasHandlers.ListFunctions, credentials)
+ faasHandlers.ScaleFunction =
+   handlers.DecorateWithBasicAuth(faasHandlers.ScaleFunction, credentials)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这个 DecorateWithBasicAuth()方法是一个路由中间件：</p>
+<ol>
+<li>调用 mux 路由的 BasicAuth()，从 http 的 header 中取到用户名和密码</li>
+<li>然后给请求头上设置一个字段<code>WWW-Authenticate</code>，值为<code>Basic realm="Restricted"</code></li>
+<li>如果校验失败，则返回错误，成功的话调用 next 方法继续进入下一个 handler。</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// DecorateWithBasicAuth enforces basic auth as a middleware with given credentials
+func DecorateWithBasicAuth(next http.HandlerFunc, credentials *types.BasicAuthCredentials) http.HandlerFunc {
+ return func(w http.ResponseWriter, r *http.Request) {
+  user, password, ok := r.BasicAuth()
+  w.Header().Set(&#34;WWW-Authenticate&#34;, `Basic realm=&#34;Restricted&#34;`)
+
+  if !ok || !(credentials.Password == password &amp;&amp; user == credentials.User) {
+
+   w.WriteHeader(http.StatusUnauthorized)
+   w.Write([]byte(&#34;invalid credentials&#34;))
+   return
+  }
+  next.ServeHTTP(w, r)
+ }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=代理转发>代理转发</h3>
+<p>Gateway 本身不做任何和部署发布函数的事情，它只是作为一个代理，把请求转发给相应的 Provider 去处理，所有的请求都要通过这个网关。</p>
+<h4 id=同步函数转发>同步函数转发</h4>
+<p>主要转发的 API 有：</p>
+<ul>
+<li>RoutelessProxy</li>
+<li>ListFunctions</li>
+<li>DeployFunction</li>
+<li>DeleteFunction</li>
+<li>UpdateFunction</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>faasHandlers.RoutelessProxy = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+ faasHandlers.ListFunctions = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+ faasHandlers.DeployFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+ faasHandlers.DeleteFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+ faasHandlers.UpdateFunction = handlers.MakeForwardingProxyHandler(reverseProxy, forwardingNotifiers, urlResolver)
+</code></pre></td></tr></table>
+</div>
+</div><p>MakeForwardingProxyHandler()有三个参数：</p>
+<ul>
+<li>
+<p>proxy</p>
+<p>这是一个 http 的客户端，作者把这个客户端抽成一个类，然后使用该类的 NewHTTPClientReverseProxy 方法创建实例，这样就简化了代码，不用每次都得写一堆相同的配置。</p>
+</li>
+<li>
+<p>notifiers</p>
+<p>这个其实是要打印的日志，这里是一个 HTTPNotifier 的接口。而在这个 MakeForwardingProxyHandler 中其实有两个实现类，一个是 LoggingNotifier，一个是 PrometheusFunctionNotifier，分别用来打印和函数 http 请求相关的日志以及和 Prometheus 监控相关的日志。</p>
+</li>
+<li>
+<p>baseURLResolver</p>
+<p>这个就是 Provider 的 url 地址。</p>
+</li>
+</ul>
+<p>在这个 MakeForwardingProxyHandler 中主要做了三件事儿：</p>
+<ol>
+<li>
+<p>解析要转发的 url</p>
+</li>
+<li>
+<p>调用 forwardRequest 方法转发请求，</p>
+<p>forwardRequest 方法的逻辑比较简单，只是把请求发出去。这里就不深入分析了。</p>
+</li>
+<li>
+<p>打印日志</p>
+</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// MakeForwardingProxyHandler create a handler which forwards HTTP requests
+func MakeForwardingProxyHandler(proxy *types.HTTPClientReverseProxy, notifiers []HTTPNotifier, baseURLResolver BaseURLResolver) http.HandlerFunc {
+ return func(w http.ResponseWriter, r *http.Request) {
+  baseURL := baseURLResolver.Resolve(r)
+  requestURL := r.URL.Path
+  start := time.Now()
+  statusCode, err := forwardRequest(w, r, proxy.Client, baseURL, requestURL, proxy.Timeout)
+  seconds := time.Since(start)
+  if err != nil {
+   log.Printf(&#34;error with upstream request to: %s, %s\n&#34;, requestURL, err.Error())
+  }
+  for _, notifier := range notifiers {
+   notifier.Notify(r.Method, requestURL, statusCode, seconds)
+  }
+ }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=异步函数转发>异步函数转发</h4>
+<p>前面说过，如果是异步函数，Gateway 就作为一个发布者，将函数放到队列里。MakeQueuedProxy 方法就是做这件事儿的：</p>
+<ol>
+<li>读取请求体</li>
+<li>将<code>X-Callback-Url</code>参数从参数中 http 的 header 中读出来</li>
+<li>实例化用于异步处理的 Request 对象</li>
+<li>调用 canQueueRequests.Queue(req)，将请求发布到队列中</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// MakeQueuedProxy accepts work onto a queue
+func MakeQueuedProxy(metrics metrics.MetricOptions, wildcard bool, canQueueRequests queue.CanQueueRequests) http.HandlerFunc {
+ return func(w http.ResponseWriter, r *http.Request) {
+  defer r.Body.Close()
+  body, err := ioutil.ReadAll(r.Body)
+  // 省略错误处理代码
+  vars := mux.Vars(r)
+  name := vars[&#34;name&#34;]
+
+  callbackURLHeader := r.Header.Get(&#34;X-Callback-Url&#34;)
+  var callbackURL *url.URL
+  if len(callbackURLHeader) &gt; 0 {
+   urlVal, urlErr := url.Parse(callbackURLHeader)
+   // 省略错误处理代码
+   callbackURL = urlVal
+  }
+  req := &amp;queue.Request{
+   Function:    name,
+   Body:        body,
+   Method:      r.Method,
+   QueryString: r.URL.RawQuery,
+   Header:      r.Header,
+   CallbackURL: callbackURL,
+  }
+  err = canQueueRequests.Queue(req)
+  // 省略错误处理代码
+  w.WriteHeader(http.StatusAccepted)
+ }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=自动伸缩>自动伸缩</h4>
+<p>伸缩性其实有两种，一种是可以通过调用 API 接口，来将函数进行缩放。另外一种就是通过 AlertHandler。</p>
+<p>自动伸缩是 OpenFaaS 的一大特点，触发自动伸缩主要是根据不同的指标需求。</p>
+<ul>
+<li>
+<p>根据每秒请求数来做伸缩</p>
+<p>OpenFaaS 附带了一个自动伸缩的规则，这个规则是在 AlertManager 配置文件中定义。AlertManager 从 Prometheus 中读取使用情况（每秒请求数），然后在满足一定条件时向 Gateway 发送警报。</p>
+<p>可以通过删除 AlertManager，或者将部署扩展的环境变量设置为 0，来禁用此方式。</p>
+</li>
+<li>
+<p>最小/最大副本数</p>
+<p>通过向函数添加标签, 可以在部署时设置最小 (初始) 和最大副本数。</p>
+<ul>
+<li><code>com.openfaas.scale.min</code> 默认是 <code>1</code></li>
+<li><code>com.openfaas.scale.max</code> 默认是 <code>20</code></li>
+<li><code>com.openfaas.scale.factor</code> 默认是 <code>20%</code> ，在 0-100 之间，这是每次扩容的时候，新增实例的百分比，若是 100 的话，会瞬间飙升到副本数的最大值。</li>
+</ul>
+<p><code>com.openfaas.scale.min</code> 和 <code>com.openfaas.scale.max</code>值一样的时候，可以关闭自动伸缩。</p>
+<p><code>com.openfaas.scale.factor</code>是 0 时，也会关闭自动伸缩。</p>
+</li>
+<li>
+<p>通过内存和 CPU 的使用量。</p>
+<p>使用 k8s 内置的 HPA，也可以触发 AlertManager。</p>
+</li>
+</ul>
+<h5 id=手动指定伸缩的值>手动指定伸缩的值</h5>
+<p>可以从这句代码中发现，调用这个路由，转发给了 provider 处理。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>r.HandleFunc(&#34;/system/scale-function/{name:[-a-zA-Z_0-9]+}&#34;, faasHandlers.ScaleFunction).Methods(http.MethodPost)
+</code></pre></td></tr></table>
+</div>
+</div><h5 id=处理-alertmanager-的伸缩请求>处理 AlertManager 的伸缩请求</h5>
+<p>Prometheus 将监控指标发给 AlertManager 之后，会触发 AlterManager 调用<code>/system/alert</code>接口，这个接口的 handler 是由<code>handlers.MakeAlertHandler</code>方法生成。</p>
+<p>MakeAlertHandler 方法接收的参数是 ServiceQuery。ServiceQuery 是一个接口，它有两个函数，用来 get 或者 ser 最大的副本数。Gateway 中实现这个接口的类是 ExternalServiceQuery，这个实现类是在 plugin 包中，我们也可以直接定制这个实现类，用来实现满足特定条件。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// ServiceQuery provides interface for replica querying/setting
+type ServiceQuery interface {
+ GetReplicas(service string) (response ServiceQueryResponse, err error)
+ SetReplicas(service string, count uint64) error
+}
+
+// ExternalServiceQuery proxies service queries to external plugin via HTTP
+type ExternalServiceQuery struct {
+ URL         url.URL
+ ProxyClient http.Client
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这个 ExternalServiceQuery 有一个<code>NewExternalServiceQuery</code>方法，这个方法也是一个工厂方法，用来创建实例。这个 url 其实就是 provider 的 url，proxyClient 就是一个 http 的 client 对象。</p>
+<ul>
+<li>
+<p><code>GetReplicas</code>方法</p>
+<p>从<code>system/function/:name</code>接口获取到函数的信息，组装一个<code>ServiceQueryResponse</code>对象即可。</p>
+</li>
+<li>
+<p><code>SetReplicas</code>方法</p>
+<p>调用<code>system/scale-function/:name</code>接口，设置副本数。</p>
+</li>
+</ul>
+<p>MakeAlertHandler 的函数主要是从<code>http.Request</code>中读取 body，然后反序列化成<code>PrometheusAlert</code>对象：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// PrometheusAlert as produced by AlertManager
+type PrometheusAlert struct {
+ Status   string                 `json:&#34;status&#34;`
+ Receiver string                 `json:&#34;receiver&#34;`
+ Alerts   []PrometheusInnerAlert `json:&#34;alerts&#34;`
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>可以发现，这个 Alerts 是一个数组对象，所以可以是对多个函数进行缩放。反序列化之后，调用<code>handleAlerts</code>方法，而<code>handleAlerts</code>对 Alerts 进行遍历，针对每个 Alerts 调用了<code>scaleService</code>方法。<code>scaleService</code>才是真正处理伸缩服务的函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>func scaleService(alert requests.PrometheusInnerAlert, service ServiceQuery) error {
+ var err error
+ serviceName := alert.Labels.FunctionName
+
+ if len(serviceName) &gt; 0 {
+  queryResponse, getErr := service.GetReplicas(serviceName)
+  if getErr == nil {
+   status := alert.Status
+
+   newReplicas := CalculateReplicas(status, queryResponse.Replicas, uint64(queryResponse.MaxReplicas), queryResponse.MinReplicas, queryResponse.ScalingFactor)
+
+   log.Printf(&#34;[Scale] function=%s %d =&gt; %d.\n&#34;, serviceName, queryResponse.Replicas, newReplicas)
+   if newReplicas == queryResponse.Replicas {
+    return nil
+   }
+
+   updateErr := service.SetReplicas(serviceName, newReplicas)
+   if updateErr != nil {
+    err = updateErr
+   }
+  }
+ }
+ return err
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>从代码总就可以看到，scaleService 做了三件事儿：</p>
+<ul>
+<li>
+<p>获取现在的副本数</p>
+</li>
+<li>
+<p>计算新的副本数</p>
+<p>新副本数的计算方法是根据<code>com.openfaas.scale.factor</code>计算步长：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>step := uint64((float64(maxReplicas) / 100) * float64(scalingFactor))
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>设置为新的副本数</p>
+</li>
+</ul>
+<h5 id=从-0-增加副本到的最小值>从 0 增加副本到的最小值</h5>
+<p>我们在调用函数的时候，用的路由是：<code>/function/:name</code>。如果环境变量里有配置<code>scale_from_zero</code>为 true，先用<code>MakeScalingHandler()</code>方法对 proxyHandler 进行一次包装。</p>
+<p><code>MakeScalingHandler</code>接受参数主要是：</p>
+<ul>
+<li>
+<p>next：就是下一个 httpHandlerFunc，中间件都会有这样一个参数</p>
+</li>
+<li>
+<p>config：<code>ScalingConfig</code>的对象：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// ScalingConfig for scaling behaviours
+type ScalingConfig struct {
+ MaxPollCount         uint              // 查到的最大数量
+ FunctionPollInterval time.Duration     // 函数调用时间间隔
+ CacheExpiry          time.Duration     // 缓存过期时间
+ ServiceQuery         ServiceQuery      // 外部服务调用的一个接口
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>这个<code>MakeScalingHandler</code>中间件主要做了如下的事情：</p>
+<ul>
+<li>先从 FunctionCache 缓存中获取该函数的基本信息，从这个缓存可以拿到每个函数的副本数量。</li>
+<li>为了加快函数的启动速度，如果缓存中可以获该得函数，且函数的副本数大于 0，满足条件，return 即可。</li>
+<li>如果不满足上一步，就会调用<code>SetReplicas</code>方法设置副本数，并更新 FunctionCache 的缓存。</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// MakeScalingHandler creates handler which can scale a function from
+// zero to 1 replica(s).
+func MakeScalingHandler(next http.HandlerFunc, upstream http.HandlerFunc, config ScalingConfig) http.HandlerFunc {
+ cache := FunctionCache{
+  Cache:  make(map[string]*FunctionMeta),
+  Expiry: config.CacheExpiry,
+ }
+ return func(w http.ResponseWriter, r *http.Request) {
+  functionName := getServiceName(r.URL.String())
+  if serviceQueryResponse, hit := cache.Get(functionName); hit &amp;&amp; serviceQueryResponse.AvailableReplicas &gt; 0 {
+   next.ServeHTTP(w, r)
+   return
+  } 
+  queryResponse, err := config.ServiceQuery.GetReplicas(functionName)
+  cache.Set(functionName, queryResponse)
+        // 省略错误处理
+  if queryResponse.AvailableReplicas == 0 {
+   minReplicas := uint64(1)
+   if queryResponse.MinReplicas &gt; 0 {
+    minReplicas = queryResponse.MinReplicas
+   }
+   err := config.ServiceQuery.SetReplicas(functionName, minReplicas)
+   // 省略错误处理代码
+   for i := 0; i &lt; int(config.MaxPollCount); i++ {
+    queryResponse, err := config.ServiceQuery.GetReplicas(functionName)
+    cache.Set(functionName, queryResponse)
+    // 省略错误处理
+    time.Sleep(config.FunctionPollInterval)
+   }
+  }
+  next.ServeHTTP(w, r)
+ }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=监控>监控</h3>
+<p>监控是一个定时任务，开启了一个新协程，利用 go 的 ticker.C 的间隔不停的去调用<code>/system/functions</code>接口。反序列化到 MetricOptions 对象中。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>func AttachExternalWatcher(endpointURL url.URL, metricsOptions MetricOptions, label string, interval time.Duration) {
+ ticker := time.NewTicker(interval)
+ quit := make(chan struct{})
+ proxyClient := // 省略创建一个http.Client对象
+
+ go func() {
+  for {
+   select {
+   case &lt;-ticker.C:
+    get, _ := http.NewRequest(http.MethodGet, endpointURL.String()+&#34;system/functions&#34;, nil)
+    services := []requests.Function{}
+    res, err := proxyClient.Do(get)
+    // 省略反序列的代码
+    for _, service := range services {
+     metricsOptions.ServiceReplicasCounter.
+      WithLabelValues(service.Name).
+      Set(float64(service.Replicas))
+    }
+    break
+   case &lt;-quit:
+    return
+   }
+  }
+ }()
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=ui>UI</h3>
+<p>UI 的代码很简单，主要就是一些前端的代码，调用上面的讲的一些 API 接口即可，这里就略去不表。</p>
+<h2 id=总结>总结</h2>
+<p>Gateway 是 OpenFaaS 最为重要的一个组件。回过头看整个项目的结构，Gateway 就是一个 rest 转发服务，一个一个的 handler，每个模块之间的耦合性不是很高，可以很容易的去拆卸，自定义实现相应的模块。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/faas-provider/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">faas-provider</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/nats-streaming/>
+<span class="next-text nav-default">NATS streaming</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

@@ -1,0 +1,1426 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Chapter6 组织你的项目 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="组织你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/chapter6/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Chapter6 组织你的项目">
+<meta property="og:description" content="组织你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter6/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-14T12:40:41+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Chapter6 组织你的项目">
+<meta itemprop=description content="组织你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你"><meta itemprop=datePublished content="2022-01-14T12:40:41+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="12410">
+<meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Chapter6 组织你的项目">
+<meta name=twitter:description content="组织你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Chapter6 组织你的项目</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-14 </span>
+<span class=more-meta> 约 12410 字 </span>
+<span class=more-meta> 预计阅读 25 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#组织你的项目一个图书管理员的故事>组织你的项目：一个图书管理员的故事</a>
+<ul>
+<li><a href=#你的项目是一个库>你的项目是一个库</a></li>
+<li><a href=#用-def-存储对象>用 def 存储对象</a></li>
+<li><a href=#创建和切换到命名空间>创建和切换到命名空间</a>
+<ul>
+<li><a href=#引用>引用</a></li>
+<li><a href=#alias>alias</a></li>
+</ul>
+</li>
+<li><a href=#真正的项目组织>真正的项目组织</a>
+<ul>
+<li><a href=#文件路径和命名空间名称之间的关系>文件路径和命名空间名称之间的关系</a></li>
+<li><a href=#要求和使用命名空间>要求和使用命名空间</a></li>
+<li><a href=#ns-宏>＃＃＃NS 宏</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=组织你的项目一个图书管理员的故事>组织你的项目：一个图书管理员的故事</h1>
+<p>在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你的代码库带来秩序。幸运的是，Clojure 提供了一套工具，专门用来帮助这个侏儒与混乱的力量不断斗争。</p>
+<p>这些工具通过将相关的函数和数据分组来帮助你组织你的代码。它们还可以防止名称冲突，这样你就不会意外地覆盖别人的代码，反之亦然。在这个充满悬念和神秘的故事中，请和我一起学习如何使用这些工具，并解决一生中的抢劫案吧 在这个传奇故事的最后，你将了解以下内容。</p>
+<ul>
+<li>
+<p>`def&rsquo;是做什么的</p>
+</li>
+<li>
+<p>什么是命名空间以及如何使用它们</p>
+</li>
+<li>
+<p>命名空间和文件系统之间的关系</p>
+</li>
+<li>
+<p>如何使用<code>refer</code>、<code>alias</code>、<code>require</code>、<code>use</code>和<code>ns</code>。</p>
+</li>
+<li>
+<p>如何使用文件系统来组织 Clojure 项目</p>
+</li>
+</ul>
+<p>我先来介绍一下 Clojure 的组织系统，它的工作原理很像一个库。Melvil 兴奋地颤抖着!</p>
+<h2 id=你的项目是一个库>你的项目是一个库</h2>
+<p>现实世界中的图书馆存储对象的集合，如书籍、杂志和 DVD。他们使用寻址系统，所以当你得到一个物体的地址时，你可以导航到物理空间并检索到该物体。</p>
+<p>当然，没有人能够直接知道一本书或 DVD 的地址是什么。这就是为什么图书馆要记录一个物体的标题和它的地址之间的联系，并提供工具来搜索这些记录。在计算机之前的旧时代，图书馆提供卡片目录，即装满纸质卡片的柜子，其中包含每本书的标题、作者、&ldquo;地址&rdquo;（杜威十进制或国会图书馆编号）和其他信息。</p>
+<p>例如，要找到《达芬奇密码》，你可以翻阅书名目录（按书名排序的卡片），直到你找到正确的卡片。在那张卡片上，你会看到地址<em>813.54</em>（如果它使用杜威十进制系统），浏览图书馆，找到<em>达芬奇密码</em>所在的书架，并参与你一生中的文学和/或仇恨阅读冒险。</p>
+<p>在 Clojure 中想象一个类似的设置是很有用的。我认为 Clojure 是将对象（如数据结构和函数）存储在一组巨大的编号架上。没有人能够直接知道一个对象被存储在哪个架子上。相反，我们给 Clojure 一个标识符，它用来检索该对象。</p>
+<p>为了使之成功，Clojure 必须维护我们的标识符和货架地址之间的关联。它通过使用<em>namespaces</em>来做到这一点。命名空间包含了人类友好的<em>符号</em>和书架地址的引用之间的 Map，被称为<em>vars</em>，很像卡片目录。</p>
+<p>从技术上讲，命名空间是 &ldquo;clojure.lang.Namespace &ldquo;类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用<code>*ns*</code>来引用当前的命名空间，你可以用<code>(ns-name *ns*)</code>来获得其名称。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns-name *ns*)
+; =&gt; user
+</code></pre></td></tr></table>
+</div>
+</div><p>例如，当你启动 REPL 时，你在<code>user</code>命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用<code>user=></code>。</p>
+<p>当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是<em>在</em>个命名空间中。</p>
+<p>至于符号，你一直在使用它们，甚至没有意识到。例如，当你写<code>(map inc [1 2])</code>时，<code>map</code>和<code>inc</code>都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像<code>map</code>这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象&ndash;在这里，就是<code>map</code>所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要求值它，而是把它当作数据。接下来的几个例子显示了当你引用一个 Form 时会发生什么。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>➊ inc
+; =&gt; #&lt;core$inc clojure.core$inc@30132014&gt;
+
+➋ &#39;inc
+; =&gt; inc
+
+➌ (map inc [1 2])
+; =&gt; (2 3)
+
+➍ &#39;(map inc [1 2])
+; =&gt; (map inc [1 2])
+</code></pre></td></tr></table>
+</div>
+</div><p>当你在 REPL 中求值 <code>inc</code> 在 ➊ 处时，它会打印出 <code>inc</code> 所指的函数的文本表述。接下来，你在➋引用<code>inc</code>，所以结果是符号<code>inc</code>。然后，你在➌处求值一个熟悉的<code>map</code>应用程序，得到一个熟悉的结果。之后，你在➍处引用整个列表数据结构，结果是一个未求值的列表，包括<code>map</code>符号、<code>inc</code>符号和一个 Vector。</p>
+<p>现在你知道了 Clojure 的组织系统，让我们来看看如何使用它。</p>
+<h2 id=用-def-存储对象>用 def 存储对象</h2>
+<p>Clojure 中用于存储对象的主要工具是<code>def</code>。其他的工具，如<code>defn</code>，都是使用<code>def</code>。下面是一个 def 的应用实例。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def great-books [&#34;East of Eden&#34; &#34;The Glass Bead Game&#34;])
+; =&gt; #&#39;user/great-books
+
+great-books
+; =&gt; [&#34;East of Eden&#34; &#34;The Glass Bead Game&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码告诉 Clojure。</p>
+<ol>
+<li>用<code>great-books</code>和 var 之间的关联更新当前命名空间的 Map。</li>
+<li>找到一个空闲的存储架。</li>
+<li>将<code>[《伊甸园之东》《玻璃珠游戏》]</code>存放在架子上。</li>
+<li>将书架的地址写在 var 上。</li>
+<li>5.返回 var（在这个例子中，`#&lsquo;user/great-books&rsquo;）。</li>
+</ol>
+<p>这个过程被称为<em>interning</em>一个 var。 你可以使用`ns-interns&rsquo;与命名空间的符号到内含变量的 Map 进行交互。下面是你如何获得一个内部变量的 Map。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns-interns *ns*)
+; =&gt; {great-books #&#39;user/great-books}.
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以使用`get&rsquo;函数来获取一个特定的 var。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(get (ns-interns *ns*) &#39; great-books)
+; =&gt; #&#39;user/great-books
+</code></pre></td></tr></table>
+</div>
+</div><p>通过求值<code>(</code>ns-map <em>ns</em>)<code>,</code>你也可以得到命名空间在给定一个符号时用来查找 var 的完整 Map。<code>(ns-map *ns*)</code>给你一个非常大的 Map，我不会在这里打印，但可以试试</p>
+<p><code>#'user/great-books'是var的*读者形式。 我将在第七章解释更多关于读者形式。现在，只需知道你可以使用</code>#&lsquo;&lsquo;来抓取与后面的符号对应的 var；<code>#'user/great-books'让你在</code>user&rsquo;命名空间中使用与符号<code>great-books'相关的var。我们可以</code>deref&rsquo;变量来获得它们所指向的对象。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(deref #&#39;user/great-books)
+; =&gt; [&#34;East of Eden&#34; &#34;The Glass Bead Game&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>这就像告诉 Clojure，&ldquo;从 var 中获取书架号，去那个书架号，抓住上面的东西，然后给我！&rdquo;</p>
+<p>但是通常情况下，你只需要使用符号。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>great-books
+; =&gt; [&#34;East of Eden&#34; &#34;The Glass Bead Game&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>这就像告诉 Clojure，&ldquo;检索与 great-books 相关的 var，然后取消那个坏的杰克逊&rdquo;。</p>
+<p>到目前为止还不错，对吗？好吧，请做好准备，因为这个田园诗般的组织天堂即将被颠覆 用同样的符号再次调用<code>def</code>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def great-books [&#34;The Power of Bees&#34; &#34;Journey to Upstairs&#34;])
+great-books
+; =&gt; [&#34;The Power of Bees&#34; &#34;Journey to Upstairs&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p><img src=https://www.braveclojure.com/assets/images/cftbat/organization/bee-power.png alt=img></p>
+<p>var 已经更新了新的 Vector 的地址。这就像你在卡片目录中的卡片上的地址用了白笔，然后写了一个新地址。其结果是，你不能再要求 Clojure 找到第一个 Vector。这被称为<em>名称碰撞</em>。混乱! 无政府状态!</p>
+<p>你可能在其他编程语言中经历过这种情况。JavaScript 在这方面是臭名昭著的，它也发生在 Ruby 中。这是个问题，因为你可能无意中覆盖了你自己的代码，而且你也不能保证第三方库不会覆盖你的代码。Melvil 惊恐地退缩了! 幸运的是，Clojure 允许你创建任意多的命名空间，这样你就可以避免这些碰撞。</p>
+<h2 id=创建和切换到命名空间>创建和切换到命名空间</h2>
+<p>Clojure 有三种创建命名空间的工具：函数<code>create-ns</code>，函数<code>in-ns</code>，以及宏<code>ns</code>。你将在你的 Clojure 文件中主要使用<code>ns</code>宏，但我将推迟几页来解释它，因为它结合了许多工具，而且在我讨论其他工具之后，它更容易理解。</p>
+<p><code>create-ns</code>接收一个符号，如果它不存在，就用这个名字创建一个命名空间，并返回这个命名空间。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>user=&gt; (create-ns &#39;cheese.taxonomy)
+; =&gt; #&lt;Namespace cheese.taxonomy&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以使用返回的名字空间作为函数调用的参数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>user=&gt; (ns-name (create-ns &#39;cheese.taxonomy))
+; =&gt; cheese-taxonomy
+</code></pre></td></tr></table>
+</div>
+</div><p>在实践中，你可能永远不会在你的代码中使用<code>create-ns</code>，因为创建一个命名空间而不移入它并不是非常有用。使用<code>in-ns</code>更常见，因为如果命名空间不存在，它会创建命名空间，并**切换到它，如清单 6-1 所示。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>user=&gt; (in-ns &#39;cheese.analysis)
+; =&gt; #&lt;Namespace cheese.analysis&gt;
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>6-1. 使用 in-ns 创建一个命名空间并切换到该空间</li>
+</ol>
+<p>注意你的 REPL 提示符现在是<code>cheese.analysis></code>，表明你确实在你刚刚创建的新命名空间中。现在当你使用<code>def</code>时，它将在<code>cheese.analysis</code>命名空间中存储命名对象。</p>
+<p>但是如果你想使用其他命名空间的函数和数据怎么办？要做到这一点，你可以使用一个<em>完全合格的</em>符号。一般的形式是 namespace<code>/</code>name。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cheese.analysis=&gt; (in-ns &#39;cheese.taxonomy)
+cheese.taxonomy=&gt; (def cheddars [&#34;mild&#34; &#34;medium&#34; &#34;strong&#34; &#34;sharp&#34; &#34;extra sharp&#34;])
+cheese.taxonomy=&gt; (in-ns &#39;cheese.analysis)
+
+cheese.analysis=&gt; cheddars
+; =&gt; Exception: Unable to resolve symbol: cheddars in this context
+</code></pre></td></tr></table>
+</div>
+</div><p>这创建了一个新的命名空间，<code>cheese.taxonomy</code>，在该命名空间中定义了<code>cheddars</code>，然后切换回<code>cheese.analysis</code>命名空间。如果你试图在<code>cheese.analysis</code>中引用<code>cheese.taxonomy</code>命名空间的<code>cheddars</code>，你会得到一个异常，但是使用完全合格的符号可以。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cheese.analysis=&gt; cheese.taxonomy/cheddars
+; =&gt; [&#34;mild&#34; &#34;medium&#34; &#34;strong&#34; &#34;sharp&#34; &#34;extra sharp&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>输入这些完全合格的符号很快就会成为一种困扰。 比如说，我是一个极不耐烦的学者，专门研究符号学-au-fromage，或者研究与奶酪有关的符号。</p>
+<p>突然间，可能发生的最糟糕的事情发生了！在全世界范围内，神圣的和有可能发生的事情都发生了。在世界各地，神圣的、具有历史意义的奶酪都失踪了。威斯康星州的标准切达干酪：不见了! 图坦卡蒙的大奶酪罐：被偷了! 都灵奶酪：被骗取的奶酪所取代! 这有可能使世界因某种原因而陷入完全的混乱! 自然，作为一个杰出的奶酪研究者，我有责任解开这个谜团。与此同时，我正被光明会、共济会和足部族追捕！因为我是一名学者，所以我必须为他们提供帮助。</p>
+<p>因为我是一个学者，我试图用我知道的最好的方式来解决这个谜团&ndash;去图书馆研究这个狗屎。我可靠的助手 Clojure 陪着我。当我们从一个名字空间到另一个名字空间忙忙碌碌时，我喊着让 Clojure 把一个又一个东西交给我。</p>
+<p>但 Clojure 有点笨，很难弄清楚我指的是什么。在<code>user</code>命名空间中，我大声说："<code>join</code>! 给我<code>join'！"--我嘴里的唾沫星子飞了出来。"</code>RuntimeException: Unable to resolve symbol: join<code>," Clojure抱怨着回应。"看在布里的份上，把</code>clojure.string/join`交给我吧！&rdquo; 我反驳道，Clojure 尽职尽责地把我要找的函数交给我。</p>
+<p>我的声音变得沙哑了。我需要一些方法来告诉 Clojure 要给我什么对象，而不必每次都使用完全合格的符号。</p>
+<p>幸运的是，Clojure 提供了 &ldquo;refer &ldquo;和 &ldquo;alias &ldquo;工具，让我可以更简洁地对它吼叫。</p>
+<h3 id=引用>引用</h3>
+<p><code>refer</code>使你能够精细地控制你如何引用其他命名空间的对象。启动一个新的 REPL 会话并尝试以下操作。请记住，在 REPL 中这样玩命名空间是可以的，但你不希望你的 Clojure 文件看起来像这样；正确的文件结构方式在<a href=https://www.braveclojure.com/organization/#Anchor>&ldquo;真正的项目组织 &ldquo;第 133 页</a>中涉及。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>user=&gt; (in-ns &#39;cheese.taxonomy)
+cheese.taxonomy=&gt; (def cheddars [&#34;mild&#34; &#34;medium&#34; &#34;strong&#34; &#34;sharp&#34; &#34;extra sharp&#34;])
+cheese.taxonomy=&gt; (def bries [&#34;Wisconsin&#34; &#34;Somerset&#34; &#34;Brie de Meaux&#34; &#34;Brie de Melun&#34;])
+cheese.taxonomy=&gt; (in-ns &#39;cheese.analysis)
+cheese.analysis=&gt; (clojure.core/refer &#39;cheese.taxonomy)
+cheese.analysis=&gt; bries
+; =&gt; [&#34;Wisconsin&#34; &#34;Somerset&#34; &#34;Brie de Meaux&#34; &#34;Brie de Melun&#34;]
+
+cheese.analysis=&gt; cheddars
+; =&gt; [&#34;mild&#34; &#34;medium&#34; &#34;strong&#34; &#34;sharp&#34; &#34;extra sharp&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码创建了一个 &ldquo;cheese.taxonomy &ldquo;命名空间和其中的两个 Vector。 <code>cheddars</code>和<code>bries</code>。然后它创建并移动到一个新的命名空间，称为<code>cheese.analysis</code>。用命名空间的符号调用<code>refer</code>可以让你引用相应的命名空间的对象，而不需要使用完全限定的符号。它通过更新当前命名空间的符号/对象 Map 来实现这一目的。你可以看到像这样的新条目。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cheese.analysis=&gt; (clojure.core/get (clojure.core/ns-map clojure.core/*ns*) &#39;bries)
+; =&gt; #&#39;cheese.taxonomy/bries
+
+cheese.analysis=&gt; (clojure.core/get (clojure.core/ns-map clojure.core/*ns*) &#39;cheddars)
+; =&gt; #&#39;cheese.taxonomy/cheddars
+</code></pre></td></tr></table>
+</div>
+</div><p>这就好像 Clojure</p>
+<ol>
+<li>在<code>cheese.taxonomy</code>命名空间上调用<code>ns-interns</code>。</li>
+<li>将其与当前命名空间的<code>ns-map</code>合并。</li>
+<li>将结果作为当前命名空间的新的`ns-map&rsquo;。</li>
+</ol>
+<p>当你调用<code>refer</code>时，你也可以把过滤器<code>:only</code>, <code>:exclude</code>, 和<code>:rename</code>传递给它。正如名字所暗示的，<code>:only</code>和<code>:exclude</code>限制了哪些符号/变量 Map 被合并到当前命名空间的<code>ns-map</code>。 <code>:rename</code>允许你使用不同的符号来表示被合并的变量。如果我们将前面的例子修改为使用<code>:only</code>，会发生以下情况。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cheese.analysis=&gt; (clojure.core/refer &#39;cheese.taxonomy :only [&#39;bries])
+cheese.analysis=&gt; bries
+; =&gt; [&#34;Wisconsin&#34; &#34;Somerset&#34; &#34;Brie de Meaux&#34; &#34;Brie de Melun&#34;]
+cheese.analysis=&gt; cheddars 
+; =&gt; RuntimeException: 无法解决符号：cheddars
+</code></pre></td></tr></table>
+</div>
+</div><p>下面是<code>:exclude</code>的操作。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cheese.analysis=&gt; (clojure.core/refer &#39;cheese.taxonomy :only [&#39;bries])
+cheese.analysis=&gt; bries
+; =&gt; [&#34;Wisconsin&#34; &#34;Somerset&#34; &#34;Brie de Meaux&#34; &#34;Brie de Melun&#34;]
+cheese.analysis=&gt; cheddars 
+; =&gt; RuntimeException: Unable to resolve symbol: cheddars
+</code></pre></td></tr></table>
+</div>
+</div><p>最后，一个<code>:rename</code>的例子。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cheese.analysis=&gt; (clojure.core/refer &#39;cheese.taxonomy :rename {&#39;bries &#39;yummy-bries})
+cheese.analysis=&gt; bries
+; =&gt; RuntimeException: Unable to resolve symbol: bries
+cheese.analysis=&gt; yummy-bries
+; =&gt; [&#34;Wisconsin&#34; &#34;Somerset&#34; &#34;Brie de Meaux&#34; &#34;Brie de Melun&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>注意，在这些最后的例子中，我们必须使用<code>clojure.core</code>中所有对象的完全合格名称，如<code>clojure.core/ns-map</code>和<code>clojure.core/refer</code>。我们不需要在<code>user</code>命名空间中这样做。这是因为 REPL 在<code>user</code>命名空间中自动引用<code>clojure.core</code>。当你创建一个新的命名空间时，你可以通过求值<code>(clojure.core/refer-clojure)</code>来简化你的生活；这将引用 clojure.core 命名空间，从现在起我将使用它。在例子中你不会看到<code>clojure.core/refer</code>，而只会看到<code>refer</code>。</p>
+<p>另一件需要注意的事情是，你可以完全自由地组织你的函数和数据，跨越命名空间。这让你可以合理地将相关的函数和数据归入同一命名空间。</p>
+<p>有时你可能希望一个函数只对同一命名空间内的其他函数有效。Clojure 允许你使用<code>defn-</code>来定义<em>私有</em>的函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;cheese.analysis)
+;; Notice the dash after &#34;defn&#34;
+(defn- private-function
+  &#34;Just an example function that does nothing&#34;
+  [])
+</code></pre></td></tr></table>
+</div>
+</div><p>如果你试图从其他命名空间调用这个函数或引用它，Clojure 将抛出一个异常。你可以在求值➊和➋的代码时看到这一点。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cheese.analysis=&gt; (in-ns &#39;cheese.taxonomy)
+cheese.taxonomy=&gt; (clojure.core/refer-clojure)
+➊ cheese.taxonomy=&gt; (cheese.analysis/private-function)
+➋ cheese.taxonomy=&gt; (refer &#39;cheese.analysis :only [&#39;private-function])
+</code></pre></td></tr></table>
+</div>
+</div><p>正如你所看到的，即使你明确地 &ldquo;引用 &ldquo;这个函数，你也不能使用其他命名空间的函数，因为你把它变成了私有的。(如果你想狡猾一点，你仍然可以使用神秘的语法`@#&lsquo;some/private-var&rsquo;来访问私有变量，但你很少想这样做)。</p>
+<h3 id=alias>alias</h3>
+<p>与<code>refer</code>相比，<code>alias</code>相对简单。它所做的只是让你缩短一个命名空间的名称，以便使用完全合格的符号。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cheese.analysis=&gt; (clojure.core/alias &#39;taxonomy &#39;cheese.taxonomy)
+cheese.analysis=&gt; taxonomy/bries
+; =&gt; [&#34;Wisconsin&#34; &#34;Somerset&#34; &#34;Brie de Meaux&#34; &#34;Brie de Melun&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码让我们使用来自<code>cheese.taxonomy</code>命名空间的调用符号，并使用较短的别名<code>taxonomy</code>。</p>
+<p><code>refer</code>和<code>alias</code>是你引用当前命名空间以外的对象的两个基本工具! 它们是 REPL 开发的好帮手。</p>
+<p>然而，你不可能在 REPL 中创建整个程序。在下一节中，我将介绍你需要知道的一切，以组织一个真正的项目，使源代码在文件系统中生存。</p>
+<h2 id=真正的项目组织>真正的项目组织</h2>
+<p>现在我已经介绍了 Clojure 组织系统的构建模块，我将向你展示如何在实际项目中使用它们。我将讨论文件路径和命名空间名称之间的关系，解释如何用<code>require</code>和<code>use</code>加载文件，并展示如何使用<code>ns</code>来设置一个命名空间。</p>
+<h3 id=文件路径和命名空间名称之间的关系>文件路径和命名空间名称之间的关系</h3>
+<p>为了一石二鸟（或者用一颗种子喂养两只鸟，这取决于你是多么的嬉皮士），我将介绍更多关于命名空间的内容，同时我们将通过绘制国际奶酪大盗的抢劫地点来抓捕这个讨厌的大盗。运行以下程序。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>lein new app the-divine-cheese-code
+</code></pre></td></tr></table>
+</div>
+</div><p>这应该创建一个目录结构，看起来像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>| .gitignore
+| doc
+| | intro.md
+| project.clj
+| README.md
+| resources
+| src
+| | the_divine_cheese_code
+| | | core.clj
+| test
+| | the_divine_cheese_code
+| | | core_test.clj
+</code></pre></td></tr></table>
+</div>
+</div><p>现在，打开<em>src/the_divine_cheese_code/core.clj</em>。你应该在第一行看到这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:gen-class))
+</code></pre></td></tr></table>
+</div>
+</div><p><code>ns</code>是在 Clojure 中创建和管理命名空间的主要方式。我很快就会对它进行全面的解释。不过现在，只需知道这一行与我们在清单 6-1 中使用的<code>in-ns</code>函数非常相似。如果一个命名空间不存在，它就创建一个命名空间，然后切换到它。我在第 12 章也详细介绍了<code>(:gen-class)</code>。</p>
+<p>命名空间的名字是<code>the-divine-cheese-code.core</code>。在 Clojure 中，命名空间的名称和声明命名空间的文件路径之间有一个一对一的 Map，根据以下约定。</p>
+<ul>
+<li>当你用<code>lein</code>创建一个目录时（就像你在这里做的那样），源代码的根默认为<em>src</em>。</li>
+<li>名称空间中的破折号对应于文件系统中的下划线。所以<code>the-divine-cheese-code</code>在文件系统中被 Map 为<em>the_divine_cheese_code</em>。</li>
+<li>命名空间名称中的句号（<code>.</code>）前面的成分对应于一个目录。例如，由于<code>the-divine-cheese-code.core</code>是命名空间的名称，<em>the_divine_cheese_code</em>是一个目录。</li>
+<li>命名空间的最后一个组成部分对应于扩展名为*.clj<em>的文件；<code>core</code>被 Map 到</em>core.clj*。</li>
+</ul>
+<p>你的项目将有一个命名空间，<code>the-divine-cheese-code.visualization.svg</code>。现在继续为它创建文件。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>mkdir src/the_divine_cheese_code/visualization
+touch src/the_divine_cheese_code/visualization/svg.clj
+</code></pre></td></tr></table>
+</div>
+</div><p>注意，文件系统的路径遵循这些惯例。有了命名空间和文件系统之间的关系，我们来看看<code>require</code>和<code>use</code>。</p>
+<h3 id=要求和使用命名空间>要求和使用命名空间</h3>
+<p>在<code>the-divine-cheese-code.core</code>命名空间的代码将使用<code>the-divine-cheese-code.visualization.svg</code>命名空间的函数来创建 SVG 标记。为了使用<code>svg</code>的函数，<code>core</code>将不得不<em>要求它。但首先，让我们在</em>svg.clj*中添加一些代码。让它看起来像这样（你以后会添加更多）。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.visualization.svg)
+
+(defn latlng-&gt;point
+  &#34;Convert lat/lng map to comma-separated string&#34; 
+  [latlng]
+  (str (:lat latlng) &#34;,&#34; (:lng latlng)))
+
+(defn points
+  [locations]
+  (clojure.string/join &#34; &#34; (map latlng-&gt;point locations)))
+</code></pre></td></tr></table>
+</div>
+</div><p>这定义了两个函数，<code>latlng->point</code>和<code>points</code>，你将用它们来把一串经纬度坐标转换成一串点。 要使用<em>core.clj</em>文件中的这段代码，你必须<code>require</code>它。<code>require</code>接收一个指定命名空间的符号，并确保该命名空间存在并准备使用；在这种情况下，当你调用<code>(require 'the-divine-cheese</code>-code.visualization.svg)<code>，Clojure读取并求值相应的文件。通过求值该文件，它创建了</code>the-divine-cheese-code.visualization.svg<code>命名空间，并在该命名空间中定义了函数</code>latlng->point<code>和</code>points`。即使文件<em>svg.clj</em>在你的项目目录中，Clojure 在运行你的项目时也不会自动求值它；你必须明确告诉 Clojure 你想使用它。</p>
+<p>在要求命名空间之后，你可以<em>参考</em>它，这样你就不必使用完全合格的名称来引用函数。继续要求<code>the-divine-cheese-code.visualization.svg</code>，并添加<code>heists</code>序列，使<em>core.clj</em>与列表相符。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core)
+;; Ensure that the SVG code is evaluated
+(require &#39;the-divine-cheese-code.visualization.svg)
+;; Refer the namespace so that you don&#39;t have to use the 
+;; fully qualified name to reference svg functions
+(refer &#39;the-divine-cheese-code.visualization.svg)
+
+(def heists [{:location &#34;Cologne, Germany&#34;
+              :cheese-name &#34;Archbishop Hildebold&#39;s Cheese Pretzel&#34;
+              :lat 50.95
+              :lng 6.97}
+             {:location &#34;Zurich, Switzerland&#34;
+              :cheese-name &#34;The Standard Emmental&#34;
+              :lat 47.37
+              :lng 8.55}
+             {:location &#34;Marseille, France&#34;
+              :cheese-name &#34;Le Fromage de Cosquer&#34;
+              :lat 43.30
+              :lng 5.37}
+             {:location &#34;Zurich, Switzerland&#34;
+              :cheese-name &#34;The Lesser Emmental&#34;
+              :lat 47.37
+              :lng 8.55}
+             {:location &#34;Vatican City&#34;
+              :cheese-name &#34;The Cheese of Turin&#34;
+              :lat 41.90
+              :lng 12.45}])
+
+(defn -main
+  [&amp; args]
+  (println (points heists)))
+</code></pre></td></tr></table>
+</div>
+</div><p>现在你有一连串的 heist 位置可以使用，你可以使用<code>visualization.svg</code>命名空间的函数。<code>main</code>函数只是将<code>points</code>函数应用于<code>heists</code>。如果你用<code>lein run</code>运行该项目，你应该看到这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>50.95,6.97 47.37,8.55 43.3,5.37 47.37,8.55 41.9,12.45
+</code></pre></td></tr></table>
+</div>
+</div><p>万岁! 你离抓到那个偷窃发酵乳的人又近了一步! 使用<code>require</code>成功加载了<code>the-divine-cheese-code.visualization.svg</code>以供使用。</p>
+<p><code>require</code>的细节实际上有点复杂，但为了实用，你可以认为<code>require</code>是告诉 Clojure 以下内容。</p>
+<ol>
+<li>如果你已经用这个符号（<code>the-divine-cheese-code.visualization.svg</code>）调用了<code>require</code>，则不做任何事情。</li>
+<li>否则，使用<a href=https://www.braveclojure.com/organization/#Anchor-3>&ldquo;文件路径和命名空间名称之间的关系 &ldquo;第 133 页</a>中描述的规则找到与该符号对应的文件。在这种情况下，Clojure 找到<code>src/the_divine_cheese_code/visualization/svg.clj</code>。</li>
+</ol>
+<p>读取并求值该文件的内容。Clojure 希望该文件声明一个与它的路径相对应的命名空间（我们的文件就是如此）。</p>
+<p><code>require</code>也可以让你在需要一个命名空间时使用<code>:as</code>或<code>alias</code>来别名它。这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(require &#39;[the-divine-cheese-code.visualization.svg :as svg] )
+</code></pre></td></tr></table>
+</div>
+</div><p>相当于这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(require &#39;the-divine-cheese-code.visualization.svg)
+(alias &#39;svg &#39;the-divine-cheese-code.visualization.svg)
+</code></pre></td></tr></table>
+</div>
+</div><p>现在你可以使用别名的命名空间了。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(svg/points heists)
+; =&gt; &#34;50.95,6.97 47.37,8.55 43.3,5.37 47.37,8.55 41.9,12.45&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>Clojure 提供了另一种捷径。函数<code>use</code>不需要单独调用<code>require</code>和<code>refer</code>，而是同时调用。在生产代码中使用<code>use</code>是不可取的，但当你在 REPL 中做实验，想快速获得一些函数时，它就很方便。例如，这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(require &#39;the-divine-cheese-code.visualization.svg)
+(refer &#39;the-divine-cheese-code.visualization.svg)
+</code></pre></td></tr></table>
+</div>
+</div><p>相当于这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(use &#39;the-divine-cheese-code.visualization.svg)
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以用<code>use</code>来别名一个命名空间，就像你可以用<code>require</code>一样。这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(require &#39;the-divine-cheese-code.visualization.svg)
+(refer &#39;the-divine-cheese-code.visualization.svg)
+(alias &#39;svg &#39;the-divine-cheese-code.visualization.svg)
+</code></pre></td></tr></table>
+</div>
+</div><p>相当于清单 6-2 中的代码，其中也显示了函数调用中使用的别名空间。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(use &#39;[the-divine-cheese-code.visualization.svg :as svg])
+(= svg/points points)
+; =&gt; true
+
+(= svg/latlng-&gt;point latlng-&gt;point)
+; =&gt; true
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>6-2. 有时，既使用又别名一个命名空间是很方便的。</li>
+</ol>
+<p>在这里用<code>use</code>别名命名空间似乎是多余的，因为<code>use</code>已经引用了命名空间（这让你可以简单地调用<code>points</code>而不是<code>svg/points</code>）。但在某些情况下，这很方便，因为<code>use</code>和<code>refer</code>有相同的选项（<code>:only</code>, <code>:exclude</code>, <code>:as</code>, 和<code>:rename</code>）。当你跳过引用一个符号时，你可能想用<code>use</code>来别名一个命名空间。你可以这样使用。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(require &#39;the-divine-cheese-code.visualization.svg)
+(refer &#39;the-divine-cheese-code.visualization.svg :as :only [&#39;point])
+</code></pre></td></tr></table>
+</div>
+</div><p>或者你可以使用清单 6-3 中的<code>use</code>形式（其中还包括如何调用函数的例子）。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(use &#39;[the-divine-cheese-code.visualization.svg :as svg :only [points]])
+(refer &#39;the-divine-cheese-code.visualization.svg :as :only [&#39;points])
+(= svg/points points)
+; =&gt; true
+
+;; We can use the alias to reach latlng-&gt;point
+svg/latlng-&gt;point
+; This doesn&#39;t throw an exception
+
+;; But we can&#39;t use the bare name
+latlng-&gt;point
+; This does throw an exception!
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>在你使用一个命名空间后将其别名化，可以让你参考你排除的符号。</li>
+</ol>
+<p>如果你在 REPL 中尝试清单 6-3，并且<code>latlng->point</code>没有抛出一个异常，这是因为你在清单 6-2 中引用了<code>latlng->point</code>。你需要重新启动你的 REPL 会话，使代码表现得如清单 6-3 所示。</p>
+<p>这里的启示是，<code>require</code>和<code>use</code>加载文件，并可选择<code>alias</code>或<code>refer</code>其命名空间。当你写 Clojure 程序和阅读别人写的代码时，你可能会遇到更多的<code>require'和</code>use&rsquo;的写法，这时，阅读 Clojure 的 API 文档（<em><a href=http://clojure.org/libs/>http://clojure.org/libs/</a></em>）来了解发生了什么是有意义的。然而，到目前为止，你所学到的关于<code>require</code>和<code>use</code>的内容应该能满足你 95.3%的需求。</p>
+<h3 id=ns-宏>＃＃＃NS 宏</h3>
+<p>现在是时候看看<code>ns</code>宏了。到目前为止所涉及的工具&ndash;<code>in-ns</code>, <code>refer</code>, <code>alias</code>, <code>require</code>, 和 <code>use</code>&ndash;最常在你使用 REPL 时使用。在你的源代码文件中，你通常会使用<code>ns</code>宏，因为它允许你简洁地使用迄今为止描述的工具，并提供其他有用的功能。在本节中，你将了解一个<code>ns</code>调用如何结合<code>require</code>、<code>use</code>、<code>in-ns</code>、<code>alias</code>和<code>refer</code>。</p>
+<p><code>ns</code>做的一个有用的任务是默认引用<code>clojure.core</code>命名空间。这就是为什么你可以从<code>the-divine-cheese-code.core</code>中调用<code>println</code>，而不使用完全限定的名称<code>clojure.core/println</code>。</p>
+<p>你可以用<code>:refer-clojure</code>来控制从<code>clojure-core</code>引用的内容，它的选项与<code>refer</code>相同。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:refer-clojure :exclude [println])
+</code></pre></td></tr></table>
+</div>
+</div><p>如果你在<em>divine_cheese_code.core.clj</em>的开头调用这个，会破坏你的代码，迫使你在<code>-main'函数中使用</code>clojure.core/println&rsquo;。</p>
+<p>在<code>ns</code>中，<code>(:</code>refer-clojure)`的形式被称为<em>reference</em>。这对你来说可能看起来很奇怪。这个引用是一个函数调用？一个宏？它是什么？你将在第 7 章中了解更多关于底层机器的知识。现在，你只需要了解每个引用如何 Map 到函数调用。例如，前面的代码就相当于这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;the-divine-cheese-code.core)
+(refer &#39;clojure.core :exclude [&#39;println])
+</code></pre></td></tr></table>
+</div>
+</div><p>在 &ldquo;ns &ldquo;中，有六种可能的引用。</p>
+<ul>
+<li><code>(:refer-clojure)</code>.</li>
+<li>&ldquo;(:require)"。</li>
+<li><code>(:use)</code></li>
+<li><code>(:import)</code></li>
+<li><code>(:load)</code></li>
+<li><code>(:gen-class)</code>。</li>
+</ul>
+<p><code>(:import)</code>和<code>(:gen-class)</code>将在第 12 章介绍。我将不介绍<code>(:load)</code>，因为它很少被使用。</p>
+<p><code>(:require)</code>的工作方式很像<code>require</code>函数。例如，这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:require the-divine-cheese-code.visualization.svg))
+</code></pre></td></tr></table>
+</div>
+</div><p>相当于这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;the-divine-cheese-code.core)
+(require &#39;the-divine-cheese-code.visualization.svg)
+</code></pre></td></tr></table>
+</div>
+</div><p>注意，在 &ldquo;ns &ldquo;形式中（与 &ldquo;in-ns &ldquo;函数调用不同），你不需要用&rdquo;&lsquo;&lsquo;来引用你的符号。在 &ldquo;ns &ldquo;中，你从来不需要引用符号。</p>
+<p>你也可以<code>alias</code>一个你在<code>ns</code>内<code>require</code>的库，就像你调用函数时一样。这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:require [the-divine-cheese-code.visualization.svg :as svg])
+</code></pre></td></tr></table>
+</div>
+</div><p>相当于这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;the-divine-cheese-code.core)
+(require [&#39;the-divine-cheese-code.visualization.svg :as &#39;svg])
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以在一个<code>(:require)</code>引用中要求多个库，如下所示。 这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:require [the-divine-cheese-code.visualization.svg :as svg])
+            [clojure.java.browse :as browse]))
+</code></pre></td></tr></table>
+</div>
+</div><p>相当于这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;the-divine-cheese-code.core)
+(require [&#39;the-divine-cheese-code.visualization.svg :as &#39;svg])
+(require [&#39;clojure.java.browse :as &#39;browse])
+</code></pre></td></tr></table>
+</div>
+</div><p>然而，<code>(:require)</code>引用和<code>require</code>函数之间的一个区别是，引用也允许你引用名字。这一点。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:require [the-divine-cheese-code.visualization.svg :refer [point]))
+</code></pre></td></tr></table>
+</div>
+</div><p>相当于这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;the-divine-cheese-code.core)
+(require &#39;the-divine-cheese-code.visualization.svg)
+(refer &#39;the-divine-cheese-code.visualization.svg :only [&#39;point])
+</code></pre></td></tr></table>
+</div>
+</div><p>你也可以引用所有的符号（注意<code>:all</code>关键字）。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:require [the-divine-cheese-code.visualization.svg :refer :all]))
+</code></pre></td></tr></table>
+</div>
+</div><p>这就相当于这样做了。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;the-divine-cheese-code.core)
+(require &#39;the-divine-cheese-code.visualization.svg)
+(refer &#39;the-divine-cheese-code.visualization.svg)
+</code></pre></td></tr></table>
+</div>
+</div><p>这是要求代码、别名命名空间和引用符号的首选方式。建议你不要使用<code>(:use)</code>，但由于你很可能会遇到它，所以知道它是如何工作的很好。你知道该怎么做。这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:use clojure.java.browse))
+</code></pre></td></tr></table>
+</div>
+</div><p>这样做。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;the-divine-cheese-code.core)
+(use &#39;clojure.java.browse)
+</code></pre></td></tr></table>
+</div>
+</div><p>而这一点。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:use [clojure.java browse io])
+</code></pre></td></tr></table>
+</div>
+</div><p>这样做。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in-ns &#39;the-divine-cheese-code.core)
+(use &#39;clojure.java.browse)
+(use &#39;clojure.java.io)
+</code></pre></td></tr></table>
+</div>
+</div><p>注意，当你在<code>:use</code>后面加上一个 Vector 时，它把第一个符号作为<em>base</em>，然后用后面的每个符号调用<code>use</code>。</p>
+<p>哦，我的天哪，就是这样! 现在你可以像专家一样使用<code>ns</code>了! 你需要这样做，该死的，因为那个<em>voleur des fromages</em>（他们可能在法语中这样说）仍然在肆意妄为。还记得他/她吗？</p>
+<p>∮∮抓小偷</p>
+<p>我们不能让这个掠夺帕尔马干酪的人带着更多的干酪离开！是时候完成根据坐标画线的工作了。现在是时候根据盗窃案的坐标来完成画线了！这肯定会发现一些问题。这肯定会发现一些问题!</p>
+<p>使用每个抢劫案的纬度坐标，你将在一个 SVG 图像中连接这些点。但是，如果你用给定的坐标画线，结果看起来就不对了，原因有二。首先，纬度坐标是由南向北上升的，而 SVG 的 Y 坐标是由上向下上升的。换句话说，你需要翻转坐标，否则绘图就会颠倒过来。</p>
+<p>第二，绘图会非常小。为了解决这个问题，你将通过平移和缩放来放大它。这就像把一张看起来像图 6-1a 的图变成图 6-1b。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/organization/svg-before.png alt>
+<img src=https://www.braveclojure.com/assets/images/cftbat/organization/svg-after.png alt></p>
+<p>图 6-1：通过翻转、平移和缩放纬度坐标来制作一张 SVG 图片。</p>
+<p>说实话，这些都是完全随意的，它已经与代码组织没有直接关系了，但是它很有趣，我想你会有一个很好的时间来浏览这些代码的 使你的<em>svg.clj</em>文件与清单 6-4 一致。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.visualization.svg
+  (:require [clojure.string :as s])
+  (:refer-clojure :exclude [min max])
+
+➊ （defn comparator-over-maps
+  [比较-fn ks］
+  (fn [maps]
+➋ (zipmap ks
+➌ (map (fn [k] (apply comparison-fn (map k maps)))
+                 ks))))
+
+➍ (def min (comparator-over-maps clojure.core/min [:lat :lng])
+(def max (comparator-over-maps clojure.core/max [:lat :lng]))
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>6-3. 构建 Map 比较函数</li>
+</ol>
+<p>你在➊处定义了<code>comparator-over-maps</code>函数。这可能是最棘手的部分，所以请忍受一下。 <code>comparator-over-maps</code>是一个返回一个函数的函数。返回的函数使用所提供的比较函数<code>comparison-fn</code>对参数<code>ks</code>提供的键值进行比较。</p>
+<p>你使用<code>comparator-over-map</code>来构造<code>min</code>和<code>max</code>函数➍，你将用它们来寻找我们图形的左上角和右下角。下面是`min&rsquo;的操作。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(min [{:a 1 :b 3} {:a 5 :b 0}] )
+; =&gt; {:a 1 :b 0}
+</code></pre></td></tr></table>
+</div>
+</div><p>当你调用<code>min</code>时，它调用<code>zipmap</code>，它接受两个参数，都是 seq，并返回一个新的 map。第一个序列的元素成为键，第二个序列的元素成为值。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(zipmap [:a :b] [1 2])
+; =&gt; {:a 1 :b 2}。
+</code></pre></td></tr></table>
+</div>
+</div><p>在 ，<code>zipmap</code>的第一个参数是<code>ks</code>，所以<code>ks</code>的元素将是返回 Map 的键。第二个参数是在➌的 Map 调用的结果。那个 Map 调用实际上是在进行比较。</p>
+<p>最后，在➍，你使用<code>comparator-over-maps</code>来创建比较函数。如果你把图纸看作是刻在一个矩形里，那么<code>min</code>是矩形中最接近（0，0）的角，<code>max</code>是离它最远的角。</p>
+<p>下面是代码的下一部分。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback> (defn translate-to-00
+  [locations]
+  (let [mincoords (min locations)]
+    (map #(merge-with - % mincoords) locations)))
+
+ (defn scale
+  [width height locations]
+  (let [maxcoords (max locations)
+        ratio {:lat (/ height (:lat maxcoords))
+               :lng (/ width (:lng maxcoords))}]
+    (map #(merge-with * % ratio) locations)))
+</code></pre></td></tr></table>
+</div>
+</div><p><code>translate-to-00</code>，定义在 ，工作原理是找到我们位置的<code>min'，然后从每个位置减去这个值。它使用</code>merge-with`，其工作原理如下。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(merge-with - {:lat 50 :lng 10} {:lat 5 :lng 5})
+; =&gt; {:lat 45 :lng 5}
+</code></pre></td></tr></table>
+</div>
+</div><p>然后我们定义函数<code>scale</code>，它将每个点乘以最大经纬度与所需高度和宽度之间的比率。</p>
+<p>下面是<em>svg.clj</em>的其余代码。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn latlng-&gt;point
+  &#34;Convert lat/lng map to comma-separated string&#34; 
+  [latlng]
+  (str (:lat latlng) &#34;,&#34; (:lng latlng)))
+
+(defn points
+  &#34;Given a seq of lat/lng maps, return string of points joined by space&#34;
+  [locations]
+  (s/join &#34; &#34; (map latlng-&gt;point locations)))
+
+(defn line
+  [points]
+  (str &#34;&lt;polyline points=\&#34;&#34; points &#34;\&#34; /&gt;&#34;))
+
+(defn transform
+  &#34;Just chains other functions&#34;
+  [width height locations]
+  (-&gt;&gt; locations
+       translate-to-00
+       (scale width height)))
+
+(defn xml
+  &#34;svg &#39;template&#39;, which also flips the coordinate system&#34;
+  [width height locations]
+  (str &#34;&lt;svg height=\&#34;&#34; height &#34;\&#34; width=\&#34;&#34; width &#34;\&#34;&gt;&#34;
+       ;; These two &lt;g&gt; tags change the coordinate system so that
+       ;; 0,0 is in the lower-left corner, instead of SVG&#39;s default
+       ;; upper-left corner
+       &#34;&lt;g transform=\&#34;translate(0,&#34; height &#34;)\&#34;&gt;&#34;
+       &#34;&lt;g transform=\&#34;rotate(-90)\&#34;&gt;&#34;
+       (-&gt; (transform width height locations)
+           points
+           line)
+       &#34;&lt;/g&gt;&lt;/g&gt;&#34;
+       &#34;&lt;/svg&gt;&#34;))
+</code></pre></td></tr></table>
+</div>
+</div><p>这里的函数非常简单明了。它们只是接收<code>{:lat x :lng y}</code>Map，并对其进行转换，以便创建一个 SVG。<code>latlng->point</code>返回一个字符串，可用于在 SVG 标记中定义一个点。<code>points</code>将<code>lat</code>/<code>lng</code>Map 的序列转换为一个以空格分隔的点的字符串。 <code>line</code>返回连接所有给定空间分隔的点字符串的 SVG 标记。 <code>transform</code>接收一个位置序列，将它们翻译成从(0, 0)开始的点，并将它们缩放到给定的宽度和高度。最后，<code>xml</code>产生标记，用 SVG 显示给定的位置。</p>
+<p>有了<em>svg.clj</em>的所有代码，现在让<em>core.clj</em>看起来像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ns the-divine-cheese-code.core
+  (:require [clojure.java.browse :as browse]
+            [the-divine-cheese-code.visualization.svg :refer [xml]])
+  (:gen-class))
+
+(def heists [{:location &#34;Cologne, Germany&#34;
+              :cheese-name &#34;Archbishop Hildebold&#39;s Cheese Pretzel&#34;
+              :lat 50.95
+              :lng 6.97}
+             {:location &#34;Zurich, Switzerland&#34;
+              :cheese-name &#34;The Standard Emmental&#34;
+              :lat 47.37
+              :lng 8.55}
+             {:location &#34;Marseille, France&#34;
+              :cheese-name &#34;Le Fromage de Cosquer&#34;
+              :lat 43.30
+              :lng 5.37}
+             {:location &#34;Zurich, Switzerland&#34;
+              :cheese-name &#34;The Lesser Emmental&#34;
+              :lat 47.37
+              :lng 8.55}
+             {:location &#34;Vatican City&#34;
+              :cheese-name &#34;The Cheese of Turin&#34;
+              :lat 41.90
+              :lng 12.45}])
+
+(defn url
+  [filename]
+  (str &#34;file:///&#34;
+       (System/getProperty &#34;user.dir&#34;)
+       &#34;/&#34;
+       filename))
+
+(defn template
+  [contents]
+  (str &#34;&lt;style&gt;polyline { fill:none; stroke:#5881d8; stroke-width:3}&lt;/style&gt;&#34;
+       contents))
+
+(defn -main
+  [&amp; args]
+  (let [filename &#34;map.html&#34;]
+    (-&gt;&gt; heists
+         (xml 50 100)
+         template
+         (spit filename))
+    (browse/browse-url (url filename))))
+</code></pre></td></tr></table>
+</div>
+</div><p>这里没有太复杂的事情发生。在 &ldquo;main &ldquo;中，你使用 &ldquo;xml &ldquo;和 &ldquo;template &ldquo;函数建立绘图，用 &ldquo;spit &ldquo;将绘图写入一个文件，然后用 &ldquo;browse/browse-url &ldquo;打开它。你现在应该试试! 运行<code>lein run</code>，你会看到类似图 6-2 的东西。</p>
+<p>图 6-2: 抢劫模式的最终 SVG!</p>
+<p>等一下 ……这看起来很像 ……这看起来很像一个 lambda。Clojure 的标志是一个 lambda . ……哦，我的天啊! Clojure，一直以来都是你!</p>
+<h2 id=总结>总结</h2>
+<p>在本章中你学到了很多东西。在这一点上，你应该拥有所有你需要的工具来开始组织你的项目。你现在知道命名空间组织了符号和 vars 之间的 Map，vars 是对 Clojure 对象（数据结构、函数等）的引用。 <code>def</code>存储一个对象，并用符号和指向该对象的 var 之间的 Map 来更新当前命名空间。你可以用<code>defn-</code>创建私有函数。</p>
+<p>Clojure 允许你用<code>create-ns</code>创建命名空间，但通常使用<code>in-ns</code>更有用，它也会切换到命名空间。你可能只在 REPL 中使用这些函数。当你在 REPL 中时，你总是<em>在</em>当前命名空间中。当你在文件中而不是在 REPL 中定义名字空间时，你应该使用 <code>ns</code> 宏，名字空间和它在文件系统中的路径之间是一对一的关系。</p>
+<p>你可以通过使用完全限定的名称来引用其他命名空间中的对象，如<code>cheese.taxonomy/cheddars</code>。 <code>refer</code>可以让你使用其他命名空间的名字，而不需要完全限定它们，<code>alias</code>可以让你在写出完全限定的名字时，使用一个更短的名字来命名空间。</p>
+<p><code>require</code>和<code>use</code>确保一个名字空间的存在并准备好被使用，并且可以选择让你<code>refer</code>和<code>alias</code>相应的名字空间。你应该使用<code>ns</code>在你的源文件中调用<code>require</code>和<code>use</code>。*<a href=https://gist.github.com/ghoseb/287710/>Clojure ns syntax cheat-sheet - GitHub</a>*是使用<code>ns</code>的所有变化的一个很好的参考。</p>
+<p>最后，也是最重要的一点，做一个俗气的人并不容易。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/organization/cheese.png alt></p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/clojure/>clojure</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/chapter7/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Chapter7 炼金术</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/chapter5/>
+<span class="next-text nav-default">Chapter5 函数式编程</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

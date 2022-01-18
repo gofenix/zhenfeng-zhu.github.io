@@ -1,0 +1,985 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>openfaas-workshop-lab3 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="实验 3&amp;ndash;函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab3\`s &amp;amp;&amp;amp; cd lab3 创建一个新的函数 有两种方法来创建一个新的函数"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab3/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="openfaas-workshop-lab3">
+<meta property="og:description" content="实验 3&ndash;函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab3\`s && cd lab3 创建一个新的函数 有两种方法来创建一个新的函数">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab3/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-06-28T17:29:56+00:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="openfaas-workshop-lab3">
+<meta itemprop=description content="实验 3&ndash;函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab3\`s && cd lab3 创建一个新的函数 有两种方法来创建一个新的函数"><meta itemprop=datePublished content="2018-06-28T17:29:56+00:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="4496">
+<meta itemprop=keywords content="openfaas,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="openfaas-workshop-lab3">
+<meta name=twitter:description content="实验 3&ndash;函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab3\`s && cd lab3 创建一个新的函数 有两种方法来创建一个新的函数"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>openfaas-workshop-lab3</h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-28 </span>
+<span class=more-meta> 约 4496 字 </span>
+<span class=more-meta> 预计阅读 9 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#实验-3--函数介绍>实验 3&ndash;函数介绍</a>
+<ul>
+<li><a href=#创建一个新的函数>创建一个新的函数</a>
+<ul>
+<li><a href=#构建或生成一个新函数>构建或生成一个新函数</a></li>
+<li><a href=#python-中的-hello-world>Python 中的 Hello world</a></li>
+<li><a href=#示例函数astronaut-finder>示例函数：astronaut-finder</a></li>
+</ul>
+</li>
+<li><a href=#故障排除找到容器的日志>故障排除：找到容器的日志</a></li>
+<li><a href=#故障排除使用write_debug的-verbose-输出>故障排除：使用`write_debug&rsquo;的 verbose 输出</a>
+<ul>
+<li><a href=#管理多个函数>管理多个函数</a></li>
+<li><a href=#自定义模板>自定义模板</a></li>
+<li><a href=#yaml-文件中的变量替换可选练习>YAML 文件中的变量替换（可选练习)</a></li>
+<li><a href=#自定义二进制文件作为函数可选练习>自定义二进制文件作为函数(可选练习)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=实验-3--函数介绍>实验 3&ndash;函数介绍</h1>
+<p><img src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png width=500px></img></p>
+<p>在开始这个实验之前，为你的文件创建一个新的文件夹。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ mkdir -p lab3<span class=se>\`</span>s
+   <span class=o>&amp;&amp;</span> <span class=nb>cd</span> lab3
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=创建一个新的函数>创建一个新的函数</h2>
+<p>有两种方法来创建一个新的函数。</p>
+<ul>
+<li>使用一个内置的或社区的代码模板建立一个函数（默认情况下）</li>
+<li>使用一个现有的二进制文件并将其作为你的函数（高级）</li>
+</ul>
+<h3 id=构建或生成一个新函数>构建或生成一个新函数</h3>
+<p>在用模板创建新函数之前，请确保你从 GitHub 上提取了<a href=https://github.com/openfaas/templates>模板</a>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ faas-cli template pull
+
+Fetch templates from repository: https://github.com/openfaas/templates.git
+ Attempting to expand templates from https://github.com/openfaas/templates.git
+2021/08/25 15:58:10 Fetched <span class=m>13</span> template<span class=o>(</span>s<span class=o>)</span> : <span class=o>[</span>csharp dockerfile go java11 java11-vert-x node node12 node14 php7 python python3 python3-debian ruby<span class=o>]</span> from https://github.com/openfaas/templates.git
+</code></pre></td></tr></table>
+</div>
+</div><p>之后，要想知道哪些语言是可用的，请键入。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ faas-cli new --list
+Languages available as templates:
+- csharp
+- dockerfile
+- go
+- java11
+- java11-vert-x
+- node
+- node12
+- node14
+- php7
+- python
+- python3
+- python3-debian
+- ruby
+</code></pre></td></tr></table>
+</div>
+</div><p>或者创建一个包含<code>Dockerfile</code>的文件夹，然后在 YAML 文件中选择 <code>Dockerfile</code>语言类型。</p>
+<p>在这一点上，你可以为 Python、Python 3、Ruby、Go、Node、CSharp 等创建一个新函数。</p>
+<ul>
+<li>关于我们的例子的说明</li>
+</ul>
+<p>我们这次研讨会的所有例子都经过了 OpenFaaS 社区对<em>Python 3</em>的全面测试，但也应该与<em>Python 2.7</em>兼容。</p>
+<p>如果你喜欢使用 Python 2.7 而不是 Python 3，那么把<code>faas-cli new --lang python3</code>换成<code>faas-cli new --lang python</code>。</p>
+<h3 id=python-中的-hello-world>Python 中的 Hello world</h3>
+<p>我们将在 Python 中创建一个 hello-world 函数，然后转到也使用额外依赖的东西上。</p>
+<ul>
+<li>构建函数的脚手架</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli new --lang python3 hello-openfaas --prefix<span class=o>=</span><span class=s2>&#34;&lt;your-docker-username-here&gt;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参数<code>--prefix</code>将更新<code>image:</code>&ndash;prefix<code>参数将更新</code>hello-openfaas.yml<code>中的值，其前缀应该是你的Docker Hub账号。对于[OpenFaaS](https://hub.docker.com/r/functions)来说，这是</code>image: functions/hello-openfaas<code>，参数将是</code>&ndash;prefix=&ldquo;function&rdquo;`。</p>
+<p>如果你在创建函数时没有指定前缀，那么在创建后编辑 YAML 文件。</p>
+<p>这将创建三个文件和一个目录。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>./hello-openfaas.yml
+./hello-openfaas
+./hello-openfaas/handler.py
+./hello-openfaas/requirements.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>YAML (.yml) 文件是用来配置 CLI 来构建、推送和部署你的函数。</p>
+<blockquote>
+<p>注意：每当你需要在 Kubernetes 或远程 OpenFaaS 实例上部署一个函数时，你必须在构建函数后推送它。在这种情况下，你也可以用一个环境变量覆盖默认的网关 URL，即 127.0.0.1:8080<code>。</code>export OPENFAAS_URL=127.0.0.1:31112`.</p>
+</blockquote>
+<p>下面是 YAML 文件的内容。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>provider</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openfaas</span><span class=w>
+</span><span class=w>  </span><span class=nt>gateway</span><span class=p>:</span><span class=w> </span><span class=l>http://127.0.0.1:8080</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>functions</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>hello-openfaas</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>python3</span><span class=w>
+</span><span class=w>    </span><span class=nt>handler</span><span class=p>:</span><span class=w> </span><span class=l>./hello-openfaas</span><span class=w>
+</span><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>hello-openfaas</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>函数的名称由<code>functions</code>下的键表示，即<code>hello-openfaas</code>。</li>
+<li>语言由 <code>lang</code> 字段表示。</li>
+<li>用于构建的文件夹被称为 <code>handler</code>，它必须是一个文件夹而不是一个文件。</li>
+<li>要使用的 Docker 镜像名称在<code>image</code>字段下。</li>
+</ul>
+<p>请记住，<code>gateway</code>URL 可以在 YAML 文件中（通过编辑<code>provider:</code>下的<code>gateway:</code>值）或在 CLI 上（通过使用<code>--gateway</code>或设置<code>OPENFAAS_URL</code>环境变量）进行覆盖。</p>
+<p>下面是<code>handler.py</code>文件的内容。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>handle</span><span class=p>(</span><span class=n>req</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;handle a request to the function
+</span><span class=s2>    Args:
+</span><span class=s2>        req (str): request body
+</span><span class=s2>    &#34;&#34;&#34;</span>
+
+    <span class=k>return</span> <span class=n>req</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个函数将只是返回输入，所以它实际上是一个<code>echo</code>函数。</p>
+<p>编辑信息，使其返回 <code>Hello OpenFaaS</code>，例如。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python>    <span class=k>return</span> <span class=s2>&#34;Hello OpenFaaS&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>任何返回到 stdout 的值都会随后返回到调用程序。另外，也可以使用<code>print()</code>语句，它将表现出类似的流向，并传递给调用程序。</p>
+<p>这是本地开发人员对函数的工作流程。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli up -f hello-openfaas.yml
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：在运行这个命令之前，请确保你已经用<code>docker login</code>命令登录了 docker 注册中心。
+注意: <code>faas-cli up</code>命令将<code>faas-cli</code>的构建、推送和部署命令合并为一条命令。</p>
+</blockquote>
+<p>随后通过用户界面、CLI、<code>curl</code>或其他应用程序调用该函数。</p>
+<p>该函数将始终获得一个路由，例如。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nv>$OPENFAAS_URL</span>/function/&lt;function_name&gt;（函数名）。
+<span class=nv>$OPENFAAS_URL</span>/function/figlet
+<span class=nv>$OPENFAAS_URL</span>/function/hello-openfaas
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>提示：如果你把 YAML 文件重命名为<code>stack.yml</code>，那么你就不需要向任何命令传递<code>-f</code>标志。</p>
+</blockquote>
+<p>函数只能通过<code>GET</code>或<code>POST</code>方法来调用。</p>
+<ul>
+<li>调用你的函数</li>
+</ul>
+<p>用<code>faas-cli invoke</code>测试函数，查看<code>faas-cli invoke --help</code>获取更多选项。</p>
+<h3 id=示例函数astronaut-finder>示例函数：astronaut-finder</h3>
+<p>我们将创建一个名为 <code>astronaut-finder</code> 的函数，在国际空间站（ISS）上随机拉出一个太空人的名字。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli new --lang python3 astronaut-finder --prefix<span class=o>=</span><span class=s2>&#34;&lt;your-docker-username-here&gt;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这将为我们写三个文件。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>./astronaut-finder/handler.py
+</code></pre></td></tr></table>
+</div>
+</div><p>函数的处理程序&ndash;你会得到一个带有原始请求的<code>req</code>对象，并可以将函数的结果打印到控制台。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>./astronaut-finder/requirements.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>这个文件用来管理函数&ndash;它有函数的名称、Docker 镜像和任何其他需要的定制。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>./astronaut-finder.yml
+</code></pre></td></tr></table>
+</div>
+</div><p>使用该文件列出你要安装的任何<code>pip</code>模块，如<code>requests</code>或<code>urllib</code>。</p>
+<ul>
+<li>编辑<code>./astronaut-finder/requirements.txt</code>。</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>requests
+</code></pre></td></tr></table>
+</div>
+</div><p>这告诉函数它需要使用一个名为<a href=http://docs.python-requests.org/en/master/>requests</a>的第三方模块，用于通过 HTTP 访问网站。</p>
+<ul>
+<li>编写该函数的代码。</li>
+</ul>
+<p>我们将从以下地方拉入数据： <a href=http://api.open-notify.org/astros.json>http://api.open-notify.org/astros.json</a></p>
+<p>下面是一个结果的例子。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span><span class=nt>&#34;number&#34;</span><span class=p>:</span> <span class=mi>6</span><span class=p>,</span> <span class=nt>&#34;people&#34;</span><span class=p>:</span> <span class=p>[{</span><span class=nt>&#34;craft&#34;</span><span class=p>:</span> <span class=s2>&#34;ISS&#34;</span><span class=p>,</span> <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Alexander Misurkin&#34;</span><span class=p>},</span> <span class=p>{</span><span class=nt>&#34;craft&#34;</span><span class=p>:</span> <span class=s2>&#34;ISS&#34;</span><span class=p>,</span> <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Mark Vande Hei&#34;</span><span class=p>},</span> <span class=p>{</span><span class=nt>&#34;craft&#34;</span><span class=p>:</span> <span class=s2>&#34;ISS&#34;</span><span class=p>,</span> <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Joe Acaba&#34;</span><span class=p>},</span> <span class=p>{</span><span class=nt>&#34;craft&#34;</span><span class=p>:</span> <span class=s2>&#34;ISS&#34;</span><span class=p>,</span> <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Anton Shkaplerov&#34;</span><span class=p>},</span> <span class=p>{</span><span class=nt>&#34;craft&#34;</span><span class=p>:</span> <span class=s2>&#34;ISS&#34;</span><span class=p>,</span> <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Scott Tingle&#34;</span><span class=p>},</span> <span class=p>{</span><span class=nt>&#34;craft&#34;</span><span class=p>:</span> <span class=s2>&#34;ISS&#34;</span><span class=p>,</span> <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Norishige Kanai&#34;</span><span class=p>}],</span> <span class=nt>&#34;message&#34;</span><span class=p>:</span> <span class=s2>&#34;success&#34;</span><span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>更新<code>handler.py</code>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>requests</span>
+<span class=kn>import</span> <span class=nn>random</span>
+
+<span class=k>def</span> <span class=nf>handle</span><span class=p>(</span><span class=n>req</span><span class=p>):</span>
+    <span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;http://api.open-notify.org/astros.json&#34;</span><span class=p>)</span>
+    <span class=n>result</span> <span class=o>=</span> <span class=n>r</span><span class=o>.</span><span class=n>json</span><span class=p>()</span>
+    <span class=n>index</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>randint</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>result</span><span class=p>[</span><span class=s2>&#34;people&#34;</span><span class=p>])</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+    <span class=n>name</span> <span class=o>=</span> <span class=n>result</span><span class=p>[</span><span class=s2>&#34;people&#34;</span><span class=p>][</span><span class=n>index</span><span class=p>][</span><span class=s2>&#34;name&#34;</span><span class=p>]</span>
+
+    <span class=k>return</span> <span class=s2>&#34;</span><span class=si>%s</span><span class=s2> is in space&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=n>name</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：在这个例子中，我们没有使用参数<code>req</code>，但必须把它放在函数的头部。</p>
+</blockquote>
+<p>现在建立这个函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli build -f ./astronaut-finder.yml
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>提示。试着把 astronaut-finder.yml 重命名为<code>stack.yml</code>，然后只调用<code>faas-cli build</code>。<code>stack.yml</code>是 CLI 的默认文件名。</p>
+</blockquote>
+<p>推送函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli push -f ./astronaut-finder.yml
+</code></pre></td></tr></table>
+</div>
+</div><p>部署该函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli deploy -f ./astronaut-finder.yml
+</code></pre></td></tr></table>
+</div>
+</div><p>调用该函数</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ <span class=nb>echo</span> <span class=p>|</span> faas-cli invoke astronaut-finder
+安东-史卡普勒夫在太空中
+
+$ <span class=nb>echo</span> <span class=p>|</span> faas-cli invoke astronaut-finder
+乔-阿卡巴在太空中
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=故障排除找到容器的日志>故障排除：找到容器的日志</h2>
+<p>你可以通过容器的日志找到你的函数的每次调用的高级信息。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>kubectl logs deployment/astronaut-finder -n openfaas-fn
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=故障排除使用write_debug的-verbose-输出>故障排除：使用`write_debug&rsquo;的 verbose 输出</h2>
+<p>让我们为你的函数打开 verbose 输出。这在默认情况下是关闭的，这样我们就不会用数据淹没你的函数的日志&ndash;这在处理二进制数据时尤其重要，因为二进制数据在日志中没有意义。</p>
+<p>这是标准的 YAML 配置。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>provider</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openfaas</span><span class=w>
+</span><span class=w>  </span><span class=nt>gateway</span><span class=p>:</span><span class=w> </span><span class=l>http://127.0.0.1:8080</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>functions</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>astronaut-finder</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>python3</span><span class=w>
+</span><span class=w>    </span><span class=nt>handler</span><span class=p>:</span><span class=w> </span><span class=l>./astronaut-finder</span><span class=w>
+</span><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>astronaut-finder</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>为该函数编辑 YAML 文件，并添加一个 <code>environment</code> 部分。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=w>  </span><span class=nt>astronaut-finder</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>python3</span><span class=w>
+</span><span class=w>    </span><span class=nt>handler</span><span class=p>:</span><span class=w> </span><span class=l>./astronaut-finder</span><span class=w>
+</span><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>astronaut-finder</span><span class=w>
+</span><span class=w>    </span><span class=nt>environment</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>write_debug</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>现在用<code>faas-cli deploy -f ./astronaut-finder.yml</code>再次部署你的函数。</p>
+<p>调用该函数，然后再次检查日志，查看函数的响应。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>kubectl logs deployment/astronaut-finder -n openfaas-fn
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=管理多个函数>管理多个函数</h3>
+<p>CLI 的 YAML 文件允许将函数分组为堆栈，这在处理一组相关函数时很有帮助。</p>
+<p>为了了解它是如何工作的，生成两个函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli new --lang python3 first
+</code></pre></td></tr></table>
+</div>
+</div><p>对于第二个函数使用<code>--append</code>标志。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli new --lang python3 second --append<span class=o>=</span>./first.yml
+</code></pre></td></tr></table>
+</div>
+</div><p>为了方便起见，我们把<code>first.yml</code>改名为<code>example.yml</code>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>mv first.yml example.yml
+</code></pre></td></tr></table>
+</div>
+</div><p>现在看看这个文件。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>provider</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openfaas</span><span class=w>
+</span><span class=w>  </span><span class=nt>gateway</span><span class=p>:</span><span class=w> </span><span class=l>http://127.0.0.1:8080</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>functions</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>first</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>python3</span><span class=w>
+</span><span class=w>    </span><span class=nt>handler</span><span class=p>:</span><span class=w> </span><span class=l>./first</span><span class=w>
+</span><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>first</span><span class=w>
+</span><span class=w>  </span><span class=nt>second</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>python3</span><span class=w>
+</span><span class=w>    </span><span class=nt>handler</span><span class=p>:</span><span class=w> </span><span class=l>./second</span><span class=w>
+</span><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>second</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这里有几个标志，在处理函数堆栈时有帮助。</p>
+<ul>
+<li>以并行方式构建。</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli build -f ./example.yml --parallel<span class=o>=</span><span class=m>2</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>只建立/推送一个函数。</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli build -f ./example.yml --filter<span class=o>=</span>second
+</code></pre></td></tr></table>
+</div>
+</div><p>花点时间来探索<code>build</code>/<code>push</code>和<code>deploy</code>的选项。</p>
+<ul>
+<li><code>faas-cli build --help</code>。</li>
+<li><code>faas-cli push --help</code>。</li>
+<li><code>faas-cli deploy --help</code>。</li>
+</ul>
+<p>要同时运行<code>faas-cli build &&faas-cli push &&faas-cli deploy</code>，请使用<code>faas-cli up</code>代替。</p>
+<blockquote>
+<p>专业提示：如果你不想传递<code>-f</code>参数，<code>stack.yml</code>是 faas-cli 寻找的默认名称。</p>
+</blockquote>
+<p>你也可以使用<code>faas-cli deploy -f https://....</code>通过 HTTP（s）部署远程函数栈（yaml）文件。</p>
+<h3 id=自定义模板>自定义模板</h3>
+<p>如果你有自己的一套分叉模板或自定义模板，那么你可以把它们拉下来，用 CLI 使用。</p>
+<p>下面是一个获取 Python 3 模板的例子，它使用 Debian Linux。</p>
+<p>使用 <code>git</code> URL 拉取模板。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli template pull https://github.com/openfaas-incubator/python3-debian
+</code></pre></td></tr></table>
+</div>
+</div><p>现在键入 <code>faas-cli new --list</code>。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ faas-cli new --list <span class=p>|</span> grep python
+- python
+- python3
+- python3-debian
+</code></pre></td></tr></table>
+</div>
+</div><p>这些新模板会被保存在你当前的工作目录下<code>./templates/</code>。</p>
+<h4 id=自定义模板模板商店>自定义模板。模板商店</h4>
+<p>模板商店<em>是一个类似于</em>函数商店*的概念，它使用户可以通过分享他们的模板来进行协作。模板商店也意味着你不必记住任何 URL 来利用你喜欢的社区或项目模板。</p>
+<p>你可以使用以下两个命令来搜索和发现模板。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ faas-cli template store list
+$ faas-cli template store list -v
+
+NAME                     SOURCE             DESCRIPTION
+csharp                   openfaas           Classic C# template
+dockerfile               openfaas           Classic Dockerfile template
+go                       openfaas           Classic Golang template
+...
+</code></pre></td></tr></table>
+</div>
+</div><p>为了获得更多的细节，你可以使用<code>--verbose</code>标志，或者<code>describe</code>命令。</p>
+<p>让我们找到一个具有 HTTP 格式的 Golang 模板。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>faas-cli template store list <span class=p>|</span> grep golang
+
+golang-http openfaas 
+Golang HTTP template 
+golang-middleware openfaas 
+Golang Middleware template
+</code></pre></td></tr></table>
+</div>
+</div><p>然后查看其上游仓库。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ faas-cli template store describe golang-http
+
+Name:              golang-http
+Platform:          x86_64
+Language:          Go
+Source:            openfaas
+Description:       Golang HTTP template
+Repository:        https://github.com/openfaas/golang-http-template
+Official Template: <span class=nb>true</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>把模板拉下来。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli template store pull golang-http
+</code></pre></td></tr></table>
+</div>
+</div><p>现在你可以通过输入以下内容用这个模板创建一个函数。</p>
+<p>bash
+faas-cli new &ndash;lang golang-http NAME</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>
+为了比运行`faas-cli template store pull golang-http`来创建函数更容易，你可以在你的stack.yml文件中附加以下内容。
+
+```yaml
+configuration:
+  templates:
+    - name: golang-http
+</code></pre></td></tr></table>
+</div>
+</div><p>然后运行以下内容，而不是指定模板名称。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>faas-cli template store pull
+</code></pre></td></tr></table>
+</div>
+</div><p>也请参见。</p>
+<ul>
+<li><a href=https://docs.openfaas.com/reference/yaml/>OpenFaaS YAML 参考指南</a></li>
+<li><a href=https://github.com/openfaas/store/>函数与模板存储</a></li>
+</ul>
+<h3 id=yaml-文件中的变量替换可选练习>YAML 文件中的变量替换（可选练习)</h3>
+<p>用于配置 CLI 的<code>.yml</code>文件能够进行变量替换，这样你就能够使用同一个<code>.yml</code>文件进行多种配置。</p>
+<p>其中一个例子是，当开发和生产图像有不同的注册表时，这就很有用。你可以使用变量替换，使本地和测试环境使用默认账户，而 CI 服务器可以被配置为使用生产账户。</p>
+<blockquote>
+<p>这是由[envsubst 库]（<a href=https://github.com/drone/envsubst>https://github.com/drone/envsubst</a>）提供的。遵循该链接可以看到支持的变量的例子</p>
+</blockquote>
+<p>编辑你的<code>astronaut-finder.yml</code>以匹配以下内容。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=w>  </span><span class=nt>astronaut-finder</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>python3</span><span class=w>
+</span><span class=w>    </span><span class=nt>handler</span><span class=p>:</span><span class=w> </span><span class=l>./astronaut-finder</span><span class=w>
+</span><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>${DOCKER_USER:-development}/astronaut-finder</span><span class=w>
+</span><span class=w>    </span><span class=nt>environment</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>write_debug</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>你会注意到<code>image</code>属性已被更新，包括一个变量定义（<code>DOCKER_USER</code>）。该值将被替换为同名的环境变量的值。如果环境变量不存在，或为空，将使用默认值（<code>development</code>）。</p>
+<p>该变量将在整个文件中被替换成该值。所以，如果你的<code>.yml</code>文件中有几个函数，所有对<code>DOCKER_USER</code>变量的引用将被替换为该环境变量的值</p>
+<p>运行下面的命令并观察输出。</p>
+<p><code>faas-cli build -f ./astronaut-finder.yml</code>。</p>
+<p>输出应该显示，构建的镜像被标记为<code>development/astronaut-finder:latest</code>。</p>
+<p>现在，将环境变量设置为你的 Docker Hub 账户名（在这个例子中，我们将使用 OpenFaaS 的 <code>function</code>账户）。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nb>export</span> <span class=nv>DOCKER_USER</span><span class=o>=</span>functions
+</code></pre></td></tr></table>
+</div>
+</div><p>运行与之前相同的构建命令，观察输出。</p>
+<p><code>faas-cli build -f ./astronaut-finder.yml</code>。</p>
+<p>现在输出应该显示，镜像是用更新的标签 <code>functions/astronaut-finder:latest</code>构建的。</p>
+<h3 id=自定义二进制文件作为函数可选练习>自定义二进制文件作为函数(可选练习)</h3>
+<p>自定义二进制文件或容器可以作为函数使用，但大多数时候，使用语言模板应该涵盖所有最常见的情况。</p>
+<p>为了使用自定义二进制文件或 Dockerfile，使用<code>dockerfile</code>语言创建一个新函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli new --lang dockerfile sorter --prefix<span class=o>=</span><span class=s2>&#34;&lt;your-docker-username-here&gt;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>你会看到一个名为 <code>sorter</code>和 <code>sorter.yml</code>的文件夹被创建。</p>
+<p>编辑<code>sorter/Dockerfile</code>并更新设置<code>fprocess'的那一行。让我们把它改成内置的bash命令</code>sort`。我们可以用它来对一个字符串列表按字母数字顺序进行排序。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=k>ENV</span> <span class=nv>fprocess</span><span class=o>=</span><span class=s2>&#34;sort&#34;</span><span class=err>
+</span></code></pre></td></tr></table>
+</div>
+</div><p>现在构建、推送和部署该函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli up -f sorter.yml
+</code></pre></td></tr></table>
+</div>
+</div><p>现在通过用户界面或 CLI 来调用该函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ <span class=nb>echo</span> -n <span class=s1>&#39;
+</span><span class=s1>elephant
+</span><span class=s1>zebra
+</span><span class=s1>horse
+</span><span class=s1>aardvark
+</span><span class=s1>monkey&#39;</span><span class=p>|</span> faas-cli invoke sorter
+
+aardvark
+elephant
+horse
+monkey
+zebra
+</code></pre></td></tr></table>
+</div>
+</div><p>在这个例子中，我们使用了<a href=https://busybox.net/downloads/BusyBox.html>BusyBox</a>中的<code>sort</code>，它是内置的函数。还有其他有用的命令，如<code>sha512sum</code>，甚至是<code>bash</code>或 shell 脚本，但你并不局限于这些内置命令。任何二进制或现有的容器都可以通过添加 OpenFaaS 函数看门狗而成为无服务器函数。</p>
+<blockquote>
+<p>提示：你知道 OpenFaaS 也支持 Windows 二进制文件吗？比如 C#、VB 或 PowerShell？</p>
+</blockquote>
+<p>现在进入<a href=lab4.md>实验室 4</a></p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/openfaas/>openfaas</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/ubuntu-docker-sudo/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">ubuntu-docker-sudo</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/workshop-lab1/>
+<span class="next-text nav-default">译：openfaas-workshop-Lab1</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

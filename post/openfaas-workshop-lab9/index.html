@@ -1,0 +1,416 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Openfaas Workshop Lab9 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab9/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Openfaas Workshop Lab9">
+<meta property="og:description" content="Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab9/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-04T13:44:09+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Openfaas Workshop Lab9">
+<meta itemprop=description content="Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运"><meta itemprop=datePublished content="2022-01-04T13:44:09+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="2253">
+<meta itemprop=keywords content="openfaas,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Openfaas Workshop Lab9">
+<meta name=twitter:description content="Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Openfaas Workshop Lab9</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-04 </span>
+<span class=more-meta> 约 2253 字 </span>
+<span class=more-meta> 预计阅读 5 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#lab-9---高级函数---自动缩放>Lab 9 - 高级函数 - 自动缩放</a>
+<ul>
+<li><a href=#自动缩放函数的应用>自动缩放函数的应用</a>
+<ul>
+<li><a href=#前提条件>前提条件</a></li>
+<li><a href=#自动扩展的背景>自动扩展的背景</a></li>
+<li><a href=#查看-prometheus>查看 Prometheus</a></li>
+<li><a href=#触发缩放的-go-函数>触发缩放的 Go 函数</a></li>
+<li><a href=#监控警报>监控警报</a></li>
+<li><a href=#疑难解答>疑难解答</a></li>
+<li><a href=#负载测试可选>负载测试(可选)</a></li>
+<li><a href=#尝试从零开始扩展>尝试从零开始扩展</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=lab-9---高级函数---自动缩放>Lab 9 - 高级函数 - 自动缩放</h1>
+<p><img src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png width=500px></img></p>
+<h2 id=自动缩放函数的应用>自动缩放函数的应用</h2>
+<p>正如<a href=http://docs.openfaas.com/architecture/autoscaling/>文档</a>中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运作的。</p>
+<h3 id=前提条件>前提条件</h3>
+<ul>
+<li>
+<p>在完成了<a href=./lab1.md>Lab 1</a>中对 OpenFaaS 的设置后，你将拥有触发自动扩展所需的一切。</p>
+</li>
+<li>
+<p>多个工具可以用来创建足够的流量来触发自动扩展 - 在这个例子中，`curl&rsquo;将被使用，因为它很容易在 Mac 和 Linux 上使用，并在 Windows 上与 Git Bash 打包。</p>
+</li>
+</ul>
+<h3 id=自动扩展的背景>自动扩展的背景</h3>
+<p>开箱即用的 OpenFaaS 是这样配置的，它将根据 Prometheus 测量的 <code>每秒请求</code>指标进行自动扩展。 这个指标是在流量通过 API 网关的时候捕获的。如果超过了定义的 <code>每秒请求</code>的阈值，AlertManager 就会启动。这个阈值应该被重新配置为适合生产使用的水平，因为在这个例子中，为了演示，它被设置为一个低值。</p>
+<blockquote>
+<p>在<a href=http://docs.openfaas.com/architecture/autoscaling/>文档网站</a>中找到更多关于自动缩放的信息。</p>
+</blockquote>
+<p>每次警报被 AlertManager 触发时，API 网关将把你的函数的一定数量的副本添加到集群中。OpenFaaS 有两个配置选项，允许指定复制的起始/最低数量，也允许停止复制的最大数量。</p>
+<p>你可以通过设置<code>com.openfaas.scale.min</code>来控制函数的最小复制量，目前默认值为<code>1</code>。</p>
+<p>你可以通过设置<code>com.openfaas.scale.max</code>来控制一个函数可以产生的最大复制量，目前默认值是<code>20</code>。</p>
+<blockquote>
+<p>注意: 如果你把<code>com.openfaas.scale.min</code>和<code>com.openfaas.scale.max</code>设置成相同的值，你就会禁用自动缩放函数。</p>
+</blockquote>
+<h3 id=查看-prometheus>查看 Prometheus</h3>
+<p>你需要运行这个端口转发命令，以便能够在<code>http://127.0.0.1:9090</code>访问 Prometheus。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>kubectl port-forward deployment/prometheus 9090:9090 -n openfaas
+</code></pre></td></tr></table>
+</div>
+</div><p>现在添加一个所有成功调用部署的函数的图。我们可以通过执行<code>rate( gateway_function_invocation_total{code="200"} [20s])</code>作为查询来实现。导致一个看起来像这样的页面。</p>
+<p><img src=../../screenshot/prometheus_graph.png alt></p>
+<p>继续打开一个新的标签，在其中使用<code>http://127.0.0.1:9090/alerts</code>导航到警报部分。在这个页面上，你以后可以看到什么时候超过了 <code>每秒请求</code> 的阈值。</p>
+<p><img src=../../screenshot/prometheus_alerts.png alt></p>
+<h3 id=触发缩放的-go-函数>触发缩放的 Go 函数</h3>
+<p>首先是 Alex Ellis 的 <code>echo-fn</code>函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ git clone https://github.com/alexellis/echo-fn <span class=se>\
+</span><span class=se></span> <span class=o>&amp;&amp;</span> <span class=nb>cd</span> echo-fn <span class=se>\
+</span><span class=se></span> <span class=o>&amp;&amp;</span> faas-cli template store pull golang-http <span class=se>\
+</span><span class=se></span> <span class=o>&amp;&amp;</span> faas-cli deploy <span class=se>\
+</span><span class=se></span>  --label com.openfaas.scale.max<span class=o>=</span><span class=m>10</span> <span class=se>\
+</span><span class=se></span>  --label com.openfaas.scale.min<span class=o>=</span><span class=m>1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在检查用户界面，看什么时候 <code>go-echo</code>函数从 <code>不准备</code>变成 <code>准备</code>。你也可以用<code>faas-cli describe go-echo</code>来检查。</p>
+<p>使用这个脚本反复调用 <code>go-echo</code> 函数，直到你看到复制数从 1 变成 5，以此类推。你可以在 Prometheus 中通过添加`gateway_service_count&rsquo;的图表或在选择该函数的情况下查看 API 网关来监控这个值。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ <span class=k>for</span> i in <span class=o>{</span>0..10000<span class=o>}</span><span class=p>;</span>
+<span class=k>do</span>
+   <span class=nb>echo</span> -n <span class=s2>&#34;Post </span><span class=nv>$i</span><span class=s2>&#34;</span> <span class=p>|</span> faas-cli invoke go-echo <span class=o>&amp;&amp;</span> echo<span class=p>;</span>
+<span class=k>done</span><span class=p>;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：如果你在 Kubernetes 上运行，使用<code>$OPENFAAS_URL</code>而不是<code>http://127.0.0.1:8080</code>。</p>
+</blockquote>
+<h3 id=监控警报>监控警报</h3>
+<p>现在你应该可以看到，在之前创建的图表中，<code>go-echo</code>函数的调用量有所增加。移动到你打开警报页面的标签。一段时间后，你应该开始看到 <code>APIHighInvocationRate</code>的状态（和颜色）变为 &ldquo;待定&rdquo;，然后再次变为 &ldquo;发射&rdquo;。你也可以使用<code>$ faas-cli list</code>或通过<a href=http://127.0.0.1:8080>ui</a>看到自动缩放的情况。</p>
+<p><img src=../../screenshot/prometheus_firing.png alt></p>
+<p>现在你可以使用<code>$ docker service ps go-echo</code>来验证<code>go-echo</code>的新副本是否已经启动。</p>
+<p>现在停止 bash 脚本，你会看到复制的数量在几秒钟后回到 1 个复制。</p>
+<h3 id=疑难解答>疑难解答</h3>
+<p>如果你认为你的自动扩展没有被触发，那么请检查以下内容。</p>
+<ul>
+<li>普罗米修斯中的警报页面 - 这应该是红色/粉色的，并显示 <code>FIRING</code> - 即在<a href=http://127.0.0.1:9090/alerts>http://127.0.0.1:9090/alerts</a>。</li>
+<li>检查核心服务的日志，即网关、Prometheus / AlertManager。</li>
+</ul>
+<p>为了获得核心服务的日志，运行<code>docker service ls</code>，然后<code>docker service logs &lt;service-name></code>。</p>
+<h3 id=负载测试可选>负载测试(可选)</h3>
+<p>需要注意的是，在受控环境中应用科学方法和工具与在你自己的笔记本电脑上运行拒绝服务攻击是有区别的。你的笔记本电脑不适合做负载测试，因为一般来说，你是在 Windows 或 Mac 主机上的 Linux 虚拟机中运行 OpenFaaS，而这也是一个单节点。这并不代表生产部署。</p>
+<p>请看<a href=https://docs.openfaas.com/architecture/performance/>构建一个合适的性能测试</a>的文档。</p>
+<p>如果<code>curl</code>没有为你的测试产生足够的流量，或者你想获得一些关于事情如何分解的统计数据，那么你可以试试<code>hey</code>工具。<code>hey</code>可以通过每秒的请求或给定的持续时间产生结构化的负载。</p>
+<p>这里有一个在 1GHz 的 2016 年 12 英寸 MacBook 上运行的例子，带有 Docker Desktop。这是一台非常低功率的计算机，正如所描述的，不代表生产性能。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>$ hey -z<span class=o>=</span>30s -q <span class=m>5</span> -c <span class=m>2</span> -m POST -d<span class=o>=</span>Test http://127.0.0.1:8080/function/go-echo
+Summary:
+  Total:        30.0203 secs
+  Slowest:      0.0967 secs
+  Fastest:      0.0057 secs
+  Average:      0.0135 secs
+  Requests/sec: 9.9932
+
+  Total data:   <span class=m>1200</span> bytes
+  Size/request: <span class=m>4</span> bytes
+
+Response <span class=nb>time</span> histogram:
+  0.006 <span class=o>[</span>1<span class=o>]</span>     <span class=p>|</span>
+  0.015 <span class=o>[</span>244<span class=o>]</span>   <span class=p>|</span>■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  0.024 <span class=o>[</span>38<span class=o>]</span>    <span class=p>|</span>■■■■■■
+  0.033 <span class=o>[</span>10<span class=o>]</span>    <span class=p>|</span>■■
+  0.042 <span class=o>[</span>4<span class=o>]</span>     <span class=p>|</span>■
+  0.051 <span class=o>[</span>1<span class=o>]</span>     <span class=p>|</span>
+  0.060 <span class=o>[</span>0<span class=o>]</span>     <span class=p>|</span>
+  0.069 <span class=o>[</span>0<span class=o>]</span>     <span class=p>|</span>
+  0.078 <span class=o>[</span>0<span class=o>]</span>     <span class=p>|</span>
+  0.088 <span class=o>[</span>0<span class=o>]</span>     <span class=p>|</span>
+  0.097 <span class=o>[</span>2<span class=o>]</span>     <span class=p>|</span>
+
+
+Latency distribution:
+  10% in 0.0089 secs
+  25% in 0.0101 secs
+  50% in 0.0118 secs
+  75% in 0.0139 secs
+  90% in 0.0173 secs
+  95% in 0.0265 secs
+  99% in 0.0428 secs
+
+Details <span class=o>(</span>average, fastest, slowest<span class=o>)</span>:
+  DNS+dialup:   0.0000 secs, 0.0057 secs, 0.0967 secs
+  DNS-lookup:   0.0000 secs, 0.0000 secs, 0.0000 secs
+  req write:    0.0001 secs, 0.0000 secs, 0.0016 secs
+  resp wait:    0.0131 secs, 0.0056 secs, 0.0936 secs
+  resp read:    0.0001 secs, 0.0000 secs, 0.0013 secs
+
+Status code distribution:
+  <span class=o>[</span>200<span class=o>]</span> <span class=m>300</span> responses
+</code></pre></td></tr></table>
+</div>
+</div><p>以上模拟了两个活跃的用户<code>-c</code>，每秒 5 个请求<code>-q</code>，持续时间<code>-z</code>为 30 秒。</p>
+<p>要使用<code>hey</code>，你必须在本地计算机上安装 Golang。</p>
+<p>也请参见。<a href=https://github.com/rakyll/hey>hey on GitHub</a></p>
+<h3 id=尝试从零开始扩展>尝试从零开始扩展</h3>
+<p>如果你把你的函数规模缩小到 0 个副本，你仍然可以调用它。该调用将触发网关将函数缩放到一个非零值。</p>
+<p>用下面的命令试试吧。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>kubectl scale deployment --replicas=0 nodeinfo -n openfaas-fn
+</code></pre></td></tr></table>
+</div>
+</div><p>打开 OpenFaaS 用户界面，检查 nodeinfo 是否有 0 个副本，或者通过`kubectl get deployment nodeinfo -n openfaas-fn'。</p>
+<p>现在调用该函数并检查它是否扩展到 1 个副本。</p>
+<p>现在转到<a href=lab10.md>Lab 10</a>。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/openfaas/>openfaas</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/openfaas-workshop-lab10/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Openfaas Workshop Lab10</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/openfaas-workshop-lab8/>
+<span class="next-text nav-default">Openfaas Workshop Lab8</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

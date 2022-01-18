@@ -1,0 +1,244 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>一致性哈希算法 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题： 如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="一致性哈希算法">
+<meta property="og:description" content="当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题： 如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-03-24T19:03:58+00:00">
+<meta property="article:modified_time" content="2018-03-24T19:03:58+00:00">
+<meta itemprop=name content="一致性哈希算法">
+<meta itemprop=description content="当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题： 如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受"><meta itemprop=datePublished content="2018-03-24T19:03:58+00:00">
+<meta itemprop=dateModified content="2018-03-24T19:03:58+00:00">
+<meta itemprop=wordCount content="738">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="一致性哈希算法">
+<meta name=twitter:description content="当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题： 如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>一致性哈希算法</h1>
+<div class=post-meta>
+<span class=post-time> 2018-03-24 </span>
+<span class=more-meta> 约 738 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#1-hash-取模>1 hash 取模</a></li>
+<li><a href=#2-一致性-hash-算法>2 一致性 hash 算法</a>
+<ul>
+<li><a href=#21-容错性>2.1 容错性</a></li>
+<li><a href=#22-扩展性>2.2 扩展性</a></li>
+<li><a href=#23-虚拟节点>2.3 虚拟节点</a></li>
+</ul>
+</li>
+<li><a href=#3-参考>3 参考</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>当我们在做数据库分库分表或者做分布式缓存的时候，不可避免的都会遇到一个问题：</p>
+<p><strong>如何将数据均匀的分散到各个节点中，并且尽量的在加减节点的时能使受影响的数据最少。</strong></p>
+<h2 id=1-hash-取模>1 hash 取模</h2>
+<p>随机放置就不多说了。通常最容易想到的方案是哈希取模了。</p>
+<p>可以将传入的 key 按照
+$$
+index=hash(key) % N
+$$
+这样来计算出需要存放的节点。</p>
+<p>这样可以满足数据的均匀分配，但是这个算法的容错性和扩展性比较差。比如增加或者删除一个节点的时候，所有的 key 都要重新计算，显然这样的成本比较高，为此需要一个算法来满足均匀的同时也要有良好的容错性和扩展性。</p>
+<h2 id=2-一致性-hash-算法>2 一致性 hash 算法</h2>
+<p>一致性 hash 算法是将所有的哈希值构成了一个环，其范围是 0~2^32-1。如图：</p>
+<p><img src=https://ws1.sinaimg.cn/large/006tNc79gy1fn8kbmd4ncj30ad08y3yn.jpg alt=哈希环></p>
+<p>之后将各个服务器节点散列到这个环上，可以用节点的 IP，hostname 这样唯一性的字段作为 key 进行 hash。散列之后如下：</p>
+<p><img src=https://ws3.sinaimg.cn/large/006tNc79gy1fn8kf72uwuj30a40a70t5.jpg alt></p>
+<p>之后需要将数据定位到对应的节点上，使用同样的 hash 函数将 key 也映射到这个环上。</p>
+<p><img src=https://ws3.sinaimg.cn/large/006tNc79gy1fn8kj9kd4oj30ax0aomxq.jpg alt></p>
+<p>这样就按照顺时针方向就可以将 k1 定位到 N1 节点，k2 定位到 N3 节点，k3 定位到 N2 节点。</p>
+<h3 id=21-容错性>2.1 容错性</h3>
+<p>假设 N1 宕机了：</p>
+<p><img src=https://ws3.sinaimg.cn/large/006tNc79gy1fn8kl9pp06j30a409waaj.jpg alt></p>
+<p>依然根据顺时针方向，k2 和 k3 保持不变，只有 k1 被重新映射到了 N3。这样就很好的保证了容错性，当一个节点宕机时只会影响到少部分数据。</p>
+<h3 id=22-扩展性>2.2 扩展性</h3>
+<p>当新增一个节点时：</p>
+<p><img src=https://ws1.sinaimg.cn/large/006tNc79gy1fn8kp1fc9xj30ca0abt9c.jpg alt></p>
+<p>在 N2 和 N3 之间新增了一个节点 N4，这时受影响的数据只有 k3，其余的数据也是保持不变。</p>
+<h3 id=23-虚拟节点>2.3 虚拟节点</h3>
+<p>到目前为止，该算法也有一些问题：</p>
+<p>当节点较少的时候可能出现数据不均匀的情况：</p>
+<p><img src=https://ws2.sinaimg.cn/large/006tNc79gy1fn8krttekbj30c10a5dg5.jpg alt></p>
+<p>这样会导致大部分数据都在 N1 节点，只有少量的数据在 N2 节点。</p>
+<p>为了解决这个问题，一致性哈希算法引入了虚拟节点。</p>
+<p>将每一个节点进行多次哈希，生成的节点放置在环上成为<strong>虚拟节点</strong>。</p>
+<p><img src=https://ws2.sinaimg.cn/large/006tNc79gy1fn8ktzuswkj30ae0abdgb.jpg alt></p>
+<p>计算时可以在 IP 后加上编号来生成哈希值。</p>
+<p>这样只需要在原有的基础上多一步由虚拟节点映射到实际节点的步骤即可让少量节点也能满足均匀性。</p>
+<h2 id=3-参考>3 参考</h2>
+<p><a href=https://crossoverjie.top/2018/01/08/Consistent-Hash/#more>https://crossoverjie.top/2018/01/08/Consistent-Hash/#more</a></p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2018-03-24
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">关于时间管理</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/spring-boot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/>
+<span class="next-text nav-default">Spring Boot 启动原理分析</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

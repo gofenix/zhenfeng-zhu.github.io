@@ -1,0 +1,880 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Chapter7 炼金术 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="Clojure 炼金术：读取器、求值器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Cloju"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/chapter7/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Chapter7 炼金术">
+<meta property="og:description" content="Clojure 炼金术：读取器、求值器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Cloju">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter7/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-15T12:14:36+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Chapter7 炼金术">
+<meta itemprop=description content="Clojure 炼金术：读取器、求值器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Cloju"><meta itemprop=datePublished content="2022-01-15T12:14:36+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="9139">
+<meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Chapter7 炼金术">
+<meta name=twitter:description content="Clojure 炼金术：读取器、求值器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Cloju"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Chapter7 炼金术</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-15 </span>
+<span class=more-meta> 约 9139 字 </span>
+<span class=more-meta> 预计阅读 19 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#clojure-炼金术读取器求值器和宏>Clojure 炼金术：读取器、求值器和宏</a>
+<ul>
+<li><a href=#a-overview-of-clojures-evaluation-model>A Overview of Clojure&rsquo;s Evaluation Model</a></li>
+<li><a href=#读取器>读取器</a>
+<ul>
+<li><a href=#读取器-1>读取器</a></li>
+<li><a href=#读者宏>读者宏</a></li>
+</ul>
+</li>
+<li><a href=#求值器>求值器</a>
+<ul>
+<li><a href=#这些东西都是自己求值的>这些东西都是自己求值的</a></li>
+<li><a href=#符号>符号</a></li>
+<li><a href=#列表>列表</a></li>
+<li><a href=#巨集>巨集</a></li>
+<li><a href=#语法抽象和---宏>语法抽象和 -> 宏</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+<li><a href=#练习>练习</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=clojure-炼金术读取器求值器和宏>Clojure 炼金术：读取器、求值器和宏</h1>
+<p>哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Clojure 提供了一种工具，使哲学家的石头看起来只是一个小饰品：*宏。</p>
+<p>宏允许你将任意的表达式转化为有效的 Clojure，因此你可以扩展语言本身以满足你的需求。而且，你甚至不需要是一个穿长袍的老家伙或老太太来使用它们</p>
+<p>为了获得这种能力，请考虑这个微不足道的宏。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defmacro backwards
+  [form]
+  (reverse form))
+
+(backwards (&#34; backwards&#34; &#34; am&#34; &#34;I&#34; str))
+; =&gt; &#34;I am backwards&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><code>backwards</code>宏允许 Clojure 成功地 Eval 表达式<code>(" backwards" " am" "I" str)</code>，尽管它没有遵循 Clojure 的内置语法规则，这些规则要求表达式的操作数首先出现（更不用说表达式不能按相反顺序书写的规则）。如果没有 &ldquo;向后&rdquo;，这个表达式会比几千年来的炼金术士用他们的一生来追求不可能实现的长生不老的方法更难失败。有了`向后'，*你就创造了你自己的语法！*你扩展了 Clojure，这样你就可以随心所欲地写代码了 我告诉你，这比把铅变成金子要好得多!</p>
+<p>本章为你提供了编写自己的宏所需的概念基础，使你能够疯狂地编写自己的宏。它解释了 Clojure 求值模型的元素：<em>读取器</em>，<em>求值器</em>，和<em>宏扩展器</em>。这就像 Clojure 元素的周期表。想想周期表是如何揭示原子的特性的：同一列的元素行为相似，因为它们有相同的核电荷。如果没有元素周期表及其基础理论，我们就会像过去的炼金术士一样，随意地把东西混在一起，看看什么东西会爆炸。但是，随着对元素的深入了解，你可以看到为什么东西会爆炸，并学会如何有目的地炸毁东西。</p>
+<h2 id=a-overview-of-clojures-evaluation-model>A Overview of Clojure&rsquo;s Evaluation Model</h2>
+<p>Clojure（像所有的 Lisps）有一个不同于大多数其他语言的求值模型：它有一个两阶段的系统，它<em>读</em>文本源代码，产生 Clojure 数据结构。然后对这些数据结构进行*求值。Clojure 遍历数据结构，并根据数据结构的类型执行函数应用或 var 查找等操作。例如，当 Clojure 读取文本<code>(+ 1 2)</code>时，结果是一个列表数据结构，其第一个元素是一个<code>+</code>符号，后面是数字 1 和 2。这个数据结构被传递给 Clojure 的求值器，求值器查找<code>+</code>对应的函数，并将该函数应用于 1 和 2。</p>
+<p>在源代码、数据和求值之间有这种关系的语言被称为<em>homoiconic</em>（顺便说一句，如果你在浴室的镜子前熄灯说三次<em>homoiconic</em>，约翰-麦卡锡的幽灵就会出现并给你一个小括号）。同源语言使你能够将你的代码作为一组数据结构进行推理，你可以通过程序进行操作。为了说明这一点，让我们在编译的土地上走一圈。</p>
+<p>编程语言需要一个编译器或解释器来将你写的代码（由 Unicode 字符组成）翻译成其他东西：机器指令、其他编程语言的代码，等等。在这个过程中，编译器会构建一个<em>抽象语法树（AST）</em>，这是一个代表你的程序的数据结构。你可以把 AST 看作是<em>求值器</em>的输入，你可以把它看作是一个遍历该树的函数，以产生机器代码或其他什么作为其输出。</p>
+<p>到目前为止，这听起来很像我为 Clojure 描述的那样。然而，在大多数语言中，AST 的数据结构在编程语言中是无法访问的；编程语言空间和编译器空间是永远分离的，两者永远不会相遇。图 7-1 显示了在非 Lisp 编程语言中表达式的编译过程的可视化情况。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/read-and-eval/non-lisp-eval.png alt></p>
+<p>图 7-1：非 Lisp 编程语言的求值</p>
+<p>但 Clojure 是不同的，因为 Clojure 是 Lisp，而 Lisps 比偷来的 tamale 更热。Lisps 求值的是本地数据结构，而不是求值表示为某种无法访问的内部数据结构的 AST。Clojure 仍然求值树形结构，但树是用 Clojure 列表结构的，节点是 Clojure 值。</p>
+<p>列表是构建树形结构的理想选择。列表的第一个元素被视为根，每个后续元素被视为一个分支。要创建一个嵌套树，你可以直接使用嵌套列表，如图 7-2 所示。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/read-and-eval/trees.png alt></p>
+<p>图 7-2：列表可以很容易地被当作树来处理。</p>
+<p>首先，Clojure 的<em>读取器</em>将文本<code>(+ 1 (* 6 7))</code>转换为一个嵌套列表。(你将在下一节了解更多关于读取器的信息。)然后，Clojure 的求值器将该数据作为输入并产生一个结果。(它还可以编译 Java 虚拟机（JVM）字节码，你会在第 12 章中了解到。现在，我们只关注概念层面上的求值模型）。</p>
+<p>考虑到这一点，图 7-3 显示了 Clojure 的求值过程是什么样的。</p>
+<p>S-表达式</p>
+<p>在你的 Lisp 冒险中，你会遇到一些资源，它们解释说 Lisp 求值 S-表达式。我在这里避免使用这个术语，因为它有歧义：你会看到它既指被求值的实际数据对象，也指表示该数据的源代码。对 Lisp 求值的两个不同组成部分（代码和数据）使用同一个术语，会掩盖重要的东西：你的文本代表了本地数据结构，而 Lisp 求值本地数据结构，这是独一无二的，令人敬畏的。关于 s-表达式的精彩处理，请查看<a href=http://www.gigamonkeys.com/book/syntax-and-semantics.html>http://www.gigamonkeys.com/book/syntax-and-semantics.html</a>。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/read-and-eval/lisp-eval.png alt></p>
+<p>图 7-3：Clojure 中的求值</p>
+<p>然而，求值器实际上并不关心它的输入来自哪里；它不一定要来自读者。因此，你可以用<code>eval</code>将你的程序的数据结构直接发送给 Clojure 求值器。看哪!</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def addition-list (list + 1 2))
+(eval addition-list)
+; =&gt; 3
+</code></pre></td></tr></table>
+</div>
+</div><p>这就对了，宝贝! 你的程序刚刚求值了一个 Clojure 列表。你很快就会读到关于 Clojure 求值规则的所有内容，但简单地说，这是发生了什么：当 Clojure 求值列表时，它查找了<code>addition-list</code>所指的列表；然后它查找了与<code>+</code>符号对应的函数；然后它用<code>1</code>和<code>2</code>作为参数调用了该函数，返回<code>3</code>。你的运行程序的数据结构和求值器的数据结构生活在同一个空间，结果是你可以使用 Clojure 的全部力量和你写的所有代码来构建数据结构进行求值。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(eval (concat addition-list [10]))
+; =&gt; 13
+
+(eval (list &#39;def &#39;lucky-number (concat addition-list [10])))
+; =&gt; #&#39;user/lucky-number
+
+lucky-number
+; =&gt; 13
+</code></pre></td></tr></table>
+</div>
+</div><p>图 7-4 显示了你在这两个例子中发送给求值器的列表。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/read-and-eval/data-to-eval.png alt></p>
+<p>图 7-4：你求值的列表</p>
+<p>你的程序可以直接与自己的求值器对话，使用自己的函数和数据在运行中修改自己 你是不是已经被权力冲昏了头脑？我希望是这样！我希望你能坚持你的理智。不过，请保持你的理智，因为还有更多的东西要学。</p>
+<p>所以，Clojure 是同源的：它用列表表示抽象的语法树，当你写 Clojure 代码时，你写的是列表的文本表示。因为你写的代码代表了你习惯于操作的数据结构，而求值器则消耗这些数据结构，所以很容易推理出如何以编程方式修改你的程序。</p>
+<p>宏就是让你轻松进行这些操作的东西。本章的其余部分详细介绍了 Clojure 的读取器和求值规则，让你对宏的工作原理有一个准确的理解。</p>
+<h2 id=读取器>读取器</h2>
+<p>读取器将你保存在文件中或在 REPL 中输入的文本源代码转换为 Clojure 数据结构。它就像人类的 Unicode 字符世界和 Clojure 的列表、Vector、Map、符号和其他数据结构世界之间的翻译。在本节中，你将直接与读取器器互动，并学习一个方便的功能，即<em>读取器宏</em>，如何让你更简洁地编写代码。</p>
+<h3 id=读取器-1>读取器</h3>
+<p>为了理解读取器，让我们首先仔细看看 Clojure 是如何处理你在 REPL 中输入的文本的。首先，REPL 会提示你输入文本。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>user=&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>然后你输入一点文本。也许像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>user=&gt; (str &#34;To understand what recursion is,&#34; &#34; you must first understand recursion.&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><p>这段文字实际上只是一串 Unicode 字符，但它是为了表示 Clojure 数据结构的组合。这种数据结构的文本表示法被称为<em>读取器的形式</em>。在这个例子中，该表格代表了一个列表数据结构，其中又包含了三个表格：<code>str</code>符号和两个字符串。</p>
+<p>一旦你在提示符中输入这些字符并按下回车键，这些文本就会进入读取器（记得 REPL 是 read-eval-print-loop 的缩写）。Clojure 读取字符流并在内部产生相应的数据结构。然后它对数据结构进行求值，并打印出结果的文本表示。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>&#34;To understand what recursion is, you must first understand recursion.&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>读取和求值是不连续的过程，你可以独立执行。一种直接与读者互动的方法是使用<code>read-string</code>函数。 <code>read-string</code>接收一个字符串作为参数，并使用 Clojure 的读取器进行处理，返回一个数据结构。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(read-string &#34;(+ 1 2)&#34;)
+; =&gt; (+ 1 2)
+
+(list? (read-string &#34;(+ 1 2)&#34;))
+; =&gt; true
+
+(conj (read-string &#34;(+ 1 2)&#34;) :zagglewag)
+; =&gt; (:zagglewag + 1 2)
+</code></pre></td></tr></table>
+</div>
+</div><p>在第一个例子中，<code>read-string</code>读取了一个包含加号和数字 1 和 2 的列表的字符串表示。返回值是一个实际的列表，正如第二个例子所证明的。最后一个例子使用<code>conj</code>在列表中预置一个关键字。启示是，读取器和求值是相互独立的。你可以读取文本而不对其进行求值，你可以将结果传递给其他函数。如果你愿意，你也可以对结果进行求值。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(eval (read-string &#34;(+ 1 2)&#34;))
+; =&gt; 3
+</code></pre></td></tr></table>
+</div>
+</div><p>在到目前为止的所有例子中，读者形式和相应的数据结构之间一直是一对一的关系。下面是更多简单的读取器形式的例子，它们直接 Map 到它们所代表的数据结构。</p>
+<ul>
+<li><strong>()</strong> 一个列表的读取形式</li>
+<li>*<em>str</em> 一个符号读取器形式</li>
+<li><strong>[1 2]</strong> 一个 Vector 读取器形式，包含两个数字读取器形式</li>
+<li><strong>{:sound &ldquo;hoot&rdquo;}</strong> 一个包含关键字读取器形式和字符串读取器形式的 Map 读取器形式</li>
+</ul>
+<p>然而，在将文本转换为数据结构时，读取器可以采用更复杂的行为。例如，还记得匿名函数吗？</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(#(+ 1 %) 3)
+; =&gt; 4
+</code></pre></td></tr></table>
+</div>
+</div><p>好吧，试试这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(read-string &#34;#(+ 1 %)&#34;)
+; =&gt; (fn* [p1__423#] (+ 1 p1__423#))
+</code></pre></td></tr></table>
+</div>
+</div><p>哇! 这不是我们所习惯的一对一的 Map。读取<code>#(+ 1 %)</code>的结果是一个由<code>fn*</code>符号组成的列表，一个包含一个符号的 Vector，和一个包含三个元素的列表。刚刚发生了什么？</p>
+<h3 id=读者宏>读者宏</h3>
+<p>我来回答我自己的问题：读者使用了一个<em>读者宏</em>来转换<code>#(+ 1 %)</code>。读者宏是一组将文本转换为数据结构的规则。它们通常允许你以更紧凑的方式表示数据结构，因为它们采用了一个简略的读者形式，并将其扩展为完整的形式。它们由<em>宏字符</em>指定，如<code>'</code>（单引号）、<code>#</code>和<code>@</code>。它们也完全不同于我们后面要讲的宏。为了不把两者混淆，我总是用<em>读者宏</em>这个全称来指代读者宏。</p>
+<p>例如，你可以在这里看到引用读者宏是如何扩展单引号字符的。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(read-string &#34;&#39;(a b c)&#34;)
+; =&gt; (quote (a b c))
+</code></pre></td></tr></table>
+</div>
+</div><p>当读取器遇到单引号时，它将其扩展为一个列表，其第一个成员是符号<code>quote</code>，第二个成员是单引号后面的数据结构。读取器的<code>deref</code>宏对<code>@</code>字符的作用与此类似。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(read-string &#34;@var&#34;)
+; =&gt; (clojure.core/deref var)
+</code></pre></td></tr></table>
+</div>
+</div><p>读取器宏也可以做一些疯狂的事情，比如导致文本被忽略。分号指定了单行注释的读取器宏。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(read-string &#34;; ignore!\n(+ 1 2)&#34;)
+; =&gt; (+ 1 2)
+</code></pre></td></tr></table>
+</div>
+</div><p>这就是读取器! 你卑微的伙伴，正在辛苦地将文本转化为数据结构。现在我们来看看 Clojure 是如何求值这些数据结构的。</p>
+<h2 id=求值器>求值器</h2>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/read-and-eval/simple-eval.png alt></p>
+<p>图 7-5：（+ 1 2）的数据结构</p>
+<p>你可以把 Clojure 的求值器看作是一个函数，它接收一个数据结构作为参数，使用与数据结构类型相对应的规则处理该数据结构，并返回一个结果。要求值一个符号，Clojure 会查找该符号所指的内容。要求值一个列表，Clojure 会查看该列表的第一个元素，并调用一个函数、宏或特殊形式。任何其他的值（包括字符串、数字和关键字）只是简单地对其进行求值。</p>
+<p>例如，假设你在 REPL 中输入了<code>(+ 1 2)</code>。图 7-5 显示了一个被发送到求值器的数据结构图。</p>
+<p>因为它是一个列表，求值器从求值列表中的第一个元素开始。第一个元素是加号，求值器通过返回相应的函数来解决这个问题。因为列表中的第一个元素是一个函数，所以求值器对每个操作数进行求值。操作数 1 和 2 求值为自己，因为它们不是列表或符号。然后求值器以 1 和 2 为操作数调用加法函数，并返回结果。</p>
+<p>本节的其余部分将更全面地解释求值器对每种数据结构的规则。为了显示求值器是如何工作的，我们将在 REPL 中运行每个例子。请记住，REPL 首先读取你的文本以获得一个数据结构，然后将该数据结构发送到求值器，然后将结果打印为文本。</p>
+<p>数据</p>
+<p>我在本章中写到 Clojure 如何求值数据结构，但这是不精确的。从技术上讲，数据结构指的是某种集合，如链接列表或 B-树，或其他什么，但我也用这个术语来指标量（单数，非集合）值，如符号和数字。我考虑过使用数据对象这个术语，但不想暗示面向对象的编程，或者只使用数据，但不想将其与数据这个概念混淆。所以，数据结构就是这样，如果你觉得这很冒犯，我会给你一千次的道歉，深思熟虑地组织成一棵 Van Emde Boas 树。</p>
+<h3 id=这些东西都是自己求值的>这些东西都是自己求值的</h3>
+<p>每当 Clojure 对不是列表或符号的数据结构进行求值时，其结果就是数据结构本身。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>true
+; =&gt; true
+
+false
+; =&gt; false
+
+{}
+; =&gt; {}
+
+:huzzah
+; =&gt; :huzzah
+</code></pre></td></tr></table>
+</div>
+</div><p>空的列表也会对自己进行求值。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>()
+; =&gt; ()
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=符号>符号</h3>
+<p>作为一个程序员，你的基本任务之一是通过将名字和值联系起来来创建抽象。你在第 3 章中通过使用<code>def</code>、<code>let</code>和函数定义学会了如何做到这一点。Clojure 使用<em>符号</em>来命名函数、宏、数据和其他任何你可以使用的东西，并通过<em>解析</em>来求值它们。为了解析一个符号，Clojure 会遍历你所创建的任何绑定，然后在命名空间 Map 中查找该符号的条目，这一点你在第 6 章中了解过。最终，一个符号被解析为一个<em>值</em>或一个<em>特殊形式</em>&ndash;一个内置的 Clojure 操作符，提供基本的行为。</p>
+<p>一般来说，Clojure 通过以下方式解析一个符号。</p>
+<ol>
+<li>查询该符号是否命名了一个特殊形式。如果它没有……。</li>
+<li>查询该符号是否对应于一个本地绑定。如果不是的话 .</li>
+<li>试图找到由<code>def</code>引入的命名空间 Map。如果没有的话 . .</li>
+<li>抛出一个异常</li>
+</ol>
+<p>让我们先看看一个符号解析到一个特殊形式。特殊形式，如<code>if</code>，总是在一个操作的上下文中使用；它们总是一个列表中的第一个元素。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if true :a :b)
+; =&gt; :a
+</code></pre></td></tr></table>
+</div>
+</div><p>在这种情况下，<code>if</code>是一个特殊的形式，它被作为一个操作符使用。如果你试图引用这个上下文之外的特殊形式，你会得到一个异常。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>if
+; =&gt; CompilerException java.lang.RuntimeException: Unable to resolve symbol: if in this context, compiling:(NO_SOURCE_PATH:0:0) 
+</code></pre></td></tr></table>
+</div>
+</div><p>接下来，让我们求值一些本地绑定。本地绑定<em>是指一个符号和一个不是由<code>def</code>创建的值之间的任何关联。在下一个例子中，符号<code>x</code>用<code>let</code>与 5 绑定。当求值器解析<code>x</code>时，它将</em>符号*<code>x</code>解析为<em>值</em> 5。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [x 5]
+  (+ x 3))
+; =&gt; 8
+</code></pre></td></tr></table>
+</div>
+</div><p>现在，如果我们创建一个<code>x</code>到 15 的命名空间 Map，Clojure 会相应地解决它。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def x 15)
+(+ x 3)
+; =&gt; 18
+</code></pre></td></tr></table>
+</div>
+</div><p>在下一个例子中，<code>x</code>被 Map 到 15，但是我们用<code>let</code>引入了<code>x</code>与 5 的局部绑定。所以<code>x</code>被解析为 5。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def x 15)
+(让 [x 5]
+  (+ x 3))
+; =&gt; 8
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以对绑定进行嵌套，在这种情况下，最近定义的绑定具有优先权。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(让 [x 5]
+  (让 [x 6]
+    (+ x 3)))
+; =&gt; 9
+</code></pre></td></tr></table>
+</div>
+</div><p>函数还创建了局部绑定，将参数与函数体中的参数绑定。在下一个例子中，<code>exclaim</code>被 Map 到一个函数。在函数主体中，参数名<code>exclamation</code>被绑定到传递给函数的参数上。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn exclaim
+  [exclamation]
+  (str exclamation &#34;!&#34;))
+
+(exclaim &#34;Hadoken&#34;)
+; =&gt; &#34;Hadoken!&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>最后，在这最后一个例子中，<code>map</code>和<code>inc</code>都指的是函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(map inc [1 2 3])
+; =&gt; (2 3 4)
+</code></pre></td></tr></table>
+</div>
+</div><p>当 Clojure 求值这段代码时，它首先求值<code>map</code>符号，查找相应的函数并将其应用于参数。符号<code>map</code>指的是 map 函数，但它不应该与函数本身相混淆。<code>map</code>符号仍然是一个数据结构，就像字符串<code>"fried salad"</code>是一个数据结构一样，但它与函数本身不同。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(read-string (&#34;+&#34;))
+; =&gt; +
+
+(type (read-string &#34;+&#34;))
+; =&gt; clojure.lang.Symbol
+
+(list (read-string &#34;+&#34;) 1 2)
+; =&gt; (+ 1 2)
+</code></pre></td></tr></table>
+</div>
+</div><p>在这些例子中，你正在与加号，<code>+</code>，作为一个数据结构进行交互。你并没有与它所指的加法函数进行交互。如果你求值它，Clojure 会查找该函数并应用它。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(eval (list (read-string &#34;+&#34;) 1 2))
+; =&gt; 3
+</code></pre></td></tr></table>
+</div>
+</div><p>就其本身而言，符号和它们的参照物实际上不做任何事情；Clojure 通过求值列表执行工作。</p>
+<h3 id=列表>列表</h3>
+<p>如果数据结构是一个空列表，它就会被求值为一个空列表。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(eval (read-string &#34;()&#34;))
+; =&gt; ()
+</code></pre></td></tr></table>
+</div>
+</div><p>否则，它被求值为对列表中第一个元素的*调用。执行调用的方式取决于第一个元素的性质。</p>
+<h4 id=函数调用>函数调用</h4>
+<p>当执行一个函数调用时，每个操作数都被完全求值，然后作为参数传递给函数。在这个例子中，<code>+</code>符号解析为一个函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(+ 1 2)
+; =&gt; 3
+</code></pre></td></tr></table>
+</div>
+</div><p>Clojure 看到列表的头部是一个函数，所以它继续求值列表中的其他元素。操作数 1 和 2 都对自己进行求值，在求值之后，Clojure 对它们应用加法函数。</p>
+<p>你也可以嵌套函数调用。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(+ 1 (+ 2 3))
+; =&gt; 6
+</code></pre></td></tr></table>
+</div>
+</div><p>即使第二个参数是一个列表，Clojure 在这里也遵循同样的过程：查找<code>+</code>符号并求值每个参数。为了求值列表<code>(+ 2 3)</code>，Clojure 将第一个成员解析为加法函数并继续求值每个参数。通过这种方式，求值是递归的。</p>
+<h4 id=特殊形式>特殊形式</h4>
+<p>你也可以调用*特殊形式。*一般来说，特殊形式是特殊的，因为它们实现了不能用函数实现的核心行为。比如说</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if true 1 2)
+; =&gt; 1
+</code></pre></td></tr></table>
+</div>
+</div><p>这里，我们要求 Clojure 求值一个以符号<code>if</code>开始的列表。这个<code>if</code>符号被解析为<code>if</code>特殊形式，Clojure 用操作数<code>true</code>、<code>1</code>和<code>2</code>调用这个特殊形式。</p>
+<p>特殊形式不遵循与普通函数相同的求值规则。例如，当你调用一个函数时，每个操作数都被求值。然而，对于<code>if</code>，你不希望每个操作数都被求值。你只希望某些操作数被求值，这取决于条件是真还是假。</p>
+<p>另一个重要的特殊形式是<code>quote</code>。你已经见过这样的列表。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>&#39;(a b c)
+</code></pre></td></tr></table>
+</div>
+</div><p>正如你在<a href=https://www.braveclojure.com/read-and-eval/#Anchor>&ldquo;读取器 &ldquo;第 153 页</a>中所看到的，这将调用一个读取器宏，所以我们最终得到这样的结果。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(quote (a b c))
+</code></pre></td></tr></table>
+</div>
+</div><p>通常，Clojure 会尝试解析<code>a</code>符号，然后调用它，因为它是一个列表中的第一个元素。<code>quote</code>的特殊形式告诉求值器，&ldquo;与其像正常一样求值我的下一个数据结构，不如直接返回数据结构本身。&rdquo; 在这种情况下，你最终得到一个由符号<code>a</code>, <code>b</code>, 和<code>c</code>组成的列表。</p>
+<p><code>def</code>、<code>let</code>、<code>loop</code>、<code>fn</code>、<code>do</code>和<code>recur</code>也都是特殊形式。你可以看到为什么：它们的求值方式与函数不一样。例如，通常当求值器求值一个符号时，它会解析该符号，但是<code>def</code>和<code>let</code>显然不是这样的行为。它们不是解析符号，而是在符号和值之间建立关联。因此，求值器从读者那里接收到一个数据结构的组合，然后它去解析符号并调用每个列表开头的函数或特殊形式。但还有更多的东西! 你也可以在列表的开头放置一个<em>宏</em>，而不是一个函数或特殊形式，这可以为你提供巨大的权力，让你知道其余的数据结构如何被求值。</p>
+<h3 id=巨集>巨集</h3>
+<p>嗯 . . Clojure 求值数据结构&ndash;与我们在 Clojure 程序中编写和操作的数据结构相同。如果我们能用 Clojure 来操作 Clojure 求值的数据结构，那不是很好吗？是的，是的，会的。你猜怎么着？你可以用宏来做这件事。你的脑袋是不是爆炸了？我的就是这样。</p>
+<p>为了了解宏的作用，让我们看看一些代码。假设我们想写一个函数，让 Clojure 读出 infix 符号（如<code>1 + 1</code>），而不是其正常符号中的运算符优先（<code>+ 1 1</code>）。这个例子不是**一个宏。相反，它只是表明你可以用 infix 符号写代码，然后用 Clojure 来转换它，使其实际执行。首先，创建一个代表 infix 加法的列表。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(read-string &#34;(1 + 1)&#34; )
+; =&gt; (1 + 1)
+</code></pre></td></tr></table>
+</div>
+</div><p>如果你试图让它求值这个列表，Clojure 将抛出一个异常。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(eval (read-string &#34;(1 + 1)&#34;))
+; =&gt; ClassCastException java.lang.Long cannot be cast to clojure.lang.IFn
+</code></pre></td></tr></table>
+</div>
+</div><p>然而，<code>read-string</code>返回一个列表，你可以用 Clojure 把这个列表重新组织成它<em>可以</em>成功求值的东西。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [infix (read-string &#34;(1 + 1)&#34;)]
+  (list (second infix) (first infix) (last infix)))
+; =&gt; (+ 1 1)
+</code></pre></td></tr></table>
+</div>
+</div><p>如果你<code>求值</code>这个，它返回<code>2</code>，就像你所期望的那样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(eval
+ (let [infix (read-string &#34;(1 + 1)&#34;)]
+   (list (second infix) (first infix) (last infix))))
+; =&gt; 2
+</code></pre></td></tr></table>
+</div>
+</div><p>这很酷，但它也很笨重。这就是宏的作用。宏给了你一个方便的方法，在 Clojure 求值列表之前对其进行操作。宏很像函数：它们接受参数并返回一个值，就像一个函数那样。它们在 Clojure 数据结构上工作，就像函数那样。它们的独特和强大之处在于它们与求值过程的配合。它们在读取器和求值器之间执行&ndash;所以它们可以操作读取器吐出的数据结构，并在将其传递给求值器之前与这些数据结构进行转换。</p>
+<p>让我们看一个例子。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defmacro ignore-last-operand
+  [function-call]
+  (butlast function-call))
+
+➊ (ignore-last-operand (+ 1 2 10))
+; =&gt; 3
+
+;; This will not print anything
+(ignore-last-operand (+ 1 2 (println &#34;look at me!!!&#34;)))
+; =&gt; 3
+</code></pre></td></tr></table>
+</div>
+</div><p>在➊，宏 &ldquo;ignore-last-operand &ldquo;接收列表&rdquo;(+ 1 2 10) &ldquo;作为其参数，<em>不是</em>值 &ldquo;13&rdquo;。这与函数调用有很大的不同，因为函数调用总是求值所有传入的参数，所以函数不可能接触到它的一个操作数并改变或忽略它。相比之下，当你调用一个宏时，操作数是<em>不</em>被求值的。特别是，符号不被解析；它们被当作符号传递。列表也不被求值；也就是说，列表中的第一个元素不作为一个函数、特殊形式或宏被调用。相反，未求值的列表数据结构被传入。</p>
+<p><img src=https://www.braveclojure.com/assets/images/cftbat/read-and-eval/whole-shebang.png alt></p>
+<p>图 7-6: (infix (1 + 2)) 的完整求值过程</p>
+<p>另一个区别是，函数返回的数据结构是<em>不</em>求值的，但是宏返回的数据结构是<em>求值的。确定宏的返回值的过程被称为</em>宏扩展*，你可以使用函数<code>macroexpand</code>来查看宏在求值数据结构之前返回什么数据结构。注意，你必须引用你传递给<code>macroexpand</code>的形式。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(macroexpand &#39;(ignore-last-operand (+ 1 2 10)))
+; =&gt; (+ 1 2)
+
+(macroexpand &#39;(ignore-last-operand (+ 1 2 (println &#34;look at me!!!&#34;))))
+; =&gt; (+ 1 2)
+</code></pre></td></tr></table>
+</div>
+</div><p>正如你所看到的，这两种扩展的结果都是列表<code>(+ 1 2)</code>。当这个列表被求值时，就像前面的例子一样，结果是<code>3</code>。</p>
+<p>为了好玩，这里有一个做简单 infix 符号的宏。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defmacro infix
+  [infixed]
+  (list (second infixed) 
+        (first infixed) 
+        (last infixed)))
+
+(infix (1 + 2))
+; =&gt; 3
+</code></pre></td></tr></table>
+</div>
+</div><p>思考这整个过程的最好方法是想象在读取和求值之间的一个阶段：<em>宏扩展</em>阶段。图 7-6 显示了如何将<code>(infix (1 + 2))</code>的整个求值过程可视化。</p>
+<p>而这就是宏是如何融入求值过程的。但你为什么要这样做呢？原因是宏允许你将任意的数据结构，如<code>(1 + 2)</code>转化为 Clojure 可以求值的结构，即<code>(+ 1 2)</code>。这意味着<em>你可以使用 Clojure 来扩展自己</em>，所以你可以随心所欲地编写程序。换句话说，宏能够实现<em>句法抽象</em>。句法抽象可能听起来有点抽象（哈哈！），所以我们来探讨一下。</p>
+<h3 id=语法抽象和---宏>语法抽象和 -> 宏</h3>
+<p>通常，Clojure 代码由一堆嵌套的函数调用组成。例如，我在我的一个项目中使用了下面这个函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn read-resource
+  &#34;Read a resource into a string&#34;
+  [path]
+  (read-string (slurp (clojure.java.io/resource path))))
+</code></pre></td></tr></table>
+</div>
+</div><p>为了理解函数体，你必须找到最内部的形式，在本例中是<code>(clojure.java.io/resource path)</code>，然后从右到左向外走，看每个函数的结果如何传递给另一个函数。这种从右到左的流程与非 Lisp 程序员所习惯的相反。当你习惯于用 Clojure 写作时，这种代码会越来越容易理解。但如果你想翻译 Clojure 代码，以便你能以更熟悉的、从左到右、从上到下的方式来阅读它，你可以使用内置的<code>-></code>宏，它也被称为<em>threading</em>或<em>stabby</em>宏。它可以让你像这样重写前面的函数。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn read-resource
+  [path]
+  (-&gt; path
+      clojure.java.io/resource
+      slurp
+      read-string))
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以把这理解为一个从上到下的流水线，而不是从内括号到外括号。首先，<code>path</code>被传递给<code>io/</code>resource<code>，然后结果被传递给</code>slurp<code>，最后结果被传递给</code>read-string`。</p>
+<p>这两种定义 &ldquo;read-resource &ldquo;的方式是完全等价的。然而，第二种方式可能更容易理解，因为我们可以从上到下接近它，一个我们习惯的方向。<code>-></code>也让我们省略了括号，这意味着有更少的视觉噪音需要处理。这是一个<em>句法抽象</em>，因为它可以让你用一种不同于 Clojure 内置语法的语法来写代码，但对于人类的消费来说是比较好的。胜过点石成金!!!</p>
+<h2 id=总结>总结</h2>
+<p>在本章中，你了解了 Clojure 的求值过程。首先，读取器将文本转换为 Clojure 数据结构。接下来，宏扩展器用宏来转换这些数据结构，将你的自定义语法转换为语法上有效的数据结构。最后，这些数据结构被发送到求值器。求值器根据数据结构的类型对其进行处理：符号被解析为它们的参照物；列表导致函数、宏或特殊形式的调用；其他一切都被求值为自身。</p>
+<p>这个过程最酷的地方是，它允许你使用 Clojure 来扩展它自己的语法。这个过程变得更加容易，因为 Clojure 是同源的：它的文本代表数据结构，而这些数据结构代表抽象的语法树，让你更容易推理出如何构建扩展语法的宏。</p>
+<p>有了所有这些新的概念，你现在就可以像我承诺的那样，故意炸毁东西了。下一章将教你关于编写宏的一切知识。请抓紧你的袜子，否则它们很可能会被打掉!</p>
+<h2 id=练习>练习</h2>
+<p>这些练习的重点是读取器和求值。第 8 章有关于编写宏的练习。</p>
+<ol>
+<li>使用<code>list</code>函数, 引用, 和<code>read-string</code>来创建一个列表, 当求值时, 打印出你的名字和你最喜欢的科幻电影.</li>
+<li>创建一个 infix 函数，该函数接收一个类似<code>(1 + 3 * 4 - 5)</code>的列表，并将其转换为 Clojure 需要的列表，以便使用运算符优先规则正确求值该表达式。</li>
+</ol>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/clojure/>clojure</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/chapter8/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Chapter8 宏</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/chapter6/>
+<span class="next-text nav-default">Chapter6 组织你的项目</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

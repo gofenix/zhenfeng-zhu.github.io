@@ -1,0 +1,662 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>spring boot 多数据源配置 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="spring boot 多数据源配置 在单数据源的情况下，Spring Boot 的配置非常简单，只需要在 application.properties 文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="spring boot 多数据源配置">
+<meta property="og:description" content="spring boot 多数据源配置 在单数据源的情况下，Spring Boot 的配置非常简单，只需要在 application.properties 文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-03-24T19:01:37+00:00">
+<meta property="article:modified_time" content="2018-03-24T19:01:37+00:00">
+<meta itemprop=name content="spring boot 多数据源配置">
+<meta itemprop=description content="spring boot 多数据源配置 在单数据源的情况下，Spring Boot 的配置非常简单，只需要在 application.properties 文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数"><meta itemprop=datePublished content="2018-03-24T19:01:37+00:00">
+<meta itemprop=dateModified content="2018-03-24T19:01:37+00:00">
+<meta itemprop=wordCount content="1300">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="spring boot 多数据源配置">
+<meta name=twitter:description content="spring boot 多数据源配置 在单数据源的情况下，Spring Boot 的配置非常简单，只需要在 application.properties 文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>spring boot 多数据源配置</h1>
+<div class=post-meta>
+<span class=post-time> 2018-03-24 </span>
+<span class=more-meta> 约 1300 字 </span>
+<span class=more-meta> 预计阅读 3 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#spring-boot-多数据源配置>spring boot 多数据源配置</a>
+<ul>
+<li><a href=#1-准备>1 准备</a>
+<ul>
+<li><a href=#11-禁止-datasourceautoconfiguration>1.1 禁止 DataSourceAutoConfiguration</a></li>
+<li><a href=#12-配置数据库连接>1.2 配置数据库连接</a></li>
+<li><a href=#13-手段创建数据源>1.3 手段创建数据源</a></li>
+</ul>
+</li>
+<li><a href=#2-jdbctemplate-多数据源>2 jdbcTemplate 多数据源</a>
+<ul>
+<li><a href=#21-jdbctemplate-的数据源配置>2.1 jdbcTemplate 的数据源配置</a></li>
+<li><a href=#22-单元测试>2.2 单元测试</a></li>
+</ul>
+</li>
+<li><a href=#3-mybatis-多数据源配置>3 mybatis 多数据源配置</a>
+<ul>
+<li><a href=#31-自定义-sqlsessionfactory>3.1 自定义 SqlSessionFactory</a></li>
+<li><a href=#32-mapper-和实体类>3.2 mapper 和实体类</a></li>
+<li><a href=#33-单元测试>3.3 单元测试</a></li>
+</ul>
+</li>
+<li><a href=#4-参考资料>4 参考资料</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=spring-boot-多数据源配置>spring boot 多数据源配置</h1>
+<p>在单数据源的情况下，Spring Boot 的配置非常简单，只需要在 application.properties 文件中配置连接参数即可。但是往往随着业务量发展，我们通常会进行数据库拆分或是引入其他数据库，从而我们需要配置多个数据源。</p>
+<h2 id=1-准备>1 准备</h2>
+<h3 id=11-禁止-datasourceautoconfiguration>1.1 禁止 DataSourceAutoConfiguration</h3>
+<p>首先要将 spring boot 自带的<code>DataSourceAutoConfiguration</code>禁掉，因为它会读取<code>application.properties</code>文件的<code>spring.datasource.*</code>属性并自动配置单数据源。在<code>@SpringBootApplication</code>注解中添加<code>exclude</code>属性即可：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+public class DemoApplication {
+ public static void main(String[] args) {
+  SpringApplication.run(JpaDemoApplication.class, args);
+ }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=12-配置数据库连接>1.2 配置数据库连接</h3>
+<p>然后在<code>application.properties</code>中配置多数据源连接信息：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>spring.datasource.primary.url=jdbc:mysql://localhost:3306/test
+spring.datasource.primary.username=root
+spring.datasource.primary.password=root
+spring.datasource.primary.driver-class-name=com.mysql.jdbc.Driver
+
+spring.datasource.secondary.url=jdbc:mysql://localhost:3306/test1
+spring.datasource.secondary.username=root
+spring.datasource.secondary.password=root
+spring.datasource.secondary.driver-class-name=com.mysql.jdbc.Driver
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=13-手段创建数据源>1.3 手段创建数据源</h3>
+<p>由于我们禁掉了自动数据源配置，因些下一步就需要手动将这些数据源创建出来：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@Configuration
+public class DataSourceConfig {
+
+    @Bean(name = &#34;primaryDataSource&#34;)
+//    @Qualifier(value = &#34;primaryDataSource&#34;)
+    @ConfigurationProperties(prefix = &#34;spring.datasource.primary&#34;)
+    public DataSource primaryDataSource(){
+        return DataSourceBuilder.create().build();
+    }
+
+
+    @Bean(name = &#34;secondaryDataSource&#34;)
+//    @Qualifier(value = &#34;secondaryDataSource&#34;)
+    @ConfigurationProperties(prefix = &#34;spring.datasource.secondary&#34;)
+    public DataSource secondaryDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=2-jdbctemplate-多数据源>2 jdbcTemplate 多数据源</h2>
+<h3 id=21-jdbctemplate-的数据源配置>2.1 jdbcTemplate 的数据源配置</h3>
+<p>新建 jdbcTemplate 的数据源配置：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@Configuration
+public class JdbcTemplateConfig {
+    @Bean(name = &#34;primaryJdbcTemplate&#34;)
+    public JdbcTemplate primaryJdbcTemplate(
+            @Qualifier(&#34;primaryDataSource&#34;) DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean(name = &#34;secondaryJdbcTemplate&#34;)
+    public JdbcTemplate secondaryJdbcTemplate(
+            @Qualifier(&#34;secondaryDataSource&#34;) DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=22-单元测试>2.2 单元测试</h3>
+<p>然后编写单元测试用例：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@RunWith(SpringRunner.class)
+@SpringBootTest
+public class JpaDemoApplicationTests {
+    @Autowired
+    @Qualifier(&#34;primaryJdbcTemplate&#34;)
+    protected JdbcTemplate jdbcTemplate1;
+
+    @Autowired
+    @Qualifier(&#34;secondaryJdbcTemplate&#34;)
+    protected JdbcTemplate jdbcTemplate2;
+
+    @Test
+    public void testJdbc() {
+        // 往第一个数据源中插入两条数据
+        jdbcTemplate1.update(&#34;insert into users(id,name,age) values(?, ?, ?)&#34;, 1, &#34;aaa&#34;, 20);
+        jdbcTemplate1.update(&#34;insert into users(id,name,age) values(?, ?, ?)&#34;, 2, &#34;bbb&#34;, 30);
+
+        // 往第二个数据源中插入一条数据，若插入的是第一个数据源，则会主键冲突报错
+        jdbcTemplate2.update(&#34;insert into users(id,name,age) values(?, ?, ?)&#34;, 1, &#34;aaa&#34;, 20);
+
+        // 查一下第一个数据源中是否有两条数据，验证插入是否成功
+        Assert.assertEquals(&#34;2&#34;, jdbcTemplate1.queryForObject(&#34;select count(1) from users&#34;, String.class));
+
+        // 查一下第一个数据源中是否有两条数据，验证插入是否成功
+        Assert.assertEquals(&#34;1&#34;, jdbcTemplate2.queryForObject(&#34;select count(1) from users&#34;, String.class));
+
+    }
+
+
+    @Test
+    public void contextLoads() {
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=3-mybatis-多数据源配置>3 mybatis 多数据源配置</h2>
+<h3 id=31-自定义-sqlsessionfactory>3.1 自定义 SqlSessionFactory</h3>
+<p>新建两个 mybatis 的 SqlSessionFactory 配置：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@Configuration
+@MapperScan(basePackages = {&#34;com.example.jpademo.primary.mapper&#34;}, sqlSessionFactoryRef = &#34;sqlSessionFactory1&#34;)
+public class MybatisPrimaryConfig {
+    @Autowired
+    @Qualifier(&#34;primaryDataSource&#34;)
+    private DataSource primaryDataSource;
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory1() throws Exception {
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        // 使用primaryDataSource数据源
+        factoryBean.setDataSource(primaryDataSource);
+        return factoryBean.getObject();
+    }
+
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplate1() throws Exception {
+        // 使用上面配置的Factory
+        SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactory1());
+        return template;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这样，<code>com.example.jpademo.primary.mapper</code>包下的所有 mapper 就会用<code>sqlSessionFactory1</code>。同理可以创建</p>
+<p><code>sqlSessionFactory2</code>：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@Configuration
+@MapperScan(basePackages = {&#34;com.example.jpademo.secondary.mapper&#34;}, sqlSessionFactoryRef = &#34;sqlSessionFactory2&#34;)
+public class MybatisSecondaryConfig {
+    @Autowired
+    @Qualifier(&#34;secondaryDataSource&#34;)
+    private DataSource secondaryDataSource;
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory2() throws Exception {
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        // 使用primaryDataSource数据源
+        factoryBean.setDataSource(secondaryDataSource);
+        return factoryBean.getObject();
+    }
+
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplate1() throws Exception {
+        // 使用上面配置的Factory
+        SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactory2());
+        return template;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=32-mapper-和实体类>3.2 mapper 和实体类</h3>
+<p>然后编写 mapper 和实体类：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@Data
+public class User {
+    private Integer id;
+    private String name;
+    private Integer age;
+}
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package com.example.jpademo.primary.mapper;
+
+import com.example.jpademo.domain.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+@Mapper
+@Qualifier(&#34;userMapper1&#34;)
+public interface UserMapper1 {
+    @Select(&#34;select * from users where id=#{id}&#34;)
+    User findById(@Param(&#34;id&#34;) Integer id);
+}
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>package com.example.jpademo.secondary.mapper;
+
+import com.example.jpademo.domain.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+@Mapper
+@Qualifier(&#34;userMapper2&#34;)
+public interface UserMapper2 {
+    @Select(&#34;select * from users where id=#{id}&#34;)
+    User findById(Integer id);
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=33-单元测试>3.3 单元测试</h3>
+<p>编写单元测试用例：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>@RunWith(SpringRunner.class)
+@SpringBootTest
+public class JpaDemoApplicationTests {
+
+    @Autowired
+    private UserMapper1 userMapper1;
+
+    @Autowired
+    private UserMapper2 userMapper2;
+
+    @Test
+    public void testMybatis() {
+        User user1 = userMapper1.findById(1);
+        User user2 = userMapper2.findById(1);
+
+        Assert.assertEquals(&#34;aaa&#34;, user1.getName());
+        Assert.assertEquals(&#34;ccc&#34;, user2.getName());
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=4-参考资料>4 参考资料</h2>
+<p><a href=http://blog.csdn.net/neosmith/article/details/61202084>Spring Boot + Mybatis 多数据源和动态数据源配置</a></p>
+<p><a href=http://www.spring4all.com/article/253>Spring Boot 两种多数据源配置：JdbcTemplate、Spring-data-jpa</a></p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2018-03-24
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/spring-data-jpa%E5%AE%9E%E6%88%98/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Spring Data Jpa 实战</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/spring-boot%E8%BF%9E%E6%8E%A5redis/>
+<span class="next-text nav-default">spring boot 连接 redis</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

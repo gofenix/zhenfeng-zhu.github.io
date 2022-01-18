@@ -1,0 +1,242 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Web 前端性能优化 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="一般来说 web 前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN 服务等等。web 前端优化主要从如下三个方面入手： 浏"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Web 前端性能优化">
+<meta property="og:description" content="一般来说 web 前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN 服务等等。web 前端优化主要从如下三个方面入手： 浏">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/web%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-11-20T16:01:49+08:00">
+<meta property="article:modified_time" content="2020-11-20T16:01:49+08:00">
+<meta itemprop=name content="Web 前端性能优化">
+<meta itemprop=description content="一般来说 web 前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN 服务等等。web 前端优化主要从如下三个方面入手： 浏"><meta itemprop=datePublished content="2020-11-20T16:01:49+08:00">
+<meta itemprop=dateModified content="2020-11-20T16:01:49+08:00">
+<meta itemprop=wordCount content="928">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Web 前端性能优化">
+<meta name=twitter:description content="一般来说 web 前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN 服务等等。web 前端优化主要从如下三个方面入手： 浏"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Web 前端性能优化</h1>
+<div class=post-meta>
+<span class=post-time> 2020-11-20 </span>
+<span class=more-meta> 约 928 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#浏览器访问优化>浏览器访问优化</a></li>
+<li><a href=#cdn-加速>CDN 加速</a></li>
+<li><a href=#反向代理>反向代理</a></li>
+<li><a href=#写在最后>写在最后</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>一般来说 web 前端是指网站业务逻辑之前的部分，比如：浏览器加载、网站视图模型、图片服务、CDN 服务等等。web 前端优化主要从如下三个方面入手：</p>
+<h2 id=浏览器访问优化>浏览器访问优化</h2>
+<ol>
+<li>
+<p><strong>减少 http 请求</strong></p>
+<p>http 协议是一个无状态的，每次请求都需要建立通信链路进行传输，在服务器端，一般每个请求都会分配一个线程去处理。</p>
+<p>减少 http 请求的主要手段是<strong>合并 CSS</strong>、<strong>合并 js</strong>、<strong>合并图片</strong>。</p>
+</li>
+<li>
+<p><strong>使用浏览器缓存</strong></p>
+<p>css、js、Logo、图标等静态资源文件更新频率较低，可以将这些文件缓存在浏览器中。</p>
+<p>在更新 js 等文件的时候，一般不是将文件内容更新，而是生成一个新的文件，然后更新 html 的引用。</p>
+<p>更新静态资源的时候，也是要逐量更新，以避免用户浏览器的大量缓存失效，造成服务器负载增加、网络堵塞。</p>
+</li>
+<li>
+<p><strong>启用压缩</strong></p>
+<p>在服务器对文件压缩，然后在浏览器端解压缩，可以减少通信传输的数据量。</p>
+</li>
+<li>
+<p><strong>CSS 放在页面最上面，js 放在页面最下面</strong></p>
+<p>浏览器会在下载完全部 CSS 之后才对整个页面进行渲染，而浏览器是在加载 js 之后就立即执行，有可能会阻塞整个页面。因此最好的做法就是把 CSS 放在最上面，js 放在最下面。但是如果是页面解析的时候就用到 js，也是要相应的 js 放在上面。</p>
+</li>
+<li>
+<p><strong>减少 cookie 传输</strong></p>
+<p>cookie 会包含在每次请求和响应中，太大的 cookie 会影响数据传输，需要慎重考虑哪些数据写入 cookie 中。</p>
+<p>对于某些静态资源的访问，如 css 和 js 等，发送 cookie 没意义，可以考虑静态资源使用独立域名访问，避免请求静态资源时发送 cookie。</p>
+</li>
+</ol>
+<h2 id=cdn-加速>CDN 加速</h2>
+<p>CDN（content distribute network，内容分发网络）的本质仍然是一个缓存。将缓存放在离用户最近的地方，使得用户可以以最快的速度获取数据。</p>
+<p>CDN 缓存的一般是静态资源，如图片、文件、CSS、js、静态网页等。</p>
+<h2 id=反向代理>反向代理</h2>
+<p>反向代理服务器位于网站中心机房的一侧，代理网站 web 服务器接收 http 请求。</p>
+<p>反向代理可以在一定程度上保护网站安全，来自互联网的访问请求必须经过代理服务器，相当于在 web 服务器和攻击之间加了一个屏障。</p>
+<p>反向代理也可以通过配置缓存，静态资源被缓存在反向代理服务器，当用户访问时，可以从反向代理服务器上返回。有些网站也会将部分动态内容缓存在代理服务器上，通过内部通知机制，更新缓存。</p>
+<p>反向代理也可以实现负载均衡的功能。</p>
+<h2 id=写在最后>写在最后</h2>
+<p>可以发现，在 web 前端性能优化的时候，提到最多的就是缓存。</p>
+<blockquote>
+<p><strong>网站性能优化第一定律：优先考虑使用缓存！</strong></p>
+</blockquote>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2020-11-20
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<nav class=post-nav>
+<a class=prev href=/post/unix-philosophy/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">unix 哲学</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/>
+<span class="next-text nav-default">大型网站发展历程</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>AppendixA 用 Leiningen 构建和开发 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="用 Leiningen 构建和开发 用任何语言编写软件都需要生成工件，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为依赖，以确保它们被加载到你"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/appendixa/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="AppendixA 用 Leiningen 构建和开发">
+<meta property="og:description" content="用 Leiningen 构建和开发 用任何语言编写软件都需要生成工件，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为依赖，以确保它们被加载到你">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/appendixa/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-15T21:39:36+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="AppendixA 用 Leiningen 构建和开发">
+<meta itemprop=description content="用 Leiningen 构建和开发 用任何语言编写软件都需要生成工件，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为依赖，以确保它们被加载到你"><meta itemprop=datePublished content="2022-01-15T21:39:36+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="2056">
+<meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="AppendixA 用 Leiningen 构建和开发">
+<meta name=twitter:description content="用 Leiningen 构建和开发 用任何语言编写软件都需要生成工件，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为依赖，以确保它们被加载到你"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>AppendixA 用 Leiningen 构建和开发</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-15 </span>
+<span class=more-meta> 约 2056 字 </span>
+<span class=more-meta> 预计阅读 5 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#用-leiningen-构建和开发>用 Leiningen 构建和开发</a>
+<ul>
+<li><a href=#artifact-ecosystem>Artifact Ecosystem</a>
+<ul>
+<li><a href=#identification>Identification</a></li>
+<li><a href=#依赖>依赖</a></li>
+<li><a href=#插件>插件</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=用-leiningen-构建和开发>用 Leiningen 构建和开发</h1>
+<p>用任何语言编写软件都需要生成<em>工件</em>，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为<em>依赖</em>，以确保它们被加载到你正在构建的项目中。Clojurists 中最流行的管理工件的工具是 Leiningen，本附录将告诉你如何使用它。你还将学习如何使用 Leiningen 来完全增强你的开发经验，使用<em>插件</em>。</p>
+<h2 id=artifact-ecosystem>Artifact Ecosystem</h2>
+<p>因为 Clojure 托管在 Java 虚拟机（JVM）上，所以 Clojure 的工件是以 JAR 文件的形式分发的（在第 12 章有介绍）。Java 地已经有一个处理 JAR 文件的完整的工件生态系统，Clojure 也使用它。<em>神器生态系统</em>并不是一个官方的编程术语；我用它来指代用于识别和分发神器的一套工具、资源和惯例。Java 的生态系统是围绕着 Maven 构建工具发展起来的，由于 Clojure 使用这个生态系统，你会经常看到对 Maven 的引用。Maven 是一个巨大的工具，可以执行各种古怪的项目管理任务。值得庆幸的是，你不需要获得 Maven 学的博士学位就能成为一名有效的 Clojurist。你需要知道的唯一特征是，Maven 规定了一种识别 Clojure 项目所遵守的工件的模式，它还规定了如何在 Maven <em>仓库</em>中托管这些工件，Maven *仓库只是存储工件以供分发的服务器。</p>
+<h3 id=identification>Identification</h3>
+<p>Maven 工件需要一个<em>组 ID</em>，一个<em>工件 ID</em>，以及一个<em>版本</em>。你可以在<em>project.clj</em>文件中为你的项目指定这些。以下是你在第一章创建的<code>clojure-noob</code>项目的<em>project.clj</em>第一行的内容。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defproject clojure-noob &#34;0.1.0-SNAPSHOT&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><code>clojure-noob</code>是你项目的组 ID 和工件 ID，<code>"0.1.0-SNAPSHOT"</code>是其版本。一般来说，版本是永久性的；如果你将一个版本为 0.1.0 的工件部署到存储库，你不能对该工件进行修改并使用相同的版本号进行部署。您需要改变版本号。(许多程序员喜欢 Semantic Versioning 系统，您可以在*<a href=http://semver.org/>Semantic Versioning 2.0.0 | Semantic Versioning</a>.*中阅读到这一系统。） 如果你想表明该版本是一个正在进行的工作，并且你计划不断地更新它，你可以在你的版本号后面加上<code>-SNAPSHOT</code>。</p>
+<p>如果你想让你的组 ID 与你的工件 ID 不同，你可以用斜线将两者分开，像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defproject group-id/artifact-id &#34;0.1.0-SNAPSHOT&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>通常，开发者会使用他们的公司名称或 GitHub 用户名作为组的 ID。</p>
+<h3 id=依赖>依赖</h3>
+<p>你的<em>project.clj</em>文件还包括一行看起来像这样的内容，它列出了你项目的依赖。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>  :dependencies [[org.clojure/clojure &#34;1.9.0&#34;]]
+</code></pre></td></tr></table>
+</div>
+</div><p>如果你想使用一个库，使用与你命名项目时相同的命名模式将其添加到这个依赖 Vector 中。例如，如果你想轻松地处理日期和时间，你可以添加 clj-time 库，像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>  :dependencies [[org.clojure/clojure &#34;1.9.0&#34;]
+            [clj-time &#34;0.9.0&#34;]]
+</code></pre></td></tr></table>
+</div>
+</div><p>下次你启动你的项目时，无论是通过运行它还是通过启动 REPL，Leiningen 都会自动下载 clj-time 并使其在你的项目中可用。</p>
+<p>Clojure 社区创造了大量有用的库，寻找它们的好地方是*<a href=http://www.clojure-toolbox.com/>http://www.clojure-toolbox.com</a>*的 Clojure 工具箱，它根据项目的目的进行分类。几乎每一个 Clojure 库都在其 README 的顶部提供了它的标识符，使你很容易找出如何把它添加到你的 Leiningen 依赖项中。</p>
+<p>有时你可能想使用一个 Java 库，但标识符并不那么容易获得。例如，如果你想添加 Apache Commons Email，你必须在网上搜索，直到你找到一个包含这样内容的网页。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>&lt;dependency&gt;
+            &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-email&lt;/artifactId&gt;
+            &lt;version&gt;1.3.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>该 XML 是 Java 项目沟通其 Maven 标识符的方式。要把它添加到 Clojure 项目中，你需要修改<code>:dependencies</code>Vector，使其看起来像这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>  :dependencies [[org.clojure/clojure &#34;1.9.0&#34;]
+            [clj-time &#34;0.9.0&#34;]
+            [org.apache.commons/commons-email &#34;1.3.3&#34;]]
+</code></pre></td></tr></table>
+</div>
+</div><p>主要的 Clojure 库是 Clojars（<em><a href=https://clojars.org/>Clojars</a></em>），主要的 Java 库是 The Central Repository（<em><a href=http://search.maven.org/>Maven Central Repository Search</a></em>），人们通常只把它称为<em>Central</em>，就像旧金山居民把旧金山称为<em>the city</em>一样。你可以使用这些网站来寻找库和它们的标识符。</p>
+<p>要把你自己的项目部署到 Clojars，你所要做的就是在那里创建一个账户，然后在你的项目中运行<code>lein deploy clojars</code>。该任务会生成 Maven 工件所需的一切，包括 POM 文件（我就不多说了）和 JAR 文件，以便储存在仓库中。然后将它们上传到 Clojars。</p>
+<h3 id=插件>插件</h3>
+<p>Leiningen 让你使用<em>插件</em>，这是一些在你写代码时能帮助你的库。例如，Eastwood 插件是一个 Clojure 检查工具；它可以识别写得不好的代码。你通常要在*$HOME/.lein/profiles.clj<em>文件中指定你的插件。要添加 Eastwood，你要把</em>profiles.clj*改成这样。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>{:user {:plugins [[jonase/eastwood &#34;0.2.1&#34;]] ] 。}}
+</code></pre></td></tr></table>
+</div>
+</div><p>这就为你的所有项目启用了一个<code>eastwood'Leiningen任务，你可以在项目的根目录下用</code>lein eastwood&rsquo;运行。</p>
+<p>Leiningen 的 GitHub 项目页面有关于如何使用配置文件和插件的优秀文档，它包括一个方便的插件列表。</p>
+<h2 id=总结>总结</h2>
+<p>本附录着重介绍了项目管理中那些重要但又难以了解的方面，比如什么是 Maven 以及 Clojure 与它的关系。它向你展示了如何使用 Leiningen 来命名你的项目，指定依赖关系，并部署到 Clojars。Leiningen 为软件开发任务提供了很多功能，但并不涉及实际编写代码。如果你想了解更多，请在网上查看 Leiningen 教程*[leiningen/TUTORIAL.md at stable - technomancy/leiningen - GitHub]（<a href=https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md>https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md</a>）*.</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/clojure/>clojure</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/appendixb/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">AppendixB 花哨的 Boot</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/chapter13/>
+<span class="next-text nav-default">Chapter13 抽象</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

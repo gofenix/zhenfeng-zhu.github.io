@@ -1,0 +1,317 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Openfaas Workshop Lab1 - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="Lab 1 - 为 OpenFaaS 做准备 OpenFaaS 需要一个Kubernetes集群来运行。你可以使用一个单节点集群或多节点集群，不管是在你的笔记本电脑上还是在云端。 任何 OpenFaaS 函"><meta name=keywords content="Fenix,Clojure,Blog">
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab1/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Openfaas Workshop Lab1">
+<meta property="og:description" content="Lab 1 - 为 OpenFaaS 做准备 OpenFaaS 需要一个Kubernetes集群来运行。你可以使用一个单节点集群或多节点集群，不管是在你的笔记本电脑上还是在云端。 任何 OpenFaaS 函">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab1/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2021-03-30T09:54:25+08:00">
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta itemprop=name content="Openfaas Workshop Lab1">
+<meta itemprop=description content="Lab 1 - 为 OpenFaaS 做准备 OpenFaaS 需要一个Kubernetes集群来运行。你可以使用一个单节点集群或多节点集群，不管是在你的笔记本电脑上还是在云端。 任何 OpenFaaS 函"><meta itemprop=datePublished content="2021-03-30T09:54:25+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
+<meta itemprop=wordCount content="1211">
+<meta itemprop=keywords content="openfaas,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Openfaas Workshop Lab1">
+<meta name=twitter:description content="Lab 1 - 为 OpenFaaS 做准备 OpenFaaS 需要一个Kubernetes集群来运行。你可以使用一个单节点集群或多节点集群，不管是在你的笔记本电脑上还是在云端。 任何 OpenFaaS 函"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Openfaas Workshop Lab1</h1>
+<div class=post-meta>
+<span class=post-time> 2021-03-30 </span>
+<span class=more-meta> 约 1211 字 </span>
+<span class=more-meta> 预计阅读 3 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#lab-1---为-openfaas-做准备>Lab 1 - 为 OpenFaaS 做准备</a>
+<ul>
+<li><a href=#前提条件>前提条件</a>
+<ul>
+<li><a href=#docker>Docker</a></li>
+<li><a href=#openfaas-cli>OpenFaaS CLI</a></li>
+</ul>
+</li>
+<li><a href=#配置-docker-hub>配置 Docker Hub</a>
+<ul>
+<li><a href=#设置一个单节点集群>设置一个单节点集群</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h1 id=lab-1---为-openfaas-做准备>Lab 1 - 为 OpenFaaS 做准备</h1>
+<img src=https://github.com/openfaas/media/raw/master/OpenFaaS_Magnet_3_1_png.png width=500px>
+<p>OpenFaaS 需要一个<a href=https://kubernetes.io>Kubernetes</a>集群来运行。你可以使用一个单节点集群或多节点集群，不管是在你的笔记本电脑上还是在云端。</p>
+<p>任何 OpenFaaS 函数的基本原件都是一个 Docker 镜像，它是使用<code>faas-cli</code>工具链构建的。</p>
+<h2 id=前提条件>前提条件</h2>
+<p>让我们来安装 Docker、OpenFaaS CLI 以及设置 Kubernetes。</p>
+<h3 id=docker>Docker</h3>
+<p>适用于 Mac</p>
+<ul>
+<li><a href=https://store.docker.com/editions/community/docker-ce-desktop-mac>Docker CE for Mac Edge Edition</a></li>
+</ul>
+<p>适用于 Windows</p>
+<ul>
+<li>仅使用 Windows 10 Pro 或企业版</li>
+<li>安装<a href=https://store.docker.com/editions/community/docker-ce-desktop-windows>Docker CE for Windows</a></li>
+</ul>
+<blockquote>
+<p>请确保通过使用 Windows 任务栏通知区的 Docker 菜单来使用<strong>Linux</strong>容器的 Docker 守护程序。</p>
+</blockquote>
+<ul>
+<li>安装<a href=https://git-scm.com/downloads>Git Bash</a></li>
+</ul>
+<p>当你安装 git bash 时，选择以下选项。<code>install UNIX commands</code>和<code>use true-type font</code>。</p>
+<blockquote>
+<p>注意：请在所有步骤中使用<em>Git Bash</em>：不要试图使用<em>PowerShell</em>、<em>WSL</em>或<em>Bash for Windows</em>。</p>
+</blockquote>
+<p>Linux - Ubuntu 或 Debian</p>
+<ul>
+<li>Docker CE for Linux</li>
+</ul>
+<blockquote>
+<p>你可以从[Docker Store]（<a href=https://store.docker.com>https://store.docker.com</a>）安装 Docker CE。</p>
+</blockquote>
+<p>注意：作为最后的手段，如果你有一台不兼容的 PC，你可以在<a href=https://labs.play-with-docker.com/>https://labs.play-with-docker.com/</a>上面体验。</p>
+<h3 id=openfaas-cli>OpenFaaS CLI</h3>
+<p>你可以使用官方的 bash 脚本来安装 OpenFaaS CLI，<code>brew</code>也可以使用，但可能会落后一到两个版本。</p>
+<p>在 MacOS 或 Linux 下，在终端运行以下程序。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=c1># MacOS users may need to run &#34;bash&#34; first if this command fails</span>
+$ curl -sLSf https://cli.openfaas.com <span class=p>|</span> sudo sh
+</code></pre></td></tr></table>
+</div>
+</div><p>对于 Windows，在<em>Git Bash</em>中运行这个。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>curl -sLSf https://cli.openfaas.com <span class=p>|</span> sh
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>如果你遇到任何问题，你可以从<a href=https://github.com/openfaas/faas-cli/releases>releases page</a>手动下载最新的<code>faas-cli.exe</code>。你可以把它放在本地目录或<code>C:\Windows\</code>路径中，这样它就可以从命令提示符中获得。</p>
+</blockquote>
+<p>我们将使用<code>faas-cli</code>来搭建新的函数，构建、部署和调用函数。你可以通过<code>faas-cli --help</code>找到 cli 的可用命令。</p>
+<p>测试 <code>faas-cli</code>。打开一个终端或 Git Bash 窗口，键入</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli <span class=nb>help</span>
+faas-cli version
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=配置-docker-hub>配置 Docker Hub</h2>
+<p>注册一个 Docker Hub 账户。<a href=https://hub.docker.com>Docker Hub</a>允许你在互联网上发布你的 Docker 镜像，以便在多节点集群上使用或与更广泛的社区分享。我们将在研讨会期间使用 Docker Hub 来发布我们的函数。</p>
+<p>你可以在这里注册。<a href=https://hub.docker.com>Docker Hub</a></p>
+<p>打开一个终端或 Git Bash 窗口，用你上面注册的用户名登录 Docker Hub。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>docker login
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：来自社区的提示&ndash;如果你在 Windows 机器上试图运行这个命令时遇到错误，那么点击任务栏中的 Docker for Windows 图标，在那里登录 Docker，而不是 <code>登录/创建 Docker ID</code>。</p>
+</blockquote>
+<ul>
+<li>为新镜像设置你的 OpenFaaS 前缀</li>
+</ul>
+<p>OpenFaaS 镜像存储在 Docker 注册表或 Docker Hub 中，我们可以设置一个环境变量，使你的用户名自动添加到你创建的新函数中。这将在研讨会过程中为你节省一些时间。</p>
+<p>编辑<code>~/.bashrc</code>或<code>~/.bash_profile</code>&ndash;如果该文件不存在，则创建它。</p>
+<p>现在添加以下内容&ndash;按照你上面看到的 URL 进行修改。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nb>export</span> <span class=nv>OPENFAAS_PREFIX</span><span class=o>=</span><span class=s2>&#34;&#34;</span> <span class=c1># Populate with your Docker Hub username</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=设置一个单节点集群>设置一个单节点集群</h3>
+<p>实验室使用 Kubernetes，Swarm 已经不再被 OpenFaaS 社区支持。有些实验室可以用于 faasd，但你可能需要改变命令，而且当使用 faasd 的时候，我们不提供对该实验室的支持。</p>
+<ul>
+<li>Kubernetes。<a href=./lab1b.md>Lab 1b</a></li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-18
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/openfaas/>openfaas</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/openfaas-workshop-lab1b/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Openfaas Workshop Lab1b</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/openfaas-workshop/>
+<span class="next-text nav-default">Openfaas Workshop</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:your@email.com class="iconfont icon-email" title=email></a>
+<a href=http://localhost:1313 class="iconfont icon-stack-overflow" title=stack-overflow></a>
+<a href=http://localhost:1313 class="iconfont icon-twitter" title=twitter></a>
+<a href=http://localhost:1313 class="iconfont icon-facebook" title=facebook></a>
+<a href=http://localhost:1313 class="iconfont icon-linkedin" title=linkedin></a>
+<a href=http://localhost:1313 class="iconfont icon-google" title=google></a>
+<a href=http://localhost:1313 class="iconfont icon-github" title=github></a>
+<a href=http://localhost:1313 class="iconfont icon-weibo" title=weibo></a>
+<a href=http://localhost:1313 class="iconfont icon-zhihu" title=zhihu></a>
+<a href=http://localhost:1313 class="iconfont icon-douban" title=douban></a>
+<a href=http://localhost:1313 class="iconfont icon-pocket" title=pocket></a>
+<a href=http://localhost:1313 class="iconfont icon-tumblr" title=tumblr></a>
+<a href=http://localhost:1313 class="iconfont icon-instagram" title=instagram></a>
+<a href=http://localhost:1313 class="iconfont icon-gitlab" title=gitlab></a>
+<a href=http://localhost:1313 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>
