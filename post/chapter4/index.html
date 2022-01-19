@@ -28,11 +28,11 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter4/"><meta property="article:section" content="post">
 <meta property="article:published_time" content="2022-01-13T17:39:28+08:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
+<meta property="article:modified_time" content="2022-01-19T10:27:36+08:00">
 <meta itemprop=name content="Chapter4 深入研究核心函数">
 <meta itemprop=description content="核心函数的深入研究 如果你像我一样是焦虑的、以青少年为中心的准肥皂剧*《吸血鬼日记》*的超级粉丝，你一定记得主角埃琳娜开始质疑她苍白的、神秘的"><meta itemprop=datePublished content="2022-01-13T17:39:28+08:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="15883">
+<meta itemprop=dateModified content="2022-01-19T10:27:36+08:00">
+<meta itemprop=wordCount content="15881">
 <meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Chapter4 深入研究核心函数">
 <meta name=twitter:description content="核心函数的深入研究 如果你像我一样是焦虑的、以青少年为中心的准肥皂剧*《吸血鬼日记》*的超级粉丝，你一定记得主角埃琳娜开始质疑她苍白的、神秘的"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
@@ -93,7 +93,7 @@
 <h1 class=post-title>Chapter4 深入研究核心函数</h1>
 <div class=post-meta>
 <span class=post-time> 2022-01-13 </span>
-<span class=more-meta> 约 15883 字 </span>
+<span class=more-meta> 约 15881 字 </span>
 <span class=more-meta> 预计阅读 32 分钟 </span>
 <span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
 </div>
@@ -112,20 +112,20 @@
 <li><a href=#通过中间层抽象>通过中间层抽象</a></li>
 </ul>
 </li>
-<li><a href=#seq-函数实例>Seq 函数实例</a>
+<li><a href=#seq-函数的例子>Seq 函数的例子</a>
 <ul>
 <li><a href=#map>Map</a></li>
 <li><a href=#reduce>reduce</a></li>
 <li><a href=#take-drop-take-while-and-drop-while>take, drop, take-while, and drop-while</a></li>
-<li><a href=#过滤和一些>过滤和一些</a></li>
+<li><a href=#filter-和-some>Filter 和 Some</a></li>
 <li><a href=#sort-and-sort-by>sort and sort-by</a></li>
-<li><a href=#协程>协程</a></li>
+<li><a href=#concat>Concat</a></li>
 </ul>
 </li>
-<li><a href=#lazy-seqs>Lazy Seqs</a>
+<li><a href=#惰性序列>惰性序列</a>
 <ul>
-<li><a href=#演示懒惰序列的效率>演示懒惰序列的效率</a></li>
-<li><a href=#无限序列>无限序列</a></li>
+<li><a href=#演示惰性序列的效率>演示惰性序列的效率</a></li>
+<li><a href=#无穷序列>无穷序列</a></li>
 </ul>
 </li>
 <li><a href=#集合抽象>集合抽象</a>
@@ -136,13 +136,13 @@
 </li>
 <li><a href=#功能函数>功能函数</a>
 <ul>
-<li><a href=#应用>应用</a></li>
-<li><a href=#部分>部分</a></li>
-<li><a href=#补充>补充</a></li>
+<li><a href=#apply>Apply</a></li>
+<li><a href=#partial>Partial</a></li>
+<li><a href=#complement>Complement</a></li>
 </ul>
 </li>
-<li><a href=#a-vampire-data-analysis-program-for-the-fwpd>A Vampire Data Analysis Program for the FWPD</a></li>
-<li><a href=#摘要>摘要</a></li>
+<li><a href=#为华盛顿州福克斯警察局fwpd编写一个复杂的吸血鬼数据分析程序>为华盛顿州福克斯警察局（FWPD）编写一个复杂的吸血鬼数据分析程序</a></li>
+<li><a href=#总结>总结</a></li>
 <li><a href=#练习>练习</a></li>
 </ul>
 </li>
@@ -228,7 +228,7 @@
 };
 </code></pre></td></tr></table>
 </div>
-</div><p>在这个片段中，<code>node2</code>的<code>next</code>指向<code>node3</code>，而<code>node1</code>的<code>next</code>指向<code>node2</code>；这就是 &ldquo;链表 &ldquo;中的 &ldquo;链接&rdquo;。</p>
+</div><p>在这个代码中，<code>node2</code>的<code>next</code>指向<code>node3</code>，而<code>node1</code>的<code>next</code>指向<code>node2</code>；这就是 &ldquo;链表 &ldquo;中的 &ldquo;链接&rdquo;。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -257,7 +257,7 @@ var node1 = {
 <p><img src=https://www.braveclojure.com/assets/images/cftbat/core-functions-in-depth/linked-list.png alt=img></p>
 <p>图 4-3: 一个链接列表</p>
 <p>你可以在一个链表上执行三个核心函数。<code>first</code>, <code>rest</code>, 和<code>cons</code>. <code>first</code>返回请求的节点的值，<code>rest</code>返回请求的节点之后的剩余值，<code>cons</code>在列表的开头添加一个具有给定值的新节点。在这些实现之后，你可以在它们之上实现<code>map</code>、<code>reduce</code>、<code>filter</code>和其他 seq 函数。</p>
-<p>下面的代码显示了我们如何用我们的 JavaScript 节点例子实现和使用<code>first</code>、<code>rest</code>和<code>cons</code>，以及如何使用它们来返回特定的节点并导出一个新的列表。请注意，<code>first</code>和<code>rest</code>的参数被命名为<em>node</em>。这可能会让人感到困惑，因为你可能会说：&ldquo;我不是在获取一个<em>列表</em>的第一个元素吗？&rdquo; 好吧，你一次对列表中的元素进行操作，是一个节点一个节点地操作</p>
+<p>下面的代码显示了我们如何用我们的 JavaScript 例子实现和使用<code>first</code>、<code>rest</code>和<code>cons</code>，以及如何使用它们来返回特定的节点并导出一个新的列表。请注意，<code>first</code>和<code>rest</code>的参数被命名为<em>node</em>。这可能会让人感到困惑，因为你可能会说：&ldquo;我不是在获取一个<em>列表</em>的第一个元素吗？&rdquo; 好吧，你一次对列表中的元素进行操作，是一个节点一个节点地操作</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -415,9 +415,9 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </div><p>这个代码片段用 JavaScript 的数组函数定义了<code>first</code>、<code>rest</code>和<code>cons</code>。同时，<code>map</code>继续引用名为<code>first</code>、<code>rest</code>和<code>cons</code>的函数，所以现在它在<code>array</code>上工作。所以，如果你能实现<code>first</code>、<code>rest</code>和<code>cons</code>，你就能免费得到<code>map</code>和前面提到的大量其他函数。</p>
 <h3 id=通过中间层抽象>通过中间层抽象</h3>
 <p>在这一点上，你可能会反对我只是在踢皮球，因为我们仍然面临着像<code>first</code>这样的函数如何能够与不同的数据结构一起工作的问题。Clojure 使用两种形式的指示来实现这一目标。在编程中，<em>中间层</em>是一个通用术语，指的是一种语言所采用的机制，这样一个名字可以有多种相关的含义。在这个例子中，&ldquo;first &ldquo;这个名字有多种数据结构的含义。方向性是使抽象化成为可能的原因。</p>
-<p><em>多态</em>是 Clojure 提供间接性的一种方式。我不想在细节上迷失方向，但基本上，多态函数根据提供的参数类型分配给不同的函数体。(这与多态函数根据你提供的参数数量派发到不同的函数体并无太大区别）。</p>
-<p>注意 Clojure 有两种结构来定义多态调度：主机平台的接口结构和平台独立的协议。但在你刚开始的时候，没有必要了解这些东西是如何工作的。我将在第 13 章介绍协议。</p>
-<p>当涉及到序列时，Clojure 也通过做一种轻量级的类型转换来创造间接性，产生一种数据结构，与抽象的函数一起工作。每当 Clojure 期望一个序列&ndash;例如，当你调用<code>map</code>、<code>first</code>、<code>rest</code>或<code>cons</code>时，它就会调用相关数据结构上的<code>seq</code>函数，以获得一个允许<code>first</code>、<code>rest</code>和<code>cons</code>的数据结构。</p>
+<p><em>多态</em>是 Clojure 提供中间层的一种方式。我不想在细节上迷失方向，但基本上，多态函数根据提供的参数类型分配给不同的函数体。(这与多态函数根据你提供的参数数量派发到不同的函数体并无太大区别）。</p>
+<p>注意 Clojure 有两种结构来定义多态分发：主机平台的接口结构和平台独立的协议。但在你刚开始的时候，没有必要了解这些东西是如何工作的。我将在第 13 章介绍协议。</p>
+<p>当涉及到序列时，Clojure 也通过做一种轻量级的类型转换来创造中间层，产生一种数据结构，与抽象的函数一起工作。每当 Clojure 期望一个序列&ndash;例如，当你调用<code>map</code>、<code>first</code>、<code>rest</code>或<code>cons</code>时，它就会调用相关数据结构上的<code>seq</code>函数，以获得一个允许<code>first</code>、<code>rest</code>和<code>cons</code>的数据结构。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -460,7 +460,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </div>
 </div><p>所以，Clojure 的序列函数在其参数上使用<code>seq</code>。序列函数是根据序列抽象定义的，使用<code>first</code>、<code>rest</code>和<code>cons</code>。只要一个数据结构实现了序列抽象，它就可以使用广泛的 seq 库，其中包括诸如<code>reduce</code>、<code>filter</code>、<code>distinct</code>、<code>group-by</code>等超级明星函数。</p>
 <p>这里的启示是，把注意力集中在我们能对一个数据结构做什么，并尽可能地忽略它的实现，是非常有力的。实现本身并不重要。它们只是达到目的的一种手段。一般来说，抽象编程可以让你在不同的数据结构上使用函数库，不管这些数据结构是如何实现的。</p>
-<h2 id=seq-函数实例>Seq 函数实例</h2>
+<h2 id=seq-函数的例子>Seq 函数的例子</h2>
 <p>Clojure 的 seq 库中有很多有用的函数，你会经常用到。现在你已经对 Clojure 的序列抽象有了更深的了解，让我们来详细看看这些函数。如果你是 Lisp 和函数式编程的新手，这些例子将是令人惊讶和愉快的。</p>
 <h3 id=map>Map</h3>
 <p>你现在已经看过很多<code>map</code>的例子了，但是这一节展示了<code>map</code>做了两个新的任务：把多个集合作为参数，以及把一个函数集合作为参数。它还强调了一个常见的<code>map</code>模式：使用关键字作为 Map 函数。</p>
@@ -497,7 +497,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </div>
 </div><p><img src=https://www.braveclojure.com/assets/images/cftbat/core-functions-in-depth/vampire-diary.png alt=img></p>
 <p>当你传递给<code>map</code>多个集合时，第一个集合的元素（<code>["a" "b" "c"]</code>）将作为 Map 函数（<code>str</code>）的第一个参数传递，第二个集合的元素（<code>["A" "B" "C"</code>）将作为第二个参数传递，以此类推。只要确保你的 Map 函数可以接受的参数数量与你传递给<code>map</code>的集合数量相等。</p>
-<p>下面的例子显示了如果你是一个试图抑制人类消费的吸血鬼，你可以如何使用这种能力。你有两个 Vector，一个代表人类摄入的升数，另一个代表过去四天的小动物摄入量。unify-diet-data &ldquo;函数获取人类和动物的单日数据，并将两者统一为一张 Map。</p>
+<p>下面的例子显示了如果你是一个试图抑制人类消费的吸血鬼，你可以如何使用这种能力。你有两个 Vector，一个代表人类摄入的升数，另一个代表过去四天的小动物摄入量。<code>unify-diet-data</code> 函数获取人类和动物的单日数据，并将两者统一为一张 Map。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -584,7 +584,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </div>
 </div><p>(如果你是五岁，那么我深表歉意）。</p>
 <h3 id=reduce>reduce</h3>
-<p>第 3 章展示了<code>reduce</code>如何处理序列中的每个元素来建立一个结果。本节展示了其他一些可能不明显的使用方法。</p>
+<p>第 3 章展示了<code>reduce</code>如何处理序列中的每个元素来生成一个结果。本节展示了其他一些可能不经常使用的使用方法。</p>
 <p>第一种用法是转换一个 Map 的值，产生一个新的 Map，其键值相同，但数值更新。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -602,7 +602,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 ; =&gt; {:max 31, :min 11}
 </code></pre></td></tr></table>
 </div>
-</div><p>在这个例子中，<code>reduce</code>将参数<code>{:max 30 :min 10}</code>视为一个 Vector 序列，如<code>([:max 30] [:min 10])</code>。然后，它从一个空图（第二个参数）开始，用第一个参数，一个匿名函数来建立它。就像<code>reduce</code>这样做。</p>
+</div><p>在这个例子中，<code>reduce</code>将参数<code>{:max 30 :min 10}</code>视为一个 Vector 序列，如<code>([:max 30] [:min 10])</code>。然后，它从一个空 Map（第二个参数）开始，用第一个参数，一个匿名函数来建立它。就像<code>reduce</code>这样做：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -614,7 +614,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><p>函数<code>assoc</code>需要三个参数：一个 Map，一个键，和一个值。它通过<em>关联</em>给定的键和给定的值，从你给它的 Map 中派生出一个新的 Map。例如，<code>(assoc {:a 1} :b 2)</code>将返回<code>{:a 1 :b 2}</code>。</p>
-<p>重组 &ldquo;的另一个用途是根据键值从 Map 中过滤出来。在下面的例子中，匿名函数检查一个键值对的值是否大于 4，如果不是，那么这个键值对就被过滤掉了。在 Map<code>{:human 4.1 :critter 3.9}</code>中，3.9 小于 4，所以<code>:critter</code>键和它的 3.9 值被过滤掉了。</p>
+<p><code>reduce</code> 的另一个用途是根据键值从 Map 中过滤出来。在下面的例子中，匿名函数检查一个键值对的值是否大于 4，如果不是，那么这个键值对就被过滤掉了。在 Map<code>{:human 4.1 :critter 3.9}</code>中，3.9 小于 4，所以<code>:critter</code>键和它的 3.9 值被过滤掉了。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -637,7 +637,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 ; =&gt; {:human 4.1}
 </code></pre></td></tr></table>
 </div>
-</div><p>这里的启示是，<code>reduce</code>是一个比最初看起来更灵活的函数。每当你想从一个 seqable 数据结构中得到一个新的值时，<code>reduce</code>通常能够满足你的需要。如果你想做一个真正能让你的头发倒竖的练习，试着用<code>reduce</code>实现<code>map</code>，然后在本章后面的内容中对<code>filter</code>和<code>some</code>做同样的练习。</p>
+</div><p>这里的启示是，<code>reduce</code>是一个比最初看起来更灵活的函数。每当你想从一个序列中得到一个新的值时，<code>reduce</code>通常能够满足你的需要。如果你想做一个真正能让你的头发倒竖的练习，试着用<code>reduce</code>实现<code>map</code>，然后在本章后面的内容中对<code>filter</code>和<code>some</code>做同样的练习。</p>
 <h3 id=take-drop-take-while-and-drop-while>take, drop, take-while, and drop-while</h3>
 <p><code>take</code>和<code>drop</code>都接受两个参数：一个数字和一个序列。<code>take</code>返回序列的前 n 个元素，而<code>drop</code>返回除去前 n 个元素的序列。</p>
 <div class=highlight><div class=chroma>
@@ -656,7 +656,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 ; =&gt; (4 5 6 7 8 9 10)
 </code></pre></td></tr></table>
 </div>
-</div><p>它们的表亲<code>take-while</code>和<code>drop-while</code>更有趣一些。每一个都需要一个<em>谓词函数</em>（一个其返回值被求值为真或假的函数）来决定它何时应该停止取舍。例如，假设你有一个 Vector，代表你 &ldquo;食物 &ldquo;日记中的条目。每个条目都有月份和日期，以及你吃了什么。为了保留空间，我们将只包括几个条目。</p>
+</div><p>它们的表亲<code>take-while</code>和<code>drop-while</code>更有趣一些。每一个都需要一个<em>谓词函数</em>（一个其返回值为真或假的函数）来决定它何时应该停止取舍。例如，假设你有一个 Vector，代表你 &ldquo;食物 &ldquo;日记中的条目。每个条目都有月份和日期，以及你吃了什么。为了保留空间，我们将只包括几个条目。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -737,8 +737,8 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><p>这个例子使用 &ldquo;drop-while &ldquo;去掉 1 月份的条目，然后对结果使用 &ldquo;take-while &ldquo;继续取条目，直到到达 4 月份的第一个条目。</p>
-<h3 id=过滤和一些>过滤和一些</h3>
-<p>使用<code>filter</code>来返回一个序列中对一个谓词函数测试为真的所有元素。这里是人类消费少于 5 升的日记条目。</p>
+<h3 id=filter-和-some>Filter 和 Some</h3>
+<p>使用<code>filter</code>来返回一个序列中对一个谓词函数为真的所有元素。这里是人类消费少于 5 升的日记条目：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -828,7 +828,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><p>如果你使用<code>sort</code>进行排序，元素将按字母顺序进行排序，返回<code>("aaa" "bb" "c")</code>。相反，结果是<code>("c" "bb" "aaa")</code>，因为你是按<code>count</code>排序，而<code>"c "的计数是1，</code>&ldquo;bb &ldquo;是 2，`&ldquo;aaa &ldquo;是 3。</p>
-<h3 id=协程>协程</h3>
+<h3 id=concat>Concat</h3>
 <p>最后, <code>concat</code>简单地将一个序列的成员附加到另一个序列的末尾:</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -840,10 +840,10 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 ; =&gt; (1 2 3 4)
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=lazy-seqs>Lazy Seqs</h2>
-<p>正如你之前看到的，<code>map</code>首先在你传递给它的集合上调用<code>seq</code>。但这并不是故事的全部。许多函数，包括<code>map</code>和<code>filter</code>，都返回一个<em>lazy seq</em>。lazy seq 是一个 seq，它的成员在你试图访问它们时才被计算。计算一个 seq 的成员被称为<em>实现</em>seq。将计算推迟到需要的时候，可以使你的程序更有效率，而且它还有一个令人惊讶的好处，就是允许你构建无限的序列。</p>
-<h3 id=演示懒惰序列的效率>演示懒惰序列的效率</h3>
-<p>为了看到懒惰序列的作用，假装你是一个现代任务组的成员，其目的是为了识别吸血鬼。你的情报人员告诉你，在你的城市里只有一个活跃的吸血鬼，而且他们已经帮助你把嫌疑人的名单缩小到一百万人。你的老板给了你一份一百万个社会安全号码的名单，并喊道：&ldquo;搞定它，麦克菲斯维奇！&rdquo;</p>
+</div><h2 id=惰性序列>惰性序列</h2>
+<p>正如你之前看到的，<code>map</code>首先在你传递给它的集合上调用<code>seq</code>。但这并不是故事的全部。许多函数，包括<code>map</code>和<code>filter</code>，都返回一个<em>惰性序列</em>。惰性序列 是一个 seq，它的成员在你试图访问它们时才被计算。计算一个 seq 的成员被称为<em>实现</em>seq。将计算推迟到需要的时候，可以使你的程序更有效率，而且它还有一个令人惊讶的好处，就是允许你构建无穷的序列。</p>
+<h3 id=演示惰性序列的效率>演示惰性序列的效率</h3>
+<p>为了看到惰性序列的作用，假装你是一个现代任务组的成员，其目的是为了识别吸血鬼。你的情报人员告诉你，在你的城市里只有一个活跃的吸血鬼，而且他们已经帮助你把嫌疑人的名单缩小到一百万人。你的老板给了你一份一百万个社会安全号码的名单，并喊道：&ldquo;搞定它，麦克菲斯维奇！&rdquo;</p>
 <p>值得庆幸的是，你拥有一台 Vampmatic 3000 计算机，这是用于识别吸血鬼的最先进的设备。由于这种猎杀吸血鬼的技术的源代码是专有的，我把它存根出来，模拟执行这项任务所需的时间。这里是一个吸血鬼数据库的子集。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -909,10 +909,10 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </div>
 </div><p>第一个打印行报告了给定操作所花费的时间&ndash;本例是 1,001.042 毫秒。第二行是返回值，在本例中是你的数据库记录。返回值与没有使用<code>time</code>的情况下完全相同。</p>
 <p>一个不笨的<code>map</code>的实现首先要对<code>social-security-numbers</code>的每个成员应用<code>vampire-</code>related-details<code>，然后再把结果传给</code>filter`。因为你有一百万个嫌疑人，这将需要一百万秒，也就是 12 天，到那时你的一半城市都会死掉！"。当然，如果结果是唯一的吸血鬼是记录中的最后一个嫌疑人，用懒人版本还是会花那么多时间，但至少有一个很好的机会，它不会。</p>
-<p>因为<code>map</code>是懒惰的，在你试图访问 Map 的元素之前，它实际上并没有将<code>吸血鬼相关的细节</code>应用于社会安全号码。事实上，<code>map</code>几乎立刻就会返回一个值。</p>
+<p>因为<code>map</code>是惰性的，在你试图访问 Map 的元素之前，它实际上并没有将<code>吸血鬼相关的细节</code>应用于社会安全号码。事实上，<code>map</code>几乎立刻就会返回一个值。</p>
 <p>第一个打印行报告了给定操作所花费的时间&ndash;本例中是 1,001.042 毫秒。第二行是返回值，在这个例子中是你的数据库记录。返回值与没有使用<code>time</code>的情况下完全相同。</p>
 <p>一个不笨的<code>map</code>的实现首先要对<code>social-security-numbers</code>的每个成员应用<code>vampire-</code>related-details<code>，然后再把结果传给</code>filter`。因为你有一百万个嫌疑人，这将需要一百万秒，也就是 12 天，到那时你的一半城市都会死掉！"。当然，如果结果是唯一的吸血鬼是记录中的最后一个嫌疑人，用懒人版本还是会花那么多时间，但至少有一个很好的机会，它不会。</p>
-<p>因为<code>map</code>是懒惰的，在你试图访问 Map 的元素之前，它实际上并没有将<code>吸血鬼相关的细节</code>应用于社会安全号码。事实上，<code>map</code>几乎马上就会返回一个值。</p>
+<p>因为<code>map</code>是惰性的，在你试图访问 Map 的元素之前，它实际上并没有将<code>吸血鬼相关的细节</code>应用于社会安全号码。事实上，<code>map</code>几乎马上就会返回一个值。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -925,11 +925,11 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 ; =&gt; #&#39;user/mapped-details
 </code></pre></td></tr></table>
 </div>
-</div><p>在这个例子中，<code>range</code>返回一个由 0 到 999,999 的整数组成的懒惰序列。然后，<code>map</code>返回一个与名称<code>mapped-details</code>相关的懒惰序列。因为<code>map</code>实际上没有对<code>range</code>返回的任何元素应用<code>vampire-related-details</code>，整个操作几乎没有花费任何时间，当然，少于 12 天。</p>
+</div><p>在这个例子中，<code>range</code>返回一个由 0 到 999,999 的整数组成的惰性序列。然后，<code>map</code>返回一个与名称<code>mapped-details</code>相关的惰性序列。因为<code>map</code>实际上没有对<code>range</code>返回的任何元素应用<code>vampire-related-details</code>，整个操作几乎没有花费任何时间，当然，少于 12 天。</p>
 <p>你可以认为懒人序列是由两部分组成的：一个关于如何实现序列元素的配方和到目前为止已经实现的元素。当你使用<code>map</code>时，它返回的懒人序列不包括任何已实现的元素，但它确实有生成其元素的配方。每当你试图访问一个未实现的元素时，懒人序列将使用它的配方来生成所请求的元素。</p>
 <p>在前面的例子中，<code>mapped-details</code>是未实现的。一旦你试图访问<code>mapped-details</code>的一个成员，它将使用它的配方来生成你所请求的元素，你将产生每秒钟的数据库查询费用。</p>
-<p>在这个例子中，<code>range</code>返回一个由 0 到 999,999 的整数组成的懒惰序列。然后，<code>map</code>返回一个与<code>mapped-details</code>名称相关的懒惰序列。因为<code>map</code>实际上没有对<code>range</code>返回的任何元素应用<code>vampire-related-details</code>，整个操作几乎没有花费任何时间，当然，少于 12 天。</p>
-<p>你可以认为懒人序列由两部分组成：一个关于如何实现序列元素的配方和到目前为止已经实现的元素。当你使用<code>map</code>时，它返回的懒惰序列不包括任何已实现的元素，但它确实有生成其元素的配方。每当你试图访问一个未实现的元素时，懒人序列将使用它的配方来生成所请求的元素。</p>
+<p>在这个例子中，<code>range</code>返回一个由 0 到 999,999 的整数组成的惰性序列。然后，<code>map</code>返回一个与<code>mapped-details</code>名称相关的惰性序列。因为<code>map</code>实际上没有对<code>range</code>返回的任何元素应用<code>vampire-related-details</code>，整个操作几乎没有花费任何时间，当然，少于 12 天。</p>
+<p>你可以认为懒人序列由两部分组成：一个关于如何实现序列元素的配方和到目前为止已经实现的元素。当你使用<code>map</code>时，它返回的惰性序列不包括任何已实现的元素，但它确实有生成其元素的配方。每当你试图访问一个未实现的元素时，懒人序列将使用它的配方来生成所请求的元素。</p>
 <p>在前面的例子中，<code>mapped-details</code>是未实现的。一旦你试图访问<code>mapped-details</code>的一个成员，它将使用它的配方来生成你所请求的元素，你将产生每秒钟的数据库查询费用。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -944,8 +944,8 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><p>这个操作花了大约 32 秒。这比一百万秒好得多，但还是比我们预期的多了 31 秒。毕竟，你只是试图访问第一个元素，所以它应该只花一秒钟。</p>
-<p>花了 32 秒的原因是 Clojure<em>chunks</em>它的懒惰序列，这只是意味着每当 Clojure 要实现一个元素时，它也会预先实现一些下一个元素的实现。在这个例子中，你只想要<code>mapped-details</code>的第一个元素，但 Clojure 继续前进，也准备了后面的 31 个元素。Clojure 这样做是因为它几乎总是能带来更好的性能。</p>
-<p>值得庆幸的是，懒惰的 seq 元素只需要实现一次。再次访问<code>mapped-details</code>的第一个元素几乎不需要时间。</p>
+<p>花了 32 秒的原因是 Clojure<em>chunks</em>它的惰性序列，这只是意味着每当 Clojure 要实现一个元素时，它也会预先实现一些下一个元素的实现。在这个例子中，你只想要<code>mapped-details</code>的第一个元素，但 Clojure 继续前进，也准备了后面的 31 个元素。Clojure 这样做是因为它几乎总是能带来更好的性能。</p>
+<p>值得庆幸的是，惰性的 seq 元素只需要实现一次。再次访问<code>mapped-details</code>的第一个元素几乎不需要时间。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -972,8 +972,8 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><p>哦！这就是为什么达蒙会做出那些令人毛骨悚然的双关语的原因。</p>
-<h3 id=无限序列>无限序列</h3>
-<p>lazy seqs 给你的一个很酷、很有用的能力是构建无限序列的能力。到目前为止，你只处理过从 Vector 或列表中生成的懒惰序列，这些序列是终止的。然而，Clojure 自带了一些函数来创建无限序列。创建无限序列的一个简单方法是使用<code>repeat</code>，它创建一个序列，其每个成员都是你传递的参数。</p>
+<h3 id=无穷序列>无穷序列</h3>
+<p>惰性序列 给你的一个很酷、很有用的能力是构建无穷序列的能力。到目前为止，你只处理过从 Vector 或列表中生成的惰性序列，这些序列是终止的。然而，Clojure 自带了一些函数来创建无穷序列。创建无穷序列的一个简单方法是使用<code>repeat</code>，它创建一个序列，其每个成员都是你传递的参数。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -984,7 +984,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 ; =&gt; (&#34;na&#34; &#34;na&#34; &#34;na&#34; &#34;na&#34; &#34;na&#34; &#34;na&#34; &#34;na&#34; &#34;na&#34; &#34;Batman!&#34;)
 </code></pre></td></tr></table>
 </div>
-</div><p>在这种情况下，你创建了一个无限的序列，其中每个元素都是字符串 &ldquo;na&rdquo;，然后用它来构建一个可能引起或不引起怀旧情绪的序列。</p>
+</div><p>在这种情况下，你创建了一个无穷的序列，其中每个元素都是字符串 &ldquo;na&rdquo;，然后用它来构建一个可能引起或不引起怀旧情绪的序列。</p>
 <p>你也可以使用<code>repeatedly</code>，它将调用提供的函数来生成序列中的每个元素。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -996,8 +996,8 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 ; =&gt; (1 4 0)
 </code></pre></td></tr></table>
 </div>
-</div><p>这里，由<code>repeatedly</code>返回的懒惰序列通过调用匿名函数<code>(fn [] (rand-int 10))</code>生成每个新元素，该函数返回一个 0 到 9 之间的随机整数。如果你在你的 REPL 中运行这个，你的结果很可能与此不同。</p>
-<p>lazy seq 的配方不需要指定一个端点。像<code>first</code>和<code>take</code>这样的函数实现了懒惰序列，它们没有办法知道序列的下一步是什么，如果序列一直提供元素，那么它们就会一直取走它们。如果你构建你自己的无限序列，你就可以看到这一点。</p>
+</div><p>这里，由<code>repeatedly</code>返回的惰性序列通过调用匿名函数<code>(fn [] (rand-int 10))</code>生成每个新元素，该函数返回一个 0 到 9 之间的随机整数。如果你在你的 REPL 中运行这个，你的结果很可能与此不同。</p>
+<p>惰性序列 的配方不需要指定一个端点。像<code>first</code>和<code>take</code>这样的函数实现了惰性序列，它们没有办法知道序列的下一步是什么，如果序列一直提供元素，那么它们就会一直取走它们。如果你构建你自己的无穷序列，你就可以看到这一点。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1028,8 +1028,8 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><p>(顺便说一下，Lisp 程序员在使用<code>cons</code>函数时称它为<em>consing</em>)。</p>
-<p>在 &ldquo;偶数 &ldquo;中，你是在对一个懒惰列表进行 consing，其中包括一个关于下一个元素的配方（一个函数）（而不是对一个完全实现的列表进行 consing）。</p>
-<p>这就涵盖了懒惰序列! 现在你知道了关于序列抽象的所有知识，我们可以转向集合抽象了。</p>
+<p>在 &ldquo;偶数 &ldquo;中，你是在对一个惰性列表进行 consing，其中包括一个关于下一个元素的配方（一个函数）（而不是对一个完全实现的列表进行 consing）。</p>
+<p>这就涵盖了惰性序列! 现在你知道了关于序列抽象的所有知识，我们可以转向集合抽象了。</p>
 <h2 id=集合抽象>集合抽象</h2>
 <p>集合的抽象与序列的抽象密切相关。所有 Clojure 的核心数据结构&ndash;Vector、Map、列表和集合&ndash;都参与了这两个抽象。</p>
 <p>序列抽象是关于对成员的单独操作，而集合抽象是关于数据结构的整体。例如，集合函数 <code>count</code>, <code>empty?</code>, 和 <code>every?</code> 不是关于任何单独的元素；它们是关于整体的。</p>
@@ -1213,10 +1213,10 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=功能函数>功能函数</h2>
-<p>学习利用 Clojure 的接受函数作为参数和返回函数作为值的能力是非常有趣的，即使它需要一些适应性。</p>
-<p>Clojure 的两个函数，<code>apply</code>和<code>partial</code>，可能看起来特别奇怪，因为它们都接受<em>和</em>返回函数。让我们来解开它们的疑惑。</p>
-<h3 id=应用>应用</h3>
-<p><code>apply</code> <em>explodes</em>一个 seqable 数据结构，所以它可以被传递给一个期望有其余参数的函数。例如，<code>max</code>接受任何数量的参数，并返回所有参数中最大的一个。这里是你如何找到最大的数字。</p>
+<p>学习利用 Clojure 的接受函数作为参数和返回函数作为值的能力是非常有趣的，即使它需要一些适应。</p>
+<p>Clojure 的两个函数，<code>apply</code>和<code>partial</code>，可能看起来特别奇怪，因为它们都<em>接受</em>和<em>返回</em>函数。让我们来解开它们的疑惑。</p>
+<h3 id=apply>Apply</h3>
+<p><code>apply</code> 会展开一个序列，所以它可以被传递给一个期望有其余参数的函数。例如，<code>max</code>接受任何数量的参数，并返回所有参数中最大的一个。这里是你如何找到最大的数字。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1270,7 +1270,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><p>对<code>my-into</code>的调用相当于调用<code>(conj [0] 1 2 3)</code>。</p>
-<h3 id=部分>部分</h3>
+<h3 id=partial>Partial</h3>
 <p><code>partial</code>接收一个函数和任意数量的参数。然后它返回一个新的函数。当你调用返回的函数时，它用你提供的原参数和新参数一起调用原函数。</p>
 <p>这里有一个例子。</p>
 <div class=highlight><div class=chroma>
@@ -1301,7 +1301,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 ; =&gt; [&#34;water&#34; &#34;earth&#34; &#34;air&#34; &#34;unobtainium&#34; &#34;adamantium&#34;]
 </code></pre></td></tr></table>
 </div>
-</div><p>所以当你调用<code>add10</code>时，它会调用原始函数和参数（<code>+ 10</code>），并附加你调用<code>add10</code>的任何参数。为了帮助澄清<code>partial</code>的工作原理，下面是你如何定义它。</p>
+</div><p>所以当你调用<code>add10</code>时，它会调用原始函数和参数<code>（+ 10）</code>，并附加你调用<code>add10</code>的任何参数。为了帮助澄清<code>partial</code>的工作原理，下面演示了如何定义：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1335,7 +1335,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
   (apply + (into [20] more-args)))
 </code></pre></td></tr></table>
 </div>
-</div><p>一般来说，当你发现你在许多不同的情况下重复相同的函数和参数组合时，你会想使用 partials。这个玩具例子显示了你如何使用<code>partial</code>来专门化一个记录器，创建一个<code>warn</code>函数。</p>
+</div><p>一般来说，当你发现你在许多不同的情况下重复相同的函数和参数组合时，你会想使用 partial。这个玩具例子显示了你如何使用<code>partial</code>来专门化一个记录器，创建一个<code>warn</code>函数。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -1363,7 +1363,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </code></pre></td></tr></table>
 </div>
 </div><p>在这里调用<code>(warning "Red light ahead")</code>与调用<code>(lousy-logger :warning "Red light ahead")</code>是相同的。</p>
-<h3 id=补充>补充</h3>
+<h3 id=complement>Complement</h3>
 <p>早些时候，你创建了<code>识别吸血鬼</code>函数，以便在一百万人中找到一个吸血鬼。如果你想创建一个函数来寻找所有的人类呢？也许你想给他们发送感谢卡，因为他们没有成为不死的掠夺者。这里是你可以做的。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1396,7 +1396,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
           (map vampire-related-details social-security-numbers)))
 </code></pre></td></tr></table>
 </div>
-</div><p>下面是你如何实现 &ldquo;补充 &ldquo;的方法。</p>
+</div><p>下面是你如何实现 &ldquo;complement"的方法。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -1427,7 +1427,7 @@ map(list, function (val) { return val + &#34; mapped!&#34;})
 </div>
 </div><p>正如你所看到的，<code>complement</code>是一个不起眼的函数。它只做一件小事，而且做得很好。<code>complement</code>使创建一个<code>不吸血</code>的函数变得微不足道，而且任何阅读代码的人都能理解代码的意图。</p>
 <p>这不会为你提供数兆字节的数据的 MapReduce 或类似的东西，但它确实证明了高阶函数的力量。它们允许你以一种在某些语言中不可能实现的方式建立起实用函数库。总的来说，这些实用函数使你的生活变得更加轻松。</p>
-<h2 id=a-vampire-data-analysis-program-for-the-fwpd>A Vampire Data Analysis Program for the FWPD</h2>
+<h2 id=为华盛顿州福克斯警察局fwpd编写一个复杂的吸血鬼数据分析程序>为华盛顿州福克斯警察局（FWPD）编写一个复杂的吸血鬼数据分析程序</h2>
 <p>为了把所有的事情联系起来，让我们为华盛顿州福克斯警察局（FWPD）编写一个复杂的吸血鬼数据分析程序的雏形。</p>
 <p>FWPD 有一个花哨的新数据库技术，叫做<em>CSV</em> <em>（逗号-**分隔的</em>值）<em>。你的工作是解析这个最先进的 CSV，并分析它是否有潜在的吸血鬼。我们将通过过滤每个嫌疑人的</em>闪光指数*来做到这一点，这是一个由某个少女开发的对嫌疑人的吸血鬼性的 0-10 预测。继续并为你的工具创建一个新的 Leiningen 项目。</p>
 <div class=highlight><div class=chroma>
@@ -1615,8 +1615,8 @@ Carlisle Cullen,6
 </code></pre></td></tr></table>
 </div>
 </div><p>Et voilà! 你现在离实现你的梦想又近了一步，即成为一名猎杀超自然生物的义务警员。你最好去围捕那些粗略的人物!</p>
-<h2 id=摘要>摘要</h2>
-<p>在本章中，你了解到 Clojure 强调对抽象的编程。序列抽象处理的是对序列中各个元素的操作，而 seq 函数通常将其参数转换为 seq，并返回一个懒惰的 seq。懒惰求值通过将计算推迟到需要时再进行，从而提高性能。你所学到的另一个抽象，即集合抽象，处理的是整个数据结构。最后，你学到的最重要的东西是，你不应该相信那些在阳光下闪光的人。</p>
+<h2 id=总结>总结</h2>
+<p>在本章中，你了解到 Clojure 强调对抽象的编程。序列抽象处理的是对序列中各个元素的操作，而 seq 函数通常将其参数转换为 seq，并返回一个惰性的 seq。惰性求值通过将计算推迟到需要时再进行，从而提高性能。你所学到的另一个抽象，即集合抽象，处理的是整个数据结构。最后，你学到的最重要的东西是，你不应该相信那些在阳光下闪光的人。</p>
 <h2 id=练习>练习</h2>
 <p>你现在拥有的吸血鬼分析程序已经领先于市场上的任何其他程序几十年了。但你怎样才能使它变得更好呢？我建议尝试以下几点。</p>
 <ol>
@@ -1635,8 +1635,8 @@ Carlisle Cullen,6
 <p class=copyright-item>
 <span class=item-title>上次更新</span>
 <span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+2022-01-19
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/f2192504aaea763c971cab733959e1bdd45092f2 title="restore blog Wed Jan 19 10:27:36 CST 2022">(f219250)</a>
 </span>
 </p>
 </div>
