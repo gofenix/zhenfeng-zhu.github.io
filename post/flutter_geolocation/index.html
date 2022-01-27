@@ -1,0 +1,348 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>Flutter_geolocation - Awesome Fenix</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="Fenix"><meta name=description content="geolocator 是一个 flutter 的地理位置插件，同时支持 Android、iOS、web 和 macos。 安装 1 flutter pub add geolocator 使用方式 定义一个基础的骨架 1 2 3 4 5 6 7 8 9 10 11"><meta name=keywords content="Fenix,Clojure,Blog">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
+<meta name=generator content="Hugo 0.92.0 with theme even">
+<link rel=canonical href=https://zhenfeng-zhu.github.io/post/flutter_geolocation/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<meta property="og:title" content="Flutter_geolocation">
+<meta property="og:description" content="geolocator 是一个 flutter 的地理位置插件，同时支持 Android、iOS、web 和 macos。 安装 1 flutter pub add geolocator 使用方式 定义一个基础的骨架 1 2 3 4 5 6 7 8 9 10 11">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/flutter_geolocation/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-27T10:09:20+08:00">
+<meta property="article:modified_time" content="2022-01-27T10:18:26+08:00">
+<meta itemprop=name content="Flutter_geolocation">
+<meta itemprop=description content="geolocator 是一个 flutter 的地理位置插件，同时支持 Android、iOS、web 和 macos。 安装 1 flutter pub add geolocator 使用方式 定义一个基础的骨架 1 2 3 4 5 6 7 8 9 10 11"><meta itemprop=datePublished content="2022-01-27T10:09:20+08:00">
+<meta itemprop=dateModified content="2022-01-27T10:18:26+08:00">
+<meta itemprop=wordCount content="337">
+<meta itemprop=keywords content=","><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Flutter_geolocation">
+<meta name=twitter:description content="geolocator 是一个 flutter 的地理位置插件，同时支持 Android、iOS、web 和 macos。 安装 1 flutter pub add geolocator 使用方式 定义一个基础的骨架 1 2 3 4 5 6 7 8 9 10 11"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/>
+<li class=mobile-menu-item>Home</li>
+</a><a href=/post/>
+<li class=mobile-menu-item>Archives</li>
+</a><a href=/tags/>
+<li class=mobile-menu-item>Tags</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>Categories</li>
+</a><a href=/about/>
+<li class=mobile-menu-item>About</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>Awesome Fenix</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/>Home</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/>Archives</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/tags/>Tags</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>Categories</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/about/>About</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>Flutter_geolocation</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-27 </span>
+<span class=more-meta> 约 337 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#安装>安装</a></li>
+<li><a href=#使用方式>使用方式</a></li>
+<li><a href=#使用方式-1>使用方式</a></li>
+<li><a href=#xcode-打开>XCODE 打开</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<p>geolocator 是一个 flutter 的地理位置插件，同时支持 Android、iOS、web 和 macos。</p>
+<h1 id=安装>安装</h1>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>flutter pub add geolocator
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=使用方式>使用方式</h1>
+<p>定义一个基础的骨架</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=kd>class</span> <span class=nc>NewGeoRoute</span> <span class=kd>extends</span> <span class=n>StatefulWidget</span> <span class=p>{</span>
+  <span class=err>@</span><span class=n>override</span>
+  <span class=n>State</span><span class=o>&lt;</span><span class=n>StatefulWidget</span><span class=o>&gt;</span> <span class=n>createState</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=n>NewGeoRouteState</span><span class=p>();</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kd>class</span> <span class=nc>NewGeoRouteState</span> <span class=kd>extends</span> <span class=n>State</span><span class=o>&lt;</span><span class=n>NewGeoRoute</span><span class=o>&gt;</span> <span class=p>{</span>
+  <span class=kt>String</span> <span class=n>_pos</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+
+  <span class=n>Future</span><span class=o>&lt;</span><span class=n>Position</span><span class=o>&gt;</span> <span class=n>_determinLocation</span><span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+    
+  <span class=p>}</span>
+
+  <span class=err>@</span><span class=n>override</span>
+  <span class=kt>void</span> <span class=n>initState</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>super</span><span class=p>.</span><span class=n>initState</span><span class=p>();</span>
+    <span class=n>_determinLocation</span><span class=p>().</span><span class=n>then</span><span class=p>((</span><span class=n>value</span><span class=p>)</span> <span class=p>{</span>
+      <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span>
+        <span class=n>_pos</span> <span class=o>=</span> <span class=n>value</span><span class=p>.</span><span class=n>toString</span><span class=p>();</span>
+      <span class=p>});</span>
+    <span class=p>});</span>
+  <span class=p>}</span>
+
+  <span class=err>@</span><span class=n>override</span>
+  <span class=n>Widget</span> <span class=n>build</span><span class=p>(</span><span class=n>BuildContext</span> <span class=n>context</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=n>Scaffold</span><span class=p>(</span>
+      <span class=nl>appBar:</span> <span class=n>AppBar</span><span class=p>(</span>
+        <span class=nl>title:</span> <span class=kd>const</span> <span class=n>Text</span><span class=p>(</span><span class=s2>&#34;地理位置演示&#34;</span><span class=p>),</span>
+      <span class=p>),</span>
+      <span class=nl>body:</span> <span class=n>Center</span><span class=p>(</span>
+        <span class=nl>child:</span> <span class=n>Column</span><span class=p>(</span>
+          <span class=nl>children:</span> <span class=p>[</span>
+            <span class=p>()</span> <span class=p>{</span>
+              <span class=k>if</span> <span class=p>(</span><span class=n>_pos</span> <span class=o>==</span> <span class=s2>&#34;&#34;</span><span class=p>)</span> <span class=p>{</span>
+                <span class=k>return</span> <span class=kd>const</span> <span class=n>CircularProgressIndicator</span><span class=p>();</span>
+              <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+                <span class=k>return</span> <span class=n>Text</span><span class=p>(</span><span class=s2>&#34;当前位置是：</span><span class=si>$</span><span class=n>_pos</span><span class=s2>&#34;</span><span class=p>);</span>
+              <span class=p>}</span>
+            <span class=p>}(),</span>
+          <span class=p>],</span>
+        <span class=p>),</span>
+      <span class=p>),</span>
+      <span class=nl>floatingActionButton:</span> <span class=n>FloatingActionButton</span><span class=p>(</span>
+        <span class=nl>onPressed:</span> <span class=p>()</span> <span class=kd>async</span> <span class=p>{</span>
+          <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span>
+            <span class=n>_pos</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+          <span class=p>});</span>
+          <span class=kd>var</span> <span class=n>local</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>_determinLocation</span><span class=p>();</span>
+          <span class=n>setState</span><span class=p>(()</span> <span class=p>{</span>
+            <span class=n>_pos</span> <span class=o>=</span> <span class=n>local</span><span class=p>.</span><span class=n>toString</span><span class=p>();</span>
+          <span class=p>});</span>
+        <span class=p>},</span>
+        <span class=nl>child:</span> <span class=kd>const</span> <span class=n>Icon</span><span class=p>(</span><span class=n>Icons</span><span class=p>.</span><span class=n>location_city</span><span class=p>),</span>
+      <span class=p>),</span>
+    <span class=p>);</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=使用方式-1>使用方式</h1>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=k>import</span> <span class=s1>&#39;package:geolocator/geolocator.dart&#39;</span><span class=p>;</span>
+
+<span class=n>Position</span> <span class=n>position</span> <span class=o>=</span> <span class=kd>await</span> <span class=n>Geolocator</span><span class=p>.</span><span class=n>getCurrentPosition</span><span class=p>(</span><span class=nl>desiredAccuracy:</span> <span class=n>LocationAccuracy</span><span class=p>.</span><span class=n>high</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>本次针对 ios，需要添加 plist 描述：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>&lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;
+&lt;string&gt;This app needs access to location when open.&lt;/string&gt;
+&lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
+&lt;string&gt;This app needs access to location when in the background.&lt;/string&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p><img src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201271017300.png alt></p>
+<h1 id=xcode-打开>XCODE 打开</h1>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>Fenix</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-27
+<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/3aa92c65ab5f3727f0b63c69914eacc6df215954 title="restore blog Thu Jan 27 10:18:26 CST 2022">(3aa92c6)</a>
+</span>
+</p>
+</div>
+<footer class=post-footer>
+<div class=post-tags>
+<a href=/tags//></a>
+</div>
+<nav class=post-nav>
+<a class=next href=/post/flutter_wechat_camera_picker/>
+<span class="next-text nav-default">Flutter WeChat Camera Picker 使用</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2016 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>
