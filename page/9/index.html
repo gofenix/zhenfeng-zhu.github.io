@@ -104,6 +104,24 @@ Get Started工程师，止步于大量框架和包的readme
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/golang%E8%B8%A9%E5%9D%91/>golang 踩坑</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-08-14 </span>
+<span class=more-meta> 约 194 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+一 x509 error when using HTTPS inside a Docker container 因为 docker 中没有 CA 证书。 普通的镜像解决办法 1 2 3 4 5 6 FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是 alpine 的参考这个： 1 2 3 4 5 6 7 8 9 FROM docker.finogeeks.club/base/alpine MAINTAINER
+</div>
+<div class=read-more>
+<a href=/post/golang%E8%B8%A9%E5%9D%91/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/eth-tools/>以太坊开发总结</a></h1>
 <div class=post-meta>
 <span class=post-time> 2018-08-10 </span>
@@ -261,24 +279,6 @@ OpenFaaS 概览 无服务器函数变得简单。 函数监视器 你可以通�
 </div>
 <div class=read-more>
 <a href=/post/openfaas-on-rancher/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/openfaas-workshop-lab4/>openfaas-workshop-lab4</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-07-02 </span>
-<span class=more-meta> 约 3099 字 </span>
-<span class=more-meta> 预计阅读 7 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-实验 4&ndash;更深入地使用函数 在开始本实验之前，为你的文件创建一个新的文件夹。由于本实验是建立在早期实验的基础上的，所以请复制 lab3
-</div>
-<div class=read-more>
-<a href=/post/openfaas-workshop-lab4/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
