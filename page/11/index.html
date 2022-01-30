@@ -104,6 +104,78 @@ Get Started工程师，止步于大量框架和包的readme
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/openfaas/>openfaas</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-24 </span>
+<span class=more-meta> 约 163 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+对于 mac 环境来讲，首先安装新版 docker: 1 brew cask install docker 然后启动 docker。 命令行登陆 docker hub 1 docker login 启动 docker swarm 1 docker swarm init 安装 faas-cli 1 brew install faas-cli clone 下来代码： 1 git clone https://github.com/openfaas/faas 然后执行
+</div>
+<div class=read-more>
+<a href=/post/openfaas/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/java-reactive-web/>java-reactive-web</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-23 </span>
+<span class=more-meta> 约 675 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+Spring web mvc： 传统 servlet web spring web flux： Reactive web 编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程 In
+</div>
+<div class=read-more>
+<a href=/post/java-reactive-web/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/kafka/>kafka</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-21 </span>
+<span class=more-meta> 约 249 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+启动 zookeeper 1 bin/zookeeper-server-start.sh config/zookeeper.properties 启动 kafka 1 bin/kafka-server-start.sh config/server.properties 创建一个主题 1 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test 1 bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者 1 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者 1 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect 1 echo -e "zhisheng\ntian" > test.txt ls 1 2 3 4 5 6 zh
+</div>
+<div class=read-more>
+<a href=/post/kafka/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/vertx-kotlin-coroutine/>译：vertx-kotlin-coroutine</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-02 </span>
+<span class=more-meta> 约 2787 字 </span>
+<span class=more-meta> 预计阅读 6 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集
+</div>
+<div class=read-more>
+<a href=/post/vertx-kotlin-coroutine/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/async/>小议 async/await 和 coroutine</a></h1>
 <div class=post-meta>
 <span class=post-time> 2018-05-21 </span>
@@ -207,78 +279,6 @@ module 首先第一个就是 es6 的 module。 看到别人写的 1 import { a }
 </div>
 <div class=read-more>
 <a href=/post/node-learning/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/node%E7%9A%84redis%E5%AE%9E%E6%88%98/>node 的 redis 实战</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-04-13 </span>
-<span class=more-meta> 约 347 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-Node.js Redis 客户端模块 为了追新，这里我使用的 yarn，毕竟我是 HDD（面向热点编程）编程实践者。 模块安装 1 yarn add redis 模块使用实例 1 2 3 4 5 6 7 8 9 10 11 12
-</div>
-<div class=read-more>
-<a href=/post/node%E7%9A%84redis%E5%AE%9E%E6%88%98/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/>谈谈 web 框架</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-04-08 </span>
-<span class=more-meta> 约 2233 字 </span>
-<span class=more-meta> 预计阅读 5 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-这篇文章打的标签比较多，也基本涵盖了我所了解的一些知识，归纳总结一下自己对 web 框架的理解。自己了解的也不是很多，也请多多指教。 写程序免不了要做
-</div>
-<div class=read-more>
-<a href=/post/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/%E6%8A%80%E6%9C%AF%E6%A0%88/>技术栈</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-04-05 </span>
-<span class=more-meta> 约 937 字 </span>
-<span class=more-meta> 预计阅读 2 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。 技术栈 Docker
-</div>
-<div class=read-more>
-<a href=/post/%E6%8A%80%E6%9C%AF%E6%A0%88/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/>同步一个 fork</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-04-04 </span>
-<span class=more-meta> 约 326 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-具体方法 Configuring a remote for a fork 给 fork 配置一个 remote 主要使用 git remote -v 查看远程状态。 1 2 3 git remote -v # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch) # origin https://github.com/YOUR_USERNAME/YOUR_FORK.git (push) 添加一个将被同步给 fork 远程的上游仓库 1 git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git 再次
-</div>
-<div class=read-more>
-<a href=/post/%E5%90%8C%E6%AD%A5%E4%B8%80%E4%B8%AA-fork/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
