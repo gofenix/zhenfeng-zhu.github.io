@@ -104,6 +104,24 @@ Get Started工程师，止步于大量框架和包的readme
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/k3d-with-openfaas/>K3d With Openfaas</a></h1>
+<div class=post-meta>
+<span class=post-time> 2021-03-10 </span>
+<span class=more-meta> 约 245 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+openfaas https://github.com/openfaas/workshop/blob/master/lab1b.md 安装 docker 1 brew install homebrew/cask/docker 安装单节点 K8S 1 brew install k3d 配置单节点 K8S 集群 1 2 3 4 5 6 k3d cluster create CLUSTER_NAME k3d kubeconfig merge CLUSTER_NAME --kubeconfig-switch-context kubectl get pods --all-namespaces 安装 arkade 1 curl -SLsf https://dl.get-arkade.dev/ | sudo sh 安装 openfaas 客户端 faas-cli 1 brew install faas-cli 安装 openfaas
+</div>
+<div class=read-more>
+<a href=/post/k3d-with-openfaas/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/%E6%8D%A2%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%80%9D%E8%80%83/>换一种方式思考</a></h1>
 <div class=post-meta>
 <span class=post-time> 2021-02-27 </span>
@@ -261,24 +279,6 @@ Elixir everything is a process. process are strongly isolated. process creation 
 </div>
 <div class=read-more>
 <a href=/post/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/geth-%E7%A7%81%E9%93%BE/>Geth 私链</a></h1>
-<div class=post-meta>
-<span class=post-time> 2020-11-20 </span>
-<span class=more-meta> 约 636 字 </span>
-<span class=more-meta> 预计阅读 2 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-在上一篇文章《Geth 入门》中，主要讲了开发环境下以太坊 geth 客户端的使用。今天简单说下私链的配置。 genesis.json 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 { "config": { "chainId":
-</div>
-<div class=read-more>
-<a href=/post/geth-%E7%A7%81%E9%93%BE/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
