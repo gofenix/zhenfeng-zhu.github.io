@@ -104,6 +104,24 @@ Get Started工程师，止步于大量框架和包的readme
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/mysql/>mysql</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-12-01 </span>
+<span class=more-meta> 约 1188 字 </span>
+<span class=more-meta> 预计阅读 3 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+MySQL 基本架构 客户端 server 层 连接器：管理连接，权限验证 查询缓存：命中规则，直接返回结果 8.0 之后全部删除了这个模块 分析器：词法分析，语法分析 优化器：执行
+</div>
+<div class=read-more>
+<a href=/post/mysql/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/graphql/>graphql</a></h1>
 <div class=post-meta>
 <span class=post-time> 2018-11-08 </span>
@@ -261,24 +279,6 @@ redis 持久化， 机制有两种： 快照：全量备份，二进制序列化
 </div>
 <div class=read-more>
 <a href=/post/dive-into-redis/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/golang%E8%B8%A9%E5%9D%91/>golang 踩坑</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-08-14 </span>
-<span class=more-meta> 约 194 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-一 x509 error when using HTTPS inside a Docker container 因为 docker 中没有 CA 证书。 普通的镜像解决办法 1 2 3 4 5 6 FROM ubuntu:14.04.1 RUN apt-get update RUN apt-get install -y ca-certificates CMD curl https://www.google.com 如果是 alpine 的参考这个： 1 2 3 4 5 6 7 8 9 FROM docker.finogeeks.club/base/alpine MAINTAINER
-</div>
-<div class=read-more>
-<a href=/post/golang%E8%B8%A9%E5%9D%91/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
