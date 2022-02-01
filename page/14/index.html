@@ -104,145 +104,181 @@ Get Started工程师，止步于大量框架和包的readme
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>kotlin 快速入门</a></h1>
+<h1 class=post-title><a class=post-link href=/post/nats/>nats 简介</a></h1>
 <div class=post-meta>
-<span class=post-time> 2018-03-24 </span>
-<span class=more-meta> 约 1372 字 </span>
-<span class=more-meta> 预计阅读 3 分钟 </span>
+<span class=post-time> 2018-07-30 </span>
+<span class=more-meta> 约 800 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参
+nats 是一个开源的，云原生的消息系统。Apcera，百度，西门子，VMware，HTC 和爱立信等公司都有在使用。 核心基于 EventMachine 开发，原理是基于消息发
 </div>
 <div class=read-more>
-<a href=/post/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/ class=read-more-link>阅读更多</a>
+<a href=/post/nats/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>RxJava2 快速入门</a></h1>
+<h1 class=post-title><a class=post-link href=/post/overview-of-openfaas/>overview-of-openfaas</a></h1>
 <div class=post-meta>
-<span class=post-time> 2018-03-24 </span>
-<span class=more-meta> 约 1253 字 </span>
-<span class=more-meta> 预计阅读 3 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-RxJava2 快速入门 引入依赖 1 compile 'io.reactivex.rxjava2:rxjava:2.0.1' 写法 简单版本 1 2 3 4 5 6 7 8 9 10 private static void helloSimple() { Consumer&lt;String> consumer = new Consumer&lt;String>() { @Override public void accept(String s) throws Exception { System.out.println("consumer accept is " + s); } }; Observable.just("hello world").subscribe(consumer); } 复杂版本 1 2 3 4 5 6 7 8
-</div>
-<div class=read-more>
-<a href=/post/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/>领域实体类</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-03-24 </span>
-<span class=more-meta> 约 345 字 </span>
+<span class=post-time> 2018-07-26 </span>
+<span class=more-meta> 约 494 字 </span>
 <span class=more-meta> 预计阅读 1 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-在看项目代码的时候，发现了 entity 包和 dto 包，里面都是只保存数据的类，仔细查了资料，才发现 java 对于只保存数据的类有好几个分类。 pojo 类：这是普通的 java 类，具
+OpenFaaS 概览 无服务器函数变得简单。 函数监视器 你可以通过添加函数监视器 (一个小型的 Golang HTTP 服务)把任何一个 Docker 镜像变成无服务器函数。 函数监视器是允许 HTTP 请求
 </div>
 <div class=read-more>
-<a href=/post/%E9%A2%86%E5%9F%9F%E5%AE%9E%E4%BD%93%E7%B1%BB/ class=read-more-link>阅读更多</a>
+<a href=/post/overview-of-openfaas/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/docker/>docker</a></h1>
+<h1 class=post-title><a class=post-link href=/post/openfaas-on-rancher/>OpenFaaS on Rancher 2.0</a></h1>
 <div class=post-meta>
-<span class=post-time> 2018-03-24 </span>
-<span class=more-meta> 约 662 字 </span>
-<span class=more-meta> 预计阅读 2 分钟 </span>
+<span class=post-time> 2018-07-26 </span>
+<span class=more-meta> 约 257 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-docker 常用命令 docker 获取镜像 docker pull 新建并启动 docker run 列出镜像 docker image ls docker images 删除虚悬镜像 docker image prune 删除本地镜像 docker iamge rm 查看应用信息 docker logs dockerfile 一般步骤 在一个目录里，新建一个
+这是一篇关于如何在 Rancher 2.0 上创建 OpenFaaS 栈的文章。我假设你已经准备好了 Rancher 2.0 集群，如果没有请按照官方文档创建一个。 下面的视频展示了如何创建 OpenFaaS 栈，并在实际
 </div>
 <div class=read-more>
-<a href=/post/docker/ class=read-more-link>阅读更多</a>
+<a href=/post/openfaas-on-rancher/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/express/>express</a></h1>
+<h1 class=post-title><a class=post-link href=/post/openfaas-workshop-lab4/>openfaas-workshop-lab4</a></h1>
 <div class=post-meta>
-<span class=post-time> 2018-03-24 </span>
-<span class=more-meta> 约 1437 字 </span>
+<span class=post-time> 2018-07-02 </span>
+<span class=more-meta> 约 3099 字 </span>
+<span class=more-meta> 预计阅读 7 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+实验 4&ndash;更深入地使用函数 在开始本实验之前，为你的文件创建一个新的文件夹。由于本实验是建立在早期实验的基础上的，所以请复制 lab3
+</div>
+<div class=read-more>
+<a href=/post/openfaas-workshop-lab4/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/ubuntu-docker-sudo/>ubuntu-docker-sudo</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-29 </span>
+<span class=more-meta> 约 19 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+1 2 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R sudo chmod g+rwx "/home/$USER/.docker" -R 1 2 3 4 5 https://api.finochat.com/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI http://localhost:3000/api/v1/platform/apps/RETAIL/profiles/@custom:finolabs.com.cn/avatar?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmY2lkIjoiQHBjdXN0b20tMTA6Zmlub2xhYnMuY29tLmNuIiwiaXNzIjoieUNkNXVhaWRhWU4zc1pwTTdHU2V5WWVqSGdlN3hSa1EiLCJpYXQiOjE1MzAyNjk5NDh9.UUsO2xw1f8cA6FiG1bNAGyYQh-vh32hKHKSJ2EKZicI
+</div>
+<div class=read-more>
+<a href=/post/ubuntu-docker-sudo/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/openfaas-workshop-lab3/>openfaas-workshop-lab3</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-28 </span>
+<span class=more-meta> 约 4496 字 </span>
+<span class=more-meta> 预计阅读 9 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+实验 3&ndash;函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。 1 2 $ mkdir -p lab3\`s && cd lab3 创建一个新的函数 有两种方法来创建一个新的函数
+</div>
+<div class=read-more>
+<a href=/post/openfaas-workshop-lab3/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/workshop-lab1/>译：openfaas-workshop-Lab1</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-25 </span>
+<span class=more-meta> 约 1186 字 </span>
 <span class=more-meta> 预计阅读 3 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-Express 快速入门 安装 1 2 3 npm init npm install --save express hello world 1 2 3 4 5 6 7 8 9 10 var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序 1 node app.js 然后
+今天大多数公司在开发应用程序并将其部署在服务器上的时候，无论是选择公有云还是私有的数据中心，都需要提前了解究竟需要多少台服务器、多大容量的存
 </div>
 <div class=read-more>
-<a href=/post/express/ class=read-more-link>阅读更多</a>
+<a href=/post/workshop-lab1/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/a-month-in-finogeeks/>碎碎念</a></h1>
+<h1 class=post-title><a class=post-link href=/post/openfaas/>openfaas</a></h1>
 <div class=post-meta>
-<span class=post-time> 2018-03-24 </span>
-<span class=more-meta> 约 911 字 </span>
+<span class=post-time> 2018-06-24 </span>
+<span class=more-meta> 约 163 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+对于 mac 环境来讲，首先安装新版 docker: 1 brew cask install docker 然后启动 docker。 命令行登陆 docker hub 1 docker login 启动 docker swarm 1 docker swarm init 安装 faas-cli 1 brew install faas-cli clone 下来代码： 1 git clone https://github.com/openfaas/faas 然后执行
+</div>
+<div class=read-more>
+<a href=/post/openfaas/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/java-reactive-web/>java-reactive-web</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-23 </span>
+<span class=more-meta> 约 675 字 </span>
 <span class=more-meta> 预计阅读 2 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-一直没有机会写 2017 的年终总结，想到去年写的新的一年的计划，好像自己都没有按照计划来做，而且写的计划也不知道写到哪里去了。 站在现在的时间点去审视
+Spring web mvc： 传统 servlet web spring web flux： Reactive web 编程模式： non-blocking 非阻塞 nio：同步？异步？ 并行模型 sync 同步 async 异步 Reactive 概念 Reactive programming： 响应式编程 In
 </div>
 <div class=read-more>
-<a href=/post/a-month-in-finogeeks/ class=read-more-link>阅读更多</a>
+<a href=/post/java-reactive-web/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/java-memory-thread/>Java 内存模型和线程</a></h1>
+<h1 class=post-title><a class=post-link href=/post/kafka/>kafka</a></h1>
 <div class=post-meta>
-<span class=post-time> 2018-03-22 </span>
-<span class=more-meta> 约 4939 字 </span>
-<span class=more-meta> 预计阅读 10 分钟 </span>
+<span class=post-time> 2018-06-21 </span>
+<span class=more-meta> 约 249 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-java 内存模型和线程 并发不一定依赖多线程，但是在 java 里面谈论并发，大多与线程脱不开关系。 线程是大多是面试都会问到的问题。我们都知道，线程是比进程更
+启动 zookeeper 1 bin/zookeeper-server-start.sh config/zookeeper.properties 启动 kafka 1 bin/kafka-server-start.sh config/server.properties 创建一个主题 1 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test 1 bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者 1 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者 1 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect 1 echo -e "zhisheng\ntian" > test.txt ls 1 2 3 4 5 6 zh
 </div>
 <div class=read-more>
-<a href=/post/java-memory-thread/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/aws-md/>aws.md</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-03-22 </span>
-<span class=more-meta> 约 547 字 </span>
-<span class=more-meta> 预计阅读 2 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-一些基础概念 EC2 云服务器，可以理解成虚拟机，新建一个实例，就是新建一个虚拟机并安装操作系统（Linux 或者 windows）。 VPC Virtual Private Cloud。
-</div>
-<div class=read-more>
-<a href=/post/aws-md/ class=read-more-link>阅读更多</a>
+<a href=/post/kafka/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
@@ -251,6 +287,10 @@ java 内存模型和线程 并发不一定依赖多线程，但是在 java 里�
 <a class=prev href=/page/13/>
 <i class="iconfont icon-left"></i>
 <span class=prev-text>上一页</span>
+</a>
+<a class=next href=/page/15/>
+<span class=next-text>下一页</span>
+<i class="iconfont icon-right"></i>
 </a>
 </nav>
 </div>
