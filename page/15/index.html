@@ -17,7 +17,7 @@ Get Started工程师，止步于大量框架和包的readme
 后端开发工程师，偶尔写一些前端，伪全栈
 也是一名数据工程师，朝着SQL Boy进化"><meta name=keywords content="Fenix,Clojure,Blog">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.1 with theme even">
+<meta name=generator content="Hugo 0.92.2 with theme even">
 <link rel=canonical href=https://zhenfeng-zhu.github.io/>
 <link href=https://zhenfeng-zhu.github.io/index.xml rel=alternate type=application/rss+xml title="Awesome Fenix">
 <link href=https://zhenfeng-zhu.github.io/index.xml rel=feed type=application/rss+xml title="Awesome Fenix">
@@ -102,6 +102,24 @@ Get Started工程师，止步于大量框架和包的readme
 <div class=content-wrapper>
 <div id=content class=content>
 <section id=posts class=posts>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/kafka/>kafka</a></h1>
+<div class=post-meta>
+<span class=post-time> 2018-06-21 </span>
+<span class=more-meta> 约 249 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+启动 zookeeper 1 bin/zookeeper-server-start.sh config/zookeeper.properties 启动 kafka 1 bin/kafka-server-start.sh config/server.properties 创建一个主题 1 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test 1 bin/kafka-topics.sh --list --zookeeper localhost:2181 生产者 1 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 消费者 1 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning kafka connect 1 echo -e "zhisheng\ntian" > test.txt ls 1 2 3 4 5 6 zh
+</div>
+<div class=read-more>
+<a href=/post/kafka/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
 <article class=post>
 <header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/vertx-kotlin-coroutine/>译：vertx-kotlin-coroutine</a></h1>
@@ -261,24 +279,6 @@ Node.js Redis 客户端模块 为了追新，这里我使用的 yarn，毕竟我
 </div>
 <div class=read-more>
 <a href=/post/%E8%B0%88%E8%B0%88web%E6%A1%86%E6%9E%B6/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/%E6%8A%80%E6%9C%AF%E6%A0%88/>技术栈</a></h1>
-<div class=post-meta>
-<span class=post-time> 2018-04-05 </span>
-<span class=more-meta> 约 937 字 </span>
-<span class=more-meta> 预计阅读 2 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-创业公司真的比较锻炼人，接触了很多的东西，视野开阔了，但是在某些时候自己疲于奔命，每个东西都是接触了一点点就被赶鸭子上架开始开发了。 技术栈 Docker
-</div>
-<div class=read-more>
-<a href=/post/%E6%8A%80%E6%9C%AF%E6%A0%88/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
