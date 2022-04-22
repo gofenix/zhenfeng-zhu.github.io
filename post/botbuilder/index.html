@@ -1,139 +1,184 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>谈谈聊天机器人框架的实现原理 - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/botbuilder/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="谈谈聊天机器人框架的实现原理">
-<meta property="og:description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/botbuilder/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-08-22T19:39:12+00:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="谈谈聊天机器人框架的实现原理">
-<meta itemprop=description content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机"><meta itemprop=datePublished content="2018-08-22T19:39:12+00:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="2764">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="谈谈聊天机器人框架的实现原理">
-<meta name=twitter:description content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>谈谈聊天机器人框架的实现原理 - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/botbuilder/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="谈谈聊天机器人框架的实现原理" />
+<meta property="og:description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/botbuilder/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-08-22T19:39:12+00:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="谈谈聊天机器人框架的实现原理">
+<meta itemprop="description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机"><meta itemprop="datePublished" content="2018-08-22T19:39:12+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="2764">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="谈谈聊天机器人框架的实现原理"/>
+<meta name="twitter:description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>谈谈聊天机器人框架的实现原理</h1>
-<div class=post-meta>
-<span class=post-time> 2018-08-22 </span>
-<span class=more-meta> 约 2764 字 </span>
-<span class=more-meta> 预计阅读 6 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#聊天机器人>聊天机器人</a></li>
-<li><a href=#机器人开发框架>机器人开发框架</a></li>
-<li><a href=#实现方式>实现方式</a></li>
-<li><a href=#conversation-ui>Conversation UI</a></li>
-<li><a href=#bot-service>Bot Service</a></li>
-<li><a href=#bot-builder-源码阅读>Bot Builder 源码阅读</a>
-<ul>
-<li><a href=#botbuilder>botbuilder</a></li>
-<li><a href=#botbuilder-core>botbuilder-core</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">谈谈聊天机器人框架的实现原理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-22 </span>
+        
+          <span class="more-meta"> 约 2764 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#聊天机器人">聊天机器人</a></li>
+        <li><a href="#机器人开发框架">机器人开发框架</a></li>
+        <li><a href="#实现方式">实现方式</a></li>
+        <li><a href="#conversation-ui">Conversation UI</a></li>
+        <li><a href="#bot-service">Bot Service</a></li>
+        <li><a href="#bot-builder-源码阅读">Bot Builder 源码阅读</a>
+          <ul>
+            <li><a href="#botbuilder">botbuilder</a></li>
+            <li><a href="#botbuilder-core">botbuilder-core</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。</p>
-<h2 id=聊天机器人>聊天机器人</h2>
+    <div class="post-content">
+      <p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。</p>
+<h2 id="聊天机器人">聊天机器人</h2>
 <blockquote>
-<p><strong>聊天机器人</strong>（Chatterbot）是经由对话或文字进行交谈的计算机程序[<a href=https://zh.wikipedia.org/wiki/%E8%81%8A%E5%A4%A9%E6%A9%9F%E5%99%A8%E4%BA%BA#cite_note-target-1>1]</a>。能够模拟人类对话，通过<a href=https://zh.wikipedia.org/wiki/%E5%9B%BE%E7%81%B5%E6%B5%8B%E8%AF%95>图灵测试</a>。</p>
+<p><strong>聊天机器人</strong>（Chatterbot）是经由对话或文字进行交谈的计算机程序[<a href="https://zh.wikipedia.org/wiki/%E8%81%8A%E5%A4%A9%E6%A9%9F%E5%99%A8%E4%BA%BA#cite_note-target-1">1]</a>。能够模拟人类对话，通过<a href="https://zh.wikipedia.org/wiki/%E5%9B%BE%E7%81%B5%E6%B5%8B%E8%AF%95">图灵测试</a>。</p>
 </blockquote>
 <p>我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。</p>
-<h2 id=机器人开发框架>机器人开发框架</h2>
+<h2 id="机器人开发框架">机器人开发框架</h2>
 <p>作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。</p>
 <p>然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。</p>
 <p>使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。</p>
-<h2 id=实现方式>实现方式</h2>
+<h2 id="实现方式">实现方式</h2>
 <ul>
 <li>webhook 事件回调</li>
 <li>FSM 状态机</li>
@@ -144,8 +189,8 @@
 <p>可能有人不是很懂有限状态机，这里做一下简单说明。</p>
 <blockquote>
 <p>有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。</p>
-<p>有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个<a href=https://zh.wikipedia.org/wiki/%E7%8A%B6%E6%80%81>状态</a>以及在这些状态之间的转移和动作等行为的<a href=https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B>数学模型</a>。</p>
-<p>可以总结为：f(state, action) => state’</p>
+<p>有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个<a href="https://zh.wikipedia.org/wiki/%E7%8A%B6%E6%80%81">状态</a>以及在这些状态之间的转移和动作等行为的<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B">数学模型</a>。</p>
+<p>可以总结为：f(state, action) =&gt; state’</p>
 <p>也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。</p>
 <p>可以认为状态机是图灵完备的。</p>
 </blockquote>
@@ -162,42 +207,42 @@
 <li>缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限</li>
 </ul>
 <p>示例：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>const {startWith, when, goto, stay, stop} = botkit.DSL(fsm);
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">const {startWith, when, goto, stay, stop} = botkit.DSL(fsm);
  
 startWith(MyStates.IDLE, {counter: 0});
 
@@ -235,36 +280,36 @@ when(MyStates.LOOP)((sender, content, data) =&gt; {
 <ul>
 <li>
 <p>routing dialog</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>// hotels.js
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">// hotels.js
 module.exports = [
     // Destination
     function (session) {
@@ -296,52 +341,52 @@ bot.dialog(&#39;flights&#39;, require(&#39;./flights&#39;));
 <li>
 <p>waterfall dialog</p>
 <p>一个瀑布流的 dialog，可以让我们在一个 dialog 中像流一样完成一系列的动作。就像 fsm 的多种状态的集合。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
-</span><span class=lnt>41
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>[
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">[
     // Destination
     function (session) {
         session.send(&#39;Welcome to the Hotels finder!&#39;);
@@ -402,7 +447,7 @@ bot.dialog(&#39;flights&#39;, require(&#39;./flights&#39;));
 </tr>
 <tr>
 <td>conversationData</td>
-<td>Stores information globally for a single conversation. This data is visible to everyone within the conversation so care should be used to what’s stored there. It’s disabled by default and needs to be enabled using the bots <a href=https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.iuniversalbotsettings.html#persistconversationdata><code>persistConversationData</code></a> setting.</td>
+<td>Stores information globally for a single conversation. This data is visible to everyone within the conversation so care should be used to what’s stored there. It’s disabled by default and needs to be enabled using the bots <a href="https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.iuniversalbotsettings.html#persistconversationdata"><code>persistConversationData</code></a> setting.</td>
 </tr>
 <tr>
 <td>privateConversationData</td>
@@ -416,28 +461,28 @@ bot.dialog(&#39;flights&#39;, require(&#39;./flights&#39;));
 </table>
 </li>
 </ul>
-<h2 id=conversation-ui>Conversation UI</h2>
+<h2 id="conversation-ui">Conversation UI</h2>
 <p>对话式 UI（Conversation UI，下文简称 CUI）。</p>
 <p>CUI 到底是什么？很好理解，我们日常跟人聊天的微信、短信界面就是。由一条条消息组成，按时间先后展示出来，就可以看作 CUI。</p>
 <p>chatbot 在与用户交流时，不单单是只有文字，还会需要用户进行互动，这时候就是 CUI 的用武之地了。我们可以和移动端进行约定，对一些特定的消息格式进行渲染，这样就可以做出按钮，列表等。</p>
-<h2 id=bot-service>Bot Service</h2>
+<h2 id="bot-service">Bot Service</h2>
 <p>作为一个机器人框架，开发完成之后，还需要和 telegram，Facebook messenger，slack 等 IM 平台进行对接，如果要开发者一个个对接的话，将会特别麻烦。作为 chatbot 开发框架的一部分，bot service 的工作就是对接 IM 平台。</p>
-<h2 id=bot-builder-源码阅读>Bot Builder 源码阅读</h2>
+<h2 id="bot-builder-源码阅读">Bot Builder 源码阅读</h2>
 <p>微软的 botbuilder-js 出到了 V4 版本，在新版本的机器人框架有着很大的变动，相比于 V3 目录结构变化了，而且机器人编写流程也有了一定的差异。</p>
 <p>项目结构</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>├── botbuilder
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">├── botbuilder
 ├── botbuilder-ai
 ├── botbuilder-azure
 ├── botbuilder-core
@@ -449,143 +494,182 @@ bot.dialog(&#39;flights&#39;, require(&#39;./flights&#39;));
 </div>
 </div><p>目录结构更加的组件化。</p>
 <p>如果我们不使用微软的服务，那么 botbuilder-ai 和 botbuilder-azure 其实不重要。</p>
-<h3 id=botbuilder>botbuilder</h3>
+<h3 id="botbuilder">botbuilder</h3>
 <p>botbuilder 是框架的入口，在这个 package 中做的事情比较简单：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botFrameworkAdapter&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./fileTranscriptStore&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;../../botbuilder-core/lib&#39;</span><span class=p>;</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botFrameworkAdapter&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./fileTranscriptStore&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;../../botbuilder-core/lib&#39;</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>导出 botbuilder-core 和继承了 botAdapter 的子类 botFrameworkAdapter。</p>
 <p>fileTranscriptStore 是存储每个 activity 的 transcript 到文件中，Transcript 是人和 bot 的对话动作的日志。</p>
 <p>如果我们要定制自己的 bot 动作，其实就可以继承 botAdapter，然后对接自己的 IM 等等。botAdapter 也是 botbuilder-core 中的，所以 botbuilder-core 是核心，只要读懂了 botbuilder-core，就可以说是理解了微软的机器人框架。</p>
-<h3 id=botbuilder-core>botbuilder-core</h3>
+<h3 id="botbuilder-core">botbuilder-core</h3>
 <p>看 botbuilder-core，也从 index.ts 开始。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;../../botframework-schema/lib&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./autoSaveStateMiddleware&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botAdapter&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botState&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botStatePropertyAccessor&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botStateSet&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./browserStorage&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./cardFactory&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./conversationState&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./memoryStorage&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./memoryTranscriptStore&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./messageFactory&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./middlewareSet&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./privateConversationState&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./propertyManager&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./recognizerResult&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./showTypingMiddleware&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./storage&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./testAdapter&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./transcriptLogger&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./turnContext&#39;</span><span class=p>;</span>
-<span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./userState&#39;</span><span class=p>;</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;../../botframework-schema/lib&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./autoSaveStateMiddleware&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botAdapter&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botState&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botStatePropertyAccessor&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botStateSet&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./browserStorage&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./cardFactory&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./conversationState&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./memoryStorage&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./memoryTranscriptStore&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./messageFactory&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./middlewareSet&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./privateConversationState&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./propertyManager&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./recognizerResult&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./showTypingMiddleware&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./storage&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./testAdapter&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./transcriptLogger&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./turnContext&#39;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./userState&#39;</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这里引入了一个 botframework-schema，通过名字可以看出来，这就是一个类型定义的包，主要是机器人 Activity 的 Schema。Activity 是人和 bot 所做的会话的程序级别的表示，该 schema 中包含了文本协议、多媒体和非内容动作（如社交互动和打字指示符）的规定。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/blockchain/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">区块链学习笔记</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/parity/">
+            <span class="next-text nav-default">基于以太坊的 Parity 联盟链部署</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/blockchain/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">区块链学习笔记</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/parity/>
-<span class="next-text nav-default">基于以太坊的 Parity 联盟链部署</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

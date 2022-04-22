@@ -1,142 +1,187 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>watchdog - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="监视器 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/watchdog/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="watchdog">
-<meta property="og:description" content="监视器 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/watchdog/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-09-06T16:23:57+00:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="watchdog">
-<meta itemprop=description content="监视器 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图"><meta itemprop=datePublished content="2018-09-06T16:23:57+00:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="1909">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="watchdog">
-<meta name=twitter:description content="监视器 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>watchdog - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="监视器 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/watchdog/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="watchdog" />
+<meta property="og:description" content="监视器 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/watchdog/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-09-06T16:23:57+00:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="watchdog">
+<meta itemprop="description" content="监视器 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图"><meta itemprop="datePublished" content="2018-09-06T16:23:57+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="1909">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="watchdog"/>
+<meta name="twitter:description" content="监视器 监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>watchdog</h1>
-<div class=post-meta>
-<span class=post-time> 2018-09-06 </span>
-<span class=more-meta> 约 1909 字 </span>
-<span class=more-meta> 预计阅读 4 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#轻松创建新函数><strong>轻松创建新函数</strong></a></li>
-<li><a href=#深入研究><strong>深入研究</strong></a></li>
-<li><a href=#高级调整><strong>高级/调整</strong></a></li>
-<li><a href=#新子监视器和-http-模式><strong>(新)——子监视器和 HTTP 模式</strong></a></li>
-<li><a href=#使用-http-头><strong>使用 HTTP 头</strong></a></li>
-<li><a href=#http-方法><strong>HTTP 方法</strong></a></li>
-<li><a href=#请求响应的内容类型><strong>请求响应的内容类型</strong></a></li>
-<li><a href=#i-dont-want-to-use-the-watchdog><strong>I don&rsquo;t want to use the watchdog</strong></a></li>
-<li><a href=#我不想使用监视器><strong>我不想使用监视器</strong></a></li>
-<li><a href=#调整自动伸缩><strong>调整自动伸缩</strong></a></li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">watchdog</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-06 </span>
+        
+          <span class="more-meta"> 约 1909 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#轻松创建新函数"><strong>轻松创建新函数</strong></a></li>
+        <li><a href="#深入研究"><strong>深入研究</strong></a></li>
+        <li><a href="#高级调整"><strong>高级/调整</strong></a></li>
+        <li><a href="#新子监视器和-http-模式"><strong>(新)——子监视器和 HTTP 模式</strong></a></li>
+        <li><a href="#使用-http-头"><strong>使用 HTTP 头</strong></a></li>
+        <li><a href="#http-方法"><strong>HTTP 方法</strong></a></li>
+        <li><a href="#请求响应的内容类型"><strong>请求响应的内容类型</strong></a></li>
+        <li><a href="#i-dont-want-to-use-the-watchdog"><strong>I don&rsquo;t want to use the watchdog</strong></a></li>
+        <li><a href="#我不想使用监视器"><strong>我不想使用监视器</strong></a></li>
+        <li><a href="#调整自动伸缩"><strong>调整自动伸缩</strong></a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p><strong>监视器</strong></p>
+    <div class="post-content">
+      <p><strong>监视器</strong></p>
 <p>监视器提供了一个外部世界和函数之间的非托管的通用接口。它的工作是收集从 API 网关来的 HTTP 请求，然后调用程序。监视器是一个小型的 Golang 服务——下图展示了它是如何工作的：</p>
-<p><img src=https://ws1.sinaimg.cn/large/006tNbRwgy1fuzw3rkue0j30k00bamy2.jpg alt></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fuzw3rkue0j30k00bamy2.jpg" alt=""></p>
 <blockquote>
 <p>上图：一个小型的 web 服务，可以为每个传入的 HTTP 请求分配所需要的进程。</p>
 </blockquote>
 <p>每个函数都需要嵌入这个二进制文件并将其作为<code>ENTRYPOINT</code> 或 <code>CMD</code>，实际上是把它作为容器的初始化进程。一旦你的进程被创建分支，监视器就会通过<code>stdin</code> 传递 HTTP 请求并从<code>stdout</code>中读取 HTTP 响应。这意味着你的程序无需知道 web 和 HTTP 的任何信息。</p>
-<h2 id=轻松创建新函数><strong>轻松创建新函数</strong></h2>
+<h2 id="轻松创建新函数"><strong>轻松创建新函数</strong></h2>
 <p><strong>从 CLI 创建一个函数</strong></p>
 <p>创建函数最简单的方法是使用 FaaS CLI 和模板。CLI 抽象了所有 Docker 的知识，使得你只需要编写所支持语言的 handler 文件即可。</p>
 <ul>
 <li><a href="https://link.zhihu.com/?target=https%3A//blog.alexellis.io/first-faas-python-function/">你的第一个使用 OpenFaaS 的无服务器 Python 函数</a></li>
 <li><a href="https://link.zhihu.com/?target=https%3A//github.com/openfaas/faas-cli">阅读有关 FaaS CLI 的教程</a></li>
 </ul>
-<h2 id=深入研究><strong>深入研究</strong></h2>
+<h2 id="深入研究"><strong>深入研究</strong></h2>
 <p><strong>Package your function 打包你的函数</strong></p>
 <p>如果你不想使用 CLI 或者现有的二进制文件或镜像，可以使用下面的方法去打包函数：</p>
 <ul>
@@ -149,20 +194,20 @@
 <li>设置 <code>CMD</code>为<code>fwatchdog</code></li>
 </ul>
 <p>一个<code>echo</code>函数的示例 Dockerfile：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>FROM alpine:3.7
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">FROM alpine:3.7
 
 ADD https://github.com/openfaas/faas/releases/download/0.8.0/fwatchdog /usr/bin
 RUN chmod +x /usr/bin/fwatchdog
@@ -177,16 +222,16 @@ CMD [&#34;fwatchdog&#34;]
 <p>Docke 的健康检查不是必需的，但是它是最佳实践。这会确保监视器已经在 API 网关转发请求之前准备好接收请求。如果函数或者监视器遇到一个不可恢复的问题，Swarm 也会重启容器。</p>
 <p>Here is an example of the <code>echo</code> function implementing a healthcheck with a 5-second checking interval.</p>
 <p>下面是实现了一个具有 5 秒间隔的健康检查的<code>echo</code>函数示例：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>FROM functions/alpine
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">FROM functions/alpine
 
 ENV fprocess=&#34;cat /etc/hostname&#34;
 
@@ -200,22 +245,22 @@ HEALTHCHECK --interval=5s CMD [ -e /tmp/.lock ] || exit 1
 </ul>
 <p><strong>环境变量重载:</strong></p>
 <p>监视器可以通过环境变量来配置，你必须始终指定一个<code>fprocess</code> 变量</p>
-<h2 id=高级调整><strong>高级/调整</strong></h2>
-<h2 id=新子监视器和-http-模式><strong>(新)——子监视器和 HTTP 模式</strong></h2>
+<h2 id="高级调整"><strong>高级/调整</strong></h2>
+<h2 id="新子监视器和-http-模式"><strong>(新)——子监视器和 HTTP 模式</strong></h2>
 <ul>
 <li>部分的监视器</li>
 </ul>
 <p>为每个请求创建一个新的进程分支具有进程隔离，可移植和简单的优点。任何进程都可以在没有任何附加代码的情况下变成一个函数。of-watchdog 可和 HTTP 模式是一种优化，这样就可以在所有请求之间维护一个单一的进程。</p>
 <p>新版本的监视器正在<a href="https://link.zhihu.com/?target=https%3A//github.com/openfaas-incubator/of-watchdog">openfaas-incubator/of-watchdog</a>上测试。</p>
 <p>这种重写主要是生成一个可以持续维护的结构。它将会替代现有的监视器，也会有二进制的释放版。</p>
-<h2 id=使用-http-头><strong>使用 HTTP 头</strong></h2>
+<h2 id="使用-http-头"><strong>使用 HTTP 头</strong></h2>
 <p>HTTP 的头和其他请求信息以下面的格式注入到环境变量中：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>X-Forwarded-By`头变成了`Http_X_Forwarded_By
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">X-Forwarded-By`头变成了`Http_X_Forwarded_By
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -230,31 +275,31 @@ HEALTHCHECK --interval=5s CMD [ -e /tmp/.lock ] || exit 1
 <p>默认情况下，通过<code>cgi_headers</code> 环境变量启用该行为。</p>
 </blockquote>
 <p>以下是带有附加头和查询字符串的 POST 请求的示例：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>$ cgi_headers=true fprocess=env ./watchdog &amp;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">$ cgi_headers=true fprocess=env ./watchdog &amp;
 2017/06/23 17:02:58 Writing lock-file to: /tmp/.lock
 
 $ curl &#34;localhost:8080?q=serverless&amp;page=1&#34; -X POST -H X-Forwarded-By:http://my.vpn.com
 </code></pre></td></tr></table>
 </div>
 </div><p>如果你再 Linux 系统下设置了<code>fprocess</code> 到 <code>env</code>中，会看到如下结果：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>Http_User_Agent=curl/7.43.0
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Http_User_Agent=curl/7.43.0
 Http_Accept=*/*
 Http_X_Forwarded_By=http://my.vpn.com
 Http_Method=POST
@@ -262,31 +307,31 @@ Http_Query=q=serverless&amp;page=1
 </code></pre></td></tr></table>
 </div>
 </div><p>也可以使用<code>GET</code>请求：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>curl &#34;localhost:8080?action=quote&amp;qty=1&amp;productId=105&#34;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">curl &#34;localhost:8080?action=quote&amp;qty=1&amp;productId=105&#34;
 </code></pre></td></tr></table>
 </div>
 </div><p>监视器的输出如下：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>Http_User_Agent=curl/7.43.0
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Http_User_Agent=curl/7.43.0
 Http_Accept=*/*
 Http_Method=GET
 Http_Query=action=quote&amp;qty=1&amp;productId=105
 </code></pre></td></tr></table>
 </div>
 </div><p>现在就可以在程序中使用 HTTP 状态来做决策了。</p>
-<h2 id=http-方法><strong>HTTP 方法</strong></h2>
+<h2 id="http-方法"><strong>HTTP 方法</strong></h2>
 <p>监视器支持的 HTTP 方法有：</p>
 <p>带有请求体的：</p>
 <ul>
@@ -299,38 +344,38 @@ Http_Query=action=quote&amp;qty=1&amp;productId=105
 <blockquote>
 <p>API 网关现在支持函数的 POST 路由。</p>
 </blockquote>
-<h2 id=请求响应的内容类型><strong>请求响应的内容类型</strong></h2>
-<p>默认情况下，监视器会匹配客户端的"Content-Type"。</p>
+<h2 id="请求响应的内容类型"><strong>请求响应的内容类型</strong></h2>
+<p>默认情况下，监视器会匹配客户端的&quot;Content-Type&quot;。</p>
 <ul>
 <li>如果客户端发送 Content-Type 为 <code>application/json</code> 的 json 形式的 post 请求，将会在响应的时候自动匹配。</li>
 <li>如果客户端发送 Content-Type 为 <code>text/plain</code> 的 json 形式的 post 请求，响应也会自动匹配。</li>
 </ul>
 <p>若要重载所有响应的 Content-Type ，需要设置<code>content_type</code> 环境变量。</p>
-<h2 id=i-dont-want-to-use-the-watchdog><strong>I don&rsquo;t want to use the watchdog</strong></h2>
-<h2 id=我不想使用监视器><strong>我不想使用监视器</strong></h2>
+<h2 id="i-dont-want-to-use-the-watchdog"><strong>I don&rsquo;t want to use the watchdog</strong></h2>
+<h2 id="我不想使用监视器"><strong>我不想使用监视器</strong></h2>
 <p>这种案例是 OpenFaaS 所不支持的，但是如果你的容器符合以下要求，那么 OpenFaaS 的网关和其他工具也会管理和伸缩服务。</p>
 <p>你需要提供一个锁文件 <code>/tmp/.lock</code>，以便业务流程系统可以在容器中运行健康检查。如果你正在使用 swarm，那么请确保在 Dockerfile 中提供<code>HEALTHCHECK</code>指令——在 <code>faas</code>存储库中有示例。</p>
 <ul>
 <li>在 HTTP 之上暴露 TCP 端口 8080</li>
 <li>创建<code>/tmp/.lock</code> 文件，或者在响应操作 tempdir 系统调用的任何位置。</li>
 </ul>
-<h2 id=调整自动伸缩><strong>调整自动伸缩</strong></h2>
+<h2 id="调整自动伸缩"><strong>调整自动伸缩</strong></h2>
 <p>自动伸缩式从 1 个副本开始，以 5 个位一个单位进行升级：</p>
 <ul>
-<li>1->5</li>
-<li>5->10</li>
-<li>10->15</li>
-<li>15->20</li>
+<li>1-&gt;5</li>
+<li>5-&gt;10</li>
+<li>10-&gt;15</li>
+<li>15-&gt;20</li>
 </ul>
 <p>你可以通过标签来覆盖一个函数 minimum 和 maximum 。</p>
 <p>如果要在 2 到 15 之间的话，请在部署的时候配置以下标签：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-text data-lang=text>com.openfaas.scale.min: &#34;2&#34;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">com.openfaas.scale.min: &#34;2&#34;
 com.openfaas.scale.max: &#34;15&#34;
 </code></pre></td></tr></table>
 </div>
@@ -338,73 +383,112 @@ com.openfaas.scale.max: &#34;15&#34;
 <p><strong>禁用自动伸缩</strong></p>
 <p>如果要禁用某个函数的自动伸缩，将最小和最大的副本数设置为相同的值，即“1”。</p>
 <p>同样也可以删除 AlertManager。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/kubernetes/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">kubernetes</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/queue-worker/">
+            <span class="next-text nav-default">queue-worker</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/kubernetes/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">kubernetes</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/queue-worker/>
-<span class="next-text nav-default">queue-worker</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

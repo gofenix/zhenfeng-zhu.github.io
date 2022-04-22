@@ -1,0 +1,149 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运作的。
+前提条件   在完成了Lab 1中对 OpenFaaS 的设置后，你将拥有触发自动扩展所需的一切。
+  多个工具可以用来创建足够的流量来触发自动扩展 - 在这个例子中，`curl&amp;rsquo;将被使用，因为它很容易在 Mac 和 Linux 上使用，并在 Windows 上与 Git Bash 打包。
+  自动扩展的背景 开箱即用的 OpenFaaS 是这样配置的，它将根据 Prometheus 测量的 每秒请求指标进行自动扩展。 这个指标是在流量通过 API 网关的时候捕获的。如果超过了定义的 每秒请求的阈值，AlertManager 就会启动。这个阈值应该被重新配置为适合生产使用的水平，因为在这个例子中，为了演示，它被设置为一个低值。
+ 在文档网站中找到更多关于自动缩放的信息。
+ 每次警报被 AlertManager 触发时，API 网关将把你的函数的一定数量的副本添加到集群中。OpenFaaS 有两个配置选项，允许指定复制的起始/最低数量，也允许停止复制的最大数量。
+你可以通过设置com.openfaas.scale.min来控制函数的最小复制量，目前默认值为1。
+你可以通过设置com.openfaas.scale.max来控制一个函数可以产生的最大复制量，目前默认值是20。
+ 注意: 如果你把com.openfaas.scale.min和com.openfaas.scale.max设置成相同的值，你就会禁用自动缩放函数。
+ 查看 Prometheus 你需要运行这个端口转发命令，以便能够在http://127.0.0.1:9090访问 Prometheus。
+1  kubectl port-forward deployment/prometheus 9090:9090 -n openfaas   现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code=&amp;quot;200&amp;quot;} [20s])作为查询来实现。导致一个看起来像这样的页面。"><title>Openfaas Workshop Lab9</title><link rel=canonical href=https://example.com/p/openfaas-workshop-lab9/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="Openfaas Workshop Lab9"><meta property="og:description" content="Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运作的。
+前提条件   在完成了Lab 1中对 OpenFaaS 的设置后，你将拥有触发自动扩展所需的一切。
+  多个工具可以用来创建足够的流量来触发自动扩展 - 在这个例子中，`curl&amp;rsquo;将被使用，因为它很容易在 Mac 和 Linux 上使用，并在 Windows 上与 Git Bash 打包。
+  自动扩展的背景 开箱即用的 OpenFaaS 是这样配置的，它将根据 Prometheus 测量的 每秒请求指标进行自动扩展。 这个指标是在流量通过 API 网关的时候捕获的。如果超过了定义的 每秒请求的阈值，AlertManager 就会启动。这个阈值应该被重新配置为适合生产使用的水平，因为在这个例子中，为了演示，它被设置为一个低值。
+ 在文档网站中找到更多关于自动缩放的信息。
+ 每次警报被 AlertManager 触发时，API 网关将把你的函数的一定数量的副本添加到集群中。OpenFaaS 有两个配置选项，允许指定复制的起始/最低数量，也允许停止复制的最大数量。
+你可以通过设置com.openfaas.scale.min来控制函数的最小复制量，目前默认值为1。
+你可以通过设置com.openfaas.scale.max来控制一个函数可以产生的最大复制量，目前默认值是20。
+ 注意: 如果你把com.openfaas.scale.min和com.openfaas.scale.max设置成相同的值，你就会禁用自动缩放函数。
+ 查看 Prometheus 你需要运行这个端口转发命令，以便能够在http://127.0.0.1:9090访问 Prometheus。
+1  kubectl port-forward deployment/prometheus 9090:9090 -n openfaas   现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code=&amp;quot;200&amp;quot;} [20s])作为查询来实现。导致一个看起来像这样的页面。"><meta property="og:url" content="https://example.com/p/openfaas-workshop-lab9/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="openfaas"><meta property="article:published_time" content="2022-01-04T13:44:09+08:00"><meta property="article:modified_time" content="2022-01-04T13:44:09+08:00"><meta name=twitter:title content="Openfaas Workshop Lab9"><meta name=twitter:description content="Lab 9 - 高级函数 - 自动缩放 自动缩放函数的应用 正如文档中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运作的。
+前提条件   在完成了Lab 1中对 OpenFaaS 的设置后，你将拥有触发自动扩展所需的一切。
+  多个工具可以用来创建足够的流量来触发自动扩展 - 在这个例子中，`curl&amp;rsquo;将被使用，因为它很容易在 Mac 和 Linux 上使用，并在 Windows 上与 Git Bash 打包。
+  自动扩展的背景 开箱即用的 OpenFaaS 是这样配置的，它将根据 Prometheus 测量的 每秒请求指标进行自动扩展。 这个指标是在流量通过 API 网关的时候捕获的。如果超过了定义的 每秒请求的阈值，AlertManager 就会启动。这个阈值应该被重新配置为适合生产使用的水平，因为在这个例子中，为了演示，它被设置为一个低值。
+ 在文档网站中找到更多关于自动缩放的信息。
+ 每次警报被 AlertManager 触发时，API 网关将把你的函数的一定数量的副本添加到集群中。OpenFaaS 有两个配置选项，允许指定复制的起始/最低数量，也允许停止复制的最大数量。
+你可以通过设置com.openfaas.scale.min来控制函数的最小复制量，目前默认值为1。
+你可以通过设置com.openfaas.scale.max来控制一个函数可以产生的最大复制量，目前默认值是20。
+ 注意: 如果你把com.openfaas.scale.min和com.openfaas.scale.max设置成相同的值，你就会禁用自动缩放函数。
+ 查看 Prometheus 你需要运行这个端口转发命令，以便能够在http://127.0.0.1:9090访问 Prometheus。
+1  kubectl port-forward deployment/prometheus 9090:9090 -n openfaas   现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code=&amp;quot;200&amp;quot;} [20s])作为查询来实现。导致一个看起来像这样的页面。"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/openfaas-workshop-lab9/>Openfaas Workshop Lab9</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jan 04, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><h1 id=lab-9---高级函数---自动缩放>Lab 9 - 高级函数 - 自动缩放</h1><p></p><h2 id=自动缩放函数的应用>自动缩放函数的应用</h2><p>正如<a class=link href=http://docs.openfaas.com/architecture/autoscaling/ target=_blank rel=noopener>文档</a>中描述的那样，OpenFaaS 带有自动扩展函数。在这个实验室中，我们将看看自动扩展是如何运作的。</p><h3 id=前提条件>前提条件</h3><ul><li><p>在完成了<a class=link href=./lab1.md>Lab 1</a>中对 OpenFaaS 的设置后，你将拥有触发自动扩展所需的一切。</p></li><li><p>多个工具可以用来创建足够的流量来触发自动扩展 - 在这个例子中，`curl&rsquo;将被使用，因为它很容易在 Mac 和 Linux 上使用，并在 Windows 上与 Git Bash 打包。</p></li></ul><h3 id=自动扩展的背景>自动扩展的背景</h3><p>开箱即用的 OpenFaaS 是这样配置的，它将根据 Prometheus 测量的 <code>每秒请求</code>指标进行自动扩展。 这个指标是在流量通过 API 网关的时候捕获的。如果超过了定义的 <code>每秒请求</code>的阈值，AlertManager 就会启动。这个阈值应该被重新配置为适合生产使用的水平，因为在这个例子中，为了演示，它被设置为一个低值。</p><blockquote><p>在<a class=link href=http://docs.openfaas.com/architecture/autoscaling/ target=_blank rel=noopener>文档网站</a>中找到更多关于自动缩放的信息。</p></blockquote><p>每次警报被 AlertManager 触发时，API 网关将把你的函数的一定数量的副本添加到集群中。OpenFaaS 有两个配置选项，允许指定复制的起始/最低数量，也允许停止复制的最大数量。</p><p>你可以通过设置<code>com.openfaas.scale.min</code>来控制函数的最小复制量，目前默认值为<code>1</code>。</p><p>你可以通过设置<code>com.openfaas.scale.max</code>来控制一个函数可以产生的最大复制量，目前默认值是<code>20</code>。</p><blockquote><p>注意: 如果你把<code>com.openfaas.scale.min</code>和<code>com.openfaas.scale.max</code>设置成相同的值，你就会禁用自动缩放函数。</p></blockquote><h3 id=查看-prometheus>查看 Prometheus</h3><p>你需要运行这个端口转发命令，以便能够在<code>http://127.0.0.1:9090</code>访问 Prometheus。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>kubectl port-forward deployment/prometheus 9090:9090 -n openfaas
+</span></span></code></pre></td></tr></table></div></div><p>现在添加一个所有成功调用部署的函数的图。我们可以通过执行<code>rate( gateway_function_invocation_total{code="200"} [20s])</code>作为查询来实现。导致一个看起来像这样的页面。</p><p><img src=/../../screenshot/prometheus_graph.png loading=lazy></p><p>继续打开一个新的标签，在其中使用<code>http://127.0.0.1:9090/alerts</code>导航到警报部分。在这个页面上，你以后可以看到什么时候超过了 <code>每秒请求</code> 的阈值。</p><p><img src=/../../screenshot/prometheus_alerts.png loading=lazy></p><h3 id=触发缩放的-go-函数>触发缩放的 Go 函数</h3><p>首先是 Alex Ellis 的 <code>echo-fn</code>函数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ git clone https://github.com/alexellis/echo-fn <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span> <span class=o>&amp;&amp;</span> <span class=nb>cd</span> echo-fn <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span> <span class=o>&amp;&amp;</span> faas-cli template store pull golang-http <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span> <span class=o>&amp;&amp;</span> faas-cli deploy <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --label com.openfaas.scale.max<span class=o>=</span><span class=m>10</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --label com.openfaas.scale.min<span class=o>=</span><span class=m>1</span>
+</span></span></code></pre></td></tr></table></div></div><p>现在检查用户界面，看什么时候 <code>go-echo</code>函数从 <code>不准备</code>变成 <code>准备</code>。你也可以用<code>faas-cli describe go-echo</code>来检查。</p><p>使用这个脚本反复调用 <code>go-echo</code> 函数，直到你看到复制数从 1 变成 5，以此类推。你可以在 Prometheus 中通过添加`gateway_service_count&rsquo;的图表或在选择该函数的情况下查看 API 网关来监控这个值。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ <span class=k>for</span> i in <span class=o>{</span>0..10000<span class=o>}</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>do</span>
+</span></span><span class=line><span class=cl>   <span class=nb>echo</span> -n <span class=s2>&#34;Post </span><span class=nv>$i</span><span class=s2>&#34;</span> <span class=p>|</span> faas-cli invoke go-echo <span class=o>&amp;&amp;</span> echo<span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>done</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>注意：如果你在 Kubernetes 上运行，使用<code>$OPENFAAS_URL</code>而不是<code>http://127.0.0.1:8080</code>。</p></blockquote><h3 id=监控警报>监控警报</h3><p>现在你应该可以看到，在之前创建的图表中，<code>go-echo</code>函数的调用量有所增加。移动到你打开警报页面的标签。一段时间后，你应该开始看到 <code>APIHighInvocationRate</code>的状态（和颜色）变为 &ldquo;待定&rdquo;，然后再次变为 &ldquo;发射&rdquo;。你也可以使用<code>$ faas-cli list</code>或通过<a class=link href=http://127.0.0.1:8080 target=_blank rel=noopener>ui</a>看到自动缩放的情况。</p><p><img src=/../../screenshot/prometheus_firing.png loading=lazy></p><p>现在你可以使用<code>$ docker service ps go-echo</code>来验证<code>go-echo</code>的新副本是否已经启动。</p><p>现在停止 bash 脚本，你会看到复制的数量在几秒钟后回到 1 个复制。</p><h3 id=疑难解答>疑难解答</h3><p>如果你认为你的自动扩展没有被触发，那么请检查以下内容。</p><ul><li>普罗米修斯中的警报页面 - 这应该是红色/粉色的，并显示 <code>FIRING</code> - 即在<a class=link href=http://127.0.0.1:9090/alerts target=_blank rel=noopener>http://127.0.0.1:9090/alerts</a>。</li><li>检查核心服务的日志，即网关、Prometheus / AlertManager。</li></ul><p>为了获得核心服务的日志，运行<code>docker service ls</code>，然后<code>docker service logs &lt;service-name></code>。</p><h3 id=负载测试可选>负载测试(可选)</h3><p>需要注意的是，在受控环境中应用科学方法和工具与在你自己的笔记本电脑上运行拒绝服务攻击是有区别的。你的笔记本电脑不适合做负载测试，因为一般来说，你是在 Windows 或 Mac 主机上的 Linux 虚拟机中运行 OpenFaaS，而这也是一个单节点。这并不代表生产部署。</p><p>请看<a class=link href=https://docs.openfaas.com/architecture/performance/ target=_blank rel=noopener>构建一个合适的性能测试</a>的文档。</p><p>如果<code>curl</code>没有为你的测试产生足够的流量，或者你想获得一些关于事情如何分解的统计数据，那么你可以试试<code>hey</code>工具。<code>hey</code>可以通过每秒的请求或给定的持续时间产生结构化的负载。</p><p>这里有一个在 1GHz 的 2016 年 12 英寸 MacBook 上运行的例子，带有 Docker Desktop。这是一台非常低功率的计算机，正如所描述的，不代表生产性能。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ hey -z<span class=o>=</span>30s -q <span class=m>5</span> -c <span class=m>2</span> -m POST -d<span class=o>=</span>Test http://127.0.0.1:8080/function/go-echo
+</span></span><span class=line><span class=cl>Summary:
+</span></span><span class=line><span class=cl>  Total:        30.0203 secs
+</span></span><span class=line><span class=cl>  Slowest:      0.0967 secs
+</span></span><span class=line><span class=cl>  Fastest:      0.0057 secs
+</span></span><span class=line><span class=cl>  Average:      0.0135 secs
+</span></span><span class=line><span class=cl>  Requests/sec: 9.9932
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  Total data:   <span class=m>1200</span> bytes
+</span></span><span class=line><span class=cl>  Size/request: <span class=m>4</span> bytes
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Response <span class=nb>time</span> histogram:
+</span></span><span class=line><span class=cl>  0.006 <span class=o>[</span>1<span class=o>]</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl>  0.015 <span class=o>[</span>244<span class=o>]</span>   <span class=p>|</span>■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+</span></span><span class=line><span class=cl>  0.024 <span class=o>[</span>38<span class=o>]</span>    <span class=p>|</span>■■■■■■
+</span></span><span class=line><span class=cl>  0.033 <span class=o>[</span>10<span class=o>]</span>    <span class=p>|</span>■■
+</span></span><span class=line><span class=cl>  0.042 <span class=o>[</span>4<span class=o>]</span>     <span class=p>|</span>■
+</span></span><span class=line><span class=cl>  0.051 <span class=o>[</span>1<span class=o>]</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl>  0.060 <span class=o>[</span>0<span class=o>]</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl>  0.069 <span class=o>[</span>0<span class=o>]</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl>  0.078 <span class=o>[</span>0<span class=o>]</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl>  0.088 <span class=o>[</span>0<span class=o>]</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl>  0.097 <span class=o>[</span>2<span class=o>]</span>     <span class=p>|</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Latency distribution:
+</span></span><span class=line><span class=cl>  10% in 0.0089 secs
+</span></span><span class=line><span class=cl>  25% in 0.0101 secs
+</span></span><span class=line><span class=cl>  50% in 0.0118 secs
+</span></span><span class=line><span class=cl>  75% in 0.0139 secs
+</span></span><span class=line><span class=cl>  90% in 0.0173 secs
+</span></span><span class=line><span class=cl>  95% in 0.0265 secs
+</span></span><span class=line><span class=cl>  99% in 0.0428 secs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Details <span class=o>(</span>average, fastest, slowest<span class=o>)</span>:
+</span></span><span class=line><span class=cl>  DNS+dialup:   0.0000 secs, 0.0057 secs, 0.0967 secs
+</span></span><span class=line><span class=cl>  DNS-lookup:   0.0000 secs, 0.0000 secs, 0.0000 secs
+</span></span><span class=line><span class=cl>  req write:    0.0001 secs, 0.0000 secs, 0.0016 secs
+</span></span><span class=line><span class=cl>  resp wait:    0.0131 secs, 0.0056 secs, 0.0936 secs
+</span></span><span class=line><span class=cl>  resp read:    0.0001 secs, 0.0000 secs, 0.0013 secs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Status code distribution:
+</span></span><span class=line><span class=cl>  <span class=o>[</span>200<span class=o>]</span> <span class=m>300</span> responses
+</span></span></code></pre></td></tr></table></div></div><p>以上模拟了两个活跃的用户<code>-c</code>，每秒 5 个请求<code>-q</code>，持续时间<code>-z</code>为 30 秒。</p><p>要使用<code>hey</code>，你必须在本地计算机上安装 Golang。</p><p>也请参见。<a class=link href=https://github.com/rakyll/hey target=_blank rel=noopener>hey on GitHub</a></p><h3 id=尝试从零开始扩展>尝试从零开始扩展</h3><p>如果你把你的函数规模缩小到 0 个副本，你仍然可以调用它。该调用将触发网关将函数缩放到一个非零值。</p><p>用下面的命令试试吧。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>kubectl scale deployment --replicas=0 nodeinfo -n openfaas-fn
+</span></span></code></pre></td></tr></table></div></div><p>打开 OpenFaaS 用户界面，检查 nodeinfo 是否有 0 个副本，或者通过`kubectl get deployment nodeinfo -n openfaas-fn&rsquo;。</p><p>现在调用该函数并检查它是否扩展到 1 个副本。</p><p>现在转到<a class=link href=lab10.md>Lab 10</a>。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/openfaas/>openfaas</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#自动缩放函数的应用>自动缩放函数的应用</a><ol><li><a href=#前提条件>前提条件</a></li><li><a href=#自动扩展的背景>自动扩展的背景</a></li><li><a href=#查看-prometheus>查看 Prometheus</a></li><li><a href=#触发缩放的-go-函数>触发缩放的 Go 函数</a></li><li><a href=#监控警报>监控警报</a></li><li><a href=#疑难解答>疑难解答</a></li><li><a href=#负载测试可选>负载测试(可选)</a></li><li><a href=#尝试从零开始扩展>尝试从零开始扩展</a></li></ol></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,761 +1,806 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>kotlin 快速入门 - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="kotlin 快速入门">
-<meta property="og:description" content="快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-03-24T17:56:45+00:00">
-<meta property="article:modified_time" content="2018-03-24T17:56:45+00:00">
-<meta itemprop=name content="kotlin 快速入门">
-<meta itemprop=description content="快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参"><meta itemprop=datePublished content="2018-03-24T17:56:45+00:00">
-<meta itemprop=dateModified content="2018-03-24T17:56:45+00:00">
-<meta itemprop=wordCount content="1372">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="kotlin 快速入门">
-<meta name=twitter:description content="快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>kotlin 快速入门 - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="kotlin 快速入门" />
+<meta property="og:description" content="快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/kotlin%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-03-24T17:56:45+00:00" />
+<meta property="article:modified_time" content="2018-03-24T17:56:45+00:00" />
+
+<meta itemprop="name" content="kotlin 快速入门">
+<meta itemprop="description" content="快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参"><meta itemprop="datePublished" content="2018-03-24T17:56:45+00:00" />
+<meta itemprop="dateModified" content="2018-03-24T17:56:45+00:00" />
+<meta itemprop="wordCount" content="1372">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="kotlin 快速入门"/>
+<meta name="twitter:description" content="快速浏览一下 Kotlin 的语法。 基本语法 包定义和引用 在源文件头部： 1 2 3 package my.demo import java.util.* 方法定义 带有方法体，并且返回确定类型数据的定义方式，例如接受 Int 类型的参"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>kotlin 快速入门</h1>
-<div class=post-meta>
-<span class=post-time> 2018-03-24 </span>
-<span class=more-meta> 约 1372 字 </span>
-<span class=more-meta> 预计阅读 3 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#基本语法>基本语法</a>
-<ul>
-<li>
-<ul>
-<li><a href=#包定义和引用>包定义和引用</a></li>
-<li><a href=#方法定义>方法定义</a></li>
-<li><a href=#变量定义>变量定义</a></li>
-<li><a href=#注释>注释</a></li>
-<li><a href=#string-模板>string 模板</a></li>
-<li><a href=#条件表达式>条件表达式</a></li>
-<li><a href=#可能为-null-的值检查是否为-null>可能为 null 的值，检查是否为 null</a></li>
-<li><a href=#类型检查和自动转换>类型检查和自动转换</a></li>
-<li><a href=#for-循环>for 循环</a></li>
-<li><a href=#while-循环>while 循环</a></li>
-<li><a href=#when-表达式>when 表达式</a></li>
-<li><a href=#区间>区间</a></li>
-<li><a href=#集合>集合</a></li>
-<li><a href=#创建基本类和实例>创建基本类和实例</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">kotlin 快速入门</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-03-24 </span>
+        
+          <span class="more-meta"> 约 1372 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本语法">基本语法</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#包定义和引用">包定义和引用</a></li>
+            <li><a href="#方法定义">方法定义</a></li>
+            <li><a href="#变量定义">变量定义</a></li>
+            <li><a href="#注释">注释</a></li>
+            <li><a href="#string-模板">string 模板</a></li>
+            <li><a href="#条件表达式">条件表达式</a></li>
+            <li><a href="#可能为-null-的值检查是否为-null">可能为 null 的值，检查是否为 null</a></li>
+            <li><a href="#类型检查和自动转换">类型检查和自动转换</a></li>
+            <li><a href="#for-循环">for 循环</a></li>
+            <li><a href="#while-循环">while 循环</a></li>
+            <li><a href="#when-表达式">when 表达式</a></li>
+            <li><a href="#区间">区间</a></li>
+            <li><a href="#集合">集合</a></li>
+            <li><a href="#创建基本类和实例">创建基本类和实例</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p>快速浏览一下 Kotlin 的语法。</p>
-<h1 id=基本语法>基本语法</h1>
-<h3 id=包定义和引用>包定义和引用</h3>
+    <div class="post-content">
+      <p>快速浏览一下 Kotlin 的语法。</p>
+<h1 id="基本语法">基本语法</h1>
+<h3 id="包定义和引用">包定义和引用</h3>
 <p>在源文件头部：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=k>package</span> <span class=nn>my.demo</span>
-<span class=k>import</span> <span class=nn>java.util.*</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="k">package</span> <span class="nn">my.demo</span>
+<span class="k">import</span> <span class="nn">java.util.*</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=方法定义>方法定义</h3>
+</div><h3 id="方法定义">方法定义</h3>
 <ul>
 <li>带有方法体，并且返回确定类型数据的定义方式，例如接受 <code>Int</code> 类型的参数并返回 <code>Int</code> 类型的值：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=k>fun</span> <span class=nf>sum</span><span class=p>(</span><span class=n>a</span><span class=p>:</span> <span class=n>Int</span><span class=p>,</span> <span class=n>b</span><span class=p>:</span> <span class=n>Int</span><span class=p>):</span> <span class=n>Int</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=n>a</span> <span class=p>+</span> <span class=n>b</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="k">fun</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="p">+</span> <span class="n">b</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>带有方法体，返回推断类型数据的定义方式，例如：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=k>fun</span> <span class=nf>sum</span><span class=p>(</span><span class=n>a</span><span class=p>:</span> <span class=n>Int</span><span class=p>,</span> <span class=n>b</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span> <span class=p>=</span> <span class=n>a</span> <span class=p>+</span> <span class=n>b</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="k">fun</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">=</span> <span class="n">a</span> <span class="p">+</span> <span class="n">b</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>返回无意义类型的定义方式：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=k>fun</span> <span class=nf>printSum</span><span class=p>(</span><span class=n>a</span><span class=p>:</span> <span class=n>Int</span><span class=p>,</span> <span class=n>b</span><span class=p>:</span> <span class=n>Int</span><span class=p>):</span> <span class=n>Unit</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;sum of </span><span class=si>$a</span><span class=s2> and </span><span class=si>$b</span><span class=s2> is </span><span class=si>${a + b}</span><span class=s2>&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="k">fun</span> <span class="nf">printSum</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Unit</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;sum of </span><span class="si">$a</span><span class="s2"> and </span><span class="si">$b</span><span class="s2"> is </span><span class="si">${a + b}</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>或者省略 <code>Unit</code>：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>printSum</span><span class=p>(</span><span class=n>a</span><span class=p>:</span> <span class=n>Int</span><span class=p>,</span> <span class=n>b</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;sum of </span><span class=si>$a</span><span class=s2> and </span><span class=si>$b</span><span class=s2> is </span><span class=si>${a + b}</span><span class=s2>&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printSum</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;sum of </span><span class="si">$a</span><span class="s2"> and </span><span class="si">$b</span><span class="s2"> is </span><span class="si">${a + b}</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=变量定义>变量定义</h3>
+</div><h3 id="变量定义">变量定义</h3>
 <ul>
 <li>只赋值一次（只读）本地变量，<strong>val</strong>：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>a</span><span class=p>:</span><span class=n>Int</span> <span class=p>=</span> <span class=m>1</span>    <span class=c1>// 指定初始值
-</span><span class=c1></span><span class=k>val</span> <span class=py>b</span> <span class=p>=</span> <span class=m>2</span>        <span class=c1>// 类型自推断为 `Int`
-</span><span class=c1></span><span class=k>val</span> <span class=py>c</span><span class=p>:</span><span class=n>Int</span>        <span class=c1>// 当不指定初始值时需要指定类型
-</span><span class=c1></span><span class=n>c</span> <span class=p>=</span> <span class=m>3</span>            <span class=c1>// 延迟赋值
-</span><span class=c1></span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">a</span><span class="p">:</span><span class="n">Int</span> <span class="p">=</span> <span class="m">1</span>    <span class="c1">// 指定初始值
+</span><span class="c1"></span><span class="k">val</span> <span class="py">b</span> <span class="p">=</span> <span class="m">2</span>        <span class="c1">// 类型自推断为 `Int`
+</span><span class="c1"></span><span class="k">val</span> <span class="py">c</span><span class="p">:</span><span class="n">Int</span>        <span class="c1">// 当不指定初始值时需要指定类型
+</span><span class="c1"></span><span class="n">c</span> <span class="p">=</span> <span class="m">3</span>            <span class="c1">// 延迟赋值
+</span><span class="c1"></span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>可变变量， <strong>var</strong>：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=k>var</span> <span class=py>x</span> <span class=p>=</span> <span class=m>5</span>    <span class=c1>// 类型自推断为 `Int`
-</span><span class=c1></span><span class=n>x</span> <span class=o>+=</span> <span class=m>1</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="k">var</span> <span class="py">x</span> <span class="p">=</span> <span class="m">5</span>    <span class="c1">// 类型自推断为 `Int`
+</span><span class="c1"></span><span class="n">x</span> <span class="o">+=</span> <span class="m">1</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>顶层变量</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>PI</span> <span class=p>=</span> <span class=m>3.14</span>
-<span class=k>var</span> <span class=py>x</span> <span class=p>=</span> <span class=m>0</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">PI</span> <span class="p">=</span> <span class="m">3.14</span>
+<span class="k">var</span> <span class="py">x</span> <span class="p">=</span> <span class="m">0</span>
 
-<span class=k>fun</span> <span class=nf>incrementX</span><span class=p>()</span> <span class=p>{</span>
-    <span class=n>x</span> <span class=o>+=</span> <span class=m>1</span>
-<span class=p>}</span>
+<span class="k">fun</span> <span class="nf">incrementX</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="m">1</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=注释>注释</h3>
+</div><h3 id="注释">注释</h3>
 <p>与 Java 和 JavaScript 一样，Kotlin 支持行尾注释和块注释：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=c1>// 行尾注释
-</span><span class=c1></span><span class=cm>/* 多行
-</span><span class=cm>   块注释 */</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// 行尾注释
+</span><span class="c1"></span><span class="cm">/* 多行
+</span><span class="cm">   块注释 */</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>与 Java 不同，Kotlin 中的块注释可以嵌套。</p>
-<h3 id=string-模板>string 模板</h3>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+<h3 id="string-模板">string 模板</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>var</span> <span class=py>a</span> <span class=p>=</span> <span class=m>1</span>
-<span class=k>val</span> <span class=py>s1</span> <span class=p>=</span> <span class=s2>&#34;a is </span><span class=si>$a</span><span class=s2>&#34;</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">var</span> <span class="py">a</span> <span class="p">=</span> <span class="m">1</span>
+<span class="k">val</span> <span class="py">s1</span> <span class="p">=</span> <span class="s2">&#34;a is </span><span class="si">$a</span><span class="s2">&#34;</span>
 
-<span class=n>a</span> <span class=p>=</span> <span class=m>2</span>
-<span class=k>val</span> <span class=py>s2</span> <span class=p>=</span> <span class=s2>&#34;</span><span class=si>${s1.replace(&#34;is&#34;, &#34;was&#34;)}</span><span class=s2>, but now is </span><span class=si>$a</span><span class=s2>}&#34;</span> 
+<span class="n">a</span> <span class="p">=</span> <span class="m">2</span>
+<span class="k">val</span> <span class="py">s2</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="si">${s1.replace(&#34;is&#34;, &#34;was&#34;)}</span><span class="s2">, but now is </span><span class="si">$a</span><span class="s2">}&#34;</span> 
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=条件表达式>条件表达式</h3>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+</div><h3 id="条件表达式">条件表达式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=k>fun</span> <span class=nf>maxOf</span><span class=p>(</span><span class=n>a</span><span class=p>:</span><span class=n>Int</span><span class=p>,</span> <span class=n>b</span><span class=p>:</span><span class=n>Int</span><span class=p>):</span> <span class=n>Int</span> <span class=p>{</span>
-    <span class=k>if</span> <span class=p>(</span><span class=n>a</span> <span class=p>&gt;</span> <span class=n>b</span><span class=p>)</span> <span class=p>{</span>
-        <span class=k>return</span> <span class=n>a</span>
-    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
-        <span class=k>return</span> <span class=n>b</span>
-    <span class=p>}</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="k">fun</span> <span class="nf">maxOf</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="n">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="n">Int</span><span class="p">):</span> <span class="n">Int</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="p">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">b</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>使用 <code>if</code> 做为表达式：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>maxOf</span><span class=p>(</span><span class=n>a</span><span class=p>:</span><span class=n>Int</span><span class=p>,</span> <span class=n>b</span><span class=p>:</span><span class=n>Int</span><span class=p>)</span> <span class=p>=</span> <span class=k>if</span> <span class=p>(</span><span class=n>a</span> <span class=p>&gt;</span> <span class=n>b</span><span class=p>)</span> <span class=n>a</span> <span class=k>else</span> <span class=n>b</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">maxOf</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="n">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="n">Int</span><span class="p">)</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="p">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="n">a</span> <span class="k">else</span> <span class="n">b</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=可能为-null-的值检查是否为-null>可能为 null 的值，检查是否为 null</h3>
+</div><h3 id="可能为-null-的值检查是否为-null">可能为 null 的值，检查是否为 null</h3>
 <p>如果值可能为 <code>null</code> 时，必须显示的指出。
 例如：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>parseInt</span><span class=p>(</span><span class=n>str</span><span class=p>:</span> <span class=n>String</span><span class=p>):</span> <span class=n>Int</span><span class=p>?</span> <span class=p>{</span>
-    <span class=c1>// ...
-</span><span class=c1></span><span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">parseInt</span><span class="p">(</span><span class="n">str</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Int</span><span class="p">?</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>使用上面定义的方法：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>printProduct</span><span class=p>(</span><span class=n>arg1</span><span class=p>:</span> <span class=n>String</span><span class=p>,</span> <span class=n>arg2</span><span class=p>:</span> <span class=n>String</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>x</span> <span class=p>=</span> <span class=n>parseInt</span><span class=p>(</span><span class=n>arg1</span><span class=p>)</span>
-    <span class=k>val</span> <span class=py>y</span> <span class=p>=</span> <span class=n>parseInt</span><span class=p>(</span><span class=n>arg2</span><span class=p>)</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">printProduct</span><span class="p">(</span><span class="n">arg1</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">arg2</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="n">parseInt</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">y</span> <span class="p">=</span> <span class="n">parseInt</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
 
-    <span class=k>if</span> <span class=p>(</span><span class=n>x</span> <span class=o>!=</span> <span class=k>null</span> <span class=o>&amp;&amp;</span> <span class=n>y</span> <span class=o>!=</span> <span class=k>null</span><span class=p>)</span> <span class=p>{</span>
-        <span class=n>println</span><span class=p>(</span><span class=n>x</span> <span class=p>*</span> <span class=n>y</span><span class=p>)</span>
-    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
-        <span class=n>println</span><span class=p>(</span><span class=n>either</span> <span class=err>&#39;$</span><span class=n>arg1</span><span class=err>&#39;</span> <span class=n>or</span> <span class=err>&#39;$</span><span class=n>arg2</span><span class=err>&#39;</span> <span class=k>is</span> <span class=n>not</span> <span class=n>a</span> <span class=n>number</span><span class=p>)</span>
-<span class=p>}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="k">null</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">x</span> <span class="p">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">either</span> <span class="err">&#39;$</span><span class="n">arg1</span><span class="err">&#39;</span> <span class="n">or</span> <span class="err">&#39;$</span><span class="n">arg2</span><span class="err">&#39;</span> <span class="k">is</span> <span class="n">not</span> <span class="n">a</span> <span class="n">number</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>或者：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>if</span> <span class=p>(</span><span class=n>x</span> <span class=o>==</span> <span class=k>null</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Wrong number format in arg1: &#39;</span><span class=si>$arg1</span><span class=s2>&#39;&#34;</span><span class=p>)</span>
-    <span class=k>return</span>
-<span class=p>}</span>
-<span class=k>if</span> <span class=p>(</span><span class=n>y</span> <span class=o>==</span> <span class=k>null</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Wrong number format in arg2: &#39;</span><span class=si>$arg2</span><span class=s2>&#39;&#34;</span><span class=p>)</span>
-    <span class=k>return</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Wrong number format in arg1: &#39;</span><span class="si">$arg1</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Wrong number format in arg2: &#39;</span><span class="si">$arg2</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+    <span class="k">return</span>
+<span class="p">}</span>
 
-<span class=n>println</span><span class=p>(</span><span class=n>x</span> <span class=p>*</span> <span class=n>y</span><span class=p>)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">x</span> <span class="p">*</span> <span class="n">y</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=类型检查和自动转换>类型检查和自动转换</h3>
+</div><h3 id="类型检查和自动转换">类型检查和自动转换</h3>
 <p><code>is</code> 操作符用于检查某个实例是否为某种类型。如果一个不可变本地变量或属性已经做过类型检查，那么可以不必显示的进行类型转换就可以使用对应类型的属性或方法。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>getStringLength</span><span class=p>(</span><span class=n>obj</span><span class=p>:</span> <span class=n>Any</span><span class=p>):</span> <span class=n>Int</span><span class=p>?</span> <span class=p>{</span>
-    <span class=k>if</span> <span class=p>(</span><span class=n>obj</span> <span class=k>is</span> <span class=n>String</span><span class=p>)</span> <span class=p>{</span>
-        <span class=k>return</span> <span class=n>obj</span><span class=p>.</span><span class=n>length</span>    <span class=c1>// 在这个类型检查分支中，`obj` 自动转换为 `String`
-</span><span class=c1></span>    <span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">getStringLength</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span> <span class="n">Int</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="k">is</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">length</span>    <span class="c1">// 在这个类型检查分支中，`obj` 自动转换为 `String`
+</span><span class="c1"></span>    <span class="p">}</span>
 
-    <span class=k>return</span> <span class=k>null</span>              <span class=c1>// 在类型检查分支外，`obj` 仍然为 `Any`
-</span><span class=c1></span><span class=p>}</span>
+    <span class="k">return</span> <span class="k">null</span>              <span class="c1">// 在类型检查分支外，`obj` 仍然为 `Any`
+</span><span class="c1"></span><span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>或者：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>getStringLength</span><span class=p>(</span><span class=n>obj</span><span class=p>:</span> <span class=n>Any</span><span class=p>):</span> <span class=n>Int</span><span class=p>?</span> <span class=p>{</span>
-    <span class=k>if</span> <span class=p>(</span><span class=n>obj</span> <span class=o>!is</span> <span class=n>String</span><span class=p>)</span> <span class=k>return</span> <span class=k>null</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">getStringLength</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span> <span class="n">Int</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="o">!is</span> <span class="n">String</span><span class="p">)</span> <span class="k">return</span> <span class="k">null</span>
     
-    <span class=k>return</span> <span class=n>obj</span><span class=p>.</span><span class=n>length</span>    <span class=c1>// 在这个分支中，`obj` 自动转换为 `String`
-</span><span class=c1></span><span class=p>}</span>
+    <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">length</span>    <span class="c1">// 在这个分支中，`obj` 自动转换为 `String`
+</span><span class="c1"></span><span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>再或者：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>getStringLength</span><span class=p>(</span><span class=n>obj</span><span class=p>:</span> <span class=n>Any</span><span class=p>):</span> <span class=n>Int</span><span class=p>?</span> <span class=p>{</span>
-    <span class=k>if</span> <span class=p>(</span><span class=n>obj</span> <span class=k>is</span> <span class=n>String</span> <span class=o>&amp;&amp;</span> <span class=n>obj</span><span class=p>.</span><span class=n>length</span> <span class=p>&gt;</span> <span class=m>0</span><span class=p>)</span> <span class=p>{</span>    <span class=c1>//  在 `&amp;&amp;` 操作符的右侧，`obj` 自动转换为 `String`
-</span><span class=c1></span>        <span class=k>return</span> <span class=n>obj</span><span class=p>.</span><span class=n>length</span>
-    <span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">getStringLength</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span> <span class="n">Int</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="k">is</span> <span class="n">String</span> <span class="o">&amp;&amp;</span> <span class="n">obj</span><span class="p">.</span><span class="n">length</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>    <span class="c1">//  在 `&amp;&amp;` 操作符的右侧，`obj` 自动转换为 `String`
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">length</span>
+    <span class="p">}</span>
 
-    <span class=k>return</span> <span class=k>null</span> 
-<span class=p>}</span>
+    <span class="k">return</span> <span class="k">null</span> 
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=for-循环>for 循环</h3>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+</div><h3 id="for-循环">for 循环</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>items</span> <span class=p>=</span> <span class=n>listOf</span><span class=p>(</span><span class=s2>&#34;apple&#34;</span><span class=p>,</span> <span class=s2>&#34;banana&#34;</span><span class=p>,</span> <span class=s2>&#34;kiwi&#34;</span><span class=p>)</span>
-<span class=k>for</span> <span class=p>(</span><span class=n>item</span> <span class=k>in</span> <span class=n>items</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;kiwi&#34;</span><span class="p">)</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="k">in</span> <span class="n">items</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>或者：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>items</span> <span class=p>=</span> <span class=n>listOf</span><span class=p>(</span><span class=s2>&#34;apple&#34;</span><span class=p>,</span> <span class=s2>&#34;banana&#34;</span><span class=p>,</span> <span class=s2>&#34;kiwi&#34;</span><span class=p>)</span>
-<span class=k>for</span> <span class=p>(</span><span class=n>index</span> <span class=k>in</span> <span class=n>items</span><span class=p>.</span><span class=n>indices</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;item at </span><span class=si>$index</span><span class=s2> is </span><span class=si>${items[index]}</span><span class=s2>&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;kiwi&#34;</span><span class="p">)</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">index</span> <span class="k">in</span> <span class="n">items</span><span class="p">.</span><span class="n">indices</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;item at </span><span class="si">$index</span><span class="s2"> is </span><span class="si">${items[index]}</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=while-循环>while 循环</h3>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+</div><h3 id="while-循环">while 循环</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>items</span> <span class=p>=</span> <span class=n>listOf</span><span class=p>(</span><span class=s2>&#34;apple&#34;</span><span class=p>,</span> <span class=s2>&#34;banana&#34;</span><span class=p>,</span> <span class=s2>&#34;kiwi&#34;</span><span class=p>)</span>
-<span class=k>var</span> <span class=py>index</span> <span class=p>=</span> <span class=m>0</span>
-<span class=k>while</span> <span class=p>(</span><span class=n>index</span> <span class=p>&lt;</span> <span class=n>items</span><span class=p>.</span><span class=n>size</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;item at </span><span class=si>$index</span><span class=s2> is </span><span class=si>${items[index]}</span><span class=s2>&#34;</span><span class=p>)</span>
-    <span class=n>index</span> <span class=o>++</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">items</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;kiwi&#34;</span><span class="p">)</span>
+<span class="k">var</span> <span class="py">index</span> <span class="p">=</span> <span class="m">0</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">index</span> <span class="p">&lt;</span> <span class="n">items</span><span class="p">.</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;item at </span><span class="si">$index</span><span class="s2"> is </span><span class="si">${items[index]}</span><span class="s2">&#34;</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">++</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=when-表达式>when 表达式</h3>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+</div><h3 id="when-表达式">when 表达式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>describe</span><span class=p>(</span><span class=n>obj</span><span class=p>:</span> <span class=n>Any</span><span class=p>):</span> <span class=n>String</span> <span class=p>=</span> 
-<span class=k>when</span> <span class=p>(</span><span class=n>obj</span><span class=p>)</span> <span class=p>{</span>
-    <span class=m>1</span>          <span class=o>-&gt;</span> <span class=s2>&#34;one&#34;</span>
-    <span class=s2>&#34;hello&#34;</span>    <span class=o>-&gt;</span> <span class=s2>&#34;Greeting&#34;</span>
-    <span class=k>is</span> <span class=n>Long</span>    <span class=o>-&gt;</span> <span class=s2>&#34;Long&#34;</span>
-    <span class=o>!is</span> <span class=n>String</span> <span class=o>-&gt;</span> <span class=s2>&#34;Not a String&#34;</span>
-    <span class=k>else</span>       <span class=o>-&gt;</span> <span class=s2>&#34;Unknown&#34;</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">describe</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span> <span class="n">String</span> <span class="p">=</span> 
+<span class="k">when</span> <span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="m">1</span>          <span class="o">-&gt;</span> <span class="s2">&#34;one&#34;</span>
+    <span class="s2">&#34;hello&#34;</span>    <span class="o">-&gt;</span> <span class="s2">&#34;Greeting&#34;</span>
+    <span class="k">is</span> <span class="n">Long</span>    <span class="o">-&gt;</span> <span class="s2">&#34;Long&#34;</span>
+    <span class="o">!is</span> <span class="n">String</span> <span class="o">-&gt;</span> <span class="s2">&#34;Not a String&#34;</span>
+    <span class="k">else</span>       <span class="o">-&gt;</span> <span class="s2">&#34;Unknown&#34;</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=区间>区间</h3>
+</div><h3 id="区间">区间</h3>
 <ul>
 <li>使用 <code>in</code> 操作符检查数字是否在区间内：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>x</span> <span class=p>=</span> <span class=m>10</span>
-<span class=k>val</span> <span class=py>y</span> <span class=p>=</span> <span class=m>9</span>
-<span class=k>if</span> <span class=p>(</span><span class=n>x</span> <span class=k>in</span> <span class=m>1.</span><span class=p>.</span><span class=n>y</span><span class=p>+</span><span class=m>1</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;fits in range&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="m">10</span>
+<span class="k">val</span> <span class="py">y</span> <span class="p">=</span> <span class="m">9</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="n">y</span><span class="p">+</span><span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;fits in range&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>检查数字是否在范围外：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>list</span> <span class=p>=</span> <span class=n>listOf</span><span class=p>(</span><span class=s2>&#34;a&#34;</span><span class=p>,</span> <span class=s2>&#34;b&#34;</span><span class=p>,</span> <span class=s2>&#34;c&#34;</span><span class=p>)</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">list</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">)</span>
 
-<span class=k>if</span> <span class=p>(-</span><span class=m>1</span> <span class=o>!in</span> <span class=m>0.</span><span class=p>.</span><span class=n>list</span><span class=p>.</span><span class=n>lastIndex</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;-1 is out of range&#34;</span><span class=p>)</span>
-<span class=p>}</span>
-<span class=k>if</span> <span class=p>(</span><span class=n>list</span><span class=p>.</span><span class=n>size</span> <span class=o>!in</span> <span class=n>list</span><span class=p>.</span><span class=n>indices</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;list size is out of valid list indices range too&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<span class="k">if</span> <span class="p">(-</span><span class="m">1</span> <span class="o">!in</span> <span class="m">0.</span><span class="p">.</span><span class="n">list</span><span class="p">.</span><span class="n">lastIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;-1 is out of range&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="n">size</span> <span class="o">!in</span> <span class="n">list</span><span class="p">.</span><span class="n">indices</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;list size is out of valid list indices range too&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>区间遍历</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>for</span> <span class=p>(</span><span class=n>x</span> <span class=k>in</span> <span class=m>1.</span><span class=p>.</span><span class=m>5</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>print</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">for</span> <span class="p">(</span><span class="n">x</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="m">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=集合>集合</h3>
+</div><h3 id="集合">集合</h3>
 <ul>
 <li>遍历集合：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>for</span> <span class=p>(</span><span class=n>item</span> <span class=k>in</span> <span class=n>items</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="k">in</span> <span class="n">items</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>使用 <code>in</code> 操作符判断集合中是否包含某个对象：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>when</span> <span class=p>{</span>
-    <span class=s2>&#34;orange&#34;</span> <span class=k>in</span> <span class=n>items</span>  <span class=o>-&gt;</span> <span class=n>println</span><span class=p>(</span><span class=s2>&#34;juicy&#34;</span><span class=p>)</span>
-    <span class=s2>&#34;apple&#34;</span> <span class=k>in</span> <span class=n>items</span>   <span class=o>-&gt;</span> <span class=n>println</span><span class=p>(</span><span class=s2>&#34;apple is fine too&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">when</span> <span class="p">{</span>
+    <span class="s2">&#34;orange&#34;</span> <span class="k">in</span> <span class="n">items</span>  <span class="o">-&gt;</span> <span class="n">println</span><span class="p">(</span><span class="s2">&#34;juicy&#34;</span><span class="p">)</span>
+    <span class="s2">&#34;apple&#34;</span> <span class="k">in</span> <span class="n">items</span>   <span class="o">-&gt;</span> <span class="n">println</span><span class="p">(</span><span class="s2">&#34;apple is fine too&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>使用 lambda 表达式过滤和 map 集合：</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>fruits</span> <span class=p>=</span> <span class=n>listOf</span><span class=p>(</span><span class=s2>&#34;banana&#34;</span><span class=p>,</span> <span class=s2>&#34;avocado&#34;</span><span class=p>,</span> <span class=s2>&#34;apple&#34;</span><span class=p>,</span> <span class=s2>&#34;kiwi&#34;</span><span class=p>)</span>
-<span class=n>fruits</span>
-<span class=p>.</span><span class=n>filter</span> <span class=p>{</span><span class=k>it</span><span class=p>.</span><span class=n>startWith</span><span class=p>(</span><span class=s2>&#34;a&#34;</span><span class=p>)}</span>
-<span class=p>.</span><span class=n>sortedBy</span> <span class=p>{</span><span class=k>it</span><span class=p>}</span>
-<span class=p>.</span><span class=n>map</span> <span class=p>{</span><span class=k>it</span><span class=p>.</span><span class=n>upperCase</span><span class=p>()}</span>
-<span class=p>.</span><span class=n>forEach</span> <span class=p>{</span><span class=n>println</span><span class=p>(</span><span class=k>it</span><span class=p>)}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">fruits</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="s2">&#34;banana&#34;</span><span class="p">,</span> <span class="s2">&#34;avocado&#34;</span><span class="p">,</span> <span class="s2">&#34;apple&#34;</span><span class="p">,</span> <span class="s2">&#34;kiwi&#34;</span><span class="p">)</span>
+<span class="n">fruits</span>
+<span class="p">.</span><span class="n">filter</span> <span class="p">{</span><span class="k">it</span><span class="p">.</span><span class="n">startWith</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">)}</span>
+<span class="p">.</span><span class="n">sortedBy</span> <span class="p">{</span><span class="k">it</span><span class="p">}</span>
+<span class="p">.</span><span class="n">map</span> <span class="p">{</span><span class="k">it</span><span class="p">.</span><span class="n">upperCase</span><span class="p">()}</span>
+<span class="p">.</span><span class="n">forEach</span> <span class="p">{</span><span class="n">println</span><span class="p">(</span><span class="k">it</span><span class="p">)}</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=创建基本类和实例>创建基本类和实例</h3>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
+</div><h3 id="创建基本类和实例">创建基本类和实例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>fun</span> <span class=nf>main</span><span class=p>(</span><span class=n>args</span><span class=p>:</span> <span class=n>Array</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;)</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>rectangle</span> <span class=p>=</span> <span class=n>Rectangle</span><span class=p>(</span><span class=m>5.0</span><span class=p>,</span> <span class=m>2.0</span><span class=p>)</span> <span class=c1>// 不需要使用 &#39;new&#39; 关键词
-</span><span class=c1></span>    <span class=k>val</span> <span class=py>triangle</span> <span class=p>=</span> <span class=n>Triangle</span><span class=p>(</span><span class=m>3.0</span><span class=p>,</span> <span class=m>4.0</span><span class=p>,</span> <span class=m>5.0</span><span class=p>)</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Area of rectangle is </span><span class=si>${rectangle.calculateArea()}</span><span class=s2>, its perimeter is </span><span class=si>${rectangle.perimeter}</span><span class=s2>&#34;</span><span class=p>)</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Area of triangle is </span><span class=si>${triangle.calculateArea()}</span><span class=s2>, its perimeter is </span><span class=si>${triangle.perimeter}</span><span class=s2>&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">rectangle</span> <span class="p">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="m">5.0</span><span class="p">,</span> <span class="m">2.0</span><span class="p">)</span> <span class="c1">// 不需要使用 &#39;new&#39; 关键词
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">triangle</span> <span class="p">=</span> <span class="n">Triangle</span><span class="p">(</span><span class="m">3.0</span><span class="p">,</span> <span class="m">4.0</span><span class="p">,</span> <span class="m">5.0</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Area of rectangle is </span><span class="si">${rectangle.calculateArea()}</span><span class="s2">, its perimeter is </span><span class="si">${rectangle.perimeter}</span><span class="s2">&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Area of triangle is </span><span class="si">${triangle.calculateArea()}</span><span class="s2">, its perimeter is </span><span class="si">${triangle.perimeter}</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 
-<span class=k>abstract</span> <span class=k>class</span> <span class=nc>Shape</span><span class=p>(</span><span class=k>val</span> <span class=py>sides</span><span class=p>:</span> <span class=n>List</span><span class=p>&lt;</span><span class=n>Double</span><span class=p>&gt;)</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>perimeter</span><span class=p>:</span> <span class=n>Double</span> <span class=k>get</span><span class=p>()</span> <span class=p>=</span> <span class=n>sides</span><span class=p>.</span><span class=n>sum</span><span class=p>()</span>
-    <span class=k>abstract</span> <span class=k>fun</span> <span class=nf>calculateArea</span><span class=p>():</span> <span class=n>Double</span>
-<span class=p>}</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">Shape</span><span class="p">(</span><span class="k">val</span> <span class="py">sides</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Double</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">perimeter</span><span class="p">:</span> <span class="n">Double</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">sides</span><span class="p">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">calculateArea</span><span class="p">():</span> <span class="n">Double</span>
+<span class="p">}</span>
 
-<span class=k>interface</span> <span class=nc>RectangleProperties</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>isSquare</span><span class=p>:</span> <span class=n>Boolean</span>
-<span class=p>}</span>
+<span class="k">interface</span> <span class="nc">RectangleProperties</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">isSquare</span><span class="p">:</span> <span class="n">Boolean</span>
+<span class="p">}</span>
 
-<span class=k>class</span> <span class=nc>Rectangle</span><span class=p>(</span>
-    <span class=k>var</span> <span class=py>height</span><span class=p>:</span> <span class=n>Double</span><span class=p>,</span>
-    <span class=k>var</span> <span class=py>length</span><span class=p>:</span> <span class=n>Double</span>
-<span class=p>)</span> <span class=p>:</span> <span class=n>Shape</span><span class=p>(</span><span class=n>listOf</span><span class=p>(</span><span class=n>height</span><span class=p>,</span> <span class=n>length</span><span class=p>,</span> <span class=n>height</span><span class=p>,</span> <span class=n>length</span><span class=p>)),</span> <span class=n>RectangleProperties</span> <span class=p>{</span>
-    <span class=k>override</span> <span class=k>val</span> <span class=py>isSquare</span><span class=p>:</span> <span class=n>Boolean</span> <span class=k>get</span><span class=p>()</span> <span class=p>=</span> <span class=n>height</span> <span class=o>==</span> <span class=n>length</span>
-    <span class=k>override</span> <span class=k>fun</span> <span class=nf>calculateArea</span><span class=p>():</span> <span class=n>Double</span> <span class=p>=</span> <span class=n>height</span> <span class=p>*</span> <span class=n>length</span>
-<span class=p>}</span>
+<span class="k">class</span> <span class="nc">Rectangle</span><span class="p">(</span>
+    <span class="k">var</span> <span class="py">height</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">var</span> <span class="py">length</span><span class="p">:</span> <span class="n">Double</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">Shape</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">length</span><span class="p">)),</span> <span class="n">RectangleProperties</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">val</span> <span class="py">isSquare</span><span class="p">:</span> <span class="n">Boolean</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">height</span> <span class="o">==</span> <span class="n">length</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">calculateArea</span><span class="p">():</span> <span class="n">Double</span> <span class="p">=</span> <span class="n">height</span> <span class="p">*</span> <span class="n">length</span>
+<span class="p">}</span>
 
-<span class=k>class</span> <span class=nc>Triangle</span><span class=p>(</span>
-    <span class=k>var</span> <span class=py>sideA</span><span class=p>:</span> <span class=n>Double</span><span class=p>,</span>
-    <span class=k>var</span> <span class=py>sideB</span><span class=p>:</span> <span class=n>Double</span><span class=p>,</span>
-    <span class=k>var</span> <span class=py>sideC</span><span class=p>:</span> <span class=n>Double</span>
-<span class=p>)</span> <span class=p>:</span> <span class=n>Shape</span><span class=p>(</span><span class=n>listOf</span><span class=p>(</span><span class=n>sideA</span><span class=p>,</span> <span class=n>sideB</span><span class=p>,</span> <span class=n>sideC</span><span class=p>))</span> <span class=p>{</span>
-    <span class=k>override</span> <span class=n>fyb</span> <span class=n>calculateArre</span><span class=p>():</span> <span class=n>Double</span> <span class=p>{</span>
-        <span class=k>val</span> <span class=py>s</span> <span class=p>=</span> <span class=n>perimeter</span> <span class=p>/</span> <span class=m>2</span>
-        <span class=k>return</span> <span class=n>Math</span><span class=p>.</span><span class=n>sqrt</span><span class=p>(</span><span class=n>s</span> <span class=p>*</span> <span class=p>(</span><span class=n>s</span> <span class=p>-</span> <span class=n>sideA</span><span class=p>)</span> <span class=p>*</span> <span class=p>(</span><span class=n>s</span> <span class=p>-</span> <span class=n>sideB</span><span class=p>)</span> <span class=p>*</span> <span class=p>(</span><span class=n>s</span> <span class=p>-</span> <span class=n>sideC</span><span class=p>))</span>
-    <span class=p>}</span>
-<span class=p>}</span>
+<span class="k">class</span> <span class="nc">Triangle</span><span class="p">(</span>
+    <span class="k">var</span> <span class="py">sideA</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">var</span> <span class="py">sideB</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">var</span> <span class="py">sideC</span><span class="p">:</span> <span class="n">Double</span>
+<span class="p">)</span> <span class="p">:</span> <span class="n">Shape</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="n">sideA</span><span class="p">,</span> <span class="n">sideB</span><span class="p">,</span> <span class="n">sideC</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="n">fyb</span> <span class="n">calculateArre</span><span class="p">():</span> <span class="n">Double</span> <span class="p">{</span>
+        <span class="k">val</span> <span class="py">s</span> <span class="p">=</span> <span class="n">perimeter</span> <span class="p">/</span> <span class="m">2</span>
+        <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span> <span class="p">*</span> <span class="p">(</span><span class="n">s</span> <span class="p">-</span> <span class="n">sideA</span><span class="p">)</span> <span class="p">*</span> <span class="p">(</span><span class="n">s</span> <span class="p">-</span> <span class="n">sideB</span><span class="p">)</span> <span class="p">*</span> <span class="p">(</span><span class="n">s</span> <span class="p">-</span> <span class="n">sideC</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -764,72 +809,112 @@
 <blockquote>
 <p><a href="https://link.jianshu.com?t=http://kotlinlang.org/docs/reference/basic-syntax.html">http://kotlinlang.org/docs/reference/basic-syntax.html</a></p>
 </blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-03-24
+        
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2018-03-24
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Guice 快速入门</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+            <span class="next-text nav-default">RxJava2 快速入门</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">Guice 快速入门</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/rxjava2%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>
-<span class="next-text nav-default">RxJava2 快速入门</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

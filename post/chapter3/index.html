@@ -1,262 +1,307 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>Chapter3 速成班 - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/chapter3/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="Chapter3 速成班">
-<meta property="og:description" content="做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter3/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2022-01-13T11:12:19+08:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="Chapter3 速成班">
-<meta itemprop=description content="做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的"><meta itemprop=datePublished content="2022-01-13T11:12:19+08:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="18915">
-<meta itemprop=keywords content="clojure,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Chapter3 速成班">
-<meta name=twitter:description content="做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Chapter3 速成班 - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/chapter3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Chapter3 速成班" />
+<meta property="og:description" content="做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-13T11:12:19+08:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="Chapter3 速成班">
+<meta itemprop="description" content="做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的"><meta itemprop="datePublished" content="2022-01-13T11:12:19+08:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="18915">
+<meta itemprop="keywords" content="clojure," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Chapter3 速成班"/>
+<meta name="twitter:description" content="做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>Chapter3 速成班</h1>
-<div class=post-meta>
-<span class=post-time> 2022-01-13 </span>
-<span class=more-meta> 约 18915 字 </span>
-<span class=more-meta> 预计阅读 38 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#做事情clojure-速成班>做事情：Clojure 速成班</a>
-<ul>
-<li><a href=#语法>语法</a>
-<ul>
-<li><a href=#form>Form</a></li>
-<li><a href=#控制流>控制流</a></li>
-<li><a href=#用-def-命名>用 def 命名</a></li>
-</ul>
-</li>
-<li><a href=#数据结构>数据结构</a>
-<ul>
-<li><a href=#number>Number</a></li>
-<li><a href=#字符串>字符串</a></li>
-<li><a href=#map>Map</a></li>
-<li><a href=#keywords>Keywords</a></li>
-<li><a href=#vector>Vector</a></li>
-<li><a href=#列表>列表</a></li>
-<li><a href=#set>Set</a></li>
-<li><a href=#简单性>简单性</a></li>
-</ul>
-</li>
-<li><a href=#函数>函数</a>
-<ul>
-<li><a href=#调用函数>调用函数</a></li>
-<li><a href=#函数调用宏调用和特殊-form>函数调用、宏调用和特殊 Form</a></li>
-<li><a href=#定义函数>定义函数</a></li>
-<li><a href=#匿名函数>匿名函数</a></li>
-<li><a href=#返回函数>返回函数</a></li>
-</ul>
-</li>
-<li><a href=#把这一切放到一起>把这一切放到一起</a>
-<ul>
-<li><a href=#夏尔的下一个顶级模型>夏尔的下一个顶级模型</a></li>
-<li><a href=#let>let</a></li>
-<li><a href=#循环>循环</a></li>
-<li><a href=#正则表达式>正则表达式</a></li>
-<li><a href=#对称器>对称器</a></li>
-<li><a href=#用-reduce-来编写更好的对称器>用 reduce 来编写更好的对称器</a></li>
-<li><a href=#霍比特人的暴力>霍比特人的暴力</a></li>
-</ul>
-</li>
-<li><a href=#总结>总结</a></li>
-<li><a href=#练习>练习</a></li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Chapter3 速成班</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-13 </span>
+        
+          <span class="more-meta"> 约 18915 字 </span>
+          <span class="more-meta"> 预计阅读 38 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#做事情clojure-速成班">做事情：Clojure 速成班</a>
+      <ul>
+        <li><a href="#语法">语法</a>
+          <ul>
+            <li><a href="#form">Form</a></li>
+            <li><a href="#控制流">控制流</a></li>
+            <li><a href="#用-def-命名">用 def 命名</a></li>
+          </ul>
+        </li>
+        <li><a href="#数据结构">数据结构</a>
+          <ul>
+            <li><a href="#number">Number</a></li>
+            <li><a href="#字符串">字符串</a></li>
+            <li><a href="#map">Map</a></li>
+            <li><a href="#keywords">Keywords</a></li>
+            <li><a href="#vector">Vector</a></li>
+            <li><a href="#列表">列表</a></li>
+            <li><a href="#set">Set</a></li>
+            <li><a href="#简单性">简单性</a></li>
+          </ul>
+        </li>
+        <li><a href="#函数">函数</a>
+          <ul>
+            <li><a href="#调用函数">调用函数</a></li>
+            <li><a href="#函数调用宏调用和特殊-form">函数调用、宏调用和特殊 Form</a></li>
+            <li><a href="#定义函数">定义函数</a></li>
+            <li><a href="#匿名函数">匿名函数</a></li>
+            <li><a href="#返回函数">返回函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#把这一切放到一起">把这一切放到一起</a>
+          <ul>
+            <li><a href="#夏尔的下一个顶级模型">夏尔的下一个顶级模型</a></li>
+            <li><a href="#let">let</a></li>
+            <li><a href="#循环">循环</a></li>
+            <li><a href="#正则表达式">正则表达式</a></li>
+            <li><a href="#对称器">对称器</a></li>
+            <li><a href="#用-reduce-来编写更好的对称器">用 reduce 来编写更好的对称器</a></li>
+            <li><a href="#霍比特人的暴力">霍比特人的暴力</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
+        <li><a href="#练习">练习</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<h1 id=做事情clojure-速成班>做事情：Clojure 速成班</h1>
+    <div class="post-content">
+      <h1 id="做事情clojure-速成班">做事情：Clojure 速成班</h1>
 <p>是时候学习如何用 Clojure 真正地<em>做事</em>了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的特点是它是一种 Lisp 语言。在本章中，你将探索构成这个 Lisp 核心的元素：语法、函数和数据。它们将共同为你在 Clojure 中表示和解决问题打下坚实的基础。</p>
 <p>在打下这个基础之后，你将能够编写一些超级重要的代码。在最后一节中，你将通过创建一个霍比特人的模型，并编写一个函数将其打在一个随机的位置上，从而将一切联系起来。超级! 重要的!</p>
 <p>当你阅读本章时，我建议你在 REPL 中输入例子并运行它们。用一种新的语言编程是一种技能，就像约德尔舞或花样游泳一样，你必须通过练习来学习它。 请留意它!</p>
-<h2 id=语法>语法</h2>
+<h2 id="语法">语法</h2>
 <p>Clojure 的语法很简单。像所有的 Lisp 一样，它采用了统一的结构、少量的特殊运算符，以及从藏在麻省理工学院下面的小括号矿井中不断提供的小括号，Lisp 就是在那里诞生的。</p>
-<h3 id=form>Form</h3>
+<h3 id="form">Form</h3>
 <p>所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。</p>
 <ul>
 <li>数据结构的字面表示（如数字、字符串、Map 和 Vector）</li>
 <li>操作</li>
 </ul>
 <p>我们使用术语<em>form</em>来指代有效的代码。我有时也会用<em>表达式</em>来指代 Clojure Form。但不要太纠结于术语。Clojure <em>求值</em>每一个 Form，以产生一个值。这些字面意义的表达都是有效的 Form。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>1
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">1
 &#34;a string&#34;
 [&#34;a&#34; &#34;vector&#34; &#34;of&#34; &#34;strings&#34;]
 </code></pre></td></tr></table>
 </div>
 </div><p>当然，你的代码很少包含自由浮动的字符，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你<em>做事情</em>的方式。所有操作的 Form 都是：<em>开括号</em>，<em>操作符</em>，<em>操作数</em>，<em>闭括号</em>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(operator operand1 operand2 ... operandn)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(operator operand1 operand2 ... operandn)
 </code></pre></td></tr></table>
 </div>
 </div><p>请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(+ 1 2 3)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(+ 1 2 3)
 ; =&gt; 6
 
 (str &#34;It was the panda &#34; &#34;in the library &#34; &#34;with a dust buster&#34;)
 ; =&gt; &#34;It was the panda in the library with a dust buster&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p><img src=https://www.braveclojure.com/assets/images/cftbat/do-things/panda.png alt=img></p>
+</div><p><img src="https://www.braveclojure.com/assets/images/cftbat/do-things/panda.png" alt="img"></p>
 <p>在第一个操作中，运算符<code>+</code>将操作数<code>1</code>、<code>2</code>和<code>3</code>相加。在第二个操作中，运算符<code>str</code>将三个字符串连接起来，形成一个新的字符串。这两种 Form 都是有效的。这里有一个不是 Form 的东西，因为它没有一个结束的小括号。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(+
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(+
 </code></pre></td></tr></table>
 </div>
 </div><p>Clojure 的结构统一性可能与你所习惯的不同。在其他语言中，不同的操作可能有不同的结构，这取决于操作符和操作数。例如，JavaScript 采用的是 中缀符号、点运算符和小括号的大杂烩。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>1 + 2 + 3
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">1 + 2 + 3
 &#34;It was the panda &#34;.concat(&#34;in the library &#34;, &#34;with a dust buster&#34;)
 </code></pre></td></tr></table>
 </div>
 </div><p>相比之下，Clojure 的结构是非常简单和一致的。无论你使用哪种运算符，或对哪种数据进行操作，其结构都是一样的。</p>
-<h3 id=控制流>控制流</h3>
+<h3 id="控制流">控制流</h3>
 <p>让我们来看看三个基本的控制流操作符。<code>if</code>, <code>do</code>, 和<code>when</code>。在本书中，你会遇到更多的操作，但这些操作可以让你开始。</p>
-<h4 id=if>if</h4>
+<h4 id="if">if</h4>
 <p>这是一个 <code>if</code> 表达式的一般结构。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if boolean-form
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if boolean-form
   then-form
   optional-else-form)
 </code></pre></td></tr></table>
 </div>
 </div><p>布尔 Form 只是一个求值为真或假的 Form。你会在下一节中了解到逻辑真和逻辑假。下面是几个<code>if</code>的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if true
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if true
   &#34;By Zeus&#39;s hammer!&#34;
   &#34;By Aquaman&#39;s trident!&#34;)
 ; =&gt; &#34;By Zeus&#39;s hammer!&#34;
@@ -267,33 +312,33 @@
 ; =&gt; &#34;By Aquaman&#39;s trident!&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p>第一个例子返回 &ldquo;By Zeus&rsquo;s hammer!"，因为其布尔 Form 求值为 <code>true</code>，是一个真值；第二个例子返回 &ldquo;By Aquaman&rsquo;s trident!"，因为其布尔 Form &ldquo;false&rdquo;，求值为一个假值。</p>
+</div><p>第一个例子返回 &ldquo;By Zeus&rsquo;s hammer!&quot;，因为其布尔 Form 求值为 <code>true</code>，是一个真值；第二个例子返回 &ldquo;By Aquaman&rsquo;s trident!&quot;，因为其布尔 Form &ldquo;false&rdquo;，求值为一个假值。</p>
 <p>你也可以省略<code>else</code>分支。如果你这样做，并且布尔表达式是假的，Clojure 会返回<code>nil</code>，就像这样。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if false
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if false
   &#34;By Odin&#39;s Elbow!&#34;)
 ; =&gt; nil
 </code></pre></td></tr></table>
 </div>
 </div><p>注意<code>if</code>使用操作数位置将操作数与<code>then</code>和<code>else</code>分支联系起来：第一个操作数是<code>then</code>分支，第二个操作数是（可选）<code>else</code>分支。因此，每个分支只能有一种 Form。这与大多数语言不同。例如，你可以在 Ruby 中这样写。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>if true
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">if true
   doer.do_thing(1)
   doer.do_thing(2)
 else
@@ -303,20 +348,20 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p>为了绕过这个明显的限制，你可以使用<code>do</code>操作符。</p>
-<h4 id=do>do</h4>
+<h4 id="do">do</h4>
 <p><code>do</code>操作符可以让你在括号中<em>包裹</em>起多个 Form，并运行其中的每一个。在你的 REPL 中尝试以下操作。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if true
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if true
   (do (println &#34;Success!&#34;)
       &#34;By Zeus&#39;s hammer!&#34;)
   (do (println &#34;Failure!&#34;)
@@ -326,18 +371,18 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p>这个操作符让你在<code>if</code>表达式的每个分支中做多件事情。在这种情况下，会发生两件事。<code>Success!</code>被打印在 REPL 中，<code>By Zeus's hammer!</code>被作为整个<code>if</code>表达式的值返回。</p>
-<h4 id=when>when</h4>
+<h4 id="when">when</h4>
 <p><code>when</code>操作符就像<code>if</code>和<code>do</code>的组合，但没有<code>else</code>分支。下面是一个例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(when true
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(when true
   (println &#34;Success!&#34;)
   &#34;abra cadabra&#34;)
 ; =&gt; Success!
@@ -345,18 +390,18 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p>如果你想在某个条件为真时做多件事，而你总是想在条件为假时返回<code>nil</code>，请使用<code>when</code>。</p>
-<h4 id=nil-true-false-truthiness-equality-and-boolean-expressions>nil, true, false, Truthiness, Equality, and Boolean Expressions</h4>
+<h4 id="nil-true-false-truthiness-equality-and-boolean-expressions">nil, true, false, Truthiness, Equality, and Boolean Expressions</h4>
 <p>Clojure 有<code>true</code>和<code>false</code>。<code>nil</code>在 Clojure 中用来表示<em>没有值</em>。你可以用<code>nil?</code>函数来检查一个值是否为<code>nil</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(nil? 1)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(nil? 1)
 ; =&gt; false
 
 (nil? nil)
@@ -364,19 +409,19 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p><code>nil</code>和<code>false</code>都是用来表示逻辑上的虚假性，而所有其他的值都是逻辑上的真实性。<em>Truthy</em>和<em>falsey</em>指的是在布尔表达式中如何处理一个值，比如传递给<code>if</code>的第一个表达式。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if &#34;bears eat beets&#34;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if &#34;bears eat beets&#34;
   &#34;bears beets Battlestar Galactica&#34;)
 ; =&gt; &#34;bears beets Battlestar Galactica&#34;
 
@@ -388,19 +433,19 @@ end
 </div>
 </div><p>在第一个例子中，字符串<code>bears eat beets</code>被认为是<code>true</code>，所以<code>if</code>表达式求值为 bears beets Battlestar Galactica`。第二个例子显示一个 nil 是假的。</p>
 <p>Clojure 的等于运算符是<code>=</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(= 1 1)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(= 1 1)
 ; =&gt; true
 
 (= nil nil)
@@ -412,19 +457,19 @@ end
 </div>
 </div><p>其他一些语言要求你在比较不同类型的值时使用不同的运算符。例如，你可能不得不使用某种专门为字符串制作的特殊字符串等于运算符。但在使用 Clojure 的内置数据结构时，你不需要像这样奇怪或繁琐的东西来测试等于。</p>
 <p>Clojure 使用布尔运算符<code>or</code>和<code>and</code>。<code>or</code>返回第一个真值或最后一个值。<code>and</code>返回第一个 false 的值，如果没有 false 的值，则返回最后一个 true 的值。让我们先看一下<code>or</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(or false nil :large_I_mean_venti :why_cant_I_just_say_large)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(or false nil :large_I_mean_venti :why_cant_I_just_say_large)
 ; =&gt; :large_I_mean_venti
 
 (or (= 0 1) (= &#34;yes&#34; &#34;no&#34;))
@@ -435,16 +480,16 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p>在第一个例子中，返回值是<code>:large_I_mean_venti</code>，因为它是第一个真值。第二个例子没有真值，所以<code>or</code>返回最后一个值，即<code>false</code>。在最后一个例子中，同样没有真值存在，<code>or</code>返回最后一个值，即<code>nil</code>。现在我们来看看<code>and</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(and :free_wifi :hot_coffee)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(and :free_wifi :hot_coffee)
 ; =&gt; :hot_coffee
 
 (and :feelin_super_cool nil false)
@@ -452,40 +497,40 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p>在第一个例子中，<code>and</code>返回最后一个真值，<code>:hot_coffee</code>。在第二个例子中, <code>and</code>返回<code>nil</code>, 这是第一个 false 的值.</p>
-<h3 id=用-def-命名>用 def 命名</h3>
+<h3 id="用-def-命名">用 def 命名</h3>
 <p>在 Clojure 中, 你可以使用<code>def</code>将一个名字与一个值绑定起来:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def failed-protagonist-names
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def failed-protagonist-names
   [&#34;Larry Potter&#34; &#34;Doreen the Explorer&#34; &#34;The Incredible Bulk&#34;])
 
 failed-protagonist-names
 ; =&gt; [&#34;Larry Potter&#34; &#34;Doreen the Explorer&#34; &#34;The Incredible Bulk&#34;]
 </code></pre></td></tr></table>
 </div>
-</div><p><img src=https://www.braveclojure.com/assets/images/cftbat/do-things/larry-potter.png alt=img></p>
-<p>在这个例子中，你把名字<code>failed-protagonist-names</code>绑定到一个包含三个字符串的 Vector（你将在<a href=https://www.braveclojure.com/do-things/#Anchor-3>&ldquo;Vector &ldquo;第 45 页</a>中了解 Vector）。</p>
-<p>请注意，我使用的是 &ldquo;绑定"一词，而在其他语言中，你会说你是在给一个<em>变量</em>赋值。那些其他语言通常鼓励你对同一个变量进行多次赋值。</p>
+</div><p><img src="https://www.braveclojure.com/assets/images/cftbat/do-things/larry-potter.png" alt="img"></p>
+<p>在这个例子中，你把名字<code>failed-protagonist-names</code>绑定到一个包含三个字符串的 Vector（你将在<a href="https://www.braveclojure.com/do-things/#Anchor-3">&ldquo;Vector &ldquo;第 45 页</a>中了解 Vector）。</p>
+<p>请注意，我使用的是 &ldquo;绑定&quot;一词，而在其他语言中，你会说你是在给一个<em>变量</em>赋值。那些其他语言通常鼓励你对同一个变量进行多次赋值。</p>
 <p>例如，在 Ruby 中，你可以对一个变量进行多次赋值。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>severity = :mild
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">severity = :mild
 error_message = &#34;OH GOD! IT&#39;S A DISASTER! WE&#39;RE &#34;
 if severity == :mild
   error_message = error_message + &#34;MILDLY INCONVENIENCED!&#34;
@@ -495,16 +540,16 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p>你可能想在 Clojure 中做类似的事情。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def severity :mild)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def severity :mild)
 (def error-message &#34;OH GOD! IT&#39;S A DISASTER! WE&#39;RE &#34;)
 (if (= severity :mild)
   (def error-message (str error-message &#34;MILDLY INCONVENIENCED!&#34;))
@@ -512,20 +557,20 @@ end
 </code></pre></td></tr></table>
 </div>
 </div><p>然而，像这样改变与名字相关的值会使你更难理解你的程序的行为，因为更难知道哪个值是与名字相关的，或者为什么这个值可能已经改变了。Clojure 有一套处理变化的工具，你会在第 10 章中了解到。随着你对 Clojure 的学习，你会发现你很少需要改变一个名字/值的关联。下面是你写前面代码的一种方式。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn error-message
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn error-message
   [severity]
   (str &#34;OH GOD! IT&#39;S A DISASTER! WE&#39;RE &#34;
        (if (= severity :mild)
@@ -536,28 +581,28 @@ end
 ; =&gt; &#34;OH GOD! IT&#39;S A DISASTER! WE&#39;RE MILDLY INCONVENIENCED!&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p>这里，你创建了一个函数，<code>error-message</code>，它接受一个参数，<code>severity</code>，并使用它来决定返回哪个字符串。然后你用<code>:mild</code>作为严重程度来调用这个函数。你将在<a href=https://www.braveclojure.com/do-things/#Anchor-4>&ldquo;函数 &ldquo;第 48 页</a>中学习所有关于创建函数的知识；与此同时，你应该把<code>def</code>当作定义常量。在接下来的几章中，你将学习如何通过接受函数式编程范式来处理这个明显的限制。</p>
-<h2 id=数据结构>数据结构</h2>
+</div><p>这里，你创建了一个函数，<code>error-message</code>，它接受一个参数，<code>severity</code>，并使用它来决定返回哪个字符串。然后你用<code>:mild</code>作为严重程度来调用这个函数。你将在<a href="https://www.braveclojure.com/do-things/#Anchor-4">&ldquo;函数 &ldquo;第 48 页</a>中学习所有关于创建函数的知识；与此同时，你应该把<code>def</code>当作定义常量。在接下来的几章中，你将学习如何通过接受函数式编程范式来处理这个明显的限制。</p>
+<h2 id="数据结构">数据结构</h2>
 <p>Clojure 带有少量的数据结构，你在大多数时候都会用到。如果你来自面向对象的背景，你会惊讶于你可以用这里介绍的看似基本的类型做很多事情。</p>
 <p>Clojure 的所有数据结构都是不可改变的，这意味着你不能在原地改变它们。例如，在 Ruby 中，你可以做以下事情来重新分配索引为 0 的失败主角的名字。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>failed_protagonist_names = [
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">failed_protagonist_names = [
   &#34;Larry Potter&#34;,
   &#34;Doreen the Explorer&#34;,
   &#34;The Incredible Bulk&#34;
@@ -573,129 +618,129 @@ failed_protagonist_names
 </code></pre></td></tr></table>
 </div>
 </div><p>Clojure 没有与之对应的东西。你会在第 10 章中了解到更多关于 Clojure 这样实现的原因，但现在只学习如何做事情，而不考虑所有的哲学问题，这很有趣。不多说了，让我们来看看 Clojure 中的数字。</p>
-<h3 id=number>Number</h3>
-<p>Clojure 有相当复杂的 Number 支持。我不会花太多时间纠缠于无聊的技术细节（比如强制和传染），因为那会妨碍<em>做事情</em>。如果你对这些枯燥的细节感兴趣，请查看*<a href=http://clojure.org/data_structures#Data%20Structures-Numbers>http://clojure.org/data_structures#Data%20Structures-Numbers</a>*的文档。可以说，Clojure 会很高兴地处理你扔给它的所有东西。</p>
+<h3 id="number">Number</h3>
+<p>Clojure 有相当复杂的 Number 支持。我不会花太多时间纠缠于无聊的技术细节（比如强制和传染），因为那会妨碍<em>做事情</em>。如果你对这些枯燥的细节感兴趣，请查看*<a href="http://clojure.org/data_structures#Data%20Structures-Numbers">http://clojure.org/data_structures#Data%20Structures-Numbers</a>*的文档。可以说，Clojure 会很高兴地处理你扔给它的所有东西。</p>
 <p>在此期间，我们将使用整数和浮点数。我们还将使用分数，Clojure 可以直接表示这些分数。下面分别是一个整数、一个浮点数和一个分数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>93
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">93
 1.2
 1/5
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=字符串>字符串</h3>
+</div><h3 id="字符串">字符串</h3>
 <p>字符串代表文本。这个名字来自于古代腓尼基人，他们在一次涉及纱线的事故后，有一天发明了字母表。下面是一些字符串字面的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>&#34;Lord Voldemort&#34;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&#34;Lord Voldemort&#34;
 &#34;\&#34;He who must not be named\&#34;&#34;
 &#34;\&#34;Great cow of Moscow!\&#34; - Hermes Conrad&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p><img src=https://www.braveclojure.com/assets/images/cftbat/do-things/wookie.png alt=img></p>
+</div><p><img src="https://www.braveclojure.com/assets/images/cftbat/do-things/wookie.png" alt="img"></p>
 <p>注意，Clojure 只允许用双引号来划分字符串。例如，&lsquo;Lord Voldemort&rsquo; 就不是一个有效的字符串。还要注意，Clojure 没有字符串插值。它只允许通过<code>str</code>函数进行拼接。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def name &#34;Chewbacca&#34;)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def name &#34;Chewbacca&#34;)
 (str &#34;\&#34;Uggllglglglglglll\&#34; - &#34; name)
 ; =&gt; &#34;Uggllglglglglglll&#34; - Chewbacca
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=map>Map</h3>
+</div><h3 id="map">Map</h3>
 <p>Map 类似于其他语言中的字典或哈希值。它们是一种将一些值与另一些值联系起来的方式。Clojure 中的两种 Map 是哈希 Map 和排序 Map。我将只介绍更基本的哈希 Map。让我们来看看 Map 字面的一些例子。这里有一个空 Map。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>{}
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{}
 </code></pre></td></tr></table>
 </div>
 </div><p>在这个例子中，<code>:first-name</code>和<code>:last-name</code>是关键字（我将在下一节介绍这些）。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>{:first-name &#34;Charlie&#34;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{:first-name &#34;Charlie&#34;
  :last-name &#34;McFishwich&#34;}
 </code></pre></td></tr></table>
 </div>
-</div><p>这里我们把<code>"string-key"</code>和<code>+</code>函数联系起来。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</div><p>这里我们把<code>&quot;string-key&quot;</code>和<code>+</code>函数联系起来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>{&#34;string-key&#34; +}
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{&#34;string-key&#34; +}
 </code></pre></td></tr></table>
 </div>
 </div><p>Map 可以被嵌套。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>{:name {:first &#34;John&#34; :middle &#34;Jacob&#34; :last &#34;Jingleheimerschmidt&#34;}}.
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{:name {:first &#34;John&#34; :middle &#34;Jacob&#34; :last &#34;Jingleheimerschmidt&#34;}}.
 </code></pre></td></tr></table>
 </div>
 </div><p>注意，Map 的值可以是任何类型&ndash;字符串、数字、Map、Vector，甚至函数。Clojure 并不关心这个问题。</p>
 <p>除了使用 map 字面，你还可以使用<code>hash-map</code>函数来创建一个 map。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(hash-map :a 1 :b 2)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(hash-map :a 1 :b 2)
 ; =&gt; {:a 1 :b 2}.
 </code></pre></td></tr></table>
 </div>
 </div><p>你可以用<code>get</code>函数在 Map 中查询数值。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(get {:a 0 :b 1} :b)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(get {:a 0 :b 1} :b)
 ; =&gt; 1
 
 (get {:a 0 :b {:c &#34;ho hum&#34;}} :b)
 ; =&gt; {:c &#34;ho hum&#34;}
 </code></pre></td></tr></table>
 </div>
-</div><p>在这两个例子中，我们向<code>get</code>询问给定 Map 中<code>:b</code>键的值&ndash;在第一个例子中，它返回<code>1</code>，而在第二个例子中，它返回嵌套 Map<code>{:c "ho hum"}</code>。</p>
-<p>如果没有找到你的键，<code>get</code>将返回<code>nil</code>，或者你可以给它一个默认值，例如<code>"unicorns？"</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+</div><p>在这两个例子中，我们向<code>get</code>询问给定 Map 中<code>:b</code>键的值&ndash;在第一个例子中，它返回<code>1</code>，而在第二个例子中，它返回嵌套 Map<code>{:c &quot;ho hum&quot;}</code>。</p>
+<p>如果没有找到你的键，<code>get</code>将返回<code>nil</code>，或者你可以给它一个默认值，例如<code>&quot;unicorns？&quot;</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(get {:a 0 :b 1} :c)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(get {:a 0 :b 1} :c)
 ; =&gt; nil
 
 (get {:a 0 :b 1} :c &#34;unicorns?&#34;)
@@ -703,157 +748,157 @@ failed_protagonist_names
 </code></pre></td></tr></table>
 </div>
 </div><p><code>get-in</code>函数可以让你在嵌套 Map 中查询数值。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(get-in {:a 0 :b {:c &#34;ho hum&#34;}} [:b :c])
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(get-in {:a 0 :b {:c &#34;ho hum&#34;}} [:b :c])
 ; =&gt; &#34;ho hum&#34;
 </code></pre></td></tr></table>
 </div>
 </div><p>另一种在 Map 中查询数值的方法是把 Map 当作一个以键为参数的函数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>({:name &#34;The Human Coffeepot&#34;} :name)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">({:name &#34;The Human Coffeepot&#34;} :name)
 ; =&gt; &#34;The Human Coffeepot&#34;
 </code></pre></td></tr></table>
 </div>
 </div><p>你可以用 Map 做的另一件很酷的事情是把 Keywords 作为函数来查询它们的值，这就引出了下一个主题，Keywords。</p>
-<h3 id=keywords>Keywords</h3>
+<h3 id="keywords">Keywords</h3>
 <p>了解 Clojure 关键字的最好方法是看它们是如何被使用的。正如你在上一节中所看到的，它们主要是作为 Map 中的键来使用。下面是一些 Keywords 的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>:a
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">:a
 :rumplestiltsken
 :34
 :_?
 </code></pre></td></tr></table>
 </div>
 </div><p>Keywords 可以作为函数使用，在数据结构中查找相应的值。例如，你可以在一个 Map 中查找<code>:a</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(:a {:a 1 :b 2 :c 3})
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(:a {:a 1 :b 2 :c 3})
 ; =&gt; 1
 </code></pre></td></tr></table>
 </div>
 </div><p>这相当于。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(get {:a 1 :b 2 :c 3} :a)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(get {:a 1 :b 2 :c 3} :a)
 ; =&gt; 1
 </code></pre></td></tr></table>
 </div>
 </div><p>你可以提供一个默认值，和<code>get</code>一样。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(:d {:a 1 :b 2 :c 3} &#34;No gnome knows homes like Noah knows&#34;)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(:d {:a 1 :b 2 :c 3} &#34;No gnome knows homes like Noah knows&#34;)
 ; =&gt; &#34;No gnome knows homes like Noah knows&#34;
 </code></pre></td></tr></table>
 </div>
 </div><p>使用关键字作为一个函数是令人愉快的简洁，Real Clojurists 一直在这样做。你也应该这样做!</p>
-<h3 id=vector>Vector</h3>
+<h3 id="vector">Vector</h3>
 <p>Vector 类似于数组, 它是一个以 0 为索引的 Set。例如, 下面是一个 Vector 的字面意思:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>[3 2 1]
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[3 2 1]
 </code></pre></td></tr></table>
 </div>
 </div><p>这里我们要返回一个 Vector 的第 0 个元素。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(get [3 2 1] 0)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(get [3 2 1] 0)
 ; =&gt; 3
 </code></pre></td></tr></table>
 </div>
 </div><p>下面是另一个按索引获取的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(get [&#34;a&#34; {:name &#34;Pugsley Winterbottom&#34;} &#34;c&#34;] 1)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(get [&#34;a&#34; {:name &#34;Pugsley Winterbottom&#34;} &#34;c&#34;] 1)
 ; =&gt; {:name &#34;Pugsley Winterbottom&#34;}
 </code></pre></td></tr></table>
 </div>
 </div><p>你可以看到，Vector 元素可以是任何类型，而且你可以混合类型。还注意到我们使用的<code>get</code>函数与我们在 Map 中查找数值时使用的相同。</p>
 <p>你可以用<code>vector</code>函数来创建 Vector。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(vector &#34;creepy&#34; &#34;full&#34; &#34;moon&#34;)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(vector &#34;creepy&#34; &#34;full&#34; &#34;moon&#34;)
 ; =&gt; [&#34;creepy&#34; &#34;full&#34; &#34;moon&#34;]
 </code></pre></td></tr></table>
 </div>
 </div><p>你可以使用<code>conj</code>函数来添加额外的元素到 Vector 中。元素被添加到 Vector 的<em>尾部</em>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(conj [1 2 3] 4)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(conj [1 2 3] 4)
 ; =&gt; [1 2 3 4]
 </code></pre></td></tr></table>
 </div>
 </div><p>Vector 不是存储序列的唯一方法；Clojure 还有<em>列表</em>。</p>
-<h3 id=列表>列表</h3>
+<h3 id="列表">列表</h3>
 <p>列表 与 Vector 类似，它们都是数值的线性 Set。但也有一些区别。例如，你不能用<code>get</code>检索列表元素。要写一个列表的字面意思, 只需将元素插入括号内, 并在开头使用单引号:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>&#39;(1 2 3 4)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&#39;(1 2 3 4)
 ; =&gt; (1 2 3 4)
 </code></pre></td></tr></table>
 </div>
 </div><p>注意，当 REPL 打印出列表时，它不包括单引号。我们将在后面的第 7 章中再来讨论为什么会这样。如果你想从一个列表中检索一个元素，你可以使用 <code>nth</code> 函数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(nth &#39;(:a :b :c) 0)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(nth &#39;(:a :b :c) 0)
 ; =&gt; :a
 
 (nth &#39;(:a :b :c) 2)
@@ -862,86 +907,86 @@ failed_protagonist_names
 </div>
 </div><p>我在本书中没有详细介绍性能，因为我认为只有你熟悉一种语言之后再关注它才是有用的。然而，知道使用<code>nth</code>从列表中检索一个元素比使用<code>get</code>从 Vector 中检索一个元素要慢一些是很好的。这是因为 Clojure 必须遍历一个列表中的所有<em>n</em>个元素才能到达<em>n</em>个，而通过索引访问一个 Vector 元素最多只需要几跳。</p>
 <p>列表值可以有任何类型，你可以用<code>list</code>函数创建列表。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(list 1 &#34;two&#34; {3 4})
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(list 1 &#34;two&#34; {3 4})
 ; =&gt; (1 &#34;二&#34; {3 4})
 </code></pre></td></tr></table>
 </div>
 </div><p>元素被添加到一个列表的<em>开头</em>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(conj &#39;(1 2 3) 4)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(conj &#39;(1 2 3) 4)
 ; =&gt; (4 1 2 3)
 </code></pre></td></tr></table>
 </div>
 </div><p>什么时候应该使用列表，什么时候应该使用 Vector？一个好的经验法则是，如果你需要很容易地把项目添加到一个序列的开头，或者你正在写一个宏，你应该使用一个列表。否则，你应该使用 Vector。随着你学习的深入，你会对何时使用哪种方法有很好的感觉。</p>
-<h3 id=set>Set</h3>
+<h3 id="set">Set</h3>
 <p>Set 是唯一值的集合。Clojure 有两种类型的 Set：哈希 Set 和排序 Set。我将专注于哈希 Set，因为它们更经常被使用。下面是一个哈希 Set 的文字符号。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>#{&#34;kurt vonnegut&#34; 20 :icicle}.
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#{&#34;kurt vonnegut&#34; 20 :icicle}.
 </code></pre></td></tr></table>
 </div>
 </div><p>你也可以用<code>hash-set</code>来创建一个 Set:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(hash-set 1 1 2 2)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(hash-set 1 1 2 2)
 ; =&gt; #{1 2}
 </code></pre></td></tr></table>
 </div>
 </div><p>注意，一个值的多个实例在 Set 中成为一个唯一的值，所以我们只剩下一个<code>1</code>和一个<code>2</code>。如果你试图将一个值添加到一个已经包含该值的 Set 中（比如下面代码中的<code>:b</code>），它仍然只有一个该值。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>( conj #{:a :b} :b)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">( conj #{:a :b} :b)
 ; =&gt; #{:a :b}
 </code></pre></td></tr></table>
 </div>
 </div><p>你也可以通过使用<code>set</code>函数从现有的 Vector 和列表中创建 Set。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(set [3 3 3 4 4])
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(set [3 3 3 4 4])
 ; =&gt; #{3 4}
 </code></pre></td></tr></table>
 </div>
 </div><p>你可以使用<code>contains?</code>函数来检查 Set 的成员资格，通过使用<code>get</code>，或通过使用关键字作为函数，以 Set 为参数。<code>contains?</code>返回<code>true</code>或<code>false</code>，而<code>get</code>和关键字查找将返回存在的值，如果不存在，则返回<code>nil</code>。</p>
 <p>下面是你如何使用<code>contains?</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(contains? #{:a :b} :a)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(contains? #{:a :b} :a)
 ; =&gt; true
 
 (contains? #{:a :b} 3)
@@ -952,30 +997,30 @@ failed_protagonist_names
 </code></pre></td></tr></table>
 </div>
 </div><p>下面是你如何使用关键字。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(:a #{:a :b})
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(:a #{:a :b})
 ; =&gt; :a
 </code></pre></td></tr></table>
 </div>
 </div><p>这里是你如何使用<code>get</code>的方法。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(get #{:a :b} :a)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(get #{:a :b} :a)
 ; =&gt; :a
 
 (get #{:a nil} nil)
@@ -986,7 +1031,7 @@ failed_protagonist_names
 </code></pre></td></tr></table>
 </div>
 </div><p>注意，使用<code>get</code>来测试一个 Set 是否包含<code>nil</code>，将总是返回<code>nil</code>，这令人困惑。当你专门测试 Set 成员时，<code>contains?</code>可能是更好的选择。</p>
-<h3 id=简单性>简单性</h3>
+<h3 id="简单性">简单性</h3>
 <p>你可能已经注意到，到目前为止，对数据结构的处理并不包括对如何创建新类型或类的描述。原因是 Clojure 对简单性的强调鼓励你首先去接触内置的数据结构。</p>
 <p>如果你来自面向对象的背景，你可能会认为这种方法很奇怪而且落后。然而，你会发现，你的数据不一定非要和一个类紧密地捆绑在一起，才是有用和可理解的。这里有一个被 Clojurists 喜爱的寓言故事，暗示了 Clojure 的哲学。</p>
 <blockquote>
@@ -995,7 +1040,7 @@ failed_protagonist_names
 </blockquote>
 <p>在接下来的章节中，你会了解到更多关于 Clojure 哲学的这个方面。现在，请留意你通过坚持使用基本数据结构来获得代码重用性的方法。</p>
 <p>我们的 Clojure 数据结构入门课程到此结束。现在，是时候深入到函数中去，学习如何使用这些数据结构了</p>
-<h2 id=函数>函数</h2>
+<h2 id="函数">函数</h2>
 <p>人们为 Lisp 疯狂的原因之一是，这些语言可以让你建立起行为复杂的程序，但主要的构件&ndash;函数&ndash;却是如此简单。本节通过解释以下内容，让你开始了解 Lisp 函数的美丽和优雅。</p>
 <ul>
 <li>调用函数</li>
@@ -1004,55 +1049,55 @@ failed_protagonist_names
 <li>匿名函数</li>
 <li>返回函数</li>
 </ul>
-<h3 id=调用函数>调用函数</h3>
+<h3 id="调用函数">调用函数</h3>
 <p>现在你已经看到了许多函数调用的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(+ 1 2 3 4)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(+ 1 2 3 4)
 (* 1 2 3 4)
 (first [1 2 3 4])
 </code></pre></td></tr></table>
 </div>
 </div><p>请记住，所有的 Clojure 操作都有相同的语法：开括号、操作符、操作数、闭括号。<em>函数**调用</em>只是操作的另一个术语，其中运算符是一个函数或一个<em>函数**表达式</em>（一个返回函数的表达式）。</p>
 <p>这可以让你写出一些相当有趣的代码。下面是一个函数表达式，它返回<code>+</code>（加法）函数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(or + -)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(or + -)
 ; =&gt; #&lt;core$_PLUS_ clojure.core$_PLUS_@76dace31&gt;
 </code></pre></td></tr></table>
 </div>
 </div><p>该返回值是加法函数的字符串表示。因为<code>or</code>的返回值是第一个真值，而这里的加法函数是真值，所以返回的是加法函数。你也可以在另一个表达式中使用这个表达式作为运算符。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>((or + -) 1 2 3)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">((or + -) 1 2 3)
 ; =&gt; 6
 </code></pre></td></tr></table>
 </div>
 </div><p>因为<code>(or + -)</code>返回<code>+</code>，这个表达式被求值为<code>1</code>、<code>2</code>和<code>3</code>之和，返回<code>6</code>。</p>
 <p>下面是几个有效的函数调用，它们都返回<code>6</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>((and (= 1 1) +) 1 2 3)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">((and (= 1 1) +) 1 2 3)
 ; =&gt; 6
 
 ((first [+ 0]) 1 2 3)
@@ -1061,40 +1106,40 @@ failed_protagonist_names
 </div>
 </div><p>在第一个例子中，<code>and</code>的返回值是第一个假值或最后一个真值。在这个例子中，<code>+</code>被返回，因为它是最后一个真值，然后被应用于参数<code>1 2 3</code>，返回<code>6</code>。在第二个例子中，<code>first</code>的返回值是一个序列中的第一个元素，在这个例子中是<code>+</code>。</p>
 <p>然而，这些都不是有效的函数调用，因为数字和字符串都不是函数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(1 2 3 4)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(1 2 3 4)
 (&#34;test&#34; 1 2 3)
 </code></pre></td></tr></table>
 </div>
 </div><p>如果你在 REPL 中运行这些，你会得到这样的结果。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>ClassCastException java.lang.String cannot be cast to clojure.lang.IFn
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ClassCastException java.lang.String cannot be cast to clojure.lang.IFn
 user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>当你继续使用 Clojure 时，你可能会多次看到这个错误：<em><x> cannot be cast to clojure.lang.IFn</em> 。只是意味着你试图将某个东西作为一个函数使用，而它并不是。</p>
 <p>函数的灵活性并没有随着函数表达式的出现而结束! 在语法上，函数可以接受任何表达式作为参数&ndash;包括<em>其他函数</em>。可以接受一个函数作为参数或返回一个函数的函数被称为<em>高阶函数</em>。具有高阶函数的编程语言被称为支持<em>函数一等公民</em>，因为你可以像对待数字和 Vector 等更熟悉的数据类型一样，将函数作为值来处理。</p>
 <p>以<code>map</code>函数（不要与 map 数据结构混淆）为例。<code>map</code>通过对一个集合的每个成员应用一个函数来创建一个新的列表。这里，<code>inc</code>函数将一个数字增加 1。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(inc 1.1)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(inc 1.1)
 ; =&gt; 2.1
 
 (map inc [0 1 2 3])
@@ -1105,16 +1150,16 @@ user/eval728 (NO_SOURCE_FILE:1)
 <p>Clojure 对一等公民函数的支持使你能够建立比没有一等公民函数的语言更强大的抽象概念。那些不熟悉这种编程方式的人认为函数允许你对数据实例进行泛化操作。例如，<code>+</code>函数对任何特定数字的加法进行了抽象。</p>
 <p>相比之下，Clojure（以及所有 Lisp）允许你创建泛化进程的函数。<code>map</code>允许你通过在任何集合上应用一个函数&ndash;任何函数&ndash;来概括转换一个集合的过程。</p>
 <p>你需要知道的关于函数调用的最后一个细节是，Clojure 在将所有函数参数传递给函数之前，会递归地求值这些参数。下面是 Clojure 如何求值一个参数也是函数调用的函数调用。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(+ (inc 199) (/ 100 (- 7 2)))
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(+ (inc 199) (/ 100 (- 7 2)))
 (+ 200 (/ 100 (- 7 2))) ; evaluated &#34;(inc 199)&#34;
 (+ 200 (/ 100 5)) ; evaluated (- 7 2)
 (+ 200 20) ; evaluated (/ 100 5)
@@ -1122,31 +1167,31 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>函数调用启动了求值过程，在应用<code>+</code>函数之前，所有的子 Form 都被求值了。</p>
-<h3 id=函数调用宏调用和特殊-form>函数调用、宏调用和特殊 Form</h3>
+<h3 id="函数调用宏调用和特殊-form">函数调用、宏调用和特殊 Form</h3>
 <p>在上一节中，你了解到函数调用是以函数表达式为操作符的表达式。另外两种表达式是<em>宏调用</em>和<em>特殊 Form</em>。你已经看到了几种特殊 Form：<code>def</code> 和<code>if</code>表达式。</p>
-<p>你将在第 7 章中学习关于宏调用和特殊 Form 的所有知识。现在，使特殊 Form &ldquo;特殊"的主要特征是，与函数调用不同，它们不求值所有的操作数。</p>
+<p>你将在第 7 章中学习关于宏调用和特殊 Form 的所有知识。现在，使特殊 Form &ldquo;特殊&quot;的主要特征是，与函数调用不同，它们不求值所有的操作数。</p>
 <p>以 &ldquo;if &ldquo;为例。这是它的一般结构。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if boolean-form
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if boolean-form
   then-form
   optional-else-form)
 </code></pre></td></tr></table>
 </div>
 </div><p>现在想象一下你有一个这样的<code>if</code>语句。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(if good-mood
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if good-mood
   (tweet walking-on-sunshine-lyrics)
   (tweet mopey-country-song-lyrics))
 </code></pre></td></tr></table>
@@ -1154,7 +1199,7 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div><p>显然，在这样的<code>if</code>表达中，我们希望 Clojure 只求值两个分支中的一个。如果 Clojure 同时求值两个<code>tweet</code>函数调用，你的 Twitter 粉丝们最终会非常困惑。</p>
 <p>另一个区别于特殊 Form 的特征是，你不能把它们作为函数的参数。一般来说，特殊 Form 实现了 Clojure 的核心功能，只是不能用函数实现。Clojure 只有少量的特殊 Form，而如此丰富的语言是用如此小的一组构建块来实现的，这是很令人惊讶的。</p>
 <p>宏与特殊 Form 类似，它们对操作数的求值与函数调用不同，而且它们也不能作为参数传递给函数。但这段弯路已经走得够长了；现在是学习如何定义函数的时候了!</p>
-<h3 id=定义函数>定义函数</h3>
+<h3 id="定义函数">定义函数</h3>
 <p>函数的定义由五个主要部分组成。</p>
 <ul>
 <li><code>defn</code></li>
@@ -1164,19 +1209,19 @@ user/eval728 (NO_SOURCE_FILE:1)
 <li>函数体</li>
 </ul>
 <p>下面是一个函数定义的例子和函数的调用示例。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>➊ (defn too-enthusiastic
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">➊ (defn too-enthusiastic
 ➋   &#34;Return a cheer that might be a bit too enthusiastic&#34;
 ➌   [name]
 ➍   (str &#34;OH. MY. GOD! &#34; name &#34; YOU ARE MOST DEFINITELY LIKE THE BEST &#34;
@@ -1188,25 +1233,25 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div>
 </div><p>在➊处，<code>too-enthusiastic</code>是函数的名称，在➋处有一个描述性的 docstring。参数 &ldquo;name &ldquo;在➌处给出，函数体在➍处接受参数，并做了它所描述的事情&ndash;返回一个可能有点过于热情的欢呼。</p>
 <p>让我们更深入地了解 docstring、参数和函数体。</p>
-<h4 id=docstring>docstring</h4>
+<h4 id="docstring">docstring</h4>
 <p>docstring*是一种描述和记录你的代码的有用方法。你可以在 REPL 中用 <code>(doc</code>fn-name<code>)</code>查看一个函数的 docstring，例如 <code>(doc map)</code>。如果你使用一个工具为你的代码生成文档，那么 docstring 也会发挥作用。</p>
-<h4 id=参数和-arity>参数和 Arity</h4>
+<h4 id="参数和-arity">参数和 Arity</h4>
 <p>Clojure 函数可以用零个或多个参数来定义。你传递给函数的值被称为<em>arguments</em>，参数可以是任何类型。参数的数量就是函数的特性。下面是一些具有不同性质的函数定义。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn no-params
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn no-params
   []
   &#34;I take no parameters!&#34;)
 (defn one-param
@@ -1220,21 +1265,21 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div>
 </div><p>在这些例子中，<code>no-params</code>是一个 0-arity 函数，<code>one-param</code>是 1-arity，<code>two-params</code>是 2-arity。</p>
 <p>函数也支持 <em>参数重载</em>。这意味着你可以定义一个函数，使不同的函数体根据不同的参数来运行。下面是一个多义性函数定义的一般方式。请注意，每个数位定义都被括在括号里，并且有一个参数列表。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn multi-arity
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn multi-arity
   ;; 3-arity arguments and body
   ([first-arg second-arg third-arg]
      (do-things first-arg second-arg third-arg))
@@ -1246,18 +1291,18 @@ user/eval728 (NO_SOURCE_FILE:1)
      (do-things first-arg)))
 </code></pre></td></tr></table>
 </div>
-</div><p>函数参数重载是为参数提供默认值的一种方法。在下面的例子中，<code>"karate"</code>是<code>chop-type</code>参数的默认参数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+</div><p>函数参数重载是为参数提供默认值的一种方法。在下面的例子中，<code>&quot;karate&quot;</code>是<code>chop-type</code>参数的默认参数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn x-chop
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn x-chop
   &#34;Describe the kind of chop you&#39;re inflicting on someone&#34;
   ([name chop-type]
      (str &#34;I &#34; chop-type &#34; chop &#34; name &#34;! Take that!&#34;))
@@ -1266,43 +1311,43 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>如果你用两个参数调用<code>x-chop</code>，该函数的工作原理和它不是一个多义性函数时一样。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(x-chop &#34;Kanye West&#34; &#34;slap&#34;)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(x-chop &#34;Kanye West&#34; &#34;slap&#34;)
 ; =&gt; &#34;I slap chop Kanye West! Take that!&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p><img src=https://www.braveclojure.com/assets/images/cftbat/do-things/kanye.png alt=img></p>
+</div><p><img src="https://www.braveclojure.com/assets/images/cftbat/do-things/kanye.png" alt="img"></p>
 <p>如果你调用<code>x-chop</code>时只有一个参数，<code>x-chop</code>实际上会在提供第二个参数<code>karate</code>时调用自己。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(x-chop &#34;Kanye East&#34;)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(x-chop &#34;Kanye East&#34;)
 ; =&gt; &#34;I karate chop Kanye East! Take that!&#34;
 </code></pre></td></tr></table>
 </div>
 </div><p>像这样用函数本身来定义一个函数，可能显得不寻常。如果是这样，那就好了! 你正在学习一种新的方法来做事!</p>
 <p>你也可以让每种函数做一些完全不相关的事情。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn weird-arity
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn weird-arity
   ([]
      &#34;Destiny dressed you this morning, my friend, and now Fear is
      trying to pull off your pants. If you give up, if you give in,
@@ -1313,25 +1358,25 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>0-arity 主体返回一个明智的引号，1-arity 主体增加一个数字。最有可能的是，你不会想写一个这样的函数，因为有两个完全不相关的函数体会让人困惑。</p>
-<p>Clojure 还允许你通过包括一个<em>可变参数</em>来定义函数，就像 &ldquo;把这些参数的其余部分放在一个列表中，名称如下&rdquo;。可变参数用安培号（<code>&</code>）表示，如➊所示。</p>
-<p><img src=https://www.braveclojure.com/assets/images/cftbat/do-things/old-man.png alt=img></p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
+<p>Clojure 还允许你通过包括一个<em>可变参数</em>来定义函数，就像 &ldquo;把这些参数的其余部分放在一个列表中，名称如下&rdquo;。可变参数用安培号（<code>&amp;</code>）表示，如➊所示。</p>
+<p><img src="https://www.braveclojure.com/assets/images/cftbat/do-things/old-man.png" alt="img"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn codger-communication
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn codger-communication
   [whippersnapper]
   (str &#34;Get off my lawn, &#34; whippersnapper &#34;!!!&#34;))
 
@@ -1346,18 +1391,18 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>正如你所看到的，当你为变量性质的函数提供参数时，参数被当作一个列表来处理。你可以把可变参数和普通参数混在一起，但可变参数必须放在最后。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn favorite-things
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn favorite-things
   [name &amp; things]
   (str &#34;Hi, &#34; name &#34;, here are my favorite things: &#34;
        (clojure.string/join &#34;, &#34; things)))
@@ -1367,20 +1412,20 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>最后，Clojure 有一种更复杂的定义参数的方法，叫做<em>解构</em>，这值得有自己的小节。</p>
-<h4 id=解构>解构</h4>
+<h4 id="解构">解构</h4>
 <p>解构的基本思想是，它可以让你在一个集合中简洁地将名字与值绑定。让我们看看一个基本的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>;; Return the first element of a collection
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">;; Return the first element of a collection
 (defn my-first
   [[first-thing]] ; Notice that first-thing is within a vector
   first-thing)
@@ -1391,24 +1436,24 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div>
 </div><p>这里，<code>my-first</code>函数将符号<code>first-thing</code>与作为参数传入的 Vector 中的第一个元素联系起来。你告诉<code>my-first</code>这样做，就是把符号<code>first-thing</code>放在一个 Vector 中。</p>
 <p>Vector 就像一个巨大的牌子，对 Clojure 说：&ldquo;嘿！这个函数将收到一个列表或 Vector 作为参数。让我的生活更轻松，为我拆开参数的结构，并将有意义的名字与参数的不同部分联系起来！&rdquo; 当对一个 Vector 或列表进行解构时，你可以随意命名你想要的元素，也可以使用其他参数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn chooser
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn chooser
   [[first-choice second-choice &amp; unimportant-choices]]
   (println (str &#34;Your first choice is: &#34; first-choice))
   (println (str &#34;Your second choice is: &#34; second-choice))
@@ -1425,19 +1470,19 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div>
 </div><p>这里，其余的参数<code>unimportant``-choices</code>处理用户在第一和第二选择之后的任何数量的额外选择。</p>
 <p>你也可以对 Map 进行去结构化。就像你告诉 Clojure 通过提供一个 Vector 作为参数来解除 Vector 或列表的结构一样，你可以通过提供一个 Map 作为参数来解除 Map 的结构。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn announce-treasure-location
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn announce-treasure-location
 ➊   [{lat :lat lng :lng}]
   (println (str &#34;Treasure lat: &#34; lat))
   (println (str &#34;Treasure lng: &#34; lng)))
@@ -1449,33 +1494,33 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div>
 </div><p>让我们更详细地看看➊的那一行。这就像告诉 Clojure，&ldquo;哟！Clojure! 为我做一件事，把<code>lat</code>这个名字与键<code>:lat</code>对应的值联系起来。对<code>lng</code>和<code>:lng</code>做同样的事情，好吗？&rdquo;</p>
 <p>我们经常想直接把关键词从 Map 中分离出来，所以有一个更短的语法。这和前面的例子有相同的结果。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn announce-treasure-location
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn announce-treasure-location
   [{:keys [lat lng]}] 。
   (println (str &#34;Treasure lat: &#34; lat))
   (println (str &#34;Treasure lng: &#34; lng)))
 </code></pre></td></tr></table>
 </div>
 </div><p>你可以通过使用<code>:as</code>关键字保留对原始 Map 参数的访问。在下面的例子中，原始 Map 是用<code>treasure-location</code>来访问的。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn receive-treasure-location
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn receive-treasure-location
   [{:keys [lat lng] :as treasure-location}]
   (println (str &#34;Treasure lat: &#34; lat))
   (println (str &#34;Treasure lng: &#34; lng))
@@ -1485,21 +1530,21 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>一般来说，你可以把解构看作是指示 Clojure 如何将名字与列表、Map、集合或 Vector 中的值联系起来。现在，我们来看看函数中真正起作用的部分：函数体!</p>
-<h4 id=函数体>函数体</h4>
-<p>函数主体可以包含任何 Form 的 Form。Clojure 会自动返回最后求值的 Form。这个函数体只包含三种 Form，当你调用这个函数时，它会吐出最后一种 Form，<code>"joe"</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<h4 id="函数体">函数体</h4>
+<p>函数主体可以包含任何 Form 的 Form。Clojure 会自动返回最后求值的 Form。这个函数体只包含三种 Form，当你调用这个函数时，它会吐出最后一种 Form，<code>&quot;joe&quot;</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn illustrative-function
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn illustrative-function
   []
   (+ 1 304)
   30
@@ -1510,22 +1555,22 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>下面是另一个函数体，它使用一个<code>if</code>表达式。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn number-comment
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn number-comment
   [x]
   (if (&gt; x 6)
     &#34;Oh my gosh! What a big number!&#34;
@@ -1538,34 +1583,34 @@ user/eval728 (NO_SOURCE_FILE:1)
 ; =&gt; &#34;Oh my gosh! What a big number!&#34;
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=所有函数都是平等的>所有函数都是平等的</h4>
+</div><h4 id="所有函数都是平等的">所有函数都是平等的</h4>
 <p>最后说明一下：Clojure 没有特权函数。<code>+</code>只是一个函数，<code>-</code>只是一个函数，而<code>inc</code>和<code>map</code>也只是函数。它们并不比你自己定义的函数好。所以，不要让他们给你任何口实!</p>
-<p>更重要的是，这个事实有助于证明 Clojure 的底层简单性。在某种程度上，Clojure 是非常愚蠢的。当你进行函数调用时，Clojure 只是说，"<code>map</code>？当然，不管怎样! 我只是应用这个并继续前进&rdquo;。它并不关心这个函数是什么，或者它来自哪里；它对所有的函数都一视同仁。在它的核心，Clojure 并不关心加法、乘法或 Map 的问题。它只关心函数的应用。</p>
+<p>更重要的是，这个事实有助于证明 Clojure 的底层简单性。在某种程度上，Clojure 是非常愚蠢的。当你进行函数调用时，Clojure 只是说，&quot;<code>map</code>？当然，不管怎样! 我只是应用这个并继续前进&rdquo;。它并不关心这个函数是什么，或者它来自哪里；它对所有的函数都一视同仁。在它的核心，Clojure 并不关心加法、乘法或 Map 的问题。它只关心函数的应用。</p>
 <p>当你继续用 Clojure 编程时，你会发现这种简单性是很理想的。你不必为处理不同的函数而担心特殊的规则或语法。它们的工作原理都是一样的!</p>
-<h3 id=匿名函数>匿名函数</h3>
+<h3 id="匿名函数">匿名函数</h3>
 <p>在 Clojure 中，函数不需要有名字。事实上，你会一直使用<em>匿名函数</em>。多么神秘啊! 你可以通过两种方式创建匿名函数。第一种是使用<code>fn</code>Form。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(fn [param-list]
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(fn [param-list]
   function body)
 </code></pre></td></tr></table>
 </div>
 </div><p>看起来很像<code>defn</code>，不是吗？让我们试一试几个例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(map (fn [name] (str &#34;Hi, &#34; name))
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(map (fn [name] (str &#34;Hi, &#34; name))
      [&#34;Darth Vader&#34; &#34;Mr. Magoo&#34;])
 ; =&gt; (&#34;Hi, Darth Vader&#34; &#34;Hi, Mr. Magoo&#34;)
 
@@ -1573,64 +1618,64 @@ user/eval728 (NO_SOURCE_FILE:1)
 ; =&gt; 24
 </code></pre></td></tr></table>
 </div>
-</div><p>你可以用处理<code>fn</code>的方式来处理<code>defn</code>，这几乎是相同的。参数列表和函数体的工作原理完全相同。你可以使用参数解构，可变参数，等等。你甚至可以将你的匿名函数与一个名字联系起来，这不应该是一个惊喜（如果这确实是一个惊喜，那么 &mldr; &mldr; 惊喜！）。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+</div><p>你可以用处理<code>fn</code>的方式来处理<code>defn</code>，这几乎是相同的。参数列表和函数体的工作原理完全相同。你可以使用参数解构，可变参数，等等。你甚至可以将你的匿名函数与一个名字联系起来，这不应该是一个惊喜（如果这确实是一个惊喜，那么 &hellip; &hellip; 惊喜！）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def my-special-multiplier (fn [x] (* x 3))
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def my-special-multiplier (fn [x] (* x 3))
 (my-special-multiplier 12)
 ; =&gt; 36
 </code></pre></td></tr></table>
 </div>
 </div><p>Clojure 还提供了另一种更紧凑的方式来创建匿名函数。下面是一个匿名函数的样子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>#(* % 3)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#(* % 3)
 </code></pre></td></tr></table>
 </div>
 </div><p>哇，这看起来很奇怪。来吧，应用这个看起来很奇怪的函数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(#(* % 3) 8)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(#(* % 3) 8)
 ; =&gt; 24
 </code></pre></td></tr></table>
 </div>
 </div><p>下面是一个将匿名函数作为参数传递给 map 的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(map #(str &#34;Hi, &#34; %)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(map #(str &#34;Hi, &#34; %)
      [&#34;Darth Vader&#34; &#34;Mr. Magoo&#34;])
 ; =&gt; (&#34;Hi, Darth Vader&#34; &#34;Hi, Mr. Magoo&#34;)
 </code></pre></td></tr></table>
 </div>
 </div><p>这种看起来很奇怪的匿名函数的编写方式是由一个叫做<em>reader**macros</em>的函数实现的。你会在第 7 章中了解到这些。现在，只学习如何使用这些匿名函数就可以了。</p>
 <p>你可以看到，这种语法肯定更紧凑，但也有点奇怪。让我们把它分解一下。这种匿名函数看起来很像函数调用，只是它前面有一个哈希标记，<code>#</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>;; Function call
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">;; Function call
 (* 8 3)
 
 ;; Anonymous function
@@ -1639,45 +1684,45 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div>
 </div><p>这种相似性使你能更快地看到应用这个匿名函数时将发生什么。&ldquo;哦，&ldquo;你可以对自己说，&ldquo;这是要把它的参数乘以 3&rdquo;。</p>
 <p>现在你可能已经猜到了，百分号<code>%</code>，表示传递给函数的参数。如果你的匿名函数需要多个参数，你可以像这样区分它们。<code>%1</code>, <code>%2</code>, <code>%3</code>, 以此类推。<code>%</code>相当于<code>%1</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(#(str %1 &#34; and &#34; %2) &#34;cornbread&#34; &#34;butter beans&#34;)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(#(str %1 &#34; and &#34; %2) &#34;cornbread&#34; &#34;butter beans&#34;)
 ; =&gt; &#34;cornbread and butter beans&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p>你也可以用<code>%&</code>传递其余参数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+</div><p>你也可以用<code>%&amp;</code>传递其余参数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(#(identity %&amp;) 1 &#34;blarg&#34; :yip)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(#(identity %&amp;) 1 &#34;blarg&#34; :yip)
 ; =&gt; (1 &#34;blarg&#34; :yip)
 </code></pre></td></tr></table>
 </div>
 </div><p>在这种情况下，你将身份函数应用于其余参数。Identity 返回它所给的参数而不改变它。可变参数是以列表 Form 存储的，所以函数应用返回所有参数的列表。</p>
 <p>如果你需要写一个简单的匿名函数，使用这种风格是最好的，因为它在视觉上很紧凑。另一方面，如果你要写一个更长、更复杂的函数，它很容易变得不可读。如果是这种情况，请使用<code>fn</code>。</p>
-<h3 id=返回函数>返回函数</h3>
+<h3 id="返回函数">返回函数</h3>
 <p>现在你已经看到，函数可以返回其他函数。返回的函数是<em>closures</em>，这意味着它们可以访问函数创建时的作用域内的所有变量。下面是一个标准的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn inc-maker
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn inc-maker
   &#34;Create a custom incrementor&#34;
   [inc-by]
   #(+ % inc-by))
@@ -1689,35 +1734,35 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>这里，<code>inc-by</code>在作用域内，所以即使返回的函数在<code>inc-maker</code>之外使用，也可以访问它。</p>
-<h2 id=把这一切放到一起>把这一切放到一起</h2>
-<p><img src=https://www.braveclojure.com/assets/images/cftbat/do-things/model-hobbit.png alt=img></p>
+<h2 id="把这一切放到一起">把这一切放到一起</h2>
+<p><img src="https://www.braveclojure.com/assets/images/cftbat/do-things/model-hobbit.png" alt="img"></p>
 <p>好了! 是时候把你新发现的知识用于一个崇高的目的了：打倒霍比特人! 要打一个霍比特人，你首先要建立它的身体部位模型。每个身体部位都将包括其相对大小，以表明该部位被击中的可能性有多大。为了避免重复，霍比特人的模型将只包括<em>左脚</em>，<em>左耳</em>的条目，以此类推。因此，你需要一个函数来完全对称该模型，创建<em>右脚</em>，<em>右耳</em>，等等。最后，你将创建一个函数，迭代身体各部分，并随机选择击中的部分。在这一过程中，你将了解到一些新的 Clojure 工具。<code>let</code>表达式，循环，和正则表达式。有趣!</p>
-<h3 id=夏尔的下一个顶级模型>夏尔的下一个顶级模型</h3>
+<h3 id="夏尔的下一个顶级模型">夏尔的下一个顶级模型</h3>
 <p>对于我们的霍比特人模型，我们将避开霍比特人的特征，如活泼和调皮，只关注霍比特人的小身板。下面是霍比特人的模型。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def asym-hobbit-body-parts [{:name &#34;head&#34; :size 3}
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def asym-hobbit-body-parts [{:name &#34;head&#34; :size 3}
                              {:name &#34;left-eye&#34; :size 1}
                              {:name &#34;left-ear&#34; :size 1}
                              {:name &#34;mouth&#34; :size 1}
@@ -1740,27 +1785,27 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div>
 </div><p>这是一个 Map 的 Vector。每个 Map 都有身体部位的名称和身体部位的相对大小。(我知道只有动漫人物的眼睛是头部的三分之一大小，但就这样吧，好吗？)</p>
 <p>明显缺少的是霍比特人的右侧。让我们来解决这个问题。清单 3-1 是到目前为止你看到的最复杂的代码，它引入了一些新的想法。但是不要担心，因为我们将详细地研究它。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(defn matching-part
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn matching-part
   [part]
   {:name (clojure.string/replace (:name part) #&#34;^left-&#34; &#34;right-&#34;)
    :size (:size part)})
@@ -1782,43 +1827,43 @@ user/eval728 (NO_SOURCE_FILE:1)
 <li>3-1. 匹配-部分和对称-身体-部分的函数</li>
 </ol>
 <p>当我们对<code>asym-hobbit-body-parts</code>调用函数<code>symmetriz-body-parts</code>时，我们得到一个完全对称的霍比特人。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(symmetrize-body-parts asym-hobbit-body-parts)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(symmetrize-body-parts asym-hobbit-body-parts)
 ; =&gt; [{:name &#34;head&#34;, :size 3}
       {:name &#34;left-eye&#34;, :size 1}
       {:name &#34;right-eye&#34;, :size 1}
@@ -1853,23 +1898,23 @@ user/eval728 (NO_SOURCE_FILE:1)
 </code></pre></td></tr></table>
 </div>
 </div><p>让我们来分析一下这段代码!</p>
-<h3 id=let>let</h3>
+<h3 id="let">let</h3>
 <p>在清单 3-1 的大量疯狂中，你可以看到结构<code>(let ...)</code>的 Form。让我们通过一个例子来建立对<code>let</code>的理解，当我们熟悉了所有的部分后，再来检查程序中的完整例子。</p>
 <p><code>let</code>将名字与值绑定。你可以认为<code>let</code>是<em>let</em> <em>it</em> <em>be</em>的缩写，这也是披头士乐队关于编程的一首优美的歌曲。这里有一个例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [x 3]
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(let [x 3]
   x)
 ; =&gt; 3
 
@@ -1880,59 +1925,59 @@ user/eval728 (NO_SOURCE_FILE:1)
 ; =&gt; (&#34;Pongo&#34; &#34;Perdita&#34;)
 </code></pre></td></tr></table>
 </div>
-</div><p>在第一个例子中，你将名字<code>x</code>与值<code>3</code>绑定。在第二个例子中，你把名字<code>dalmatians</code>绑定到表达式<code>(取2</code>dalmatian<code>-list)</code>的结果，也就是列表<code>("Pongo" "Perdita")</code>。<code>let</code>还引入了一个新的作用域。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+</div><p>在第一个例子中，你将名字<code>x</code>与值<code>3</code>绑定。在第二个例子中，你把名字<code>dalmatians</code>绑定到表达式<code>(取2</code>dalmatian<code>-list)</code>的结果，也就是列表<code>(&quot;Pongo&quot; &quot;Perdita&quot;)</code>。<code>let</code>还引入了一个新的作用域。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def x 0)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def x 0)
 (let [x 1] x)
 ; =&gt; 1
 </code></pre></td></tr></table>
 </div>
 </div><p>这里，你首先使用<code>def</code>将名字<code>x</code>绑定到值<code>0</code>上。然后，<code>let</code>创建了一个新的作用域，在这个作用域中，名字<code>x</code>被绑定到值<code>1</code>上。我认为作用域取决于上下文。例如，在 &ldquo;请清理这些烟头 &ldquo;这句话中，<em>烟头</em>的含义是不同的，这取决于你是在产科病房工作还是在香烟制造商大会的监管人员工作。在这个代码片段中，你在说：&ldquo;我希望<code>x</code>在全局上下文中是<code>0</code>，但在这个<code>let</code>表达式的上下文中，它应该是<code>1</code>。&rdquo;</p>
 <p>你可以在你的<code>let</code>绑定中引用现有的绑定。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(def x 0)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def x 0)
 (let [x (inc x)] x)
 ; =&gt; 1
 </code></pre></td></tr></table>
 </div>
 </div><p>在这个例子中，<code>(inc x)</code>中的<code>x</code>是指由<code>(def x 0)</code>创建的绑定。结果是<code>1</code>，然后在<code>let</code>创建的新作用域中与名称<code>x</code>绑定。在<code>let</code>Form 的作用域内，<code>x</code>指的是<code>1</code>，而不是<code>0</code>。</p>
 <p>你也可以在<code>let</code>中使用可变参数，就像你在函数中一样。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [[Pongo &amp; dalmatians] dalmatian-list] [Pongo dalmatians])
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(let [[Pongo &amp; dalmatians] dalmatian-list] [Pongo dalmatians])
   [Pongo dalmatians])
 ; =&gt; [&#34;Pongo&#34; (&#34;Perdita&#34; &#34;Puppy 1&#34; &#34;Puppy 2&#34;) ]
 </code></pre></td></tr></table>
 </div>
-</div><p>注意，<code>let</code>Form 的值是其主体中最后被求值的 Form。<code>let</code>Form 遵循所有在<a href=https://www.braveclojure.com/do-things/#Anchor>&ldquo;调用函数"第 48 页</a>中介绍的析构规则。在这个例子中，<code>[pongo & dalmatians]</code>解构了<code>dalmatian-list</code>，将字符串<code>"Pongo "绑定到名称</code>pongo<code>上，将其余的dalmatians列表绑定到</code>dalmatians<code>上。Vector</code>[pongo dalmatians]<code>是</code>let<code>的最后一个表达式，所以它是</code>let`Form 的值。</p>
+</div><p>注意，<code>let</code>Form 的值是其主体中最后被求值的 Form。<code>let</code>Form 遵循所有在<a href="https://www.braveclojure.com/do-things/#Anchor">&ldquo;调用函数&quot;第 48 页</a>中介绍的析构规则。在这个例子中，<code>[pongo &amp; dalmatians]</code>解构了<code>dalmatian-list</code>，将字符串<code>&quot;Pongo &quot;绑定到名称</code>pongo<code>上，将其余的dalmatians列表绑定到</code>dalmatians<code>上。Vector</code>[pongo dalmatians]<code>是</code>let<code>的最后一个表达式，所以它是</code>let`Form 的值。</p>
 <p><code>let</code>Form 有两个主要用途。首先，它们通过允许你对事物进行命名。其次，它们允许你只求值一个表达式，并重复使用其结果。当你需要重复使用一个昂贵的函数调用的结果时，这一点特别重要，比如网络 API 调用。当表达式有副作用时，这也很重要。</p>
 <p>让我们再看一下我们的对称函数中的<code>let</code>Form，这样我们就能明白到底发生了什么。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(let [[part &amp; remaining] remaining-asym-parts])
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(let [[part &amp; remaining] remaining-asym-parts])
   (recur remaining
          (in into final-body-parts
                (set [part (matching-part part part)]))))    
@@ -1940,250 +1985,250 @@ user/eval728 (NO_SOURCE_FILE:1)
 </div>
 </div><p>这段代码告诉 Clojure，&ldquo;创建一个新的作用域。在它里面，将<code>part</code>与<code>remaining-asym-parts</code>的第一个元素相关联。将<code>remaining</code>与<code>remaining-asym-parts</code>中的其他元素联系起来&rdquo;。</p>
 <p>至于<code>let</code>表达式的主体，你将在下一节中了解到<code>recur</code>的含义。函数调用</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(in into final-body-parts
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(in into final-body-parts
   (set [part (matching-part part part)] ))
 </code></pre></td></tr></table>
 </div>
 </div><p>首先告诉 Clojure, &ldquo;使用<code>set</code>函数创建一个由<code>part</code>和它的匹配部分组成的集合。然后使用函数<code>into</code>将该集合的元素添加到 Vector<code>final-body-parts</code>中&rdquo;。你在这里创建一个集合，以确保你向<code>final-body-parts</code>添加唯一的元素，因为<code>part</code>和<code>(matching-part part)</code>有时是同一个东西，正如你将在接下来的正则表达式部分看到的。下面是一个简化的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(into [] (set [:a :a]))
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(into [] (set [:a :a]))
 ; =&gt; [:a]
 </code></pre></td></tr></table>
 </div>
 </div><p>首先，<code>(set [:a :a])</code>返回集合<code>#{:a}</code>，因为集合不包含重复的元素。然后<code>(into [] #{:a})</code>返回 Vector<code>[:a]</code>。</p>
 <p>回到<code>let</code>：注意<code>part</code>在<code>let</code>的主体中被多次使用。如果我们使用原来的表达式，而不是使用<code>part</code>和<code>remaining</code>的名字，那将是一个混乱的局面! 下面是一个例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(recur (rest remaining-asym-parts)
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(recur (rest remaining-asym-parts)
        (in into final-body-parts
              (set [(first remaining-asym-parts) (matching-part (first remaining-asym-parts)) ]))
 </code></pre></td></tr></table>
 </div>
 </div><p>所以，<code>let</code>是一种方便的方法，可以为值引入本地名称，这有助于简化代码。</p>
-<h3 id=循环>循环</h3>
+<h3 id="循环">循环</h3>
 <p>在我们的<code>symmetrize-body-parts</code>函数中，我们使用了<code>loop</code>，它提供了另一种在 Clojure 中进行递归的方法。让我们看看一个简单的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=k>loop </span><span class=p>[</span><span class=nv>iteration</span> <span class=mi>0</span><span class=p>]</span>
-  <span class=p>(</span><span class=nb>println </span><span class=p>(</span><span class=nb>str </span><span class=s>&#34;Iteration &#34;</span> <span class=nv>iteration</span><span class=p>))</span>
-  <span class=p>(</span><span class=k>if </span><span class=p>(</span><span class=nb>&gt; </span><span class=nv>iteration</span> <span class=mi>3</span><span class=p>)</span>
-    <span class=p>(</span><span class=nb>println </span><span class=s>&#34;Goodbye!&#34;</span><span class=p>)</span>
-    <span class=p>(</span><span class=nf>recur</span> <span class=p>(</span><span class=nb>inc </span><span class=nv>iteration</span><span class=p>))))</span>
-<span class=c1>; =&gt; Iteration 0</span>
-<span class=c1>; =&gt; Iteration 1</span>
-<span class=c1>; =&gt; Iteration 2</span>
-<span class=c1>; =&gt; Iteration 3</span>
-<span class=c1>; =&gt; Iteration 4</span>
-<span class=c1>; =&gt; Goodbye!</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">iteration</span> <span class="mi">0</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="nb">str </span><span class="s">&#34;Iteration &#34;</span> <span class="nv">iteration</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">iteration</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">println </span><span class="s">&#34;Goodbye!&#34;</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">iteration</span><span class="p">))))</span>
+<span class="c1">; =&gt; Iteration 0</span>
+<span class="c1">; =&gt; Iteration 1</span>
+<span class="c1">; =&gt; Iteration 2</span>
+<span class="c1">; =&gt; Iteration 3</span>
+<span class="c1">; =&gt; Iteration 4</span>
+<span class="c1">; =&gt; Goodbye!</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>第一行，<code>loop [iteration 0]</code>，开始了循环并引入了一个初始值的绑定。在循环的第一次传递中，<code>iteration</code>的值为 0.接下来，它打印一个短消息。然后，它检查<code>iteration</code>的值。如果该值大于 3，那么是时候说再见了。否则，我们就 &ldquo;重来&rdquo;。这就好比<code>loop</code>创建了一个匿名函数，其参数名为<code>iteration</code>，而<code>recur</code>允许你从其内部调用该函数，传递参数<code>(inc iteration)</code>。</p>
 <p>事实上，你可以通过使用一个普通的函数定义来完成同样的事情。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=kd>defn </span><span class=nv>recursive-printer</span>
-  <span class=p>([]</span>
-     <span class=p>(</span><span class=nf>recursive-printer</span> <span class=mi>0</span><span class=p>))</span>
-  <span class=p>([</span><span class=nv>iteration</span><span class=p>]</span>
-     <span class=p>(</span><span class=nb>println </span><span class=nv>iteration</span><span class=p>)</span>
-     <span class=p>(</span><span class=k>if </span><span class=p>(</span><span class=nb>&gt; </span><span class=nv>iteration</span> <span class=mi>3</span><span class=p>)</span>
-       <span class=p>(</span><span class=nb>println </span><span class=s>&#34;Goodbye!&#34;</span><span class=p>)</span>
-       <span class=p>(</span><span class=nf>recursive-printer</span> <span class=p>(</span><span class=nb>inc </span><span class=nv>iteration</span><span class=p>)))))</span>
-<span class=p>(</span><span class=nf>recursive-printer</span><span class=p>)</span>
-<span class=c1>; =&gt; Iteration 0</span>
-<span class=c1>; =&gt; Iteration 1</span>
-<span class=c1>; =&gt; Iteration 2</span>
-<span class=c1>; =&gt; Iteration 3</span>
-<span class=c1>; =&gt; Iteration 4</span>
-<span class=c1>; =&gt; Goodbye!</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="kd">defn </span><span class="nv">recursive-printer</span>
+  <span class="p">([]</span>
+     <span class="p">(</span><span class="nf">recursive-printer</span> <span class="mi">0</span><span class="p">))</span>
+  <span class="p">([</span><span class="nv">iteration</span><span class="p">]</span>
+     <span class="p">(</span><span class="nb">println </span><span class="nv">iteration</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">iteration</span> <span class="mi">3</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb">println </span><span class="s">&#34;Goodbye!&#34;</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">recursive-printer</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">iteration</span><span class="p">)))))</span>
+<span class="p">(</span><span class="nf">recursive-printer</span><span class="p">)</span>
+<span class="c1">; =&gt; Iteration 0</span>
+<span class="c1">; =&gt; Iteration 1</span>
+<span class="c1">; =&gt; Iteration 2</span>
+<span class="c1">; =&gt; Iteration 3</span>
+<span class="c1">; =&gt; Iteration 4</span>
+<span class="c1">; =&gt; Goodbye!</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>但正如你所看到的，这是个比较啰嗦的方法。而且，<code>loop</code>有更好的性能。在我们的对称化函数中，我们将使用<code>loop</code>遍历不对称的身体部位列表中的每个元素。</p>
-<h3 id=正则表达式>正则表达式</h3>
+<h3 id="正则表达式">正则表达式</h3>
 <p><em>正则表达式</em>是对文本进行模式匹配的工具。正则表达式的文字符号是将表达式放在哈希标记后的引号中。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>#&#34;regular-expression&#34;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#&#34;regular-expression&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p>在清单 3-1 中的函数<code>matching-part</code>中，<code>clojure.string/replace</code>使用正则表达式<code>#"^left-"</code>来匹配以<code>"left-"</code>开头的字符串，以便用<code>"right-"</code>替换<code>"left-"</code>。卡特，<code>^</code>，是正则表达式发出的信号，即只有当文本<code>"left-"</code>位于字符串的开头时，它才会匹配，这就确保了像<code>"cleft-chin"</code>这样的字符串不会匹配。你可以用<code>re-find</code>来测试，它检查一个字符串是否与正则表达式描述的模式相匹配，如果不匹配，则返回匹配的文本或<code>nil</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+</div><p>在清单 3-1 中的函数<code>matching-part</code>中，<code>clojure.string/replace</code>使用正则表达式<code>#&quot;^left-&quot;</code>来匹配以<code>&quot;left-&quot;</code>开头的字符串，以便用<code>&quot;right-&quot;</code>替换<code>&quot;left-&quot;</code>。卡特，<code>^</code>，是正则表达式发出的信号，即只有当文本<code>&quot;left-&quot;</code>位于字符串的开头时，它才会匹配，这就确保了像<code>&quot;cleft-chin&quot;</code>这样的字符串不会匹配。你可以用<code>re-find</code>来测试，它检查一个字符串是否与正则表达式描述的模式相匹配，如果不匹配，则返回匹配的文本或<code>nil</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nb>re-find </span><span class=o>#</span><span class=s>&#34;^left-&#34;</span> <span class=s>&#34;left-eye&#34;</span><span class=p>)</span>
-<span class=c1>; =&gt; &#34;left-&#34;</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nb">re-find </span><span class="o">#</span><span class="s">&#34;^left-&#34;</span> <span class="s">&#34;left-eye&#34;</span><span class="p">)</span>
+<span class="c1">; =&gt; &#34;left-&#34;</span>
 
-<span class=p>(</span><span class=nb>re-find </span><span class=o>#</span><span class=s>&#34;^left-&#34;</span> <span class=s>&#34;cleft-chin&#34;</span><span class=p>)</span>
-<span class=c1>; =&gt; nil</span>
+<span class="p">(</span><span class="nb">re-find </span><span class="o">#</span><span class="s">&#34;^left-&#34;</span> <span class="s">&#34;cleft-chin&#34;</span><span class="p">)</span>
+<span class="c1">; =&gt; nil</span>
 
-<span class=p>(</span><span class=nb>re-find </span><span class=o>#</span><span class=s>&#34;^left-&#34;</span> <span class=s>&#34;wongleblart&#34;</span><span class=p>)</span>
-<span class=c1>; =&gt; nil</span>
+<span class="p">(</span><span class="nb">re-find </span><span class="o">#</span><span class="s">&#34;^left-&#34;</span> <span class="s">&#34;wongleblart&#34;</span><span class="p">)</span>
+<span class="c1">; =&gt; nil</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>下面是几个<code>matching-part</code>的例子，使用一个重词将<code>"left-"</code>替换为<code>"right-"</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+</div><p>下面是几个<code>matching-part</code>的例子，使用一个重词将<code>&quot;left-&quot;</code>替换为<code>&quot;right-&quot;</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=kd>defn </span><span class=nv>matching-part</span>
-  <span class=p>[</span><span class=nv>part</span><span class=p>]</span>
-  <span class=p>{</span><span class=ss>:name</span> <span class=p>(</span><span class=nf>clojure.string/replace</span> <span class=p>(</span><span class=ss>:name</span> <span class=nv>part</span><span class=p>)</span> <span class=o>#</span><span class=s>&#34;^left-&#34;</span> <span class=s>&#34;right-&#34;</span><span class=p>)</span>
-   <span class=ss>:size</span> <span class=p>(</span><span class=ss>:size</span> <span class=nv>part</span><span class=p>)})</span>
-<span class=p>(</span><span class=nf>matching-part</span> <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-eye&#34;</span> <span class=ss>:size</span> <span class=mi>1</span><span class=p>})</span>
-<span class=c1>; =&gt; {:name &#34;right-eye&#34; :size 1}]</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="kd">defn </span><span class="nv">matching-part</span>
+  <span class="p">[</span><span class="nv">part</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:name</span> <span class="p">(</span><span class="nf">clojure.string/replace</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">part</span><span class="p">)</span> <span class="o">#</span><span class="s">&#34;^left-&#34;</span> <span class="s">&#34;right-&#34;</span><span class="p">)</span>
+   <span class="ss">:size</span> <span class="p">(</span><span class="ss">:size</span> <span class="nv">part</span><span class="p">)})</span>
+<span class="p">(</span><span class="nf">matching-part</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-eye&#34;</span> <span class="ss">:size</span> <span class="mi">1</span><span class="p">})</span>
+<span class="c1">; =&gt; {:name &#34;right-eye&#34; :size 1}]</span>
 
-<span class=p>(</span><span class=nf>matching-part</span> <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;head&#34;</span> <span class=ss>:size</span> <span class=mi>3</span><span class=p>})</span>
-<span class=c1>; =&gt; {:name &#34;head&#34; :size 3}]</span>
+<span class="p">(</span><span class="nf">matching-part</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;head&#34;</span> <span class="ss">:size</span> <span class="mi">3</span><span class="p">})</span>
+<span class="c1">; =&gt; {:name &#34;head&#34; :size 3}]</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>请注意，名称 &ldquo;head&rdquo; 是原样返回的。</p>
-<h3 id=对称器>对称器</h3>
+<h3 id="对称器">对称器</h3>
 <p>现在让我们回到完整的对称器，对其进行更详细的分析。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=k>def </span><span class=nv>asym-hobbit-body-parts</span> <span class=p>[{</span><span class=ss>:name</span> <span class=s>&#34;head&#34;</span> <span class=ss>:size</span> <span class=mi>3</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-eye&#34;</span> <span class=ss>:size</span> <span class=mi>1</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-ear&#34;</span> <span class=ss>:size</span> <span class=mi>1</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;mouth&#34;</span> <span class=ss>:size</span> <span class=mi>1</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;nose&#34;</span> <span class=ss>:size</span> <span class=mi>1</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;neck&#34;</span> <span class=ss>:size</span> <span class=mi>2</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-shoulder&#34;</span> <span class=ss>:size</span> <span class=mi>3</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-upper-arm&#34;</span> <span class=ss>:size</span> <span class=mi>3</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;chest&#34;</span> <span class=ss>:size</span> <span class=mi>10</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;back&#34;</span> <span class=ss>:size</span> <span class=mi>10</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-forearm&#34;</span> <span class=ss>:size</span> <span class=mi>3</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;abdomen&#34;</span> <span class=ss>:size</span> <span class=mi>6</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-kidney&#34;</span> <span class=ss>:size</span> <span class=mi>1</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-hand&#34;</span> <span class=ss>:size</span> <span class=mi>2</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-knee&#34;</span> <span class=ss>:size</span> <span class=mi>2</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-thigh&#34;</span> <span class=ss>:size</span> <span class=mi>4</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-lower-leg&#34;</span> <span class=ss>:size</span> <span class=mi>3</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-achilles&#34;</span> <span class=ss>:size</span> <span class=mi>1</span><span class=p>}</span>
-                             <span class=p>{</span><span class=ss>:name</span> <span class=s>&#34;left-foot&#34;</span> <span class=ss>:size</span> <span class=mi>2</span><span class=p>}])</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">def </span><span class="nv">asym-hobbit-body-parts</span> <span class="p">[{</span><span class="ss">:name</span> <span class="s">&#34;head&#34;</span> <span class="ss">:size</span> <span class="mi">3</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-eye&#34;</span> <span class="ss">:size</span> <span class="mi">1</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-ear&#34;</span> <span class="ss">:size</span> <span class="mi">1</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;mouth&#34;</span> <span class="ss">:size</span> <span class="mi">1</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;nose&#34;</span> <span class="ss">:size</span> <span class="mi">1</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;neck&#34;</span> <span class="ss">:size</span> <span class="mi">2</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-shoulder&#34;</span> <span class="ss">:size</span> <span class="mi">3</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-upper-arm&#34;</span> <span class="ss">:size</span> <span class="mi">3</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;chest&#34;</span> <span class="ss">:size</span> <span class="mi">10</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;back&#34;</span> <span class="ss">:size</span> <span class="mi">10</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-forearm&#34;</span> <span class="ss">:size</span> <span class="mi">3</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;abdomen&#34;</span> <span class="ss">:size</span> <span class="mi">6</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-kidney&#34;</span> <span class="ss">:size</span> <span class="mi">1</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-hand&#34;</span> <span class="ss">:size</span> <span class="mi">2</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-knee&#34;</span> <span class="ss">:size</span> <span class="mi">2</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-thigh&#34;</span> <span class="ss">:size</span> <span class="mi">4</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-lower-leg&#34;</span> <span class="ss">:size</span> <span class="mi">3</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-achilles&#34;</span> <span class="ss">:size</span> <span class="mi">1</span><span class="p">}</span>
+                             <span class="p">{</span><span class="ss">:name</span> <span class="s">&#34;left-foot&#34;</span> <span class="ss">:size</span> <span class="mi">2</span><span class="p">}])</span>
 
 
-<span class=p>(</span><span class=kd>defn </span><span class=nv>matching-part</span>
-  <span class=p>[</span><span class=nv>part</span><span class=p>]</span>
-  <span class=p>{</span><span class=ss>:name</span> <span class=p>(</span><span class=nf>clojure.string/replace</span> <span class=p>(</span><span class=ss>:name</span> <span class=nv>part</span><span class=p>)</span> <span class=o>#</span><span class=s>&#34;^left-&#34;</span> <span class=s>&#34;right-&#34;</span><span class=p>)</span>
-   <span class=ss>:size</span> <span class=p>(</span><span class=ss>:size</span> <span class=nv>part</span><span class=p>)})</span>
+<span class="p">(</span><span class="kd">defn </span><span class="nv">matching-part</span>
+  <span class="p">[</span><span class="nv">part</span><span class="p">]</span>
+  <span class="p">{</span><span class="ss">:name</span> <span class="p">(</span><span class="nf">clojure.string/replace</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">part</span><span class="p">)</span> <span class="o">#</span><span class="s">&#34;^left-&#34;</span> <span class="s">&#34;right-&#34;</span><span class="p">)</span>
+   <span class="ss">:size</span> <span class="p">(</span><span class="ss">:size</span> <span class="nv">part</span><span class="p">)})</span>
 
-<span class=err>➊</span> <span class=p>(</span><span class=kd>defn </span><span class=nv>symmetrize-body-parts</span>
-  <span class=s>&#34;Expects a seq of maps that have a :name and :size&#34;</span>
-  <span class=p>[</span><span class=nv>asym-body-parts</span><span class=p>]</span>
-<span class=err>➋</span>   <span class=p>(</span><span class=k>loop </span><span class=p>[</span><span class=nv>remaining-asym-parts</span> <span class=nv>asym-body-parts</span> 
-         <span class=nv>final-body-parts</span> <span class=p>[]]</span>
-<span class=err>➌</span>     <span class=p>(</span><span class=k>if </span><span class=p>(</span><span class=nf>empty?</span> <span class=nv>remaining-asym-parts</span><span class=p>)</span> 
-      <span class=nv>final-body-parts</span>
-<span class=err>➍</span>       <span class=p>(</span><span class=k>let </span><span class=p>[[</span><span class=nv>part</span> <span class=o>&amp;</span> <span class=nv>remaining</span><span class=p>]</span> <span class=nv>remaining-asym-parts</span><span class=p>]</span> 
-<span class=err>➎</span>         <span class=p>(</span><span class=nf>recur</span> <span class=nv>remaining</span> 
-               <span class=p>(</span><span class=nb>into </span><span class=nv>final-body-parts</span>
-                     <span class=p>(</span><span class=nb>set </span><span class=p>[</span><span class=nv>part</span> <span class=p>(</span><span class=nf>matching-part</span> <span class=nv>part</span><span class=p>)])))))))</span>
+<span class="err">➊</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">symmetrize-body-parts</span>
+  <span class="s">&#34;Expects a seq of maps that have a :name and :size&#34;</span>
+  <span class="p">[</span><span class="nv">asym-body-parts</span><span class="p">]</span>
+<span class="err">➋</span>   <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">remaining-asym-parts</span> <span class="nv">asym-body-parts</span> 
+         <span class="nv">final-body-parts</span> <span class="p">[]]</span>
+<span class="err">➌</span>     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">remaining-asym-parts</span><span class="p">)</span> 
+      <span class="nv">final-body-parts</span>
+<span class="err">➍</span>       <span class="p">(</span><span class="k">let </span><span class="p">[[</span><span class="nv">part</span> <span class="o">&amp;</span> <span class="nv">remaining</span><span class="p">]</span> <span class="nv">remaining-asym-parts</span><span class="p">]</span> 
+<span class="err">➎</span>         <span class="p">(</span><span class="nf">recur</span> <span class="nv">remaining</span> 
+               <span class="p">(</span><span class="nb">into </span><span class="nv">final-body-parts</span>
+                     <span class="p">(</span><span class="nb">set </span><span class="p">[</span><span class="nv">part</span> <span class="p">(</span><span class="nf">matching-part</span> <span class="nv">part</span><span class="p">)])))))))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>symmetriz-body-parts</code>函数（从➊开始）采用了函数式编程中常见的一般策略。给定一个序列（在本例中，是一个身体部位及其尺寸的 Vector），该函数连续地将该序列分割成<em>head</em>和<em>tail</em>。然后，它处理头部，将其添加到某个结果中，并使用递归来继续处理尾部的过程。</p>
@@ -2191,34 +2236,34 @@ user/eval728 (NO_SOURCE_FILE:1)
 <p>如果<code>remaining-asym-parts</code>在➌处是空的，这意味着我们已经处理了整个序列，可以返回结果，<code>final-body-parts</code>。否则，在➍，我们将列表分成<code>head</code>，<code>part</code>，和<code>tail</code>，<code>remaining</code>。</p>
 <p>在➎处，我们用<code>remaining</code>进行循环，这个列表在循环的每一次迭代中都会缩短一个元素，还有<code>(in)</code>表达式，它建立了对称的身体部分的 Vector。</p>
 <p>如果你是这种编程的新手，这段代码可能需要一些时间来解决。请坚持下去! 一旦你理解了正在发生的事情，你会觉得自己像个百万富翁!</p>
-<h3 id=用-reduce-来编写更好的对称器>用 reduce 来编写更好的对称器</h3>
+<h3 id="用-reduce-来编写更好的对称器">用 reduce 来编写更好的对称器</h3>
 <p>处理序列的每个元素并返回一个结果的模式非常普遍，以至于有一个内置的函数叫做<code>reduce</code>。下面是一个简单的例子。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure>
-<span class=c1>;; sum with reduce</span>
-<span class=p>(</span><span class=nb>reduce + </span><span class=p>[</span><span class=mi>1</span> <span class=mi>2</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>])</span>
-<span class=c1>; =&gt; 10</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure">
+<span class="c1">;; sum with reduce</span>
+<span class="p">(</span><span class="nb">reduce + </span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
+<span class="c1">; =&gt; 10</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>这就像告诉 Clojure 这样做。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure>
-<span class=p>(</span><span class=nb>+ </span><span class=p>(</span><span class=nb>+ </span><span class=p>(</span><span class=nb>+ </span><span class=mi>1</span> <span class=mi>2</span><span class=p>)</span> <span class=mi>3</span><span class=p>)</span> <span class=mi>4</span><span class=p>)</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure">
+<span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">2</span><span class="p">)</span> <span class="mi">3</span><span class="p">)</span> <span class="mi">4</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -2229,127 +2274,127 @@ user/eval728 (NO_SOURCE_FILE:1)
 <li>对序列中剩下的每个元素重复第 2 步。</li>
 </ol>
 <p><code>reduce</code>也需要一个可选的初始值。这里的初始值是<code>15</code>。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nb>reduce + </span><span class=mi>15</span> <span class=p>[</span><span class=mi>1</span> <span class=mi>2</span> <span class=mi>3</span> <span class=mi>4</span><span class=p>])</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nb">reduce + </span><span class="mi">15</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>如果你提供了一个初始值，<code>reduce</code>就会开始对初始值和序列的第一个元素应用给定的函数，而不是序列的前两个元素。</p>
-<p>需要注意的一个细节是，在这些例子中，<code>reduce</code>接收一个元素的集合，<code>[1 2 3 4]</code>，并返回一个单一的数字。虽然程序员经常这样使用<code>reduce</code>，但你也可以使用<code>reduce</code>来返回一个比你开始时更大的集合，就像我们在<code>symmetrize</code>-body-parts<code>中尝试做的那样。</code>reduce<code>抽象了 "处理一个集合并建立一个结果 "的任务，它对返回的结果类型是不确定的。为了进一步了解</code>reduce`的工作原理，这里有一种方法可以实现它。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<p>需要注意的一个细节是，在这些例子中，<code>reduce</code>接收一个元素的集合，<code>[1 2 3 4]</code>，并返回一个单一的数字。虽然程序员经常这样使用<code>reduce</code>，但你也可以使用<code>reduce</code>来返回一个比你开始时更大的集合，就像我们在<code>symmetrize</code>-body-parts<code>中尝试做的那样。</code>reduce<code>抽象了 &quot;处理一个集合并建立一个结果 &quot;的任务，它对返回的结果类型是不确定的。为了进一步了解</code>reduce`的工作原理，这里有一种方法可以实现它。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=kd>defn </span><span class=nv>my-reduce</span>
-  <span class=p>([</span><span class=nv>f</span> <span class=nv>initial</span> <span class=nv>coll</span><span class=p>]</span>
-   <span class=p>(</span><span class=k>loop </span><span class=p>[</span><span class=nv>result</span> <span class=nv>initial</span>
-          <span class=nv>remaining</span> <span class=nv>coll</span><span class=p>]</span>
-     <span class=p>(</span><span class=k>if </span><span class=p>(</span><span class=nf>empty?</span> <span class=nv>remaining</span><span class=p>)</span>
-       <span class=nv>result</span>
-       <span class=p>(</span><span class=nf>recur</span> <span class=p>(</span><span class=nf>f</span> <span class=nv>result</span> <span class=p>(</span><span class=nb>first </span><span class=nv>remaining</span><span class=p>))</span> <span class=p>(</span><span class=nb>rest </span><span class=nv>remaining</span><span class=p>)))))</span>
-  <span class=p>([</span><span class=nv>f</span> <span class=p>[</span><span class=nv>head</span> <span class=o>&amp;</span> <span class=nv>tail</span><span class=p>]]</span>
-   <span class=p>(</span><span class=nf>my-reduce</span> <span class=nv>f</span> <span class=nv>head</span> <span class=nv>tail</span><span class=p>)))</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="kd">defn </span><span class="nv">my-reduce</span>
+  <span class="p">([</span><span class="nv">f</span> <span class="nv">initial</span> <span class="nv">coll</span><span class="p">]</span>
+   <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">result</span> <span class="nv">initial</span>
+          <span class="nv">remaining</span> <span class="nv">coll</span><span class="p">]</span>
+     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">remaining</span><span class="p">)</span>
+       <span class="nv">result</span>
+       <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nf">f</span> <span class="nv">result</span> <span class="p">(</span><span class="nb">first </span><span class="nv">remaining</span><span class="p">))</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">remaining</span><span class="p">)))))</span>
+  <span class="p">([</span><span class="nv">f</span> <span class="p">[</span><span class="nv">head</span> <span class="o">&amp;</span> <span class="nv">tail</span><span class="p">]]</span>
+   <span class="p">(</span><span class="nf">my-reduce</span> <span class="nv">f</span> <span class="nv">head</span> <span class="nv">tail</span><span class="p">)))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>我们可以重新实现我们的对称器，如下所示。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=kd>defn </span><span class=nv>better-symmetrize-body-parts</span>
-  <span class=s>&#34;Expects a seq of maps that have a :name and :size&#34;</span>
-  <span class=p>[</span><span class=nv>asym-body-parts</span><span class=p>]</span>
-  <span class=p>(</span><span class=nb>reduce </span><span class=p>(</span><span class=k>fn </span><span class=p>[</span><span class=nv>final-body-parts</span> <span class=nv>part</span><span class=p>]</span>
-            <span class=p>(</span><span class=nb>into </span><span class=nv>final-body-parts</span> <span class=p>(</span><span class=nb>set </span><span class=p>[</span><span class=nv>part</span> <span class=p>(</span><span class=nf>matching-part</span> <span class=nv>part</span><span class=p>)])))</span>
-          <span class=p>[]</span>
-          <span class=nv>asym-body-parts</span><span class=p>))</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="kd">defn </span><span class="nv">better-symmetrize-body-parts</span>
+  <span class="s">&#34;Expects a seq of maps that have a :name and :size&#34;</span>
+  <span class="p">[</span><span class="nv">asym-body-parts</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">reduce </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">final-body-parts</span> <span class="nv">part</span><span class="p">]</span>
+            <span class="p">(</span><span class="nb">into </span><span class="nv">final-body-parts</span> <span class="p">(</span><span class="nb">set </span><span class="p">[</span><span class="nv">part</span> <span class="p">(</span><span class="nf">matching-part</span> <span class="nv">part</span><span class="p">)])))</span>
+          <span class="p">[]</span>
+          <span class="nv">asym-body-parts</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>真棒! 使用<code>reduce</code>的一个显而易见的好处是，你写的代码总体上更少。你传递给<code>reduce</code>的匿名函数只专注于处理一个元素和建立一个结果。原因是<code>reduce</code>处理了底层的机制，即跟踪哪些元素已经被处理，并决定是否返回一个最终结果或递归。</p>
 <p>使用<code>reduce</code>也更有表现力。如果你的代码的读者遇到 &ldquo;loop&rdquo;，如果不阅读所有的代码，他们将不能确定这个循环到底在做什么。但是如果他们看到<code>reduce</code>，他们会立即知道代码的目的是处理一个集合的元素以建立一个结果。</p>
 <p>最后，通过将 &ldquo;reduce &ldquo;过程抽象为一个以另一个函数为参数的函数，你的程序变得更有可塑性。例如，你可以将<code>reduce</code>函数作为一个参数传递给其他函数。你还可以创建一个更通用的 &ldquo;对称体-部件 &ldquo;版本，例如 &ldquo;扩展体-部件&rdquo;。除了身体部位的列表外，它还可以接受一个<em>扩展器</em>函数，并让你的模型不仅仅是霍比特人。例如，你可以有一个蜘蛛扩展器，可以增加眼睛和腿的数量。我会让你自己来写，因为我是邪恶的。</p>
-<h3 id=霍比特人的暴力>霍比特人的暴力</h3>
+<h3 id="霍比特人的暴力">霍比特人的暴力</h3>
 <p>我的话，这真是为勇敢和真实的人准备的 Clojure! 为了给你的工作画上句号，这里有一个函数可以确定霍比特人的哪个部分被击中。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=kd>defn </span><span class=nv>hit</span>
-  <span class=p>[</span><span class=nv>asym-body-parts</span><span class=p>]</span>
-  <span class=p>(</span><span class=k>let </span><span class=p>[</span><span class=nv>sym-parts</span> <span class=p>(</span><span class=err>➊</span><span class=nv>better-symmetrize-body-parts</span> <span class=nv>asym-body-parts</span><span class=p>)</span>
-        <span class=err>➋</span><span class=nv>body-part-size-sum</span> <span class=p>(</span><span class=nb>reduce + </span><span class=p>(</span><span class=nb>map </span><span class=ss>:size</span> <span class=nv>sym-parts</span><span class=p>))</span>
-        <span class=nv>target</span> <span class=p>(</span><span class=nb>rand </span><span class=nv>body-part-size-sum</span><span class=p>)]</span>
-    <span class=err>➌</span><span class=p>(</span><span class=k>loop </span><span class=p>[[</span><span class=nv>part</span> <span class=o>&amp;</span> <span class=nv>remaining</span><span class=p>]</span> <span class=nv>sym-parts</span>
-           <span class=nv>accumulated-size</span> <span class=p>(</span><span class=ss>:size</span> <span class=nv>part</span><span class=p>)]</span>
-      <span class=p>(</span><span class=k>if </span><span class=p>(</span><span class=nb>&gt; </span><span class=nv>accumulated-size</span> <span class=nv>target</span><span class=p>)</span>
-        <span class=nv>part</span>
-        <span class=p>(</span><span class=nf>recur</span> <span class=nv>remaining</span> <span class=p>(</span><span class=nb>+ </span><span class=nv>accumulated-size</span> <span class=p>(</span><span class=ss>:size</span> <span class=p>(</span><span class=nb>first </span><span class=nv>remaining</span><span class=p>))))))))</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="kd">defn </span><span class="nv">hit</span>
+  <span class="p">[</span><span class="nv">asym-body-parts</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">sym-parts</span> <span class="p">(</span><span class="err">➊</span><span class="nv">better-symmetrize-body-parts</span> <span class="nv">asym-body-parts</span><span class="p">)</span>
+        <span class="err">➋</span><span class="nv">body-part-size-sum</span> <span class="p">(</span><span class="nb">reduce + </span><span class="p">(</span><span class="nb">map </span><span class="ss">:size</span> <span class="nv">sym-parts</span><span class="p">))</span>
+        <span class="nv">target</span> <span class="p">(</span><span class="nb">rand </span><span class="nv">body-part-size-sum</span><span class="p">)]</span>
+    <span class="err">➌</span><span class="p">(</span><span class="k">loop </span><span class="p">[[</span><span class="nv">part</span> <span class="o">&amp;</span> <span class="nv">remaining</span><span class="p">]</span> <span class="nv">sym-parts</span>
+           <span class="nv">accumulated-size</span> <span class="p">(</span><span class="ss">:size</span> <span class="nv">part</span><span class="p">)]</span>
+      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">accumulated-size</span> <span class="nv">target</span><span class="p">)</span>
+        <span class="nv">part</span>
+        <span class="p">(</span><span class="nf">recur</span> <span class="nv">remaining</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">accumulated-size</span> <span class="p">(</span><span class="ss">:size</span> <span class="p">(</span><span class="nb">first </span><span class="nv">remaining</span><span class="p">))))))))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>hit</code>的工作原理是取一个不对称的身体部位的 Vector，在➊处对称，然后在➋处将各部位的大小相加。一旦我们将这些尺寸相加，就好像从 1 到<code>身体部位尺寸之和</code>的每个数字都对应于一个身体部位；1 可能对应于左眼，而 2、3、4 可能对应于头部。这使得当你击中一个身体部位时（通过在这个范围内选择一个随机数字），特定身体部位被击中的可能性将取决于身体部位的大小。</p>
-<p><img src=https://www.braveclojure.com/assets/images/cftbat/do-things/hobbit-hit-line.png alt=img></p>
+<p><img src="https://www.braveclojure.com/assets/images/cftbat/do-things/hobbit-hit-line.png" alt="img"></p>
 <p>图 3-1：身体部位与数字的范围相对应，如果目标在这个范围内，就会被击中。</p>
 <p>最后，这些数字中的一个被随机选择，然后我们在➌处使用<code>loop</code>来寻找并返回与该数字对应的身体部位。循环是通过跟踪我们已经检查过的部分的累计大小，并检查累计大小是否大于目标值来实现的。我把这个过程想象成用一排编号的槽来排列身体部位。在我排完一个身体部位后，我问自己：&ldquo;我已经达到目标了吗？&rdquo; 如果我达到了，这意味着我刚刚排好的身体部位就是被击中的那个部位。否则，我就继续排查这些部位。</p>
 <p>例如，假设你的零件清单是<em>头</em>、<em>左眼</em>和<em>左手</em>，如图 3-1。在取完第一个部分，即头部后，累计大小为 3。当累计大小超过目标时，身体部分就被击中，所以如果目标小于 3，那么头部就被击中了。否则，你取下下一个部分，即左眼，并将累积大小增加到 4，如果目标大于或等于 3 且小于 4，则产生一个命中。</p>
 <p>下面是一些<code>hit</code>函数的运行样本。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nf>hit</span> <span class=nv>asym-hobbit-body-parts</span><span class=p>)</span>
-<span class=c1>; =&gt; {:name &#34;right-upper-arm&#34;, :size 3}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nf">hit</span> <span class="nv">asym-hobbit-body-parts</span><span class="p">)</span>
+<span class="c1">; =&gt; {:name &#34;right-upper-arm&#34;, :size 3}</span>
 
-<span class=p>(</span><span class=nf>hit</span> <span class=nv>asym-hobbit-body-parts</span><span class=p>)</span>
-<span class=c1>; =&gt; {:name &#34;chest&#34;, :size 10}</span>
+<span class="p">(</span><span class="nf">hit</span> <span class="nv">asym-hobbit-body-parts</span><span class="p">)</span>
+<span class="c1">; =&gt; {:name &#34;chest&#34;, :size 10}</span>
 
-<span class=p>(</span><span class=nf>hit</span> <span class=nv>asym-hobbit-body-parts</span><span class=p>)</span>
-<span class=c1>; =&gt; {:name &#34;left-eye&#34;, :size 1}</span>
+<span class="p">(</span><span class="nf">hit</span> <span class="nv">asym-hobbit-body-parts</span><span class="p">)</span>
+<span class="c1">; =&gt; {:name &#34;left-eye&#34;, :size 1}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>哦，我的上帝，那个可怜的霍比特人！你这个怪物！"。你这个怪物!</p>
-<h2 id=总结>总结</h2>
+</div><p>哦，我的上帝，那个可怜的霍比特人！你这个怪物！&quot;。你这个怪物!</p>
+<h2 id="总结">总结</h2>
 <p>本章让你对如何在 Clojure 中<em>做事</em>有了一个旋风式的了解。你现在知道了如何用字符串、数字、Map、关键字、Vector、列表和 Set 来表示信息，以及如何用<code>def</code>和<code>let</code>来命名这些表达式。你已经了解了函数的灵活性以及如何创建你自己的函数。此外，你还了解了 Clojure 的简单哲学，包括其统一的语法和强调在原始数据类型上使用大型函数库。</p>
 <p>第 4 章将带你详细探究 Clojure 的核心函数，第 5 章解释了函数式编程的思维模式。本章向你展示了如何编写 Clojure 代码&ndash;接下来的两章将向你展示如何更好的编写 Clojure。</p>
-<p>在这一点上，我建议你开始写代码，我的每一根纤维都是这样。没有比这更好的方法来巩固你的 Clojure 知识了。Clojure Cheat Sheet（<em><a href=http://clojure.org/api/cheatsheet>http://clojure.org/api/cheatsheet</a></em>）是一个很好的参考资料，它列出了所有在本章中涉及的数据结构上操作的内置函数。</p>
-<p>下面的练习会让你的大脑非常兴奋。如果你想更多地测试你的新技能，可以在*<a href=http://www.projecteuler.net/>http://www.projecteuler.net/</a><em>尝试一些 Project Euler 挑战。你还可以看看 4Clojure（</em><a href=http://www.4clojure.com/problems/>http://www.4clojure.com/problems/</a>*），这是一套在线的 Clojure 问题，旨在测试你的知识。写点什么吧!</p>
-<h2 id=练习>练习</h2>
+<p>在这一点上，我建议你开始写代码，我的每一根纤维都是这样。没有比这更好的方法来巩固你的 Clojure 知识了。Clojure Cheat Sheet（<em><a href="http://clojure.org/api/cheatsheet">http://clojure.org/api/cheatsheet</a></em>）是一个很好的参考资料，它列出了所有在本章中涉及的数据结构上操作的内置函数。</p>
+<p>下面的练习会让你的大脑非常兴奋。如果你想更多地测试你的新技能，可以在*<a href="http://www.projecteuler.net/">http://www.projecteuler.net/</a><em>尝试一些 Project Euler 挑战。你还可以看看 4Clojure（</em><a href="http://www.4clojure.com/problems/">http://www.4clojure.com/problems/</a>*），这是一套在线的 Clojure 问题，旨在测试你的知识。写点什么吧!</p>
+<h2 id="练习">练习</h2>
 <p>这些练习是为了测试你的 Clojure 知识和学习更多的 Clojure 函数，是一种有趣的方式。前三个可以只用本章介绍的信息来完成，但后三个需要你使用到目前为止还没有涉及的函数。如果你真的很想写更多的代码并探索 Clojure 的标准库，那么就去解决后三个问题。如果你觉得这些练习太难了，可以在读完第 4 章和第 5 章后再来看看，你会发现它们要容易得多。</p>
 <ol>
 <li>
@@ -2360,65 +2405,65 @@ user/eval728 (NO_SOURCE_FILE:1)
 </li>
 <li>
 <p>写一个函数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=nv>dec-maker</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="nv">dec-maker</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>，其工作原理与函数</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=nv>inc-maker</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="nv">inc-maker</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>除了用减法。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=k>def </span><span class=nv>dec9</span> <span class=p>(</span><span class=nf>dec-maker</span> <span class=mi>9</span><span class=p>))</span>
-<span class=p>(</span><span class=nf>dec9</span> <span class=mi>10</span><span class=p>)</span>
-<span class=c1>; =&gt; 1</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">def </span><span class="nv">dec9</span> <span class="p">(</span><span class="nf">dec-maker</span> <span class="mi">9</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">dec9</span> <span class="mi">10</span><span class="p">)</span>
+<span class="c1">; =&gt; 1</span>
 </code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
 <p>写一个函数。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=nv>mapset</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="nv">mapset</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>，它的工作原理是</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>map
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">map
 </code></pre></td></tr></table>
 </div>
 </div><p>除了返回值是一个集合。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-clojure data-lang=clojure><span class=p>(</span><span class=nf>mapset</span> <span class=nb>inc </span><span class=p>[</span><span class=mi>1</span> <span class=mi>1</span> <span class=mi>2</span> <span class=mi>2</span><span class=p>])</span>
-<span class=c1>; =&gt; #{2 3}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nf">mapset</span> <span class="nb">inc </span><span class="p">[</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1">; =&gt; #{2 3}</span>
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2429,76 +2474,114 @@ user/eval728 (NO_SOURCE_FILE:1)
 <p>创建一个函数，将<code>symmetriz-body-parts</code>和你在练习 5 中创建的函数通用化。这个新的函数应该接受一个身体部位的集合，以及要增加的匹配身体部位的数量。如果你对 Lisp 语言和函数式编程是完全陌生的，那么如何做到这一点可能并不明显。如果你被卡住了，只需转到下一章，以后再重温这个问题。</p>
 </li>
 </ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/clojure/">clojure</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/chapter4/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Chapter4 深入研究核心函数</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/chapter2/">
+            <span class="next-text nav-default">Chapter2 如何使用 Emacs</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/clojure/>clojure</a>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<nav class=post-nav>
-<a class=prev href=/post/chapter4/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">Chapter4 深入研究核心函数</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/chapter2/>
-<span class="next-text nav-default">Chapter2 如何使用 Emacs</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

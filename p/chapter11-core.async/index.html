@@ -1,0 +1,359 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="用 core.async 掌握并发进程 有一天，当你走在大街上时，你会惊讶、好奇，并有点厌恶地发现一台热狗自动贩卖机。你的头皮被有罪的好奇心刺痛，你会忍不住掏出三块钱，看看这个装置是否真的能工作。在 &amp;ldquo;咔嚓 &amp;ldquo;一声接受了你的钱后，它弹出了一个新鲜的热狗，包括面包和所有的东西。
+自动售货机表现出简单的行为：当它收到钱时，它会放出一个热狗，然后为下一次购买做准备。当它的热狗用完时，它就会停止。我们周围的热狗自动售货机以不同的面貌出现，它们是独立的实体，同时对世界上的事件作出反应。你最喜欢的咖啡店的浓缩咖啡机，你小时候喜欢的宠物仓鼠&amp;ndash;所有的东西都可以被分解成一组行为，这些行为遵循一般的形式 &amp;ldquo;当x发生时，做y&amp;quot;。甚至我们写的程序也只是美化的热狗贩卖机，每一个都是独立的进程，等待着下一个事件的发生，无论是击键、超时，还是套接字上的数据到达。
+Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。 本章描述了思考这种编程风格的有用模型，以及你在实际编写代码时需要了解的实际细节。你将学习如何使用通道在由 go 块和thread创建的独立进程之间进行通信；了解一些关于 Clojure 如何通过停放和阻塞有效地管理线程；如何使用alts!!；以及一种更直接的创建队列的方法。最后，你将学习如何用进程管道来踢回调的屁股。
+进程的入门 core.async 的核心是*进程，一个并发运行的逻辑单元，对事件做出反应。进程对应于我们对现实世界的心理模型：实体之间的互动和响应是独立的，没有某种中央控制机制的牵制。你把钱放进机器里，就会有一个热狗出来，所有这些都不需要光照派或老大哥来策划整个事情。这与你迄今为止一直在探索的并发性观点不同，在那里，你定义的任务要么只是控制主线程的扩展（例如，用pmap实现数据并行），要么是你没有兴趣与之交流的任务（如用future创建的一次性任务）。
+把自动售货机看成是一个进程可能很奇怪：自动售货机是名词和事物，而进程是动词和行为。为了获得正确的思维方式，可以尝试将现实世界的物体定义为其事件驱动的行为的总和。当一粒种子被浇水时，它就会发芽；当母亲看着她的新生儿时，她就会感受到爱；而当你观看《星战》第一集时，你会充满愤怒和绝望。如果你想变得超级哲学，可以考虑是否有可能将每个事物的本质定义为它所识别的事件的集合，以及它如何做出反应。现实是否只是热狗售卖机的组成？
+总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 &amp;ldquo;lein new app playsync &amp;ldquo;创建一个新的 Leiningen 项目，名为playsync。然后，打开project.clj文件，将 core.async 添加到:dependenciesVector 中，使其内容如下。
+1 2  [[org.clojure/clojure &amp;#34;1.9.0&amp;#34;] [org.clojure/core.async &amp;#34;0.1.346.0-17112a-alpha&amp;#34;]]   注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
+接下来，打开src/playsync/core.clj，使其看起来像这样。
+1 2 3 4 5  (ns playsync.core (:require [clojure.core.async :as a :refer [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;!! go chan buffer close!"><title>Chapter11 core.async</title><link rel=canonical href=https://example.com/p/chapter11-core.async/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="Chapter11 core.async"><meta property="og:description" content="用 core.async 掌握并发进程 有一天，当你走在大街上时，你会惊讶、好奇，并有点厌恶地发现一台热狗自动贩卖机。你的头皮被有罪的好奇心刺痛，你会忍不住掏出三块钱，看看这个装置是否真的能工作。在 &amp;ldquo;咔嚓 &amp;ldquo;一声接受了你的钱后，它弹出了一个新鲜的热狗，包括面包和所有的东西。
+自动售货机表现出简单的行为：当它收到钱时，它会放出一个热狗，然后为下一次购买做准备。当它的热狗用完时，它就会停止。我们周围的热狗自动售货机以不同的面貌出现，它们是独立的实体，同时对世界上的事件作出反应。你最喜欢的咖啡店的浓缩咖啡机，你小时候喜欢的宠物仓鼠&amp;ndash;所有的东西都可以被分解成一组行为，这些行为遵循一般的形式 &amp;ldquo;当x发生时，做y&amp;quot;。甚至我们写的程序也只是美化的热狗贩卖机，每一个都是独立的进程，等待着下一个事件的发生，无论是击键、超时，还是套接字上的数据到达。
+Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。 本章描述了思考这种编程风格的有用模型，以及你在实际编写代码时需要了解的实际细节。你将学习如何使用通道在由 go 块和thread创建的独立进程之间进行通信；了解一些关于 Clojure 如何通过停放和阻塞有效地管理线程；如何使用alts!!；以及一种更直接的创建队列的方法。最后，你将学习如何用进程管道来踢回调的屁股。
+进程的入门 core.async 的核心是*进程，一个并发运行的逻辑单元，对事件做出反应。进程对应于我们对现实世界的心理模型：实体之间的互动和响应是独立的，没有某种中央控制机制的牵制。你把钱放进机器里，就会有一个热狗出来，所有这些都不需要光照派或老大哥来策划整个事情。这与你迄今为止一直在探索的并发性观点不同，在那里，你定义的任务要么只是控制主线程的扩展（例如，用pmap实现数据并行），要么是你没有兴趣与之交流的任务（如用future创建的一次性任务）。
+把自动售货机看成是一个进程可能很奇怪：自动售货机是名词和事物，而进程是动词和行为。为了获得正确的思维方式，可以尝试将现实世界的物体定义为其事件驱动的行为的总和。当一粒种子被浇水时，它就会发芽；当母亲看着她的新生儿时，她就会感受到爱；而当你观看《星战》第一集时，你会充满愤怒和绝望。如果你想变得超级哲学，可以考虑是否有可能将每个事物的本质定义为它所识别的事件的集合，以及它如何做出反应。现实是否只是热狗售卖机的组成？
+总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 &amp;ldquo;lein new app playsync &amp;ldquo;创建一个新的 Leiningen 项目，名为playsync。然后，打开project.clj文件，将 core.async 添加到:dependenciesVector 中，使其内容如下。
+1 2  [[org.clojure/clojure &amp;#34;1.9.0&amp;#34;] [org.clojure/core.async &amp;#34;0.1.346.0-17112a-alpha&amp;#34;]]   注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
+接下来，打开src/playsync/core.clj，使其看起来像这样。
+1 2 3 4 5  (ns playsync.core (:require [clojure.core.async :as a :refer [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;!! go chan buffer close!"><meta property="og:url" content="https://example.com/p/chapter11-core.async/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="clojure"><meta property="article:published_time" content="2022-01-15T12:56:01+08:00"><meta property="article:modified_time" content="2022-01-15T12:56:01+08:00"><meta name=twitter:title content="Chapter11 core.async"><meta name=twitter:description content="用 core.async 掌握并发进程 有一天，当你走在大街上时，你会惊讶、好奇，并有点厌恶地发现一台热狗自动贩卖机。你的头皮被有罪的好奇心刺痛，你会忍不住掏出三块钱，看看这个装置是否真的能工作。在 &amp;ldquo;咔嚓 &amp;ldquo;一声接受了你的钱后，它弹出了一个新鲜的热狗，包括面包和所有的东西。
+自动售货机表现出简单的行为：当它收到钱时，它会放出一个热狗，然后为下一次购买做准备。当它的热狗用完时，它就会停止。我们周围的热狗自动售货机以不同的面貌出现，它们是独立的实体，同时对世界上的事件作出反应。你最喜欢的咖啡店的浓缩咖啡机，你小时候喜欢的宠物仓鼠&amp;ndash;所有的东西都可以被分解成一组行为，这些行为遵循一般的形式 &amp;ldquo;当x发生时，做y&amp;quot;。甚至我们写的程序也只是美化的热狗贩卖机，每一个都是独立的进程，等待着下一个事件的发生，无论是击键、超时，还是套接字上的数据到达。
+Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。 本章描述了思考这种编程风格的有用模型，以及你在实际编写代码时需要了解的实际细节。你将学习如何使用通道在由 go 块和thread创建的独立进程之间进行通信；了解一些关于 Clojure 如何通过停放和阻塞有效地管理线程；如何使用alts!!；以及一种更直接的创建队列的方法。最后，你将学习如何用进程管道来踢回调的屁股。
+进程的入门 core.async 的核心是*进程，一个并发运行的逻辑单元，对事件做出反应。进程对应于我们对现实世界的心理模型：实体之间的互动和响应是独立的，没有某种中央控制机制的牵制。你把钱放进机器里，就会有一个热狗出来，所有这些都不需要光照派或老大哥来策划整个事情。这与你迄今为止一直在探索的并发性观点不同，在那里，你定义的任务要么只是控制主线程的扩展（例如，用pmap实现数据并行），要么是你没有兴趣与之交流的任务（如用future创建的一次性任务）。
+把自动售货机看成是一个进程可能很奇怪：自动售货机是名词和事物，而进程是动词和行为。为了获得正确的思维方式，可以尝试将现实世界的物体定义为其事件驱动的行为的总和。当一粒种子被浇水时，它就会发芽；当母亲看着她的新生儿时，她就会感受到爱；而当你观看《星战》第一集时，你会充满愤怒和绝望。如果你想变得超级哲学，可以考虑是否有可能将每个事物的本质定义为它所识别的事件的集合，以及它如何做出反应。现实是否只是热狗售卖机的组成？
+总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 &amp;ldquo;lein new app playsync &amp;ldquo;创建一个新的 Leiningen 项目，名为playsync。然后，打开project.clj文件，将 core.async 添加到:dependenciesVector 中，使其内容如下。
+1 2  [[org.clojure/clojure &amp;#34;1.9.0&amp;#34;] [org.clojure/core.async &amp;#34;0.1.346.0-17112a-alpha&amp;#34;]]   注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
+接下来，打开src/playsync/core.clj，使其看起来像这样。
+1 2 3 4 5  (ns playsync.core (:require [clojure.core.async :as a :refer [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;!! go chan buffer close!"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/chapter11-core.async/>Chapter11 core.async</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jan 15, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><h1 id=用-coreasync-掌握并发进程>用 core.async 掌握并发进程</h1><p>有一天，当你走在大街上时，你会惊讶、好奇，并有点厌恶地发现一台热狗自动贩卖机。你的头皮被有罪的好奇心刺痛，你会忍不住掏出三块钱，看看这个装置是否真的能工作。在 &ldquo;咔嚓 &ldquo;一声接受了你的钱后，它弹出了一个新鲜的热狗，包括面包和所有的东西。</p><p><img src=https://www.braveclojure.com/assets/images/cftbat/core-async/hotdog-vending-machine.png loading=lazy></p><p>自动售货机表现出简单的行为：当它收到钱时，它会放出一个热狗，然后为下一次购买做准备。当它的热狗用完时，它就会停止。我们周围的热狗自动售货机以不同的面貌出现，它们是独立的实体，同时对世界上的事件作出反应。你最喜欢的咖啡店的浓缩咖啡机，你小时候喜欢的宠物仓鼠&ndash;所有的东西都可以被分解成一组行为，这些行为遵循一般的形式 &ldquo;当<em>x</em>发生时，做<em>y</em>"。甚至我们写的程序也只是美化的热狗贩卖机，每一个都是独立的进程，等待着下一个事件的发生，无论是击键、超时，还是套接字上的数据到达。</p><p>Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。 本章描述了思考这种编程风格的有用模型，以及你在实际编写代码时需要了解的实际细节。你将学习如何使用通道在由 go 块和<code>thread</code>创建的独立进程之间进行通信；了解一些关于 Clojure 如何通过停放和阻塞有效地管理线程；如何使用<code>alts!!</code>；以及一种更直接的创建队列的方法。最后，你将学习如何用进程管道来踢回调的屁股。</p><h2 id=进程的入门>进程的入门</h2><p>core.async 的核心是*进程，一个并发运行的逻辑单元，对事件做出反应。进程对应于我们对现实世界的心理模型：实体之间的互动和响应是独立的，没有某种中央控制机制的牵制。你把钱放进机器里，就会有一个热狗出来，所有这些都不需要光照派或老大哥来策划整个事情。这与你迄今为止一直在探索的并发性观点不同，在那里，你定义的任务要么只是控制主线程的扩展（例如，用<code>pmap</code>实现数据并行），要么是你没有兴趣与之交流的任务（如用<code>future</code>创建的一次性任务）。</p><p>把自动售货机看成是一个进程可能很奇怪：自动售货机是名词和事物，而进程是动词和行为。为了获得正确的思维方式，可以尝试将现实世界的物体定义为其事件驱动的行为的总和。当一粒种子被浇水时，它就会发芽；当母亲看着她的新生儿时，她就会感受到爱；而当你观看《<em>星</em>战》第一集时，你会充满愤怒和绝望。如果你想变得超级哲学，可以考虑是否有可能将每个事物的本质定义为它所识别的事件的集合，以及它如何做出反应。现实是否只是热狗售卖机的组成？</p><p>总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 &ldquo;lein new app playsync &ldquo;创建一个新的 Leiningen 项目，名为<em>playsync</em>。然后，打开<em>project.clj</em>文件，将 core.async 添加到<code>:dependencies</code>Vector 中，使其内容如下。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[[org.clojure/clojure &#34;1.9.0&#34;]
+</span></span><span class=line><span class=cl>[org.clojure/core.async &#34;0.1.346.0-17112a-alpha&#34;]]
+</span></span></code></pre></td></tr></table></div></div><p>注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。</p><p>接下来，打开<em>src/playsync/core.clj</em>，使其看起来像这样。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(ns playsync.core
+</span></span><span class=line><span class=cl>  (:require [clojure.core.async
+</span></span><span class=line><span class=cl>             :as a
+</span></span><span class=line><span class=cl>             :refer [&gt;! &lt;! &gt;!! &lt;!! go chan buffer close! thread
+</span></span><span class=line><span class=cl>                     alts! alts!! timeout]]))
+</span></span></code></pre></td></tr></table></div></div><p>现在，当你在 REPL 中打开它时，你将拥有最常用的 core.async 函数供你使用。很好! 在创建像热狗售卖机那样复杂和革命性的东西之前，先创建一个进程，简单地打印它收到的消息。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(def echo-chan (chan))
+</span></span><span class=line><span class=cl>(go (println (&lt;! echo-chan)))
+</span></span><span class=line><span class=cl>(&gt;!! echo-chan &#34;ketchup&#34;)
+</span></span><span class=line><span class=cl>; =&gt; true
+</span></span><span class=line><span class=cl>; =&gt; ketchup
+</span></span></code></pre></td></tr></table></div></div><p>在第一行代码中，你用<code>chan</code>函数创建了一个名为<code>echo-chan</code>的<em>通道。通道传达</em>消息*。你可以把<em>消息放到一个通道上，也可以把</em>消息从一个通道上拿下来。进程<em>等待</em>放和取的完成&ndash;这些是进程所响应的事件。你可以认为进程有两个规则。1）当试图把一个消息放到通道上或从通道上取走一个消息时，等待并不做任何事情，直到放或取成功；2）当放或取成功时，继续执行。</p><p>在下一行，你用<code>go</code>来创建一个新的进程。<code>go</code>表达式中的所有内容都被称为<em>go 块</em>，在一个单独的线程上并发运行。Go 块在一个线程池上运行你的进程，该线程池包含的线程数量等于你的机器上的核心数量的两倍，这意味着你的程序不必为每个进程创建一个新的线程。这通常会带来更好的性能，因为你避免了与创建线程有关的开销。</p><p>在这个例子中，进程<code>(println (&lt;! echo-chan))</code>表达了 &ldquo;当我从`echo-chan&rsquo;那里得到一个消息时，打印它&rdquo;。该进程被分流到另一个线程，释放了当前线程，使你能够继续与 REPL 交互。</p><p>在表达式<code>(&lt;! echo-chan)</code>中，<code>&lt;!</code>是<em>take</em>函数。它监听你给它作为参数的通道，它所属的进程等待，直到另一个进程在该通道上放出一个消息。当<code>&lt;!</code>检索到一个值时，该值被返回并执行<code>println</code>表达式。</p><p>表达式<code>(>!! echo-chan "ketchup")</code>将字符串<code>"ketchup"</code>放到<code>echo-chan</code>上并返回<code>true</code>。当你把一个消息放在一个通道上时，该进程会阻塞，直到另一个进程接收该消息。在这种情况下，REPL 进程根本不需要等待，因为已经有一个进程在监听该通道，等待从该通道中获取信息。然而，如果你做了以下事情，你的 REPL 将无限期地阻塞。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(&gt;!! (chan) &#34;mustard&#34;)
+</span></span></code></pre></td></tr></table></div></div><p>你已经创建了一个新的通道，并在上面放了一些东西，但没有进程在监听这个通道。进程不仅仅是等待接收消息，他们也在等待他们放在通道上的消息被接收。</p><h3 id=缓冲>缓冲</h3><p>值得注意的是，前面的练习包含<em>两个</em>进程：你用<code>go</code>创建的进程和 REPL 进程。这些进程相互之间没有明确的知识，而且它们独立行动。</p><p>让我们想象一下，这些过程发生在一个餐厅里。REPL 是番茄酱厨师，当他完成一个批次时，他大声说：&ldquo;番茄酱！&rdquo; 完全有可能的是，其他员工都在外面欣赏他们有机花园里最新的一批牛至，而厨师只是坐着等待，直到有人来取他的番茄酱。反过来说，&ldquo;去 &ldquo;的过程代表了其中一个工作人员，他正在耐心地等待着什么回应。可能是什么都没有发生，他只是无限期地等待，直到餐厅关门。</p><p>这种情况似乎有点傻：哪个自尊心强的番茄酱厨师会在制作更多的番茄酱之前，只是坐等别人拿走他最新的一批番茄酱？为了避免这种悲剧的发生，你可以创建缓冲通道。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(def echo-buffer (chan 2))
+</span></span><span class=line><span class=cl>(&gt;!! echo-buffer &#34;ketchup&#34;)
+</span></span><span class=line><span class=cl>; =&gt; true
+</span></span><span class=line><span class=cl>(&gt;!! echo-buffer &#34;ketchup&#34;)
+</span></span><span class=line><span class=cl>; =&gt; true
+</span></span><span class=line><span class=cl>(&gt;!! echo-buffer &#34;ketchup&#34;)
+</span></span><span class=line><span class=cl>; This blocks because the channel buffer is full
+</span></span></code></pre></td></tr></table></div></div><p>(小心求值最后一个<code>(>! ! echo-buffer "ketchup")</code>，因为它将阻塞你的 REPL。如果你使用的是 Leiningen REPL，ctrl-C 会解除封锁）。</p><p>在这种情况下，你已经创建了一个缓冲区大小为 2 的通道。这意味着你可以在通道上放两个值而不需要等待，但放第三个值意味着进程将等待，直到另一个进程从通道上取值。你还可以用<code>sliding-buffer</code>创建<em>滑动</em>缓冲区，它以先入先出的方式丢弃数值；用<code>dropping-buffer</code>创建<em>丢弃</em>缓冲区，它以后入先出的方式丢弃数值。这两种缓冲区都不会导致<code>>!!</code>阻塞。</p><p>通过使用缓冲区，番茄酱大师可以继续制作成批令人垂涎欲滴的番茄酱，而不必等待他的员工把它们带走。如果他使用普通的缓冲器，就像他有一个架子，可以把所有的番茄酱批次放在上面；一旦架子满了，他还得等待空间的打开。如果他用的是滑动缓冲器，当架子上的番茄酱满了，他就会把最旧的一批扔掉，把所有的番茄酱滑下来，然后把新的一批放到空出来的地方。如果是跌落式缓冲器，他就会把最新鲜的一批番茄酱从货架上打下来，然后把新的一批番茄酱放在那个空间里。</p><p>缓冲区只是对核心模型的阐述：进程是独立的、并发执行的逻辑单元，对事件作出反应。你可以用 go 块来创建进程，并通过通道来沟通事件。</p><h3 id=堵塞和停车>堵塞和停车</h3><p>你可能已经注意到，take 函数<code>&lt;!</code>只使用了一个感叹号，而 put 函数<code>>!</code>则使用了两个感叹号。事实上，put 和 take 都有一个感叹号和两个感叹号的种类。什么时候使用哪个？简单的答案是，你可以在 go 块内使用一个感叹号，但你必须在 go 块外使用两个感叹号。</p><div class=table-wrapper><table><thead><tr><th></th><th>Inside go block</th><th>Outside go block</th></tr></thead><tbody><tr><td>put</td><td><code>>!</code> or <code>>!!</code></td><td><code>>!!</code></td></tr><tr><td>take</td><td><code>&lt;!</code> or <code>&lt;!!</code></td><td><code>&lt;!!</code></td></tr></tbody></table></div><p>这一切都归结为效率问题。因为 go 块使用一个固定大小的线程池，你可以创建 1000 个 go 进程，但只使用少量的线程。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(def hi-chan (chan))
+</span></span><span class=line><span class=cl>(doseq [n (range 1000)])
+</span></span><span class=line><span class=cl>  (go (&gt;! hi-chan (str &#34;hi &#34; n)))))
+</span></span></code></pre></td></tr></table></div></div><p>为了理解 Clojure 是如何做到这一点的，我们需要探索进程如何<em>等待。等待是使用 core.async 进程的一个关键方面：我们已经确定，<em>put</em>会等待到另一个进程在同一通道上做</em>take*，反之亦然。在这个例子中，1,000 个进程在等待另一个进程从 &ldquo;hi-chan &ldquo;中提取。</p><p>有两种类型的等待。 <em>停车</em>和<em>阻塞</em>。阻塞是你熟悉的那种等待：一个线程停止执行，直到一个任务完成。通常这发生在你进行某种 I/O 操作的时候。这个线程仍然活着，但不做任何工作，所以如果你想让你的程序继续工作，你必须创建一个新的线程。在第 9 章中，你学到了如何用 &ldquo;future &ldquo;来做这件事。</p><p>停车释放了线程，这样它就可以继续工作了。假设你有一个线程和两个进程，Process A 和 Process B，Process A 在线程上运行，然后等待放或取。Clojure 将进程 A 移出线程，并将进程 B 移到线程上。如果进程 B 开始等待，而进程 A 的 put 或 take 已经完成，那么 Clojure 将把进程 B 移出线程，把进程 A 放回线程上。停放允许多个进程的指令在一个线程上交错，类似于使用多个线程允许在一个核心上交错的方式。停放的实现并不重要；只需说它只在 go 块内实现，并且只在使用<code>>!</code>和<code>&lt;!</code>，或<em>停放 put</em>和<em>停放 take</em>时实现。<code>>!!</code>和<code>&lt;!!</code>是<em>停放的放</em>和<em>停放的取</em>。</p><h3 id=线程>线程</h3><p>肯定有一些时候你会想使用阻塞而不是停放，比如你的进程要花很长时间才能放或取，在这些场合你应该使用<code>线程</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(thread (println (&lt;!! echo-chan)))
+</span></span><span class=line><span class=cl>(&gt;!! echo-chan &#34;mustard&#34;)
+</span></span><span class=line><span class=cl>; =&gt; true
+</span></span><span class=line><span class=cl>; =&gt; mustard
+</span></span></code></pre></td></tr></table></div></div><p><code>thread</code>的行为几乎与<code>future</code>完全一样：它创建一个新的线程并在该线程上执行一个进程。与<code>future'不同的是，</code>thread&rsquo;不是返回一个可以反推的对象，而是返回一个通道。当<code>thread</code>的进程停止时，该进程的返回值会被放在<code>thread</code>返回的通道上。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(let [t (thread &#34;chili&#34;) ]
+</span></span><span class=line><span class=cl>  (&lt;!! t))
+</span></span><span class=line><span class=cl>; =&gt; &#34;chili&#34;
+</span></span></code></pre></td></tr></table></div></div><p>在这种情况下，进程不等待任何事件；相反，它立即停止。它的返回值是 &ldquo;chili&rdquo;，它被放在与<code>t绑定的通道上。</code>我们从<code>t</code>中获取，返回`&ldquo;chili&rdquo;。</p><p>当你执行一个长期运行的任务时，你应该使用<code>thread</code>而不是 go block，原因是你不会堵塞你的线程池。想象一下，你正在运行四个进程，下载巨大的文件，保存它们，然后把文件的路径放在一个通道上。当这些进程在下载文件和保存这些文件时，Clojure 不能停放它们的线程。它只能在最后一步停放线程，即进程将文件的路径放在通道上时。因此，如果你的线程池只有四个线程，所有四个线程都将被用于下载，在其中一个下载完成之前，不允许其他进程运行。</p><p><code>go</code>、<code>thread</code>、<code>chan</code>、<code>&lt;!</code>、<code>&lt;!</code>、<code>>!</code>和<code>>!</code>是你用来创建和与进程通信的核心工具。put 和 take 都会使一个进程等待，直到它的补码在给定的通道上被执行。<code>go</code>允许你使用 put 和 take 的停车变体，这可以提高性能。如果你在 put 和 take 之前执行长期运行的任务，你应该使用阻塞式变体，以及<code>thread</code>。</p><p>这应该能满足你的一切需求，让你实现你的心愿，创造一台把钱变成热狗的机器。</p><h2 id=你一直渴望的热狗机过程>你一直渴望的热狗机过程</h2><p>看哪，你的梦想成真了!</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(defn hot-dog-machine
+</span></span><span class=line><span class=cl>  []
+</span></span><span class=line><span class=cl>  (let [in (chan)
+</span></span><span class=line><span class=cl>        out (chan)]
+</span></span><span class=line><span class=cl>    (go (&lt;! in)
+</span></span><span class=line><span class=cl>        (&gt;! out &#34;hot dog&#34;))
+</span></span><span class=line><span class=cl>    [in out]))
+</span></span></code></pre></td></tr></table></div></div><p>这个函数创建了一个<code>in</code>通道用于接收钱，一个<code>out</code>通道用于发放热狗。然后用<code>go</code>创建一个异步进程，等待钱，然后发放热狗。最后，它将<code>in</code>和<code>out</code>通道作为一个 Vector 返回。</p><p>是时候吃热狗了!</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(let [[in out] (hot-dog-machine)]
+</span></span><span class=line><span class=cl>  (&gt;!! in &#34;pocket lint&#34;)
+</span></span><span class=line><span class=cl>  (&lt;!! out))
+</span></span><span class=line><span class=cl>; =&gt; &#34;hot dog&#34;
+</span></span></code></pre></td></tr></table></div></div><p>在这个片段中，你用 destructuring（在第三章中讲到）和<code>let</code>将<code>in</code>和<code>out</code>通道绑定到<code>in</code>和<code>out</code>符号。然后你把 &ldquo;pocket lint &ldquo;放在 &ldquo;in &ldquo;通道上。热狗机器进程等待着一些东西，任何东西，到达<code>in</code>通道；一旦<code>"pocket lint"</code>到达，热狗机器进程恢复执行，将<code>"hot dog"</code>放在<code>out</code>通道上。</p><p>等一下……这不对。我的意思是，是的，免费的热狗，但是一定会有人因为机器接受小棉絮作为付款而不高兴。不仅如此，这台机器在关闭前只能发放一个热狗。让我们改变热狗机的功能，让你可以指定它有多少个热狗，并且当你给它数字 3 时，它才会发放一个热狗。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(defn hot-dog-machine-v2
+</span></span><span class=line><span class=cl>  [hot-dog-count]
+</span></span><span class=line><span class=cl>  (let [in (chan)
+</span></span><span class=line><span class=cl>        out (chan)]
+</span></span><span class=line><span class=cl>    (go (loop [hc hot-dog-count]
+</span></span><span class=line><span class=cl>          (if (&gt; hc 0)
+</span></span><span class=line><span class=cl>            (let [input (&lt;! in)]
+</span></span><span class=line><span class=cl>             ➊(if (= 3 input)
+</span></span><span class=line><span class=cl>                (do (&gt;! out &#34;hot dog&#34;)
+</span></span><span class=line><span class=cl>                    (recur (dec hc)))
+</span></span><span class=line><span class=cl>                (do (&gt;! out &#34;wilted lettuce&#34;)
+</span></span><span class=line><span class=cl>                    (recur hc))))
+</span></span><span class=line><span class=cl>           ➋(do (close! in)
+</span></span><span class=line><span class=cl>                (close! out)))))
+</span></span><span class=line><span class=cl>    [in out]))
+</span></span></code></pre></td></tr></table></div></div><p>这里有很多代码，但策略是直接的。新函数<code>hot-dog-machine-v2</code>允许你指定<code>hot-dog-count</code>。在➊的 go 块内，只有当数字 3（意思是三块钱）被放在`in&rsquo;通道上时，它才会派发热狗；否则，它派发枯萎的生菜，这绝对不是热狗。一旦一个进程采取了输出，热狗机进程就会带着更新的热狗数量循环回来，并准备再次接收钱。</p><p>当机器进程的热狗用完时，该进程就会在➋处<em>关闭</em>通道。当你关闭一个通道时，你就不能再对它执行 put，而且一旦你从一个关闭的通道上取走所有的值，任何后续的取值都将返回 &ldquo;nil&rdquo;。</p><p>让我们来试试清单 11-1 中的升级版热狗机，把钱和口袋里的棉絮放进去。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(let [[in out] (hot-dog-machine-v2 2)]
+</span></span><span class=line><span class=cl>  (&gt;!! in &#34;pocket lint&#34;)
+</span></span><span class=line><span class=cl>  (println (&lt;!! out))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  (&gt;!! in 3)
+</span></span><span class=line><span class=cl>  (println (&lt;!! out))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  (&gt;!! in 3)
+</span></span><span class=line><span class=cl>  (println (&lt;!! out))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  (&gt;!! in 3)
+</span></span><span class=line><span class=cl>  (&lt;!! out))
+</span></span><span class=line><span class=cl>; =&gt; wilted lettuce
+</span></span><span class=line><span class=cl>; =&gt; hotdog
+</span></span><span class=line><span class=cl>; =&gt; hotdog
+</span></span><span class=line><span class=cl>; =&gt; nil
+</span></span></code></pre></td></tr></table></div></div><ol><li>清单 11-1. 与一个健壮的热狗售货机进程交互</li></ol><p>首先，我们尝试了 &ldquo;口袋里的棉絮 &ldquo;这一招，得到了打蔫的生菜。接下来，我们两次投入 3 美元，两次都得到一个热狗。然后，我们试图再投入 3 美元，但这被忽略了，因为通道已经关闭；数字 3 没有被放在通道上。当我们试图从 &ldquo;出 &ldquo;通道取钱时，我们得到的是 &ldquo;零&rdquo;，这也是因为该通道是关闭的。你可能会注意到<code>hot-dog-machine-v2</code>的几个有趣的细节。首先，它在同一个 go 块中做了一个 put 和一个 take。这并不罕见，这也是创建进程<em>管道的一种方法：只要让一个进程的</em>入<em>通道成为另一个进程的</em>出*通道。下面的例子就是这样做的，把一个字符串通过一系列的进程进行转换，直到最后一个进程打印出这个字符串。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(let [c1 (chan)
+</span></span><span class=line><span class=cl>      c2 (chan)
+</span></span><span class=line><span class=cl>      c3 (chan)]
+</span></span><span class=line><span class=cl>  (go (&gt;! c2 (clojure.string/upper-case (&lt;! c1))))
+</span></span><span class=line><span class=cl>  (go (&gt;! c3 (clojure.string/reverse (&lt;! c2))))
+</span></span><span class=line><span class=cl>  (go (println (&lt;! c3)))
+</span></span><span class=line><span class=cl>  (&gt;!! c1 &#34;redrum&#34;))
+</span></span><span class=line><span class=cl>; =&gt; MURDER
+</span></span></code></pre></td></tr></table></div></div><p>在本章的最后，我将会有更多关于进程管道以及如何使用它们来代替回调的内容。</p><p>回到清单 11-1! 另一件需要注意的事情是，热狗机在你处理完它所发放的东西之前，不会接受更多的钱。这允许你建立类似于状态机的行为模型，其中通道操作的完成会触发状态转换。例如，你可以认为自动售货机有两个状态。<em>准备接收钱</em>和<em>发放</em>物品*。插入钱和取走物品会触发这两者之间的转换。</p><h2 id=alts>alts</h2><p>core.async 函数<code>alts!!</code>可以让你使用一个操作集合中第一个成功的通道操作的结果。我们在第 198 页的 &ldquo;延迟 &ldquo;中用延迟和 Future 做了类似的事情。在那个例子中，我们把一组头像上传到一个头像分享网站，并在第一张照片上传时通知头像所有者。下面是你如何用<code>alts!!</code>做同样的事情。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(defn upload
+</span></span><span class=line><span class=cl>  [headshot c]
+</span></span><span class=line><span class=cl>  (go (Thread/sleep (rand 100))
+</span></span><span class=line><span class=cl>      (&gt;! c headshot)))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>➊ (let [c1 (chan)
+</span></span><span class=line><span class=cl>      c2 (chan)
+</span></span><span class=line><span class=cl>      c3 (chan)]
+</span></span><span class=line><span class=cl>  (upload &#34;serious.jpg&#34; c1)
+</span></span><span class=line><span class=cl>  (upload &#34;fun.jpg&#34; c2)
+</span></span><span class=line><span class=cl>  (upload &#34;sassy.jpg&#34; c3)
+</span></span><span class=line><span class=cl>➋   (let [[headshot channel] (alts!! [c1 c2 c3])]
+</span></span><span class=line><span class=cl>    (println &#34;Sending headshot notification for&#34; headshot)))
+</span></span><span class=line><span class=cl>; =&gt; Sending headshot notification for sassy.jpg
+</span></span></code></pre></td></tr></table></div></div><p>在这里，<code>upload</code>函数接收一个头像和一个频道，并创建一个新的进程，该进程将随机睡眠一段时间（模拟上传），然后将头像放到频道上。从➊开始的<code>let</code>绑定和<code>upload</code>函数调用应该是有意义的：我们创建了三个通道，然后用它们来执行上传。</p><p>事情在➋处变得有趣。<code>alts!!</code>函数需要一个通道的 Vector 作为其参数。这就好比说，&ldquo;试着在这些通道上同时做一个阻塞性的拍摄。一旦取值成功，返回一个 Vector，其第一个元素是取值，第二个元素是获胜的通道&rdquo;。在这个例子中，与<em>sassy.jpg</em>相关的通道首先收到了一个值。如果你想获取它们的值并对它们进行处理，其他通道仍然可用。<code>alts!!</code>所做的只是从第一个有值的通道中获取一个值；它并不触及其他通道。</p><p><code>alts!!</code>的一个很酷的方面是，你可以给它一个<em>timeout 通道</em>，它等待指定的毫秒数，然后关闭。这是一个优雅的机制，可以为并发操作设置一个时间限制。下面是你如何在上传服务中使用它。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(let [c1 (chan)]
+</span></span><span class=line><span class=cl>  (upload &#34;serious.jpg&#34; c1)
+</span></span><span class=line><span class=cl>  (let [[headshot channel] (alts!! [c1 (timeout 20)])]
+</span></span><span class=line><span class=cl>    (if headshot
+</span></span><span class=line><span class=cl>      (println &#34;Sending headshot notification for&#34; headshot)
+</span></span><span class=line><span class=cl>      (println &#34;Timed out!&#34;))))
+</span></span><span class=line><span class=cl>; =&gt; Timed out!
+</span></span></code></pre></td></tr></table></div></div><p>在这种情况下，我们将超时设置为 20 毫秒。因为上传没有在这个时间段完成，我们得到了一个超时消息。</p><p>你也可以使用<code>alts!!</code>来指定 put 操作。要做到这一点，在你传递给<code>alts!!</code>的 Vector 内放置一个 Vector，就像本例中的➊。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(let [c1 (chan)
+</span></span><span class=line><span class=cl>      c2 (chan)]
+</span></span><span class=line><span class=cl>  (go (&lt;! c2))
+</span></span><span class=line><span class=cl>➊   (let [[value channel] (alts!! [c1 [c2 &#34;put!&#34;]])]
+</span></span><span class=line><span class=cl>    (println value)
+</span></span><span class=line><span class=cl>    (= channel c2)))
+</span></span><span class=line><span class=cl>; =&gt; true
+</span></span><span class=line><span class=cl>; =&gt; true
+</span></span></code></pre></td></tr></table></div></div><p>这里你创建了两个通道，然后创建了一个进程，等待对<code>c2</code>进行处理。你提供给<code>alts!!</code>的 Vector 告诉它，&ldquo;尝试对<code>c1'进行取舍，并尝试将</code>&ldquo;put!"<code>放在</code>c2&rsquo;上。如果在<code>c1</code>上的取值首先完成，返回其值和通道。如果在<code>c2</code>上的投放先完成，如果投放成功，返回<code>true</code>，否则返回<code>false</code>。&rdquo; 最后，<code>value</code>的结果（是<code>true</code>，因为<code>c2</code>的通道是开放的）打印出来，显示返回的通道确实是<code>c2</code>。</p><p>像<code>&lt;!!</code>和<code>>!!</code>一样，<code>alts!!</code>有一个停车的选择，<code>alts!</code>，你可以在 go 块中使用它。 <code>alts!</code>是一个很好的方法，可以对一组通道中的哪一个进行投入或取出的选择。它仍然执行放和取，所以使用停放或阻塞变量的理由同样适用。</p><p>这就涵盖了 core.async 的基础知识! 本章的其余部分解释了协调进程的两种常见模式。</p><h2 id=队列>队列</h2><p>在第 202 页的 &ldquo;滚动你自己的队列 &ldquo;中，你写了一个宏，让你对 Future 进行排队。进程让你以一种更直接的方式使用类似的技术。假设你想从一个网站上获得一堆随机的报价，并把它们写到一个文件中。你想确保每次只有一个报价被写入文件，这样文本就不会被交错，所以你把你的报价放在一个队列中。下面是完整的代码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(defn append-to-file
+</span></span><span class=line><span class=cl>  &#34;Write a string to the end of a file&#34;
+</span></span><span class=line><span class=cl>  [filename s]
+</span></span><span class=line><span class=cl>  (spit filename s :append true))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>(defn format-quote
+</span></span><span class=line><span class=cl>  &#34;Delineate the beginning and end of a quote because it&#39;s convenient&#34;
+</span></span><span class=line><span class=cl>  [quote]
+</span></span><span class=line><span class=cl>  (str &#34;=== BEGIN QUOTE ===\n&#34; quote &#34;=== END QUOTE ===\n\n&#34;))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>(defn random-quote
+</span></span><span class=line><span class=cl>  &#34;Retrieve a random quote and format it&#34;
+</span></span><span class=line><span class=cl>  []
+</span></span><span class=line><span class=cl>  (format-quote (slurp &#34;http://www.braveclojure.com/random-quote&#34;)))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>(defn snag-quotes
+</span></span><span class=line><span class=cl>  [filename num-quotes]
+</span></span><span class=line><span class=cl>  (let [c (chan)]
+</span></span><span class=line><span class=cl>    (go (while true (append-to-file filename (&lt;! c))))
+</span></span><span class=line><span class=cl>    (dotimes [n num-quotes] (go (&gt;! c (random-quote))))))
+</span></span></code></pre></td></tr></table></div></div><p>函数<code>append-to-file</code>、<code>format-quote</code>和<code>random-quote</code>有文档说明它们的作用。<code>snag-quotes</code>是发生有趣工作的地方。首先，它创建一个通道，在产生报价的进程和消费报价的进程之间共享。然后，它创建了一个使用 &ldquo;while true &ldquo;来创建一个无限循环的进程。在循环的每一次迭代中，它等待一个报价到达<code>c</code>，然后将其追加到一个文件中。最后，<code>snag-quotes</code>创建一个<code>num-quotes</code>数量的进程来获取一个引号，然后把它放在<code>c</code>上。如果你求值<code>(snag-quotes "quotes" 2)</code>并检查你启动 REPL 的目录中的<em>quotes</em>文件，它应该有两个引号。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>=== BEGIN QUOTE ===
+</span></span><span class=line><span class=cl>Nobody&#39;s gonna believe that computers are intelligent until they start
+</span></span><span class=line><span class=cl>coming in late and lying about it.
+</span></span><span class=line><span class=cl>=== END QUOTE ===
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>=== BEGIN QUOTE ===
+</span></span><span class=line><span class=cl>Give your child mental blocks for Christmas.
+</span></span><span class=line><span class=cl>=== END QUOTE ===
+</span></span></code></pre></td></tr></table></div></div><p>这种排队方式与第 9 章中的例子不同。在那个例子中，每个任务都是按照其创建的顺序来处理的。在这里，每个获取报价的任务是按照它完成的顺序来处理的。在这两种情况下，你都要确保每次只有一个报价被写入文件。</p><h2 id=用进程管道逃离回调地狱>用进程管道逃离回调地狱</h2><p>在没有通道的语言中，你需要用 &ldquo;回调 &ldquo;来表达 &ldquo;当<em>x</em>发生时，做<em>y</em>&ldquo;的想法。在像 JavaScript 这样的语言中，回调是一种定义代码的方式，一旦其他代码完成就会异步执行。如果你使用过 JavaScript，你可能已经花了一些时间在<em>回调地狱</em>中沉溺。</p><p>它被称为回调地狱的原因是，在回调层之间很容易产生不明显的依赖关系。它们最终会共享状态，使得在回调被触发时很难推理整个系统的状态。你可以通过创建一个流程管道来避免这种令人沮丧的结果。这样一来，每个逻辑单元都生活在自己独立的进程中，逻辑单元之间的所有通信都通过明确定义的输入和输出通道进行。</p><p>在下面的例子中，我们创建了三个通过通道连接的无限循环进程，将一个进程的<em>输出</em>通道作为管道中下一个进程的<em>输入</em>通道。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(defn upper-caser
+</span></span><span class=line><span class=cl>  [in］
+</span></span><span class=line><span class=cl>  (let [out (chan)] (让 [out (chan)])
+</span></span><span class=line><span class=cl>    (go (while true (&gt;! out (clojure.string/upper-case (&lt;! in))))))
+</span></span><span class=line><span class=cl>    out))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>(defn reverser
+</span></span><span class=line><span class=cl>  [in］
+</span></span><span class=line><span class=cl>  (let [out (chan)] (go (while true (&gt;!
+</span></span><span class=line><span class=cl>    (go (while true (&gt;! out (clojure.string/reverse (&lt;! in))))))
+</span></span><span class=line><span class=cl>    out))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>(defn printer
+</span></span><span class=line><span class=cl>  [in］
+</span></span><span class=line><span class=cl>  (go (while true (println (&lt;! in))))))
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>(def in-chan (chan))
+</span></span><span class=line><span class=cl>(def upper-caser-out (upper-caser in-chan))
+</span></span><span class=line><span class=cl>(def reverser-out (reverser upper-caser-out))
+</span></span><span class=line><span class=cl>(Printer reverser-out)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>(&gt;！！in-chan &#34;redrum&#34;)
+</span></span><span class=line><span class=cl>; =&gt; MURDER
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>(&gt;!! in-chan &#34;repaid&#34;)
+</span></span><span class=line><span class=cl>; =&gt; DIAPER
+</span></span></code></pre></td></tr></table></div></div><p>通过使用这样的流程处理事件，推理整个数据转换系统的各个步骤就更容易了。你可以查看每个步骤并理解它的作用，而不必参考之前可能发生的事情或之后可能发生的事情；每个过程就像一个纯函数一样容易推理。</p><h2 id=额外资源>额外资源</h2><p>Clojure 的 core.async 库在很大程度上受到 Go 的并发模型的启发，它是基于 Tony Hoare 在<em>Communicating Sequential</em> <em>Processes</em>中的工作，可在*<a class=link href=http://www.usingcsp.com/ target=_blank rel=noopener>http://www.usingcsp.com/</a>。*</p><p>Go 的共同创造者 Rob Pike 有一个很好的关于并发的演讲，可在*<a class=link href="https://www.youtube.com/watch?v=f6kdp27TYZs" target=_blank rel=noopener>Google I/O 2012 - Go 并发模式 - YouTube</a>*。</p><p>ClojureScript，也被称为浏览器的最佳选择，使用 core.async。不再有回调的地狱! 你可以在*<a class=link href=https://github.com/clojure/clojurescript%3C/span%3E target=_blank rel=noopener>https://github.com/clojure/clojurescript</a>*了解 ClojureScript 的情况。</p><p>最后，在*<a class=link href=http://clojure.github.io/core.async/ target=_blank rel=noopener>clojure.core.async - core.async 1.2.599-SNAPSHOT API documentation</a>*查看 API 文档。</p><h2 id=总结>总结</h2><p>在本章中，你了解了 core.async 如何允许你创建并发进程，以响应通道上的 put 和 take 通信事件。你了解了如何使用<code>go</code>和<code>thread</code>来创建并发进程，通过停放和阻塞来等待通信事件。你还学习了如何通过使一个进程的<em>出</em>通道成为另一个进程的<em>入</em>通道来创建进程管道，以及这如何使你写的代码比嵌套回调更容易理解。最后，你思考了你是否只是一台花哨的热狗售货机。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/clojure/>clojure</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#进程的入门>进程的入门</a><ol><li><a href=#缓冲>缓冲</a></li><li><a href=#堵塞和停车>堵塞和停车</a></li><li><a href=#线程>线程</a></li></ol></li><li><a href=#你一直渴望的热狗机过程>你一直渴望的热狗机过程</a></li><li><a href=#alts>alts</a></li><li><a href=#队列>队列</a></li><li><a href=#用进程管道逃离回调地狱>用进程管道逃离回调地狱</a></li><li><a href=#额外资源>额外资源</a></li><li><a href=#总结>总结</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

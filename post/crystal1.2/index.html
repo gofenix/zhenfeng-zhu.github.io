@@ -1,282 +1,366 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>Crystal 1.2 版本更新说明 - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/crystal1.2/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="Crystal 1.2 版本更新说明">
-<meta property="og:description" content="Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/crystal1.2/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2021-10-17T23:08:51+08:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="Crystal 1.2 版本更新说明">
-<meta itemprop=description content="Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行"><meta itemprop=datePublished content="2021-10-17T23:08:51+08:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="1498">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Crystal 1.2 版本更新说明">
-<meta name=twitter:description content="Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Crystal 1.2 版本更新说明 - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/crystal1.2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Crystal 1.2 版本更新说明" />
+<meta property="og:description" content="Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/crystal1.2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-17T23:08:51+08:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="Crystal 1.2 版本更新说明">
+<meta itemprop="description" content="Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行"><meta itemprop="datePublished" content="2021-10-17T23:08:51+08:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="1498">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Crystal 1.2 版本更新说明"/>
+<meta name="twitter:description" content="Crystal 1.2.0 发布 我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>Crystal 1.2 版本更新说明</h1>
-<div class=post-meta>
-<span class=post-time> 2021-10-17 </span>
-<span class=more-meta> 约 1498 字 </span>
-<span class=more-meta> 预计阅读 3 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#crystal-120-发布>Crystal 1.2.0 发布</a>
-<ul>
-<li><a href=#统计数据>统计数据</a></li>
-<li><a href=#平台支持>平台支持</a></li>
-<li><a href=#语言变化>语言变化</a></li>
-<li><a href=#宏>宏</a></li>
-<li><a href=#标准库>标准库</a>
-<ul>
-<li><a href=#数值类型>数值类型</a></li>
-<li><a href=#集合>集合</a></li>
-<li><a href=#文件>文件</a></li>
-<li><a href=#网络>网络</a></li>
-<li><a href=#文本>文本</a></li>
-<li><a href=#序列化>序列化</a></li>
-</ul>
-</li>
-<li><a href=#工具新的文档生成器>工具：新的文档生成器</a></li>
-<li><a href=#基础设施>基础设施</a></li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Crystal 1.2 版本更新说明</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-17 </span>
+        
+          <span class="more-meta"> 约 1498 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#crystal-120-发布">Crystal 1.2.0 发布</a>
+      <ul>
+        <li><a href="#统计数据">统计数据</a></li>
+        <li><a href="#平台支持">平台支持</a></li>
+        <li><a href="#语言变化">语言变化</a></li>
+        <li><a href="#宏">宏</a></li>
+        <li><a href="#标准库">标准库</a>
+          <ul>
+            <li><a href="#数值类型">数值类型</a></li>
+            <li><a href="#集合">集合</a></li>
+            <li><a href="#文件">文件</a></li>
+            <li><a href="#网络">网络</a></li>
+            <li><a href="#文本">文本</a></li>
+            <li><a href="#序列化">序列化</a></li>
+          </ul>
+        </li>
+        <li><a href="#工具新的文档生成器">工具：新的文档生成器</a></li>
+        <li><a href="#基础设施">基础设施</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<h1 id=crystal-120-发布>Crystal 1.2.0 发布</h1>
+    <div class="post-content">
+      <h1 id="crystal-120-发布">Crystal 1.2.0 发布</h1>
 <p>我们正在发布一个包含多个错误修复和改进的新版本。下面我们列出了最重要或最有趣的变化，但没有提到几个错误修正。有关详细信息，请访问发行说明。重大更改标有 ⚠️。</p>
-<h2 id=统计数据>统计数据</h2>
+<h2 id="统计数据">统计数据</h2>
 <p>在此版本中，我们包含了自 1.1.1 版本以来 32 位贡献者的 181 个 PR。我们感谢为改进语言及其标准库所做的所有努力！❤️</p>
-<h2 id=平台支持>平台支持</h2>
+<h2 id="平台支持">平台支持</h2>
 <p>正如在 1.2 的上一篇博客文章中提到的，我们决定降低对 32 位 x86 架构的支持。但是我们确实有一些好消息要分享！</p>
 <p>我们在原生 Windows 支持方面取得了进展，在此版本中包括套接字实现（#11205、#11137、#10605、#10605）。</p>
 <p>与 Windows 相关，也与 ARM64 架构相关，我们修复了一个重要的代码生成错误。我们现在处于将 aarch64 平台提升到 Tier 1 的条件，预计很快就会支持。这也与带有 M1 芯片组的 macOS 相关：从这个版本开始，我们包含一个适用于 x86 和 M1 mac 的通用 macOS 包。</p>
 <p>我们发现 Windows 和 M1 的 mac 上出现的两个错误来自 LLVM 11 和 12。我们预计该修复将随最近发布的 LLVM 13 一起提供。Crystal 1.2.0 与 LLVM 12 兼容，尽管我们建议不要使用 LLVM 11 和 12.</p>
-<h2 id=语言变化>语言变化</h2>
+<h2 id="语言变化">语言变化</h2>
 <p>现在可以将泛型类的子类分配给父类的实例：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-crystal data-lang=crystal><span class=k>class</span> <span class=nc>Foo</span><span class=p>(</span><span class=nc>T</span><span class=p>);</span> <span class=k>end</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-crystal" data-lang="crystal"><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nc">T</span><span class="p">);</span> <span class="k">end</span>
 
-<span class=k>class</span> <span class=nc>Bar</span><span class=p>(</span><span class=nc>T</span><span class=p>)</span> <span class=o>&lt;</span> <span class=n>Foo</span><span class=p>(</span><span class=n>T</span><span class=p>);</span> <span class=k>end</span>
+<span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="nc">T</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Foo</span><span class="p">(</span><span class="n">T</span><span class="p">);</span> <span class="k">end</span>
 
-<span class=n>x</span> <span class=o>=</span> <span class=n>Foo</span>
-<span class=n>x</span> <span class=o>=</span> <span class=n>Bar</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Foo</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Bar</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>也与泛型类有关，有些情况下编译器没有正确替换泛型参数（#11166、#11067。</p>
 <p>为支持 ThinLTO 汇编被丢弃，因为它并没有在 crystal 0.25 下可用。</p>
-<h2 id=宏>宏</h2>
+<h2 id="宏">宏</h2>
 <p>可以在 for 循环中添加下划线来忽略值。例如，在以下代码中，map 的 key 被忽略：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-crystal data-lang=crystal><span class=si>{%</span> <span class=k>for</span> <span class=n>_</span><span class=p>,</span> <span class=n>v</span><span class=p>,</span> <span class=n>i</span> <span class=k>in</span> <span class=p>{</span><span class=mi>1</span> <span class=o>=&gt;</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span> <span class=o>=&gt;</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span> <span class=o>=&gt;</span> <span class=mi>6</span><span class=p>}</span> <span class=si>%}</span>
-  <span class=nb>p</span> <span class=si>{{</span><span class=n>v</span> <span class=o>+</span> <span class=n>i</span><span class=si>}}</span>
-<span class=si>{%</span> <span class=k>end</span> <span class=si>%}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-crystal" data-lang="crystal"><span class="si">{%</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">i</span> <span class="k">in</span> <span class="p">{</span><span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">}</span> <span class="si">%}</span>
+  <span class="nb">p</span> <span class="si">{{</span><span class="n">v</span> <span class="o">+</span> <span class="n">i</span><span class="si">}}</span>
+<span class="si">{%</span> <span class="k">end</span> <span class="si">%}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>此外，还有一个新的 file_exists?宏方法来检查文件的存在（#10540），#is_a?现在可以识别 AST 节点层次结构（#11062）。</p>
-<h2 id=标准库>标准库</h2>
+<h2 id="标准库">标准库</h2>
 <p>⚠️ 我们正在延续 1.1.0 版本开始的趋势，帮助获得更好的错误信息和文档：对一些方法使用预期类型进行了注释。添加注释可能会在特定情况下破坏现有代码，因此，如果您遇到这种情况，请立即告诉我们。</p>
-<h3 id=数值类型>数值类型</h3>
+<h3 id="数值类型">数值类型</h3>
 <p>数值类型的主要改进是支持 128 位整数（#11206 和#11245）所采取的步骤。</p>
 <p>作为微小的改进，现在可以调整 Int#to_s 输出的精度；通过新方法#next_float 和#prev_float 迭代可表示的浮点数集；对 BigDecimal 使用负指数；并计算一个数的整数平方根。</p>
-<h3 id=集合>集合</h3>
+<h3 id="集合">集合</h3>
 <p>可变集合现在包含一个 Indexable::Mutable(T)模块，它极大地扩展了对某些集合（例如 BitArray 和 ）的操作集 Deque。以下现在有效：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-crystal data-lang=crystal><span class=n>ba</span> <span class=o>=</span> <span class=n>BitArray</span><span class=o>.</span><span class=n>new</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span> <span class=c1># ba is BitArray[0000000000]</span>
-<span class=n>ba</span><span class=o>[</span><span class=mi>0</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span>          <span class=c1># ba is BitArray[1000000000]</span>
-<span class=n>ba</span><span class=o>.</span><span class=n>rotate!</span><span class=p>(</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span>        <span class=c1># ba is BitArray[0100000000]</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-crystal" data-lang="crystal"><span class="n">ba</span> <span class="o">=</span> <span class="n">BitArray</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># ba is BitArray[0000000000]</span>
+<span class="n">ba</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span>          <span class="c1"># ba is BitArray[1000000000]</span>
+<span class="n">ba</span><span class="o">.</span><span class="n">rotate!</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>        <span class="c1"># ba is BitArray[0100000000]</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>此外，Indexable::Mutable(T)扩展为包括稳定和不稳定的排序方法（#11254、#11029、#10163）。默认 sort 操作现在调用稳定算法。</p>
 <p>⚠️ 作为一项重大更改，Array#product 已弃用，取而代之的是新的泛型和更好命名的 Indexable#cartesian_product.</p>
 <p>另外两个值得一提的贡献：可枚举对象配备了将它们与给定谓词（Enumerable#tally_by）相匹配的方法；和方法 Array#transpose, Enumerable#reject, 和 Enumerable#to_h 现在使用元组。</p>
-<h3 id=文件>文件</h3>
+<h3 id="文件">文件</h3>
 <p>⚠️ 该方法 IO#write_utf8 已被弃用，取而代之的是更具描述性的 name IO#write_string，因为您可以使用它来编写各种编码的字符串，具体取决于 IO 的配置。我们还修复了一些与使用 IO#write 而不是 IO#write_string 将文本附加到 IO 相关的错误。</p>
-<h3 id=网络>网络</h3>
+<h3 id="网络">网络</h3>
 <p>⚠️ 为了提高 STDLIB 的安全性，URI.encode 被弃用 URI.encode_path 和 URI.encode_path_segment 。</p>
 <p>现在支持从 websockets ( #10854 ) 中的 URI 获取基本身份验证，并正确处理 cookie ( #10564 )的 max-age 和 expires 。</p>
-<h3 id=文本>文本</h3>
+<h3 id="文本">文本</h3>
 <p>⚠️String#unsafe_byte_at 已被弃用，因为 String 已经有一个#to_unsafe 方法。</p>
 <p>Crystal 现在支持 Unicode 14.0.0。</p>
-<h3 id=序列化>序列化</h3>
+<h3 id="序列化">序列化</h3>
 <p>有一种新方法 XML::Node#namespace_definition 可以获取节点的明确定义的 XML 命名空间，URI 现在可以将 URI 序列化为 JSON 和 YAML。</p>
-<h2 id=工具新的文档生成器>工具：新的文档生成器</h2>
+<h2 id="工具新的文档生成器">工具：新的文档生成器</h2>
 <p>API 文档现在使用 markd 来呈现 Markdown ( #11040 )。这就解决了内部渲染器实现带来的缺点。</p>
-<h2 id=基础设施>基础设施</h2>
+<h2 id="基础设施">基础设施</h2>
 <p>现在可以 make install 了。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/crystal_roadmap/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Crystal Roadmap</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">
+            <span class="next-text nav-default">如何理解可观测性</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/crystal_roadmap/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">Crystal Roadmap</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/>
-<span class="next-text nav-default">如何理解可观测性</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

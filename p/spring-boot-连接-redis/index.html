@@ -1,0 +1,187 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Spring-data-redis为 spring-data 模块中对 redis 的支持部分，简称为“SDR”，提供了基于 jedis 客户端 API 的高度封装以及与 spring 容器的整合，
+jedis 客户端在编程实施方面存在如下不足：
+ connection 管理缺乏自动化，connection-pool 的设计缺少必要的容器支持。 数据操作需要关注“序列化”/“反序列化”，因为 jedis 的客户端 API 接受的数据类型为 string 和 byte，对结构化数据(json,xml,pojo 等)操作需要额外的支持。 事务操作纯粹为硬编码 pub/sub 功能，缺乏必要的设计模式支持，对于开发者而言需要关注的太多。  1 spring-data-redis 特性  连接池自动管理，提供了一个高度封装的“RedisTemplate”类 针对 jedis 客户端中大量 api 进行了归类封装,将同一类型操作封装为 operation 接口  ValueOperations：简单 K-V 操作 SetOperations：set 类型数据操作 ZSetOperations：zset 类型数据操作 HashOperations：针对 map 类型的数据操作 ListOperations：针对 list 类型的数据操作   提供了对 key 的“bound”(绑定)便捷化操作 API，可以通过 bound 封装指定的 key，然后进行一系列的操作而无须“显式”的再次指定 Key，即 BoundKeyOperations：  BoundValueOperations BoundSetOperations BoundListOperations BoundSetOperations BoundHashOperations   将事务操作封装，有容器控制。 针对数据的“序列化/反序列化”，提供了多种可选择策略(RedisSerializer)  JdkSerializationRedisSerializer：POJO 对象的存取场景，使用 JDK 本身序列化机制，将 pojo 类通过 ObjectInputStream/ObjectOutputStream 进行序列化操作，最终 redis-server 中将存储字节序列。是目前最常用的序列化策略。 StringRedisSerializer：Key 或者 value 为字符串的场景，根据指定的 charset 对数据的字节序列编码成 string，是“new String(bytes, charset)”和“string."><title>spring boot 连接 redis</title><link rel=canonical href=https://example.com/p/spring-boot-%E8%BF%9E%E6%8E%A5-redis/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="spring boot 连接 redis"><meta property="og:description" content="Spring-data-redis为 spring-data 模块中对 redis 的支持部分，简称为“SDR”，提供了基于 jedis 客户端 API 的高度封装以及与 spring 容器的整合，
+jedis 客户端在编程实施方面存在如下不足：
+ connection 管理缺乏自动化，connection-pool 的设计缺少必要的容器支持。 数据操作需要关注“序列化”/“反序列化”，因为 jedis 的客户端 API 接受的数据类型为 string 和 byte，对结构化数据(json,xml,pojo 等)操作需要额外的支持。 事务操作纯粹为硬编码 pub/sub 功能，缺乏必要的设计模式支持，对于开发者而言需要关注的太多。  1 spring-data-redis 特性  连接池自动管理，提供了一个高度封装的“RedisTemplate”类 针对 jedis 客户端中大量 api 进行了归类封装,将同一类型操作封装为 operation 接口  ValueOperations：简单 K-V 操作 SetOperations：set 类型数据操作 ZSetOperations：zset 类型数据操作 HashOperations：针对 map 类型的数据操作 ListOperations：针对 list 类型的数据操作   提供了对 key 的“bound”(绑定)便捷化操作 API，可以通过 bound 封装指定的 key，然后进行一系列的操作而无须“显式”的再次指定 Key，即 BoundKeyOperations：  BoundValueOperations BoundSetOperations BoundListOperations BoundSetOperations BoundHashOperations   将事务操作封装，有容器控制。 针对数据的“序列化/反序列化”，提供了多种可选择策略(RedisSerializer)  JdkSerializationRedisSerializer：POJO 对象的存取场景，使用 JDK 本身序列化机制，将 pojo 类通过 ObjectInputStream/ObjectOutputStream 进行序列化操作，最终 redis-server 中将存储字节序列。是目前最常用的序列化策略。 StringRedisSerializer：Key 或者 value 为字符串的场景，根据指定的 charset 对数据的字节序列编码成 string，是“new String(bytes, charset)”和“string."><meta property="og:url" content="https://example.com/p/spring-boot-%E8%BF%9E%E6%8E%A5-redis/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2018-03-24T19:00:48+00:00"><meta property="article:modified_time" content="2018-03-24T19:00:48+00:00"><meta name=twitter:title content="spring boot 连接 redis"><meta name=twitter:description content="Spring-data-redis为 spring-data 模块中对 redis 的支持部分，简称为“SDR”，提供了基于 jedis 客户端 API 的高度封装以及与 spring 容器的整合，
+jedis 客户端在编程实施方面存在如下不足：
+ connection 管理缺乏自动化，connection-pool 的设计缺少必要的容器支持。 数据操作需要关注“序列化”/“反序列化”，因为 jedis 的客户端 API 接受的数据类型为 string 和 byte，对结构化数据(json,xml,pojo 等)操作需要额外的支持。 事务操作纯粹为硬编码 pub/sub 功能，缺乏必要的设计模式支持，对于开发者而言需要关注的太多。  1 spring-data-redis 特性  连接池自动管理，提供了一个高度封装的“RedisTemplate”类 针对 jedis 客户端中大量 api 进行了归类封装,将同一类型操作封装为 operation 接口  ValueOperations：简单 K-V 操作 SetOperations：set 类型数据操作 ZSetOperations：zset 类型数据操作 HashOperations：针对 map 类型的数据操作 ListOperations：针对 list 类型的数据操作   提供了对 key 的“bound”(绑定)便捷化操作 API，可以通过 bound 封装指定的 key，然后进行一系列的操作而无须“显式”的再次指定 Key，即 BoundKeyOperations：  BoundValueOperations BoundSetOperations BoundListOperations BoundSetOperations BoundHashOperations   将事务操作封装，有容器控制。 针对数据的“序列化/反序列化”，提供了多种可选择策略(RedisSerializer)  JdkSerializationRedisSerializer：POJO 对象的存取场景，使用 JDK 本身序列化机制，将 pojo 类通过 ObjectInputStream/ObjectOutputStream 进行序列化操作，最终 redis-server 中将存储字节序列。是目前最常用的序列化策略。 StringRedisSerializer：Key 或者 value 为字符串的场景，根据指定的 charset 对数据的字节序列编码成 string，是“new String(bytes, charset)”和“string."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/spring-boot-%E8%BF%9E%E6%8E%A5-redis/>spring boot 连接 redis</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Mar 24, 2018</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><p><strong>Spring-data-redis</strong>为 spring-data 模块中对 redis 的支持部分，简称为“SDR”，提供了基于 jedis 客户端 API 的高度封装以及与 spring 容器的整合，</p><p>jedis 客户端在编程实施方面存在如下不足：</p><ul><li>connection 管理缺乏自动化，connection-pool 的设计缺少必要的容器支持。</li><li>数据操作需要关注“序列化”/“反序列化”，因为 jedis 的客户端 API 接受的数据类型为 string 和 byte，对结构化数据(json,xml,pojo 等)操作需要额外的支持。</li><li>事务操作纯粹为硬编码</li><li>pub/sub 功能，缺乏必要的设计模式支持，对于开发者而言需要关注的太多。</li></ul><h2 id=1-spring-data-redis-特性>1 spring-data-redis 特性</h2><ol><li>连接池自动管理，提供了一个高度封装的“RedisTemplate”类</li><li>针对 jedis 客户端中大量 api 进行了归类封装,将同一类型操作封装为 operation 接口<ul><li><code>ValueOperations</code>：简单 K-V 操作</li><li><code>SetOperations</code>：set 类型数据操作</li><li><code>ZSetOperations</code>：zset 类型数据操作</li><li><code>HashOperations</code>：针对 map 类型的数据操作</li><li><code>ListOperations</code>：针对 list 类型的数据操作</li></ul></li><li>提供了对 key 的“bound”(绑定)便捷化操作 API，可以通过 bound 封装指定的 key，然后进行一系列的操作而无须“显式”的再次指定 Key，即 BoundKeyOperations：<ul><li><code>BoundValueOperations</code></li><li><code>BoundSetOperations</code></li><li><code>BoundListOperations</code></li><li><code>BoundSetOperations</code></li><li><code>BoundHashOperations</code></li></ul></li><li>将事务操作封装，有容器控制。</li><li>针对数据的“序列化/反序列化”，提供了多种可选择策略(RedisSerializer)<ul><li><code>JdkSerializationRedisSerializer</code>：POJO 对象的存取场景，使用 JDK 本身序列化机制，将 pojo 类通过 ObjectInputStream/ObjectOutputStream 进行序列化操作，最终 redis-server 中将存储字节序列。是目前最常用的序列化策略。</li><li><code>StringRedisSerializer</code>：Key 或者 value 为字符串的场景，根据指定的 charset 对数据的字节序列编码成 string，是“new String(bytes, charset)”和“string.getBytes(charset)”的直接封装。是最轻量级和高效的策略。</li><li><code>JacksonJsonRedisSerializer</code>：jackson-json 工具提供了 javabean 与 json 之间的转换能力，可以将 pojo 实例序列化成 json 格式存储在 redis 中，也可以将 json 格式的数据转换成 pojo 实例。因为 jackson 工具在序列化和反序列化时，需要明确指定 Class 类型，因此此策略封装起来稍微复杂。</li><li><code>OxmSerializer</code>：提供了将 javabean 与 xml 之间的转换能力，目前可用的三方支持包括 jaxb，apache-xmlbeans；redis 存储的数据将是 xml 工具。不过使用此策略，编程将会有些难度，而且效率最低；不建议使用。</li></ul></li><li>基于设计模式，和 JMS 开发思路，将 pub/sub 的 API 设计进行了封装，使开发更加便捷。</li><li>spring-data-redis 中，并没有对 sharding 提供良好的封装，如果你的架构是基于 sharding，那么你需要自己去实现，这也是 sdr 和 jedis 相比，唯一缺少的特性。</li></ol><h2 id=2-引入依赖>2 引入依赖</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;dependency&gt;</span>
+</span></span><span class=line><span class=cl> <span class=nt>&lt;groupId&gt;</span>org.springframework.boot<span class=nt>&lt;/groupId&gt;</span>
+</span></span><span class=line><span class=cl> <span class=nt>&lt;artifactId&gt;</span>spring-boot-starter-data-redis<span class=nt>&lt;/artifactId&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;/dependency&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=3-配置>3 配置</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># REDIS (RedisProperties)
+</span></span><span class=line><span class=cl># Redis数据库索引（默认为0）
+</span></span><span class=line><span class=cl>spring.redis.database=0
+</span></span><span class=line><span class=cl># Redis服务器地址
+</span></span><span class=line><span class=cl>spring.redis.host=localhost
+</span></span><span class=line><span class=cl># Redis服务器连接端口
+</span></span><span class=line><span class=cl>spring.redis.port=6379
+</span></span><span class=line><span class=cl># Redis服务器连接密码（默认为空）
+</span></span><span class=line><span class=cl>spring.redis.password=root
+</span></span><span class=line><span class=cl># 连接池最大连接数（使用负值表示没有限制）
+</span></span><span class=line><span class=cl>spring.redis.pool.max-active=8
+</span></span><span class=line><span class=cl># 连接池最大阻塞等待时间（使用负值表示没有限制）
+</span></span><span class=line><span class=cl>spring.redis.pool.max-wait=-1
+</span></span><span class=line><span class=cl># 连接池中的最大空闲连接
+</span></span><span class=line><span class=cl>spring.redis.pool.max-idle=8
+</span></span><span class=line><span class=cl># 连接池中的最小空闲连接
+</span></span><span class=line><span class=cl>spring.redis.pool.min-idle=0
+</span></span><span class=line><span class=cl># 连接超时时间（毫秒）
+</span></span><span class=line><span class=cl>spring.redis.timeout=0
+</span></span></code></pre></td></tr></table></div></div><p>其中 spring.redis.database 的配置通常使用 0 即可，Redis 在配置的时候可以设置数据库数量，默认为 16，可以理解为数据库的 schema</p><h3 id=31-stringredistemplate>3.1 <code>StringRedisTemplate</code></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>@RunWith(SpringRunner.class)
+</span></span><span class=line><span class=cl>@SpringBootTest
+</span></span><span class=line><span class=cl>public class DemoApplicationTests {
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> @Autowired
+</span></span><span class=line><span class=cl> private StringRedisTemplate stringRedisTemplate;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> @Test
+</span></span><span class=line><span class=cl> public void testRedis(){
+</span></span><span class=line><span class=cl>  stringRedisTemplate.opsForValue().set(&#34;myKey&#34;, &#34;hello redis&#34;);
+</span></span><span class=line><span class=cl>  Assert.assertEquals(&#34;hello redis&#34;, stringRedisTemplate.opsForValue().get(&#34;myKey&#34;));
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>通过上面这段极为简单的测试案例演示了如何通过自动配置的 StringRedisTemplate 对象进行 Redis 的读写操作，该对象从命名中就可注意到支持的是 String 类型。如果有使用过 spring-data-redis 的开发者一定熟悉 RedisTemplate&lt;K, V>接口，StringRedisTemplate 就相当于 RedisTemplate&lt;String, String>的实现。</p><p>除了 String 类型，我们还经常会在 Redis 中存储对象。</p><h3 id=32-redistemplateobject-object>3.2 <code>RedisTemplate&lt;Object, Object></code></h3><h4 id=321-新建-user-类>3.2.1 新建 User 类</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>@Data
+</span></span><span class=line><span class=cl>@AllArgsConstructor
+</span></span><span class=line><span class=cl>public class User implements Serializable{
+</span></span><span class=line><span class=cl>    private static final long serialVersionUID = 1L;
+</span></span><span class=line><span class=cl>    private Integer id;
+</span></span><span class=line><span class=cl>    private String username;
+</span></span><span class=line><span class=cl>    private Integer age;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h4 id=322-创建-userrepository>3.2.2 创建 UserRepository</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>@Repository
+</span></span><span class=line><span class=cl>public class UserRepository {
+</span></span><span class=line><span class=cl>    @Autowired
+</span></span><span class=line><span class=cl>    private RedisTemplate&lt;Object, Object&gt; redisTemplate;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    //
+</span></span><span class=line><span class=cl>    @Resource(name = &#34;redisTemplate&#34;)
+</span></span><span class=line><span class=cl>    ValueOperations&lt;Object, Object&gt; valOps;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    /**
+</span></span><span class=line><span class=cl>     * 保存
+</span></span><span class=line><span class=cl>     * @param user
+</span></span><span class=line><span class=cl>     */
+</span></span><span class=line><span class=cl>    public void save(User user) {
+</span></span><span class=line><span class=cl>        int id = user.getId();
+</span></span><span class=line><span class=cl>        valOps.set(id, user);
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    /**
+</span></span><span class=line><span class=cl>     * 获取
+</span></span><span class=line><span class=cl>     * @param id
+</span></span><span class=line><span class=cl>     * @return
+</span></span><span class=line><span class=cl>     */
+</span></span><span class=line><span class=cl>    public User getUserById(int id) {
+</span></span><span class=line><span class=cl>        return (User) valOps.get(id);
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>@Resource 注解和@Autowired 一样，也可以标注在字段或属性的 setter 方法上，但它默认按名称装配。名称可以通过@Resource 的 name 属性指定，如果没有指定 name 属性，当注解标注在字段上，即默认取字段的名称作为 bean 名称寻找依赖对象，当注解标注在属性的 setter 方法上，即默认取属性名作为 bean 名称寻找依赖对象。</p><h4 id=323-单元测试>3.2.3 单元测试</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>@RunWith(SpringRunner.class)
+</span></span><span class=line><span class=cl>@SpringBootTest
+</span></span><span class=line><span class=cl>public class DemoApplicationTests {
+</span></span><span class=line><span class=cl> @Autowired
+</span></span><span class=line><span class=cl> private UserRepository userRepository;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> @Test
+</span></span><span class=line><span class=cl> public void testRedis(){
+</span></span><span class=line><span class=cl>  User user=new User(1, &#34;hello&#34;, 12);
+</span></span><span class=line><span class=cl>  userRepository.save(user);
+</span></span><span class=line><span class=cl>  Assert.assertEquals(&#34;hello&#34;, userRepository.getUserById(1).getUsername());
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=4-参考资料>4 参考资料</h2><p><a class=link href=http://blog.csdn.net/smartdt/article/details/78894013 target=_blank rel=noopener>SpringBoot 之 Redis 的支持</a></p><p><a class=link href=http://shift-alt-ctrl.iteye.com/blog/1886831 target=_blank rel=noopener>Spring-data-redis 特性与实例</a></p></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#1-spring-data-redis-特性>1 spring-data-redis 特性</a></li><li><a href=#2-引入依赖>2 引入依赖</a></li><li><a href=#3-配置>3 配置</a><ol><li><a href=#31-stringredistemplate>3.1 <code>StringRedisTemplate</code></a></li><li><a href=#32-redistemplateobject-object>3.2 <code>RedisTemplate&lt;Object, Object></code></a><ol><li><a href=#321-新建-user-类>3.2.1 新建 User 类</a></li><li><a href=#322-创建-userrepository>3.2.2 创建 UserRepository</a></li><li><a href=#323-单元测试>3.2.3 单元测试</a></li></ol></li></ol></li><li><a href=#4-参考资料>4 参考资料</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

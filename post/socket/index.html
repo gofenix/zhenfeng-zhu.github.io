@@ -1,126 +1,171 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>socket - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/socket/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="socket">
-<meta property="og:description" content="Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/socket/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2019-08-26T06:54:14+00:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="socket">
-<meta itemprop=description content="Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为"><meta itemprop=datePublished content="2019-08-26T06:54:14+00:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="906">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="socket">
-<meta name=twitter:description content="Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>socket - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/socket/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="socket" />
+<meta property="og:description" content="Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/socket/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-26T06:54:14+00:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="socket">
+<meta itemprop="description" content="Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为"><meta itemprop="datePublished" content="2019-08-26T06:54:14+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="906">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="socket"/>
+<meta name="twitter:description" content="Socket 网络模型 osi 七层模型 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 对应的 tcpip 就是 应用层 dns http 传输层 icmp tcp udp ip 层 ipv4 ipv6 mac 层 arp vlan 物理层 Ethernet 为什么要分层 因为"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>socket</h1>
-<div class=post-meta>
-<span class=post-time> 2019-08-26 </span>
-<span class=more-meta> 约 906 字 </span>
-<span class=more-meta> 预计阅读 2 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#socket>Socket</a></li>
-<li><a href=#网络模型>网络模型</a>
-<ul>
-<li><a href=#osi-七层模型>osi 七层模型</a></li>
-<li><a href=#对应的-tcpip-就是>对应的 tcpip 就是</a></li>
-</ul>
-</li>
-<li><a href=#为什么要分层>为什么要分层</a></li>
-<li><a href=#tcp-和-udp-的区别>TCP 和 UDP 的区别</a></li>
-<li><a href=#socket-函数>socket 函数</a></li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">socket</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-26 </span>
+        
+          <span class="more-meta"> 约 906 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#socket">Socket</a></li>
+    <li><a href="#网络模型">网络模型</a>
+      <ul>
+        <li><a href="#osi-七层模型">osi 七层模型</a></li>
+        <li><a href="#对应的-tcpip-就是">对应的 tcpip 就是</a></li>
+      </ul>
+    </li>
+    <li><a href="#为什么要分层">为什么要分层</a></li>
+    <li><a href="#tcp-和-udp-的区别">TCP 和 UDP 的区别</a></li>
+    <li><a href="#socket-函数">socket 函数</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<h1 id=socket>Socket</h1>
-<h1 id=网络模型>网络模型</h1>
-<h2 id=osi-七层模型>osi 七层模型</h2>
+    <div class="post-content">
+      <h1 id="socket">Socket</h1>
+<h1 id="网络模型">网络模型</h1>
+<h2 id="osi-七层模型">osi 七层模型</h2>
 <ul>
 <li>应用层</li>
 <li>表示层</li>
@@ -130,7 +175,7 @@
 <li>数据链路层</li>
 <li>物理层</li>
 </ul>
-<h2 id=对应的-tcpip-就是>对应的 tcpip 就是</h2>
+<h2 id="对应的-tcpip-就是">对应的 tcpip 就是</h2>
 <ul>
 <li>应用层
 <ul>
@@ -163,12 +208,12 @@
 </ul>
 </li>
 </ul>
-<h1 id=为什么要分层>为什么要分层</h1>
+<h1 id="为什么要分层">为什么要分层</h1>
 <p>因为网络环境过于复杂，不是一个能够集中控制的体系。全球的服务器和设备各有各的体系，但是可以通过同一套网络协议栈切分成多个层次和组合，来满足不同设备之间的通信需求。</p>
 <p>二层到四层，即 mac、ip 和传输等层都是 Linux 内核中处理。应用层的如浏览器、Nginx 和 Tomcat 等都是用户态的。</p>
 <p>传输层的 tcp 和 udp 里都有端口的概念，不同应用监听不同的段即可。</p>
 <p>应用层和内核的互通机制，就是通过 socket 系统调用。其实 socket 哪一层都不属于，它是属于操作系统的概念，而不是网络分层的概念。因为操作系统把二层到四层的处理代码在内核里，应用层的处理代码让应用自己做，两者需要跨内核态和用户态进行通信，这个就是 socket。</p>
-<h1 id=tcp-和-udp-的区别>TCP 和 UDP 的区别</h1>
+<h1 id="tcp-和-udp-的区别">TCP 和 UDP 的区别</h1>
 <ul>
 <li>tcp 是面向连接的，udp 是面向无连接的</li>
 <li>tcp 提供可靠交付，无差错、不丢失、不重复、并且按序到达。udp 不提供可靠交付，可能丢失，不按顺序。</li>
@@ -179,13 +224,13 @@
 <p><strong>所谓的建立连接，其实是为了在客户端和服务端维护连接，而建立一定的数据结构来维护双方交互的状态。并用这样的数据结构来保证面向连接的特性。tcp 无法左右中间的任何通路，也没有什么虚拟的连接。</strong></p>
 <p><strong>所谓的可靠，也是两端的数据结构做的事情。不丢失其实是数据结构在“点名”，顺序到达是数据结构在“排序”，面向数据流其实是数据结构将零散的包，按照顺序捏成一个流发给应用层。</strong></p>
 <p><strong>所谓的流量控制和拥塞控制，其实就是根据收到的对端的网络包，调整两端的数据结构状态。</strong></p>
-<h1 id=socket-函数>socket 函数</h1>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<h1 id="socket-函数">socket 函数</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>int</span> <span class=n>socket</span><span class=p>(</span><span class=kt>int</span> <span class=n>domain</span><span class=p>,</span> <span class=kt>int</span> <span class=n>type</span><span class=p>,</span> <span class=kt>int</span> <span class=n>protocol</span><span class=p>)</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">socket</span><span class="p">(</span><span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>socket 函数用于创建一个 socket 文件描述符。</p>
@@ -206,78 +251,117 @@
 <li>protocol
 <ul>
 <li>协议</li>
-<li>IPPROTO_TCP, IPPROTO_UDP</li>
+<li>IPPROTO_TCP,  IPPROTO_UDP</li>
 </ul>
 </li>
 </ul>
-<p><img src=/Users/lucas/Documents/Nutstore/assets/997e39e5574252ada22220e4b3646dda.png alt=img></p>
+<p><img src="/Users/lucas/Documents/Nutstore/assets/997e39e5574252ada22220e4b3646dda.png" alt="img"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/crystal%E7%AE%80%E4%BB%8B/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">crystal 简介</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/go%E8%BF%9B%E9%98%B6/">
+            <span class="next-text nav-default">go 进阶</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/crystal%E7%AE%80%E4%BB%8B/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">crystal 简介</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/go%E8%BF%9B%E9%98%B6/>
-<span class="next-text nav-default">go 进阶</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

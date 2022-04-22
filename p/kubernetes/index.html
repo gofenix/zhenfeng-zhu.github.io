@@ -1,0 +1,175 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。
+docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
+解决了应用打包的根本性问题。
+容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理
+ 容器本身没有价值，有价值的是“容器编排”。
+ 原理 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。
+在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。
+Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
+因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。
+挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。
+ 启动 Namespace 配置 设置 Cgroups 参数 切换进程根目录 rootf  docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。
+一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。
+volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
+主要依赖 Linux 依赖三大技术  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。
+docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。"><title>kubernetes</title><link rel=canonical href=https://example.com/p/kubernetes/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="kubernetes"><meta property="og:description" content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。
+docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
+解决了应用打包的根本性问题。
+容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理
+ 容器本身没有价值，有价值的是“容器编排”。
+ 原理 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。
+在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。
+Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
+因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。
+挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。
+ 启动 Namespace 配置 设置 Cgroups 参数 切换进程根目录 rootf  docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。
+一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。
+volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
+主要依赖 Linux 依赖三大技术  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。
+docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。"><meta property="og:url" content="https://example.com/p/kubernetes/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2018-10-08T15:29:21+00:00"><meta property="article:modified_time" content="2018-10-08T15:29:21+00:00"><meta name=twitter:title content="kubernetes"><meta name=twitter:description content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。
+docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。
+解决了应用打包的根本性问题。
+容器编排 对 Docker 容器的一系列定义、配置和创建动作的管理
+ 容器本身没有价值，有价值的是“容器编排”。
+ 原理 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。
+在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。
+Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。
+因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。
+挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。
+ 启动 Namespace 配置 设置 Cgroups 参数 切换进程根目录 rootf  docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。
+一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。
+volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。
+主要依赖 Linux 依赖三大技术  Namespace Cgroups rootfs  和虚拟机比较 虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。
+docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/kubernetes/>kubernetes</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Oct 08, 2018</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><h3 id=docker>docker</h3><p>利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。</p><h3 id=docker-镜像>docker 镜像</h3><p>其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。</p><p>解决了应用打包的根本性问题。</p><h3 id=容器编排>容器编排</h3><p>对 Docker 容器的一系列定义、配置和创建动作的管理</p><blockquote><p>容器本身没有价值，有价值的是“容器编排”。</p></blockquote><h3 id=原理>原理</h3><p>容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。</p><p>在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。</p><p>Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。</p><p>因此，一个正在运行的 Docker 容器，其实就是一个启用了多个 Namespace 的应用进程，而这个进程能够使用的资源是由 Cgroups 来限制。</p><p>挂载在容器根目录上，用来为容器进程提供隔离后执行环境的文件系统，就是容器镜像，rootfs。</p><ul><li>启动 Namespace 配置</li><li>设置 Cgroups 参数</li><li>切换进程根目录 rootf</li></ul><p>docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。</p><p>一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。</p><p>volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。</p><h3 id=主要依赖-linux-依赖三大技术>主要依赖 Linux 依赖三大技术</h3><ul><li>Namespace</li><li>Cgroups</li><li>rootfs</li></ul><h3 id=和虚拟机比较>和虚拟机比较</h3><p>虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。</p><p>docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。</p><p>不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被 Namespace 化的，如时间。</p><p>kubernetes 要解决的问题</p><p>编排？调度？容器云？集群管理？</p><p><img src=https://ws3.sinaimg.cn/large/006tNbRwgy1fw117whrc6j31hc0u0gq5.jpg loading=lazy></p><ul><li>master<ul><li>kube-apiserver：API 服务</li><li>kube-scheduler：调度</li><li>kube-controller-manager：编排</li></ul></li><li>node<ul><li>kubelet：同容器运行时打交道。依赖于 CRI（container runtime interface 容器运行接口）远程调用接口，这个接口定义了容器运行时的各项核心操作。</li></ul></li><li>etcd</li></ul><p>运行在大规模集群中的各种任务之间，实际存在各种各样的关系。这些关系的处理，才是作业编排和管理系统最困难的地方。</p><p>sudo</p><ul><li>首先，通过一个编排对象，如 pod，job 或 cronjob 等，来描述你试图管理的应用；</li><li>然后，再为它定义一些服务对象，如 service，secret，autoscaler 等。这些对象，会负责具体的平台级功能。</li></ul><p>这种使用方法，就是所谓的“声明式 API”。这种 API 对应的编排对象和服务对象，都是 k8s 项目中的 API 对象。</p><h2 id=简单使用>简单使用</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>kubectl create -f 我的配置文件
+</span></span></code></pre></td></tr></table></div></div><p>pod 就是 k8s 世界中的应用，而一个应用可以由多个容器组成。</p><p>使用一个 API 对象管理另一个 API 对象的方法，叫控制器模式。</p><p>每个 API 对象都有一个 metadata 字段，这个字段是 API 对象的标识，即元数据。主要用到的是 labels，spec.selector.matchLabels 就是 k8s 过滤的规则。与 labels 同层级的是 annotations，这是由 k8s 所感兴趣的，而不是用户。</p><p>一个 k8s 的 API 对象都有 metadata 和 spec 两个部分。前者放的是对象的元数据，对所有 API 对象来讲，这部分的字段和格式基本一样；而后者存放的是属于这个对象独有的定义，用来描述它所要表达的功能。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>$ kubectl create -f nginx-deployment.yaml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$ kubectl get pods -l app=nginx
+</span></span><span class=line><span class=cl>NAME                                READY     STATUS    RESTARTS   AGE
+</span></span><span class=line><span class=cl>nginx-deployment-67594d6bf6-9gdvr   1/1       Running   0          10m
+</span></span><span class=line><span class=cl>nginx-deployment-67594d6bf6-v6j7w   1/1       Running   0          10m
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$ kubectl describe pod nginx-deployment-67594d6bf6-9gdvr
+</span></span><span class=line><span class=cl>Name:               nginx-deployment-67594d6bf6-9gdvr
+</span></span><span class=line><span class=cl>Namespace:          default
+</span></span><span class=line><span class=cl>Priority:           0
+</span></span><span class=line><span class=cl>PriorityClassName:  &lt;none&gt;
+</span></span><span class=line><span class=cl>Node:               node-1/10.168.0.3
+</span></span><span class=line><span class=cl>Start Time:         Thu, 16 Aug 2018 08:48:42 +0000
+</span></span><span class=line><span class=cl>Labels:             app=nginx
+</span></span><span class=line><span class=cl>                    pod-template-hash=2315082692
+</span></span><span class=line><span class=cl>Annotations:        &lt;none&gt;
+</span></span><span class=line><span class=cl>Status:             Running
+</span></span><span class=line><span class=cl>IP:                 10.32.0.23
+</span></span><span class=line><span class=cl>Controlled By:      ReplicaSet/nginx-deployment-67594d6bf6
+</span></span><span class=line><span class=cl>...
+</span></span><span class=line><span class=cl>Events:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  Type     Reason                  Age                From               Message
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  ----     ------                  ----               ----               -------
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  Normal   Scheduled               1m                 default-scheduler  Successfully assigned default/nginx-deployment-67594d6bf6-9gdvr to node-1
+</span></span><span class=line><span class=cl>  Normal   Pulling                 25s                kubelet, node-1    pulling image &#34;nginx:1.7.9&#34;
+</span></span><span class=line><span class=cl>  Normal   Pulled                  17s                kubelet, node-1    Successfully pulled image &#34;nginx:1.7.9&#34;
+</span></span><span class=line><span class=cl>  Normal   Created                 17s                kubelet, node-1    Created container
+</span></span><span class=line><span class=cl>  Normal   Started                 17s                kubelet, node-1    Started container
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$ kubectl apply -f nginx-deployment.yaml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 修改 nginx-deployment.yaml 的内容
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$ kubectl apply -f nginx-deployment.yaml
+</span></span></code></pre></td></tr></table></div></div><p>在命令行中，所有 key-value 格式的参数，都使用“=“而不是”：“表示。</p><p>在 k8s 执行过程中，对 API 对象的所有重要操作，都会被记录在这个对象的 events 中。</p><p>在线业务</p><p>Deployment</p><p>StatefunSet</p><p>DaemonSet</p><p>离线业务</p><p>Job</p><p>restartPolicy 在 job 对象里只被允许设置为 never 和 onFailure；而在 Deployment 对象中，只被允许设置为 always。</p><h3 id=声明式-api-和-kubernetes-编程范式>声明式 API 和 Kubernetes 编程范式</h3><p>创建一个两个 Nginx 容器的步骤：</p><p>首先写一个 Deployment 的 yaml 文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nginx-deployment</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>containerPort</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>然后使用 kubectl create 命令在 Kubernetes 中创建一个 Deployment 对象：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>kubectl create -f nginx.yaml
+</span></span></code></pre></td></tr></table></div></div><p>这样两个 Nginx pod 就运行起来了。</p><p>如果要更新的话，只需要修改 yaml 文件，然后使用 kubectl apply 命令更新，触发了滚动更新。</p><p>这个 apply 命令就是声明式 API。</p><p><img src=https://ws1.sinaimg.cn/large/006tNbRwgy1fwzjwny2o8j31hc0u0abg.jpg loading=lazy></p><p>istio 项目中，最根本的组件是运行在每个 pod 里的 envoy 容器。这个代理服务以 sidecar 容器的方式，把整个 pod 的进出流量接管下来。istio 的控制层的 pilot 组件，通过调用每个 envoy 的 API，实现微服务的治理。</p><p>利用 Kubernetes 的 Admission Control，也叫：Initializer，先创建一个 Pod，然后 istio 就是在 pod 的 yaml 给 Kubernetes 之后，自动加上 envoy 的配置。</p><ul><li>所谓的声明式，指的就是我只需要提交一个定义好的 API 对象来声明我所期望的状态是什么样子。</li><li>其次，声明式 API 允许有多个 API 写端，以 PATCH 的方式对 API 对象进行修改，而无需关心原始的 YAML 文件的内容。</li><li>最后，Kubernetes 基于对 API 对象的增删改查，在无需外界干预的情况下，完成对实际状态和期望状态的调谐。</li></ul><p>一个 API 对象在 etcd 中完整路径是由：group（API 组），version（API 版本）和 Resource（API 资源类型）三个部分组成的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>batch/v2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>CronJob</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>batch 是组，v2 是版本，CronJob 是类型。</p><p>对于核心 API 对象：Pod，Node 等，不需要 group 的。非核心对象是需要组。</p><p>匹配规则就是：</p><p>/apis/batch/v2/CronJob</p><ul><li><p>首先 yaml 文件被提交给了 APIServer</p><p>过滤，授权，超时处理或审计等</p></li><li><p>进入路由流程</p><p>根据 yaml，按照匹配规则去找</p></li><li><p>根据定义，按照 yaml 中的字段，创建一个对象</p></li><li><p>进行 Amission 和 Validation。</p></li><li><p>把验证过的对象，序列化存到 etcd 中</p></li></ul><h3 id=rbac>RBAC</h3><p>基于角色的控制</p><p>role：角色，一组规则，定义 Kubernetes API 对象的操作权限</p><p>subject：被作用者，可以是人，也可以是机器，也可以是 Kubernetes 定义的用户</p><p>rolebinding：定义被作用者和角色的绑定关系</p><p>ServiceAccount，会被自动创建分配一个 secret 对象。</p><p>所谓角色就是一组权限规则列表，而我们分配这些权限的方式，就是通过创建 rolebinding 对象，将被作用者和权限列表进行绑定。</p><p>另外，与之对应的 ClusterRole 和 ClusterRoleBinding，则是 Kubernetes 集群级别的 Role 和 RoleBinding，它们的作用范围不受 Namespace 限制。</p><p>尽管被作用者有很多种（如 User、Group），但在我们平常使用的时候，最普遍的还是 ServiceAccount。</p><h3 id=网络模型>网络模型</h3><p>Veth Pair 常常被用作连接不同 Network Namespace 的网线。veth pair 虚拟设备。总是以两张虚拟网卡形式成对出现。并且，从一个网卡中发出的数据包，可以直接出现在另一张网卡上，哪怕这两个网卡在不同的 network Namespace 里。</p><p>一旦一张虚拟网卡被插在网桥上，他就会变成该网桥的从设备。从设备会降级成为网桥的一个端口，不能处理数据包，只能接收流入的数据包交给对应的网桥。</p><p>两个容器的虚拟网卡都插在宿主机的一个网桥上，这个网桥就扮演一个交换机的角色。当两个容器进行网络交互时，从一个容器的发出请求到宿主机，由于 Veth Pair 的机制，另一个容器就看到有数据流入。</p><p>因此默认情况下，被限制在 network Namespace 的容器进程，实际就是通过 veth pair 设备+宿主机网桥的方式，实现了跟其他容器的数据交换。</p><p><img src=https://ws1.sinaimg.cn/large/006tNbRwgy1fwzjwayfppj31bn0rngn5.jpg loading=lazy alt=img></p><p>跨主通信，需要有一个集群公用的网桥，所有容器都连接到该网桥上，就可以相互通信，这就是 overlay network（覆盖网络）</p></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#docker>docker</a></li><li><a href=#docker-镜像>docker 镜像</a></li><li><a href=#容器编排>容器编排</a></li><li><a href=#原理>原理</a></li><li><a href=#主要依赖-linux-依赖三大技术>主要依赖 Linux 依赖三大技术</a></li><li><a href=#和虚拟机比较>和虚拟机比较</a></li></ol></li><li><a href=#简单使用>简单使用</a><ol><li><a href=#声明式-api-和-kubernetes-编程范式>声明式 API 和 Kubernetes 编程范式</a></li><li><a href=#rbac>RBAC</a></li><li><a href=#网络模型>网络模型</a></li></ol></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,0 +1,114 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Spring web mvc： 传统 servlet web
+spring web flux： Reactive web
+ 编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程
+In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow."><title>java-reactive-web</title><link rel=canonical href=https://example.com/p/java-reactive-web/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="java-reactive-web"><meta property="og:description" content="Spring web mvc： 传统 servlet web
+spring web flux： Reactive web
+ 编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程
+In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow."><meta property="og:url" content="https://example.com/p/java-reactive-web/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2018-06-23T15:05:32+00:00"><meta property="article:modified_time" content="2018-06-23T15:05:32+00:00"><meta name=twitter:title content="java-reactive-web"><meta name=twitter:description content="Spring web mvc： 传统 servlet web
+spring web flux： Reactive web
+ 编程模式： non-blocking 非阻塞  nio：同步？异步？   并行模型  sync 同步 async 异步    Reactive 概念 Reactive programming： 响应式编程
+In computing, reactive programming is a declarative programming paradigm concerned with data streams and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) data streams with ease, and also communicate that an inferred dependency within the associated execution model exists, which facilitates the automatic propagation of the changed data flow."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/java-reactive-web/>java-reactive-web</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jun 23, 2018</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 2 分钟</time></div></footer></div></header><section class=article-content><p>Spring web mvc： 传统 servlet web</p><p>spring web flux： Reactive web</p><ul><li>编程模式： non-blocking 非阻塞<ul><li>nio：同步？异步？</li></ul></li><li>并行模型<ul><li>sync 同步</li><li>async 异步</li></ul></li></ul><h1 id=reactive-概念>Reactive 概念</h1><p>Reactive programming： 响应式编程</p><p>In <a class=link href=https://en.wikipedia.org/wiki/Computing target=_blank rel=noopener>computing</a>, <strong>reactive programming</strong> is a declarative <a class=link href=https://en.wikipedia.org/wiki/Programming_paradigm target=_blank rel=noopener>programming paradigm</a> concerned with <a class=link href=https://en.wikipedia.org/wiki/Dataflow_programming target=_blank rel=noopener>data streams</a> and the propagation of change. With this paradigm it is possible to express static (e.g. arrays) or dynamic (e.g. event emitters) <em>data streams</em> with ease, and also communicate that an inferred dependency within the associated <em>execution model</em> exists, which facilitates the automatic propagation of the changed data flow.</p><h2 id=实现框架>实现框架</h2><ul><li><p>RxJava</p><p>ReactiveX is a library for composing asynchronous and event-based programs by using observable sequences.</p><p>这种就是推的模式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>int[] a=[1, 2, 3]
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>for(int i: a){
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>package com.reactive.demo.reactivedemo;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>import java.util.Observable;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>/**
+</span></span><span class=line><span class=cl> * todo
+</span></span><span class=line><span class=cl> *
+</span></span><span class=line><span class=cl> * @author zhuzhenfeng
+</span></span><span class=line><span class=cl> * @date 2018/6/23
+</span></span><span class=line><span class=cl> */
+</span></span><span class=line><span class=cl>public class ObserverPatternDemo {
+</span></span><span class=line><span class=cl>    public static void main(String[] args) {
+</span></span><span class=line><span class=cl>        MyObservable observable = new MyObservable();
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        // 1 observable   n个observer
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        observable.addObserver((o, value) -&gt; {
+</span></span><span class=line><span class=cl>            System.out.println(&#34;1 收到数据更新&#34; + value);
+</span></span><span class=line><span class=cl>        });
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        observable.addObserver((o, value) -&gt; {
+</span></span><span class=line><span class=cl>            System.out.println(&#34;2 收到数据更新&#34; + value);
+</span></span><span class=line><span class=cl>        });
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        observable.setChanged();
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        observable.notifyObservers(&#34;hello world&#34;);//  push data 发布数据
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    public static class MyObservable extends Observable {
+</span></span><span class=line><span class=cl>        @Override
+</span></span><span class=line><span class=cl>        protected synchronized void setChanged() {
+</span></span><span class=line><span class=cl>            super.setChanged();
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/bin/java &#34;-
+</span></span><span class=line><span class=cl>2 收到数据更新hello world
+</span></span><span class=line><span class=cl>1 收到数据更新hello world
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Process finished with exit code 0
+</span></span></code></pre></td></tr></table></div></div><p>当时不阻塞，后续回调。非阻塞基本上采用 callback 的形式。</p><p>对于 java 来讲，异步代表切换了线程。</p><p>当前的实现： 同步+非阻塞</p><p>如果是切换了线程，代表是异步 的非阻塞，一般是 gui 程序的。</p></li><li><p>Reactor</p></li></ul><h2 id=特性>特性</h2><ul><li>异步</li><li>非阻塞</li><li>事件驱动</li><li>可能有背压 backpressure</li><li>防止回调地狱</li></ul><h1 id=reactive-使用场景>Reactive 使用场景</h1><p>Long Live 模式： netty 的 io 连接（rpc） timeout</p><p>short live 模式：不太适合 Reactive web，因为这是等待。只是会快速返回，但是并不会给你真正的结果。短频快的连接，不太有用武之地。</p><ul><li>http</li><li>http 超时时间</li></ul><h1 id=reactive-理解误区>Reactive 理解误区</h1><p>web：快速响应</p><p>200 Q->200 T -> 50T</p><p>1-50</p><p>Tomcat connector thread pool(200)->reactive thread pool(50)</p><p>io 连接从 Tomcat->Reactive</p><p>连接</p><p>Reactive thread pool（50）</p><p>不太适合 web 请求。</p><p>webflux 其实并不会提升性能。</p><p><img src=http://ww1.sinaimg.cn/large/b831e4c7gy1fsl9ian4ezj20ma0g7tg4.jpg loading=lazy></p><p>少量的线程，少量的内存来做更好的伸缩性，而并不是为了提升更好的性能。使用 Reactive 只会是使单位时间内接受请求的数量增加，单位时间内的处理请求的数量下降。</p></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#实现框架>实现框架</a></li><li><a href=#特性>特性</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

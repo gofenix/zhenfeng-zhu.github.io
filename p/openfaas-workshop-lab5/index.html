@@ -1,0 +1,365 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Lab 5 - 创建一个 GitHub 机器人 在开始这个实验之前，为你的文件创建一个新的文件夹。
+1 2  $ mkdir -p lab5\  &amp;amp;&amp;amp; cd lab5   我们将使用 OpenFaaS 的函数来创建一个名为 issue-bot的 GitHub 机器人。
+问题机器人的工作是通过分析 描述 字段的情绪来分流新的问题，然后它将应用一个积极或审查的标签。这将有助于维护者在繁忙的工作中，可以优先考虑哪些问题需要首先处理。
+问题机器人的图示](./diagram/issue-bot.png)
+获取一个 GitHub 账户   注册一个GitHub 账户，如果你还没有一个账户。
+  创建一个新的仓库，并将其称为bot-test。
+  注意：我们将只使用这个仓库作为创建问题的测试场所。你不需要在那里提交任何代码。
+建立一个带有入口的隧道 你需要接收来自 GitHub 的 webhooks。幸运的是，inlets 让这一切变得非常快速和简单。它可以按月或按年订阅，所以如果你不确定是否全年都需要它，你可以只付一个月的钱。
+inlets 有一个叫做 inlets-operator 的 Kubernetes 集成。你可以用它来设置 LoadBalancers 或带有 TLS 的 Ingress。它的工作原理是为你创建一个云虚拟机，并在那里运行一个隧道服务器，然后为你运行一个隧道客户端作为一个 Pod，你就可以获得传入流量。
+在你喜欢的云提供商（如 DigitalOcean）的 API 页面下创建一个写入访问令牌，然后将内容保存到digital-ocean-api-token.txt。
+设置完订阅后，将你的密钥保存到$HOME/.inlets/LICENSE，然后运行以下程序。
+1 2 3 4  arkade install inlets-operator \  --provider digitalocean \  --region lon1 \  --token-file $HOME/digital-ocean-api-token."><title>Openfaas Workshop Lab5</title><link rel=canonical href=https://example.com/p/openfaas-workshop-lab5/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="Openfaas Workshop Lab5"><meta property="og:description" content="Lab 5 - 创建一个 GitHub 机器人 在开始这个实验之前，为你的文件创建一个新的文件夹。
+1 2  $ mkdir -p lab5\  &amp;amp;&amp;amp; cd lab5   我们将使用 OpenFaaS 的函数来创建一个名为 issue-bot的 GitHub 机器人。
+问题机器人的工作是通过分析 描述 字段的情绪来分流新的问题，然后它将应用一个积极或审查的标签。这将有助于维护者在繁忙的工作中，可以优先考虑哪些问题需要首先处理。
+问题机器人的图示](./diagram/issue-bot.png)
+获取一个 GitHub 账户   注册一个GitHub 账户，如果你还没有一个账户。
+  创建一个新的仓库，并将其称为bot-test。
+  注意：我们将只使用这个仓库作为创建问题的测试场所。你不需要在那里提交任何代码。
+建立一个带有入口的隧道 你需要接收来自 GitHub 的 webhooks。幸运的是，inlets 让这一切变得非常快速和简单。它可以按月或按年订阅，所以如果你不确定是否全年都需要它，你可以只付一个月的钱。
+inlets 有一个叫做 inlets-operator 的 Kubernetes 集成。你可以用它来设置 LoadBalancers 或带有 TLS 的 Ingress。它的工作原理是为你创建一个云虚拟机，并在那里运行一个隧道服务器，然后为你运行一个隧道客户端作为一个 Pod，你就可以获得传入流量。
+在你喜欢的云提供商（如 DigitalOcean）的 API 页面下创建一个写入访问令牌，然后将内容保存到digital-ocean-api-token.txt。
+设置完订阅后，将你的密钥保存到$HOME/.inlets/LICENSE，然后运行以下程序。
+1 2 3 4  arkade install inlets-operator \  --provider digitalocean \  --region lon1 \  --token-file $HOME/digital-ocean-api-token."><meta property="og:url" content="https://example.com/p/openfaas-workshop-lab5/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="openfaas"><meta property="article:published_time" content="2022-01-04T13:43:56+08:00"><meta property="article:modified_time" content="2022-01-04T13:43:56+08:00"><meta name=twitter:title content="Openfaas Workshop Lab5"><meta name=twitter:description content="Lab 5 - 创建一个 GitHub 机器人 在开始这个实验之前，为你的文件创建一个新的文件夹。
+1 2  $ mkdir -p lab5\  &amp;amp;&amp;amp; cd lab5   我们将使用 OpenFaaS 的函数来创建一个名为 issue-bot的 GitHub 机器人。
+问题机器人的工作是通过分析 描述 字段的情绪来分流新的问题，然后它将应用一个积极或审查的标签。这将有助于维护者在繁忙的工作中，可以优先考虑哪些问题需要首先处理。
+问题机器人的图示](./diagram/issue-bot.png)
+获取一个 GitHub 账户   注册一个GitHub 账户，如果你还没有一个账户。
+  创建一个新的仓库，并将其称为bot-test。
+  注意：我们将只使用这个仓库作为创建问题的测试场所。你不需要在那里提交任何代码。
+建立一个带有入口的隧道 你需要接收来自 GitHub 的 webhooks。幸运的是，inlets 让这一切变得非常快速和简单。它可以按月或按年订阅，所以如果你不确定是否全年都需要它，你可以只付一个月的钱。
+inlets 有一个叫做 inlets-operator 的 Kubernetes 集成。你可以用它来设置 LoadBalancers 或带有 TLS 的 Ingress。它的工作原理是为你创建一个云虚拟机，并在那里运行一个隧道服务器，然后为你运行一个隧道客户端作为一个 Pod，你就可以获得传入流量。
+在你喜欢的云提供商（如 DigitalOcean）的 API 页面下创建一个写入访问令牌，然后将内容保存到digital-ocean-api-token.txt。
+设置完订阅后，将你的密钥保存到$HOME/.inlets/LICENSE，然后运行以下程序。
+1 2 3 4  arkade install inlets-operator \  --provider digitalocean \  --region lon1 \  --token-file $HOME/digital-ocean-api-token."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/openfaas-workshop-lab5/>Openfaas Workshop Lab5</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jan 04, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><h1 id=lab-5---创建一个-github-机器人>Lab 5 - 创建一个 GitHub 机器人</h1><p></p><p>在开始这个实验之前，为你的文件创建一个新的文件夹。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ mkdir -p lab5<span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   <span class=o>&amp;&amp;</span> <span class=nb>cd</span> lab5
+</span></span></code></pre></td></tr></table></div></div><p>我们将使用 OpenFaaS 的函数来创建一个名为 <code>issue-bot</code>的 GitHub 机器人。</p><p>问题机器人的工作是通过分析 <code>描述</code> 字段的情绪来分流新的问题，然后它将应用一个<em>积极</em>或<em>审查</em>的标签。这将有助于维护者在繁忙的工作中，可以优先考虑哪些问题需要首先处理。</p><p>问题机器人的图示](./diagram/issue-bot.png)</p><h2 id=获取一个-github-账户>获取一个 GitHub 账户</h2><ul><li><p>注册一个<a class=link href=https://github.com target=_blank rel=noopener>GitHub 账户</a>，如果你还没有一个账户。</p></li><li><p>创建一个新的仓库，并将其称为<em>bot-test</em>。</p></li></ul><p>注意：我们将只使用这个仓库作为创建问题的测试场所。你不需要在那里提交任何代码。</p><h2 id=建立一个带有入口的隧道>建立一个带有入口的隧道</h2><p>你需要接收来自 GitHub 的 webhooks。幸运的是，inlets 让这一切变得非常快速和简单。它可以按月或按年订阅，所以如果你不确定是否全年都需要它，你可以只付一个月的钱。</p><p>inlets 有一个叫做 inlets-operator 的 Kubernetes 集成。你可以用它来设置 LoadBalancers 或带有 TLS 的 Ingress。它的工作原理是为你创建一个云虚拟机，并在那里运行一个隧道服务器，然后为你运行一个隧道客户端作为一个 Pod，你就可以获得传入流量。</p><p>在你喜欢的云提供商（如 DigitalOcean）的 API 页面下创建一个写入访问令牌，然后将内容保存到<code>digital-ocean-api-token.txt</code>。</p><p>设置完订阅后，将你的密钥保存到<code>$HOME/.inlets/LICENSE</code>，然后运行以下程序。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>arkade install inlets-operator <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --provider digitalocean <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --region lon1 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --token-file <span class=nv>$HOME</span>/digital-ocean-api-token.txt
+</span></span></code></pre></td></tr></table></div></div><p>这将部署 inlets-operator，并指示它在 DigitalOcean 上为你的隧道服务器配置新的主机到伦敦地区。其他供应商和地区也可以使用，<a class=link href=https://docs.inlets.dev/reference/inlets-operator/ target=_blank rel=noopener>更多信息请见文档</a>。</p><h2 id=用网关的公共-ip-登录你的网关>用网关的公共 IP 登录你的网关</h2><p>用信息检索你的网关密码，从。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>arkade info openfaas
+</span></span></code></pre></td></tr></table></div></div><p>LoadBalancer 的公共 IP 大约需要 10-30 秒才能出现。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl get svc -n openfaas gateway-external
+</span></span><span class=line><span class=cl>NAME               TYPE           CLUSTER-IP    EXTERNAL-IP   PORT<span class=o>(</span>S<span class=o>)</span>          AGE
+</span></span><span class=line><span class=cl>gateway-external   LoadBalancer   10.96.29.46   &lt;pending&gt;     8080:32278/TCP   5h56m
+</span></span><span class=line><span class=cl>gateway-external   LoadBalancer   10.96.29.46   165.227.233.227   8080:32278/TCP   5h56m
+</span></span></code></pre></td></tr></table></div></div><p>然后把它保存到环境变量中。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>export</span> <span class=nv>OPENFAAS_URL</span><span class=o>=</span>http://165.227.233.227:8080
+</span></span></code></pre></td></tr></table></div></div><p>用给你的密码登录到公共 IP。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$PASSWORD</span> <span class=p>|</span> faas-cli login --password-stdin
+</span></span></code></pre></td></tr></table></div></div><p>最后测试远程 URL，如<a class=link href=http://165.227.233.227:8080 target=_blank rel=noopener>http://165.227.233.227:8080</a></p><p>你可以通过设置<code>OPENFAAS_URL</code>环境变量或使用<code>--gateway</code>标志来对远程网关运行命令。</p><p>如果你想用 TLS 证书和自定义域名来暴露 OpenFaaS，你可以按照这些说明来代替。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>arkade install ingress-nginx
+</span></span><span class=line><span class=cl>arkade install cert-manager
+</span></span><span class=line><span class=cl>arkade install openfaas
+</span></span><span class=line><span class=cl>arkade install openfaas-ingress <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --email web@example.com <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --domain openfaas.example.com
+</span></span></code></pre></td></tr></table></div></div><p>然后创建一个 DNS A 记录，指向 ingress-nginx 的 IP 地址。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>kubectl get svc ingress-nginx-controller
+</span></span><span class=line><span class=cl>NAME                       TYPE           CLUSTER-IP     EXTERNAL-IP   PORT<span class=o>(</span>S<span class=o>)</span>                      AGE
+</span></span><span class=line><span class=cl>NAME                       TYPE           CLUSTER-IP     EXTERNAL-IP   PORT<span class=o>(</span>S<span class=o>)</span>                      AGE
+</span></span><span class=line><span class=cl>ingress-nginx-controller   LoadBalancer   10.96.179.20   &lt;pending&gt;     80:30319/TCP,443:31591/TCP   20s
+</span></span><span class=line><span class=cl>ingress-nginx-controller   LoadBalancer   10.96.179.20   209.97.135.63   80:30319/TCP,443:31591/TCP   52s
+</span></span></code></pre></td></tr></table></div></div><p>现在你可以为<code>https://openfaas.example.com</code>提供一个自定义的 TLS 记录。</p><h2 id=创建一个-webhook-接收器issue-bot>创建一个 webhook 接收器<code>issue-bot</code></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>export</span> <span class=nv>OPENFAAS_PREFIX</span><span class=o>=</span><span class=s2>&#34;docker.io/your-username&#34;</span>
+</span></span><span class=line><span class=cl>$ faas-cli new --lang python3 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  issue-bot
+</span></span></code></pre></td></tr></table></div></div><p>现在编辑该函数的 YAML 文件<code>issue-bot.yml</code>并添加一个环境变量<code>write_debug: true</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>provider</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openfaas</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>gateway</span><span class=p>:</span><span class=w> </span><span class=l>http://127.0.0.1:8080</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>functions</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>issue-bot</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>python3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>handler</span><span class=p>:</span><span class=w> </span><span class=l>./issue-bot</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>docker.io/your-username/issue-bot</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>environment</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>write_debug</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>构建、推送和部署该函数，使用</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>faas-cli up -f ./issue-bot.yml
+</span></span></code></pre></td></tr></table></div></div><h2 id=从-github-接收-webhooks>从 GitHub 接收 webhooks</h2><p>重新登录 GitHub 并导航到你的仓库<em>bot-tester</em>。</p><p>点击 <em>设置</em> -> <em>Webhooks</em> -> <em>添加 Webhook</em></p><p><img src=/../../screenshot/add_github_webhook.png loading=lazy alt=添加网络钩子></p><p>现在输入你从 inlets 或你的自定义域中得到的 URL，在最后加上<code>/function/issue-bot</code>，例如。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>https://openfaas.example.com
+</span></span></code></pre></td></tr></table></div></div><p><img src=/../../screenshot/issue-bot-webhook.png loading=lazy alt=添加webhook></p><p>对于<em>Content-type</em>选择。<em>application/json</em></p><p>暂时将<em>Secret</em>留空。</p><p>并选择 <code>让我选择个别事件</code></p><p>对于事件选择<strong>事件</strong>和<strong>事件评论</strong>。</p><p>！<a class=link href=../../screenshot/WebhookEventsSettings.png>设置事件</a></p><h2 id=检查它是否有效>检查它是否有效</h2><p>现在去 GitHub，创建一个新问题。在标题和描述中输入 <code>test</code>。</p><p>检查该函数被调用了多少次&ndash;这个数字至少应该是<code>1</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ faas-cli list
+</span></span><span class=line><span class=cl>Function    Invocations
+</span></span><span class=line><span class=cl>issue-bot   <span class=m>2</span>
+</span></span></code></pre></td></tr></table></div></div><p>每次你创建一个问题，由于 GitHub 的 API 调用了该函数，计数会增加。</p><p>你可以通过输入<code>docker service logs -f issue-bot</code>（或<code>kubectl logs deployment/issue-bot -n openfaas-fn</code>）看到通过 GitHub 发送的有效载荷。</p><p>GitHub 的 Webhooks 页面也会在 <code>Recent Deliveries</code>下显示每条发送的消息，你可以在这里重放一条消息，看看你的函数返回的响应。</p><p><img src=/../../screenshot/github_replay.png loading=lazy alt="Replaying an event"></p><h3 id=部署-sentimentanalysis-函数>部署 SentimentAnalysis 函数</h3><p>为了使用这个 issue-bot 函数，你将需要首先部署 SentimentAnalysis 函数。
+这是一个 python 函数，为通过 TextBlob 项目输入的每个句子提供正/负（极性-1.0-1.0）和主观性的评级。</p><p>如果你在<a class=link href=./lab4.md>Lab 4</a>中没有这样做，你可以从<strong>函数商店</strong>部署 <code>SentimentAnalysis</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ <span class=nb>echo</span> -n <span class=s2>&#34;I am really excited to participate in the OpenFaaS workshop.&#34;</span> <span class=p>|</span> faas-cli invoke sentimentanalysis
+</span></span><span class=line><span class=cl>Polarity: 0.375 Subjectivity: 0.75
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$ <span class=nb>echo</span> -n <span class=s2>&#34;The hotel was clean, but the area was terrible&#34;</span> <span class=p>|</span> faas-cli invoke sentimentanalysis
+</span></span><span class=line><span class=cl>Polarity: -0.316666666667 Subjectivity: 0.85
+</span></span></code></pre></td></tr></table></div></div><h3 id=更新issue-bot函数>更新<code>issue-bot</code>函数</h3><p>打开<code>issue-bot/handler.py</code>，用这段代码替换模板。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span><span class=o>,</span> <span class=nn>json</span><span class=o>,</span> <span class=nn>os</span><span class=o>,</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>handle</span><span class=p>(</span><span class=n>req</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>event_header</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;Http_X_Github_Event&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=n>event_header</span> <span class=o>==</span> <span class=s2>&#34;issues&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>sys</span><span class=o>.</span><span class=n>exit</span><span class=p>(</span><span class=s2>&#34;Unable to handle X-GitHub-Event: &#34;</span> <span class=o>+</span> <span class=n>event_header</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>gateway_hostname</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;gateway_hostname&#34;</span><span class=p>,</span> <span class=s2>&#34;gateway.openfaas&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>payload</span> <span class=o>=</span> <span class=n>json</span><span class=o>.</span><span class=n>loads</span><span class=p>(</span><span class=n>req</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=n>payload</span><span class=p>[</span><span class=s2>&#34;action&#34;</span><span class=p>]</span> <span class=o>==</span> <span class=s2>&#34;opened&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>#sentimentanalysis</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s1>&#39;http://&#39;</span> <span class=o>+</span> <span class=n>gateway_hostname</span> <span class=o>+</span> <span class=s1>&#39;:8080/function/sentimentanalysis&#39;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>payload</span><span class=p>[</span><span class=s2>&#34;issue&#34;</span><span class=p>][</span><span class=s2>&#34;title&#34;</span><span class=p>]</span><span class=o>+</span><span class=s2>&#34; &#34;</span><span class=o>+</span><span class=n>payload</span><span class=p>[</span><span class=s2>&#34;issue&#34;</span><span class=p>][</span><span class=s2>&#34;body&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>res</span><span class=o>.</span><span class=n>status_code</span> <span class=o>!=</span> <span class=mi>200</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>sys</span><span class=o>.</span><span class=n>exit</span><span class=p>(</span><span class=s2>&#34;Error with sentimentanalysis, expected: </span><span class=si>%d</span><span class=s2>, got: </span><span class=si>%d</span><span class=se>\n</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=mi>200</span><span class=p>,</span> <span class=n>res</span><span class=o>.</span><span class=n>status_code</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>res</span><span class=o>.</span><span class=n>json</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>用 HTTP/HTTPs 的请求模块更新你的<code>requirements.txt</code>文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>requests
+</span></span></code></pre></td></tr></table></div></div><p>在<code>issue-bot.yml</code>文件中添加<code>gateway_hostname</code>环境变量，并将其值设置为<code>gateway.openfaas</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>    ...
+</span></span><span class=line><span class=cl>    environment:
+</span></span><span class=line><span class=cl>      gateway_hostname: &#34;gateway.openfaas&#34;
+</span></span><span class=line><span class=cl>    ...
+</span></span></code></pre></td></tr></table></div></div><p>上面代码中的下面一行将 GitHub 问题的标题和正文作为文本发布给<code>sentimentanalysis</code>函数。响应将是 JSON 格式。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s1>&#39;http://&#39;</span> <span class=o>+</span> <span class=n>gateway_hostname</span> <span class=o>+</span> <span class=s1>&#39;:8080/function/sentimentanalysis&#39;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>payload</span><span class=p>[</span><span class=s2>&#34;issue&#34;</span><span class=p>][</span><span class=s2>&#34;title&#34;</span><span class=p>]</span><span class=o>+</span><span class=s2>&#34; &#34;</span><span class=o>+</span><span class=n>payload</span><span class=p>[</span><span class=s2>&#34;issue&#34;</span><span class=p>][</span><span class=s2>&#34;body&#34;</span><span class=p>])</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>构建和部署</li></ul><p>使用 CLI 来构建和部署该函数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>faas-cli up -f issue-bot.yml
+</span></span></code></pre></td></tr></table></div></div><p>现在在<code>bot-test</code>仓库中创建一个新问题。GitHub 将通过我们之前配置的 Inlets 隧道向你的函数发送一个 JSON 有效载荷。</p><p>你可以在 GitHub 上直接查看请求/响应&ndash;导航到<em>Settings</em> -> <em>Webhook</em>，如下所示。</p><p><img src=/../../screenshot/WebhookResponse.png loading=lazy></p><h2 id=回复到-github>回复到 GitHub</h2><p>下一步是让我们贴上 <code>正面</code> 或 <code>评论</code> 的标签，但由于这个动作涉及到向仓库写入内容，我们需要从 GitHub 获得一个<em>个人访问令牌</em>。</p><h3 id=为-github-创建一个个人访问令牌>为 GitHub 创建一个个人访问令牌</h3><p>进入你的<em>GitHub 配置文件</em> -> <em>设置/开发者设置</em> -> <em>个人访问令牌</em>，然后点击<em>生成新令牌</em>。</p><p><img src=/../../screenshot/PersonalAccessTokens.png loading=lazy></p><p>勾选 <code>repo</code>的方框，允许访问你的存储库</p><p><img src=/../../screenshot/NewPAT.png loading=lazy></p><p>点击页面底部的 <code>Generate Token</code>按钮</p><p>在你的<code>issue-bot.yml</code>文件所在的目录中创建一个名为<code>env.yml</code>的文件，内容如下。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>environment</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>auth_token</span><span class=p>:</span><span class=w> </span><span class=l>&lt;auth_token_value&gt;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>用 GitHub 上的令牌更新<code>auth_token</code>变量。</p><p>现在更新你的 issue-bot.yml 文件，告诉它使用<code>env.yml</code>文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>provider</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>openfaas</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>gateway</span><span class=p>:</span><span class=w> </span><span class=l>http://127.0.0.1:8080</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>functions</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>issue-bot</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>python3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>handler</span><span class=p>:</span><span class=w> </span><span class=l>./issue-bot</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>&lt;your-username&gt;/issue-bot</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>environment</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>write_debug</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>gateway_hostname</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;gateway.openfaas&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>positive_threshold</span><span class=p>:</span><span class=w> </span><span class=m>0.25</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>environment_file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>env.yml</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><blockquote><p><code>positive_threshold</code>环境变量用于微调一个问题是否获得<code>positive</code>或<code>review</code>标签。</p></blockquote><p>任何敏感信息都会被放在一个外部文件中（即<code>env.yml</code>），这样它就可以被包含在<code>.gitignore</code>文件中，这将有助于防止这些信息被存储在公共的 Git 仓库中。</p><p>OpenFaaS 也支持使用原生的 Docker 和 Kubernetes 的秘密，详情请见<a class=link href=lab10.md>Lab 10</a></p><h3 id=通过-github-的-api-应用标签>通过 GitHub 的 API 应用标签</h3><p>你可以使用 API 来执行许多不同的任务，<a class=link href=https://github.com/PyGithub/PyGithub target=_blank rel=noopener>文档在这里可以找到</a>。</p><p>下面是一个 Python 代码的例子，我们可以用它来应用标签，但你先不要把它添加到你的函数中。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>issue_number</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>repo_name</span> <span class=o>=</span> <span class=s2>&#34;alexellis/issue_bot&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>auth_token</span> <span class=o>=</span> <span class=s2>&#34;xyz&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>g</span> <span class=o>=</span> <span class=n>Github</span><span class=p>(</span><span class=n>auth_token</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>repo</span> <span class=o>=</span> <span class=n>g</span><span class=o>.</span><span class=n>get_repo</span><span class=p>(</span><span class=n>repo_name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>issue</span> <span class=o>=</span> <span class=n>repo</span><span class=o>.</span><span class=n>get_issue</span><span class=p>(</span><span class=n>issue_number</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个用于 GitHub 的库是由社区提供的，不是官方的，但似乎很受欢迎。它可以通过我们的<code>requirements.txt</code>文件从<code>pip</code>调入。</p><h2 id=完成函数>完成函数</h2><ul><li>更新你的<code>issue-bot/requirements.txt</code>文件，为<code>PyGithub</code>添加一行内容</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>requests
+</span></span><span class=line><span class=cl>PyGithub
+</span></span></code></pre></td></tr></table></div></div><ul><li>打开<code>issue-bot/handler.py</code>，将代码替换为以下内容。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span><span class=o>,</span> <span class=nn>json</span><span class=o>,</span> <span class=nn>os</span><span class=o>,</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>github</span> <span class=kn>import</span> <span class=n>Github</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>handle</span><span class=p>(</span><span class=n>req</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>event_header</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;Http_X_Github_Event&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=n>event_header</span> <span class=o>==</span> <span class=s2>&#34;issues&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>sys</span><span class=o>.</span><span class=n>exit</span><span class=p>(</span><span class=s2>&#34;Unable to handle X-GitHub-Event: &#34;</span> <span class=o>+</span> <span class=n>event_header</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>gateway_hostname</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;gateway_hostname&#34;</span><span class=p>,</span> <span class=s2>&#34;gateway.openfaas&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>payload</span> <span class=o>=</span> <span class=n>json</span><span class=o>.</span><span class=n>loads</span><span class=p>(</span><span class=n>req</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=n>payload</span><span class=p>[</span><span class=s2>&#34;action&#34;</span><span class=p>]</span> <span class=o>==</span> <span class=s2>&#34;opened&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>sys</span><span class=o>.</span><span class=n>exit</span><span class=p>(</span><span class=s2>&#34;Action not supported: &#34;</span> <span class=o>+</span> <span class=n>payload</span><span class=p>[</span><span class=s2>&#34;action&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Call sentimentanalysis</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s1>&#39;http://&#39;</span> <span class=o>+</span> <span class=n>gateway_hostname</span> <span class=o>+</span> <span class=s1>&#39;:8080/function/sentimentanalysis&#39;</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>                        <span class=n>data</span><span class=o>=</span> <span class=n>payload</span><span class=p>[</span><span class=s2>&#34;issue&#34;</span><span class=p>][</span><span class=s2>&#34;title&#34;</span><span class=p>]</span><span class=o>+</span><span class=s2>&#34; &#34;</span><span class=o>+</span><span class=n>payload</span><span class=p>[</span><span class=s2>&#34;issue&#34;</span><span class=p>][</span><span class=s2>&#34;body&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>res</span><span class=o>.</span><span class=n>status_code</span> <span class=o>!=</span> <span class=mi>200</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>sys</span><span class=o>.</span><span class=n>exit</span><span class=p>(</span><span class=s2>&#34;Error with sentimentanalysis, expected: </span><span class=si>%d</span><span class=s2>, got: </span><span class=si>%d</span><span class=se>\n</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=mi>200</span><span class=p>,</span> <span class=n>res</span><span class=o>.</span><span class=n>status_code</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Read the positive_threshold from configuration</span>
+</span></span><span class=line><span class=cl>    <span class=n>positive_threshold</span> <span class=o>=</span> <span class=nb>float</span><span class=p>(</span><span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;positive_threshold&#34;</span><span class=p>,</span> <span class=s2>&#34;0.2&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>polarity</span> <span class=o>=</span> <span class=n>res</span><span class=o>.</span><span class=n>json</span><span class=p>()[</span><span class=s1>&#39;polarity&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Call back to GitHub to apply a label</span>
+</span></span><span class=line><span class=cl>    <span class=n>apply_label</span><span class=p>(</span><span class=n>polarity</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>payload</span><span class=p>[</span><span class=s2>&#34;issue&#34;</span><span class=p>][</span><span class=s2>&#34;number&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=n>payload</span><span class=p>[</span><span class=s2>&#34;repository&#34;</span><span class=p>][</span><span class=s2>&#34;full_name&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=n>positive_threshold</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s2>&#34;Repo: </span><span class=si>%s</span><span class=s2>, issue: </span><span class=si>%s</span><span class=s2>, polarity: </span><span class=si>%f</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=n>payload</span><span class=p>[</span><span class=s2>&#34;repository&#34;</span><span class=p>][</span><span class=s2>&#34;full_name&#34;</span><span class=p>],</span> <span class=n>payload</span><span class=p>[</span><span class=s2>&#34;issue&#34;</span><span class=p>][</span><span class=s2>&#34;number&#34;</span><span class=p>],</span> <span class=n>polarity</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>apply_label</span><span class=p>(</span><span class=n>polarity</span><span class=p>,</span> <span class=n>issue_number</span><span class=p>,</span> <span class=n>repo</span><span class=p>,</span> <span class=n>positive_threshold</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>g</span> <span class=o>=</span> <span class=n>Github</span><span class=p>(</span><span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=s2>&#34;auth_token&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>repo</span> <span class=o>=</span> <span class=n>g</span><span class=o>.</span><span class=n>get_repo</span><span class=p>(</span><span class=n>repo</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>issue</span> <span class=o>=</span> <span class=n>repo</span><span class=o>.</span><span class=n>get_issue</span><span class=p>(</span><span class=n>issue_number</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>has_label_positive</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=n>has_label_review</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>label</span> <span class=ow>in</span> <span class=n>issue</span><span class=o>.</span><span class=n>labels</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>label</span> <span class=o>==</span> <span class=s2>&#34;positive&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>has_label_positive</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>label</span> <span class=o>==</span> <span class=s2>&#34;review&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>has_label_review</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>polarity</span> <span class=o>&gt;</span> <span class=n>positive_threshold</span> <span class=ow>and</span> <span class=ow>not</span> <span class=n>has_label_positive</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>issue</span><span class=o>.</span><span class=n>set_labels</span><span class=p>(</span><span class=s2>&#34;positive&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=ow>not</span> <span class=n>has_label_review</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>issue</span><span class=o>.</span><span class=n>set_labels</span><span class=p>(</span><span class=s2>&#34;review&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>源代码也可在<a class=link href=./issue-bot/bot-handler/handler.py>issue-bot/bot-handler/handler.py</a></p></blockquote><ul><li>构建和部署</li></ul><p>使用 CLI 来构建和部署该函数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>faas-cli up -f issue-bot.yml
+</span></span></code></pre></td></tr></table></div></div><p>现在通过在<code>bot-test</code>仓库中创建一些新的问题来试试。检查 <code>正面</code>和 <code>评论</code>标签是否被正确应用，如果你不确定信息是否被传递或怀疑有错误被抛出，请查阅 GitHub Webhooks 页面。</p><p><img src=/../../screenshot/bot_label_applied.png loading=lazy></p><blockquote><p>注意：如果标签没有立即出现，请先尝试刷新页面。</p></blockquote><h2 id=用-hmac-验证有效载荷>用 HMAC 验证有效载荷</h2><p>在<a class=link href=lab11.md>Lab 11</a>中，我们将学习如何通过使用 HMAC 保护无服务器函数不被篡改。</p><p>现在转到<a class=link href=lab6.md>Lab 6</a>。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/openfaas/>openfaas</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#获取一个-github-账户>获取一个 GitHub 账户</a></li><li><a href=#建立一个带有入口的隧道>建立一个带有入口的隧道</a></li><li><a href=#用网关的公共-ip-登录你的网关>用网关的公共 IP 登录你的网关</a></li><li><a href=#创建一个-webhook-接收器issue-bot>创建一个 webhook 接收器<code>issue-bot</code></a></li><li><a href=#从-github-接收-webhooks>从 GitHub 接收 webhooks</a></li><li><a href=#检查它是否有效>检查它是否有效</a><ol><li><a href=#部署-sentimentanalysis-函数>部署 SentimentAnalysis 函数</a></li><li><a href=#更新issue-bot函数>更新<code>issue-bot</code>函数</a></li></ol></li><li><a href=#回复到-github>回复到 GitHub</a><ol><li><a href=#为-github-创建一个个人访问令牌>为 GitHub 创建一个个人访问令牌</a></li><li><a href=#通过-github-的-api-应用标签>通过 GitHub 的 API 应用标签</a></li></ol></li><li><a href=#完成函数>完成函数</a></li><li><a href=#用-hmac-验证有效载荷>用 HMAC 验证有效载荷</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,0 +1,346 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="以前没有好好学的东西，现在在工作中慢慢的补回来了。
+基础概念  索引  es 是将数据存储在一个或者多个索引（index）中。
+索引就像是数据库。
+ 文档  文档是 es 的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。
+文档就像数据库中的一条条记录。
+ 类型  每个文档都有一个类型与之相对应。
+类型就像数据库中的表。
+ Map  所有文档在被写入到 es 中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。
+ 节点  单个 es 服务实例就是一个节点。
+ 集群  多个协同工作的 es 节点的集合就是集群。
+ 分片  es 将数据分散到多个物理的 Lucene 索引上，这些物理 Lucene 索引被称为分片。
+ 副本  副本就是每个分片都做冗余处理，一个宕机之后，不影响服务。
+快速入门 安装 es 的安装很简单，我这里使用的是 mac，下载下来 zip 包，解压即可使用。
+1 2 3 4 5 6 7  [elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ."><title>elasticsearch</title><link rel=canonical href=https://example.com/p/elasticsearch/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="elasticsearch"><meta property="og:description" content="以前没有好好学的东西，现在在工作中慢慢的补回来了。
+基础概念  索引  es 是将数据存储在一个或者多个索引（index）中。
+索引就像是数据库。
+ 文档  文档是 es 的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。
+文档就像数据库中的一条条记录。
+ 类型  每个文档都有一个类型与之相对应。
+类型就像数据库中的表。
+ Map  所有文档在被写入到 es 中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。
+ 节点  单个 es 服务实例就是一个节点。
+ 集群  多个协同工作的 es 节点的集合就是集群。
+ 分片  es 将数据分散到多个物理的 Lucene 索引上，这些物理 Lucene 索引被称为分片。
+ 副本  副本就是每个分片都做冗余处理，一个宕机之后，不影响服务。
+快速入门 安装 es 的安装很简单，我这里使用的是 mac，下载下来 zip 包，解压即可使用。
+1 2 3 4 5 6 7  [elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ."><meta property="og:url" content="https://example.com/p/elasticsearch/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2018-05-20T14:17:07+00:00"><meta property="article:modified_time" content="2018-05-20T14:17:07+00:00"><meta name=twitter:title content="elasticsearch"><meta name=twitter:description content="以前没有好好学的东西，现在在工作中慢慢的补回来了。
+基础概念  索引  es 是将数据存储在一个或者多个索引（index）中。
+索引就像是数据库。
+ 文档  文档是 es 的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。
+文档就像数据库中的一条条记录。
+ 类型  每个文档都有一个类型与之相对应。
+类型就像数据库中的表。
+ Map  所有文档在被写入到 es 中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。
+ 节点  单个 es 服务实例就是一个节点。
+ 集群  多个协同工作的 es 节点的集合就是集群。
+ 分片  es 将数据分散到多个物理的 Lucene 索引上，这些物理 Lucene 索引被称为分片。
+ 副本  副本就是每个分片都做冗余处理，一个宕机之后，不影响服务。
+快速入门 安装 es 的安装很简单，我这里使用的是 mac，下载下来 zip 包，解压即可使用。
+1 2 3 4 5 6 7  [elasticsearch-6.2.4] pwd /Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4 [elasticsearch-6.2.4] ."></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/elasticsearch/>elasticsearch</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>May 20, 2018</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><p>以前没有好好学的东西，现在在工作中慢慢的补回来了。</p><h1 id=基础概念>基础概念</h1><ul><li>索引</li></ul><p>es 是将数据存储在一个或者多个索引（index）中。</p><p>索引就像是数据库。</p><ul><li>文档</li></ul><p>文档是 es 的实体。由字段构成，每个字段包含字段名和一个或者多个字段值。</p><p>文档就像数据库中的一条条记录。</p><ul><li>类型</li></ul><p>每个文档都有一个类型与之相对应。</p><p>类型就像数据库中的表。</p><ul><li>Map</li></ul><p>所有文档在被写入到 es 中，都会被分析。由用户设置一些参数决定如何分割词条、哪些字应该被过滤掉等等。</p><ul><li>节点</li></ul><p>单个 es 服务实例就是一个节点。</p><ul><li>集群</li></ul><p>多个协同工作的 es 节点的集合就是集群。</p><ul><li>分片</li></ul><p>es 将数据分散到多个物理的 Lucene 索引上，这些物理 Lucene 索引被称为分片。</p><ul><li>副本</li></ul><p>副本就是每个分片都做冗余处理，一个宕机之后，不影响服务。</p><h1 id=快速入门>快速入门</h1><h2 id=安装>安装</h2><p>es 的安装很简单，我这里使用的是 mac，下载下来 zip 包，解压即可使用。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>[elasticsearch-6.2.4] pwd
+</span></span><span class=line><span class=cl>/Users/zhuzhenfeng/Documents/software/elasticsearch-6.2.4
+</span></span><span class=line><span class=cl>[elasticsearch-6.2.4] ./bin/elasticsearch
+</span></span><span class=line><span class=cl>Java HotSpot(TM) 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+</span></span><span class=line><span class=cl>[2018-05-20T17:18:37,619][INFO ][o.e.n.Node               ] [] initializing ...
+</span></span><span class=line><span class=cl>[2018-05-20T17:18:37,766][INFO ][o.e.e.NodeEnvironment    ] [M41310-] using [1] data paths, mounts [[/ (/dev/disk1s1)]], net usable_space [136gb], net total_space [233.4gb], types [apfs]
+</span></span><span class=line><span class=cl>[2018-05-20T17:18:37,767][INFO ][o.e.e.NodeEnvironment    ] [M41310-] heap size [990.7mb], compressed ordinary object pointers [true]
+</span></span></code></pre></td></tr></table></div></div><p>这样就将 es 启动了，然后在 chrome 中，输入<a class=link href=http://localhost:9200 target=_blank rel=noopener>http://localhost:9200</a>，即可查看有没有启动成功。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;name&#34;: &#34;M41310-&#34;,
+</span></span><span class=line><span class=cl>    &#34;cluster_name&#34;: &#34;elasticsearch&#34;,
+</span></span><span class=line><span class=cl>    &#34;cluster_uuid&#34;: &#34;58U11tViTYuXpI2b5SiGrg&#34;,
+</span></span><span class=line><span class=cl>    &#34;version&#34;: {
+</span></span><span class=line><span class=cl>        &#34;number&#34;: &#34;6.2.4&#34;,
+</span></span><span class=line><span class=cl>        &#34;build_hash&#34;: &#34;ccec39f&#34;,
+</span></span><span class=line><span class=cl>        &#34;build_date&#34;: &#34;2018-04-12T20:37:28.497551Z&#34;,
+</span></span><span class=line><span class=cl>        &#34;build_snapshot&#34;: false,
+</span></span><span class=line><span class=cl>        &#34;lucene_version&#34;: &#34;7.2.1&#34;,
+</span></span><span class=line><span class=cl>        &#34;minimum_wire_compatibility_version&#34;: &#34;5.6.0&#34;,
+</span></span><span class=line><span class=cl>        &#34;minimum_index_compatibility_version&#34;: &#34;5.0.0&#34;
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    &#34;tagline&#34;: &#34;You Know, for Search&#34;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=常用的命令>常用的命令</h2><p>使用 postman 来模拟发送请求。</p><h3 id=创建-index>创建 index</h3><p>PUT</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>http://127.0.0.1:9200/myindex
+</span></span></code></pre></td></tr></table></div></div><p>response</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;acknowledged&#34;: true,
+</span></span><span class=line><span class=cl>    &#34;shards_acknowledged&#34;: true,
+</span></span><span class=line><span class=cl>    &#34;index&#34;: &#34;myindex&#34;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>创建了一个叫 myindex 的索引</p><h3 id=删除-index>删除 index</h3><p>DELETE</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>http://127.0.0.1:9200/myindex
+</span></span></code></pre></td></tr></table></div></div><p>response</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;acknowledged&#34;: true
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>使用 delete 方法就可以删除索引，而且可以发现 es 的 response 特别人性化。</p><h3 id=创建-maping>创建 maping</h3><p>POST</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>http://localhost:9200/myindex/fulltext/_mapping
+</span></span></code></pre></td></tr></table></div></div><p>body</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;properties&#34;: {
+</span></span><span class=line><span class=cl>    &#34;content&#34;: {
+</span></span><span class=line><span class=cl>      &#34;type&#34;: &#34;text&#34;,
+</span></span><span class=line><span class=cl>      &#34;analyzer&#34;: &#34;ik_max_word&#34;,
+</span></span><span class=line><span class=cl>      &#34;search_analyzer&#34;: &#34;ik_max_word&#34;
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>response</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;acknowledged&#34;: true
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>在这里在创建一个 type 是 fulltext 的同时，指定了这个 fulltext 类型的字段 Map。在 mapping 中，一般是设置字段是什么类型的，比如 bool，text 等。analyzer 是给文档建索引的分词方法，search_analyzer 是搜索时对搜索的内容进行分词的方法。这里都是用了 ik 的分词器。</p><h3 id=新增-doc>新增 doc</h3><p>POST</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>http://localhost:9200/myindex/fulltext/1
+</span></span></code></pre></td></tr></table></div></div><p>body</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{ 
+</span></span><span class=line><span class=cl>    &#34;content&#34;: &#34;中国崛起哦&#34; 
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>response</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;_index&#34;: &#34;myindex&#34;,
+</span></span><span class=line><span class=cl>    &#34;_type&#34;: &#34;fulltext&#34;,
+</span></span><span class=line><span class=cl>    &#34;_id&#34;: &#34;1&#34;,
+</span></span><span class=line><span class=cl>    &#34;_version&#34;: 1,
+</span></span><span class=line><span class=cl>    &#34;result&#34;: &#34;created&#34;,
+</span></span><span class=line><span class=cl>    &#34;_shards&#34;: {
+</span></span><span class=line><span class=cl>        &#34;total&#34;: 2,
+</span></span><span class=line><span class=cl>        &#34;successful&#34;: 1,
+</span></span><span class=line><span class=cl>        &#34;failed&#34;: 0
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    &#34;_seq_no&#34;: 0,
+</span></span><span class=line><span class=cl>    &#34;_primary_term&#34;: 1
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>如果没有指定 id 的话，每次新增的时候都会用 es 自动给的 id。如果不注意的话，可能会出现重复新增，所以我们一般情况下会使用自己给的的 id。</p><h3 id=搜索>搜索</h3><p>POST</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>http://127.0.0.1:9200/myindex/fulltext/_search
+</span></span></code></pre></td></tr></table></div></div><p>body</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;query&#34;: {
+</span></span><span class=line><span class=cl>    &#34;match&#34;: {
+</span></span><span class=line><span class=cl>      &#34;content&#34;: {
+</span></span><span class=line><span class=cl>        &#34;query&#34;: &#34;中国&#34;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>response</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;took&#34;: 98,
+</span></span><span class=line><span class=cl>    &#34;timed_out&#34;: false,
+</span></span><span class=line><span class=cl>    &#34;_shards&#34;: {
+</span></span><span class=line><span class=cl>        &#34;total&#34;: 5,
+</span></span><span class=line><span class=cl>        &#34;successful&#34;: 5,
+</span></span><span class=line><span class=cl>        &#34;skipped&#34;: 0,
+</span></span><span class=line><span class=cl>        &#34;failed&#34;: 0
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    &#34;hits&#34;: {
+</span></span><span class=line><span class=cl>        &#34;total&#34;: 1,
+</span></span><span class=line><span class=cl>        &#34;max_score&#34;: 0.2876821,
+</span></span><span class=line><span class=cl>        &#34;hits&#34;: [
+</span></span><span class=line><span class=cl>            {
+</span></span><span class=line><span class=cl>                &#34;_index&#34;: &#34;myindex&#34;,
+</span></span><span class=line><span class=cl>                &#34;_type&#34;: &#34;fulltext&#34;,
+</span></span><span class=line><span class=cl>                &#34;_id&#34;: &#34;1&#34;,
+</span></span><span class=line><span class=cl>                &#34;_score&#34;: 0.2876821,
+</span></span><span class=line><span class=cl>                &#34;_source&#34;: {
+</span></span><span class=line><span class=cl>                    &#34;content&#34;: &#34;中国崛起哦&#34;
+</span></span><span class=line><span class=cl>                }
+</span></span><span class=line><span class=cl>            }
+</span></span><span class=line><span class=cl>        ]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}。
+</span></span></code></pre></td></tr></table></div></div><p>前面都没啥，主要就是如何把数据灌到 es 中。es 作为一个搜索引擎，肯定搜索才是最重要的。这里只是用的最简单的搜索。关于 es 的搜索，我在实际生产中主要使用的是，多字段的搜索，使用了 bool 操作符。</p><h1 id=原理>原理</h1><h2 id=相关性得分>相关性得分</h2><p>Elasticsearch 默认按照相关性得分排序，即每个文档跟查询的匹配程度。Elasticsearch 中的 <em>相关性</em> 概念非常重要，也是完全区别于传统关系型数据库的一个概念，数据库中的一条记录要么匹配要么不匹配。</p><h1 id=搜索-1>搜索</h1><h2 id=轻量级搜索>轻量级搜索</h2><p>_search</p><p>_search?q=content:中国</p><p>这种搜索方式比较简单，很轻量。</p><h2 id=查询表达式>查询表达式</h2><p>即 dsl 形式的。使用的是 POST 方法，在 body 中，写搜索的 dsl。</p><h3 id=简单的-dsl>简单的 dsl</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;query&#34;: {
+</span></span><span class=line><span class=cl>    &#34;match&#34;: {
+</span></span><span class=line><span class=cl>      &#34;content&#34;: {
+</span></span><span class=line><span class=cl>        &#34;query&#34;: &#34;中国&#34;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h3 id=bool-操作符的-dsl>bool 操作符的 DSL</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;query&#34; : {
+</span></span><span class=line><span class=cl>        &#34;bool&#34;: {
+</span></span><span class=line><span class=cl>            &#34;must&#34;: {
+</span></span><span class=line><span class=cl>                &#34;match&#34; : {
+</span></span><span class=line><span class=cl>                    &#34;last_name&#34; : &#34;smith&#34; 
+</span></span><span class=line><span class=cl>                }
+</span></span><span class=line><span class=cl>            },
+</span></span><span class=line><span class=cl>            &#34;filter&#34;: {
+</span></span><span class=line><span class=cl>                &#34;range&#34; : {
+</span></span><span class=line><span class=cl>                    &#34;age&#34; : { &#34;gt&#34; : 30 } 
+</span></span><span class=line><span class=cl>                }
+</span></span><span class=line><span class=cl>            }
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>我们添加了一个 <em>过滤器</em> 用于执行一个范围查询，并复用之前的 <code>match</code> 查询。</p><h3 id=短语搜索>短语搜索</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;query&#34; : {
+</span></span><span class=line><span class=cl>        &#34;match_phrase&#34; : {
+</span></span><span class=line><span class=cl>            &#34;about&#34; : &#34;rock climbing&#34;
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>如果不用短语搜索的话，会将只含有 rock 或者 climbing 的返回。为了能让二者是短语形式，es 中新增了短语搜索 dsl。</p><h3 id=高亮>高亮</h3><p>许多应用都倾向于在每个搜索结果中 <em>高亮</em> 部分文本片段，以便让用户知道为何该文档符合查询条件。在 Elasticsearch 中检索出高亮片段也很容易。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    &#34;query&#34; : {
+</span></span><span class=line><span class=cl>        &#34;match_phrase&#34; : {
+</span></span><span class=line><span class=cl>            &#34;about&#34; : &#34;rock climbing&#34;
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    &#34;highlight&#34;: {
+</span></span><span class=line><span class=cl>        &#34;fields&#34; : {
+</span></span><span class=line><span class=cl>            &#34;about&#34; : {}
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>加上 highlight 关键字即可。</p><h3 id=聚合>聚合</h3><p> Elasticsearch 有一个功能叫聚合（aggregations），允许我们基于数据生成一些精细的分析结果。聚合与 SQL 中的 <code>GROUP BY</code> 类似但更强大。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;aggs&#34;: {
+</span></span><span class=line><span class=cl>    &#34;all_interests&#34;: {
+</span></span><span class=line><span class=cl>      &#34;terms&#34;: { &#34;field&#34;: &#34;interests&#34; }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#安装>安装</a></li><li><a href=#常用的命令>常用的命令</a><ol><li><a href=#创建-index>创建 index</a></li><li><a href=#删除-index>删除 index</a></li><li><a href=#创建-maping>创建 maping</a></li><li><a href=#新增-doc>新增 doc</a></li><li><a href=#搜索>搜索</a></li></ol></li></ol><ol><li><a href=#相关性得分>相关性得分</a></li></ol><ol><li><a href=#轻量级搜索>轻量级搜索</a></li><li><a href=#查询表达式>查询表达式</a><ol><li><a href=#简单的-dsl>简单的 dsl</a></li><li><a href=#bool-操作符的-dsl>bool 操作符的 DSL</a></li><li><a href=#短语搜索>短语搜索</a></li><li><a href=#高亮>高亮</a></li><li><a href=#聚合>聚合</a></li></ol></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

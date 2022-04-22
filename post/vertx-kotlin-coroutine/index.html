@@ -1,136 +1,181 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>译：vertx-kotlin-coroutine - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/vertx-kotlin-coroutine/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="译：vertx-kotlin-coroutine">
-<meta property="og:description" content="尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/vertx-kotlin-coroutine/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-06-02T16:00:52+00:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="译：vertx-kotlin-coroutine">
-<meta itemprop=description content="尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集"><meta itemprop=datePublished content="2018-06-02T16:00:52+00:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="2787">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="译：vertx-kotlin-coroutine">
-<meta name=twitter:description content="尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>译：vertx-kotlin-coroutine - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/vertx-kotlin-coroutine/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="译：vertx-kotlin-coroutine" />
+<meta property="og:description" content="尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/vertx-kotlin-coroutine/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-06-02T16:00:52+00:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="译：vertx-kotlin-coroutine">
+<meta itemprop="description" content="尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集"><meta itemprop="datePublished" content="2018-06-02T16:00:52+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="2787">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="译：vertx-kotlin-coroutine"/>
+<meta name="twitter:description" content="尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。 Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。 vertx-lang-kotlin-coroutines 集"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>译：vertx-kotlin-coroutine</h1>
-<div class=post-meta>
-<span class=post-time> 2018-06-02 </span>
-<span class=more-meta> 约 2787 字 </span>
-<span class=more-meta> 预计阅读 6 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#简介>简介</a></li>
-<li><a href=#从一个-vertxx-的-contex-中启动协程>从一个 vertx.x 的 contex 中启动协程</a></li>
-<li><a href=#继承-coroutineverticle>继承 CoroutineVerticle</a></li>
-<li><a href=#获得一次性的异步结果>获得一次性的异步结果</a></li>
-<li><a href=#获取一次性事件>获取一次性事件</a></li>
-<li><a href=#获取一次性-worker-的结果>获取一次性 worker 的结果</a></li>
-<li><a href=#事件流>事件流</a></li>
-<li><a href=#等待-vertx-的-future-的完成>等待 vert.x 的 future 的完成</a></li>
-<li><a href=#通道>通道</a>
-<ul>
-<li><a href=#接收数据>接收数据</a></li>
-<li><a href=#发送数据>发送数据</a></li>
-</ul>
-</li>
-<li><a href=#延迟取消和超时>延迟，取消和超时</a></li>
-<li><a href=#协程的互操作性>协程的互操作性</a></li>
-<li><a href=#rxjava-的互操作性>RxJava 的互操作性</a></li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">译：vertx-kotlin-coroutine</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-06-02 </span>
+        
+          <span class="more-meta"> 约 2787 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#从一个-vertxx-的-contex-中启动协程">从一个 vertx.x 的 contex 中启动协程</a></li>
+    <li><a href="#继承-coroutineverticle">继承 CoroutineVerticle</a></li>
+    <li><a href="#获得一次性的异步结果">获得一次性的异步结果</a></li>
+    <li><a href="#获取一次性事件">获取一次性事件</a></li>
+    <li><a href="#获取一次性-worker-的结果">获取一次性 worker 的结果</a></li>
+    <li><a href="#事件流">事件流</a></li>
+    <li><a href="#等待-vertx-的-future-的完成">等待 vert.x 的 future 的完成</a></li>
+    <li><a href="#通道">通道</a>
+      <ul>
+        <li><a href="#接收数据">接收数据</a></li>
+        <li><a href="#发送数据">发送数据</a></li>
+      </ul>
+    </li>
+    <li><a href="#延迟取消和超时">延迟，取消和超时</a></li>
+    <li><a href="#协程的互操作性">协程的互操作性</a></li>
+    <li><a href="#rxjava-的互操作性">RxJava 的互操作性</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<blockquote>
+    <div class="post-content">
+      <blockquote>
 <p>尝试翻译 vertx 的文档。尊重原文，部分使用自己的理解。</p>
 </blockquote>
 <p>Vert.x 的 kotlin 协程提供了 async/await 或者和 go 类似的 channel。这使得你能够以熟悉的顺序风格写垂直代码。</p>
 <p>vertx-lang-kotlin-coroutines 集成了 kotlin 协程，用于执行异步操作和处理事件。这样就能够以同步代码的模型编写代码，而且不会阻塞内核线程。</p>
-<h1 id=简介>简介</h1>
+<h1 id="简介">简介</h1>
 <p>vert.x 与许多旧的应用平台相比的一个主要优势是它几乎完全是非阻塞的（内核线程）。这允许基于 vert.x 的程序使用极少数的内核线程处理大量的并发（例如：许多连接和消息），可以获得更好的伸缩性。</p>
 <p>vert.x 的非阻塞特性形成了非阻塞 API。非阻塞 API 可以采用多种形式来实现，包括回调函数，promise，fibers 或者响应式扩展。vert.x 的核心 API 使用回调函数的风格，但是它也支持其他模型，如 RxJava 1 和 2。</p>
 <p>在某些情况下，使用异步的 API 编程可能比使用经典的顺序代码风格更具有挑战性，特别是需要按照顺序完成若干操作。另外，使用异步 API 时，错误的传播也更为复杂。</p>
@@ -139,245 +184,245 @@
 <blockquote>
 <p>vertx-lang-kotlin-coroutines 目前仅适用于 kotlin，而且是 kotlin1.1 的一个实验特性。</p>
 </blockquote>
-<h1 id=从一个-vertxx-的-contex-中启动协程>从一个 vertx.x 的 contex 中启动协程</h1>
+<h1 id="从一个-vertxx-的-contex-中启动协程">从一个 vertx.x 的 contex 中启动协程</h1>
 <p>导入 io.vertx.kotlin.coroutines.VertxCoroutine，launch（协程生成器）方法中允许运行一段代码作为可以暂停的协程：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>vertx</span> <span class=p>=</span> <span class=n>Vertx</span><span class=p>.</span><span class=n>vertx</span><span class=p>()</span>
-<span class=n>vertx</span><span class=p>.</span><span class=n>deployVerticle</span><span class=p>(</span><span class=n>ExampleVerticle</span><span class=p>())</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">vertx</span> <span class="p">=</span> <span class="n">Vertx</span><span class="p">.</span><span class="n">vertx</span><span class="p">()</span>
+<span class="n">vertx</span><span class="p">.</span><span class="n">deployVerticle</span><span class="p">(</span><span class="n">ExampleVerticle</span><span class="p">())</span>
 
-<span class=n>launch</span><span class=p>(</span><span class=n>vertx</span><span class=p>.</span><span class=n>dispatcher</span><span class=p>())</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>timerId</span> <span class=p>=</span> <span class=n>awaitEvent</span><span class=p>&lt;</span><span class=n>Long</span><span class=p>&gt;</span> <span class=p>{</span> <span class=n>handler</span> <span class=o>-&gt;</span>
-    <span class=n>vertx</span><span class=p>.</span><span class=n>setTimer</span><span class=p>(</span><span class=m>1000</span><span class=p>,</span> <span class=n>handler</span><span class=p>)</span>
-  <span class=p>}</span>
-  <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Event fired from timer with id </span><span class=si>${timerId}</span><span class=s2>&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<span class="n">launch</span><span class="p">(</span><span class="n">vertx</span><span class="p">.</span><span class="n">dispatcher</span><span class="p">())</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">timerId</span> <span class="p">=</span> <span class="n">awaitEvent</span><span class="p">&lt;</span><span class="n">Long</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">handler</span> <span class="o">-&gt;</span>
+    <span class="n">vertx</span><span class="p">.</span><span class="n">setTimer</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Event fired from timer with id </span><span class="si">${timerId}</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>vertx.dispatcher()返回一个使用 vert.x 的事件循环执行协程的 disptacher。</p>
 <p>awaitEvent 函数暂停协程的执行直到定时器触发为止，并使用赋给 handler 的值恢复协程。</p>
 <p>有关 handlers，events 和事件流的更多细节，将在下一节中给出。</p>
-<h1 id=继承-coroutineverticle>继承 CoroutineVerticle</h1>
+<h1 id="继承-coroutineverticle">继承 CoroutineVerticle</h1>
 <p>你可以将代码部署为 io.vertx.kotlin.coroutines.CoroutineVerticle 的实例，这是 kotlin 协程的专用类型。你应该重载 verticle 的 start()方法，stop()方法的重载是可选的：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>class</span> <span class=nc>MyVerticle</span> <span class=p>:</span> <span class=n>CoroutineVerticle</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>suspend</span> <span class=k>override</span> <span class=k>fun</span> <span class=nf>start</span><span class=p>()</span> <span class=p>{</span>
-    <span class=c1>// ...
-</span><span class=c1></span>  <span class=p>}</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyVerticle</span> <span class="p">:</span> <span class="n">CoroutineVerticle</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">suspend</span> <span class="k">override</span> <span class="k">fun</span> <span class="nf">start</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=获得一次性的异步结果>获得一次性的异步结果</h1>
-<p>vert.x 的许多异步操作都采用 <code>Handler&lt;AsyncResult&lt;T>></code> 作为最后一个参数。一个例子就是使用 vert.x 的 mongo client 执行对象检索，或者是发送一个事件总线消息之后等待回复。</p>
+</div><h1 id="获得一次性的异步结果">获得一次性的异步结果</h1>
+<p>vert.x 的许多异步操作都采用 <code>Handler&lt;AsyncResult&lt;T&gt;&gt;</code> 作为最后一个参数。一个例子就是使用 vert.x 的 mongo client 执行对象检索，或者是发送一个事件总线消息之后等待回复。</p>
 <p>这是通过 awaitResult 方法来实现，它返回一个值或者抛出一个异常。</p>
 <p>协程会一直处于暂停的状态知道事件被处理，并且这时没有内核线程被阻塞。</p>
 <p>The method is executed by specifying the asynchronous operation that needs to be executed in the form of a block that is passed to the handler at run-time.</p>
 <p>这个方法是通过指定一个异步操作来执行，这个异步操作需要以块的形式执行，而这个异步操作块在运行时会被传给 handler。</p>
 <p>这里是一个例子：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>suspend</span> <span class=k>fun</span> <span class=nf>awaitResultExample</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>consumer</span> <span class=p>=</span> <span class=n>vertx</span><span class=p>.</span><span class=n>eventBus</span><span class=p>().</span><span class=n>localConsumer</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;(</span><span class=s2>&#34;a.b.c&#34;</span><span class=p>)</span>
-  <span class=n>consumer</span><span class=p>.</span><span class=n>handler</span> <span class=p>{</span> <span class=n>message</span> <span class=o>-&gt;</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Consumer received: </span><span class=si>${message.body()}</span><span class=s2>&#34;</span><span class=p>)</span>
-    <span class=n>message</span><span class=p>.</span><span class=n>reply</span><span class=p>(</span><span class=s2>&#34;pong&#34;</span><span class=p>)</span>
-  <span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">awaitResultExample</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">consumer</span> <span class="p">=</span> <span class="n">vertx</span><span class="p">.</span><span class="n">eventBus</span><span class="p">().</span><span class="n">localConsumer</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;(</span><span class="s2">&#34;a.b.c&#34;</span><span class="p">)</span>
+  <span class="n">consumer</span><span class="p">.</span><span class="n">handler</span> <span class="p">{</span> <span class="n">message</span> <span class="o">-&gt;</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Consumer received: </span><span class="si">${message.body()}</span><span class="s2">&#34;</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">.</span><span class="n">reply</span><span class="p">(</span><span class="s2">&#34;pong&#34;</span><span class="p">)</span>
+  <span class="p">}</span>
 
-  <span class=c1>// Send a message and wait for a reply
-</span><span class=c1></span>  <span class=k>val</span> <span class=py>reply</span> <span class=p>=</span> <span class=n>awaitResult</span><span class=p>&lt;</span><span class=n>Message</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;&gt;</span> <span class=p>{</span> <span class=n>h</span> <span class=o>-&gt;</span>
-    <span class=n>vertx</span><span class=p>.</span><span class=n>eventBus</span><span class=p>().</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;a.b.c&#34;</span><span class=p>,</span> <span class=s2>&#34;ping&#34;</span><span class=p>,</span> <span class=n>h</span><span class=p>)</span>
-  <span class=p>}</span>
-  <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Reply received: </span><span class=si>${reply.body()}</span><span class=s2>&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+  <span class="c1">// Send a message and wait for a reply
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">reply</span> <span class="p">=</span> <span class="n">awaitResult</span><span class="p">&lt;</span><span class="n">Message</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">{</span> <span class="n">h</span> <span class="o">-&gt;</span>
+    <span class="n">vertx</span><span class="p">.</span><span class="n">eventBus</span><span class="p">().</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;a.b.c&#34;</span><span class="p">,</span> <span class="s2">&#34;ping&#34;</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Reply received: </span><span class="si">${reply.body()}</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>当此块产生失败时，调用者可以使用 try/catch 结构处理异常。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>suspend</span> <span class=k>fun</span> <span class=nf>awaitResultFailureExample</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>consumer</span> <span class=p>=</span> <span class=n>vertx</span><span class=p>.</span><span class=n>eventBus</span><span class=p>().</span><span class=n>localConsumer</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;(</span><span class=s2>&#34;a.b.c&#34;</span><span class=p>)</span>
-  <span class=n>consumer</span><span class=p>.</span><span class=n>handler</span> <span class=p>{</span> <span class=n>message</span> <span class=o>-&gt;</span>
-    <span class=c1>// The consumer will get a failure
-</span><span class=c1></span>    <span class=n>message</span><span class=p>.</span><span class=n>fail</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=s2>&#34;it failed!!!&#34;</span><span class=p>)</span>
-  <span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">awaitResultFailureExample</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">consumer</span> <span class="p">=</span> <span class="n">vertx</span><span class="p">.</span><span class="n">eventBus</span><span class="p">().</span><span class="n">localConsumer</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;(</span><span class="s2">&#34;a.b.c&#34;</span><span class="p">)</span>
+  <span class="n">consumer</span><span class="p">.</span><span class="n">handler</span> <span class="p">{</span> <span class="n">message</span> <span class="o">-&gt;</span>
+    <span class="c1">// The consumer will get a failure
+</span><span class="c1"></span>    <span class="n">message</span><span class="p">.</span><span class="n">fail</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="s2">&#34;it failed!!!&#34;</span><span class="p">)</span>
+  <span class="p">}</span>
 
-  <span class=c1>// Send a message and wait for a reply
-</span><span class=c1></span>  <span class=k>try</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>reply</span><span class=p>:</span> <span class=n>Message</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;</span> <span class=p>=</span> <span class=n>awaitResult</span><span class=p>&lt;</span><span class=n>Message</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;&gt;</span> <span class=p>{</span> <span class=n>h</span> <span class=o>-&gt;</span>
-         <span class=n>vertx</span><span class=p>.</span><span class=n>eventBus</span><span class=p>().</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;a.b.c&#34;</span><span class=p>,</span> <span class=s2>&#34;ping&#34;</span><span class=p>,</span> <span class=n>h</span><span class=p>)</span>
-       <span class=p>}</span>
-  <span class=p>}</span> <span class=k>catch</span><span class=p>(</span><span class=n>e</span><span class=p>:</span> <span class=n>ReplyException</span><span class=p>)</span> <span class=p>{</span>
-    <span class=c1>// Handle specific reply exception here
-</span><span class=c1></span>    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Reply failure: </span><span class=si>${e.message}</span><span class=s2>&#34;</span><span class=p>)</span>
-  <span class=p>}</span>
-<span class=p>}</span>
+  <span class="c1">// Send a message and wait for a reply
+</span><span class="c1"></span>  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">reply</span><span class="p">:</span> <span class="n">Message</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">awaitResult</span><span class="p">&lt;</span><span class="n">Message</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">{</span> <span class="n">h</span> <span class="o">-&gt;</span>
+         <span class="n">vertx</span><span class="p">.</span><span class="n">eventBus</span><span class="p">().</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;a.b.c&#34;</span><span class="p">,</span> <span class="s2">&#34;ping&#34;</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+       <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">ReplyException</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle specific reply exception here
+</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Reply failure: </span><span class="si">${e.message}</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=获取一次性事件>获取一次性事件</h1>
+</div><h1 id="获取一次性事件">获取一次性事件</h1>
 <p>使用 awaitEvent 函数处理一次性事件（而不是下一次出现的事件）：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>suspend</span> <span class=k>fun</span> <span class=nf>awaitEventExample</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>id</span> <span class=p>=</span> <span class=n>awaitEvent</span><span class=p>&lt;</span><span class=n>Long</span><span class=p>&gt;</span> <span class=p>{</span> <span class=n>h</span> <span class=o>-&gt;</span> <span class=n>vertx</span><span class=p>.</span><span class=n>setTimer</span><span class=p>(</span><span class=m>2000L</span><span class=p>,</span> <span class=n>h</span><span class=p>)</span> <span class=p>}</span>
-  <span class=n>println</span><span class=p>(</span><span class=s2>&#34;This should be fired in 2s by some time with id=</span><span class=si>$id</span><span class=s2>&#34;</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">awaitEventExample</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">id</span> <span class="p">=</span> <span class="n">awaitEvent</span><span class="p">&lt;</span><span class="n">Long</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">h</span> <span class="o">-&gt;</span> <span class="n">vertx</span><span class="p">.</span><span class="n">setTimer</span><span class="p">(</span><span class="m">2000L</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">println</span><span class="p">(</span><span class="s2">&#34;This should be fired in 2s by some time with id=</span><span class="si">$id</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=获取一次性-worker-的结果>获取一次性 worker 的结果</h1>
+</div><h1 id="获取一次性-worker-的结果">获取一次性 worker 的结果</h1>
 <p>使用 awaitBlocking 函数处理阻塞计算：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>suspend</span> <span class=k>fun</span> <span class=nf>awaitBlockingExample</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>s</span> <span class=p>=</span> <span class=n>awaitBlocking</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;</span> <span class=p>{</span>
-    <span class=n>Thread</span><span class=p>.</span><span class=n>sleep</span><span class=p>(</span><span class=m>1000</span><span class=p>)</span>
-    <span class=s2>&#34;some-string&#34;</span>
-  <span class=p>}</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">awaitBlockingExample</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">s</span> <span class="p">=</span> <span class="n">awaitBlocking</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="n">Thread</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+    <span class="s2">&#34;some-string&#34;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=事件流>事件流</h1>
+</div><h1 id="事件流">事件流</h1>
 <p>在 vert.x API 的很多地方，事件流都是通过 handler 来处理。这些例子包括事件消息总线的使用者和 http 服务器的请求。</p>
 <p>ReceiveChannelHandler 类允许通过(suspendable)receive 方法接收事件：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>suspend</span> <span class=k>fun</span> <span class=nf>streamExample</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>adapter</span> <span class=p>=</span> <span class=n>vertx</span><span class=p>.</span><span class=n>receiveChannelHandler</span><span class=p>&lt;</span><span class=n>Message</span><span class=p>&lt;</span><span class=n>Int</span><span class=p>&gt;&gt;()</span>
-  <span class=n>vertx</span><span class=p>.</span><span class=n>eventBus</span><span class=p>().</span><span class=n>localConsumer</span><span class=p>&lt;</span><span class=n>Int</span><span class=p>&gt;(</span><span class=s2>&#34;a.b.c&#34;</span><span class=p>).</span><span class=n>handler</span><span class=p>(</span><span class=n>adapter</span><span class=p>)</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">streamExample</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">adapter</span> <span class="p">=</span> <span class="n">vertx</span><span class="p">.</span><span class="n">receiveChannelHandler</span><span class="p">&lt;</span><span class="n">Message</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;&gt;()</span>
+  <span class="n">vertx</span><span class="p">.</span><span class="n">eventBus</span><span class="p">().</span><span class="n">localConsumer</span><span class="p">&lt;</span><span class="n">Int</span><span class="p">&gt;(</span><span class="s2">&#34;a.b.c&#34;</span><span class="p">).</span><span class="n">handler</span><span class="p">(</span><span class="n">adapter</span><span class="p">)</span>
 
-  <span class=c1>// Send 15 messages
-</span><span class=c1></span>  <span class=k>for</span> <span class=p>(</span><span class=n>i</span> <span class=k>in</span> <span class=m>0.</span><span class=p>.</span><span class=m>15</span><span class=p>)</span> <span class=n>vertx</span><span class=p>.</span><span class=n>eventBus</span><span class=p>().</span><span class=n>send</span><span class=p>(</span><span class=s2>&#34;a.b.c&#34;</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span>
+  <span class="c1">// Send 15 messages
+</span><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">15</span><span class="p">)</span> <span class="n">vertx</span><span class="p">.</span><span class="n">eventBus</span><span class="p">().</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;a.b.c&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 
-  <span class=c1>// Receive the first 10 messages
-</span><span class=c1></span>  <span class=k>for</span> <span class=p>(</span><span class=n>i</span> <span class=k>in</span> <span class=m>0.</span><span class=p>.</span><span class=m>10</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>message</span> <span class=p>=</span> <span class=n>adapter</span><span class=p>.</span><span class=n>receive</span><span class=p>()</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Received: </span><span class=si>${message.body()}</span><span class=s2>&#34;</span><span class=p>)</span>
-  <span class=p>}</span>
-<span class=p>}</span>
+  <span class="c1">// Receive the first 10 messages
+</span><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">0.</span><span class="p">.</span><span class="m">10</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">message</span> <span class="p">=</span> <span class="n">adapter</span><span class="p">.</span><span class="n">receive</span><span class="p">()</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Received: </span><span class="si">${message.body()}</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=等待-vertx-的-future-的完成>等待 vert.x 的 future 的完成</h1>
-<p>vert.x 的 future 类实例的扩展方法 await，可以暂停协程直到他们完成。在这种情况下，该方法返回相应的 <code>AsyncResult&lt;T></code> 对象。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
+</div><h1 id="等待-vertx-的-future-的完成">等待 vert.x 的 future 的完成</h1>
+<p>vert.x 的 future 类实例的扩展方法 await，可以暂停协程直到他们完成。在这种情况下，该方法返回相应的 <code>AsyncResult&lt;T&gt;</code> 对象。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>suspend</span> <span class=k>fun</span> <span class=nf>awaitingFuture</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>httpServerFuture</span> <span class=p>=</span> <span class=n>Future</span><span class=p>.</span><span class=n>future</span><span class=p>&lt;</span><span class=n>HttpServer</span><span class=p>&gt;()</span>
-  <span class=n>vertx</span><span class=p>.</span><span class=n>createHttpServer</span><span class=p>()</span>
-    <span class=p>.</span><span class=n>requestHandler</span> <span class=p>{</span> <span class=n>req</span> <span class=o>-&gt;</span> <span class=n>req</span><span class=p>.</span><span class=n>response</span><span class=p>().</span><span class=n>end</span><span class=p>(</span><span class=s2>&#34;Hello!&#34;</span><span class=p>)</span> <span class=p>}</span>
-    <span class=p>.</span><span class=n>listen</span><span class=p>(</span><span class=m>8000</span><span class=p>,</span> <span class=n>httpServerFuture</span><span class=p>)</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">awaitingFuture</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">httpServerFuture</span> <span class="p">=</span> <span class="n">Future</span><span class="p">.</span><span class="n">future</span><span class="p">&lt;</span><span class="n">HttpServer</span><span class="p">&gt;()</span>
+  <span class="n">vertx</span><span class="p">.</span><span class="n">createHttpServer</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">requestHandler</span> <span class="p">{</span> <span class="n">req</span> <span class="o">-&gt;</span> <span class="n">req</span><span class="p">.</span><span class="n">response</span><span class="p">().</span><span class="n">end</span><span class="p">(</span><span class="s2">&#34;Hello!&#34;</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="m">8000</span><span class="p">,</span> <span class="n">httpServerFuture</span><span class="p">)</span>
 
-  <span class=k>val</span> <span class=py>httpServer</span> <span class=p>=</span> <span class=n>httpServerFuture</span><span class=p>.</span><span class=n>await</span><span class=p>()</span>
-  <span class=n>println</span><span class=p>(</span><span class=s2>&#34;HTTP server port: </span><span class=si>${httpServer.actualPort()}</span><span class=s2>&#34;</span><span class=p>)</span>
+  <span class="k">val</span> <span class="py">httpServer</span> <span class="p">=</span> <span class="n">httpServerFuture</span><span class="p">.</span><span class="n">await</span><span class="p">()</span>
+  <span class="n">println</span><span class="p">(</span><span class="s2">&#34;HTTP server port: </span><span class="si">${httpServer.actualPort()}</span><span class="s2">&#34;</span><span class="p">)</span>
 
-  <span class=k>val</span> <span class=py>result</span> <span class=p>=</span> <span class=n>CompositeFuture</span><span class=p>.</span><span class=n>all</span><span class=p>(</span><span class=n>httpServerFuture</span><span class=p>,</span> <span class=n>httpServerFuture</span><span class=p>).</span><span class=n>await</span><span class=p>()</span>
-  <span class=k>if</span> <span class=p>(</span><span class=n>result</span><span class=p>.</span><span class=n>succeeded</span><span class=p>())</span> <span class=p>{</span>
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;The server is now running!&#34;</span><span class=p>)</span>
-  <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
-    <span class=n>result</span><span class=p>.</span><span class=n>cause</span><span class=p>().</span><span class=n>printStackTrace</span><span class=p>()</span>
-  <span class=p>}</span>
-<span class=p>}</span>
+  <span class="k">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">CompositeFuture</span><span class="p">.</span><span class="n">all</span><span class="p">(</span><span class="n">httpServerFuture</span><span class="p">,</span> <span class="n">httpServerFuture</span><span class="p">).</span><span class="n">await</span><span class="p">()</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">succeeded</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;The server is now running!&#34;</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">cause</span><span class="p">().</span><span class="n">printStackTrace</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=通道>通道</h1>
+</div><h1 id="通道">通道</h1>
 <p>channel 和 java 的 BlockingQueue 类似，只是 Channel 不会阻塞而是暂停协程。</p>
 <ul>
 <li>将值发送到满了的 Channel 会暂停协程</li>
@@ -386,475 +431,514 @@
 <p>使用 toChannel 的扩展方法可以将 vert.x 的 ReadStream 和 WriteStream 适配成通道。</p>
 <p>这些适配器负责管理背压和流终端：</p>
 <ul>
-<li><code>ReadStream&lt;T></code> 适配为 <code>ReceiveChannel&lt;T></code></li>
-<li><code>WriteStream&lt;T></code> 适配为 <code>SendChannel&lt;T></code></li>
+<li><code>ReadStream&lt;T&gt;</code> 适配为 <code>ReceiveChannel&lt;T&gt;</code></li>
+<li><code>WriteStream&lt;T&gt;</code> 适配为  <code>SendChannel&lt;T&gt;</code></li>
 </ul>
-<h2 id=接收数据>接收数据</h2>
+<h2 id="接收数据">接收数据</h2>
 <p>当你需要处理一系列相关值的时候，channel 可能非常有用：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=k>suspend</span> <span class=k>fun</span> <span class=nf>handleTemperatureStream</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>stream</span> <span class=p>=</span> <span class=n>vertx</span><span class=p>.</span><span class=n>eventBus</span><span class=p>().</span><span class=n>consumer</span><span class=p>&lt;</span><span class=n>Double</span><span class=p>&gt;(</span><span class=s2>&#34;temperature&#34;</span><span class=p>)</span>
-  <span class=k>val</span> <span class=py>channel</span> <span class=p>=</span> <span class=n>stream</span><span class=p>.</span><span class=n>toChannel</span><span class=p>(</span><span class=n>vertx</span><span class=p>)</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">handleTemperatureStream</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">stream</span> <span class="p">=</span> <span class="n">vertx</span><span class="p">.</span><span class="n">eventBus</span><span class="p">().</span><span class="n">consumer</span><span class="p">&lt;</span><span class="n">Double</span><span class="p">&gt;(</span><span class="s2">&#34;temperature&#34;</span><span class="p">)</span>
+  <span class="k">val</span> <span class="py">channel</span> <span class="p">=</span> <span class="n">stream</span><span class="p">.</span><span class="n">toChannel</span><span class="p">(</span><span class="n">vertx</span><span class="p">)</span>
 
-  <span class=k>var</span> <span class=py>min</span> <span class=p>=</span> <span class=n>Double</span><span class=p>.</span><span class=n>MAX_VALUE</span>
-  <span class=k>var</span> <span class=py>max</span> <span class=p>=</span> <span class=n>Double</span><span class=p>.</span><span class=n>MIN_VALUE</span>
+  <span class="k">var</span> <span class="py">min</span> <span class="p">=</span> <span class="n">Double</span><span class="p">.</span><span class="n">MAX_VALUE</span>
+  <span class="k">var</span> <span class="py">max</span> <span class="p">=</span> <span class="n">Double</span><span class="p">.</span><span class="n">MIN_VALUE</span>
 
-  <span class=c1>// Iterate until the stream is closed
-</span><span class=c1></span>  <span class=c1>// Non-blocking
-</span><span class=c1></span>  <span class=k>for</span> <span class=p>(</span><span class=n>msg</span> <span class=k>in</span> <span class=n>channel</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>temperature</span> <span class=p>=</span> <span class=n>msg</span><span class=p>.</span><span class=n>body</span><span class=p>()</span>
-    <span class=n>min</span> <span class=p>=</span> <span class=n>Math</span><span class=p>.</span><span class=n>min</span><span class=p>(</span><span class=n>min</span><span class=p>,</span> <span class=n>temperature</span><span class=p>)</span>
-    <span class=n>max</span> <span class=p>=</span> <span class=n>Math</span><span class=p>.</span><span class=n>max</span><span class=p>(</span><span class=n>max</span><span class=p>,</span> <span class=n>temperature</span><span class=p>)</span>
-  <span class=p>}</span>
+  <span class="c1">// Iterate until the stream is closed
+</span><span class="c1"></span>  <span class="c1">// Non-blocking
+</span><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="n">msg</span> <span class="k">in</span> <span class="n">channel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">temperature</span> <span class="p">=</span> <span class="n">msg</span><span class="p">.</span><span class="n">body</span><span class="p">()</span>
+    <span class="n">min</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="n">min</span><span class="p">(</span><span class="n">min</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span>
+    <span class="n">max</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="n">max</span><span class="p">(</span><span class="n">max</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span>
+  <span class="p">}</span>
 
-  <span class=c1>// The stream is now closed
-</span><span class=c1></span><span class=p>}</span>
+  <span class="c1">// The stream is now closed
+</span><span class="c1"></span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>他也可以用于解析协议。我们将构建一个非阻塞的 http 请求解析器来展示通道的功能。</p>
 <p>我们将依靠 RecordParser 将以\r \n 分割的 buffer 流进行分割。</p>
 <p>这是解析器的初始版本，它只处理 http 的请求行。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>server</span> <span class=p>=</span> <span class=n>vertx</span><span class=p>.</span><span class=n>createNetServer</span><span class=p>().</span><span class=n>connectHandler</span> <span class=p>{</span> <span class=n>socket</span> <span class=o>-&gt;</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">server</span> <span class="p">=</span> <span class="n">vertx</span><span class="p">.</span><span class="n">createNetServer</span><span class="p">().</span><span class="n">connectHandler</span> <span class="p">{</span> <span class="n">socket</span> <span class="o">-&gt;</span>
 
-  <span class=c1>// The record parser provides a stream of buffers delimited by \r\n
-</span><span class=c1></span>  <span class=k>val</span> <span class=py>stream</span> <span class=p>=</span> <span class=n>RecordParser</span><span class=p>.</span><span class=n>newDelimited</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\r\n</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>socket</span><span class=p>)</span>
+  <span class="c1">// The record parser provides a stream of buffers delimited by \r\n
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">stream</span> <span class="p">=</span> <span class="n">RecordParser</span><span class="p">.</span><span class="n">newDelimited</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">socket</span><span class="p">)</span>
 
-  <span class=c1>// Convert the stream to a Kotlin channel
-</span><span class=c1></span>  <span class=k>val</span> <span class=py>channel</span> <span class=p>=</span> <span class=n>stream</span><span class=p>.</span><span class=n>toChannel</span><span class=p>(</span><span class=n>vertx</span><span class=p>)</span>
+  <span class="c1">// Convert the stream to a Kotlin channel
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">channel</span> <span class="p">=</span> <span class="n">stream</span><span class="p">.</span><span class="n">toChannel</span><span class="p">(</span><span class="n">vertx</span><span class="p">)</span>
 
-  <span class=c1>// Run the coroutine
-</span><span class=c1></span>  <span class=n>launch</span><span class=p>(</span><span class=n>vertx</span><span class=p>.</span><span class=n>dispatcher</span><span class=p>())</span> <span class=p>{</span>
+  <span class="c1">// Run the coroutine
+</span><span class="c1"></span>  <span class="n">launch</span><span class="p">(</span><span class="n">vertx</span><span class="p">.</span><span class="n">dispatcher</span><span class="p">())</span> <span class="p">{</span>
 
-    <span class=c1>// Receive the request-line
-</span><span class=c1></span>    <span class=c1>// Non-blocking
-</span><span class=c1></span>    <span class=k>val</span> <span class=py>line</span> <span class=p>=</span> <span class=n>channel</span><span class=p>.</span><span class=n>receive</span><span class=p>().</span><span class=n>toString</span><span class=p>().</span><span class=n>split</span><span class=p>(</span><span class=s2>&#34; &#34;</span><span class=p>)</span>
-    <span class=k>val</span> <span class=py>method</span> <span class=p>=</span> <span class=n>line</span><span class=p>[</span><span class=m>0</span><span class=p>]</span>
-    <span class=k>val</span> <span class=py>uri</span> <span class=p>=</span> <span class=n>line</span><span class=p>[</span><span class=m>1</span><span class=p>]</span>
+    <span class="c1">// Receive the request-line
+</span><span class="c1"></span>    <span class="c1">// Non-blocking
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">line</span> <span class="p">=</span> <span class="n">channel</span><span class="p">.</span><span class="n">receive</span><span class="p">().</span><span class="n">toString</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">method</span> <span class="p">=</span> <span class="n">line</span><span class="p">[</span><span class="m">0</span><span class="p">]</span>
+    <span class="k">val</span> <span class="py">uri</span> <span class="p">=</span> <span class="n">line</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
 
-    <span class=n>println</span><span class=p>(</span><span class=s2>&#34;Received HTTP request (</span><span class=si>$method</span><span class=s2>, </span><span class=si>$uri</span><span class=s2>)&#34;</span><span class=p>)</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Received HTTP request (</span><span class="si">$method</span><span class="s2">, </span><span class="si">$uri</span><span class="s2">)&#34;</span><span class="p">)</span>
 
-    <span class=c1>// Still need to parse headers and body...
-</span><span class=c1></span>  <span class=p>}</span>
-<span class=p>}</span>
+    <span class="c1">// Still need to parse headers and body...
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>解析请求行就像在 channel 上调用 receive 一样简单。</p>
 <p>下一步是通过接收块来解析 http 头，直到我们得到一个空块为止。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=c1>// Receive HTTP headers
-</span><span class=c1></span><span class=k>val</span> <span class=py>headers</span> <span class=p>=</span> <span class=n>HashMap</span><span class=p>&lt;</span><span class=n>String</span><span class=p>,</span> <span class=n>String</span><span class=p>&gt;()</span>
-<span class=k>while</span> <span class=p>(</span><span class=k>true</span><span class=p>)</span> <span class=p>{</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Receive HTTP headers
+</span><span class="c1"></span><span class="k">val</span> <span class="py">headers</span> <span class="p">=</span> <span class="n">HashMap</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span>
+<span class="k">while</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
 
-  <span class=c1>// Non-blocking
-</span><span class=c1></span>  <span class=k>val</span> <span class=py>header</span> <span class=p>=</span> <span class=n>channel</span><span class=p>.</span><span class=n>receive</span><span class=p>().</span><span class=n>toString</span><span class=p>()</span>
+  <span class="c1">// Non-blocking
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">header</span> <span class="p">=</span> <span class="n">channel</span><span class="p">.</span><span class="n">receive</span><span class="p">().</span><span class="n">toString</span><span class="p">()</span>
 
-  <span class=c1>// Done with parsing headers
-</span><span class=c1></span>  <span class=k>if</span> <span class=p>(</span><span class=n>header</span><span class=p>.</span><span class=n>isEmpty</span><span class=p>())</span> <span class=p>{</span>
-    <span class=k>break</span>
-  <span class=p>}</span>
+  <span class="c1">// Done with parsing headers
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">header</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">break</span>
+  <span class="p">}</span>
 
-  <span class=k>val</span> <span class=py>pos</span> <span class=p>=</span> <span class=n>header</span><span class=p>.</span><span class=n>indexOf</span><span class=p>(</span><span class=sc>&#39;:&#39;</span><span class=p>)</span>
-  <span class=n>headers</span><span class=p>[</span><span class=n>header</span><span class=p>.</span><span class=n>substring</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=n>pos</span><span class=p>).</span><span class=n>toLowerCase</span><span class=p>()]</span> <span class=p>=</span> <span class=n>header</span><span class=p>.</span><span class=n>substring</span><span class=p>(</span><span class=n>pos</span> <span class=p>+</span> <span class=m>1</span><span class=p>).</span><span class=n>trim</span><span class=p>()</span>
-<span class=p>}</span>
+  <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">header</span><span class="p">.</span><span class="n">indexOf</span><span class="p">(</span><span class="sc">&#39;:&#39;</span><span class="p">)</span>
+  <span class="n">headers</span><span class="p">[</span><span class="n">header</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">pos</span><span class="p">).</span><span class="n">toLowerCase</span><span class="p">()]</span> <span class="p">=</span> <span class="n">header</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="n">pos</span> <span class="p">+</span> <span class="m">1</span><span class="p">).</span><span class="n">trim</span><span class="p">()</span>
+<span class="p">}</span>
 
-<span class=n>println</span><span class=p>(</span><span class=s2>&#34;Received HTTP request (</span><span class=si>$method</span><span class=s2>, </span><span class=si>$uri</span><span class=s2>) with headers </span><span class=si>${headers.keys}</span><span class=s2>&#34;</span><span class=p>)</span>
+<span class="n">println</span><span class="p">(</span><span class="s2">&#34;Received HTTP request (</span><span class="si">$method</span><span class="s2">, </span><span class="si">$uri</span><span class="s2">) with headers </span><span class="si">${headers.keys}</span><span class="s2">&#34;</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>最后，我们通过处理可选的请求体来终止解析器。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
-</span><span class=lnt>41
-</span><span class=lnt>42
-</span><span class=lnt>43
-</span><span class=lnt>44
-</span><span class=lnt>45
-</span><span class=lnt>46
-</span><span class=lnt>47
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=c1>// Receive the request body
-</span><span class=c1></span><span class=k>val</span> <span class=py>transferEncoding</span> <span class=p>=</span> <span class=n>headers</span><span class=p>[</span><span class=s2>&#34;transfer-encoding&#34;</span><span class=p>]</span>
-<span class=k>val</span> <span class=py>contentLength</span> <span class=p>=</span> <span class=n>headers</span><span class=p>[</span><span class=s2>&#34;content-length&#34;</span><span class=p>]</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Receive the request body
+</span><span class="c1"></span><span class="k">val</span> <span class="py">transferEncoding</span> <span class="p">=</span> <span class="n">headers</span><span class="p">[</span><span class="s2">&#34;transfer-encoding&#34;</span><span class="p">]</span>
+<span class="k">val</span> <span class="py">contentLength</span> <span class="p">=</span> <span class="n">headers</span><span class="p">[</span><span class="s2">&#34;content-length&#34;</span><span class="p">]</span>
 
-<span class=k>val</span> <span class=py>body</span> <span class=p>:</span> <span class=n>Buffer</span><span class=p>?</span>
-<span class=k>if</span> <span class=p>(</span><span class=n>transferEncoding</span> <span class=o>==</span> <span class=s2>&#34;chunked&#34;</span><span class=p>)</span> <span class=p>{</span>
+<span class="k">val</span> <span class="py">body</span> <span class="p">:</span> <span class="n">Buffer</span><span class="p">?</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">transferEncoding</span> <span class="o">==</span> <span class="s2">&#34;chunked&#34;</span><span class="p">)</span> <span class="p">{</span>
 
-  <span class=c1>// Handle chunked encoding, e.g
-</span><span class=c1></span>  <span class=c1>// 5\r\n
-</span><span class=c1></span>  <span class=c1>// HELLO\r\n
-</span><span class=c1></span>  <span class=c1>// 0\r\n
-</span><span class=c1></span>  <span class=c1>// \r\n
-</span><span class=c1></span>
-  <span class=n>body</span> <span class=p>=</span> <span class=n>Buffer</span><span class=p>.</span><span class=n>buffer</span><span class=p>()</span>
-  <span class=k>while</span> <span class=p>(</span><span class=k>true</span><span class=p>)</span> <span class=p>{</span>
+  <span class="c1">// Handle chunked encoding, e.g
+</span><span class="c1"></span>  <span class="c1">// 5\r\n
+</span><span class="c1"></span>  <span class="c1">// HELLO\r\n
+</span><span class="c1"></span>  <span class="c1">// 0\r\n
+</span><span class="c1"></span>  <span class="c1">// \r\n
+</span><span class="c1"></span>
+  <span class="n">body</span> <span class="p">=</span> <span class="n">Buffer</span><span class="p">.</span><span class="n">buffer</span><span class="p">()</span>
+  <span class="k">while</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class=c1>// Parse length chunk
-</span><span class=c1></span>    <span class=c1>// Non-blocking
-</span><span class=c1></span>    <span class=k>val</span> <span class=py>len</span> <span class=p>=</span> <span class=n>channel</span><span class=p>.</span><span class=n>receive</span><span class=p>().</span><span class=n>toString</span><span class=p>().</span><span class=n>toInt</span><span class=p>(</span><span class=m>16</span><span class=p>)</span>
-    <span class=k>if</span> <span class=p>(</span><span class=n>len</span> <span class=o>==</span> <span class=m>0</span><span class=p>)</span> <span class=p>{</span>
-      <span class=k>break</span>
-    <span class=p>}</span>
+    <span class="c1">// Parse length chunk
+</span><span class="c1"></span>    <span class="c1">// Non-blocking
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">len</span> <span class="p">=</span> <span class="n">channel</span><span class="p">.</span><span class="n">receive</span><span class="p">().</span><span class="n">toString</span><span class="p">().</span><span class="n">toInt</span><span class="p">(</span><span class="m">16</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">break</span>
+    <span class="p">}</span>
 
-    <span class=c1>// The stream is flipped to parse a chunk of the exact size
-</span><span class=c1></span>    <span class=n>stream</span><span class=p>.</span><span class=n>fixedSizeMode</span><span class=p>(</span><span class=n>len</span> <span class=p>+</span> <span class=m>2</span><span class=p>)</span>
+    <span class="c1">// The stream is flipped to parse a chunk of the exact size
+</span><span class="c1"></span>    <span class="n">stream</span><span class="p">.</span><span class="n">fixedSizeMode</span><span class="p">(</span><span class="n">len</span> <span class="p">+</span> <span class="m">2</span><span class="p">)</span>
 
-    <span class=c1>// Receive the chunk and append it
-</span><span class=c1></span>    <span class=c1>// Non-blocking
-</span><span class=c1></span>    <span class=k>val</span> <span class=py>chunk</span> <span class=p>=</span> <span class=n>channel</span><span class=p>.</span><span class=n>receive</span><span class=p>()</span>
-    <span class=n>body</span><span class=p>.</span><span class=n>appendBuffer</span><span class=p>(</span><span class=n>chunk</span><span class=p>,</span> <span class=m>0</span><span class=p>,</span> <span class=n>chunk</span><span class=p>.</span><span class=n>length</span><span class=p>()</span> <span class=p>-</span> <span class=m>2</span><span class=p>)</span>
+    <span class="c1">// Receive the chunk and append it
+</span><span class="c1"></span>    <span class="c1">// Non-blocking
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">chunk</span> <span class="p">=</span> <span class="n">channel</span><span class="p">.</span><span class="n">receive</span><span class="p">()</span>
+    <span class="n">body</span><span class="p">.</span><span class="n">appendBuffer</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">chunk</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="p">-</span> <span class="m">2</span><span class="p">)</span>
 
-    <span class=c1>// The stream is flipped back to the \r\n delimiter to parse the next chunk
-</span><span class=c1></span>    <span class=n>stream</span><span class=p>.</span><span class=n>delimitedMode</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\r\n</span><span class=s2>&#34;</span><span class=p>)</span>
-  <span class=p>}</span>
-<span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>contentLength</span> <span class=o>!=</span> <span class=k>null</span><span class=p>)</span> <span class=p>{</span>
+    <span class="c1">// The stream is flipped back to the \r\n delimiter to parse the next chunk
+</span><span class="c1"></span>    <span class="n">stream</span><span class="p">.</span><span class="n">delimitedMode</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">contentLength</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
 
-  <span class=c1>// The stream is flipped to parse a body of the exact size
-</span><span class=c1></span>  <span class=n>stream</span><span class=p>.</span><span class=n>fixedSizeMode</span><span class=p>(</span><span class=n>contentLength</span><span class=p>.</span><span class=n>toInt</span><span class=p>())</span>
+  <span class="c1">// The stream is flipped to parse a body of the exact size
+</span><span class="c1"></span>  <span class="n">stream</span><span class="p">.</span><span class="n">fixedSizeMode</span><span class="p">(</span><span class="n">contentLength</span><span class="p">.</span><span class="n">toInt</span><span class="p">())</span>
 
-  <span class=c1>// Non-blocking
-</span><span class=c1></span>  <span class=n>body</span> <span class=p>=</span> <span class=n>channel</span><span class=p>.</span><span class=n>receive</span><span class=p>()</span>
-<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
-  <span class=n>body</span> <span class=p>=</span> <span class=k>null</span>
-<span class=p>}</span>
+  <span class="c1">// Non-blocking
+</span><span class="c1"></span>  <span class="n">body</span> <span class="p">=</span> <span class="n">channel</span><span class="p">.</span><span class="n">receive</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="n">body</span> <span class="p">=</span> <span class="k">null</span>
+<span class="p">}</span>
 
-<span class=n>println</span><span class=p>(</span><span class=s2>&#34;Received HTTP request (</span><span class=si>$method</span><span class=s2>, </span><span class=si>$uri</span><span class=s2>) with headers </span><span class=si>${headers.keys}</span><span class=s2> and body with size </span><span class=si>${body?.length() ?: 0}</span><span class=s2>&#34;</span><span class=p>)</span>
+<span class="n">println</span><span class="p">(</span><span class="s2">&#34;Received HTTP request (</span><span class="si">$method</span><span class="s2">, </span><span class="si">$uri</span><span class="s2">) with headers </span><span class="si">${headers.keys}</span><span class="s2"> and body with size </span><span class="si">${body?.length() ?: 0}</span><span class="s2">&#34;</span><span class="p">)</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=发送数据>发送数据</h2>
+</div><h2 id="发送数据">发送数据</h2>
 <p>使用 channel 发送数据也非常直接：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=k>suspend</span> <span class=k>fun</span> <span class=nf>sendChannel</span><span class=p>()</span> <span class=p>{</span>
-  <span class=k>val</span> <span class=py>stream</span> <span class=p>=</span> <span class=n>vertx</span><span class=p>.</span><span class=n>eventBus</span><span class=p>().</span><span class=n>publisher</span><span class=p>&lt;</span><span class=n>Double</span><span class=p>&gt;(</span><span class=s2>&#34;temperature&#34;</span><span class=p>)</span>
-  <span class=k>val</span> <span class=py>channel</span> <span class=p>=</span> <span class=n>stream</span><span class=p>.</span><span class=n>toChannel</span><span class=p>(</span><span class=n>vertx</span><span class=p>)</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">sendChannel</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">val</span> <span class="py">stream</span> <span class="p">=</span> <span class="n">vertx</span><span class="p">.</span><span class="n">eventBus</span><span class="p">().</span><span class="n">publisher</span><span class="p">&lt;</span><span class="n">Double</span><span class="p">&gt;(</span><span class="s2">&#34;temperature&#34;</span><span class="p">)</span>
+  <span class="k">val</span> <span class="py">channel</span> <span class="p">=</span> <span class="n">stream</span><span class="p">.</span><span class="n">toChannel</span><span class="p">(</span><span class="n">vertx</span><span class="p">)</span>
 
-  <span class=k>while</span> <span class=p>(</span><span class=k>true</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>temperature</span> <span class=p>=</span> <span class=n>readTemperatureSensor</span><span class=p>()</span>
+  <span class="k">while</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">temperature</span> <span class="p">=</span> <span class="n">readTemperatureSensor</span><span class="p">()</span>
 
-    <span class=c1>// Broadcast the temperature
-</span><span class=c1></span>    <span class=c1>// Non-blocking but could be suspended
-</span><span class=c1></span>    <span class=n>channel</span><span class=p>.</span><span class=n>send</span><span class=p>(</span><span class=n>temperature</span><span class=p>)</span>
+    <span class="c1">// Broadcast the temperature
+</span><span class="c1"></span>    <span class="c1">// Non-blocking but could be suspended
+</span><span class="c1"></span>    <span class="n">channel</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
 
-    <span class=c1>// Wait for one second
-</span><span class=c1></span>    <span class=n>awaitEvent</span><span class=p>&lt;</span><span class=n>Long</span><span class=p>&gt;</span> <span class=p>{</span> <span class=n>vertx</span><span class=p>.</span><span class=n>setTimer</span><span class=p>(</span><span class=m>1000</span><span class=p>,</span> <span class=k>it</span><span class=p>)</span>  <span class=p>}</span>
-  <span class=p>}</span>
-<span class=p>}</span>
+    <span class="c1">// Wait for one second
+</span><span class="c1"></span>    <span class="n">awaitEvent</span><span class="p">&lt;</span><span class="n">Long</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">vertx</span><span class="p">.</span><span class="n">setTimer</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="k">it</span><span class="p">)</span>  <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
 </code></pre></td></tr></table>
 </div>
 </div><p>SendChannel#send 和 WriteStream#write 都是非阻塞操作。不像当 channel 满的时候 SendChannel#send 可以停止执行，而等效 WriteStream#writ 的无 channel 操作可能像这样：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=c1>// Check we can write in the stream
-</span><span class=c1></span><span class=k>if</span> <span class=p>(</span><span class=n>stream</span><span class=p>.</span><span class=n>writeQueueFull</span><span class=p>())</span> <span class=p>{</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="c1">// Check we can write in the stream
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">stream</span><span class="p">.</span><span class="n">writeQueueFull</span><span class="p">())</span> <span class="p">{</span>
 
-  <span class=c1>// We can&#39;t write so we set a drain handler to be called when we can write again
-</span><span class=c1></span>  <span class=n>stream</span><span class=p>.</span><span class=n>drainHandler</span> <span class=p>{</span> <span class=n>broadcastTemperature</span><span class=p>()</span> <span class=p>}</span>
-<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+  <span class="c1">// We can&#39;t write so we set a drain handler to be called when we can write again
+</span><span class="c1"></span>  <span class="n">stream</span><span class="p">.</span><span class="n">drainHandler</span> <span class="p">{</span> <span class="n">broadcastTemperature</span><span class="p">()</span> <span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
-  <span class=c1>// Read temperature
-</span><span class=c1></span>  <span class=k>val</span> <span class=py>temperature</span> <span class=p>=</span> <span class=n>readTemperatureSensor</span><span class=p>()</span>
+  <span class="c1">// Read temperature
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">temperature</span> <span class="p">=</span> <span class="n">readTemperatureSensor</span><span class="p">()</span>
 
-  <span class=c1>// Write it to the stream
-</span><span class=c1></span>  <span class=n>stream</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>temperature</span><span class=p>)</span>
+  <span class="c1">// Write it to the stream
+</span><span class="c1"></span>  <span class="n">stream</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
 
-  <span class=c1>// Wait for one second
-</span><span class=c1></span>  <span class=n>vertx</span><span class=p>.</span><span class=n>setTimer</span><span class=p>(</span><span class=m>1000</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>broadcastTemperature</span><span class=p>()</span>
-  <span class=p>}</span>
-<span class=p>}</span>
+  <span class="c1">// Wait for one second
+</span><span class="c1"></span>  <span class="n">vertx</span><span class="p">.</span><span class="n">setTimer</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">broadcastTemperature</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=延迟取消和超时>延迟，取消和超时</h1>
+</div><h1 id="延迟取消和超时">延迟，取消和超时</h1>
 <p>借助于 vert.x 的定时器，vert.x 的调度器完全支持协程的 delay 函数：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=n>launch</span><span class=p>(</span><span class=n>vertx</span><span class=p>.</span><span class=n>dispatcher</span><span class=p>())</span> <span class=p>{</span>
-  <span class=c1>// Set a one second Vertx timer
-</span><span class=c1></span>  <span class=n>delay</span><span class=p>(</span><span class=m>1000</span><span class=p>)</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">launch</span><span class="p">(</span><span class="n">vertx</span><span class="p">.</span><span class="n">dispatcher</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// Set a one second Vertx timer
+</span><span class="c1"></span>  <span class="n">delay</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>定时器也支持取消：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=k>val</span> <span class=py>job</span> <span class=p>=</span> <span class=n>launch</span><span class=p>(</span><span class=n>vertx</span><span class=p>.</span><span class=n>dispatcher</span><span class=p>())</span> <span class=p>{</span>
-  <span class=c1>// Set a one second Vertx timer
-</span><span class=c1></span>  <span class=k>while</span> <span class=p>(</span><span class=k>true</span><span class=p>)</span> <span class=p>{</span>
-    <span class=n>delay</span><span class=p>(</span><span class=m>1000</span><span class=p>)</span>
-    <span class=c1>// Do something periodically
-</span><span class=c1></span>  <span class=p>}</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">job</span> <span class="p">=</span> <span class="n">launch</span><span class="p">(</span><span class="n">vertx</span><span class="p">.</span><span class="n">dispatcher</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// Set a one second Vertx timer
+</span><span class="c1"></span>  <span class="k">while</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">delay</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+    <span class="c1">// Do something periodically
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
 
-<span class=c1>// Sometimes later
-</span><span class=c1></span><span class=n>job</span><span class=p>.</span><span class=n>cancel</span><span class=p>()</span>
+<span class="c1">// Sometimes later
+</span><span class="c1"></span><span class="n">job</span><span class="p">.</span><span class="n">cancel</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>取消是合作的。</p>
 <p>你也可以使用 withTimeout 函数安排超时。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span><span class=lnt>9
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-Kotlin data-lang=Kotlin><span class=n>launch</span><span class=p>(</span><span class=n>vertx</span><span class=p>.</span><span class=n>dispatcher</span><span class=p>())</span> <span class=p>{</span>
-  <span class=k>try</span> <span class=p>{</span>
-    <span class=k>val</span> <span class=py>id</span> <span class=p>=</span> <span class=n>withTimeout</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;(</span><span class=m>1000</span><span class=p>)</span> <span class=p>{</span>
-      <span class=k>return</span> <span class=n>awaitEvent</span><span class=p>&lt;</span><span class=n>String</span><span class=p>&gt;</span> <span class=p>{</span> <span class=n>anAsyncMethod</span><span class=p>(</span><span class=k>it</span><span class=p>)</span> <span class=p>}</span>
-    <span class=p>}</span>
-  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=n>e</span><span class=p>:</span> <span class=n>TimeoutCancellationException</span><span class=p>)</span> <span class=p>{</span>
-    <span class=c1>// Cancelled
-</span><span class=c1></span>  <span class=p>}</span>
-<span class=p>}</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Kotlin" data-lang="Kotlin"><span class="n">launch</span><span class="p">(</span><span class="n">vertx</span><span class="p">.</span><span class="n">dispatcher</span><span class="p">())</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">id</span> <span class="p">=</span> <span class="n">withTimeout</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;(</span><span class="m">1000</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">awaitEvent</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">anAsyncMethod</span><span class="p">(</span><span class="k">it</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">TimeoutCancellationException</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Cancelled
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Vert.x 支持所有的协程构建器：launch，async 和 runBlocking。runBlocking 构建器不能再 vert.x 的时间循环线程中使用。</p>
-<h1 id=协程的互操作性>协程的互操作性</h1>
+<h1 id="协程的互操作性">协程的互操作性</h1>
 <p>vert.x 集成协程被设计为完全可以和 kotlin 协程互操作。</p>
 <p>kotlinx.coroutines.experimental.sync.Mutex 被执行在使用 vert.x 调度器的事件循环线程。</p>
-<h1 id=rxjava-的互操作性>RxJava 的互操作性</h1>
+<h1 id="rxjava-的互操作性">RxJava 的互操作性</h1>
 <p>虽然 vertx-lang-kotlin-coroutines 模块没有与 RxJava 特定集成，但是 kotlin 协程提供了 RxJava 的集成。RxJava 可以和 vertx-lang-kotlin-coroutines 很好的协同工作。</p>
 <p>你可以阅读响应流和协程的指南。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/kafka/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">kafka</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/async/">
+            <span class="next-text nav-default">小议 async/await 和 coroutine</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/kafka/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">kafka</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/async/>
-<span class="next-text nav-default">小议 async/await 和 coroutine</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

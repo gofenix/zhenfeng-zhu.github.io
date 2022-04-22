@@ -1,0 +1,367 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
+ 网关的路由是：/function/&amp;lt;function_name&amp;gt; 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：
+ 网关的路由是：/async-function/&amp;lt;function_name&amp;gt; 客户端获得 202 的即时响应码 从 queue-worker 中调用函数 默认情况下，结果是被丢弃的。  查看 queue-worker 的日志 1  docker service logs -f func_queue-worker   利用 requestbin 和 X-Callback-Url 获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
+ 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。  源码分析 依赖项 1 2 3 4  github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas   go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。"><title>queue-worker</title><link rel=canonical href=https://example.com/p/queue-worker/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="queue-worker"><meta property="og:description" content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
+ 网关的路由是：/function/&amp;lt;function_name&amp;gt; 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：
+ 网关的路由是：/async-function/&amp;lt;function_name&amp;gt; 客户端获得 202 的即时响应码 从 queue-worker 中调用函数 默认情况下，结果是被丢弃的。  查看 queue-worker 的日志 1  docker service logs -f func_queue-worker   利用 requestbin 和 X-Callback-Url 获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
+ 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。  源码分析 依赖项 1 2 3 4  github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas   go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。"><meta property="og:url" content="https://example.com/p/queue-worker/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2018-09-06T16:23:12+00:00"><meta property="article:modified_time" content="2018-09-06T16:23:12+00:00"><meta name=twitter:title content="queue-worker"><meta name=twitter:description content="queue-worker 源码分析 异步函数和同步函数 在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。
+ 网关的路由是：/function/&amp;lt;function_name&amp;gt; 必须等待 在结束的时候得到结果 明确知道是成功还是失败  异步函数会有一些差异：
+ 网关的路由是：/async-function/&amp;lt;function_name&amp;gt; 客户端获得 202 的即时响应码 从 queue-worker 中调用函数 默认情况下，结果是被丢弃的。  查看 queue-worker 的日志 1  docker service logs -f func_queue-worker   利用 requestbin 和 X-Callback-Url 获取异步函数的结果 如果需要获得异步函数的结果，有两个方法：
+ 更改代码，将结果返回给端点或者消息系统 利用内置的回调 内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。 requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。  源码分析 依赖项 1 2 3 4  github.com/nats-io/go-nats-streaming github.com/nats-io/go-nats github.com/openfaas/faas   go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/queue-worker/>queue-worker</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 06, 2018</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 4 分钟</time></div></footer></div></header><section class=article-content><h1 id=queue-worker-源码分析>queue-worker 源码分析</h1><h2 id=异步函数和同步函数><strong>异步函数和同步函数</strong></h2><p>在 OpenFaaS 中同步调用函数时，将会连接到网关，直到函数成功返回才会关闭连接。同步调用是阻塞的。</p><ul><li>网关的路由是：<code>/function/&lt;function_name></code></li><li>必须等待</li><li>在结束的时候得到结果</li><li>明确知道是成功还是失败</li></ul><p>异步函数会有一些差异：</p><ul><li>网关的路由是：<code>/async-function/&lt;function_name></code></li><li>客户端获得 202 的即时响应码</li><li>从 queue-worker 中调用函数</li><li>默认情况下，结果是被丢弃的。</li></ul><h2 id=查看-queue-worker-的日志><strong>查看 queue-worker 的日志</strong></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>docker service logs -f func_queue-worker
+</span></span></code></pre></td></tr></table></div></div><h2 id=利用-requestbin-和-x-callback-url-获取异步函数的结果><strong>利用 requestbin 和 X-Callback-Url 获取异步函数的结果</strong></h2><p>如果需要获得异步函数的结果，有两个方法：</p><ul><li>更改代码，将结果返回给端点或者消息系统</li><li>利用内置的回调
+内置的回调将会允许函数提供一个 url，queue-worker 会报告函数的成功或失败。
+requestbin 会创建一个新的 bin，这是互联网的一个 url 地址，可以从这里获取函数的结果。</li></ul><p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fuzvzbcz2vj30k00b3aar.jpg loading=lazy></p><p><img src=https://ws3.sinaimg.cn/large/006tNbRwgy1fuzvztfu66j30k00b2757.jpg loading=lazy></p><p><img src=https://ws4.sinaimg.cn/large/006tNbRwgy1fuzw08o8w3j30k00b1aay.jpg loading=lazy></p><h2 id=源码分析><strong>源码分析</strong></h2><h2 id=依赖项><strong>依赖项</strong></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>github.com/nats-io/go-nats-streaming
+</span></span><span class=line><span class=cl>github.com/nats-io/go-nats
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>github.com/openfaas/faas
+</span></span></code></pre></td></tr></table></div></div><p>go-nats 和 go-nats-streaming 是 nats 和 nats-streaming 的 go 版本的客户端。</p><p>faas 这个依赖其实是只用到了 queue 包下面的 types.go 文件。这个文件是定义了异步请求的 Request 结构体和一个 CanQueueRequests 接口。如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>package queue
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>import &#34;net/url&#34;
+</span></span><span class=line><span class=cl>import &#34;net/http&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// Request for asynchronous processing
+</span></span><span class=line><span class=cl>type Request struct {
+</span></span><span class=line><span class=cl>    Header      http.Header
+</span></span><span class=line><span class=cl>    Body        []byte
+</span></span><span class=line><span class=cl>    Method      string
+</span></span><span class=line><span class=cl>    QueryString string
+</span></span><span class=line><span class=cl>    Function    string
+</span></span><span class=line><span class=cl>    CallbackURL *url.URL `json:&#34;CallbackUrl&#34;`
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// CanQueueRequests can take on asynchronous requests
+</span></span><span class=line><span class=cl>type CanQueueRequests interface {
+</span></span><span class=line><span class=cl>    Queue(req *Request) error
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>从这里我们就可以明白作者的设计思路，只要是实现了这个 CanQueueRequests 接口，就可以作为一个 queue-worker。</p><h2 id=接口实现类-natsqueue><strong>接口实现类 NatsQueue</strong></h2><p>接口的实现类 NatsQueue 是在 handler 包里。它的属性都是 nats 中常用到的，包括 clientId，clusterId，url，连接，主题等，如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>// NatsQueue queue for work
+</span></span><span class=line><span class=cl>type NatsQueue struct {
+</span></span><span class=line><span class=cl>    nc        stan.Conn    // nats的连接
+</span></span><span class=line><span class=cl>    ClientID  string       // nats的clientId
+</span></span><span class=line><span class=cl>    ClusterID string       // nats的clusterId
+</span></span><span class=line><span class=cl>    NATSURL   string       // nats的URL
+</span></span><span class=line><span class=cl>    Topic     string       // 主题
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>它的 queue 方法也很简单，主要做了两件事儿：</p><ol><li>解析传入的 Request 对象，并转为 json 对象 out</li><li>将 out 发布到队列里</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>// Queue request for processing
+</span></span><span class=line><span class=cl>func (q *NatsQueue) Queue(req *queue.Request) error {
+</span></span><span class=line><span class=cl>    var err error
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    fmt.Printf(&#34;NatsQueue - submitting request: %s.\n&#34;, req.Function)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    out, err := json.Marshal(req)
+</span></span><span class=line><span class=cl>    if err != nil {
+</span></span><span class=line><span class=cl>        log.Println(err)
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    err = q.nc.Publish(q.Topic, out)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    return err
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>go 语言没有构造方法，所以 NatsQueue 还用于创建 NatsQueue 的实例的方法，这里就成为工厂方法。这个工厂方法主要就是从配置文件中读取环境变量的值，然后创建一个 nats 的连接，相当于给 NatsQueue 的对象的每个属性进行赋值。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>func CreateNatsQueue(address string, port int, clientConfig NatsConfig) (*NatsQueue, error) {
+</span></span><span class=line><span class=cl>    queue1 := NatsQueue{}
+</span></span><span class=line><span class=cl>    var err error
+</span></span><span class=line><span class=cl>    natsURL := fmt.Sprintf(&#34;nats://%s:%d&#34;, address, port)
+</span></span><span class=line><span class=cl>    log.Printf(&#34;Opening connection to %s\n&#34;, natsURL)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    clientID := clientConfig.GetClientID()
+</span></span><span class=line><span class=cl>    clusterID := &#34;faas-cluster&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    nc, err := stan.Connect(clusterID, clientID, stan.NatsURL(natsURL))
+</span></span><span class=line><span class=cl>    queue1.nc = nc
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    return &amp;queue1, err
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>这个 CreateNatsQueue 方法是 Gateway 项目中进行调用，我们可以在 Gateway 项目的 main.go 中找到，如果 Gateway 的配置开启了异步函数支持，就会调用该方法，创建一个 NatsQueue 对象，然后把函数放到队列中，这里就不深入讲解：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>if config.UseNATS() {
+</span></span><span class=line><span class=cl>        log.Println(&#34;Async enabled: Using NATS Streaming.&#34;)
+</span></span><span class=line><span class=cl>        natsQueue, queueErr := natsHandler.CreateNatsQueue(*config.NATSAddress, *config.NATSPort, natsHandler.DefaultNatsConfig{})
+</span></span><span class=line><span class=cl>        if queueErr != nil {
+</span></span><span class=line><span class=cl>            log.Fatalln(queueErr)
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        faasHandlers.QueuedProxy = handlers.MakeQueuedProxy(metricsOptions, true, natsQueue)
+</span></span><span class=line><span class=cl>        faasHandlers.AsyncReport = handlers.MakeAsyncReport(metricsOptions)
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>到这里，我相信读者也了解到，Gateway 其实就是一个发布者，将异步请求扔到队列里。接下来肯定要有一个订阅者将请求消费处理。</p><h2 id=订阅者处理><strong>订阅者处理</strong></h2><p>我们都知道，nats streaming 的订阅者订阅到消息之后，会把消息扔给一个回调函数去处理。queue-worker 的订阅者实现也是这样，它的实现并不复杂，所有逻辑都在 main.go 的中。</p><p>我们先看回调函数 mcb 都做了什么：</p><ol><li>首先当然是将消息体反序列化成上面说到的用于异步处理的 Request 对象。</li><li>构造 http 请求的 url 和 querystring，url 的格式如下：
+functionURL := fmt.Sprintf(&ldquo;http://%s%s:8080/%s&rdquo;, req.Function, config.FunctionSuffix, queryString)</li><li>设置 http 的 header，并以 post 的形式向 functionURL 发起请求。</li><li>如果请求失败，设置返回状态码为<code>http.StatusServiceUnavailable</code>，并分别处理 CallbackURL 是否存在的情况。</li><li>如果请求成功，同样也是要分别处理 CallbackURL 是否存在的情况。</li></ol><p>当然在这个 callback 中会根据一些环境变量的存在，选择是否打印日志出来。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>mcb := func(msg *stan.Msg) {
+</span></span><span class=line><span class=cl>        i++
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        printMsg(msg, i)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        started := time.Now()
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        req := queue.Request{}
+</span></span><span class=line><span class=cl>        unmarshalErr := json.Unmarshal(msg.Data, &amp;req)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        if unmarshalErr != nil {
+</span></span><span class=line><span class=cl>            log.Printf(&#34;Unmarshal error: %s with data %s&#34;, unmarshalErr, msg.Data)
+</span></span><span class=line><span class=cl>            return
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        fmt.Printf(&#34;Request for %s.\n&#34;, req.Function)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        if config.DebugPrintBody {
+</span></span><span class=line><span class=cl>            fmt.Println(string(req.Body))
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        queryString := &#34;&#34;
+</span></span><span class=line><span class=cl>        if len(req.QueryString) &gt; 0 {
+</span></span><span class=line><span class=cl>            queryString = fmt.Sprintf(&#34;?%s&#34;, strings.TrimLeft(req.QueryString, &#34;?&#34;))
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        functionURL := fmt.Sprintf(&#34;http://%s%s:8080/%s&#34;, req.Function, config.FunctionSuffix, queryString)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        request, err := http.NewRequest(http.MethodPost, functionURL, bytes.NewReader(req.Body))
+</span></span><span class=line><span class=cl>        defer request.Body.Close()
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        copyHeaders(request.Header, &amp;req.Header)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        res, err := client.Do(request)
+</span></span><span class=line><span class=cl>        var status int
+</span></span><span class=line><span class=cl>        var functionResult []byte
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        if err != nil {
+</span></span><span class=line><span class=cl>            status = http.StatusServiceUnavailable
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            log.Println(err)
+</span></span><span class=line><span class=cl>            timeTaken := time.Since(started).Seconds()
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            if req.CallbackURL != nil {
+</span></span><span class=line><span class=cl>                log.Printf(&#34;Callback to: %s\n&#34;, req.CallbackURL.String())
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                resultStatusCode, resultErr := postResult(&amp;client, res, functionResult, req.CallbackURL.String())
+</span></span><span class=line><span class=cl>                if resultErr != nil {
+</span></span><span class=line><span class=cl>                    log.Println(resultErr)
+</span></span><span class=line><span class=cl>                } else {
+</span></span><span class=line><span class=cl>                    log.Printf(&#34;Posted result: %d&#34;, resultStatusCode)
+</span></span><span class=line><span class=cl>                }
+</span></span><span class=line><span class=cl>            }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            statusCode, reportErr := postReport(&amp;client, req.Function, status, timeTaken, config.GatewayAddress)
+</span></span><span class=line><span class=cl>            if reportErr != nil {
+</span></span><span class=line><span class=cl>                log.Println(reportErr)
+</span></span><span class=line><span class=cl>            } else {
+</span></span><span class=line><span class=cl>                log.Printf(&#34;Posting report - %d\n&#34;, statusCode)
+</span></span><span class=line><span class=cl>            }
+</span></span><span class=line><span class=cl>            return
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        if res.Body != nil {
+</span></span><span class=line><span class=cl>            defer res.Body.Close()
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            resData, err := ioutil.ReadAll(res.Body)
+</span></span><span class=line><span class=cl>            functionResult = resData
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            if err != nil {
+</span></span><span class=line><span class=cl>                log.Println(err)
+</span></span><span class=line><span class=cl>            }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            if config.WriteDebug {
+</span></span><span class=line><span class=cl>                fmt.Println(string(functionResult))
+</span></span><span class=line><span class=cl>            } else {
+</span></span><span class=line><span class=cl>                fmt.Printf(&#34;Wrote %d Bytes\n&#34;, len(string(functionResult)))
+</span></span><span class=line><span class=cl>            }
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        timeTaken := time.Since(started).Seconds()
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        fmt.Println(res.Status)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        if req.CallbackURL != nil {
+</span></span><span class=line><span class=cl>            log.Printf(&#34;Callback to: %s\n&#34;, req.CallbackURL.String())
+</span></span><span class=line><span class=cl>            resultStatusCode, resultErr := postResult(&amp;client, res, functionResult, req.CallbackURL.String())
+</span></span><span class=line><span class=cl>            if resultErr != nil {
+</span></span><span class=line><span class=cl>                log.Println(resultErr)
+</span></span><span class=line><span class=cl>            } else {
+</span></span><span class=line><span class=cl>                log.Printf(&#34;Posted result: %d&#34;, resultStatusCode)
+</span></span><span class=line><span class=cl>            }
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        statusCode, reportErr := postReport(&amp;client, req.Function, res.StatusCode, timeTaken, config.GatewayAddress)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        if reportErr != nil {
+</span></span><span class=line><span class=cl>            log.Println(reportErr)
+</span></span><span class=line><span class=cl>        } else {
+</span></span><span class=line><span class=cl>            log.Printf(&#34;Posting report - %d\n&#34;, statusCode)
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p><code>postResult</code>函数是用来处理 callbackURL 存在的情况，在这个函数中将结果，以 post 请求调用 callbackURL 发送出去。</p><p><code>postReport</code>函数用来处理 callbackURL 不存在的情况，这里是将结果发到 Gateway 网关的<code>"http://" + gatewayAddress + ":8088/system/async-report"</code>中，我们之后就可以从这个 url 里查询异步函数的执行结果了。</p><h2 id=总结><strong>总结</strong></h2><p>本文主要分析了 NATS Streaming 版本的 queue worker 的实现，通过分析源码我们可以看到 OpenFaaS 在架构的设计很有考究，充分的考虑到了可扩展性，通过定义接口规范，使得开发者很容易实现自定义。</p></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#异步函数和同步函数><strong>异步函数和同步函数</strong></a></li><li><a href=#查看-queue-worker-的日志><strong>查看 queue-worker 的日志</strong></a></li><li><a href=#利用-requestbin-和-x-callback-url-获取异步函数的结果><strong>利用 requestbin 和 X-Callback-Url 获取异步函数的结果</strong></a></li><li><a href=#源码分析><strong>源码分析</strong></a></li><li><a href=#依赖项><strong>依赖项</strong></a></li><li><a href=#接口实现类-natsqueue><strong>接口实现类 NatsQueue</strong></a></li><li><a href=#订阅者处理><strong>订阅者处理</strong></a></li><li><a href=#总结><strong>总结</strong></a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

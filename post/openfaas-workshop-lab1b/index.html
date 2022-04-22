@@ -1,148 +1,193 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>Openfaas Workshop Lab1b - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。 Linux 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/ MacOS 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab1b/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="Openfaas Workshop Lab1b">
-<meta property="og:description" content="Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。 Linux 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/ MacOS 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab1b/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2021-03-30T09:55:20+08:00">
-<meta property="article:modified_time" content="2022-02-20T20:51:41+08:00">
-<meta itemprop=name content="Openfaas Workshop Lab1b">
-<meta itemprop=description content="Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。 Linux 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/ MacOS 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"><meta itemprop=datePublished content="2021-03-30T09:55:20+08:00">
-<meta itemprop=dateModified content="2022-02-20T20:51:41+08:00">
-<meta itemprop=wordCount content="2534">
-<meta itemprop=keywords content="openfaas,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Openfaas Workshop Lab1b">
-<meta name=twitter:description content="Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。 Linux 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/ MacOS 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Openfaas Workshop Lab1b - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。 Linux 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod &#43;x kubectl mv kubectl /usr/local/bin/ MacOS 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab1b/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Openfaas Workshop Lab1b" />
+<meta property="og:description" content="Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。 Linux 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod &#43;x kubectl mv kubectl /usr/local/bin/ MacOS 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab1b/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-30T09:55:20+08:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="Openfaas Workshop Lab1b">
+<meta itemprop="description" content="Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。 Linux 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod &#43;x kubectl mv kubectl /usr/local/bin/ MacOS 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"><meta itemprop="datePublished" content="2021-03-30T09:55:20+08:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="2532">
+<meta itemprop="keywords" content="openfaas," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Openfaas Workshop Lab1b"/>
+<meta name="twitter:description" content="Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。 Linux 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod &#43;x kubectl mv kubectl /usr/local/bin/ MacOS 1 2 3 4 export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>Openfaas Workshop Lab1b</h1>
-<div class=post-meta>
-<span class=post-time> 2021-03-30 </span>
-<span class=more-meta> 约 2534 字 </span>
-<span class=more-meta> 预计阅读 6 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#lab-1---用-kubernetes-设置-openfaas>Lab 1 - 用 Kubernetes 设置 OpenFaaS</a>
-<ul>
-<li><a href=#安装最新的-kubectl>安装最新的 <code>kubectl</code></a></li>
-<li><a href=#设置一个-kubernetes-集群>设置一个 Kubernetes 集群</a>
-<ul>
-<li><a href=#在你的笔记本电脑上创建一个本地集群>在你的笔记本电脑上创建一个本地集群</a></li>
-<li><a href=#在云上创建一个远程集群>在云上创建一个远程集群</a></li>
-</ul>
-</li>
-<li><a href=#部署-openfaas>部署 OpenFaaS</a>
-<ul>
-<li><a href=#安装-openfaas>安装 OpenFaaS</a></li>
-<li><a href=#登录你的-openfaas-网关>登录你的 OpenFaaS 网关</a></li>
-<li><a href=#永久保存你的-openfaas-url>永久保存你的 OpenFaaS URL</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Openfaas Workshop Lab1b</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-03-30 </span>
+        
+          <span class="more-meta"> 约 2532 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#lab-1---用-kubernetes-设置-openfaas">Lab 1 - 用 Kubernetes 设置 OpenFaaS</a>
+      <ul>
+        <li><a href="#安装最新的-kubectl">安装最新的 <code>kubectl</code></a></li>
+        <li><a href="#设置一个-kubernetes-集群">设置一个 Kubernetes 集群</a>
+          <ul>
+            <li><a href="#在你的笔记本电脑上创建一个本地集群">在你的笔记本电脑上创建一个本地集群</a></li>
+            <li><a href="#在云上创建一个远程集群">在云上创建一个远程集群</a></li>
+          </ul>
+        </li>
+        <li><a href="#部署-openfaas">部署 OpenFaaS</a>
+          <ul>
+            <li><a href="#安装-openfaas">安装 OpenFaaS</a></li>
+            <li><a href="#登录你的-openfaas-网关">登录你的 OpenFaaS 网关</a></li>
+            <li><a href="#永久保存你的-openfaas-url">永久保存你的 OpenFaaS URL</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<h1 id=lab-1---用-kubernetes-设置-openfaas>Lab 1 - 用 Kubernetes 设置 OpenFaaS</h1>
-<p><img src=https://kubernetes.io/images/kubernetes-horizontal-color.png width=500px> </img></p>
-<h2 id=安装最新的-kubectl>安装最新的 <code>kubectl</code></h2>
-<p>使用下面的说明或<a href=https://kubernetes.io/docs/tasks/tools/install-kubectl/>官方文档</a>为你的操作系统安装<code>kubectl</code>。</p>
+    <div class="post-content">
+      <h1 id="lab-1---用-kubernetes-设置-openfaas">Lab 1 - 用 Kubernetes 设置 OpenFaaS</h1>
+<p><img src="https://kubernetes.io/images/kubernetes-horizontal-color.png" width="500px"> </img></p>
+<h2 id="安装最新的-kubectl">安装最新的 <code>kubectl</code></h2>
+<p>使用下面的说明或<a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">官方文档</a>为你的操作系统安装<code>kubectl</code>。</p>
 <ul>
 <li>Linux</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nb>export</span> <span class=nv>VER</span><span class=o>=</span><span class=k>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span class=k>)</span>
-curl -LO https://storage.googleapis.com/kubernetes-release/release/<span class=nv>$VER</span>/bin/linux/amd64/kubectl
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">export</span> <span class="nv">VER</span><span class="o">=</span><span class="k">$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span class="k">)</span>
+curl -LO https://storage.googleapis.com/kubernetes-release/release/<span class="nv">$VER</span>/bin/linux/amd64/kubectl
 chmod +x kubectl
 mv kubectl /usr/local/bin/
 </code></pre></td></tr></table>
@@ -150,16 +195,16 @@ mv kubectl /usr/local/bin/
 </div><ul>
 <li>MacOS</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nb>export</span> <span class=nv>VER</span><span class=o>=</span><span class=k>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span class=k>)</span>
-curl -LO https://storage.googleapis.com/kubernetes-release/release/<span class=nv>$VER</span>/bin/darwin/amd64/kubectl
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">export</span> <span class="nv">VER</span><span class="o">=</span><span class="k">$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span class="k">)</span>
+curl -LO https://storage.googleapis.com/kubernetes-release/release/<span class="nv">$VER</span>/bin/darwin/amd64/kubectl
 chmod +x kubectl
 mv kubectl /usr/local/bin/
 </code></pre></td></tr></table>
@@ -167,30 +212,30 @@ mv kubectl /usr/local/bin/
 </div><ul>
 <li>Windows</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nb>export</span> <span class=nv>VER</span><span class=o>=</span><span class=k>$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span class=k>)</span>
-curl -LO https://storage.googleapis.com/kubernetes-release/release/<span class=nv>$VER</span>/bin/windows/amd64/kubectl.exe
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">export</span> <span class="nv">VER</span><span class="o">=</span><span class="k">$(</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span class="k">)</span>
+curl -LO https://storage.googleapis.com/kubernetes-release/release/<span class="nv">$VER</span>/bin/windows/amd64/kubectl.exe
 chmod +x kubectl.exe
-mkdir -p <span class=nv>$HOME</span>/bin/
-mv kubectl <span class=nv>$HOME</span>/bin/
+mkdir -p <span class="nv">$HOME</span>/bin/
+mv kubectl <span class="nv">$HOME</span>/bin/
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=设置一个-kubernetes-集群>设置一个 Kubernetes 集群</h2>
+</div><h2 id="设置一个-kubernetes-集群">设置一个 Kubernetes 集群</h2>
 <p>你可以在使用 Kubernetes 的同时按照实验进行操作，但你可能需要沿途做一些小改动。网关的服务地址从<code>http://gateway:8080</code>改为<code>http://gateway.openfaas:8080</code>。这些差异已经尽可能地被记录下来，每个实验室都提供了替代方案。</p>
-<h3 id=在你的笔记本电脑上创建一个本地集群>在你的笔记本电脑上创建一个本地集群</h3>
-<h4 id=_k3s-使用-k3d_><em>k3s 使用 k3d</em></h4>
+<h3 id="在你的笔记本电脑上创建一个本地集群">在你的笔记本电脑上创建一个本地集群</h3>
+<h4 id="_k3s-使用-k3d_"><em>k3s 使用 k3d</em></h4>
 <p>如果你的电脑上有 Docker，那么你可以使用 Rancher 实验室托管的<code>k3d</code>工具。它安装了一个轻量级的 Kubernetes 版本，叫做<code>k3s</code>，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的电脑上运行。</p>
 <ul>
 <li>
-<p><a href=https://github.com/rancher/k3d>安装 k3d</a></p>
+<p><a href="https://github.com/rancher/k3d">安装 k3d</a></p>
 </li>
 <li>
 <p>启动一个集群</p>
@@ -202,28 +247,28 @@ mv kubectl <span class=nv>$HOME</span>/bin/
 <li>执行一些命令，如<code>kubectl get pods --all-namespaces</code>。
 如果你想删除默认集群<code>k3d cluster delete CLUSTER_NAME</code>。</li>
 </ol>
-<h4 id=_docker-for-mac_><em>Docker for Mac</em></h4>
+<h4 id="_docker-for-mac_"><em>Docker for Mac</em></h4>
 <ul>
-<li><a href=https://docs.docker.com/v17.12/docker-for-mac/install/>安装 Docker for Mac</a></li>
+<li><a href="https://docs.docker.com/v17.12/docker-for-mac/install/">安装 Docker for Mac</a></li>
 </ul>
 <blockquote>
 <p>请注意，Kubernetes 仅在 Docker for Mac 17.12 CE 及以上版本中可用。</p>
 </blockquote>
-<h4 id=_使用-minikube_><em>使用 Minikube</em></h4>
+<h4 id="_使用-minikube_"><em>使用 Minikube</em></h4>
 <ul>
 <li>
-<p>要安装 Minikube，请根据你的平台从<a href=https://github.com/kubernetes/minikube/releases>最新版本</a>下载适当的安装程序。</p>
+<p>要安装 Minikube，请根据你的平台从<a href="https://github.com/kubernetes/minikube/releases">最新版本</a>下载适当的安装程序。</p>
 </li>
 <li>
 <p>现在运行 Minikube</p>
 </li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>minikube start
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">minikube start
 </code></pre></td></tr></table>
 </div>
 </div><p>minikube 虚拟机通过一个仅限主机的 IP 地址暴露给主机系统。用<code>minikube ip</code>检查这个 IP。
@@ -231,17 +276,17 @@ mv kubectl <span class=nv>$HOME</span>/bin/
 <blockquote>
 <p>注意：Minikube 还需要一个 Hypervisor，如 VirtualBox 或 Hyperkit（在 MacOS 上）。按照 minikube 的说明和文件</p>
 </blockquote>
-<h3 id=在云上创建一个远程集群>在云上创建一个远程集群</h3>
+<h3 id="在云上创建一个远程集群">在云上创建一个远程集群</h3>
 <p>你可以在云端创建一个远程集群，享受与本地开发一样的体验，同时节省 RAM/CPU 和电池。运行一个集群 1-2 天的费用是最低的。</p>
-<h4 id=_在-digitalocean-的-kubernetes-服务上运行_><em>在 DigitalOcean 的 Kubernetes 服务上运行</em></h4>
+<h4 id="_在-digitalocean-的-kubernetes-服务上运行_"><em>在 DigitalOcean 的 Kubernetes 服务上运行</em></h4>
 <p>你可以使用免费点数通过 DigitalOcean 的用户界面创建一个集群。</p>
 <p>然后 DigitalOcean 的仪表板将指导你如何配置你的<code>kubectl</code>和<code>KUBECONFIG</code>文件，以便在实验室中使用。</p>
 <ul>
-<li><a href=https://m.do.co/c/8d4e75e9886f>申请你的免费点数&ndash;30 天内有 50 美元的点数。</a></li>
+<li><a href="https://m.do.co/c/8d4e75e9886f">申请你的免费点数&ndash;30 天内有 50 美元的点数。</a></li>
 </ul>
 <p>即使你已经申请了免费学分，一个 2-3 个节点的集群 24-48 小时的运行费用也是可以忽略不计的。</p>
 <p><em>点击仪表板左侧面板上的 Kubernetes</em>，然后点击 <code>启用有限访问</code></p>
-<p>_一旦登录，点击 Kubernetes_菜单项并创建一个集群。</p>
+<p><em>一旦登录，点击 Kubernetes</em>菜单项并创建一个集群。</p>
 <p>建议使用最新的 Kubernetes 版本，并选择离你最近的数据中心区域，以尽量减少延时。</p>
 <ul>
 <li>在 <code>添加节点池</code>下</li>
@@ -252,143 +297,143 @@ mv kubectl <span class=nv>$HOME</span>/bin/
 </blockquote>
 <ul>
 <li>
-<p>下载<a href=https://github.com/digitalocean/doctl#installing-doctl>doctl</a>CLI 并把它放在你的路径中。</p>
+<p>下载<a href="https://github.com/digitalocean/doctl#installing-doctl">doctl</a>CLI 并把它放在你的路径中。</p>
 </li>
 <li>
-<p>在您的 DigitalOcean 仪表板上创建一个<a href=https://cloud.digitalocean.com/account/api/tokens/new>API 密钥</a></p>
+<p>在您的 DigitalOcean 仪表板上创建一个<a href="https://cloud.digitalocean.com/account/api/tokens/new">API 密钥</a></p>
 </li>
 </ul>
 <p>追踪您的 API 密钥（将其复制到剪贴板）。</p>
 <ul>
 <li>认证 CLI</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>doctl auth init
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">doctl auth init
 </code></pre></td></tr></table>
 </div>
 </div><p>粘贴你的 API 密钥</p>
 <ul>
 <li>现在获得集群的名称。</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ doctl k8s cluster list
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ doctl k8s cluster list
 GUID workshop-lon1 nyc1 1.13.5-do.1 provisioning workshop-lon1-1
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>保存一个配置文件，使<code>kubectl</code>指向新集群。</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>doctl k8s cluster kubeconfig save workshop-lon1
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">doctl k8s cluster kubeconfig save workshop-lon1
 </code></pre></td></tr></table>
 </div>
 </div><p>现在你需要切换你的 Kubernetes 上下文以指向新的集群。</p>
-<p>用<code>kubectl config get-contexts</code>找到集群名称，如果它没有突出显示，则输入<code>kubectl config set-context &lt;context-name></code>。</p>
-<h4 id=_在-gke谷歌-kubernetes-引擎上运行_><em>在 GKE（谷歌 Kubernetes 引擎）上运行</em></h4>
-<p>登录到谷歌云，创建一个项目，并为其启用计费。如果你没有账户，你可以<a href=https://cloud.google.com/free/>在这里</a>注册，获得免费点数。</p>
-<p>安装<a href=https://cloud.google.com/sdk/docs>Google Cloud SDK</a> - 这将使<code>gcloud</code>和<code>kubectl</code>命令可用。
-对于 Windows，请按照<a href=https://cloud.google.com/sdk/docs/#windows>文档</a>中的说明。</p>
+<p>用<code>kubectl config get-contexts</code>找到集群名称，如果它没有突出显示，则输入<code>kubectl config set-context &lt;context-name&gt;</code>。</p>
+<h4 id="_在-gke谷歌-kubernetes-引擎上运行_"><em>在 GKE（谷歌 Kubernetes 引擎）上运行</em></h4>
+<p>登录到谷歌云，创建一个项目，并为其启用计费。如果你没有账户，你可以<a href="https://cloud.google.com/free/">在这里</a>注册，获得免费点数。</p>
+<p>安装<a href="https://cloud.google.com/sdk/docs">Google Cloud SDK</a> - 这将使<code>gcloud</code>和<code>kubectl</code>命令可用。
+对于 Windows，请按照<a href="https://cloud.google.com/sdk/docs/#windows">文档</a>中的说明。</p>
 <p>安装 gcloud 命令行工具后，用<code>gcloud init</code>配置你的项目，并设置默认项目、计算区域和区域（用你自己的项目替换<code>PROJECT_ID</code>）。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>gcloud config <span class=nb>set</span> project PROJECT_ID
-gcloud config <span class=nb>set</span> compute/region us-central1
-gcloud config <span class=nb>set</span> compute/zone us-central1-a
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">gcloud config <span class="nb">set</span> project PROJECT_ID
+gcloud config <span class="nb">set</span> compute/region us-central1
+gcloud config <span class="nb">set</span> compute/zone us-central1-a
 </code></pre></td></tr></table>
 </div>
 </div><p>启用 Kubernetes 服务。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>gcloud services <span class=nb>enable</span> container.googleapis.com
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">gcloud services <span class="nb">enable</span> container.googleapis.com
 </code></pre></td></tr></table>
 </div>
 </div><p>安装 kubectl。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>gcloud components install kubectl
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">gcloud components install kubectl
 </code></pre></td></tr></table>
 </div>
 </div><p>创建一个 Kubernetes 集群。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ gcloud container clusters create openfaas <span class=se>\
-</span><span class=se></span>--zone<span class=o>=</span>us-central1-a <span class=se>\
-</span><span class=se></span>--num-nodes<span class=o>=</span><span class=m>1</span> <span class=se>\
-</span><span class=se></span>--machine-type<span class=o>=</span>n1-standard-2 <span class=se>\
-</span><span class=se></span>--disk-size<span class=o>=</span><span class=m>30</span> <span class=se>\
-</span><span class=se></span>--no-enable-cloud-logging
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ gcloud container clusters create openfaas <span class="se">\
+</span><span class="se"></span>--zone<span class="o">=</span>us-central1-a <span class="se">\
+</span><span class="se"></span>--num-nodes<span class="o">=</span><span class="m">1</span> <span class="se">\
+</span><span class="se"></span>--machine-type<span class="o">=</span>n1-standard-2 <span class="se">\
+</span><span class="se"></span>--disk-size<span class="o">=</span><span class="m">30</span> <span class="se">\
+</span><span class="se"></span>--no-enable-cloud-logging
 </code></pre></td></tr></table>
 </div>
 </div><p>为 <code>kubectl</code>设置凭证。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>gcloud container clusters get-credentials openfaas
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">gcloud container clusters get-credentials openfaas
 </code></pre></td></tr></table>
 </div>
 </div><p>创建一个集群管理员角色绑定:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>$ kubectl create clusterrolebinding <span class=s2>&#34;cluster-admin-</span><span class=k>$(</span>whoami<span class=k>)</span><span class=s2>&#34;</span> <span class=se>\
-</span><span class=se></span>--clusterrole<span class=o>=</span>cluster-admin <span class=se>\
-</span><span class=se></span>--user<span class=o>=</span><span class=s2>&#34;</span><span class=k>$(</span>gcloud config get-value core/account<span class=k>)</span><span class=s2>&#34;</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ kubectl create clusterrolebinding <span class="s2">&#34;cluster-admin-</span><span class="k">$(</span>whoami<span class="k">)</span><span class="s2">&#34;</span> <span class="se">\
+</span><span class="se"></span>--clusterrole<span class="o">=</span>cluster-admin <span class="se">\
+</span><span class="se"></span>--user<span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>gcloud config get-value core/account<span class="k">)</span><span class="s2">&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>现在验证<code>kubectl</code>已经配置到 GKE 集群。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>$ kubectl get nodes
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">$ kubectl get nodes
 NAME                                   STATUS    ROLES     AGE       VERSION
 gke-name-default-pool-eceef152-qjmt   Ready     &lt;none&gt;    1h        v1.10.7-gke.2
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=部署-openfaas>部署 OpenFaaS</h2>
+</div><h2 id="部署-openfaas">部署 OpenFaaS</h2>
 <p>部署 OpenFaaS 的说明会时常改变，因为我们努力使其更加简单。</p>
-<h3 id=安装-openfaas>安装 OpenFaaS</h3>
+<h3 id="安装-openfaas">安装 OpenFaaS</h3>
 <p>有三种方式来安装 OpenFaaS，你可以选择对你和你的团队有意义的方式。在这个研讨会上，我们将使用官方的安装程序<code>arkade</code>。</p>
 <ul>
 <li>
@@ -401,206 +446,244 @@ gke-name-default-pool-eceef152-qjmt   Ready     &lt;none&gt;    1h        v1.10.
 <p>普通 YAML 文件 - 硬编码的设置/值。像 Kustomize 这样的工具可以提供自定义设置</p>
 </li>
 </ul>
-<h4 id=用arkade安装>用<code>arkade</code>安装</h4>
+<h4 id="用arkade安装">用<code>arkade</code>安装</h4>
 <ul>
 <li>获取 arkade</li>
 </ul>
 <p>对于 MacOS / Linux:</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=c1># MacOS users may need to run &#34;bash&#34; first if this command fails</span>
-curl -SLsf https://dl.get-arkade.dev/ <span class=p>|</span> sudo sh
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># MacOS users may need to run &#34;bash&#34; first if this command fails</span>
+curl -SLsf https://dl.get-arkade.dev/ <span class="p">|</span> sudo sh
 </code></pre></td></tr></table>
 </div>
 </div><p>对于 Windows。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>curl -SLsf https://dl.get-arkade.dev/ <span class=p>|</span> sh
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">curl -SLsf https://dl.get-arkade.dev/ <span class="p">|</span> sh
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>安装 OpenFaaS 应用程序</li>
 </ul>
 <p>如果你使用的是提供 LoadBalancers 的管理云 Kubernetes 服务，那么运行以下内容。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>arkade install openfaas --load-balancer
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">arkade install openfaas --load-balancer
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>注意：<code>--load-balancer</code>标志的默认值是<code>false</code>，所以通过该标志，安装将向你的云提供商请求一个。</p>
 </blockquote>
 <p>如果你使用的是本地 Kubernetes 集群或虚拟机，那么请运行。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>arkade install openfaas
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">arkade install openfaas
 </code></pre></td></tr></table>
 </div>
 </div><p>在后面的实验室中，我们将向你展示如何使用 Kubernetes Ingress 设置一个带有 TLS 的自定义域。</p>
-<h4 id=或者用-helm-安装高级>或者用 helm 安装（高级）</h4>
-<p>如果你愿意，你可以使用<a href=https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md>helm chart</a>的说明来安装 OpenFaaS。</p>
-<h3 id=登录你的-openfaas-网关>登录你的 OpenFaaS 网关</h3>
+<h4 id="或者用-helm-安装高级">或者用 helm 安装（高级）</h4>
+<p>如果你愿意，你可以使用<a href="https://github.com/openfaas/faas-netes/blob/master/chart/openfaas/README.md">helm chart</a>的说明来安装 OpenFaaS。</p>
+<h3 id="登录你的-openfaas-网关">登录你的 OpenFaaS 网关</h3>
 <ul>
 <li>检查网关是否准备好了</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>kubectl rollout status -n openfaas deploy/gateway
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl rollout status -n openfaas deploy/gateway
 </code></pre></td></tr></table>
 </div>
 </div><p>如果你使用你的笔记本电脑，虚拟机，或任何其他类型的 Kubernetes 分布，请运行以下内容。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>kubectl port-forward svc/gateway -n openfaas 8080:8080
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl port-forward svc/gateway -n openfaas 8080:8080
 </code></pre></td></tr></table>
 </div>
 </div><p>这个命令将打开一个从 Kubernetes 集群到本地计算机的隧道，这样你就可以访问 OpenFaaS 网关。还有其他方法可以访问 OpenFaaS，但这已经超出了本次研讨会的范围。</p>
 <p>你的网关 URL 是。<code>http://127.0.0.1:8080</code></p>
 <p>如果你使用的是管理云 Kubernetes 服务，那么从下面的命令中的<code>EXTERNAL-IP</code>字段中获取 LoadBalancer 的 IP 地址或 DNS 条目。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>kubectl get svc -o wide gateway-external -n openfaas
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubectl get svc -o wide gateway-external -n openfaas
 </code></pre></td></tr></table>
 </div>
 </div><p>你的 URL 将是上面的 IP 或 DNS 条目，端口为<code>8080</code>。</p>
 <ul>
 <li>登录。</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nb>export</span> <span class=nv>OPENFAAS_URL</span><span class=o>=</span><span class=s2>&#34;&#34;</span> <span class=c1># Populate as above</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">export</span> <span class="nv">OPENFAAS_URL</span><span class="o">=</span><span class="s2">&#34;&#34;</span> <span class="c1"># Populate as above</span>
 
-<span class=c1># This command retrieves your password</span>
-<span class=nv>PASSWORD</span><span class=o>=</span><span class=k>$(</span>kubectl get secret -n openfaas basic-auth -o <span class=nv>jsonpath</span><span class=o>=</span><span class=s2>&#34;{.data.basic-auth-password}&#34;</span> <span class=p>|</span> base64 --decode<span class=p>;</span> <span class=nb>echo</span><span class=k>)</span>
+<span class="c1"># This command retrieves your password</span>
+<span class="nv">PASSWORD</span><span class="o">=</span><span class="k">$(</span>kubectl get secret -n openfaas basic-auth -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&#34;{.data.basic-auth-password}&#34;</span> <span class="p">|</span> base64 --decode<span class="p">;</span> <span class="nb">echo</span><span class="k">)</span>
 
-<span class=c1># This command logs in and saves a file to ~/.openfaas/config.yml</span>
-<span class=nb>echo</span> -n <span class=nv>$PASSWORD</span> <span class=p>|</span> faas-cli login --username admin --password-stdin
+<span class="c1"># This command logs in and saves a file to ~/.openfaas/config.yml</span>
+<span class="nb">echo</span> -n <span class="nv">$PASSWORD</span> <span class="p">|</span> faas-cli login --username admin --password-stdin
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>检查<code>faas-cli list</code>是否工作。</li>
 </ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>faas-cli list
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">faas-cli list
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=永久保存你的-openfaas-url>永久保存你的 OpenFaaS URL</h3>
+</div><h3 id="永久保存你的-openfaas-url">永久保存你的 OpenFaaS URL</h3>
 <p>编辑<code>~/.bashrc</code>或<code>~/.bash_profile</code>&ndash;如果该文件不存在，则创建它。</p>
 <p>现在添加以下内容&ndash;按照你上面看到的 URL 进行修改。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nb>export</span> <span class=nv>OPENFAAS_URL</span><span class=o>=</span><span class=s2>&#34;&#34;</span> <span class=c1># populate as above</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">export</span> <span class="nv">OPENFAAS_URL</span><span class="o">=</span><span class="s2">&#34;&#34;</span> <span class="c1"># populate as above</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>现在转到<a href=lab2.md>实验室 2</a></p>
+</div><p>现在转到<a href="lab2.md">实验室 2</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-02-20
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/d6665c0d7bff9257c50f21e1ccb091a7c7774b87 title="restore blog Sun Feb 20 20:51:41 CST 2022">(d6665c0)</a>
-</span>
-</p>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/openfaas/">openfaas</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/openfaas-workshop-lab2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Openfaas Workshop Lab2</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/openfaas-workshop-lab1/">
+            <span class="next-text nav-default">Openfaas Workshop Lab1</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/openfaas/>openfaas</a>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<nav class=post-nav>
-<a class=prev href=/post/openfaas-workshop-lab2/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">Openfaas Workshop Lab2</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/openfaas-workshop-lab1/>
-<span class="next-text nav-default">Openfaas Workshop Lab1</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

@@ -1,129 +1,174 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>contract - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="类型 Solidity 是静态类型的语言。 值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex&amp;quot;0012&amp;quot; enum function 引用类型 数组 uint[] 结构体 struct Map mapping(key =&amp;gt; value) 单元和全局变量 以太币的单位 在数字后"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/contract/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="contract">
-<meta property="og:description" content="类型 Solidity 是静态类型的语言。 值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex&#34;0012&#34; enum function 引用类型 数组 uint[] 结构体 struct Map mapping(key => value) 单元和全局变量 以太币的单位 在数字后">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/contract/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-08-03T14:32:03+00:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="contract">
-<meta itemprop=description content="类型 Solidity 是静态类型的语言。 值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex&#34;0012&#34; enum function 引用类型 数组 uint[] 结构体 struct Map mapping(key => value) 单元和全局变量 以太币的单位 在数字后"><meta itemprop=datePublished content="2018-08-03T14:32:03+00:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="1086">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="contract">
-<meta name=twitter:description content="类型 Solidity 是静态类型的语言。 值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex&#34;0012&#34; enum function 引用类型 数组 uint[] 结构体 struct Map mapping(key => value) 单元和全局变量 以太币的单位 在数字后"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>contract - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="类型 Solidity 是静态类型的语言。 值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex&amp;quot;0012&amp;quot; enum function 引用类型 数组 uint[] 结构体 struct Map mapping(key =&amp;gt; value) 单元和全局变量 以太币的单位 在数字后" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/contract/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="contract" />
+<meta property="og:description" content="类型 Solidity 是静态类型的语言。 值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex&quot;0012&quot; enum function 引用类型 数组 uint[] 结构体 struct Map mapping(key =&gt; value) 单元和全局变量 以太币的单位 在数字后" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/contract/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-08-03T14:32:03+00:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="contract">
+<meta itemprop="description" content="类型 Solidity 是静态类型的语言。 值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex&quot;0012&quot; enum function 引用类型 数组 uint[] 结构体 struct Map mapping(key =&gt; value) 单元和全局变量 以太币的单位 在数字后"><meta itemprop="datePublished" content="2018-08-03T14:32:03+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="1086">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="contract"/>
+<meta name="twitter:description" content="类型 Solidity 是静态类型的语言。 值类型 bool int/uint fixed/unfixed address balance 和 transfer send call, callcode 和 delegatecall byte bytes 和 string 十六进制 hex&quot;0012&quot; enum function 引用类型 数组 uint[] 结构体 struct Map mapping(key =&gt; value) 单元和全局变量 以太币的单位 在数字后"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>contract</h1>
-<div class=post-meta>
-<span class=post-time> 2018-08-03 </span>
-<span class=more-meta> 约 1086 字 </span>
-<span class=more-meta> 预计阅读 3 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#类型>类型</a>
-<ul>
-<li><a href=#值类型>值类型</a></li>
-<li><a href=#引用类型>引用类型</a></li>
-</ul>
-</li>
-<li><a href=#单元和全局变量>单元和全局变量</a></li>
-<li><a href=#控制结构>控制结构</a></li>
-<li><a href=#合约结构>合约结构</a></li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">contract</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-03 </span>
+        
+          <span class="more-meta"> 约 1086 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#类型">类型</a>
+          <ul>
+            <li><a href="#值类型">值类型</a></li>
+            <li><a href="#引用类型">引用类型</a></li>
+          </ul>
+        </li>
+        <li><a href="#单元和全局变量">单元和全局变量</a></li>
+        <li><a href="#控制结构">控制结构</a></li>
+        <li><a href="#合约结构">合约结构</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<h2 id=类型>类型</h2>
+    <div class="post-content">
+      <h2 id="类型">类型</h2>
 <p>Solidity 是静态类型的语言。</p>
-<h3 id=值类型>值类型</h3>
+<h3 id="值类型">值类型</h3>
 <ul>
 <li>bool</li>
 <li>int/uint</li>
@@ -137,11 +182,11 @@
 </li>
 <li>byte</li>
 <li>bytes 和 string</li>
-<li>十六进制 hex"0012"</li>
+<li>十六进制 hex&quot;0012&quot;</li>
 <li>enum</li>
 <li>function</li>
 </ul>
-<h3 id=引用类型>引用类型</h3>
+<h3 id="引用类型">引用类型</h3>
 <ul>
 <li>
 <p>数组</p>
@@ -153,10 +198,10 @@
 </li>
 <li>
 <p>Map</p>
-<p>mapping(key => value)</p>
+<p>mapping(key =&gt; value)</p>
 </li>
 </ul>
-<h2 id=单元和全局变量>单元和全局变量</h2>
+<h2 id="单元和全局变量">单元和全局变量</h2>
 <ul>
 <li>
 <p>以太币的单位</p>
@@ -190,27 +235,27 @@
 <p>地址相关</p>
 <ul>
 <li>
-<p><code>&lt;address>.balance</code> (<code>uint256</code>):</p>
-<p>以 Wei 为单位的 <a href=http://solidity-cn.readthedocs.io/zh/develop/types.html#address>地址类型</a> 的余额。</p>
+<p><code>&lt;address&gt;.balance</code> (<code>uint256</code>):</p>
+<p>以 Wei 为单位的 <a href="http://solidity-cn.readthedocs.io/zh/develop/types.html#address">地址类型</a> 的余额。</p>
 </li>
 <li>
-<p><code>&lt;address>.transfer(uint256 amount)</code>:</p>
-<p>向 <a href=http://solidity-cn.readthedocs.io/zh/develop/types.html#address>地址类型</a> 发送数量为 amount 的 Wei，失败时抛出异常，发送 2300 gas 的矿工费，不可调节。</p>
+<p><code>&lt;address&gt;.transfer(uint256 amount)</code>:</p>
+<p>向 <a href="http://solidity-cn.readthedocs.io/zh/develop/types.html#address">地址类型</a> 发送数量为 amount 的 Wei，失败时抛出异常，发送 2300 gas 的矿工费，不可调节。</p>
 </li>
 <li>
-<p><code>&lt;address>.send(uint256 amount) returns (bool)</code>:</p>
-<p>向 <a href=http://solidity-cn.readthedocs.io/zh/develop/types.html#address>地址类型</a> 发送数量为 amount 的 Wei，失败时返回 <code>false</code>，发送 2300 gas 的矿工费用，不可调节。</p>
+<p><code>&lt;address&gt;.send(uint256 amount) returns (bool)</code>:</p>
+<p>向 <a href="http://solidity-cn.readthedocs.io/zh/develop/types.html#address">地址类型</a> 发送数量为 amount 的 Wei，失败时返回 <code>false</code>，发送 2300 gas 的矿工费用，不可调节。</p>
 </li>
 <li>
-<p><code>&lt;address>.call(...) returns (bool)</code>:</p>
+<p><code>&lt;address&gt;.call(...) returns (bool)</code>:</p>
 <p>发出低级函数 <code>CALL</code>，失败时返回 <code>false</code>，发送所有可用 gas，可调节。</p>
 </li>
 <li>
-<p><code>&lt;address>.callcode(...) returns (bool)</code>：</p>
+<p><code>&lt;address&gt;.callcode(...) returns (bool)</code>：</p>
 <p>发出低级函数 <code>CALLCODE</code>，失败时返回 <code>false</code>，发送所有可用 gas，可调节。</p>
 </li>
 <li>
-<p><code>&lt;address>.delegatecall(...) returns (bool)</code>:</p>
+<p><code>&lt;address&gt;.delegatecall(...) returns (bool)</code>:</p>
 <p>发出低级函数 <code>DELEGATECALL</code>，失败时返回 <code>false</code>，发送所有可用 gas，可调节。</p>
 </li>
 </ul>
@@ -218,31 +263,31 @@
 <li>
 <p>合约相关</p>
 <p><code>this</code> (current contract&rsquo;s type):</p>
-<p>当前合约，可以明确转换为 <a href=http://solidity-cn.readthedocs.io/zh/develop/types.html#address>地址类型</a>。</p>
+<p>当前合约，可以明确转换为 <a href="http://solidity-cn.readthedocs.io/zh/develop/types.html#address">地址类型</a>。</p>
 <p><code>selfdestruct(address recipient)</code>:</p>
-<p>销毁合约，并把余额发送到指定 <a href=http://solidity-cn.readthedocs.io/zh/develop/types.html#address>地址类型</a>。</p>
+<p>销毁合约，并把余额发送到指定 <a href="http://solidity-cn.readthedocs.io/zh/develop/types.html#address">地址类型</a>。</p>
 <p><code>suicide(address recipient)</code>:</p>
 <p>与 selfdestruct 等价，但已不推荐使用。</p>
 </li>
 </ul>
-<h2 id=控制结构>控制结构</h2>
+<h2 id="控制结构">控制结构</h2>
 <p>输入参数和我们常见的函数的参数相同</p>
 <p>输出参数必须要在 returns 后面，和 go 的类似</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>function arithmetics(uint _a, uint _b) returns (uint o_sum, uint o_product) {
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">function arithmetics(uint _a, uint _b) returns (uint o_sum, uint o_product) {
         o_sum = _a + _b;
         o_product = _a * _b;
 }
@@ -258,22 +303,22 @@ function arithmetics(uint _a, uint _b) returns (uint , uint ) {
 <p>内部函数调用，就和普通的方法调用一样。</p>
 <p>从外部调用合约的函数，先创建一个合约实例（和类的对象一样），然后调用实例方法。</p>
 <p>调函数要发送 wei 和 gas，就像下图所示：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>pragma solidity ^0.4.0;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">pragma solidity ^0.4.0;
 
 contract InfoFeed {
     function info() public payable returns (uint ret) { return 42; }
@@ -288,7 +333,7 @@ contract Consumer {
 </div>
 </div><p><code>payable</code> 修饰符要用于修饰 <code>info</code>，否则，.value() 选项将不可用。</p>
 <p>可以通过 new 创建一个合约，和 new 出一个对象一样。</p>
-<h2 id=合约结构>合约结构</h2>
+<h2 id="合约结构">合约结构</h2>
 <ul>
 <li>
 <p>状态变量</p>
@@ -305,14 +350,14 @@ contract Consumer {
 <li>
 <p>事件</p>
 <p>以太坊的日志工具接口。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>event HighestBidIncreased(address bidder, uint amount); // 事件
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">event HighestBidIncreased(address bidder, uint amount); // 事件
 
 emit HighestBidIncreased(msg.sender, msg.value); // 触发事件
 </code></pre></td></tr></table>
@@ -327,73 +372,112 @@ emit HighestBidIncreased(msg.sender, msg.value); // 触发事件
 </li>
 </ul>
 <p>合约函数可见性修饰</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E4%BB%A5%E5%A4%AA%E5%9D%8A/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">以太坊</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/faas-provider/">
+            <span class="next-text nav-default">faas-provider</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/%E4%BB%A5%E5%A4%AA%E5%9D%8A/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">以太坊</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/faas-provider/>
-<span class="next-text nav-default">faas-provider</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

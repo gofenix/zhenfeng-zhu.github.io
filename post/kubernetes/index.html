@@ -1,145 +1,190 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>kubernetes - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。 docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/kubernetes/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="kubernetes">
-<meta property="og:description" content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。 docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/kubernetes/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-10-08T15:29:21+00:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="kubernetes">
-<meta itemprop=description content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。 docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了"><meta itemprop=datePublished content="2018-10-08T15:29:21+00:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="3032">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="kubernetes">
-<meta name=twitter:description content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。 docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>kubernetes - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。 docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/kubernetes/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="kubernetes" />
+<meta property="og:description" content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。 docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/kubernetes/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-10-08T15:29:21+00:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="kubernetes">
+<meta itemprop="description" content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。 docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了"><meta itemprop="datePublished" content="2018-10-08T15:29:21+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="3032">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="kubernetes"/>
+<meta name="twitter:description" content="docker 利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。 docker 镜像 其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>kubernetes</h1>
-<div class=post-meta>
-<span class=post-time> 2018-10-08 </span>
-<span class=more-meta> 约 3032 字 </span>
-<span class=more-meta> 预计阅读 7 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href=#docker>docker</a></li>
-<li><a href=#docker-镜像>docker 镜像</a></li>
-<li><a href=#容器编排>容器编排</a></li>
-<li><a href=#原理>原理</a></li>
-<li><a href=#主要依赖-linux-依赖三大技术>主要依赖 Linux 依赖三大技术</a></li>
-<li><a href=#和虚拟机比较>和虚拟机比较</a></li>
-</ul>
-</li>
-<li><a href=#简单使用>简单使用</a>
-<ul>
-<li><a href=#声明式-api-和-kubernetes-编程范式>声明式 API 和 Kubernetes 编程范式</a></li>
-<li><a href=#rbac>RBAC</a></li>
-<li><a href=#网络模型>网络模型</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">kubernetes</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-10-08 </span>
+        
+          <span class="more-meta"> 约 3032 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#docker">docker</a></li>
+            <li><a href="#docker-镜像">docker 镜像</a></li>
+            <li><a href="#容器编排">容器编排</a></li>
+            <li><a href="#原理">原理</a></li>
+            <li><a href="#主要依赖-linux-依赖三大技术">主要依赖 Linux 依赖三大技术</a></li>
+            <li><a href="#和虚拟机比较">和虚拟机比较</a></li>
+          </ul>
+        </li>
+        <li><a href="#简单使用">简单使用</a>
+          <ul>
+            <li><a href="#声明式-api-和-kubernetes-编程范式">声明式 API 和 Kubernetes 编程范式</a></li>
+            <li><a href="#rbac">RBAC</a></li>
+            <li><a href="#网络模型">网络模型</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<h3 id=docker>docker</h3>
+    <div class="post-content">
+      <h3 id="docker">docker</h3>
 <p>利用 Linux 的 cgroups 和 namespace，构建一个沙箱运行环境。</p>
-<h3 id=docker-镜像>docker 镜像</h3>
+<h3 id="docker-镜像">docker 镜像</h3>
 <p>其实就是一个压缩包，这个压缩包是由一个完整的操作系统的所有文件目录构成，包含了这个应用运行所需要的所有依赖，所以本地开发环境和测试环境是一样的。</p>
 <p>解决了应用打包的根本性问题。</p>
-<h3 id=容器编排>容器编排</h3>
+<h3 id="容器编排">容器编排</h3>
 <p>对 Docker 容器的一系列定义、配置和创建动作的管理</p>
 <blockquote>
 <p>容器本身没有价值，有价值的是“容器编排”。</p>
 </blockquote>
-<h3 id=原理>原理</h3>
+<h3 id="原理">原理</h3>
 <p>容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造一个“边界”。</p>
 <p>在创建一个容器进程的时候，指定了这个进程所需要启动的一组 Namespace 参数，这样容器就只能看到当前 Namespace 所限定的资源、文件、设备、状态或配置。</p>
 <p>Cgroups 主要作用是为一个进程组设置资源上限，如 CPU、内存、磁盘和带宽等。也可以设置进程优先级，审计，挂起，重启等。</p>
@@ -153,19 +198,19 @@
 <p>docker 镜像设计时，引入了层（layer），用户制作镜像的每一步操作都会生成一个层，也就是一个增量的 rootfs。AuFS，所以就有了共享层，镜像不用那么大。</p>
 <p>一个进程，可以选择加入到某个进程已有的 Namespace 当中，从而达到进入这个进程所在的容器的目的，这正是 docker exec 的实现原理。</p>
 <p>volume 机制，允许你将宿主机上指定的目录或文件，挂载到容器里面进行读取和修改操作。</p>
-<h3 id=主要依赖-linux-依赖三大技术>主要依赖 Linux 依赖三大技术</h3>
+<h3 id="主要依赖-linux-依赖三大技术">主要依赖 Linux 依赖三大技术</h3>
 <ul>
 <li>Namespace</li>
 <li>Cgroups</li>
 <li>rootfs</li>
 </ul>
-<h3 id=和虚拟机比较>和虚拟机比较</h3>
+<h3 id="和虚拟机比较">和虚拟机比较</h3>
 <p>虚拟机是通过硬件虚拟化功能，模拟一套操作系统所需要的各种硬件，如 CPU、内存、IO 设备等，然后安装一个新的操作系统。</p>
 <p>docker 是利用 Linux 的 Namespace 原理，帮助用户启动的还是系统的应用进程，只是加了一些参数，限制其能看到的资源。因此相对于虚拟机资源消耗更小，而且轻量级，敏捷高性能。</p>
 <p>不过缺点就是隔离不彻底，多个容器进程公用宿主机操作系统内核。有些资源和对象不可以被 Namespace 化的，如时间。</p>
 <p>kubernetes 要解决的问题</p>
 <p>编排？调度？容器云？集群管理？</p>
-<p><img src=https://ws3.sinaimg.cn/large/006tNbRwgy1fw117whrc6j31hc0u0gq5.jpg alt></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fw117whrc6j31hc0u0gq5.jpg" alt=""></p>
 <ul>
 <li>master
 <ul>
@@ -188,64 +233,64 @@
 <li>然后，再为它定义一些服务对象，如 service，secret，autoscaler 等。这些对象，会负责具体的平台级功能。</li>
 </ul>
 <p>这种使用方法，就是所谓的“声明式 API”。这种 API 对应的编排对象和服务对象，都是 k8s 项目中的 API 对象。</p>
-<h2 id=简单使用>简单使用</h2>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<h2 id="简单使用">简单使用</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>kubectl create -f 我的配置文件
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">kubectl create -f 我的配置文件
 </code></pre></td></tr></table>
 </div>
 </div><p>pod 就是 k8s 世界中的应用，而一个应用可以由多个容器组成。</p>
 <p>使用一个 API 对象管理另一个 API 对象的方法，叫控制器模式。</p>
 <p>每个 API 对象都有一个 metadata 字段，这个字段是 API 对象的标识，即元数据。主要用到的是 labels，spec.selector.matchLabels 就是 k8s 过滤的规则。与 labels 同层级的是 annotations，这是由 k8s 所感兴趣的，而不是用户。</p>
 <p>一个 k8s 的 API 对象都有 metadata 和 spec 两个部分。前者放的是对象的元数据，对所有 API 对象来讲，这部分的字段和格式基本一样；而后者存放的是属于这个对象独有的定义，用来描述它所要表达的功能。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>$ kubectl create -f nginx-deployment.yaml
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">$ kubectl create -f nginx-deployment.yaml
 
 $ kubectl get pods -l app=nginx
 NAME                                READY     STATUS    RESTARTS   AGE
@@ -296,68 +341,68 @@ $ kubectl apply -f nginx-deployment.yaml
 <p>离线业务</p>
 <p>Job</p>
 <p>restartPolicy 在 job 对象里只被允许设置为 never 和 onFailure；而在 Deployment 对象中，只被允许设置为 always。</p>
-<h3 id=声明式-api-和-kubernetes-编程范式>声明式 API 和 Kubernetes 编程范式</h3>
+<h3 id="声明式-api-和-kubernetes-编程范式">声明式 API 和 Kubernetes 编程范式</h3>
 <p>创建一个两个 Nginx 容器的步骤：</p>
 <p>首先写一个 Deployment 的 yaml 文件：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>apps/v1</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Deployment</span><span class=w>
-</span><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nginx-deployment</span><span class=w>
-</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>selector</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>matchLabels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
-</span><span class=w>  </span><span class=nt>replicas</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
-</span><span class=w>  </span><span class=nt>template</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>metadata</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>app</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
-</span><span class=w>    </span><span class=nt>spec</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>containers</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
-</span><span class=w>        </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>nginx</span><span class=w>
-</span><span class=w>        </span><span class=nt>ports</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span>- <span class=nt>containerPort</span><span class=p>:</span><span class=w> </span><span class=m>80</span><span class=w>
-</span><span class=w>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx-deployment</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>然后使用 kubectl create 命令在 Kubernetes 中创建一个 Deployment 对象：</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>kubectl create -f nginx.yaml
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">kubectl create -f nginx.yaml
 </code></pre></td></tr></table>
 </div>
 </div><p>这样两个 Nginx pod 就运行起来了。</p>
 <p>如果要更新的话，只需要修改 yaml 文件，然后使用 kubectl apply 命令更新，触发了滚动更新。</p>
 <p>这个 apply 命令就是声明式 API。</p>
-<p><img src=https://ws1.sinaimg.cn/large/006tNbRwgy1fwzjwny2o8j31hc0u0abg.jpg alt></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fwzjwny2o8j31hc0u0abg.jpg" alt=""></p>
 <p>istio 项目中，最根本的组件是运行在每个 pod 里的 envoy 容器。这个代理服务以 sidecar 容器的方式，把整个 pod 的进出流量接管下来。istio 的控制层的 pilot 组件，通过调用每个 envoy 的 API，实现微服务的治理。</p>
 <p>利用 Kubernetes 的 Admission Control，也叫：Initializer，先创建一个 Pod，然后 istio 就是在 pod 的 yaml 给 Kubernetes 之后，自动加上 envoy 的配置。</p>
 <ul>
@@ -366,14 +411,14 @@ $ kubectl apply -f nginx-deployment.yaml
 <li>最后，Kubernetes 基于对 API 对象的增删改查，在无需外界干预的情况下，完成对实际状态和期望状态的调谐。</li>
 </ul>
 <p>一个 API 对象在 etcd 中完整路径是由：group（API 组），version（API 版本）和 Resource（API 资源类型）三个部分组成的。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>batch/v2</span><span class=w>
-</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>CronJob</span><span class=w>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v2</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">CronJob</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>batch 是组，v2 是版本，CronJob 是类型。</p>
@@ -399,7 +444,7 @@ $ kubectl apply -f nginx-deployment.yaml
 <p>把验证过的对象，序列化存到 etcd 中</p>
 </li>
 </ul>
-<h3 id=rbac>RBAC</h3>
+<h3 id="rbac">RBAC</h3>
 <p>基于角色的控制</p>
 <p>role：角色，一组规则，定义 Kubernetes API 对象的操作权限</p>
 <p>subject：被作用者，可以是人，也可以是机器，也可以是 Kubernetes 定义的用户</p>
@@ -408,80 +453,119 @@ $ kubectl apply -f nginx-deployment.yaml
 <p>所谓角色就是一组权限规则列表，而我们分配这些权限的方式，就是通过创建 rolebinding 对象，将被作用者和权限列表进行绑定。</p>
 <p>另外，与之对应的 ClusterRole 和 ClusterRoleBinding，则是 Kubernetes 集群级别的 Role 和 RoleBinding，它们的作用范围不受 Namespace 限制。</p>
 <p>尽管被作用者有很多种（如 User、Group），但在我们平常使用的时候，最普遍的还是 ServiceAccount。</p>
-<h3 id=网络模型>网络模型</h3>
+<h3 id="网络模型">网络模型</h3>
 <p>Veth Pair 常常被用作连接不同 Network Namespace 的网线。veth pair 虚拟设备。总是以两张虚拟网卡形式成对出现。并且，从一个网卡中发出的数据包，可以直接出现在另一张网卡上，哪怕这两个网卡在不同的 network Namespace 里。</p>
 <p>一旦一张虚拟网卡被插在网桥上，他就会变成该网桥的从设备。从设备会降级成为网桥的一个端口，不能处理数据包，只能接收流入的数据包交给对应的网桥。</p>
 <p>两个容器的虚拟网卡都插在宿主机的一个网桥上，这个网桥就扮演一个交换机的角色。当两个容器进行网络交互时，从一个容器的发出请求到宿主机，由于 Veth Pair 的机制，另一个容器就看到有数据流入。</p>
 <p>因此默认情况下，被限制在 network Namespace 的容器进程，实际就是通过 veth pair 设备+宿主机网桥的方式，实现了跟其他容器的数据交换。</p>
-<p><img src=https://ws1.sinaimg.cn/large/006tNbRwgy1fwzjwayfppj31bn0rngn5.jpg alt=img></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fwzjwayfppj31bn0rngn5.jpg" alt="img"></p>
 <p>跨主通信，需要有一个集群公用的网桥，所有容器都连接到该网桥上，就可以相互通信，这就是 overlay network（覆盖网络）</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/go-best-practice/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">go-best-practice</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/watchdog/">
+            <span class="next-text nav-default">watchdog</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/go-best-practice/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">go-best-practice</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/watchdog/>
-<span class="next-text nav-default">watchdog</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

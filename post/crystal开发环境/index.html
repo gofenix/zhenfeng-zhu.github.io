@@ -1,144 +1,189 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>crystal 开发环境 - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。 安装 crystal 1 brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。 1 2"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="crystal 开发环境">
-<meta property="og:description" content="突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。 安装 crystal 1 brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。 1 2">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2019-08-27T14:03:12+00:00">
-<meta property="article:modified_time" content="2019-08-27T14:03:12+00:00">
-<meta itemprop=name content="crystal 开发环境">
-<meta itemprop=description content="突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。 安装 crystal 1 brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。 1 2"><meta itemprop=datePublished content="2019-08-27T14:03:12+00:00">
-<meta itemprop=dateModified content="2019-08-27T14:03:12+00:00">
-<meta itemprop=wordCount content="170">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="crystal 开发环境">
-<meta name=twitter:description content="突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。 安装 crystal 1 brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。 1 2"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>crystal 开发环境 - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。 安装 crystal 1 brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。 1 2" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="crystal 开发环境" />
+<meta property="og:description" content="突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。 安装 crystal 1 brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。 1 2" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/crystal%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-27T14:03:12+00:00" />
+<meta property="article:modified_time" content="2019-08-27T14:03:12+00:00" />
+
+<meta itemprop="name" content="crystal 开发环境">
+<meta itemprop="description" content="突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。 安装 crystal 1 brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。 1 2"><meta itemprop="datePublished" content="2019-08-27T14:03:12+00:00" />
+<meta itemprop="dateModified" content="2019-08-27T14:03:12+00:00" />
+<meta itemprop="wordCount" content="170">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="crystal 开发环境"/>
+<meta name="twitter:description" content="突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。 安装 crystal 1 brew install crystal 安装 vscode 插件 https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang 安装 scry scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。 1 2"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>crystal 开发环境</h1>
-<div class=post-meta>
-<span class=post-time> 2019-08-27 </span>
-<span class=more-meta> 约 170 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#安装-crystal>安装 crystal</a></li>
-<li><a href=#安装-vscode-插件>安装 vscode 插件</a></li>
-<li><a href=#安装-scry>安装 scry</a></li>
-<li><a href=#配置插件>配置插件</a></li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">crystal 开发环境</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-08-27 </span>
+        
+          <span class="more-meta"> 约 170 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装-crystal">安装 crystal</a></li>
+    <li><a href="#安装-vscode-插件">安装 vscode 插件</a></li>
+    <li><a href="#安装-scry">安装 scry</a></li>
+    <li><a href="#配置插件">配置插件</a></li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<p>突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。</p>
-<h1 id=安装-crystal>安装 crystal</h1>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+    <div class="post-content">
+      <p>突然搞明白了 crystal 的 vscode 插件的正确使用姿势，记录一下。</p>
+<h1 id="安装-crystal">安装 crystal</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>brew install crystal
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">brew install crystal
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=安装-vscode-插件>安装 vscode 插件</h1>
+</div><h1 id="安装-vscode-插件">安装 vscode 插件</h1>
 <p><a href="https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang">https://marketplace.visualstudio.com/items?itemName=faustinoaq.crystal-lang</a></p>
-<h1 id=安装-scry>安装 scry</h1>
+<h1 id="安装-scry">安装 scry</h1>
 <p>scry 是 crystal 的 language server 的 client 工具，在本地安装 scry 就可以做到代码跳转了。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>$ git clone https://github.com/crystal-lang-tools/scry.git
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">$ git clone https://github.com/crystal-lang-tools/scry.git
 
 $ cd scry
 
@@ -149,100 +194,140 @@ crystal build -o /Users/lucas/Documents/demos/crystal/scry/bin/scry src/scry.cr
 </code></pre></td></tr></table>
 </div>
 </div><p>/Users/lucas/Documents/demos/crystal/scry/bin/scry 就是编译出来的二进制的路径</p>
-<h1 id=配置插件>配置插件</h1>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+<h1 id="配置插件">配置插件</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-json data-lang=json>  <span class=s2>&#34;crystal-lang.compiler&#34;</span><span class=err>:</span> <span class=s2>&#34;crystal&#34;</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.server&#34;</span><span class=err>:</span> <span class=s2>&#34;/Users/lucas/Documents/demos/crystal/scry/bin/scry&#34;</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.maxNumberOfProblems&#34;</span><span class=err>:</span> <span class=mi>20</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.mainFile&#34;</span><span class=err>:</span> <span class=s2>&#34;${workspaceRoot}/src/main.cr&#34;</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.processesLimit&#34;</span><span class=err>:</span> <span class=mi>5</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.hover&#34;</span><span class=err>:</span> <span class=kc>true</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.problems&#34;</span><span class=err>:</span> <span class=s2>&#34;build&#34;</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.implementations&#34;</span><span class=err>:</span> <span class=kc>true</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.completion&#34;</span><span class=err>:</span> <span class=kc>true</span><span class=err>,</span>
-  <span class=s2>&#34;crystal-lang.logLevel&#34;</span><span class=err>:</span> <span class=s2>&#34;info&#34;</span><span class=err>,</span>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json">  <span class="s2">&#34;crystal-lang.compiler&#34;</span><span class="err">:</span> <span class="s2">&#34;crystal&#34;</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.server&#34;</span><span class="err">:</span> <span class="s2">&#34;/Users/lucas/Documents/demos/crystal/scry/bin/scry&#34;</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.maxNumberOfProblems&#34;</span><span class="err">:</span> <span class="mi">20</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.mainFile&#34;</span><span class="err">:</span> <span class="s2">&#34;${workspaceRoot}/src/main.cr&#34;</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.processesLimit&#34;</span><span class="err">:</span> <span class="mi">5</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.hover&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.problems&#34;</span><span class="err">:</span> <span class="s2">&#34;build&#34;</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.implementations&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.completion&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>
+  <span class="s2">&#34;crystal-lang.logLevel&#34;</span><span class="err">:</span> <span class="s2">&#34;info&#34;</span><span class="err">,</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>把上面的配置加到 vscode 的 settings 文件中，就可以愉快的开发啦。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-08-27
+        
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2019-08-27
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/tmux/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">tmux</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/crystal%E7%AE%80%E4%BB%8B/">
+            <span class="next-text nav-default">crystal 简介</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/tmux/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">tmux</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/crystal%E7%AE%80%E4%BB%8B/>
-<span class="next-text nav-default">crystal 简介</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>

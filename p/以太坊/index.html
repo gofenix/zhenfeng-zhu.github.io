@@ -1,0 +1,426 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
+首先先把 go 的依赖下载下来：
+1  go get -u -v github.com/ethereum/go-ethereum   有时候下载的很慢，可以从 github 上拉下来代码。
+账户 以太坊的地址在离线状态下也可以创建到。
+创建账户有两种方式：
+以公钥和私钥的形式创建 1 2 3 4 5 6 7 8 9 10 11 12 13 14  func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return &amp;#34;&amp;#34;, nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println(&amp;#34;address: &amp;#34;, address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println(&amp;#34;privateKey: &amp;#34;, privateKey) return address, nil }   这种方式一般用的比较少。"><title>以太坊</title><link rel=canonical href=https://example.com/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A/><link rel=stylesheet href=/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css><meta property="og:title" content="以太坊"><meta property="og:description" content="参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
+首先先把 go 的依赖下载下来：
+1  go get -u -v github.com/ethereum/go-ethereum   有时候下载的很慢，可以从 github 上拉下来代码。
+账户 以太坊的地址在离线状态下也可以创建到。
+创建账户有两种方式：
+以公钥和私钥的形式创建 1 2 3 4 5 6 7 8 9 10 11 12 13 14  func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return &amp;#34;&amp;#34;, nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println(&amp;#34;address: &amp;#34;, address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println(&amp;#34;privateKey: &amp;#34;, privateKey) return address, nil }   这种方式一般用的比较少。"><meta property="og:url" content="https://example.com/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"><meta property="og:site_name" content="演示站点"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2018-08-07T20:09:26+00:00"><meta property="article:modified_time" content="2018-08-07T20:09:26+00:00"><meta name=twitter:title content="以太坊"><meta name=twitter:description content="参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。
+首先先把 go 的依赖下载下来：
+1  go get -u -v github.com/ethereum/go-ethereum   有时候下载的很慢，可以从 github 上拉下来代码。
+账户 以太坊的地址在离线状态下也可以创建到。
+创建账户有两种方式：
+以公钥和私钥的形式创建 1 2 3 4 5 6 7 8 9 10 11 12 13 14  func CreateAccount() (string, error) { key, err := crypto.GenerateKey() if err != nil { log.Fatalln(err) return &amp;#34;&amp;#34;, nil } address := crypto.PubkeyToAddress(key.PublicKey).Hex() log.Println(&amp;#34;address: &amp;#34;, address) privateKey := hex.EncodeToString(key.D.Bytes()) log.Println(&amp;#34;privateKey: &amp;#34;, privateKey) return address, nil }   这种方式一般用的比较少。"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>演示站点</a></h1><h2 class=site-description>软件工程师 编程小语种爱好者，精通各种语言的hello world，目前沉迷Clojure、elixir Get Started工程师，止步于大量框架和包的readme 后端开发工程师，偶尔写一些前端，伪全栈 也是一名数据工程师，朝着SQL Boy进化</h2></div></header><ol class=social-menu><li><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://example.com/en/>English</option><option value=https://example.com/ selected>中文</option><option value=https://example.com/ar/>عربي</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A/>以太坊</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Aug 07, 2018</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 4 分钟</time></div></footer></div></header><section class=article-content><p>参与了公司的一个项目，上了以太坊，这里简单记录一下踩坑。</p><p>首先先把 go 的依赖下载下来：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>go get -u -v github.com/ethereum/go-ethereum
+</span></span></code></pre></td></tr></table></div></div><p>有时候下载的很慢，可以从 github 上拉下来代码。</p><h2 id=账户>账户</h2><p>以太坊的地址在离线状态下也可以创建到。</p><p>创建账户有两种方式：</p><h4 id=以公钥和私钥的形式创建>以公钥和私钥的形式创建</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>func CreateAccount() (string, error) {
+</span></span><span class=line><span class=cl> key, err := crypto.GenerateKey()
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(err)
+</span></span><span class=line><span class=cl>  return &#34;&#34;, nil
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> address := crypto.PubkeyToAddress(key.PublicKey).Hex()
+</span></span><span class=line><span class=cl> log.Println(&#34;address: &#34;, address)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> privateKey := hex.EncodeToString(key.D.Bytes())
+</span></span><span class=line><span class=cl> log.Println(&#34;privateKey: &#34;, privateKey)
+</span></span><span class=line><span class=cl> return address, nil
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>这种方式一般用的比较少。</p><h4 id=以-keystore-的形式创建>以 keystore 的形式创建</h4><p>keystore 会创建一个文件，这个文件如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;address&#34;: &#34;d93688757810e644f0b9c162102d9c598813f0dd&#34;,
+</span></span><span class=line><span class=cl>  &#34;crypto&#34;: {
+</span></span><span class=line><span class=cl>    &#34;cipher&#34;: &#34;aes-128-ctr&#34;,
+</span></span><span class=line><span class=cl>    &#34;ciphertext&#34;:
+</span></span><span class=line><span class=cl>      &#34;71ae7c8144729b2f9e0c51d95c6dfb73e63f14b5332b3594e8a1f325237c27ed&#34;,
+</span></span><span class=line><span class=cl>    &#34;cipherparams&#34;: { &#34;iv&#34;: &#34;620c73001081c014a862ce80003a4648&#34; },
+</span></span><span class=line><span class=cl>    &#34;kdf&#34;: &#34;scrypt&#34;,
+</span></span><span class=line><span class=cl>    &#34;kdfparams&#34;: {
+</span></span><span class=line><span class=cl>      &#34;dklen&#34;: 32,
+</span></span><span class=line><span class=cl>      &#34;n&#34;: 262144,
+</span></span><span class=line><span class=cl>      &#34;p&#34;: 1,
+</span></span><span class=line><span class=cl>      &#34;r&#34;: 8,
+</span></span><span class=line><span class=cl>      &#34;salt&#34;: &#34;bd272aa37271ef9913eb095a4d143be238e348c48fce6459896e1bb1b0236741&#34;
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    &#34;mac&#34;: &#34;2b3ade771645090a2b34c214906c592a1300d529e459faefb1421ba496b6fe1d&#34;
+</span></span><span class=line><span class=cl>  },
+</span></span><span class=line><span class=cl>  &#34;id&#34;: &#34;e4dd5384-56a8-4ec7-b6e0-492dcd3742e9&#34;,
+</span></span><span class=line><span class=cl>  &#34;version&#34;: 3
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>在生成这个文件的时候，会让你输一个密码，这个文件加密码其实就是一个私钥。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>// 理论上来讲，这个函数应该只被创建一次即可
+</span></span><span class=line><span class=cl>// 创建一个账户
+</span></span><span class=line><span class=cl>func CreateWallet() (key, addr string) {
+</span></span><span class=line><span class=cl> ks := keystore.NewKeyStore(&#34;/Users/zhuzhenfeng/Documents/github/gowork/src/geth-demo/&#34;, keystore.StandardScryptN, keystore.StandardScryptP)
+</span></span><span class=line><span class=cl> account, _ := ks.NewAccount(&#34;password&#34;)
+</span></span><span class=line><span class=cl> key_json, err := ks.Export(account, &#34;password&#34;, &#34;password&#34;)
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(&#34;导出账户错误: &#34;, err)
+</span></span><span class=line><span class=cl>  panic(err)
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl> key = string(key_json)
+</span></span><span class=line><span class=cl> addr = account.Address.Hex()
+</span></span><span class=line><span class=cl> return
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>这个 key 和 address，&ldquo;password"是这个文件的密码。</p><h2 id=私链>私链</h2><p>一种方式是连接互联网上的测试链，一种是连接本地的私链。</p><h4 id=本地私链的启动>本地私链的启动</h4><p>启动本地私链最简单的一种方式是用 Truffle 提供的 Ganache，只要将它下载下来，启动起来即可。</p><p><img src=https://ws1.sinaimg.cn/large/0069RVTdgy1fu1f8kub6vj30xc0m8aet.jpg loading=lazy alt=image-20180807202239542></p><p>可以看到已经启动了，连接的地址是:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>http://127.0.0.1:7545
+</span></span></code></pre></td></tr></table></div></div><h4 id=互联网上的测试链地址>互联网上的测试链地址</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>https://rinkeby.infura.io/v3/6c81fb1b66804f0698d49f2ec242afc9
+</span></span></code></pre></td></tr></table></div></div><h4 id=连接>连接</h4><p>我们用 geth 的 rpc 连接上面的私链地址即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>func connectRPC() (*ethclient.Client, error) {
+</span></span><span class=line><span class=cl> // 连接测试链的节点
+</span></span><span class=line><span class=cl> //rpcClient, err := rpc.Dial(&#34;https://rinkeby.infura.io/v3/6c81fb1b66804f0698d49f2ec242afc9&#34;)
+</span></span><span class=line><span class=cl> rpcClient, err := rpc.Dial(&#34;http://127.0.0.1:7545&#34;)
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(err)
+</span></span><span class=line><span class=cl>  return nil, err
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> conn := ethclient.NewClient(rpcClient)
+</span></span><span class=line><span class=cl> return conn, nil
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=其他操作>其他操作</h2><p>在上一步中连接 rpc 中，拿到了 client。用这个 client 就可以做很多事儿：</p><h3 id=获取余额>获取余额</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>func GetBalance(address string) (float64, error) {
+</span></span><span class=line><span class=cl> client, err := connectRPC()
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(&#34;err: &#34;, err)
+</span></span><span class=line><span class=cl>  panic(err)
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> balance, err := client.BalanceAt(context.TODO(), common.HexToAddress(address), nil)
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(balance)
+</span></span><span class=line><span class=cl>  return 0, err
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl> balanceV := float64(balance.Int64()) * math.Pow(10, -18)
+</span></span><span class=line><span class=cl> return balanceV, nil
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h3 id=代币转账>代币转账</h3><p>要生成代币，需要写一个 token 的合约。可以用这一个最简单的 token.abi。复杂一般可以用 truffle 框架来编写。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// token.abi
+</span></span><span class=line><span class=cl>[
+</span></span><span class=line><span class=cl>  {
+</span></span><span class=line><span class=cl>    &#34;anonymous&#34;: false,
+</span></span><span class=line><span class=cl>    &#34;inputs&#34;: [
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;indexed&#34;: true,
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;from&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;address&#34;
+</span></span><span class=line><span class=cl>      },
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;indexed&#34;: true,
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;to&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;address&#34;
+</span></span><span class=line><span class=cl>      },
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;indexed&#34;: false,
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;value&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;uint256&#34;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    ],
+</span></span><span class=line><span class=cl>    &#34;name&#34;: &#34;Transfer&#34;,
+</span></span><span class=line><span class=cl>    &#34;type&#34;: &#34;event&#34;
+</span></span><span class=line><span class=cl>  },
+</span></span><span class=line><span class=cl>  {
+</span></span><span class=line><span class=cl>    &#34;constant&#34;: true,
+</span></span><span class=line><span class=cl>    &#34;inputs&#34;: [],
+</span></span><span class=line><span class=cl>    &#34;name&#34;: &#34;totalSupply&#34;,
+</span></span><span class=line><span class=cl>    &#34;outputs&#34;: [
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;uint256&#34;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    ],
+</span></span><span class=line><span class=cl>    &#34;payable&#34;: false,
+</span></span><span class=line><span class=cl>    &#34;stateMutability&#34;: &#34;view&#34;,
+</span></span><span class=line><span class=cl>    &#34;type&#34;: &#34;function&#34;
+</span></span><span class=line><span class=cl>  },
+</span></span><span class=line><span class=cl>  {
+</span></span><span class=line><span class=cl>    &#34;constant&#34;: false,
+</span></span><span class=line><span class=cl>    &#34;inputs&#34;: [
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;_to&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;address&#34;
+</span></span><span class=line><span class=cl>      },
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;_value&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;uint256&#34;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    ],
+</span></span><span class=line><span class=cl>    &#34;name&#34;: &#34;transfer&#34;,
+</span></span><span class=line><span class=cl>    &#34;outputs&#34;: [
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;bool&#34;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    ],
+</span></span><span class=line><span class=cl>    &#34;payable&#34;: false,
+</span></span><span class=line><span class=cl>    &#34;stateMutability&#34;: &#34;nonpayable&#34;,
+</span></span><span class=line><span class=cl>    &#34;type&#34;: &#34;function&#34;
+</span></span><span class=line><span class=cl>  },
+</span></span><span class=line><span class=cl>  {
+</span></span><span class=line><span class=cl>    &#34;constant&#34;: true,
+</span></span><span class=line><span class=cl>    &#34;inputs&#34;: [
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;_owner&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;address&#34;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    ],
+</span></span><span class=line><span class=cl>    &#34;name&#34;: &#34;balanceOf&#34;,
+</span></span><span class=line><span class=cl>    &#34;outputs&#34;: [
+</span></span><span class=line><span class=cl>      {
+</span></span><span class=line><span class=cl>        &#34;name&#34;: &#34;&#34;,
+</span></span><span class=line><span class=cl>        &#34;type&#34;: &#34;uint256&#34;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    ],
+</span></span><span class=line><span class=cl>    &#34;payable&#34;: false,
+</span></span><span class=line><span class=cl>    &#34;stateMutability&#34;: &#34;view&#34;,
+</span></span><span class=line><span class=cl>    &#34;type&#34;: &#34;function&#34;
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>]
+</span></span></code></pre></td></tr></table></div></div><p>然后将其转换为 go 文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>abigen --abi token.abi --pkg main --type Token --out token.go
+</span></span></code></pre></td></tr></table></div></div><p>生成的 token.go 文件，才是可以被操作的文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>func TransferToken() {
+</span></span><span class=line><span class=cl> key, to_address := CreateWallet()
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> client, err := connectRPC()
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(err)
+</span></span><span class=line><span class=cl>  panic(err)
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> auth, err := bind.NewTransactor(strings.NewReader(key), &#34;password&#34;)
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(&#34;读取keystore失败&#34;, err)
+</span></span><span class=line><span class=cl>  panic(err)
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> token, err := cont.NewToken(common.HexToAddress(&#34;0x75a26aaaecda412bd914e8fbfaed586a467fa8b5&#34;), client)
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(&#34;获取token失败&#34;, err)
+</span></span><span class=line><span class=cl>  panic(err)
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> balance, err := token.BalanceOf(nil, common.HexToAddress(to_address))
+</span></span><span class=line><span class=cl> if err != nil {
+</span></span><span class=line><span class=cl>  log.Fatalln(&#34;token balance of&#34;, err)
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> log.Println(&#34;to address balance: &#34;, balance)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> amount := big.NewFloat(10.00)
+</span></span><span class=line><span class=cl> //这是处理位数的代码段
+</span></span><span class=line><span class=cl> tenDecimal := big.NewFloat(math.Pow(10, 18))
+</span></span><span class=line><span class=cl> convertAmount, _ := new(big.Float).Mul(tenDecimal, amount).Int(&amp;big.Int{})
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> tx, err := token.Transfer(auth, common.HexToAddress(to_address), convertAmount)
+</span></span><span class=line><span class=cl> if nil != err {
+</span></span><span class=line><span class=cl>  fmt.Printf(&#34;err: %v \n&#34;, err)
+</span></span><span class=line><span class=cl>  return
+</span></span><span class=line><span class=cl> }
+</span></span><span class=line><span class=cl> fmt.Printf(&#34;result: %v\n&#34;, tx)
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>不知为何会出现 failed to estimate gas needed 的情况</p></blockquote><p>代币转账的代码就如上所示，有了这个，其实我们就可以发币了。</p><p>至于上面的一句代码中的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>token, err := cont.NewToken(common.HexToAddress(&#34;0x75a26aaaecda412bd914e8fbfaed586a467fa8b5&#34;), client)
+</span></span></code></pre></td></tr></table></div></div><p>这个<code>0x75a26aaaecda412bd914e8fbfaed586a467fa8b5</code>地址，就是合约的地址。关于合约的部署，其实如果是在本地调试的话，可以用 truffle。truffle 在部署的时候，会将合约地址返回。</p><p>如下图所示：</p><p><img src=https://ws4.sinaimg.cn/large/0069RVTdgy1fu1f8bx1xvj30xc0m8mzv.jpg loading=lazy alt=image-20180807203645670></p><p>关于如何在以太坊上写代币的合约，下次再写一下笔记。</p><h2 id=总结>总结</h2><p>可以用 web3 去做这些事儿，会更简单一些。因为服务端选型用的 go，所以就用 go 踩了一些坑。</p></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{DISQUS&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+1993 -
+2022 演示站点</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.10.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#账户>账户</a><ol><li><ol><li><a href=#以公钥和私钥的形式创建>以公钥和私钥的形式创建</a></li><li><a href=#以-keystore-的形式创建>以 keystore 的形式创建</a></li></ol></li></ol></li><li><a href=#私链>私链</a><ol><li><ol><li><a href=#本地私链的启动>本地私链的启动</a></li><li><a href=#互联网上的测试链地址>互联网上的测试链地址</a></li><li><a href=#连接>连接</a></li></ol></li></ol></li><li><a href=#其他操作>其他操作</a><ol><li><a href=#获取余额>获取余额</a></li><li><a href=#代币转账>代币转账</a></li></ol></li><li><a href=#总结>总结</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

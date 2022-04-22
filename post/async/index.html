@@ -1,123 +1,168 @@
-<!doctype html><html lang=zh-cn>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>小议 async/await 和 coroutine - Awesome Fenix</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="Fenix"><meta name=description content="Being happy doesn&amp;rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections. 后端编程，涉及最多的就是并发。简单理解就是： 并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行"><meta name=keywords content="Fenix,Clojure,Blog">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script>
-<meta name=generator content="Hugo 0.92.2 with theme even">
-<link rel=canonical href=https://zhenfeng-zhu.github.io/post/async/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<meta property="og:title" content="小议 async/await 和 coroutine">
-<meta property="og:description" content="Being happy doesn&rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections. 后端编程，涉及最多的就是并发。简单理解就是： 并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/async/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2018-05-21T19:37:14+00:00">
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00">
-<meta itemprop=name content="小议 async/await 和 coroutine">
-<meta itemprop=description content="Being happy doesn&rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections. 后端编程，涉及最多的就是并发。简单理解就是： 并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行"><meta itemprop=datePublished content="2018-05-21T19:37:14+00:00">
-<meta itemprop=dateModified content="2022-01-18T10:28:15+08:00">
-<meta itemprop=wordCount content="3330">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="小议 async/await 和 coroutine">
-<meta name=twitter:description content="Being happy doesn&rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections. 后端编程，涉及最多的就是并发。简单理解就是： 并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>小议 async/await 和 coroutine - Awesome Fenix</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fenix" /><meta name="description" content="Being happy doesn&amp;rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections. 后端编程，涉及最多的就是并发。简单理解就是： 并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行" /><meta name="keywords" content="Fenix, Clojure, Blog" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
+     crossorigin="anonymous"></script>
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/async/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="小议 async/await 和 coroutine" />
+<meta property="og:description" content="Being happy doesn&rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections. 后端编程，涉及最多的就是并发。简单理解就是： 并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/async/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-05-21T19:37:14+00:00" />
+<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
+
+<meta itemprop="name" content="小议 async/await 和 coroutine">
+<meta itemprop="description" content="Being happy doesn&rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections. 后端编程，涉及最多的就是并发。简单理解就是： 并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行"><meta itemprop="datePublished" content="2018-05-21T19:37:14+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
+<meta itemprop="wordCount" content="3330">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="小议 async/await 和 coroutine"/>
+<meta name="twitter:description" content="Being happy doesn&rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections. 后端编程，涉及最多的就是并发。简单理解就是： 并发是同时管理多个任务去执行，并行是针对多核处理器，同时执行"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>Awesome Fenix</a>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awesome Fenix</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class=mobile-navbar-icon>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/>
-<li class=mobile-menu-item>Home</li>
-</a><a href=/post/>
-<li class=mobile-menu-item>Archives</li>
-</a><a href=/tags/>
-<li class=mobile-menu-item>Tags</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>Categories</li>
-</a><a href=/about/>
-<li class=mobile-menu-item>About</li>
-</a>
-</ul>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
 </nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>Awesome Fenix</a>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Awesome Fenix</a>
 </div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/>Home</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/>Archives</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/tags/>Tags</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>Categories</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/about/>About</a>
-</li>
-</ul>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
 </nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>小议 async/await 和 coroutine</h1>
-<div class=post-meta>
-<span class=post-time> 2018-05-21 </span>
-<span class=more-meta> 约 3330 字 </span>
-<span class=more-meta> 预计阅读 7 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#一个问题>一个问题</a></li>
-<li><a href=#js-异步编程>js 异步编程</a></li>
-<li><a href=#futurerxjavaactor-和-kotlin-协程>Future、RxJava、Actor 和 kotlin 协程</a></li>
-<li><a href=#浅谈协程>浅谈协程</a></li>
-<li><a href=#结语>结语</a></li>
-</ul>
-</li>
-</ul>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">小议 async/await 和 coroutine</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-05-21 </span>
+        
+          <span class="more-meta"> 约 3330 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一个问题">一个问题</a></li>
+        <li><a href="#js-异步编程">js 异步编程</a></li>
+        <li><a href="#futurerxjavaactor-和-kotlin-协程">Future、RxJava、Actor 和 kotlin 协程</a></li>
+        <li><a href="#浅谈协程">浅谈协程</a></li>
+        <li><a href="#结语">结语</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
+  </div>
 </div>
-</div>
-<div class=post-content>
-<blockquote>
+    <div class="post-content">
+      <blockquote>
 <p>Being happy doesn&rsquo;t mean that everything is perfect. It means that you decided to look beyond the imperfections.</p>
 </blockquote>
 <p>后端编程，涉及最多的就是并发。简单理解就是：</p>
@@ -127,11 +172,11 @@
 <p>并发一般特指 IO，IO 是独立于 CPU 的设备，IO 设备通常远远慢于 CPU，所以我们引入了并发的概念，让 CPU 可以一次性发起多个 IO 操作而不用等待 IO 设备做完一个操作再做令一个。原理就是非阻塞操作+事件通知。</p>
 <p>硬件底层上我其实不关心，主要就是在写程序上，如何简单的去写并发的代码。在语法层面上对并发做的比较好的，很适合做服务端，比如 go，比如 node，又比如某些函数式语言。我最近最近主要使用的是 node 和 kotlin。</p>
 <p>那么在写并发代码的时候，就会时不时的想这样一个问题：</p>
-<h2 id=一个问题>一个问题</h2>
+<h2 id="一个问题">一个问题</h2>
 <p>当代码遇到一个“暂时不能完成”的流程时（例如建立一个 tcp 链接，可能需要 5ms 才能建立），他不想阻塞在这里睡眠，想暂时离开现场去干点别的事情（例如看看另外一个已经建立的链接是否可以收包了）。问题是：离开现场后，当你回来的时候，上下文还像你走的时候吗？</p>
 <p>跳转离开，在任何语言里都有 2 种最基本的方法：1）从当前函数返回； 2）调用一个新的函数。 前者会把上下文中的局部变量和函数参数全部摧毁，除非他返回前把这些变量找个别的地方保存起来；后者则能保护住整个上下文的内存（除了协程切换后会摧毁一些寄存器），而且跳转回来也是常规方法：函数返回。</p>
 <p>在写 node 的时候，基本上是无脑上 async/await。每次看到回调函数的时候，强迫症就犯了，总是想方设法将那个方法转成 promise，然后使用 await 获得结果。无脑尝试了 bluebird 和 node 的 util，虽然有些是很好用的，但是有的还是无法达到我预期的。靠着无脑的 async/await，实现了很多功能，代码写起来也是快的飞起，但是只顾着做业务而不深入思考的话，是一个不好的表现，所以我就停下来搜了很多 async/await 的东西，特别是从阮一峰老师那里收获了很多。</p>
-<h2 id=js-异步编程>js 异步编程</h2>
+<h2 id="js-异步编程">js 异步编程</h2>
 <p>因为 js 是单线程，所以异步编程对 js 特别重要。</p>
 <p>实现异步主要有如下几种：</p>
 <ul>
@@ -162,15 +207,15 @@
 <li>
 <p>generator</p>
 <p>es6 增加了 generator 函数，就是协程的一种实现，最大特点就是使用 yield 关键字就是用来交出函数的执行权。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>function* gen(x){
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">function* gen(x){
   var y = yield x + 2;
   return y;
 }
@@ -182,17 +227,17 @@
 <li>
 <p>Thunk 函数</p>
 <p>说到 thunk 函数，就得先了解一下参数的求值策略。</p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-plain data-lang=plain>let m=1;
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">let m=1;
 function f(x){
     return x*2
 }
@@ -211,16 +256,16 @@ f(m+5)
 </li>
 </ul>
 <p>传值调用比较简单，但是对参数求值的时候，实际上还没用到这个参数，有可能造成性能损失。</p>
-<p>编译器的"传名调用"实现，往往是将参数放到一个临时函数之中，再将这个临时函数传入函数体。这个临时函数就叫做 Thunk 函数。</p>
+<p>编译器的&quot;传名调用&quot;实现，往往是将参数放到一个临时函数之中，再将这个临时函数传入函数体。这个临时函数就叫做 Thunk 函数。</p>
 <p>js 是传值调用。他的 thunk 函数是将多参数的函数，替换成了单参数的版本，而且只接受回调函数作为参数。</p>
 <p>这样就可以很方便的实现了基于 thunk 函数的 generator 自动执行器。</p>
-<p>具体的实现和如何使用，参考<a href=http://www.ruanyifeng.com/blog/2015/05/thunk.html>http://www.ruanyifeng.com/blog/2015/05/thunk.html</a>。</p>
+<p>具体的实现和如何使用，参考<a href="http://www.ruanyifeng.com/blog/2015/05/thunk.html">http://www.ruanyifeng.com/blog/2015/05/thunk.html</a>。</p>
 </li>
 <li>
 <p>co 函数</p>
 <p>co 函数是基于 Promise 的 generator 函数的自动执行器。</p>
 <p>源代码只有几十行，tj 大神太强👍了。</p>
-<p><a href=http://www.ruanyifeng.com/blog/2015/05/co.html>http://www.ruanyifeng.com/blog/2015/05/co.html</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/05/co.html">http://www.ruanyifeng.com/blog/2015/05/co.html</a></p>
 </li>
 <li>
 <p>async/await</p>
@@ -230,7 +275,7 @@ f(m+5)
 </li>
 </ul>
 <p>理解了以上的演进过程，感觉自己终于摆脱了 java 思维的枪，对 node 终于入门了。然后，同步地写着 kotlin 项目，又陷入了泥潭中。</p>
-<h2 id=futurerxjavaactor-和-kotlin-协程>Future、RxJava、Actor 和 kotlin 协程</h2>
+<h2 id="futurerxjavaactor-和-kotlin-协程">Future、RxJava、Actor 和 kotlin 协程</h2>
 <p>我理解的也不是很深，求科普。</p>
 <p>以前写 java 的时候，自己都是无脑用线程池，开多线程去处理，一般这种情况下不需要线程的结果。</p>
 <ul>
@@ -261,7 +306,7 @@ f(m+5)
 </li>
 </ul>
 <p>跪求科普，等理解了再接着完善。</p>
-<h2 id=浅谈协程>浅谈协程</h2>
+<h2 id="浅谈协程">浅谈协程</h2>
 <p>说到协程，就要说线程。</p>
 <p>线程是操作系统的用户态概念，线程本身也依赖中断来进行调度。早期的用户态 IO 并发处理是用 poll(select)模型去轮询 IO 状态，然后发起相应的 IO 操作，称之为事件响应式的异步模型，这种方式并不容易使用，所以又发展出了阻塞式 IO 操作，让逻辑挂起并等待 IO 完成，为了让阻塞式 IO 能够并发就必须依赖多线程或者多进程模型来实现。但是线程的开销是非常大的，当遇到大规模并发的时候多线程模型就无法胜任了。所以大规模并发时我们又退回去使用事件响应，epoll 在本质上还是 poll 模型，只是在算法上优化了实现，此时我们只用单线程就可以处理上万的并发请求了。</p>
 <p>直到多核 CPU 的出现，我们发现只用一个线程是无法发挥多核 CPU 的威力的，所以再次引入线程池来分摊 IO 操作的 CPU 消耗，甚至 CPU 的中断响应也可以由多个核来分摊执行，此时的线程数量是大致等于 CPU 的核心数而远小于并发 IO 数的（这时 CPU 能处理百万级的并发），线程的引入完全是为了负载均衡而跟并发没有关系。所以不管是用 select/epoll/iocp 在逻辑层都绕不开基于事件响应的异步操作，面对异步逻辑本身的复杂性，我们才引入了 async/await 以及 coroutine 来降低复杂性。</p>
@@ -270,75 +315,114 @@ f(m+5)
 <p>所谓 stackful 是指每个 coroutine 有独立的运行栈，比如 go 语言的每个 goroutine 会分配一个 4k 的内存来做为运行栈，切换 goroutine 的时候运行栈也会切换。stackful 的好处在于这种 coroutine 是完整的，coroutine 可以嵌套、循环。</p>
 <p>与 stackful 对应的是 stackless coroutine，比如 js 的 generator 函数，这类 coroutine 不需要分配单独的栈空间，coroutine 状态保存在闭包里，但缺点是功能比较弱，不能被嵌套调用，也没办法和异步函数配合使用进行控制流的调度，所以基本上没办法跟 stackful coroutine 做比较。保存这些状态的时候，有的语言就引入了状态机的模型来实现线程。</p>
 <p>async/await 的出现，实现了基于 stackless coroutine 的完整 coroutine。在特性上已经非常接近 stackful coroutine 了，不但可以嵌套使用也可以支持 try catch。</p>
-<h2 id=结语>结语</h2>
+<h2 id="结语">结语</h2>
 <p>发现自己挺无脑的，学会了一个东西，就无脑的去用，直到碰壁了才会去思考。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fenix</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-18
+        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
+    </span>
+  </p>
+  
+  
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>Fenix</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-18
-<a href=zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89 title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-</span>
-</p>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/vertx-kotlin-coroutine/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">译：vertx-kotlin-coroutine</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/elasticsearch/">
+            <span class="next-text nav-default">elasticsearch</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <script src="https://utteranc.es/client.js"
+        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
-<footer class=post-footer>
-<nav class=post-nav>
-<a class=prev href=/post/vertx-kotlin-coroutine/>
-<i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">译：vertx-kotlin-coroutine</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/elasticsearch/>
-<span class="next-text nav-default">elasticsearch</span>
-<span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
+  </span>
 </div>
-<script src=https://utteranc.es/client.js repo=zhenfeng-zhu/zhenfeng-zhu.github.io issue-term=pathname label=Comment theme=github-light crossorigin=anonymous async></script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=https://zhenfeng-zhu.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
-<span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
-<span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
-2016 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
-<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-216295420-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-216295420-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
 </body>
 </html>
