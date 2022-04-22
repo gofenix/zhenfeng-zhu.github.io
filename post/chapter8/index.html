@@ -1,231 +1,48 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Chapter8 宏 - Awesome Fenix</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="Fenix" /><meta name="description" content="编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的" /><meta name="keywords" content="Fenix, Clojure, Blog" />
-
-
-
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
-     crossorigin="anonymous"></script>
-
-
-<meta name="generator" content="Hugo 0.92.2 with theme even" />
-
-
-<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/chapter8/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="Chapter8 宏" />
-<meta property="og:description" content="编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/chapter8/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-01-15T12:22:42+08:00" />
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
-
-<meta itemprop="name" content="Chapter8 宏">
-<meta itemprop="description" content="编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的"><meta itemprop="datePublished" content="2022-01-15T12:22:42+08:00" />
-<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
-<meta itemprop="wordCount" content="11129">
-<meta itemprop="keywords" content="clojure," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Chapter8 宏"/>
-<meta name="twitter:description" content="编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Awesome Fenix</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Awesome Fenix</a>
-</div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-</nav>
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Chapter8 宏</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2022-01-15 </span>
-        
-          <span class="more-meta"> 约 11129 字 </span>
-          <span class="more-meta"> 预计阅读 23 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#编写宏">编写宏</a>
-      <ul>
-        <li><a href="#宏是必不可少的">宏是必不可少的</a></li>
-        <li><a href="#解剖巨集">解剖巨集</a></li>
-        <li><a href="#为求值建立列表">为求值建立列表</a>
-          <ul>
-            <li><a href="#区分符号和值">区分符号和值</a></li>
-            <li><a href="#简单的引号">简单的引号</a></li>
-            <li><a href="#语法引用">语法引用</a></li>
-          </ul>
-        </li>
-        <li><a href="#在宏中使用语法引语">在宏中使用语法引语</a></li>
-        <li><a href="#重构一个宏和取消引号拼接">重构一个宏和取消引号拼接</a></li>
-        <li><a href="#需要注意的事项">需要注意的事项</a>
-          <ul>
-            <li><a href="#变量捕获">变量捕获</a></li>
-            <li><a href="#双重求值">双重求值</a></li>
-            <li><a href="#宏的所有方式">宏的所有方式</a></li>
-          </ul>
-        </li>
-        <li><a href="#为勇敢和真实的人而酿的酒">为勇敢和真实的人而酿的酒</a>
-          <ul>
-            <li><a href="#验证函数">验证函数</a></li>
-            <li><a href="#if-valid">if-valid</a></li>
-          </ul>
-        </li>
-        <li><a href="#总结">总结</a></li>
-        <li><a href="#练习">练习</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <h1 id="编写宏">编写宏</h1>
-<p>当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在</p>
-<p>凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。&ldquo;终于来了！&ldquo;我的大脑涌动着。&ldquo;这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！&rdquo;</p>
-<p>从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水&ndash;喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。</p>
-<p><img src="https://www.braveclojure.com/assets/images/cftbat/writing-macros/simmons-potion.png" alt=""></p>
-<p>就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。</p>
-<p>在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。</p>
-<p>在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。</p>
-<h2 id="宏是必不可少的">宏是必不可少的</h2>
-<p>在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以<code>when</code>为例。 <code>when</code>有这样的一般形式。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(when boolean-expression
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Chapter8 宏 | PaperMod</title><meta name=keywords content="clojure"><meta name=description content="编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在
+凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。&ldquo;终于来了！&ldquo;我的大脑涌动着。&ldquo;这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！&rdquo;
+从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水&ndash;喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。
+就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。
+在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。
+在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。
+宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。
+(when boolean-expression expression-1 expression-2 expression-3 ... expression-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
+在这个宏扩展中，你可以看到when是用if和do来实现的。
+(macroexpand '(when boolean-expression expression-1 expression-2 expression-3)) ; => (if boolean-expression (do expression-1 expression-2 expression-3)) 这表明宏是 Clojure 开发中不可或缺的一部分&ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。
+解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。
+作为一个例子，这里有我们的老朋友infix宏。
+(defmacro infix &#34;Use this macro when you pine for the notation of your childhood&#34; [infixed] (list (second infixed) (first infixed) (last infixed))) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。"><meta name=author content="Theme PaperMod"><link rel=canonical href=/post/chapter8/><link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=favicon.ico><link rel=icon type=image/png sizes=16x16 href=favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=favicon-32x32.png><link rel=apple-touch-icon href=apple-touch-icon.png><link rel=mask-icon href=safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.97.3"><link rel=alternate hreflang=en href=/post/chapter8/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="Chapter8 宏"><meta property="og:description" content="编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在
+凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。&ldquo;终于来了！&ldquo;我的大脑涌动着。&ldquo;这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！&rdquo;
+从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水&ndash;喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。
+就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。
+在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。
+在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。
+宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。
+(when boolean-expression expression-1 expression-2 expression-3 ... expression-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
+在这个宏扩展中，你可以看到when是用if和do来实现的。
+(macroexpand '(when boolean-expression expression-1 expression-2 expression-3)) ; => (if boolean-expression (do expression-1 expression-2 expression-3)) 这表明宏是 Clojure 开发中不可或缺的一部分&ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。
+解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。
+作为一个例子，这里有我们的老朋友infix宏。
+(defmacro infix &#34;Use this macro when you pine for the notation of your childhood&#34; [infixed] (list (second infixed) (first infixed) (last infixed))) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。"><meta property="og:type" content="article"><meta property="og:url" content="/post/chapter8/"><meta property="og:image" content="/post/chapter8/https:/raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png"><meta property="article:section" content="post"><meta property="article:published_time" content="2022-01-15T12:22:42+08:00"><meta property="article:modified_time" content="2022-01-15T12:22:42+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="/post/chapter8/https:/raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png"><meta name=twitter:title content="Chapter8 宏"><meta name=twitter:description content="编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在
+凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。&ldquo;终于来了！&ldquo;我的大脑涌动着。&ldquo;这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！&rdquo;
+从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水&ndash;喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。
+就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。
+在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。
+在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。
+宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。
+(when boolean-expression expression-1 expression-2 expression-3 ... expression-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
+在这个宏扩展中，你可以看到when是用if和do来实现的。
+(macroexpand '(when boolean-expression expression-1 expression-2 expression-3)) ; => (if boolean-expression (do expression-1 expression-2 expression-3)) 这表明宏是 Clojure 开发中不可或缺的一部分&ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。
+解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。
+作为一个例子，这里有我们的老朋友infix宏。
+(defmacro infix &#34;Use this macro when you pine for the notation of your childhood&#34; [infixed] (list (second infixed) (first infixed) (last infixed))) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"/post/"},{"@type":"ListItem","position":3,"name":"Chapter8 宏","item":"/post/chapter8/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Chapter8 宏","name":"Chapter8 宏","description":"编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在\n凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。\u0026ldquo;终于来了！\u0026ldquo;我的大脑涌动着。\u0026ldquo;这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！\u0026rdquo;\n从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水\u0026ndash;喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。\n就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。\n在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。\n在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。\n宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。\n(when boolean-expression expression-1 expression-2 expression-3 ... expression-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。\n在这个宏扩展中，你可以看到when是用if和do来实现的。\n(macroexpand \u0026#39;(when boolean-expression expression-1 expression-2 expression-3)) ; =\u0026gt; (if boolean-expression (do expression-1 expression-2 expression-3)) 这表明宏是 Clojure 开发中不可或缺的一部分\u0026ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。\n解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。\n作为一个例子，这里有我们的老朋友infix宏。\n(defmacro infix \u0026#34;Use this macro when you pine for the notation of your childhood\u0026#34; [infixed] (list (second infixed) (first infixed) (last infixed))) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。","keywords":["clojure"],"articleBody":"编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在\n凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。“终于来了！“我的大脑涌动着。“这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！”\n从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水–喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。\n就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。\n在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。\n在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。\n宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。\n(when boolean-expression expression-1 expression-2 expression-3 ... expression-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。\n在这个宏扩展中，你可以看到when是用if和do来实现的。\n(macroexpand '(when boolean-expression expression-1 expression-2 expression-3)) ; = (if boolean-expression (do expression-1 expression-2 expression-3)) 这表明宏是 Clojure 开发中不可或缺的一部分–它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。\n解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。\n作为一个例子，这里有我们的老朋友infix宏。\n(defmacro infix \"Use this macro when you pine for the notation of your childhood\" [infixed] (list (second infixed) (first infixed) (last infixed))) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。\n(infix (1 + 1)) ; = 2 函数和宏之间的一个关键区别是，函数参数在传递给函数之前被完全求值，而宏是以未求值的数据形式接收参数。你可以在这个例子中看到这一点。如果你试图单独求值(1+1)，你会得到一个异常。然而，因为你在进行一个宏调用，未求值的列表(1 + 1)被传递给infix。然后宏可以使用first、second和last来重新排列列表，这样 Clojure 就可以求值它。\n(macroexpand '(infix (1 + 1)) ; = (+ 1 1) 通过扩展宏，你可以看到infix将(1 + 1)重新排列成(+ 1 1)。很方便!\n你也可以在宏定义中使用参数重构，就像你可以使用函数一样。\n(defmacro infix-2 [[operand1 op operand2]] (list op operand1 operand2) (list op operand1 operand2)) 解构参数可以让你根据序列参数中的位置简洁地将值与符号绑定。在这里，infix-2将一个顺序数据结构作为参数，并按位置进行解构，因此第一个值被命名为operand1，第二个值被命名为op，第三个值在宏中被命名为operand2。\n你也可以创建多属性的宏，事实上，基本的布尔运算and和or都被定义为宏。下面是and的源代码。\n(defmacro and \"Evaluates exprs one at a time, from left to right. If a form returns logical false (nil or false), and returns that value and doesn't evaluate any of the other expressions, otherwise it returns the value of the last expr. (and) returns true.\" {:added \"1.0\"} ([] true) ([x] x) ([x \u0026 next] `(let [and# ~x] (if and# (and ~@next) and#)))) 在这个例子中发生了很多事情，包括符号和~@，你很快就会了解到这些。现在重要的是，这里有三个宏体：一个总是返回 “true “的 0-arity 宏体，一个返回操作数的 1-arity 宏体，以及一个递归调用自身的n-arity 宏体。这是正确的：宏可以是递归的，它们也可以使用其余的参数（n-arity 宏主体中的\u0026 next），就像函数一样。\n现在你对宏的解剖已经很熟悉了，现在是时候把你自己绑在你的奥德修斯式思维的桅杆上，学习写宏体了。\n为求值建立列表 编写宏就是要为 Clojure 建立一个列表来进行求值，这需要颠覆你的正常思维方式。首先，你经常需要引用表达式，以便在你的最终列表中获得未求值的数据结构（我们稍后会回到这个问题）。更普遍的是，你需要特别注意符号和值之间的区别。\n区分符号和值 假设你想创建一个宏，它接收一个表达式，并同时打印和返回其值。(这与println'不同，println’总是返回`nil’。)你希望你的宏能够返回类似这样的列表。\n(let [result expression] (println result) result) 你的宏的第一个版本可能看起来像这样，使用list函数来创建 Clojure 应该求值的列表。\n (defmacro my-print-whoopsie [expression] (list let [result expression] (list println result) result)) 然而，如果你尝试这样做，你会得到一个异常`不能接受一个宏的值。#‘clojure.core/let’。这到底是怎么回事？\n发生这种情况的原因是，你的宏主体试图获取符号 let所指的*值，而你实际想做的是返回let符号本身。还有其他的问题：你试图获得result的值，这是不绑定的，你试图获得println的值，而不是返回其符号。下面是你如何写宏来做你想要的事情。\n(defmacro my-print [expression] (list 'let ['result expression] (list 'println 'result) 'result)) 在这里，你通过在每个符号前加上单引号”‘‘来引出你想作为一个符号使用。这告诉 Clojure关闭后面的求值，在这种情况下，防止 Clojure 试图解决这些符号，而只是返回这些符号。使用引号来关闭求值的能力是编写宏的核心，所以让我们给这个主题一个独立的章节。\n简单的引号 你几乎总是在你的宏中使用引号来获得一个未求值的符号。让我们简单地复习一下引号，然后看看你如何在宏中使用它。\n首先，这里是一个没有引号的简单函数调用。\n(+ 1 2) ; = 3 如果我们在开头加上quote，它就会返回一个未求值的数据结构。\n(quote (+ 1 2)) ; = (+ 1 2) 这里在返回的列表中，+是一个符号。如果我们求值这个加号，就会产生加号函数。\n+ ; = #而如果我们引用这个加号，它只是产生加号。\n(quote +) ; = + 求值一个未绑定的符号会引发一个异常。\nsweating-to-the-oldies ; = Unable to resolve symbol: sweating-to-the-oldies in this context 但是引用符号会返回一个符号，不管这个符号是否有一个与之相关的值。\n(quote sweating-to-the-oldies) ; = sweating-to-the-oldies 单引号字符是(quotex)的读者宏。\n'(+ 1 2) ; = (+ 1 2) 'dr-jekyll-and-richard-simmons ; = dr-jekyll-and-richard-simmons 你可以在when宏中看到引用的工作。这是when的实际源代码。\n(defmacro when \"Evaluates test. If logical true, evaluates body in an implicit do.\" {:added \"1.0\"} [test \u0026 body] (list 'if test (cons 'do body))) 注意，宏的定义同时引用了if和do。这是因为你想让这些符号出现在`when’返回的最终列表中进行计算。下面是一个返回列表的例子，它可能是这样的。\n(macroexpand '(when (the-cows-come :home) (call me :pappy) (slap me :silly))) ; = (if (the-cows-come :home) (do (call me :pappy) (slap me :silly))) 下面是另一个内置宏的源代码的例子，这次是关于unless的。\n(defmacro unless \"Inverted 'if'\" [test \u0026 branches] (conj (reverse branches) test 'if)) 同样，你必须引用if，因为你想让未求值的符号放在结果列表中，就像这样。\n(macroexpand '(unless (done-been slapped? me) (slap me :silly) (say \"I reckon that'll learn me\"))) ; = (if (done-been slapped? me) (say \"I reckon that'll learn me\") (slap me :silly)) 在许多情况下，在编写宏时，你会使用这样的简单引号，但大多数情况下你会使用更强大的语法引号。\n语法引用 到目前为止, 你已经看到了通过使用list函数来建立列表的宏，以及对列表进行操作的函数，如first, second, last，等等。事实上，你可以这样写宏，直到奶牛回家。但有时，这将导致繁琐和冗长的代码。\n语法引号返回未求值的数据结构，与普通引号类似。然而，有两个重要的区别。一个区别是，语法引用将返回完全合格的符号（即包括符号的命名空间）。让我们比较一下引号和语法引号。\n如果你的代码中不包括名字空间，那么引用就不包括名字空间。\n'+ ; = + 写出命名空间，它将被正常的引用所返回。\n'clojure.core/+ ; = clojure.core/+ 语法引号将总是包括符号的完整命名空间。\n`+ ; = clojure.core/+ 对一个列表的引用会递归地引用所有的元素。\n'(+ 1 2) ; = (+ 1 2) 语法引用一个列表递归地引用所有的元素。\n`(+ 1 2) ; = (clojure.core/+ 1 2) 语法引号包括名字空间的原因是为了帮助你避免名字的碰撞，这个话题在第 6 章中涉及。\n引号和语法引号之间的另一个区别是，后者允许你使用 “tilde”，即”~\"，来*解除引号的形式。这有点像氪星石：只要超人在氪星石周围，他的能力就会消失。每当在一个语法引号的 Form 中出现 tilde，语法引号返回未求值的、完全命名的 Form 的能力就会消失。这里有一个例子。\n`(+ 1 ~(inc 1)) ; = (clojure.core/+ 1 2) 因为它在 tilde 之后，(inc 1)被求值而不是被引号。如果没有 unquote，语法引号会返回未求值的形式，并带有完全限定的符号。\n`(+ 1 (inc 1)) ; = (clojure.core/+ 1 (clojure.core/inc 1)) 如果你熟悉字符串插值，你可以类似地考虑语法引用/非引用的问题。在这两种情况下，你都在创建一种模板，将一些变量放在一个更大的静态结构中。例如，在 Ruby 中，你可以通过连接来创建字符串\"Churn your butter, Jebediah!\"。\nname = \"Jebediah\" \"Churn your butter, \" + name + \"!\" 或通过内插法。\n\"Churn your butter, #{name}!\" 就像字符串插值可以使代码更清晰、更简洁一样，语法引号和解引号可以使你更清晰、更简洁地创建列表。比较一下使用list函数和使用语法引号。\n(list '+ 1 (inc 1)) ; = (+ 1 2) `(+ 1 ~(inc 1)) ; = (clojure.core/+ 1 2) 正如你所看到的，语法引号版本更加简洁。而且，它的视觉形式更接近列表的最终形式，使其更容易理解。\n在宏中使用语法引语 现在你已经很好地掌握了语法引号的工作原理，来看看code-critic宏。你将使用语法引号编写一个更简洁的版本。\n(defmacro code-critic \"Phrases are courtesy Hermes Conrad from Futurama\" [bad good] (list 'do (list 'println \"Great squid of Madrid, this is bad code:\" (list 'quote bad)) (list 'println \"Sweet gorilla of Manila, this is good code:\" (list 'quote good)))) (code-critic (1 + 1) (+ 1 1)) ; = Great squid of Madrid, this is bad code: (1 + 1) ; = Sweet gorilla of Manila, this is good code: (+ 1 1) 仅仅是看着那些乏味的重复的list和单引号，就让我感到害怕。但是如果你用语法引号重写code-critic，你就可以使它变得圆滑简洁。\n(defmacro code-critic \"Phrases are courtesy Hermes Conrad from Futurama\" [bad good] `(do (println \"Great squid of Madrid, this is bad code:\" (quote ~bad)) (println \"Sweet gorilla of Manila, this is good code:\" (quote ~good)))) 在这种情况下，你想引用除符号good和bad以外的所有内容。在原来的版本中，你必须单独引用每一块，并明确地把它放在一个不方便的列表中，只是为了防止这两个符号被引用。有了语法引号，你只需将整个do表达式包裹在一个引号中，并简单地取消你要求值的两个符号的引号。\n宏的编写方法介绍到此结束! 亲爱的西萨摩亚和东萨摩亚的神圣蟒蛇，这是很重要的!\n总而言之，宏接收未经求值的、任意的数据结构作为参数，并返回 Clojure 求值的数据结构。在定义宏的时候，你可以使用参数重构，就像你可以使用函数和let绑定一样。你也可以编写多属性和递归的宏。\n大多数情况下，你的宏会返回列表。你可以通过使用list函数或使用语法引号来建立要返回的列表。语法引号通常会使代码更清晰、更简洁，因为它可以让你创建一个你想返回的数据结构的模板，更容易进行视觉上的解析。无论你使用语法引号还是普通引号，重要的是在建立你的列表时要清楚地了解符号和它所求值的值之间的区别。如果你想让你的宏返回多种形式供 Clojure 求值，一定要用do来包装它们。\n重构一个宏和取消引号拼接 上一节中的 “code-critic “宏仍然需要一些改进。看看这个重复的地方! 两个 “println “的调用几乎是一样的。让我们把它清理一下。首先，让我们创建一个函数来生成这些`println’列表。函数比宏更容易思考和使用，所以把宏的内容移到辅助函数中通常是个好主意。\n(defn criticize-code [criticism code] `(println ~criticism (quote ~code))) (defmacro code-critic [bad good] `(do ~(criticize-code \"Cursed bacteria of Liberia, this is bad code:\" bad) ~(criticize-code \"Sweet sacred boa of Western and Eastern Samoa, this is good code:\" good))) 注意到criticize-code函数如何返回一个语法引号的列表。这就是你如何建立起宏将返回的列表。\n不过，还有更多的改进空间。这段代码仍然有多个几乎相同的函数调用。在这种情况下，你想对一个值的集合应用同一个函数，使用像map这样的 seq 函数是有意义的。\n(defmacro code-critic [bad good] `(do ~(map #(apply criticize-code %) [[\"Great squid of Madrid, this is bad code:\" bad] [\"Sweet gorilla of Manila, this is good code:\" good]]))) 这看起来好一点了。你正在 Map 每个批评/代码对，并将 “批评-代码 “函数应用于该对。让我们试着运行这段代码。\n(code-critic (1 + 1) (+ 1 1)) ; = NullPointerException 哦，不！这根本就没有用! 发生了什么？问题是，map返回一个列表，在这种情况下，它返回一个println表达式的列表。我们只想得到每个println调用的结果，但是相反，这段代码把两个结果都放在一个列表中，然后试图求值这个列表。\n换句话说，当它求值这段代码时，Clojure 会得到类似这样的结果。\n(do ((clojure.core/println \" criticism\" ' (1 + 1)) (clojure.core/println \"critism\" '(+ 1 1))))) 然后求值第一个 “println “的调用，给我们提供这个。\n(do (nil (clojure.core/println \"criticism\" '(+ 1 1)))) 并在求值了第二个`println’调用后，这样做。\n(do (nil nil)) 这就是导致异常的原因。println求值为nil，所以我们最后得到的结果是(nil nil)。nil是不可调用的，我们得到一个NullPointerException。\n多么不方便啊 但恰恰相反，无引号拼接正是为了处理这种情况而发明的。取消引号拼接是用~@来完成的。如果你只是取消引用一个列表，你会得到这样的结果。\n`(+ ~(list 1 2 3)) ; = (clojure.core/+ (1 2 3)) 然而，如果你使用 unquote 拼接，你会得到这样的结果。\n`(+ ~@(list 1 2 3)) ; = (clojure.core/+ 1 2 3) Unquote 拼接将一个可排序的数据结构解开，将其内容直接放在包围的语法引号数据结构中。这就像~@是一把大锤子，后面的东西是一个皮纳塔，其结果是你曾经参加过的最可怕和最棒的聚会。\n总之，如果你在你的代码批评中使用非引号拼接，那么一切都会很顺利。\n(defmacro code-critic [{:keys [good bad]}] `(do ~@(map #(apply criticize-code %) [[\"Sweet lion of Zion, this is bad code:\" bad] [\"Great cow of Moscow, this is good code:\" good]]))) (code-critic (1 + 1) (+ 1 1)) ; = Sweet lion of Zion, this is bad code: (1 + 1) ; = Great cow of Moscow, this is good code: (+ 1 1) 呜呼! 你已经成功地将重复的代码提取到一个函数中，并使你的宏代码更加简洁。温尼伯的可爱豚鼠，这是很好的代码!\n需要注意的事项 宏有一些偷偷摸摸的问题，你应该注意到。在本节中，你将了解到一些宏的陷阱以及如何避免它们。我希望你还没有把自己从你的思想桅杆上解下来。\n变量捕获 变量捕获发生在一个宏引入了一个绑定，而这个绑定对宏的用户来说是未知的，它使一个现有的绑定黯然失色。例如，在下面的代码中，一个宏顽皮地引入了它自己的let绑定，这就把代码搞乱了。\n(def message \"Good job!\") (defmacro with-mischief [\u0026 stuff-to-do] (concat (list 'let ['message \"Oh, big deal!\"]) stuff-to-do)) (with-mischief (println \"Here's how I feel about that thing you did: \" message)) ; = Here's how I feel about that thing you did: Oh, big deal! println调用引用了符号message，我们认为它与字符串\"好样的！\"绑定。然而，with-mischief宏为message创建了一个新的绑定。\n注意，这个宏没有使用语法引号。这样做会导致一个异常。\n(def message \"Good job!\") (defmacro with-mischief [\u0026 stuff-to-do] `(let [message \"Oh, big deal!\"] ~@stuff-to-do)) (with-mischief (println \"Here's how I feel about that thing you did: \" message)) ; Exception: Can't let qualified name: user/message 这个异常是为了你自己好：语法引号的设计是为了防止你在宏中意外地捕捉到变量。如果你想在你的宏中引入let绑定，你可以使用一个gensym。gensym函数在每次连续调用时产生唯一的符号。\n(gensym) ; = G__655 (gensym) ; = G__658 你也可以传递一个符号前缀。\n(gensym 'message) ; = message4760 (gensym 'message) ; = message4763 下面是你如何改写with-mischief，使之不那么调皮。\n(defmacro without-mischief [\u0026 stuff-to-do] (let [macro-message (gensym 'message)] `(let [~macro-message \"Oh, big deal!\"] ~@stuff-to-do (println \"I still need to say: \" ~macro-message)))) (without-mischief (println \"Here's how I feel about that thing you did: \" message)) ; = Here's how I feel about that thing you did: Good job! ; = I still need to say: Oh, big deal! 这个例子通过使用gensym来创建一个新的、唯一的符号，然后与macro-message绑定，避免了变量捕获。在语法引用的let表达式中，macro-message没有被引用，被解析为 gensym 的符号。这个源码符号与stuff-to-do中的任何符号都不同，所以你可以避免变量捕获。因为这是一个常见的模式，你可以使用自动源码。自动源码是使用源码的更简洁和方便的方法。\n`(blarg# blarg#) (blarg__2869__auto__ blarg__2869__auto__) `(let [name# \"Larry Potter\"] name#) ; = (clojure.core/let [name__2872__auto__ \"Larry Potter\"] name__2872__auto__) 在这个例子中，你通过在语法引号列表中的一个符号上附加一个哈希标记（或者哈希标记，如果你一定要坚持的话）来创建一个自动源码。Clojure 会自动确保 x#的每个实例在同一个语法引号列表中解析为相同的符号，y#的每个实例也是如此，以此类推。\ngensym和 auto-gensym 在编写宏时经常使用，它们允许你避免变量捕获。\n双重求值 编写宏时要注意的另一个问题是双重求值，当一个作为参数传递给宏的表格被求值了不止一次时，就会出现这种情况。请看下面的例子。\n(defmacro report [to-try] `(if ~to-try (println (quote ~to-try) \"was successful:\" ~to-try) (println (quote ~to-try) \"was not successful:\" ~to-try))) ;; Thread/sleep takes a number of milliseconds to sleep for (report (do (Thread/sleep 1000) (+ 1 1))) 这段代码是为了测试其参数的真实性。如果参数是真实的，它被认为是成功的；如果是虚假的，它是不成功的。该宏打印出其参数是否成功。在这种情况下，你实际上会睡两秒钟，因为(Thread/sleep 1000)被求值了两次：一次在if之后，另一次在println被调用时。这是因为(do (Thread/sleep 1000) (+ 1 1))的代码在整个宏扩展中被重复。这就像你写的一样。\n(if (do (Thread/sleep 1000) (+ 1 1)) (println '(do (Thread/sleep 1000) (+ 1 1)) \"was successful:\" (do (Thread/sleep 1000) (+ 1 1))) (println '(do (Thread/sleep 1000) (+ 1 1)) \"was not successful:\" (do (Thread/sleep 1000) (+ 1 1)))) “大问题！“你内心的例子评论家说。好吧，如果你的代码是在银行账户之间转账，这将是一个非常大的问题。以下是你如何避免这个问题的方法。\n(defmacro report [to-try] `(let [result# ~to-try] (if result# (println (quote ~to-try) \"was successful:\" result#) (println (quote ~to-try) \"was not successful:\" result#)))) 将 “to-try “放在一个 “let “表达式中，你只需求值一次该代码，并将结果绑定到一个自动标示的符号 “result#“上，现在你可以引用该符号而无需重新求值 “to-try “代码。\n宏的所有方式 使用宏的一个微妙的缺陷是，你可能最终不得不写越来越多的宏来完成任何事情。这是由于宏的扩展发生在求值之前。\n例如，假设你想用report宏来doseq。而不是多次调用报告。\n(report (= 1 1)) ; = (= 1 1) was successful: true (report (= 1 2)) ; = (= 1 2) was not successful: false 让我们进行迭代。\n(doseq [code ['(= 1 1) '(= 1 2)]] (report code)) ; = code was successful: (= 1 1) ; = code was successful: (= 1 2) 当我们单独传递函数时，报告宏工作正常，但当我们使用doseq对多个函数进行report迭代时，它是一个毫无价值的失败。下面是其中一个doseq迭代的宏扩展的样子。\n(if code (clojure.core/println 'code \"was successful:\" code) (clojure.core/println 'code \"was not successful:\" code)) 正如你所看到的，report在每个迭代中接收未求值的符号code；然而，我们希望它在求值时接收任何code被绑定的内容。但是report在宏扩展时操作，就是不能访问这些值。这就像它有 T.Rex 的手臂，运行时的值永远不在它的掌握之中。\n为了解决这种情况，我们可以再写一个宏，像这样。\n(defmacro doseq-macro [macroname \u0026 args] `(do ~@(map (fn [arg] (list macroname arg)) args))) (doseq-macro report (= 1 1) (= 1 2)) ; = (= 1 1) was successful: true ; = (= 1 2) was not successful: false 如果你遇到这种情况，请花些时间重新思考你的方法。这很容易使你自己陷入困境，使你无法通过普通的函数调用来完成任何事情。你会被卡住，不得不写更多的宏。宏是非常强大和令人敬畏的，你不应该害怕使用它们。它们把 Clojure 处理数据的设施变成了创造新语言的设施，而这些新语言是根据你的编程问题来设计的。对于某些程序来说，你的代码 90%以上都是宏，这是合适的。尽管它们很棒，但它们也增加了新的组合挑战。它们只是真正的相互组合，所以通过使用它们，你可能会错过 Clojure 中其他类型的组合（函数式、面向对象）。\n我们现在已经涵盖了编写宏的所有机制。拍拍你的背吧! 这是一个相当大的交易!\n在本章的最后，终于到了戴上你的伪装帽，在本章最开始谈到的网上药水店工作的时候了。\n为勇敢和真实的人而酿的酒 在这一章的开头，我透露了一个梦想：找到某种可饮用的东西，一旦摄入，就能暂时让我拥有 80 年代健身大师的力量和气质，把我从抑制和自我意识的牢笼中解放出来。我相信有一天某个地方会有人发明这样的灵丹妙药，所以我们不妨着手建立一个系统来销售这种神话般的药水。让我们把这种假想的混合物称为勇敢和真实的啤酒。这个名字是我无缘无故想到的。\n在订单纷至沓来之前（双关语！击掌！），我们需要有一些验证的地方。本节向你展示了一种在功能上进行验证的方法，以及如何使用你将编写的名为 “if-valid “的宏更简洁地编写执行验证的代码。这将帮助你了解编写自己的宏的典型情况。如果你只想知道宏的定义，可以跳到\"if-valid” 第 182 页。\n验证函数 为了简单起见，我们只担心验证每个订单的姓名和电子邮件。对于我们的商店，我想我们希望这些订单的细节能像这样表示。\n(def order-details {:name \"Mitchard Blimmons\" :email \"mitchard.blimmonsgmail.com\"}) 这个特殊的 Map 有一个无效的电子邮件地址（缺少@符号），所以这正是我们的验证代码应该捕捉的订单类型 理想情况下，我们希望编写的代码能产生这样的结果。\n(validate order-details order-details-validations) ; = {:email [\"Your email address doesn't look like an email address.\"]} 也就是说，我们希望能够调用一个函数，`validate’，其中包含需要验证的数据和如何验证的定义。结果应该是一个 Map，其中每个键对应一个无效的字段，每个值是该字段的一个或多个验证信息的 Vector。下面的两个函数完成了这项工作。\n让我们先看看order-details-validations。以下是你如何表示验证信息。\n(def order-details-validations {:name [\"Please enter a name\" not-empty] :email [\"Please enter an email address\" not-empty \"Your email address doesn't look like an email address\" #(or (empty? %) (re-seq #\"@\" %))]}) 这是一个 Map，每个键都与错误信息和验证函数对的 Vector 相关。例如，:name有一个验证函数，not-empty；如果验证失败，你应该得到\"请输入一个名字\"的错误信息。\n接下来，我们需要写出validate'函数。validate函数可以分解成两个函数：一个是对单个字段进行验证，另一个是将这些错误信息累积成一个最终的错误信息Map，如{:email [“你的邮箱地址看起来不像邮箱地址。”]}。这里有一个叫做error-messages-for`的函数，对一个单一的值进行验证。\n(defn error-messages-for \"Return a seq of error messages\" [to-validate message-validator-pairs] (map first (filter #(not ((second %) to-validate)) (partition 2 message-validator-pairs)))) 第一个参数，to-validate，是你要验证的字段。第二个参数，message-validator-pairs，应该是一个有偶数元素的序列。这个序列被分组为(partition 2 message-validator-pairs)'的对。对中的第一个元素应该是一个错误信息，对中的第二个元素应该是一个函数（就像在order-details-validations中安排的对）。error-messages-for函数的工作原理是过滤出所有错误信息和验证对，其中验证函数在应用于to-validate时返回true。然后，它使用map first`来获取每对元素的第一个元素，即错误信息。下面是它的操作。\n(error-messages-for \"\" [\"Please enter a name\" not-empty]) ; = (\"Please enter a name\") 现在我们需要将这些错误信息积累到一个 Map 中。\n下面是完整的validate函数，以及我们将其应用于order-details和order-details-validations时的输出。\n(defn validate \"Returns a map with a vector of errors for each key\" [to-validate validations] (reduce (fn [errors validation] (let [[fieldname validation-check-groups] validation value (get to-validate fieldname) error-messages (error-messages-for value validation-check-groups)] (if (empty? error-messages) errors (assoc errors fieldname error-messages)))) {} validations)) (validate order-details order-details-validations) ; = {:email (\"Your email address doesn't look like an email address\")} 成功了! 这个函数是通过减少order-details-validations'并将order-details’的每个键的错误信息（如果有的话）关联到一个最终的错误信息 Map。\nif-valid 有了我们的验证代码，我们现在可以随心所欲地验证记录了。大多数情况下，验证会像这样。\n(let [errors (validate order-details order-details-validations)] (if (empty? errors) (println :success) (println :failure errors))) 该模式是做以下工作。\n 验证一条记录并将结果绑定到errors。 检查是否有任何错误 3.如果有，做成功的事情，这里(println :success)。 否则，做失败的事情，这里(println :failure errors)。  我已经在实际生产的网站中使用了这个验证代码。起初，我发现自己不断重复代码的微小变化，这无疑表明我需要引入一个抽象，以隐藏重复的部分：应用validate函数，将结果绑定到一些符号，并检查结果是否为空。为了创建这种抽象，你可能会想写一个这样的函数。\n(defn if-valid [record validations success-code failure-code] (let [errors (validate record validations)] (if (empty? errors) success-code failure-code))) 然而，这不会起作用，因为success-code和failure-code每次都会被求值。宏会起作用，因为宏允许你控制求值。下面是你如何使用宏的方法。\n(if-valid order-details order-details-validations errors (render :success) (render :failure errors)) 这个宏隐藏了重复的细节，帮助你更简洁地表达你的意图。这就像要求别人给你开瓶器，而不是说：“请给我手动装置，用于去除玻璃容器中液体的临时密封剂。” 下面是实施方法。\n(defmacro if-valid \"Handle validation more concisely\" [to-validate validations errors-name \u0026 then-else] `(let [~errors-name (validate ~to-validate ~validations)] (if (empty? ~errors-name) ~@then-else))) 这个宏需要四个参数。 to-validate, validations, errors-name, 和其余参数then-else. 像这样使用errors-name是一个新的策略。我们想在then-else语句中访问validate函数返回的错误。要做到这一点，我们要告诉宏它应该把结果绑定到什么符号上。下面的宏扩展显示了它是如何工作的。\n (macroexpand '(if-valid order-details order-details-validations my-error-name (println :success) (println :failure my-error-name))) (let* [my-error-name (user/validate order-details order-details-validations)] (if (clojure.core/empty? my-error-name) (println :success) (println :failure my-error-name))) 语法引号抽象了你之前看到的let/validate/if模式的一般形式。然后我们使用 unquote 拼接来解压if分支，这些分支被打包到then-else其余参数中。\n这真是太简单了! 说了这么多关于宏的内容，并详细介绍了它们的机制，我打赌你一定以为会有更复杂的东西。对不起，朋友。如果你对你的失望感到难以接受，我知道有一种饮料可以帮助你。\n总结 在本章中，你学会了如何编写自己的宏。宏的定义与函数非常相似：它们有参数、文件串和主体。它们可以使用参数重构和休息参数，而且可以是递归的。你的宏几乎都会返回列表。你有时会使用list和seq函数来编写简单的宏，但大多数时候你会使用语法引号，，它让你使用安全模板来编写宏。\n当你编写宏时，重要的是要记住符号和值之间的区别：宏在代码被求值之前被展开，因此不能访问求值的结果。双重求值和变量捕获是另外两个微妙的陷阱，但你可以通过明智地使用 “let “表达式和代词来避免它们。\n宏是一种有趣的工具，可以让你在编码时少一些拘束。通过让你控制求值，宏给你一定程度的自由和表达，这是其他语言所不允许的。在你的 Clojure 旅程中，你可能会听到有人告诫你不要使用宏，说什么 “宏是邪恶的 “和 “你不应该使用宏”。不要听这些假正经的人的话–至少在开始的时候不要听他们的。走出去，享受美好的时光。这是你学习在哪些情况下适合使用宏的唯一途径。你会从另一个角度知道如何有技巧地、潇洒地使用宏。\n练习   编写宏when-valid，使它的行为与when相似。下面是一个调用它的例子。\n(when-valid order-details order-details-validations (println \"It's a success!\") (render :success)) 当数据有效时，应该求值println和render形式，如果数据无效，when-valid应该返回nil。\n  你看到and是作为一个宏实现的。把`or’作为一个宏来实现。\n  在第 5 章中，你创建了一系列函数（c-int, c-str, c-dex）来读取一个 RPG 字符的属性。写一个宏，用一个宏调用来定义任意数量的属性检索函数。以下是你如何调用它。\n  (defattrs c-int :intelligence c-str :strength c-dex :dexterity)\n","wordCount":"1589","inLanguage":"en","image":"/post/chapter8/https:/raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png","datePublished":"2022-01-15T12:22:42+08:00","dateModified":"2022-01-15T12:22:42+08:00","author":{"@type":"Person","name":"Theme PaperMod"},"mainEntityOfPage":{"@type":"WebPage","@id":"/post/chapter8/"},"publisher":{"@type":"Organization","name":"PaperMod","logo":{"@type":"ImageObject","url":"favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script><header class=header><nav class=nav><div class=logo><a href accesskey=h title="PaperMod (Alt + H)">PaperMod</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><ul class=lang-switch><li>|</li><li><a href=/fr/ title=French aria-label=:fr:>🇫🇷</a></li><li><a href=/fa/ title=Fa aria-label=Fa>Fa</a></li></ul></span></div><ul id=menu><li><a href=archives title=Archive><span>Archive</span></a></li><li><a href=categories/ title=Categories><span>Categories</span></a></li><li><a href=search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href>Home</a>&nbsp;»&nbsp;<a href=/post/>Posts</a></div><h1 class=post-title>Chapter8 宏</h1><div class=post-meta><span title="2022-01-15 12:22:42 +0800 +0800">January 15, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href=https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content/post/Chapter8.md rel="noopener noreferrer" target=_blank>Suggest Changes</a></div></header><figure class=entry-cover><img loading=lazy src=https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202201152206174.png alt><p><text></p></figure><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#%e7%bc%96%e5%86%99%e5%ae%8f aria-label=编写宏>编写宏</a><ul><li><a href=#%e5%ae%8f%e6%98%af%e5%bf%85%e4%b8%8d%e5%8f%af%e5%b0%91%e7%9a%84 aria-label=宏是必不可少的>宏是必不可少的</a></li><li><a href=#%e8%a7%a3%e5%89%96%e5%b7%a8%e9%9b%86 aria-label=解剖巨集>解剖巨集</a></li><li><a href=#%e4%b8%ba%e6%b1%82%e5%80%bc%e5%bb%ba%e7%ab%8b%e5%88%97%e8%a1%a8 aria-label=为求值建立列表>为求值建立列表</a><ul><li><a href=#%e5%8c%ba%e5%88%86%e7%ac%a6%e5%8f%b7%e5%92%8c%e5%80%bc aria-label=区分符号和值>区分符号和值</a></li><li><a href=#%e7%ae%80%e5%8d%95%e7%9a%84%e5%bc%95%e5%8f%b7 aria-label=简单的引号>简单的引号</a></li><li><a href=#%e8%af%ad%e6%b3%95%e5%bc%95%e7%94%a8 aria-label=语法引用>语法引用</a></li></ul></li><li><a href=#%e5%9c%a8%e5%ae%8f%e4%b8%ad%e4%bd%bf%e7%94%a8%e8%af%ad%e6%b3%95%e5%bc%95%e8%af%ad aria-label=在宏中使用语法引语>在宏中使用语法引语</a></li><li><a href=#%e9%87%8d%e6%9e%84%e4%b8%80%e4%b8%aa%e5%ae%8f%e5%92%8c%e5%8f%96%e6%b6%88%e5%bc%95%e5%8f%b7%e6%8b%bc%e6%8e%a5 aria-label=重构一个宏和取消引号拼接>重构一个宏和取消引号拼接</a></li><li><a href=#%e9%9c%80%e8%a6%81%e6%b3%a8%e6%84%8f%e7%9a%84%e4%ba%8b%e9%a1%b9 aria-label=需要注意的事项>需要注意的事项</a><ul><li><a href=#%e5%8f%98%e9%87%8f%e6%8d%95%e8%8e%b7 aria-label=变量捕获>变量捕获</a></li><li><a href=#%e5%8f%8c%e9%87%8d%e6%b1%82%e5%80%bc aria-label=双重求值>双重求值</a></li><li><a href=#%e5%ae%8f%e7%9a%84%e6%89%80%e6%9c%89%e6%96%b9%e5%bc%8f aria-label=宏的所有方式>宏的所有方式</a></li></ul></li><li><a href=#%e4%b8%ba%e5%8b%87%e6%95%a2%e5%92%8c%e7%9c%9f%e5%ae%9e%e7%9a%84%e4%ba%ba%e8%80%8c%e9%85%bf%e7%9a%84%e9%85%92 aria-label=为勇敢和真实的人而酿的酒>为勇敢和真实的人而酿的酒</a><ul><li><a href=#%e9%aa%8c%e8%af%81%e5%87%bd%e6%95%b0 aria-label=验证函数>验证函数</a></li><li><a href=#if-valid aria-label=if-valid>if-valid</a></li></ul></li><li><a href=#%e6%80%bb%e7%bb%93 aria-label=总结>总结</a></li><li><a href=#%e7%bb%83%e4%b9%a0 aria-label=练习>练习</a></li></ul></li></ul></div></details></div><div class=post-content><h1 id=编写宏>编写宏<a hidden class=anchor aria-hidden=true href=#编写宏>#</a></h1><p>当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在</p><p>凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。&ldquo;终于来了！&ldquo;我的大脑涌动着。&ldquo;这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！&rdquo;</p><p>从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水&ndash;喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。</p><p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/writing-macros/simmons-potion.png alt></p><p>就像药水可以让我暂时改变我的基本性质一样，宏允许你以其他语言无法实现的方式修改 Clojure。有了宏，你可以扩展 Clojure 以适应你的问题空间，建立起语言。</p><p>在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。</p><p>在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。</p><h2 id=宏是必不可少的>宏是必不可少的<a hidden class=anchor aria-hidden=true href=#宏是必不可少的>#</a></h2><p>在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以<code>when</code>为例。 <code>when</code>有这样的一般形式。</p><pre tabindex=0><code>(when boolean-expression
   expression-1
   expression-2
   expression-3
   ...
   expression-x)
-</code></pre></td></tr></table>
-</div>
-</div><p>你可能认为<code>when</code>是一个像<code>if</code>一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，<code>when</code>实际上是一个宏。</p>
-<p>在这个宏扩展中，你可以看到<code>when</code>是用<code>if</code>和<code>do</code>来实现的。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(macroexpand &#39;(when boolean-expression
+</code></pre><p>你可能认为<code>when</code>是一个像<code>if</code>一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，<code>when</code>实际上是一个宏。</p><p>在这个宏扩展中，你可以看到<code>when</code>是用<code>if</code>和<code>do</code>来实现的。</p><pre tabindex=0><code>(macroexpand &#39;(when boolean-expression
                 expression-1
                 expression-2
                 expression-3))
@@ -233,80 +50,18 @@
        (do expression-1
            expression-2
            expression-3))
-</code></pre></td></tr></table>
-</div>
-</div><p>这表明宏是 Clojure 开发中不可或缺的一部分&ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。</p>
-<h2 id="解剖巨集">解剖巨集</h2>
-<p>巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。</p>
-<p>作为一个例子，这里有我们的老朋友<code>infix</code>宏。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro infix
+</code></pre><p>这表明宏是 Clojure 开发中不可或缺的一部分&ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。</p><h2 id=解剖巨集>解剖巨集<a hidden class=anchor aria-hidden=true href=#解剖巨集>#</a></h2><p>巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。</p><p>作为一个例子，这里有我们的老朋友<code>infix</code>宏。</p><pre tabindex=0><code>(defmacro infix
   &#34;Use this macro when you pine for the notation of your childhood&#34;
   [infixed]
   (list (second infixed) (first infixed) (last infixed)))
-</code></pre></td></tr></table>
-</div>
-</div><p>这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(infix (1 + 1))
+</code></pre><p>这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。</p><pre tabindex=0><code>(infix (1 + 1))
 ; =&gt; 2
-</code></pre></td></tr></table>
-</div>
-</div><p>函数和宏之间的一个关键区别是，函数参数在传递给函数之前被完全求值，而宏是以未求值的数据形式接收参数。你可以在这个例子中看到这一点。如果你试图单独求值<code>(1+1)</code>，你会得到一个异常。然而，因为你在进行一个宏调用，未求值的列表<code>(1 + 1)</code>被传递给<code>infix</code>。然后宏可以使用<code>first</code>、<code>second</code>和<code>last</code>来重新排列列表，这样 Clojure 就可以求值它。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(macroexpand &#39;(infix (1 + 1))
+</code></pre><p>函数和宏之间的一个关键区别是，函数参数在传递给函数之前被完全求值，而宏是以未求值的数据形式接收参数。你可以在这个例子中看到这一点。如果你试图单独求值<code>(1+1)</code>，你会得到一个异常。然而，因为你在进行一个宏调用，未求值的列表<code>(1 + 1)</code>被传递给<code>infix</code>。然后宏可以使用<code>first</code>、<code>second</code>和<code>last</code>来重新排列列表，这样 Clojure 就可以求值它。</p><pre tabindex=0><code>(macroexpand &#39;(infix (1 + 1))
 ; =&gt; (+ 1 1)
-</code></pre></td></tr></table>
-</div>
-</div><p>通过扩展宏，你可以看到<code>infix</code>将<code>(1 + 1)</code>重新排列成<code>(+ 1 1)</code>。很方便!</p>
-<p>你也可以在宏定义中使用参数重构，就像你可以使用函数一样。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro infix-2
+</code></pre><p>通过扩展宏，你可以看到<code>infix</code>将<code>(1 + 1)</code>重新排列成<code>(+ 1 1)</code>。很方便!</p><p>你也可以在宏定义中使用参数重构，就像你可以使用函数一样。</p><pre tabindex=0><code>(defmacro infix-2
   [[operand1 op operand2]] (list op operand1 operand2)
   (list op operand1 operand2))
-</code></pre></td></tr></table>
-</div>
-</div><p>解构参数可以让你根据序列参数中的位置简洁地将值与符号绑定。在这里，<code>infix-2</code>将一个顺序数据结构作为参数，并按位置进行解构，因此第一个值被命名为<code>operand1</code>，第二个值被命名为<code>op</code>，第三个值在宏中被命名为<code>operand2</code>。</p>
-<p>你也可以创建多属性的宏，事实上，基本的布尔运算<code>and</code>和<code>or</code>都被定义为宏。下面是<code>and</code>的源代码。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro and
+</code></pre><p>解构参数可以让你根据序列参数中的位置简洁地将值与符号绑定。在这里，<code>infix-2</code>将一个顺序数据结构作为参数，并按位置进行解构，因此第一个值被命名为<code>operand1</code>，第二个值被命名为<code>op</code>，第三个值在宏中被命名为<code>operand2</code>。</p><p>你也可以创建多属性的宏，事实上，基本的布尔运算<code>and</code>和<code>or</code>都被定义为宏。下面是<code>and</code>的源代码。</p><pre tabindex=0><code>(defmacro and
   &#34;Evaluates exprs one at a time, from left to right. If a form
   returns logical false (nil or false), and returns that value and
   doesn&#39;t evaluate any of the other expressions, otherwise it returns
@@ -317,358 +72,80 @@
   ([x &amp; next]
    `(let [and# ~x]
       (if and# (and ~@next) and#))))
-</code></pre></td></tr></table>
-</div>
-</div><p>在这个例子中发生了很多事情，包括符号和<code>~@</code>，你很快就会了解到这些。现在重要的是，这里有三个宏体：一个总是返回 &ldquo;true &ldquo;的 0-arity 宏体，一个返回操作数的 1-arity 宏体，以及一个递归调用自身的<em>n</em>-arity 宏体。这是正确的：宏可以是递归的，它们也可以使用其余的参数（<em>n</em>-arity 宏主体中的<code>&amp; next</code>），就像函数一样。</p>
-<p>现在你对宏的解剖已经很熟悉了，现在是时候把你自己绑在你的奥德修斯式思维的桅杆上，学习写宏体了。</p>
-<h2 id="为求值建立列表">为求值建立列表</h2>
-<p>编写宏就是要为 Clojure 建立一个列表来进行求值，这需要颠覆你的正常思维方式。首先，你经常需要引用表达式，以便在你的最终列表中获得未求值的数据结构（我们稍后会回到这个问题）。更普遍的是，你需要特别注意<em>符号</em>和<em>值</em>之间的区别。</p>
-<h3 id="区分符号和值">区分符号和值</h3>
-<p>假设你想创建一个宏，它接收一个表达式，并同时打印和返回其值。(这与<code>println'不同，</code>println&rsquo;总是返回`nil'。)你希望你的宏能够返回类似这样的列表。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(let [result expression]
+</code></pre><p>在这个例子中发生了很多事情，包括符号和<code>~@</code>，你很快就会了解到这些。现在重要的是，这里有三个宏体：一个总是返回 &ldquo;true &ldquo;的 0-arity 宏体，一个返回操作数的 1-arity 宏体，以及一个递归调用自身的<em>n</em>-arity 宏体。这是正确的：宏可以是递归的，它们也可以使用其余的参数（<em>n</em>-arity 宏主体中的<code>& next</code>），就像函数一样。</p><p>现在你对宏的解剖已经很熟悉了，现在是时候把你自己绑在你的奥德修斯式思维的桅杆上，学习写宏体了。</p><h2 id=为求值建立列表>为求值建立列表<a hidden class=anchor aria-hidden=true href=#为求值建立列表>#</a></h2><p>编写宏就是要为 Clojure 建立一个列表来进行求值，这需要颠覆你的正常思维方式。首先，你经常需要引用表达式，以便在你的最终列表中获得未求值的数据结构（我们稍后会回到这个问题）。更普遍的是，你需要特别注意<em>符号</em>和<em>值</em>之间的区别。</p><h3 id=区分符号和值>区分符号和值<a hidden class=anchor aria-hidden=true href=#区分符号和值>#</a></h3><p>假设你想创建一个宏，它接收一个表达式，并同时打印和返回其值。(这与<code>println'不同，</code>println&rsquo;总是返回`nil&rsquo;。)你希望你的宏能够返回类似这样的列表。</p><pre tabindex=0><code>(let [result expression]
   (println result)
   result)
-</code></pre></td></tr></table>
-</div>
-</div><p>你的宏的第一个版本可能看起来像这样，使用<code>list</code>函数来创建 Clojure 应该求值的列表。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> (defmacro my-print-whoopsie
+</code></pre><p>你的宏的第一个版本可能看起来像这样，使用<code>list</code>函数来创建 Clojure 应该求值的列表。</p><pre tabindex=0><code> (defmacro my-print-whoopsie
   [expression]
   (list let [result expression]
         (list println result)
         result))
-</code></pre></td></tr></table>
-</div>
-</div><p>然而，如果你尝试这样做，你会得到一个异常`不能接受一个宏的值。#&lsquo;clojure.core/let&rsquo;。这到底是怎么回事？</p>
-<p>发生这种情况的原因是，你的宏主体试图获取<em>符号</em> <code>let</code>所指的*值，而你实际想做的是返回<code>let</code>符号本身。还有其他的问题：你试图获得<code>result</code>的值，这是不绑定的，你试图获得<code>println</code>的值，而不是返回其符号。下面是你如何写宏来做你想要的事情。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro my-print
+</code></pre><p>然而，如果你尝试这样做，你会得到一个异常`不能接受一个宏的值。#&lsquo;clojure.core/let&rsquo;。这到底是怎么回事？</p><p>发生这种情况的原因是，你的宏主体试图获取<em>符号</em> <code>let</code>所指的*值，而你实际想做的是返回<code>let</code>符号本身。还有其他的问题：你试图获得<code>result</code>的值，这是不绑定的，你试图获得<code>println</code>的值，而不是返回其符号。下面是你如何写宏来做你想要的事情。</p><pre tabindex=0><code>(defmacro my-print
   [expression]
   (list &#39;let [&#39;result expression]
         (list &#39;println &#39;result)
         &#39;result))
-</code></pre></td></tr></table>
-</div>
-</div><p>在这里，你通过在每个符号前加上单引号&rdquo;&lsquo;&lsquo;来引出你想作为一个符号使用。这告诉 Clojure<em>关闭</em>后面的求值，在这种情况下，防止 Clojure 试图解决这些符号，而只是返回这些符号。使用引号来关闭求值的能力是编写宏的核心，所以让我们给这个主题一个独立的章节。</p>
-<h3 id="简单的引号">简单的引号</h3>
-<p>你几乎总是在你的宏中使用引号来获得一个未求值的符号。让我们简单地复习一下引号，然后看看你如何在宏中使用它。</p>
-<p>首先，这里是一个没有引号的简单函数调用。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(+ 1 2)
+</code></pre><p>在这里，你通过在每个符号前加上单引号&rdquo;&lsquo;&lsquo;来引出你想作为一个符号使用。这告诉 Clojure<em>关闭</em>后面的求值，在这种情况下，防止 Clojure 试图解决这些符号，而只是返回这些符号。使用引号来关闭求值的能力是编写宏的核心，所以让我们给这个主题一个独立的章节。</p><h3 id=简单的引号>简单的引号<a hidden class=anchor aria-hidden=true href=#简单的引号>#</a></h3><p>你几乎总是在你的宏中使用引号来获得一个未求值的符号。让我们简单地复习一下引号，然后看看你如何在宏中使用它。</p><p>首先，这里是一个没有引号的简单函数调用。</p><pre tabindex=0><code>(+ 1 2)
 ; =&gt; 3
-</code></pre></td></tr></table>
-</div>
-</div><p>如果我们在开头加上<code>quote</code>，它就会返回一个未求值的数据结构。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(quote (+ 1 2))
+</code></pre><p>如果我们在开头加上<code>quote</code>，它就会返回一个未求值的数据结构。</p><pre tabindex=0><code>(quote (+ 1 2))
 ; =&gt; (+ 1 2) 
-</code></pre></td></tr></table>
-</div>
-</div><p>这里在返回的列表中，<code>+</code>是一个符号。如果我们求值这个加号，就会产生加号函数。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">+
+</code></pre><p>这里在返回的列表中，<code>+</code>是一个符号。如果我们求值这个加号，就会产生加号函数。</p><pre tabindex=0><code>+
 ; =&gt; #&lt;core$_PLUS_ clojure.core$_PLUS_@47b36583&gt;
-</code></pre></td></tr></table>
-</div>
-</div><p>而如果我们引用这个加号，它只是产生加号。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(quote +)
+</code></pre><p>而如果我们引用这个加号，它只是产生加号。</p><pre tabindex=0><code>(quote +)
 ; =&gt; +
-</code></pre></td></tr></table>
-</div>
-</div><p>求值一个未绑定的符号会引发一个异常。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sweating-to-the-oldies
+</code></pre><p>求值一个未绑定的符号会引发一个异常。</p><pre tabindex=0><code>sweating-to-the-oldies
 ; =&gt; Unable to resolve symbol: sweating-to-the-oldies in this context
-</code></pre></td></tr></table>
-</div>
-</div><p>但是引用符号会返回一个符号，不管这个符号是否有一个与之相关的值。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(quote sweating-to-the-oldies)
+</code></pre><p>但是引用符号会返回一个符号，不管这个符号是否有一个与之相关的值。</p><pre tabindex=0><code>(quote sweating-to-the-oldies)
 ; =&gt; sweating-to-the-oldies
-</code></pre></td></tr></table>
-</div>
-</div><p>单引号字符是<code>(quote</code>x<code>)</code>的读者宏。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&#39;(+ 1 2)
+</code></pre><p>单引号字符是<code>(quote</code>x<code>)</code>的读者宏。</p><pre tabindex=0><code>&#39;(+ 1 2)
 ; =&gt; (+ 1 2)
 
 &#39;dr-jekyll-and-richard-simmons
 ; =&gt; dr-jekyll-and-richard-simmons
-</code></pre></td></tr></table>
-</div>
-</div><p>你可以在<code>when</code>宏中看到引用的工作。这是<code>when</code>的实际源代码。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro when
+</code></pre><p>你可以在<code>when</code>宏中看到引用的工作。这是<code>when</code>的实际源代码。</p><pre tabindex=0><code>(defmacro when
   &#34;Evaluates test. If logical true, evaluates body in an implicit do.&#34;
   {:added &#34;1.0&#34;}
   [test &amp; body]
   (list &#39;if test (cons &#39;do body)))
-</code></pre></td></tr></table>
-</div>
-</div><p>注意，宏的定义同时引用了<code>if</code>和<code>do</code>。这是因为你想让这些符号出现在`when&rsquo;返回的最终列表中进行计算。下面是一个返回列表的例子，它可能是这样的。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(macroexpand &#39;(when (the-cows-come :home)
+</code></pre><p>注意，宏的定义同时引用了<code>if</code>和<code>do</code>。这是因为你想让这些符号出现在`when&rsquo;返回的最终列表中进行计算。下面是一个返回列表的例子，它可能是这样的。</p><pre tabindex=0><code>(macroexpand &#39;(when (the-cows-come :home)
                 (call me :pappy)
                 (slap me :silly)))
 ; =&gt; (if (the-cows-come :home)
        (do (call me :pappy)
            (slap me :silly)))
-</code></pre></td></tr></table>
-</div>
-</div><p>下面是另一个内置宏的源代码的例子，这次是关于<code>unless</code>的。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro unless
+</code></pre><p>下面是另一个内置宏的源代码的例子，这次是关于<code>unless</code>的。</p><pre tabindex=0><code>(defmacro unless
   &#34;Inverted &#39;if&#39;&#34;
   [test &amp; branches]
   (conj (reverse branches) test &#39;if))
-</code></pre></td></tr></table>
-</div>
-</div><p>同样，你必须引用<code>if</code>，因为你想让未求值的符号放在结果列表中，就像这样。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(macroexpand &#39;(unless (done-been slapped? me)
+</code></pre><p>同样，你必须引用<code>if</code>，因为你想让未求值的符号放在结果列表中，就像这样。</p><pre tabindex=0><code>(macroexpand &#39;(unless (done-been slapped? me)
                       (slap me :silly)
                       (say &#34;I reckon that&#39;ll learn me&#34;)))
 ; =&gt; (if (done-been slapped? me)
        (say &#34;I reckon that&#39;ll learn me&#34;)
        (slap me :silly))
-</code></pre></td></tr></table>
-</div>
-</div><p>在许多情况下，在编写宏时，你会使用这样的简单引号，但大多数情况下你会使用更强大的语法引号。</p>
-<h3 id="语法引用">语法引用</h3>
-<p>到目前为止, 你已经看到了通过使用<code>list</code>函数来建立列表的宏，以及对列表进行操作的函数，如<code>first</code>, <code>second</code>, <code>last</code>，等等。事实上，你可以这样写宏，直到奶牛回家。但有时，这将导致繁琐和冗长的代码。</p>
-<p>语法引号返回未求值的数据结构，与普通引号类似。然而，有两个重要的区别。一个区别是，语法引用将返回<em>完全合格的</em>符号（即包括符号的命名空间）。让我们比较一下引号和语法引号。</p>
-<p>如果你的代码中不包括名字空间，那么引用就不包括名字空间。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&#39;+
+</code></pre><p>在许多情况下，在编写宏时，你会使用这样的简单引号，但大多数情况下你会使用更强大的语法引号。</p><h3 id=语法引用>语法引用<a hidden class=anchor aria-hidden=true href=#语法引用>#</a></h3><p>到目前为止, 你已经看到了通过使用<code>list</code>函数来建立列表的宏，以及对列表进行操作的函数，如<code>first</code>, <code>second</code>, <code>last</code>，等等。事实上，你可以这样写宏，直到奶牛回家。但有时，这将导致繁琐和冗长的代码。</p><p>语法引号返回未求值的数据结构，与普通引号类似。然而，有两个重要的区别。一个区别是，语法引用将返回<em>完全合格的</em>符号（即包括符号的命名空间）。让我们比较一下引号和语法引号。</p><p>如果你的代码中不包括名字空间，那么引用就不包括名字空间。</p><pre tabindex=0><code>&#39;+
 ; =&gt; +
-</code></pre></td></tr></table>
-</div>
-</div><p>写出命名空间，它将被正常的引用所返回。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&#39;clojure.core/+
+</code></pre><p>写出命名空间，它将被正常的引用所返回。</p><pre tabindex=0><code>&#39;clojure.core/+
 ; =&gt; clojure.core/+
-</code></pre></td></tr></table>
-</div>
-</div><p>语法引号将总是包括符号的完整命名空间。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">`+
+</code></pre><p>语法引号将总是包括符号的完整命名空间。</p><pre tabindex=0><code>`+
 ; =&gt; clojure.core/+
-</code></pre></td></tr></table>
-</div>
-</div><p>对一个列表的引用会递归地引用所有的元素。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&#39;(+ 1 2)
+</code></pre><p>对一个列表的引用会递归地引用所有的元素。</p><pre tabindex=0><code>&#39;(+ 1 2)
 ; =&gt; (+ 1 2)
-</code></pre></td></tr></table>
-</div>
-</div><p>语法引用一个列表递归地引用所有的元素。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">`(+ 1 2)
+</code></pre><p>语法引用一个列表递归地引用所有的元素。</p><pre tabindex=0><code>`(+ 1 2)
 ; =&gt; (clojure.core/+ 1 2)
-</code></pre></td></tr></table>
-</div>
-</div><p>语法引号包括名字空间的原因是为了帮助你避免名字的碰撞，这个话题在第 6 章中涉及。</p>
-<p>引号和语法引号之间的另一个区别是，后者允许你使用 &ldquo;tilde&rdquo;，即&rdquo;~&quot;，来*解除引号的形式。这有点像氪星石：只要超人在氪星石周围，他的能力就会消失。每当在一个语法引号的 Form 中出现 tilde，语法引号返回未求值的、完全命名的 Form 的能力就会消失。这里有一个例子。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">`(+ 1 ~(inc 1))
+</code></pre><p>语法引号包括名字空间的原因是为了帮助你避免名字的碰撞，这个话题在第 6 章中涉及。</p><p>引号和语法引号之间的另一个区别是，后者允许你使用 &ldquo;tilde&rdquo;，即&rdquo;~"，来*解除引号的形式。这有点像氪星石：只要超人在氪星石周围，他的能力就会消失。每当在一个语法引号的 Form 中出现 tilde，语法引号返回未求值的、完全命名的 Form 的能力就会消失。这里有一个例子。</p><pre tabindex=0><code>`(+ 1 ~(inc 1))
 ; =&gt; (clojure.core/+ 1 2)
-</code></pre></td></tr></table>
-</div>
-</div><p>因为它在 tilde 之后，<code>(inc 1)</code>被求值而不是被引号。如果没有 unquote，语法引号会返回未求值的形式，并带有完全限定的符号。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">`(+ 1 (inc 1))
+</code></pre><p>因为它在 tilde 之后，<code>(inc 1)</code>被求值而不是被引号。如果没有 unquote，语法引号会返回未求值的形式，并带有完全限定的符号。</p><pre tabindex=0><code>`(+ 1 (inc 1))
 ; =&gt; (clojure.core/+ 1 (clojure.core/inc 1))
-</code></pre></td></tr></table>
-</div>
-</div><p>如果你熟悉字符串插值，你可以类似地考虑语法引用/非引用的问题。在这两种情况下，你都在创建一种模板，将一些变量放在一个更大的静态结构中。例如，在 Ruby 中，你可以通过连接来创建字符串<code>&quot;Churn your butter, Jebediah!&quot;</code>。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">name = &#34;Jebediah&#34;
+</code></pre><p>如果你熟悉字符串插值，你可以类似地考虑语法引用/非引用的问题。在这两种情况下，你都在创建一种模板，将一些变量放在一个更大的静态结构中。例如，在 Ruby 中，你可以通过连接来创建字符串<code>"Churn your butter, Jebediah!"</code>。</p><pre tabindex=0><code>name = &#34;Jebediah&#34;
 &#34;Churn your butter, &#34; + name + &#34;!&#34;
-</code></pre></td></tr></table>
-</div>
-</div><p>或通过内插法。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&#34;Churn your butter, #{name}!&#34;
-</code></pre></td></tr></table>
-</div>
-</div><p>就像字符串插值可以使代码更清晰、更简洁一样，语法引号和解引号可以使你更清晰、更简洁地创建列表。比较一下使用<code>list</code>函数和使用语法引号。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(list &#39;+ 1 (inc 1))
+</code></pre><p>或通过内插法。</p><pre tabindex=0><code>&#34;Churn your butter, #{name}!&#34;
+</code></pre><p>就像字符串插值可以使代码更清晰、更简洁一样，语法引号和解引号可以使你更清晰、更简洁地创建列表。比较一下使用<code>list</code>函数和使用语法引号。</p><pre tabindex=0><code>(list &#39;+ 1 (inc 1))
 ; =&gt; (+ 1 2)
 
 `(+ 1 ~(inc 1))
 ; =&gt; (clojure.core/+ 1 2)
-</code></pre></td></tr></table>
-</div>
-</div><p>正如你所看到的，语法引号版本更加简洁。而且，它的视觉形式更接近列表的最终形式，使其更容易理解。</p>
-<h2 id="在宏中使用语法引语">在宏中使用语法引语</h2>
-<p>现在你已经很好地掌握了语法引号的工作原理，来看看<code>code-critic</code>宏。你将使用语法引号编写一个更简洁的版本。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro code-critic
+</code></pre><p>正如你所看到的，语法引号版本更加简洁。而且，它的视觉形式更接近列表的最终形式，使其更容易理解。</p><h2 id=在宏中使用语法引语>在宏中使用语法引语<a hidden class=anchor aria-hidden=true href=#在宏中使用语法引语>#</a></h2><p>现在你已经很好地掌握了语法引号的工作原理，来看看<code>code-critic</code>宏。你将使用语法引号编写一个更简洁的版本。</p><pre tabindex=0><code>(defmacro code-critic
   &#34;Phrases are courtesy Hermes Conrad from Futurama&#34;
   [bad good]
   (list &#39;do
@@ -682,48 +159,14 @@
 (code-critic (1 + 1) (+ 1 1))
 ; =&gt; Great squid of Madrid, this is bad code: (1 + 1)
 ; =&gt; Sweet gorilla of Manila, this is good code: (+ 1 1)
-</code></pre></td></tr></table>
-</div>
-</div><p>仅仅是看着那些乏味的重复的<code>list</code>和单引号，就让我感到害怕。但是如果你用语法引号重写<code>code-critic</code>，你就可以使它变得圆滑简洁。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro code-critic
+</code></pre><p>仅仅是看着那些乏味的重复的<code>list</code>和单引号，就让我感到害怕。但是如果你用语法引号重写<code>code-critic</code>，你就可以使它变得圆滑简洁。</p><pre tabindex=0><code>(defmacro code-critic
   &#34;Phrases are courtesy Hermes Conrad from Futurama&#34;
   [bad good]
   `(do (println &#34;Great squid of Madrid, this is bad code:&#34;
                 (quote ~bad))
        (println &#34;Sweet gorilla of Manila, this is good code:&#34;
                 (quote ~good))))
-</code></pre></td></tr></table>
-</div>
-</div><p>在这种情况下，你想引用除符号<code>good</code>和<code>bad</code>以外的所有内容。在原来的版本中，你必须单独引用每一块，并明确地把它放在一个不方便的列表中，只是为了防止这两个符号被引用。有了语法引号，你只需将整个<code>do</code>表达式包裹在一个引号中，并简单地取消你要求值的两个符号的引号。</p>
-<p>宏的编写方法介绍到此结束! 亲爱的西萨摩亚和东萨摩亚的神圣蟒蛇，这是很重要的!</p>
-<p>总而言之，宏接收未经求值的、任意的数据结构作为参数，并返回 Clojure 求值的数据结构。在定义宏的时候，你可以使用参数重构，就像你可以使用函数和<code>let</code>绑定一样。你也可以编写多属性和递归的宏。</p>
-<p>大多数情况下，你的宏会返回列表。你可以通过使用<code>list</code>函数或使用语法引号来建立要返回的列表。语法引号通常会使代码更清晰、更简洁，因为它可以让你创建一个你想返回的数据结构的模板，更容易进行视觉上的解析。无论你使用语法引号还是普通引号，重要的是在建立你的列表时要清楚地了解符号和它所求值的值之间的区别。如果你想让你的宏返回多种形式供 Clojure 求值，一定要用<code>do</code>来包装它们。</p>
-<h2 id="重构一个宏和取消引号拼接">重构一个宏和取消引号拼接</h2>
-<p>上一节中的 &ldquo;code-critic &ldquo;宏仍然需要一些改进。看看这个重复的地方! 两个 &ldquo;println &ldquo;的调用几乎是一样的。让我们把它清理一下。首先，让我们创建一个函数来生成这些`println&rsquo;列表。函数比宏更容易思考和使用，所以把宏的内容移到辅助函数中通常是个好主意。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn criticize-code
+</code></pre><p>在这种情况下，你想引用除符号<code>good</code>和<code>bad</code>以外的所有内容。在原来的版本中，你必须单独引用每一块，并明确地把它放在一个不方便的列表中，只是为了防止这两个符号被引用。有了语法引号，你只需将整个<code>do</code>表达式包裹在一个引号中，并简单地取消你要求值的两个符号的引号。</p><p>宏的编写方法介绍到此结束! 亲爱的西萨摩亚和东萨摩亚的神圣蟒蛇，这是很重要的!</p><p>总而言之，宏接收未经求值的、任意的数据结构作为参数，并返回 Clojure 求值的数据结构。在定义宏的时候，你可以使用参数重构，就像你可以使用函数和<code>let</code>绑定一样。你也可以编写多属性和递归的宏。</p><p>大多数情况下，你的宏会返回列表。你可以通过使用<code>list</code>函数或使用语法引号来建立要返回的列表。语法引号通常会使代码更清晰、更简洁，因为它可以让你创建一个你想返回的数据结构的模板，更容易进行视觉上的解析。无论你使用语法引号还是普通引号，重要的是在建立你的列表时要清楚地了解符号和它所求值的值之间的区别。如果你想让你的宏返回多种形式供 Clojure 求值，一定要用<code>do</code>来包装它们。</p><h2 id=重构一个宏和取消引号拼接>重构一个宏和取消引号拼接<a hidden class=anchor aria-hidden=true href=#重构一个宏和取消引号拼接>#</a></h2><p>上一节中的 &ldquo;code-critic &ldquo;宏仍然需要一些改进。看看这个重复的地方! 两个 &ldquo;println &ldquo;的调用几乎是一样的。让我们把它清理一下。首先，让我们创建一个函数来生成这些`println&rsquo;列表。函数比宏更容易思考和使用，所以把宏的内容移到辅助函数中通常是个好主意。</p><pre tabindex=0><code>(defn criticize-code
   [criticism code]
   `(println ~criticism (quote ~code)))
 
@@ -731,114 +174,26 @@
   [bad good]
   `(do ~(criticize-code &#34;Cursed bacteria of Liberia, this is bad code:&#34; bad)
        ~(criticize-code &#34;Sweet sacred boa of Western and Eastern Samoa, this is good code:&#34; good)))
-</code></pre></td></tr></table>
-</div>
-</div><p>注意到<code>criticize-code</code>函数如何返回一个语法引号的列表。这就是你如何建立起宏将返回的列表。</p>
-<p>不过，还有更多的改进空间。这段代码仍然有多个几乎相同的函数调用。在这种情况下，你想对一个值的集合应用同一个函数，使用像<code>map</code>这样的 seq 函数是有意义的。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro code-critic
+</code></pre><p>注意到<code>criticize-code</code>函数如何返回一个语法引号的列表。这就是你如何建立起宏将返回的列表。</p><p>不过，还有更多的改进空间。这段代码仍然有多个几乎相同的函数调用。在这种情况下，你想对一个值的集合应用同一个函数，使用像<code>map</code>这样的 seq 函数是有意义的。</p><pre tabindex=0><code>(defmacro code-critic
   [bad good]
   `(do ~(map #(apply criticize-code %)
              [[&#34;Great squid of Madrid, this is bad code:&#34; bad]
               [&#34;Sweet gorilla of Manila, this is good code:&#34; good]])))
-</code></pre></td></tr></table>
-</div>
-</div><p>这看起来好一点了。你正在 Map 每个批评/代码对，并将 &ldquo;批评-代码 &ldquo;函数应用于该对。让我们试着运行这段代码。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(code-critic (1 + 1) (+ 1 1))
+</code></pre><p>这看起来好一点了。你正在 Map 每个批评/代码对，并将 &ldquo;批评-代码 &ldquo;函数应用于该对。让我们试着运行这段代码。</p><pre tabindex=0><code>(code-critic (1 + 1) (+ 1 1))
 ; =&gt; NullPointerException
-</code></pre></td></tr></table>
-</div>
-</div><p>哦，不！这根本就没有用! 发生了什么？问题是，<code>map</code>返回一个列表，在这种情况下，它返回一个<code>println</code>表达式的列表。我们只想得到每个<code>println</code>调用的结果，但是相反，这段代码把两个结果都放在一个列表中，然后试图求值这个列表。</p>
-<p>换句话说，当它求值这段代码时，Clojure 会得到类似这样的结果。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(do
+</code></pre><p>哦，不！这根本就没有用! 发生了什么？问题是，<code>map</code>返回一个列表，在这种情况下，它返回一个<code>println</code>表达式的列表。我们只想得到每个<code>println</code>调用的结果，但是相反，这段代码把两个结果都放在一个列表中，然后试图求值这个列表。</p><p>换句话说，当它求值这段代码时，Clojure 会得到类似这样的结果。</p><pre tabindex=0><code>(do
  ((clojure.core/println &#34; criticism&#34; &#39; (1 + 1))
   (clojure.core/println &#34;critism&#34; &#39;(+ 1 1)))))
-</code></pre></td></tr></table>
-</div>
-</div><p>然后求值第一个 &ldquo;println &ldquo;的调用，给我们提供这个。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(do
+</code></pre><p>然后求值第一个 &ldquo;println &ldquo;的调用，给我们提供这个。</p><pre tabindex=0><code>(do
  (nil
   (clojure.core/println &#34;criticism&#34; &#39;(+ 1 1))))
-</code></pre></td></tr></table>
-</div>
-</div><p>并在求值了第二个`println&rsquo;调用后，这样做。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(do
+</code></pre><p>并在求值了第二个`println&rsquo;调用后，这样做。</p><pre tabindex=0><code>(do
  (nil nil))
-</code></pre></td></tr></table>
-</div>
-</div><p>这就是导致异常的原因。<code>println</code>求值为<code>nil</code>，所以我们最后得到的结果是<code>(nil nil)</code>。<code>nil</code>是不可调用的，我们得到一个<code>NullPointerException</code>。</p>
-<p>多么不方便啊 但恰恰相反，无引号拼接正是为了处理这种情况而发明的。取消引号拼接是用<code>~@</code>来完成的。如果你只是取消引用一个列表，你会得到这样的结果。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">`(+ ~(list 1 2 3))
+</code></pre><p>这就是导致异常的原因。<code>println</code>求值为<code>nil</code>，所以我们最后得到的结果是<code>(nil nil)</code>。<code>nil</code>是不可调用的，我们得到一个<code>NullPointerException</code>。</p><p>多么不方便啊 但恰恰相反，无引号拼接正是为了处理这种情况而发明的。取消引号拼接是用<code>~@</code>来完成的。如果你只是取消引用一个列表，你会得到这样的结果。</p><pre tabindex=0><code>`(+ ~(list 1 2 3))
 ; =&gt; (clojure.core/+ (1 2 3))
-</code></pre></td></tr></table>
-</div>
-</div><p>然而，如果你使用 unquote 拼接，你会得到这样的结果。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">`(+ ~@(list 1 2 3))
+</code></pre><p>然而，如果你使用 unquote 拼接，你会得到这样的结果。</p><pre tabindex=0><code>`(+ ~@(list 1 2 3))
 ; =&gt; (clojure.core/+ 1 2 3)
-</code></pre></td></tr></table>
-</div>
-</div><p>Unquote 拼接将一个可排序的数据结构解开，将其内容直接放在包围的语法引号数据结构中。这就像<code>~@</code>是一把大锤子，后面的东西是一个皮纳塔，其结果是你曾经参加过的最可怕和最棒的聚会。</p>
-<p>总之，如果你在你的代码批评中使用非引号拼接，那么一切都会很顺利。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro code-critic
+</code></pre><p>Unquote 拼接将一个可排序的数据结构解开，将其内容直接放在包围的语法引号数据结构中。这就像<code>~@</code>是一把大锤子，后面的东西是一个皮纳塔，其结果是你曾经参加过的最可怕和最棒的聚会。</p><p>总之，如果你在你的代码批评中使用非引号拼接，那么一切都会很顺利。</p><pre tabindex=0><code>(defmacro code-critic
   [{:keys [good bad]}]
   `(do ~@(map #(apply criticize-code %)
               [[&#34;Sweet lion of Zion, this is bad code:&#34; bad]
@@ -847,27 +202,7 @@
 (code-critic (1 + 1) (+ 1 1))
 ; =&gt; Sweet lion of Zion, this is bad code: (1 + 1)
 ; =&gt; Great cow of Moscow, this is good code: (+ 1 1)
-</code></pre></td></tr></table>
-</div>
-</div><p>呜呼! 你已经成功地将重复的代码提取到一个函数中，并使你的宏代码更加简洁。温尼伯的可爱豚鼠，这是很好的代码!</p>
-<h2 id="需要注意的事项">需要注意的事项</h2>
-<p>宏有一些偷偷摸摸的问题，你应该注意到。在本节中，你将了解到一些宏的陷阱以及如何避免它们。我希望你还没有把自己从你的思想桅杆上解下来。</p>
-<h3 id="变量捕获">变量捕获</h3>
-<p><em>变量捕获</em>发生在一个宏引入了一个绑定，而这个绑定对宏的用户来说是未知的，它使一个现有的绑定黯然失色。例如，在下面的代码中，一个宏顽皮地引入了它自己的<code>let</code>绑定，这就把代码搞乱了。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def message &#34;Good job!&#34;)
+</code></pre><p>呜呼! 你已经成功地将重复的代码提取到一个函数中，并使你的宏代码更加简洁。温尼伯的可爱豚鼠，这是很好的代码!</p><h2 id=需要注意的事项>需要注意的事项<a hidden class=anchor aria-hidden=true href=#需要注意的事项>#</a></h2><p>宏有一些偷偷摸摸的问题，你应该注意到。在本节中，你将了解到一些宏的陷阱以及如何避免它们。我希望你还没有把自己从你的思想桅杆上解下来。</p><h3 id=变量捕获>变量捕获<a hidden class=anchor aria-hidden=true href=#变量捕获>#</a></h3><p><em>变量捕获</em>发生在一个宏引入了一个绑定，而这个绑定对宏的用户来说是未知的，它使一个现有的绑定黯然失色。例如，在下面的代码中，一个宏顽皮地引入了它自己的<code>let</code>绑定，这就把代码搞乱了。</p><pre tabindex=0><code>(def message &#34;Good job!&#34;)
 (defmacro with-mischief
   [&amp; stuff-to-do]
   (concat (list &#39;let [&#39;message &#34;Oh, big deal!&#34;])
@@ -876,24 +211,7 @@
 (with-mischief
   (println &#34;Here&#39;s how I feel about that thing you did: &#34; message))
 ; =&gt; Here&#39;s how I feel about that thing you did: Oh, big deal!
-</code></pre></td></tr></table>
-</div>
-</div><p><code>println</code>调用引用了符号<code>message</code>，我们认为它与字符串<code>&quot;好样的！&quot;</code>绑定。然而，<code>with-mischief</code>宏为<code>message</code>创建了一个新的绑定。</p>
-<p>注意，这个宏没有使用语法引号。这样做会导致一个异常。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def message &#34;Good job!&#34;)
+</code></pre><p><code>println</code>调用引用了符号<code>message</code>，我们认为它与字符串<code>"好样的！"</code>绑定。然而，<code>with-mischief</code>宏为<code>message</code>创建了一个新的绑定。</p><p>注意，这个宏没有使用语法引号。这样做会导致一个异常。</p><pre tabindex=0><code>(def message &#34;Good job!&#34;)
 (defmacro with-mischief
   [&amp; stuff-to-do]
   `(let [message &#34;Oh, big deal!&#34;]
@@ -902,59 +220,17 @@
 (with-mischief
   (println &#34;Here&#39;s how I feel about that thing you did: &#34; message))
 ; Exception: Can&#39;t let qualified name: user/message
-</code></pre></td></tr></table>
-</div>
-</div><p>这个异常是为了你自己好：语法引号的设计是为了防止你在宏中意外地捕捉到变量。如果你想在你的宏中引入<code>let</code>绑定，你可以使用一个<em>gensym</em>。<code>gensym</code>函数在每次连续调用时产生唯一的符号。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gensym)
+</code></pre><p>这个异常是为了你自己好：语法引号的设计是为了防止你在宏中意外地捕捉到变量。如果你想在你的宏中引入<code>let</code>绑定，你可以使用一个<em>gensym</em>。<code>gensym</code>函数在每次连续调用时产生唯一的符号。</p><pre tabindex=0><code>(gensym)
 ; =&gt; G__655
 
 (gensym)
 ; =&gt; G__658
-</code></pre></td></tr></table>
-</div>
-</div><p>你也可以传递一个符号前缀。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(gensym &#39;message)
+</code></pre><p>你也可以传递一个符号前缀。</p><pre tabindex=0><code>(gensym &#39;message)
 ; =&gt; message4760
 
 (gensym &#39;message)
 ; =&gt; message4763
-</code></pre></td></tr></table>
-</div>
-</div><p>下面是你如何改写<code>with-mischief</code>，使之不那么调皮。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro without-mischief
+</code></pre><p>下面是你如何改写<code>with-mischief</code>，使之不那么调皮。</p><pre tabindex=0><code>(defmacro without-mischief
   [&amp; stuff-to-do]
   (let [macro-message (gensym &#39;message)]
     `(let [~macro-message &#34;Oh, big deal!&#34;]
@@ -965,42 +241,12 @@
   (println &#34;Here&#39;s how I feel about that thing you did: &#34; message))
 ; =&gt; Here&#39;s how I feel about that thing you did:  Good job!
 ; =&gt; I still need to say:  Oh, big deal! 
-</code></pre></td></tr></table>
-</div>
-</div><p>这个例子通过使用<code>gensym</code>来创建一个新的、唯一的符号，然后与<code>macro-message</code>绑定，避免了变量捕获。在语法引用的<code>let</code>表达式中，<code>macro-message</code>没有被引用，被解析为 gensym 的符号。这个源码符号与<code>stuff-to-do</code>中的任何符号都不同，所以你可以避免变量捕获。因为这是一个常见的模式，你可以使用<em>自动源码</em>。自动源码是使用源码的更简洁和方便的方法。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">`(blarg# blarg#)
+</code></pre><p>这个例子通过使用<code>gensym</code>来创建一个新的、唯一的符号，然后与<code>macro-message</code>绑定，避免了变量捕获。在语法引用的<code>let</code>表达式中，<code>macro-message</code>没有被引用，被解析为 gensym 的符号。这个源码符号与<code>stuff-to-do</code>中的任何符号都不同，所以你可以避免变量捕获。因为这是一个常见的模式，你可以使用<em>自动源码</em>。自动源码是使用源码的更简洁和方便的方法。</p><pre tabindex=0><code>`(blarg# blarg#)
 (blarg__2869__auto__ blarg__2869__auto__)
 
 `(let [name# &#34;Larry Potter&#34;] name#)
 ; =&gt; (clojure.core/let [name__2872__auto__ &#34;Larry Potter&#34;] name__2872__auto__)
-</code></pre></td></tr></table>
-</div>
-</div><p>在这个例子中，你通过在语法引号列表中的一个符号上附加一个哈希标记（或者<em>哈希标记</em>，如果你一定要坚持的话）来创建一个自动源码。Clojure 会自动确保 x<code>#</code>的每个实例在同一个语法引号列表中解析为相同的符号，y<code>#</code>的每个实例也是如此，以此类推。</p>
-<p><code>gensym</code>和 auto-gensym 在编写宏时经常使用，它们允许你避免变量捕获。</p>
-<h3 id="双重求值">双重求值</h3>
-<p>编写宏时要注意的另一个问题是<em>双重求值</em>，当一个作为参数传递给宏的表格被求值了不止一次时，就会出现这种情况。请看下面的例子。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro report
+</code></pre><p>在这个例子中，你通过在语法引号列表中的一个符号上附加一个哈希标记（或者<em>哈希标记</em>，如果你一定要坚持的话）来创建一个自动源码。Clojure 会自动确保 x<code>#</code>的每个实例在同一个语法引号列表中解析为相同的符号，y<code>#</code>的每个实例也是如此，以此类推。</p><p><code>gensym</code>和 auto-gensym 在编写宏时经常使用，它们允许你避免变量捕获。</p><h3 id=双重求值>双重求值<a hidden class=anchor aria-hidden=true href=#双重求值>#</a></h3><p>编写宏时要注意的另一个问题是<em>双重求值</em>，当一个作为参数传递给宏的表格被求值了不止一次时，就会出现这种情况。请看下面的例子。</p><pre tabindex=0><code>(defmacro report
   [to-try]
   `(if ~to-try
      (println (quote ~to-try) &#34;was successful:&#34; ~to-try)
@@ -1008,22 +254,7 @@
 
 ;; Thread/sleep takes a number of milliseconds to sleep for
 (report (do (Thread/sleep 1000) (+ 1 1)))
-</code></pre></td></tr></table>
-</div>
-</div><p>这段代码是为了测试其参数的真实性。如果参数是真实的，它被认为是成功的；如果是虚假的，它是不成功的。该宏打印出其参数是否成功。在这种情况下，你实际上会睡两秒钟，因为<code>(Thread/sleep 1000)</code>被求值了两次：一次在<code>if</code>之后，另一次在<code>println</code>被调用时。这是因为<code>(do (Thread/sleep 1000) (+ 1 1))</code>的代码在整个宏扩展中被重复。这就像你写的一样。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if (do (Thread/sleep 1000) (+ 1 1))
+</code></pre><p>这段代码是为了测试其参数的真实性。如果参数是真实的，它被认为是成功的；如果是虚假的，它是不成功的。该宏打印出其参数是否成功。在这种情况下，你实际上会睡两秒钟，因为<code>(Thread/sleep 1000)</code>被求值了两次：一次在<code>if</code>之后，另一次在<code>println</code>被调用时。这是因为<code>(do (Thread/sleep 1000) (+ 1 1))</code>的代码在整个宏扩展中被重复。这就像你写的一样。</p><pre tabindex=0><code>(if (do (Thread/sleep 1000) (+ 1 1))
   (println &#39;(do (Thread/sleep 1000) (+ 1 1))
            &#34;was successful:&#34;
            (do (Thread/sleep 1000) (+ 1 1)))
@@ -1031,92 +262,26 @@
   (println &#39;(do (Thread/sleep 1000) (+ 1 1))
            &#34;was not successful:&#34;
            (do (Thread/sleep 1000) (+ 1 1))))
-</code></pre></td></tr></table>
-</div>
-</div><p>&ldquo;大问题！&ldquo;你内心的例子评论家说。好吧，如果你的代码是在银行账户之间转账，这将是一个非常大的问题。以下是你如何避免这个问题的方法。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro report
+</code></pre><p>&ldquo;大问题！&ldquo;你内心的例子评论家说。好吧，如果你的代码是在银行账户之间转账，这将是一个非常大的问题。以下是你如何避免这个问题的方法。</p><pre tabindex=0><code>(defmacro report
   [to-try]
   `(let [result# ~to-try]
      (if result#
        (println (quote ~to-try) &#34;was successful:&#34; result#)
        (println (quote ~to-try) &#34;was not successful:&#34; result#))))
-</code></pre></td></tr></table>
-</div>
-</div><p>将 &ldquo;to-try &ldquo;放在一个 &ldquo;let &ldquo;表达式中，你只需求值一次该代码，并将结果绑定到一个自动标示的符号 &ldquo;result#&ldquo;上，现在你可以引用该符号而无需重新求值 &ldquo;to-try &ldquo;代码。</p>
-<h3 id="宏的所有方式">宏的所有方式</h3>
-<p>使用宏的一个微妙的缺陷是，你可能最终不得不写越来越多的宏来完成任何事情。这是由于宏的扩展发生在求值之前。</p>
-<p>例如，假设你想用<code>report</code>宏来<code>doseq</code>。而不是多次调用报告。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(report (= 1 1))
+</code></pre><p>将 &ldquo;to-try &ldquo;放在一个 &ldquo;let &ldquo;表达式中，你只需求值一次该代码，并将结果绑定到一个自动标示的符号 &ldquo;result#&ldquo;上，现在你可以引用该符号而无需重新求值 &ldquo;to-try &ldquo;代码。</p><h3 id=宏的所有方式>宏的所有方式<a hidden class=anchor aria-hidden=true href=#宏的所有方式>#</a></h3><p>使用宏的一个微妙的缺陷是，你可能最终不得不写越来越多的宏来完成任何事情。这是由于宏的扩展发生在求值之前。</p><p>例如，假设你想用<code>report</code>宏来<code>doseq</code>。而不是多次调用报告。</p><pre tabindex=0><code>(report (= 1 1))
 ; =&gt; (= 1 1) was successful: true
 
 (report (= 1 2))
 ; =&gt; (= 1 2) was not successful: false
-</code></pre></td></tr></table>
-</div>
-</div><p>让我们进行迭代。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(doseq [code [&#39;(= 1 1) &#39;(= 1 2)]]
+</code></pre><p>让我们进行迭代。</p><pre tabindex=0><code>(doseq [code [&#39;(= 1 1) &#39;(= 1 2)]]
   (report code))
 ; =&gt; code was successful: (= 1 1)
 ; =&gt; code was successful: (= 1 2)
-</code></pre></td></tr></table>
-</div>
-</div><p>当我们单独传递函数时，报告宏工作正常，但当我们使用<code>doseq</code>对多个函数进行<code>report</code>迭代时，它是一个毫无价值的失败。下面是其中一个<code>doseq</code>迭代的宏扩展的样子。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if
+</code></pre><p>当我们单独传递函数时，报告宏工作正常，但当我们使用<code>doseq</code>对多个函数进行<code>report</code>迭代时，它是一个毫无价值的失败。下面是其中一个<code>doseq</code>迭代的宏扩展的样子。</p><pre tabindex=0><code>(if
  code
  (clojure.core/println &#39;code &#34;was successful:&#34; code)
  (clojure.core/println &#39;code &#34;was not successful:&#34; code))
-</code></pre></td></tr></table>
-</div>
-</div><p>正如你所看到的，<code>report</code>在每个迭代中接收未求值的符号<code>code</code>；然而，我们希望它在求值时接收任何<code>code</code>被绑定的内容。但是<code>report</code>在宏扩展时操作，就是不能访问这些值。这就像它有 T.Rex 的手臂，运行时的值永远不在它的掌握之中。</p>
-<p>为了解决这种情况，我们可以再写一个宏，像这样。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro doseq-macro
+</code></pre><p>正如你所看到的，<code>report</code>在每个迭代中接收未求值的符号<code>code</code>；然而，我们希望它在求值时接收任何<code>code</code>被绑定的内容。但是<code>report</code>在宏扩展时操作，就是不能访问这些值。这就像它有 T.Rex 的手臂，运行时的值永远不在它的掌握之中。</p><p>为了解决这种情况，我们可以再写一个宏，像这样。</p><pre tabindex=0><code>(defmacro doseq-macro
   [macroname &amp; args]
   `(do
      ~@(map (fn [arg] (list macroname arg)) args)))
@@ -1124,56 +289,12 @@
 (doseq-macro report (= 1 1) (= 1 2))
 ; =&gt; (= 1 1) was successful: true
 ; =&gt; (= 1 2) was not successful: false
-</code></pre></td></tr></table>
-</div>
-</div><p>如果你遇到这种情况，请花些时间重新思考你的方法。这很容易使你自己陷入困境，使你无法通过普通的函数调用来完成任何事情。你会被卡住，不得不写更多的宏。宏是非常强大和令人敬畏的，你不应该害怕使用它们。它们把 Clojure 处理数据的设施变成了创造新语言的设施，而这些新语言是根据你的编程问题来设计的。对于某些程序来说，你的代码 90%以上都是宏，这是合适的。尽管它们很棒，但它们也增加了新的组合挑战。它们只是真正的相互组合，所以通过使用它们，你可能会错过 Clojure 中其他类型的组合（函数式、面向对象）。</p>
-<p>我们现在已经涵盖了编写宏的所有机制。拍拍你的背吧! 这是一个相当大的交易!</p>
-<p>在本章的最后，终于到了戴上你的伪装帽，在本章最开始谈到的网上药水店工作的时候了。</p>
-<h2 id="为勇敢和真实的人而酿的酒">为勇敢和真实的人而酿的酒</h2>
-<p><img src="https://www.braveclojure.com/assets/images/cftbat/writing-macros/wizard.png" alt=""></p>
-<p>在这一章的开头，我透露了一个梦想：找到某种可饮用的东西，一旦摄入，就能暂时让我拥有 80 年代健身大师的力量和气质，把我从抑制和自我意识的牢笼中解放出来。我相信有一天某个地方会有人发明这样的灵丹妙药，所以我们不妨着手建立一个系统来销售这种神话般的药水。让我们把这种假想的混合物称为<em>勇敢和真实的啤酒</em>。这个名字是我无缘无故想到的。</p>
-<p>在订单纷至沓来之前（双关语！击掌！），我们需要有一些验证的地方。本节向你展示了一种在功能上进行验证的方法，以及如何使用你将编写的名为 &ldquo;if-valid &ldquo;的宏更简洁地编写执行验证的代码。这将帮助你了解编写自己的宏的典型情况。如果你只想知道宏的定义，可以跳到<a href="https://www.braveclojure.com/writing-macros/#Anchor">&quot;<code>if-valid</code>&rdquo; 第 182 页</a>。</p>
-<h3 id="验证函数">验证函数</h3>
-<p>为了简单起见，我们只担心验证每个订单的姓名和电子邮件。对于我们的商店，我想我们希望这些订单的细节能像这样表示。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def order-details
+</code></pre><p>如果你遇到这种情况，请花些时间重新思考你的方法。这很容易使你自己陷入困境，使你无法通过普通的函数调用来完成任何事情。你会被卡住，不得不写更多的宏。宏是非常强大和令人敬畏的，你不应该害怕使用它们。它们把 Clojure 处理数据的设施变成了创造新语言的设施，而这些新语言是根据你的编程问题来设计的。对于某些程序来说，你的代码 90%以上都是宏，这是合适的。尽管它们很棒，但它们也增加了新的组合挑战。它们只是真正的相互组合，所以通过使用它们，你可能会错过 Clojure 中其他类型的组合（函数式、面向对象）。</p><p>我们现在已经涵盖了编写宏的所有机制。拍拍你的背吧! 这是一个相当大的交易!</p><p>在本章的最后，终于到了戴上你的伪装帽，在本章最开始谈到的网上药水店工作的时候了。</p><h2 id=为勇敢和真实的人而酿的酒>为勇敢和真实的人而酿的酒<a hidden class=anchor aria-hidden=true href=#为勇敢和真实的人而酿的酒>#</a></h2><p><img loading=lazy src=https://www.braveclojure.com/assets/images/cftbat/writing-macros/wizard.png alt></p><p>在这一章的开头，我透露了一个梦想：找到某种可饮用的东西，一旦摄入，就能暂时让我拥有 80 年代健身大师的力量和气质，把我从抑制和自我意识的牢笼中解放出来。我相信有一天某个地方会有人发明这样的灵丹妙药，所以我们不妨着手建立一个系统来销售这种神话般的药水。让我们把这种假想的混合物称为<em>勇敢和真实的啤酒</em>。这个名字是我无缘无故想到的。</p><p>在订单纷至沓来之前（双关语！击掌！），我们需要有一些验证的地方。本节向你展示了一种在功能上进行验证的方法，以及如何使用你将编写的名为 &ldquo;if-valid &ldquo;的宏更简洁地编写执行验证的代码。这将帮助你了解编写自己的宏的典型情况。如果你只想知道宏的定义，可以跳到<a href=https://www.braveclojure.com/writing-macros/#Anchor>"<code>if-valid</code>&rdquo; 第 182 页</a>。</p><h3 id=验证函数>验证函数<a hidden class=anchor aria-hidden=true href=#验证函数>#</a></h3><p>为了简单起见，我们只担心验证每个订单的姓名和电子邮件。对于我们的商店，我想我们希望这些订单的细节能像这样表示。</p><pre tabindex=0><code>(def order-details
   {:name &#34;Mitchard Blimmons&#34;
    :email &#34;mitchard.blimmonsgmail.com&#34;})
-</code></pre></td></tr></table>
-</div>
-</div><p>这个特殊的 Map 有一个无效的电子邮件地址（缺少<code>@</code>符号），所以这正是我们的验证代码应该捕捉的订单类型 理想情况下，我们希望编写的代码能产生这样的结果。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(validate order-details order-details-validations)
+</code></pre><p>这个特殊的 Map 有一个无效的电子邮件地址（缺少<code>@</code>符号），所以这正是我们的验证代码应该捕捉的订单类型 理想情况下，我们希望编写的代码能产生这样的结果。</p><pre tabindex=0><code>(validate order-details order-details-validations)
 ; =&gt; {:email [&#34;Your email address doesn&#39;t look like an email address.&#34;]}
-</code></pre></td></tr></table>
-</div>
-</div><p>也就是说，我们希望能够调用一个函数，`validate&rsquo;，其中包含需要验证的数据和如何验证的定义。结果应该是一个 Map，其中每个键对应一个无效的字段，每个值是该字段的一个或多个验证信息的 Vector。下面的两个函数完成了这项工作。</p>
-<p>让我们先看看<code>order-details-validations</code>。以下是你如何表示验证信息。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(def order-details-validations
+</code></pre><p>也就是说，我们希望能够调用一个函数，`validate&rsquo;，其中包含需要验证的数据和如何验证的定义。结果应该是一个 Map，其中每个键对应一个无效的字段，每个值是该字段的一个或多个验证信息的 Vector。下面的两个函数完成了这项工作。</p><p>让我们先看看<code>order-details-validations</code>。以下是你如何表示验证信息。</p><pre tabindex=0><code>(def order-details-validations
   {:name
    [&#34;Please enter a name&#34; not-empty]
 
@@ -1182,59 +303,14 @@
 
     &#34;Your email address doesn&#39;t look like an email address&#34;
     #(or (empty? %) (re-seq #&#34;@&#34; %))]})
-</code></pre></td></tr></table>
-</div>
-</div><p>这是一个 Map，每个键都与错误信息和验证函数对的 Vector 相关。例如，<code>:name</code>有一个验证函数，<code>not-empty</code>；如果验证失败，你应该得到<code>&quot;请输入一个名字&quot;</code>的错误信息。</p>
-<p>接下来，我们需要写出<code>validate'函数。</code>validate<code>函数可以分解成两个函数：一个是对单个字段进行验证，另一个是将这些错误信息累积成一个最终的错误信息Map，如</code>{:email [&ldquo;你的邮箱地址看起来不像邮箱地址。&quot;]}<code>。这里有一个叫做</code>error-messages-for`的函数，对一个单一的值进行验证。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn error-messages-for
+</code></pre><p>这是一个 Map，每个键都与错误信息和验证函数对的 Vector 相关。例如，<code>:name</code>有一个验证函数，<code>not-empty</code>；如果验证失败，你应该得到<code>"请输入一个名字"</code>的错误信息。</p><p>接下来，我们需要写出<code>validate'函数。</code>validate<code>函数可以分解成两个函数：一个是对单个字段进行验证，另一个是将这些错误信息累积成一个最终的错误信息Map，如</code>{:email [&ldquo;你的邮箱地址看起来不像邮箱地址。&rdquo;]}<code>。这里有一个叫做</code>error-messages-for`的函数，对一个单一的值进行验证。</p><pre tabindex=0><code>(defn error-messages-for
   &#34;Return a seq of error messages&#34;
   [to-validate message-validator-pairs]
   (map first (filter #(not ((second %) to-validate))
                      (partition 2 message-validator-pairs))))
-</code></pre></td></tr></table>
-</div>
-</div><p>第一个参数，<code>to-validate</code>，是你要验证的字段。第二个参数，<code>message-validator-pairs</code>，应该是一个有偶数元素的序列。这个序列被分组为<code>(partition 2 message-validator-pairs)'的对。对中的第一个元素应该是一个错误信息，对中的第二个元素应该是一个函数（就像在</code>order-details-validations<code>中安排的对）。</code>error-messages-for<code>函数的工作原理是过滤出所有错误信息和验证对，其中验证函数在应用于</code>to-validate<code>时返回</code>true<code>。然后，它使用</code>map first`来获取每对元素的第一个元素，即错误信息。下面是它的操作。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(error-messages-for &#34;&#34; [&#34;Please enter a name&#34; not-empty])
+</code></pre><p>第一个参数，<code>to-validate</code>，是你要验证的字段。第二个参数，<code>message-validator-pairs</code>，应该是一个有偶数元素的序列。这个序列被分组为<code>(partition 2 message-validator-pairs)'的对。对中的第一个元素应该是一个错误信息，对中的第二个元素应该是一个函数（就像在</code>order-details-validations<code>中安排的对）。</code>error-messages-for<code>函数的工作原理是过滤出所有错误信息和验证对，其中验证函数在应用于</code>to-validate<code>时返回</code>true<code>。然后，它使用</code>map first`来获取每对元素的第一个元素，即错误信息。下面是它的操作。</p><pre tabindex=0><code>(error-messages-for &#34;&#34; [&#34;Please enter a name&#34; not-empty])
 ; =&gt; (&#34;Please enter a name&#34;)
-</code></pre></td></tr></table>
-</div>
-</div><p>现在我们需要将这些错误信息积累到一个 Map 中。</p>
-<p>下面是完整的<code>validate</code>函数，以及我们将其应用于<code>order-details</code>和<code>order-details-validations</code>时的输出。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn validate
+</code></pre><p>现在我们需要将这些错误信息积累到一个 Map 中。</p><p>下面是完整的<code>validate</code>函数，以及我们将其应用于<code>order-details</code>和<code>order-details-validations</code>时的输出。</p><pre tabindex=0><code>(defn validate
   &#34;Returns a map with a vector of errors for each key&#34;
   [to-validate validations]
   (reduce (fn [errors validation]
@@ -1249,98 +325,26 @@
 
 (validate order-details order-details-validations)
 ; =&gt; {:email (&#34;Your email address doesn&#39;t look like an email address&#34;)}
-</code></pre></td></tr></table>
-</div>
-</div><p>成功了! 这个函数是通过减少<code>order-details-validations'并将</code>order-details&rsquo;的每个键的错误信息（如果有的话）关联到一个最终的错误信息 Map。</p>
-<h3 id="if-valid">if-valid</h3>
-<p>有了我们的验证代码，我们现在可以随心所欲地验证记录了。大多数情况下，验证会像这样。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(let [errors (validate order-details order-details-validations)]
+</code></pre><p>成功了! 这个函数是通过减少<code>order-details-validations'并将</code>order-details&rsquo;的每个键的错误信息（如果有的话）关联到一个最终的错误信息 Map。</p><h3 id=if-valid>if-valid<a hidden class=anchor aria-hidden=true href=#if-valid>#</a></h3><p>有了我们的验证代码，我们现在可以随心所欲地验证记录了。大多数情况下，验证会像这样。</p><pre tabindex=0><code>(let [errors (validate order-details order-details-validations)]
   (if (empty? errors)
     (println :success)
     (println :failure errors)))
-</code></pre></td></tr></table>
-</div>
-</div><p>该模式是做以下工作。</p>
-<ol>
-<li>验证一条记录并将结果绑定到<code>errors</code>。</li>
-<li>检查是否有任何错误</li>
-<li>3.如果有，做成功的事情，这里<code>(println :success)</code>。</li>
-<li>否则，做失败的事情，这里<code>(println :failure errors)</code>。</li>
-</ol>
-<p>我已经在实际生产的网站中使用了这个验证代码。起初，我发现自己不断重复代码的微小变化，这无疑表明我需要引入一个抽象，以隐藏重复的部分：应用<code>validate</code>函数，将结果绑定到一些符号，并检查结果是否为空。为了创建这种抽象，你可能会想写一个这样的函数。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defn if-valid
+</code></pre><p>该模式是做以下工作。</p><ol><li>验证一条记录并将结果绑定到<code>errors</code>。</li><li>检查是否有任何错误</li><li>3.如果有，做成功的事情，这里<code>(println :success)</code>。</li><li>否则，做失败的事情，这里<code>(println :failure errors)</code>。</li></ol><p>我已经在实际生产的网站中使用了这个验证代码。起初，我发现自己不断重复代码的微小变化，这无疑表明我需要引入一个抽象，以隐藏重复的部分：应用<code>validate</code>函数，将结果绑定到一些符号，并检查结果是否为空。为了创建这种抽象，你可能会想写一个这样的函数。</p><pre tabindex=0><code>(defn if-valid
   [record validations success-code failure-code]
   (let [errors (validate record validations)]
     (if (empty? errors)
       success-code
       failure-code)))
-</code></pre></td></tr></table>
-</div>
-</div><p>然而，这不会起作用，因为<code>success-code</code>和<code>failure-code</code>每次都会被求值。宏会起作用，因为宏允许你控制求值。下面是你如何使用宏的方法。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(if-valid order-details order-details-validations errors
+</code></pre><p>然而，这不会起作用，因为<code>success-code</code>和<code>failure-code</code>每次都会被求值。宏会起作用，因为宏允许你控制求值。下面是你如何使用宏的方法。</p><pre tabindex=0><code>(if-valid order-details order-details-validations errors
  (render :success)
  (render :failure errors))
-</code></pre></td></tr></table>
-</div>
-</div><p>这个宏隐藏了重复的细节，帮助你更简洁地表达你的意图。这就像要求别人给你开瓶器，而不是说：&ldquo;请给我手动装置，用于去除玻璃容器中液体的临时密封剂。&rdquo; 下面是实施方法。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(defmacro if-valid
+</code></pre><p>这个宏隐藏了重复的细节，帮助你更简洁地表达你的意图。这就像要求别人给你开瓶器，而不是说：&ldquo;请给我手动装置，用于去除玻璃容器中液体的临时密封剂。&rdquo; 下面是实施方法。</p><pre tabindex=0><code>(defmacro if-valid
   &#34;Handle validation more concisely&#34;
   [to-validate validations errors-name &amp; then-else]
   `(let [~errors-name (validate ~to-validate ~validations)]
      (if (empty? ~errors-name)
        ~@then-else)))
-</code></pre></td></tr></table>
-</div>
-</div><p>这个宏需要四个参数。 <code>to-validate</code>, <code>validations</code>, <code>errors-name</code>, 和其余参数<code>then-else</code>. 像这样使用<code>errors-name</code>是一个新的策略。我们想在<code>then-else</code>语句中访问<code>validate</code>函数返回的错误。要做到这一点，我们要告诉宏它应该把结果绑定到什么符号上。下面的宏扩展显示了它是如何工作的。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> (macroexpand
+</code></pre><p>这个宏需要四个参数。 <code>to-validate</code>, <code>validations</code>, <code>errors-name</code>, 和其余参数<code>then-else</code>. 像这样使用<code>errors-name</code>是一个新的策略。我们想在<code>then-else</code>语句中访问<code>validate</code>函数返回的错误。要做到这一点，我们要告诉宏它应该把结果绑定到什么符号上。下面的宏扩展显示了它是如何工作的。</p><pre tabindex=0><code> (macroexpand
  &#39;(if-valid order-details order-details-validations my-error-name
             (println :success)
             (println :failure my-error-name)))
@@ -1349,164 +353,13 @@
  (if (clojure.core/empty? my-error-name)
   (println :success)
   (println :failure my-error-name)))
-</code></pre></td></tr></table>
-</div>
-</div><p>语法引号抽象了你之前看到的<code>let/validate/if</code>模式的一般形式。然后我们使用 unquote 拼接来解压<code>if</code>分支，这些分支被打包到<code>then-else</code>其余参数中。</p>
-<p>这真是太简单了! 说了这么多关于宏的内容，并详细介绍了它们的机制，我打赌你一定以为会有更复杂的东西。对不起，朋友。如果你对你的失望感到难以接受，我知道有一种饮料可以帮助你。</p>
-<h2 id="总结">总结</h2>
-<p>在本章中，你学会了如何编写自己的宏。宏的定义与函数非常相似：它们有参数、文件串和主体。它们可以使用参数重构和休息参数，而且可以是递归的。你的宏几乎都会返回列表。你有时会使用<code>list</code>和<code>seq</code>函数来编写简单的宏，但大多数时候你会使用语法引号，，它让你使用安全模板来编写宏。</p>
-<p>当你编写宏时，重要的是要记住符号和值之间的区别：宏在代码被求值之前被展开，因此不能访问求值的结果。双重求值和变量捕获是另外两个微妙的陷阱，但你可以通过明智地使用 &ldquo;let &ldquo;表达式和代词来避免它们。</p>
-<p>宏是一种有趣的工具，可以让你在编码时少一些拘束。通过让你控制求值，宏给你一定程度的自由和表达，这是其他语言所不允许的。在你的 Clojure 旅程中，你可能会听到有人告诫你不要使用宏，说什么 &ldquo;宏是邪恶的 &ldquo;和 &ldquo;你不应该使用宏&rdquo;。不要听这些假正经的人的话&ndash;至少在开始的时候不要听他们的。走出去，享受美好的时光。这是你学习在哪些情况下适合使用宏的唯一途径。你会从另一个角度知道如何有技巧地、潇洒地使用宏。</p>
-<h2 id="练习">练习</h2>
-<ol>
-<li>
-<p>编写宏<code>when-valid</code>，使它的行为与<code>when</code>相似。下面是一个调用它的例子。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">(when-valid order-details order-details-validations
+</code></pre><p>语法引号抽象了你之前看到的<code>let/validate/if</code>模式的一般形式。然后我们使用 unquote 拼接来解压<code>if</code>分支，这些分支被打包到<code>then-else</code>其余参数中。</p><p>这真是太简单了! 说了这么多关于宏的内容，并详细介绍了它们的机制，我打赌你一定以为会有更复杂的东西。对不起，朋友。如果你对你的失望感到难以接受，我知道有一种饮料可以帮助你。</p><h2 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h2><p>在本章中，你学会了如何编写自己的宏。宏的定义与函数非常相似：它们有参数、文件串和主体。它们可以使用参数重构和休息参数，而且可以是递归的。你的宏几乎都会返回列表。你有时会使用<code>list</code>和<code>seq</code>函数来编写简单的宏，但大多数时候你会使用语法引号，，它让你使用安全模板来编写宏。</p><p>当你编写宏时，重要的是要记住符号和值之间的区别：宏在代码被求值之前被展开，因此不能访问求值的结果。双重求值和变量捕获是另外两个微妙的陷阱，但你可以通过明智地使用 &ldquo;let &ldquo;表达式和代词来避免它们。</p><p>宏是一种有趣的工具，可以让你在编码时少一些拘束。通过让你控制求值，宏给你一定程度的自由和表达，这是其他语言所不允许的。在你的 Clojure 旅程中，你可能会听到有人告诫你不要使用宏，说什么 &ldquo;宏是邪恶的 &ldquo;和 &ldquo;你不应该使用宏&rdquo;。不要听这些假正经的人的话&ndash;至少在开始的时候不要听他们的。走出去，享受美好的时光。这是你学习在哪些情况下适合使用宏的唯一途径。你会从另一个角度知道如何有技巧地、潇洒地使用宏。</p><h2 id=练习>练习<a hidden class=anchor aria-hidden=true href=#练习>#</a></h2><ol><li><p>编写宏<code>when-valid</code>，使它的行为与<code>when</code>相似。下面是一个调用它的例子。</p><pre tabindex=0><code>(when-valid order-details order-details-validations
 (println &#34;It&#39;s a success!&#34;)
 (render :success))
-</code></pre></td></tr></table>
-</div>
-</div><p>当数据有效时，应该求值<code>println</code>和<code>render</code>形式，如果数据无效，<code>when-valid</code>应该返回<code>nil</code>。</p>
-</li>
-<li>
-<p>你看到<code>and</code>是作为一个宏实现的。把`or&rsquo;作为一个宏来实现。</p>
-</li>
-<li>
-<p>在第 5 章中，你创建了一系列函数（<code>c-int</code>, <code>c-str</code>, <code>c-dex</code>）来读取一个 RPG 字符的属性。写一个宏，用一个宏调用来定义任意数量的属性检索函数。以下是你如何调用它。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
-</code></pre></td></tr></table>
-</div>
-</div></li>
-</ol>
-<p>(defattrs c-int :intelligence
+</code></pre><p>当数据有效时，应该求值<code>println</code>和<code>render</code>形式，如果数据无效，<code>when-valid</code>应该返回<code>nil</code>。</p></li><li><p>你看到<code>and</code>是作为一个宏实现的。把`or&rsquo;作为一个宏来实现。</p></li><li><p>在第 5 章中，你创建了一系列函数（<code>c-int</code>, <code>c-str</code>, <code>c-dex</code>）来读取一个 RPG 字符的属性。写一个宏，用一个宏调用来定义任意数量的属性检索函数。以下是你如何调用它。</p><pre tabindex=0><code></code></pre></li></ol><p>(defattrs c-int :intelligence
 c-str :strength
-c-dex :dexterity)</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Fenix</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2022-01-18
-        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/clojure/">clojure</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/chapter9/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Chapter9 并发的艺术</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/chapter7/">
-            <span class="next-text nav-default">Chapter7 炼金术</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        <script src="https://utteranc.es/client.js"
-        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
-        issue-term="pathname"
-        label="Comment"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
-  </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2016 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-  </span>
-</div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-216295420-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-</body>
-</html>
+c-dex :dexterity)</p><pre tabindex=0><code></code></pre></div><footer class=post-footer><ul class=post-tags><li><a href=/tags/clojure/>clojure</a></li></ul><nav class=paginav><a class=prev href=/post/chapter9/><span class=title>« Prev Page</span><br><span>Chapter9 并发的艺术</span></a>
+<a class=next href=/post/chapter7/><span class=title>Next Page »</span><br><span>Chapter7 炼金术</span></a></nav><div class=share-buttons><a target=_blank rel="noopener noreferrer" aria-label="share Chapter8 宏 on twitter" href="https://twitter.com/intent/tweet/?text=Chapter8%20%e5%ae%8f&url=%2fpost%2fchapter8%2f&hashtags=clojure"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Chapter8 宏 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=%2fpost%2fchapter8%2f&title=Chapter8%20%e5%ae%8f&summary=Chapter8%20%e5%ae%8f&source=%2fpost%2fchapter8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Chapter8 宏 on reddit" href="https://reddit.com/submit?url=%2fpost%2fchapter8%2f&title=Chapter8%20%e5%ae%8f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Chapter8 宏 on facebook" href="https://facebook.com/sharer/sharer.php?u=%2fpost%2fchapter8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Chapter8 宏 on whatsapp" href="https://api.whatsapp.com/send?text=Chapter8%20%e5%ae%8f%20-%20%2fpost%2fchapter8%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Chapter8 宏 on telegram" href="https://telegram.me/share/url?text=Chapter8%20%e5%ae%8f&url=%2fpost%2fchapter8%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></div></footer></article></main><footer class=footer><span>&copy; 2022 <a href>PaperMod</a></span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(t){t.preventDefault();var e=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({behavior:"smooth"}),e==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${e}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(t=>{const n=t.parentNode.parentNode,e=document.createElement("button");e.classList.add("copy-code"),e.innerText="copy";function s(){e.innerText="copied!",setTimeout(()=>{e.innerText="copy"},2e3)}e.addEventListener("click",o=>{if("clipboard"in navigator){navigator.clipboard.writeText(t.textContent),s();return}const e=document.createRange();e.selectNodeContents(t);const n=window.getSelection();n.removeAllRanges(),n.addRange(e);try{document.execCommand("copy"),s()}catch(e){}n.removeRange(e)}),n.classList.contains("highlight")?n.appendChild(e):n.parentNode.firstChild==n||(t.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?t.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(e):t.parentNode.appendChild(e))})</script></body></html>

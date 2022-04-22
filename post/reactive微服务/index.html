@@ -1,362 +1,67 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Reactive 微服务 - Awesome Fenix</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="Fenix" /><meta name="description" content="Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问" /><meta name="keywords" content="Fenix, Clojure, Blog" />
-
-
-
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
-     crossorigin="anonymous"></script>
-
-
-<meta name="generator" content="Hugo 0.92.2 with theme even" />
-
-
-<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="Reactive 微服务" />
-<meta property="og:description" content="Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-03-24T17:57:58+00:00" />
-<meta property="article:modified_time" content="2018-03-24T17:57:58+00:00" />
-
-<meta itemprop="name" content="Reactive 微服务">
-<meta itemprop="description" content="Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问"><meta itemprop="datePublished" content="2018-03-24T17:57:58+00:00" />
-<meta itemprop="dateModified" content="2018-03-24T17:57:58+00:00" />
-<meta itemprop="wordCount" content="2061">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Reactive 微服务"/>
-<meta name="twitter:description" content="Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Awesome Fenix</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Awesome Fenix</a>
-</div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-</nav>
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Reactive 微服务</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2018-03-24 </span>
-        
-          <span class="more-meta"> 约 2061 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#reactive-微服务">Reactive 微服务</a>
-      <ul>
-        <li><a href="#vertx">Vert.x</a>
-          <ul>
-            <li><a href="#event-loop">event loop</a></li>
-            <li><a href="#verticles">verticles</a></li>
-            <li><a href="#从-callbacks-到-observables">从 Callbacks 到 Observables</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <h1 id="reactive-微服务">Reactive 微服务</h1>
-<p>分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive 便出现了。</p>
-<p>Reactive 编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。</p>
-<p>在 reactive 编程中，刺激信号是数据的转移，叫做 streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。</p>
-<p>Reactive 系统：一种架构风格，其基于异步消息来构建响应式的分布式系统。</p>
-<p>reactive 系统使用了消息驱动的方法。所有的构建通过异步消息的发送和接收来交互。消息投递的逻辑由底层的实现决定。发送者不会阻塞着等待回复，它们可能会稍后才接收到回复。</p>
-<p>reactive 系统会有两个重要的特征：</p>
-<ul>
-<li>
-<p>伸缩性——可以横向伸缩</p>
-<p>伸缩性来自消息传递的解耦。消息被发送到一个地址之后，可以被一组消费者按照一种负载均衡方法消费。当 reactive 系统遇到负载高峰时，它可以创造出新的消费者，并在此之后销毁它们。</p>
-</li>
-<li>
-<p>恢复性——可以处理错误并且恢复</p>
-<p>首先，这种消息交互模式允许组件在其本地处理错误，组件不需要等待消息，因此当一个组件发生错误时，其他组件仍然会正常工作。其次，当一个处理消息的组件发生错误后，消息可以可以传递给在相同地址注册的其他组件。</p>
-</li>
-</ul>
-<p>reactive 微服务系统是由 reactive 微服务组成的。这些微服务有下面四个特征：</p>
-<ul>
-<li>自治性</li>
-<li>异步性</li>
-<li>恢复性</li>
-<li>伸缩性</li>
-</ul>
-<p>Reactive 微服务是可自治的。他们可以根据周围的服务是否可用来调整自己的行为。自治性往往伴随着孤立性；Reactive 微服务可以在本地处理错误、独立地完成任务，并在必要时和其他服务合作。它们使用异步消息传递的机制和其他服务沟通；它们也会接收消息并且对其作出回应。</p>
-<p>得益于异步消息机制，reactive 微服务可以处理错误并根据情况调整自己的行为。错误不会被扩散，而是在靠近错误源头的地方被处理掉。当一个微服务挂掉之后，它的消费者微服务要能够处理错误并避免扩散。这一孤立原则是避免错误逐层上浮而毁掉整个系统的关键。可恢复性不只是关于处理错误，它还涉及到自愈性；一个 reactive 微服务应该能够从错误中恢复并且对错误进行补救。</p>
-<p>最后，reactive 微服务必须是可伸缩的，这样系统才可以根据负载情况来调整节点数量。这一特性意味着将会有一系列的限制，比如不能有在内存中的状态，要能够在必要时同步状态信息，或者要能够将消息路由到状态信息相同的节点。</p>
-<h2 id="vertx">Vert.x</h2>
-<p>Vert.x 是一个用于构建 reactive 和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用 Vert.x 构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。</p>
-<p>传统编程模式</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">int res = compute(1, 2);
-</code></pre></td></tr></table>
-</div>
-</div><p>在这段代码中，是在等待 compute 函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个 handler：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">compute(1, 2, res -&gt; {
-    // called with the result
-});
-</code></pre></td></tr></table>
-</div>
-</div><p>在上述代码中，compute 函数不再返回一个结果，而是传一个 handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在 vert.x 中，到处都可以看到这种形式的代码，比如创建 http 服务器时：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">vertx.createHttpServer()
-    .requestHandler(request -&gt; {
-        request.response().end(&#34;hello vert.x&#34;);
-    })
-    .listen(8080);
-</code></pre></td></tr></table>
-</div>
-</div><p>这个例子中，我们让一个 requestHandler 接收 HTTP 请求(事件)并且返回&quot;hello vert.x&quot;。Handler 是一个函数，当事件发生时，它会被调用。在我们的例子中，handler 代码会在每次请求进来时被调用执行。要注意的是，Handler 并不会返回一个结果，但是它可以提供一个结果；这个结果是怎样被提供的，这个要看是哪种交互行为。在上面的代码段中，它只是向一个 HTTP response 写入了结果。这个 Handler 后面跟了一个方法令其监听 8080 端口。调用这个 HTTP 服务它会返回一个简单的 response。</p>
-<h3 id="event-loop">event loop</h3>
-<p>绝大多数情况，Vert.x 会用一个叫做 event loop 的线程来调用所有的 handler。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3153856-e1219f95986959b0.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""></p>
-<p>基于消息循环的线程模型有一个很大的优点：它简化了并发。因为只有一个线程存在，因此永远都只被一个线程调用而不存在并发的情况。但是同样也有一个限制：</p>
-<blockquote>
-<p>不要阻塞消息循环</p>
-</blockquote>
-<p>因为没有阻塞，一个消息循环线程可以短时间内分发巨量的事件，这个模式就叫做 reactor 模式。</p>
-<h3 id="verticles">verticles</h3>
-<p>Verticles 是被 Vert.x 部署和运行的代码块。一个微服务的应用，是由运行在同一个 Vert.x 实例上的若干 verticle 组成的。一个 verticle 通常会创建服务器或客户端、注册一组 Handler，以及封装一部分系统的业务处理逻辑。</p>
-<h4 id="标准的-verticle">标准的 verticle</h4>
-<p>标准的 verticle 会在 Vert.x 的消息循环中被执行，并且永远不会阻塞。Vert.x 保证了每一个 verticle 都会只被同一个线程执行而不会有并发发生，从而避免同步工作。</p>
-<h4 id="worker-verticle">Worker Verticle</h4>
-<p>和标准的 verticle 不同，worker verticle 不是在消息循环中执行的，这就意味着他们可以执行阻塞代码。但是，这会限制你的可扩展性。</p>
-<p>Verticle 可以访问 vertx 成员变量(是由 AbstractVerticle 类提供的)来创建服务器和客户端，以及和其他的 verticle 交互。Verticle 还可以部署其他的 verticle，对它们进行配置，并设置创建实例的数量。这些实例会和不同的消息循环线程绑定，Vert.x 通过这些实例来均衡负载。</p>
-<h3 id="从-callbacks-到-observables">从 Callbacks 到 Observables</h3>
-<p>我们可以发现，Vert.x 开发模式使用回调方法。在组织管理多个异步动作时，这种基于回调的开发模式容易产生复杂的代码，陷入 callback hell。</p>
-<p>Vert.x 提供了解决这个开发难题的答案——RxJava API。</p>
-
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Fenix</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2018-03-24
-        
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">最终一致性的实现手段</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
-            <span class="next-text nav-default">Guice 快速入门</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        <script src="https://utteranc.es/client.js"
-        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
-        issue-term="pathname"
-        label="Comment"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
-  </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2016 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-  </span>
-</div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-216295420-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-</body>
-</html>
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Reactive 微服务 | PaperMod</title><meta name=keywords content><meta name=description content="Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive 便出现了。
+Reactive 编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。
+在 reactive 编程中，刺激信号是数据的转移，叫做 streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。
+Reactive 系统：一种架构风格，其基于异步消息来构建响应式的分布式系统。
+reactive 系统使用了消息驱动的方法。所有的构建通过异步消息的发送和接收来交互。消息投递的逻辑由底层的实现决定。发送者不会阻塞着等待回复，它们可能会稍后才接收到回复。
+reactive 系统会有两个重要的特征：
+  伸缩性——可以横向伸缩
+伸缩性来自消息传递的解耦。消息被发送到一个地址之后，可以被一组消费者按照一种负载均衡方法消费。当 reactive 系统遇到负载高峰时，它可以创造出新的消费者，并在此之后销毁它们。
+  恢复性——可以处理错误并且恢复
+首先，这种消息交互模式允许组件在其本地处理错误，组件不需要等待消息，因此当一个组件发生错误时，其他组件仍然会正常工作。其次，当一个处理消息的组件发生错误后，消息可以可以传递给在相同地址注册的其他组件。
+  reactive 微服务系统是由 reactive 微服务组成的。这些微服务有下面四个特征：
+ 自治性 异步性 恢复性 伸缩性  Reactive 微服务是可自治的。他们可以根据周围的服务是否可用来调整自己的行为。自治性往往伴随着孤立性；Reactive 微服务可以在本地处理错误、独立地完成任务，并在必要时和其他服务合作。它们使用异步消息传递的机制和其他服务沟通；它们也会接收消息并且对其作出回应。
+得益于异步消息机制，reactive 微服务可以处理错误并根据情况调整自己的行为。错误不会被扩散，而是在靠近错误源头的地方被处理掉。当一个微服务挂掉之后，它的消费者微服务要能够处理错误并避免扩散。这一孤立原则是避免错误逐层上浮而毁掉整个系统的关键。可恢复性不只是关于处理错误，它还涉及到自愈性；一个 reactive 微服务应该能够从错误中恢复并且对错误进行补救。
+最后，reactive 微服务必须是可伸缩的，这样系统才可以根据负载情况来调整节点数量。这一特性意味着将会有一系列的限制，比如不能有在内存中的状态，要能够在必要时同步状态信息，或者要能够将消息路由到状态信息相同的节点。
+Vert.x Vert.x 是一个用于构建 reactive 和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用 Vert.x 构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。
+传统编程模式
+int res = compute(1, 2); 在这段代码中，是在等待 compute 函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个 handler：
+compute(1, 2, res -> { // called with the result }); 在上述代码中，compute 函数不再返回一个结果，而是传一个 handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在 vert."><meta name=author content="Theme PaperMod"><link rel=canonical href=/post/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/><link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=favicon.ico><link rel=icon type=image/png sizes=16x16 href=favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=favicon-32x32.png><link rel=apple-touch-icon href=apple-touch-icon.png><link rel=mask-icon href=safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.97.3"><link rel=alternate hreflang=en href=/post/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="Reactive 微服务"><meta property="og:description" content="Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive 便出现了。
+Reactive 编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。
+在 reactive 编程中，刺激信号是数据的转移，叫做 streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。
+Reactive 系统：一种架构风格，其基于异步消息来构建响应式的分布式系统。
+reactive 系统使用了消息驱动的方法。所有的构建通过异步消息的发送和接收来交互。消息投递的逻辑由底层的实现决定。发送者不会阻塞着等待回复，它们可能会稍后才接收到回复。
+reactive 系统会有两个重要的特征：
+  伸缩性——可以横向伸缩
+伸缩性来自消息传递的解耦。消息被发送到一个地址之后，可以被一组消费者按照一种负载均衡方法消费。当 reactive 系统遇到负载高峰时，它可以创造出新的消费者，并在此之后销毁它们。
+  恢复性——可以处理错误并且恢复
+首先，这种消息交互模式允许组件在其本地处理错误，组件不需要等待消息，因此当一个组件发生错误时，其他组件仍然会正常工作。其次，当一个处理消息的组件发生错误后，消息可以可以传递给在相同地址注册的其他组件。
+  reactive 微服务系统是由 reactive 微服务组成的。这些微服务有下面四个特征：
+ 自治性 异步性 恢复性 伸缩性  Reactive 微服务是可自治的。他们可以根据周围的服务是否可用来调整自己的行为。自治性往往伴随着孤立性；Reactive 微服务可以在本地处理错误、独立地完成任务，并在必要时和其他服务合作。它们使用异步消息传递的机制和其他服务沟通；它们也会接收消息并且对其作出回应。
+得益于异步消息机制，reactive 微服务可以处理错误并根据情况调整自己的行为。错误不会被扩散，而是在靠近错误源头的地方被处理掉。当一个微服务挂掉之后，它的消费者微服务要能够处理错误并避免扩散。这一孤立原则是避免错误逐层上浮而毁掉整个系统的关键。可恢复性不只是关于处理错误，它还涉及到自愈性；一个 reactive 微服务应该能够从错误中恢复并且对错误进行补救。
+最后，reactive 微服务必须是可伸缩的，这样系统才可以根据负载情况来调整节点数量。这一特性意味着将会有一系列的限制，比如不能有在内存中的状态，要能够在必要时同步状态信息，或者要能够将消息路由到状态信息相同的节点。
+Vert.x Vert.x 是一个用于构建 reactive 和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用 Vert.x 构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。
+传统编程模式
+int res = compute(1, 2); 在这段代码中，是在等待 compute 函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个 handler：
+compute(1, 2, res -> { // called with the result }); 在上述代码中，compute 函数不再返回一个结果，而是传一个 handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在 vert."><meta property="og:type" content="article"><meta property="og:url" content="/post/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/"><meta property="og:image" content="papermod-cover.png"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-03-24T17:57:58+00:00"><meta property="article:modified_time" content="2018-03-24T17:57:58+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="papermod-cover.png"><meta name=twitter:title content="Reactive 微服务"><meta name=twitter:description content="Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive 便出现了。
+Reactive 编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。
+在 reactive 编程中，刺激信号是数据的转移，叫做 streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。
+Reactive 系统：一种架构风格，其基于异步消息来构建响应式的分布式系统。
+reactive 系统使用了消息驱动的方法。所有的构建通过异步消息的发送和接收来交互。消息投递的逻辑由底层的实现决定。发送者不会阻塞着等待回复，它们可能会稍后才接收到回复。
+reactive 系统会有两个重要的特征：
+  伸缩性——可以横向伸缩
+伸缩性来自消息传递的解耦。消息被发送到一个地址之后，可以被一组消费者按照一种负载均衡方法消费。当 reactive 系统遇到负载高峰时，它可以创造出新的消费者，并在此之后销毁它们。
+  恢复性——可以处理错误并且恢复
+首先，这种消息交互模式允许组件在其本地处理错误，组件不需要等待消息，因此当一个组件发生错误时，其他组件仍然会正常工作。其次，当一个处理消息的组件发生错误后，消息可以可以传递给在相同地址注册的其他组件。
+  reactive 微服务系统是由 reactive 微服务组成的。这些微服务有下面四个特征：
+ 自治性 异步性 恢复性 伸缩性  Reactive 微服务是可自治的。他们可以根据周围的服务是否可用来调整自己的行为。自治性往往伴随着孤立性；Reactive 微服务可以在本地处理错误、独立地完成任务，并在必要时和其他服务合作。它们使用异步消息传递的机制和其他服务沟通；它们也会接收消息并且对其作出回应。
+得益于异步消息机制，reactive 微服务可以处理错误并根据情况调整自己的行为。错误不会被扩散，而是在靠近错误源头的地方被处理掉。当一个微服务挂掉之后，它的消费者微服务要能够处理错误并避免扩散。这一孤立原则是避免错误逐层上浮而毁掉整个系统的关键。可恢复性不只是关于处理错误，它还涉及到自愈性；一个 reactive 微服务应该能够从错误中恢复并且对错误进行补救。
+最后，reactive 微服务必须是可伸缩的，这样系统才可以根据负载情况来调整节点数量。这一特性意味着将会有一系列的限制，比如不能有在内存中的状态，要能够在必要时同步状态信息，或者要能够将消息路由到状态信息相同的节点。
+Vert.x Vert.x 是一个用于构建 reactive 和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用 Vert.x 构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。
+传统编程模式
+int res = compute(1, 2); 在这段代码中，是在等待 compute 函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个 handler：
+compute(1, 2, res -> { // called with the result }); 在上述代码中，compute 函数不再返回一个结果，而是传一个 handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在 vert."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"/post/"},{"@type":"ListItem","position":3,"name":"Reactive 微服务","item":"/post/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Reactive 微服务","name":"Reactive 微服务","description":"Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive 便出现了。\nReactive 编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。\n在 reactive 编程中，刺激信号是数据的转移，叫做 streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。\nReactive 系统：一种架构风格，其基于异步消息来构建响应式的分布式系统。\nreactive 系统使用了消息驱动的方法。所有的构建通过异步消息的发送和接收来交互。消息投递的逻辑由底层的实现决定。发送者不会阻塞着等待回复，它们可能会稍后才接收到回复。\nreactive 系统会有两个重要的特征：\n  伸缩性——可以横向伸缩\n伸缩性来自消息传递的解耦。消息被发送到一个地址之后，可以被一组消费者按照一种负载均衡方法消费。当 reactive 系统遇到负载高峰时，它可以创造出新的消费者，并在此之后销毁它们。\n  恢复性——可以处理错误并且恢复\n首先，这种消息交互模式允许组件在其本地处理错误，组件不需要等待消息，因此当一个组件发生错误时，其他组件仍然会正常工作。其次，当一个处理消息的组件发生错误后，消息可以可以传递给在相同地址注册的其他组件。\n  reactive 微服务系统是由 reactive 微服务组成的。这些微服务有下面四个特征：\n 自治性 异步性 恢复性 伸缩性  Reactive 微服务是可自治的。他们可以根据周围的服务是否可用来调整自己的行为。自治性往往伴随着孤立性；Reactive 微服务可以在本地处理错误、独立地完成任务，并在必要时和其他服务合作。它们使用异步消息传递的机制和其他服务沟通；它们也会接收消息并且对其作出回应。\n得益于异步消息机制，reactive 微服务可以处理错误并根据情况调整自己的行为。错误不会被扩散，而是在靠近错误源头的地方被处理掉。当一个微服务挂掉之后，它的消费者微服务要能够处理错误并避免扩散。这一孤立原则是避免错误逐层上浮而毁掉整个系统的关键。可恢复性不只是关于处理错误，它还涉及到自愈性；一个 reactive 微服务应该能够从错误中恢复并且对错误进行补救。\n最后，reactive 微服务必须是可伸缩的，这样系统才可以根据负载情况来调整节点数量。这一特性意味着将会有一系列的限制，比如不能有在内存中的状态，要能够在必要时同步状态信息，或者要能够将消息路由到状态信息相同的节点。\nVert.x Vert.x 是一个用于构建 reactive 和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用 Vert.x 构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。\n传统编程模式\nint res = compute(1, 2); 在这段代码中，是在等待 compute 函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个 handler：\ncompute(1, 2, res -\u0026gt; { // called with the result }); 在上述代码中，compute 函数不再返回一个结果，而是传一个 handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在 vert.","keywords":[],"articleBody":"Reactive 微服务 分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive 便出现了。\nReactive 编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。\n在 reactive 编程中，刺激信号是数据的转移，叫做 streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。\nReactive 系统：一种架构风格，其基于异步消息来构建响应式的分布式系统。\nreactive 系统使用了消息驱动的方法。所有的构建通过异步消息的发送和接收来交互。消息投递的逻辑由底层的实现决定。发送者不会阻塞着等待回复，它们可能会稍后才接收到回复。\nreactive 系统会有两个重要的特征：\n  伸缩性——可以横向伸缩\n伸缩性来自消息传递的解耦。消息被发送到一个地址之后，可以被一组消费者按照一种负载均衡方法消费。当 reactive 系统遇到负载高峰时，它可以创造出新的消费者，并在此之后销毁它们。\n  恢复性——可以处理错误并且恢复\n首先，这种消息交互模式允许组件在其本地处理错误，组件不需要等待消息，因此当一个组件发生错误时，其他组件仍然会正常工作。其次，当一个处理消息的组件发生错误后，消息可以可以传递给在相同地址注册的其他组件。\n  reactive 微服务系统是由 reactive 微服务组成的。这些微服务有下面四个特征：\n 自治性 异步性 恢复性 伸缩性  Reactive 微服务是可自治的。他们可以根据周围的服务是否可用来调整自己的行为。自治性往往伴随着孤立性；Reactive 微服务可以在本地处理错误、独立地完成任务，并在必要时和其他服务合作。它们使用异步消息传递的机制和其他服务沟通；它们也会接收消息并且对其作出回应。\n得益于异步消息机制，reactive 微服务可以处理错误并根据情况调整自己的行为。错误不会被扩散，而是在靠近错误源头的地方被处理掉。当一个微服务挂掉之后，它的消费者微服务要能够处理错误并避免扩散。这一孤立原则是避免错误逐层上浮而毁掉整个系统的关键。可恢复性不只是关于处理错误，它还涉及到自愈性；一个 reactive 微服务应该能够从错误中恢复并且对错误进行补救。\n最后，reactive 微服务必须是可伸缩的，这样系统才可以根据负载情况来调整节点数量。这一特性意味着将会有一系列的限制，比如不能有在内存中的状态，要能够在必要时同步状态信息，或者要能够将消息路由到状态信息相同的节点。\nVert.x Vert.x 是一个用于构建 reactive 和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用 Vert.x 构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。\n传统编程模式\nint res = compute(1, 2); 在这段代码中，是在等待 compute 函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个 handler：\ncompute(1, 2, res - { // called with the result }); 在上述代码中，compute 函数不再返回一个结果，而是传一个 handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在 vert.x 中，到处都可以看到这种形式的代码，比如创建 http 服务器时：\nvertx.createHttpServer() .requestHandler(request - { request.response().end(\"hello vert.x\"); }) .listen(8080); 这个例子中，我们让一个 requestHandler 接收 HTTP 请求(事件)并且返回\"hello vert.x\"。Handler 是一个函数，当事件发生时，它会被调用。在我们的例子中，handler 代码会在每次请求进来时被调用执行。要注意的是，Handler 并不会返回一个结果，但是它可以提供一个结果；这个结果是怎样被提供的，这个要看是哪种交互行为。在上面的代码段中，它只是向一个 HTTP response 写入了结果。这个 Handler 后面跟了一个方法令其监听 8080 端口。调用这个 HTTP 服务它会返回一个简单的 response。\nevent loop 绝大多数情况，Vert.x 会用一个叫做 event loop 的线程来调用所有的 handler。\n基于消息循环的线程模型有一个很大的优点：它简化了并发。因为只有一个线程存在，因此永远都只被一个线程调用而不存在并发的情况。但是同样也有一个限制：\n 不要阻塞消息循环\n 因为没有阻塞，一个消息循环线程可以短时间内分发巨量的事件，这个模式就叫做 reactor 模式。\nverticles Verticles 是被 Vert.x 部署和运行的代码块。一个微服务的应用，是由运行在同一个 Vert.x 实例上的若干 verticle 组成的。一个 verticle 通常会创建服务器或客户端、注册一组 Handler，以及封装一部分系统的业务处理逻辑。\n标准的 verticle 标准的 verticle 会在 Vert.x 的消息循环中被执行，并且永远不会阻塞。Vert.x 保证了每一个 verticle 都会只被同一个线程执行而不会有并发发生，从而避免同步工作。\nWorker Verticle 和标准的 verticle 不同，worker verticle 不是在消息循环中执行的，这就意味着他们可以执行阻塞代码。但是，这会限制你的可扩展性。\nVerticle 可以访问 vertx 成员变量(是由 AbstractVerticle 类提供的)来创建服务器和客户端，以及和其他的 verticle 交互。Verticle 还可以部署其他的 verticle，对它们进行配置，并设置创建实例的数量。这些实例会和不同的消息循环线程绑定，Vert.x 通过这些实例来均衡负载。\n从 Callbacks 到 Observables 我们可以发现，Vert.x 开发模式使用回调方法。在组织管理多个异步动作时，这种基于回调的开发模式容易产生复杂的代码，陷入 callback hell。\nVert.x 提供了解决这个开发难题的答案——RxJava API。\n","wordCount":"169","inLanguage":"en","datePublished":"2018-03-24T17:57:58Z","dateModified":"2018-03-24T17:57:58Z","author":{"@type":"Person","name":"Theme PaperMod"},"mainEntityOfPage":{"@type":"WebPage","@id":"/post/reactive%E5%BE%AE%E6%9C%8D%E5%8A%A1/"},"publisher":{"@type":"Organization","name":"PaperMod","logo":{"@type":"ImageObject","url":"favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script><header class=header><nav class=nav><div class=logo><a href accesskey=h title="PaperMod (Alt + H)">PaperMod</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><ul class=lang-switch><li>|</li><li><a href=/fr/ title=French aria-label=:fr:>🇫🇷</a></li><li><a href=/fa/ title=Fa aria-label=Fa>Fa</a></li></ul></span></div><ul id=menu><li><a href=archives title=Archive><span>Archive</span></a></li><li><a href=categories/ title=Categories><span>Categories</span></a></li><li><a href=search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href>Home</a>&nbsp;»&nbsp;<a href=/post/>Posts</a></div><h1 class=post-title>Reactive 微服务</h1><div class=post-meta><span title="2018-03-24 17:57:58 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href=https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content/post/Reactive%e5%be%ae%e6%9c%8d%e5%8a%a1.md rel="noopener noreferrer" target=_blank>Suggest Changes</a></div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#reactive-%e5%be%ae%e6%9c%8d%e5%8a%a1 aria-label="Reactive 微服务">Reactive 微服务</a><ul><li><a href=#vertx aria-label=Vert.x>Vert.x</a><ul><li><a href=#event-loop aria-label="event loop">event loop</a></li><li><a href=#verticles aria-label=verticles>verticles</a><ul><li><a href=#%e6%a0%87%e5%87%86%e7%9a%84-verticle aria-label="标准的 verticle">标准的 verticle</a></li><li><a href=#worker-verticle aria-label="Worker Verticle">Worker Verticle</a></li></ul></li><li><a href=#%e4%bb%8e-callbacks-%e5%88%b0-observables aria-label="从 Callbacks 到 Observables">从 Callbacks 到 Observables</a></li></ul></li></ul></li></ul></div></details></div><div class=post-content><h1 id=reactive-微服务>Reactive 微服务<a hidden class=anchor aria-hidden=true href=#reactive-微服务>#</a></h1><p>分布式系统构建起来很困难，因为它们容易出问题，运行缓慢，并且被 CAP 和 FLP 理论所限制。换句话说，它们的构建和运维都特别复杂。为了解决这个问题，reactive 便出现了。</p><p>Reactive 编程：一种开发模型，其专注于数据流向、对变化的反馈，以及传播他们。</p><p>在 reactive 编程中，刺激信号是数据的转移，叫做 streams。其实很像生产者——消费者模式，消费者对值进行订阅并响应。</p><p>Reactive 系统：一种架构风格，其基于异步消息来构建响应式的分布式系统。</p><p>reactive 系统使用了消息驱动的方法。所有的构建通过异步消息的发送和接收来交互。消息投递的逻辑由底层的实现决定。发送者不会阻塞着等待回复，它们可能会稍后才接收到回复。</p><p>reactive 系统会有两个重要的特征：</p><ul><li><p>伸缩性——可以横向伸缩</p><p>伸缩性来自消息传递的解耦。消息被发送到一个地址之后，可以被一组消费者按照一种负载均衡方法消费。当 reactive 系统遇到负载高峰时，它可以创造出新的消费者，并在此之后销毁它们。</p></li><li><p>恢复性——可以处理错误并且恢复</p><p>首先，这种消息交互模式允许组件在其本地处理错误，组件不需要等待消息，因此当一个组件发生错误时，其他组件仍然会正常工作。其次，当一个处理消息的组件发生错误后，消息可以可以传递给在相同地址注册的其他组件。</p></li></ul><p>reactive 微服务系统是由 reactive 微服务组成的。这些微服务有下面四个特征：</p><ul><li>自治性</li><li>异步性</li><li>恢复性</li><li>伸缩性</li></ul><p>Reactive 微服务是可自治的。他们可以根据周围的服务是否可用来调整自己的行为。自治性往往伴随着孤立性；Reactive 微服务可以在本地处理错误、独立地完成任务，并在必要时和其他服务合作。它们使用异步消息传递的机制和其他服务沟通；它们也会接收消息并且对其作出回应。</p><p>得益于异步消息机制，reactive 微服务可以处理错误并根据情况调整自己的行为。错误不会被扩散，而是在靠近错误源头的地方被处理掉。当一个微服务挂掉之后，它的消费者微服务要能够处理错误并避免扩散。这一孤立原则是避免错误逐层上浮而毁掉整个系统的关键。可恢复性不只是关于处理错误，它还涉及到自愈性；一个 reactive 微服务应该能够从错误中恢复并且对错误进行补救。</p><p>最后，reactive 微服务必须是可伸缩的，这样系统才可以根据负载情况来调整节点数量。这一特性意味着将会有一系列的限制，比如不能有在内存中的状态，要能够在必要时同步状态信息，或者要能够将消息路由到状态信息相同的节点。</p><h2 id=vertx>Vert.x<a hidden class=anchor aria-hidden=true href=#vertx>#</a></h2><p>Vert.x 是一个用于构建 reactive 和分布式系统的工具箱，其使用了异步非阻塞编程模型。当使用 Vert.x 构建微服务的时候，微服务会自然地带上一个核心特征：所有事情都是异步的。</p><p>传统编程模式</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>int res = compute(1, 2);
+</span></span></code></pre></div><p>在这段代码中，是在等待 compute 函数计算出来结果之后再进行剩下的操作。而在异步非阻塞的编程模式中，将会创建一个 handler：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>compute(1, 2, res -&gt; {
+</span></span><span class=line><span class=cl>    // called with the result
+</span></span><span class=line><span class=cl>});
+</span></span></code></pre></div><p>在上述代码中，compute 函数不再返回一个结果，而是传一个 handler，当结果准备好时调用就可以了。得益于这种开发模型，可以使用很少的线程去处理高并发工作。在 vert.x 中，到处都可以看到这种形式的代码，比如创建 http 服务器时：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>vertx.createHttpServer()
+</span></span><span class=line><span class=cl>    .requestHandler(request -&gt; {
+</span></span><span class=line><span class=cl>        request.response().end(&#34;hello vert.x&#34;);
+</span></span><span class=line><span class=cl>    })
+</span></span><span class=line><span class=cl>    .listen(8080);
+</span></span></code></pre></div><p>这个例子中，我们让一个 requestHandler 接收 HTTP 请求(事件)并且返回"hello vert.x"。Handler 是一个函数，当事件发生时，它会被调用。在我们的例子中，handler 代码会在每次请求进来时被调用执行。要注意的是，Handler 并不会返回一个结果，但是它可以提供一个结果；这个结果是怎样被提供的，这个要看是哪种交互行为。在上面的代码段中，它只是向一个 HTTP response 写入了结果。这个 Handler 后面跟了一个方法令其监听 8080 端口。调用这个 HTTP 服务它会返回一个简单的 response。</p><h3 id=event-loop>event loop<a hidden class=anchor aria-hidden=true href=#event-loop>#</a></h3><p>绝大多数情况，Vert.x 会用一个叫做 event loop 的线程来调用所有的 handler。</p><p><img loading=lazy src=https://upload-images.jianshu.io/upload_images/3153856-e1219f95986959b0.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/700 alt></p><p>基于消息循环的线程模型有一个很大的优点：它简化了并发。因为只有一个线程存在，因此永远都只被一个线程调用而不存在并发的情况。但是同样也有一个限制：</p><blockquote><p>不要阻塞消息循环</p></blockquote><p>因为没有阻塞，一个消息循环线程可以短时间内分发巨量的事件，这个模式就叫做 reactor 模式。</p><h3 id=verticles>verticles<a hidden class=anchor aria-hidden=true href=#verticles>#</a></h3><p>Verticles 是被 Vert.x 部署和运行的代码块。一个微服务的应用，是由运行在同一个 Vert.x 实例上的若干 verticle 组成的。一个 verticle 通常会创建服务器或客户端、注册一组 Handler，以及封装一部分系统的业务处理逻辑。</p><h4 id=标准的-verticle>标准的 verticle<a hidden class=anchor aria-hidden=true href=#标准的-verticle>#</a></h4><p>标准的 verticle 会在 Vert.x 的消息循环中被执行，并且永远不会阻塞。Vert.x 保证了每一个 verticle 都会只被同一个线程执行而不会有并发发生，从而避免同步工作。</p><h4 id=worker-verticle>Worker Verticle<a hidden class=anchor aria-hidden=true href=#worker-verticle>#</a></h4><p>和标准的 verticle 不同，worker verticle 不是在消息循环中执行的，这就意味着他们可以执行阻塞代码。但是，这会限制你的可扩展性。</p><p>Verticle 可以访问 vertx 成员变量(是由 AbstractVerticle 类提供的)来创建服务器和客户端，以及和其他的 verticle 交互。Verticle 还可以部署其他的 verticle，对它们进行配置，并设置创建实例的数量。这些实例会和不同的消息循环线程绑定，Vert.x 通过这些实例来均衡负载。</p><h3 id=从-callbacks-到-observables>从 Callbacks 到 Observables<a hidden class=anchor aria-hidden=true href=#从-callbacks-到-observables>#</a></h3><p>我们可以发现，Vert.x 开发模式使用回调方法。在组织管理多个异步动作时，这种基于回调的开发模式容易产生复杂的代码，陷入 callback hell。</p><p>Vert.x 提供了解决这个开发难题的答案——RxJava API。</p></div><footer class=post-footer><nav class=paginav><a class=prev href=/post/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5/><span class=title>« Prev Page</span><br><span>最终一致性的实现手段</span></a>
+<a class=next href=/post/guice%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/><span class=title>Next Page »</span><br><span>Guice 快速入门</span></a></nav><div class=share-buttons><a target=_blank rel="noopener noreferrer" aria-label="share Reactive 微服务 on twitter" href="https://twitter.com/intent/tweet/?text=Reactive%20%e5%be%ae%e6%9c%8d%e5%8a%a1&url=%2fpost%2freactive%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%2f&hashtags="><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Reactive 微服务 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=%2fpost%2freactive%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%2f&title=Reactive%20%e5%be%ae%e6%9c%8d%e5%8a%a1&summary=Reactive%20%e5%be%ae%e6%9c%8d%e5%8a%a1&source=%2fpost%2freactive%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Reactive 微服务 on reddit" href="https://reddit.com/submit?url=%2fpost%2freactive%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%2f&title=Reactive%20%e5%be%ae%e6%9c%8d%e5%8a%a1"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Reactive 微服务 on facebook" href="https://facebook.com/sharer/sharer.php?u=%2fpost%2freactive%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Reactive 微服务 on whatsapp" href="https://api.whatsapp.com/send?text=Reactive%20%e5%be%ae%e6%9c%8d%e5%8a%a1%20-%20%2fpost%2freactive%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share Reactive 微服务 on telegram" href="https://telegram.me/share/url?text=Reactive%20%e5%be%ae%e6%9c%8d%e5%8a%a1&url=%2fpost%2freactive%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></div></footer></article></main><footer class=footer><span>&copy; 2022 <a href>PaperMod</a></span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(t){t.preventDefault();var e=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({behavior:"smooth"}),e==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${e}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(t=>{const n=t.parentNode.parentNode,e=document.createElement("button");e.classList.add("copy-code"),e.innerText="copy";function s(){e.innerText="copied!",setTimeout(()=>{e.innerText="copy"},2e3)}e.addEventListener("click",o=>{if("clipboard"in navigator){navigator.clipboard.writeText(t.textContent),s();return}const e=document.createRange();e.selectNodeContents(t);const n=window.getSelection();n.removeAllRanges(),n.addRange(e);try{document.execCommand("copy"),s()}catch(e){}n.removeRange(e)}),n.classList.contains("highlight")?n.appendChild(e):n.parentNode.firstChild==n||(t.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?t.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(e):t.parentNode.appendChild(e))})</script></body></html>

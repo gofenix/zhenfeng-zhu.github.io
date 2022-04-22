@@ -1,675 +1,191 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>谈谈聊天机器人框架的实现原理 - Awesome Fenix</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="Fenix" /><meta name="description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机" /><meta name="keywords" content="Fenix, Clojure, Blog" />
-
-
-
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
-     crossorigin="anonymous"></script>
-
-
-<meta name="generator" content="Hugo 0.92.2 with theme even" />
-
-
-<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/botbuilder/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="谈谈聊天机器人框架的实现原理" />
-<meta property="og:description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/botbuilder/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-08-22T19:39:12+00:00" />
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
-
-<meta itemprop="name" content="谈谈聊天机器人框架的实现原理">
-<meta itemprop="description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机"><meta itemprop="datePublished" content="2018-08-22T19:39:12+00:00" />
-<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
-<meta itemprop="wordCount" content="2764">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="谈谈聊天机器人框架的实现原理"/>
-<meta name="twitter:description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。 聊天机器人 聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Awesome Fenix</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Awesome Fenix</a>
-</div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-</nav>
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">谈谈聊天机器人框架的实现原理</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2018-08-22 </span>
-        
-          <span class="more-meta"> 约 2764 字 </span>
-          <span class="more-meta"> 预计阅读 6 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#聊天机器人">聊天机器人</a></li>
-        <li><a href="#机器人开发框架">机器人开发框架</a></li>
-        <li><a href="#实现方式">实现方式</a></li>
-        <li><a href="#conversation-ui">Conversation UI</a></li>
-        <li><a href="#bot-service">Bot Service</a></li>
-        <li><a href="#bot-builder-源码阅读">Bot Builder 源码阅读</a>
-          <ul>
-            <li><a href="#botbuilder">botbuilder</a></li>
-            <li><a href="#botbuilder-core">botbuilder-core</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。</p>
-<h2 id="聊天机器人">聊天机器人</h2>
-<blockquote>
-<p><strong>聊天机器人</strong>（Chatterbot）是经由对话或文字进行交谈的计算机程序[<a href="https://zh.wikipedia.org/wiki/%E8%81%8A%E5%A4%A9%E6%A9%9F%E5%99%A8%E4%BA%BA#cite_note-target-1">1]</a>。能够模拟人类对话，通过<a href="https://zh.wikipedia.org/wiki/%E5%9B%BE%E7%81%B5%E6%B5%8B%E8%AF%95">图灵测试</a>。</p>
-</blockquote>
-<p>我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。</p>
-<h2 id="机器人开发框架">机器人开发框架</h2>
-<p>作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。</p>
-<p>然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。</p>
-<p>使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。</p>
-<h2 id="实现方式">实现方式</h2>
-<ul>
-<li>webhook 事件回调</li>
-<li>FSM 状态机</li>
-<li>workflow 工作流</li>
-</ul>
-<p>最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。</p>
-<p>那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。</p>
-<p>可能有人不是很懂有限状态机，这里做一下简单说明。</p>
-<blockquote>
-<p>有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。</p>
-<p>有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个<a href="https://zh.wikipedia.org/wiki/%E7%8A%B6%E6%80%81">状态</a>以及在这些状态之间的转移和动作等行为的<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B">数学模型</a>。</p>
-<p>可以总结为：f(state, action) =&gt; state’</p>
-<p>也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。</p>
-<p>可以认为状态机是图灵完备的。</p>
-</blockquote>
-<p>我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。</p>
-<p>我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。</p>
-<p>特点是：</p>
-<ul>
-<li>人为定义对话流程</li>
-<li>完全有系统主导，系统问用户答</li>
-<li>答非所问的情况直接忽略</li>
-<li>建模简单，能清晰明了的把交互匹配到模型</li>
-<li>难以扩展，很容易变的复杂</li>
-<li>适用于简单的任务，难以处理复杂问题</li>
-<li>缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限</li>
-</ul>
-<p>示例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">const {startWith, when, goto, stay, stop} = botkit.DSL(fsm);
- 
-startWith(MyStates.IDLE, {counter: 0});
-
-when(MyStates.IDLE)(async (sender, content, data) =&gt; {
-           
-});
-
-when(MyStates.UI)((sender, content, data) =&gt; {
-            
-});
-
-when(MyStates.STEP1)((sender, content, data) =&gt; {
-            
-});
-
-when(MyStates.STEP2)((sender, content, data) =&gt; {
-            
-});
-
-when(MyStates.DONE)((sender, content, data) =&gt; {
-            
-});
-
-when(MyStates.EMPTY)((sender, content, data) =&gt; {
-            
-});
-
-when(MyStates.LOOP)((sender, content, data) =&gt; {
-           
-});
-</code></pre></td></tr></table>
-</div>
-</div><p>从示例中可以发现，基于 fsm 的机器人框架需要使用类似 DSL 领域特定语言一样的描述语言，定义各种各样的状态，每一个状态都有触发点。当满足某个状态条件时，进入该状态，执行该状态的逻辑。这种基于状态机的机器人框架，对于简单的场景比较容易写，但是如果是遇到了复杂的场景，比如多轮对话中还附带上下文信息，就会写起来非常复杂。</p>
-<p>于是引入了基于工作流的 chatbot 框架。其实工作流是对 fsm 的一种简化封装，本质上来讲，工作流能做到的，fsm 状态机也能做到，而且 fsm 状态机或许能拆的更细，但是工作流的一个个 function，或者是 function 的集合 dialog，可以互相组合，开发起来更符合大部分人的直觉。</p>
-<ul>
-<li>
-<p>routing dialog</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">// hotels.js
-module.exports = [
-    // Destination
-    function (session) {
-        session.send(&#39;Welcome to the Hotels finder!&#39;);
-        builder.Prompts.text(session, &#39;Please enter your destination&#39;);
-    },
-    function (session, results, next) {
-        session.dialogData.destination = results.response;
-        session.send(&#39;Looking for hotels in %s&#39;, results.response); 
-        next();
-    },
-    ...
-];
-
-// app.js
-var bot = new builder.UniversalBot(connector, [
-    function (session) {
-        // ...
-    },
-    // ...
-]);
-
-bot.dialog(&#39;hotels&#39;, require(&#39;./hotels&#39;));
-bot.dialog(&#39;flights&#39;, require(&#39;./flights&#39;));
-</code></pre></td></tr></table>
-</div>
-</div><p>通过 routing dialog，我们可以实现 dialog 的复用。</p>
-</li>
-<li>
-<p>waterfall dialog</p>
-<p>一个瀑布流的 dialog，可以让我们在一个 dialog 中像流一样完成一系列的动作。就像 fsm 的多种状态的集合。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">[
-    // Destination
-    function (session) {
-        session.send(&#39;Welcome to the Hotels finder!&#39;);
-        builder.Prompts.text(session, &#39;Please enter your destination&#39;);
-    },
-    function (session, results, next) {
-        session.dialogData.destination = results.response;
-        session.send(&#39;Looking for hotels in %s&#39;, results.response); 
-        next();
-    },
-    ...
-    function (session) {
-        var destination = session.dialogData.destination;
-        var checkIn = new Date(session.dialogData.checkIn);
-        var checkOut = checkIn.addDays(session.dialogData.nights);
-
-        session.send(
-            &#39;Ok. Searching for Hotels in %s from %d/%d to %d/%d...&#39;,
-            destination,
-            checkIn.getMonth() + 1, checkIn.getDate(),
-            checkOut.getMonth() + 1, checkOut.getDate());
-
-        // Async search
-        Store
-            .searchHotels(destination, checkIn, checkOut)
-            .then(function (hotels) {
-                // Results
-                session.send(&#39;I found in total %d hotels for your dates:&#39;, hotels.length);
-
-                var message = new builder.Message()
-                    .attachmentLayout(builder.AttachmentLayout.carousel)
-                    .attachments(hotels.map(hotelAsAttachment));
-
-                session.send(message);
-
-                // End
-                session.endDialog();
-            });
-    }
-]
-</code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>state</p>
-<p>在一个 dialog 上下文中共享的数据，或者在多个 dialog 中共享的数据。对于微软的 botbuilder 来讲，他们提供了如下几个 API：</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Use Cases</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>userData</td>
-<td>Stores information globally for the user across all conversations.</td>
-</tr>
-<tr>
-<td>conversationData</td>
-<td>Stores information globally for a single conversation. This data is visible to everyone within the conversation so care should be used to what’s stored there. It’s disabled by default and needs to be enabled using the bots <a href="https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.iuniversalbotsettings.html#persistconversationdata"><code>persistConversationData</code></a> setting.</td>
-</tr>
-<tr>
-<td>privateConversationData</td>
-<td>Stores information globally for a single conversation but its private data for the current user. This data spans all dialogs so it’s useful for storing temporary state that you want cleaned up when the conversation ends.</td>
-</tr>
-<tr>
-<td>dialogData</td>
-<td>Persists information for a single dialog instance. This is essential for storing temporary information in between the steps of a waterfall.</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h2 id="conversation-ui">Conversation UI</h2>
-<p>对话式 UI（Conversation UI，下文简称 CUI）。</p>
-<p>CUI 到底是什么？很好理解，我们日常跟人聊天的微信、短信界面就是。由一条条消息组成，按时间先后展示出来，就可以看作 CUI。</p>
-<p>chatbot 在与用户交流时，不单单是只有文字，还会需要用户进行互动，这时候就是 CUI 的用武之地了。我们可以和移动端进行约定，对一些特定的消息格式进行渲染，这样就可以做出按钮，列表等。</p>
-<h2 id="bot-service">Bot Service</h2>
-<p>作为一个机器人框架，开发完成之后，还需要和 telegram，Facebook messenger，slack 等 IM 平台进行对接，如果要开发者一个个对接的话，将会特别麻烦。作为 chatbot 开发框架的一部分，bot service 的工作就是对接 IM 平台。</p>
-<h2 id="bot-builder-源码阅读">Bot Builder 源码阅读</h2>
-<p>微软的 botbuilder-js 出到了 V4 版本，在新版本的机器人框架有着很大的变动，相比于 V3 目录结构变化了，而且机器人编写流程也有了一定的差异。</p>
-<p>项目结构</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">├── botbuilder
-├── botbuilder-ai
-├── botbuilder-azure
-├── botbuilder-core
-├── botbuilder-dialogs
-├── botframework-config
-├── botframework-connector
-├── botframework-schema
-</code></pre></td></tr></table>
-</div>
-</div><p>目录结构更加的组件化。</p>
-<p>如果我们不使用微软的服务，那么 botbuilder-ai 和 botbuilder-azure 其实不重要。</p>
-<h3 id="botbuilder">botbuilder</h3>
-<p>botbuilder 是框架的入口，在这个 package 中做的事情比较简单：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botFrameworkAdapter&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./fileTranscriptStore&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;../../botbuilder-core/lib&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>导出 botbuilder-core 和继承了 botAdapter 的子类 botFrameworkAdapter。</p>
-<p>fileTranscriptStore 是存储每个 activity 的 transcript 到文件中，Transcript 是人和 bot 的对话动作的日志。</p>
-<p>如果我们要定制自己的 bot 动作，其实就可以继承 botAdapter，然后对接自己的 IM 等等。botAdapter 也是 botbuilder-core 中的，所以 botbuilder-core 是核心，只要读懂了 botbuilder-core，就可以说是理解了微软的机器人框架。</p>
-<h3 id="botbuilder-core">botbuilder-core</h3>
-<p>看 botbuilder-core，也从 index.ts 开始。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;../../botframework-schema/lib&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./autoSaveStateMiddleware&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botAdapter&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botState&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botStatePropertyAccessor&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./botStateSet&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./browserStorage&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./cardFactory&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./conversationState&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./memoryStorage&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./memoryTranscriptStore&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./messageFactory&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./middlewareSet&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./privateConversationState&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./propertyManager&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./recognizerResult&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./showTypingMiddleware&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./storage&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./testAdapter&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./transcriptLogger&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./turnContext&#39;</span><span class="p">;</span>
-<span class="kr">export</span> <span class="o">*</span> <span class="kr">from</span> <span class="s1">&#39;./userState&#39;</span><span class="p">;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>这里引入了一个 botframework-schema，通过名字可以看出来，这就是一个类型定义的包，主要是机器人 Activity 的 Schema。Activity 是人和 bot 所做的会话的程序级别的表示，该 schema 中包含了文本协议、多媒体和非内容动作（如社交互动和打字指示符）的规定。</p>
-
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Fenix</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2022-01-18
-        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/blockchain/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">区块链学习笔记</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/parity/">
-            <span class="next-text nav-default">基于以太坊的 Parity 联盟链部署</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        <script src="https://utteranc.es/client.js"
-        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
-        issue-term="pathname"
-        label="Comment"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
-  </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2016 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-  </span>
-</div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-216295420-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-</body>
-</html>
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>谈谈聊天机器人框架的实现原理 | PaperMod</title><meta name=keywords content><meta name=description content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
+聊天机器人  聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
+ 我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。
+机器人开发框架 作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。
+然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。
+使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。
+实现方式  webhook 事件回调 FSM 状态机 workflow 工作流  最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。
+那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。
+可能有人不是很懂有限状态机，这里做一下简单说明。
+ 有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。
+有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
+可以总结为：f(state, action) => state’
+也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。
+可以认为状态机是图灵完备的。
+ 我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
+我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。
+特点是：
+ 人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限  示例：
+const {startWith, when, goto, stay, stop} = botkit."><meta name=author content="Theme PaperMod"><link rel=canonical href=/post/botbuilder/><link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=favicon.ico><link rel=icon type=image/png sizes=16x16 href=favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=favicon-32x32.png><link rel=apple-touch-icon href=apple-touch-icon.png><link rel=mask-icon href=safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.97.3"><link rel=alternate hreflang=en href=/post/botbuilder/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="谈谈聊天机器人框架的实现原理"><meta property="og:description" content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
+聊天机器人  聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
+ 我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。
+机器人开发框架 作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。
+然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。
+使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。
+实现方式  webhook 事件回调 FSM 状态机 workflow 工作流  最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。
+那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。
+可能有人不是很懂有限状态机，这里做一下简单说明。
+ 有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。
+有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
+可以总结为：f(state, action) => state’
+也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。
+可以认为状态机是图灵完备的。
+ 我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
+我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。
+特点是：
+ 人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限  示例：
+const {startWith, when, goto, stay, stop} = botkit."><meta property="og:type" content="article"><meta property="og:url" content="/post/botbuilder/"><meta property="og:image" content="papermod-cover.png"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-08-22T19:39:12+00:00"><meta property="article:modified_time" content="2018-08-22T19:39:12+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="papermod-cover.png"><meta name=twitter:title content="谈谈聊天机器人框架的实现原理"><meta name=twitter:description content="在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。
+聊天机器人  聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。
+ 我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。
+机器人开发框架 作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。
+然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。
+使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。
+实现方式  webhook 事件回调 FSM 状态机 workflow 工作流  最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。
+那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。
+可能有人不是很懂有限状态机，这里做一下简单说明。
+ 有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。
+有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。
+可以总结为：f(state, action) => state’
+也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。
+可以认为状态机是图灵完备的。
+ 我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。
+我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。
+特点是：
+ 人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限  示例：
+const {startWith, when, goto, stay, stop} = botkit."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"/post/"},{"@type":"ListItem","position":3,"name":"谈谈聊天机器人框架的实现原理","item":"/post/botbuilder/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"谈谈聊天机器人框架的实现原理","name":"谈谈聊天机器人框架的实现原理","description":"在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。\n聊天机器人  聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。\n 我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。\n机器人开发框架 作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。\n然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。\n使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。\n实现方式  webhook 事件回调 FSM 状态机 workflow 工作流  最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。\n那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。\n可能有人不是很懂有限状态机，这里做一下简单说明。\n 有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。\n有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。\n可以总结为：f(state, action) =\u0026gt; state’\n也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。\n可以认为状态机是图灵完备的。\n 我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。\n我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。\n特点是：\n 人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限  示例：\nconst {startWith, when, goto, stay, stop} = botkit.","keywords":[],"articleBody":"在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。\n聊天机器人  聊天机器人（Chatterbot）是经由对话或文字进行交谈的计算机程序[1]。能够模拟人类对话，通过图灵测试。\n 我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。\n机器人开发框架 作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。\n然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。\n使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。\n实现方式  webhook 事件回调 FSM 状态机 workflow 工作流  最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。\n那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。\n可能有人不是很懂有限状态机，这里做一下简单说明。\n 有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。\n有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。\n可以总结为：f(state, action) = state’\n也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。\n可以认为状态机是图灵完备的。\n 我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。\n我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。\n特点是：\n 人为定义对话流程 完全有系统主导，系统问用户答 答非所问的情况直接忽略 建模简单，能清晰明了的把交互匹配到模型 难以扩展，很容易变的复杂 适用于简单的任务，难以处理复杂问题 缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限  示例：\nconst {startWith, when, goto, stay, stop} = botkit.DSL(fsm); startWith(MyStates.IDLE, {counter: 0}); when(MyStates.IDLE)(async (sender, content, data) = { }); when(MyStates.UI)((sender, content, data) = { }); when(MyStates.STEP1)((sender, content, data) = { }); when(MyStates.STEP2)((sender, content, data) = { }); when(MyStates.DONE)((sender, content, data) = { }); when(MyStates.EMPTY)((sender, content, data) = { }); when(MyStates.LOOP)((sender, content, data) = { }); 从示例中可以发现，基于 fsm 的机器人框架需要使用类似 DSL 领域特定语言一样的描述语言，定义各种各样的状态，每一个状态都有触发点。当满足某个状态条件时，进入该状态，执行该状态的逻辑。这种基于状态机的机器人框架，对于简单的场景比较容易写，但是如果是遇到了复杂的场景，比如多轮对话中还附带上下文信息，就会写起来非常复杂。\n于是引入了基于工作流的 chatbot 框架。其实工作流是对 fsm 的一种简化封装，本质上来讲，工作流能做到的，fsm 状态机也能做到，而且 fsm 状态机或许能拆的更细，但是工作流的一个个 function，或者是 function 的集合 dialog，可以互相组合，开发起来更符合大部分人的直觉。\n  routing dialog\n// hotels.js module.exports = [ // Destination function (session) { session.send('Welcome to the Hotels finder!'); builder.Prompts.text(session, 'Please enter your destination'); }, function (session, results, next) { session.dialogData.destination = results.response; session.send('Looking for hotels in %s', results.response); next(); }, ... ]; // app.js var bot = new builder.UniversalBot(connector, [ function (session) { // ... }, // ... ]); bot.dialog('hotels', require('./hotels')); bot.dialog('flights', require('./flights')); 通过 routing dialog，我们可以实现 dialog 的复用。\n  waterfall dialog\n一个瀑布流的 dialog，可以让我们在一个 dialog 中像流一样完成一系列的动作。就像 fsm 的多种状态的集合。\n[ // Destination function (session) { session.send('Welcome to the Hotels finder!'); builder.Prompts.text(session, 'Please enter your destination'); }, function (session, results, next) { session.dialogData.destination = results.response; session.send('Looking for hotels in %s', results.response); next(); }, ... function (session) { var destination = session.dialogData.destination; var checkIn = new Date(session.dialogData.checkIn); var checkOut = checkIn.addDays(session.dialogData.nights); session.send( 'Ok. Searching for Hotels in %s from %d/%d to %d/%d...', destination, checkIn.getMonth() + 1, checkIn.getDate(), checkOut.getMonth() + 1, checkOut.getDate()); // Async search Store .searchHotels(destination, checkIn, checkOut) .then(function (hotels) { // Results session.send('I found in total %d hotels for your dates:', hotels.length); var message = new builder.Message() .attachmentLayout(builder.AttachmentLayout.carousel) .attachments(hotels.map(hotelAsAttachment)); session.send(message); // End session.endDialog(); }); } ]   state\n在一个 dialog 上下文中共享的数据，或者在多个 dialog 中共享的数据。对于微软的 botbuilder 来讲，他们提供了如下几个 API：\n   Field Use Cases     userData Stores information globally for the user across all conversations.   conversationData Stores information globally for a single conversation. This data is visible to everyone within the conversation so care should be used to what’s stored there. It’s disabled by default and needs to be enabled using the bots persistConversationData setting.   privateConversationData Stores information globally for a single conversation but its private data for the current user. This data spans all dialogs so it’s useful for storing temporary state that you want cleaned up when the conversation ends.   dialogData Persists information for a single dialog instance. This is essential for storing temporary information in between the steps of a waterfall.      Conversation UI 对话式 UI（Conversation UI，下文简称 CUI）。\nCUI 到底是什么？很好理解，我们日常跟人聊天的微信、短信界面就是。由一条条消息组成，按时间先后展示出来，就可以看作 CUI。\nchatbot 在与用户交流时，不单单是只有文字，还会需要用户进行互动，这时候就是 CUI 的用武之地了。我们可以和移动端进行约定，对一些特定的消息格式进行渲染，这样就可以做出按钮，列表等。\nBot Service 作为一个机器人框架，开发完成之后，还需要和 telegram，Facebook messenger，slack 等 IM 平台进行对接，如果要开发者一个个对接的话，将会特别麻烦。作为 chatbot 开发框架的一部分，bot service 的工作就是对接 IM 平台。\nBot Builder 源码阅读 微软的 botbuilder-js 出到了 V4 版本，在新版本的机器人框架有着很大的变动，相比于 V3 目录结构变化了，而且机器人编写流程也有了一定的差异。\n项目结构\n├── botbuilder ├── botbuilder-ai ├── botbuilder-azure ├── botbuilder-core ├── botbuilder-dialogs ├── botframework-config ├── botframework-connector ├── botframework-schema 目录结构更加的组件化。\n如果我们不使用微软的服务，那么 botbuilder-ai 和 botbuilder-azure 其实不重要。\nbotbuilder botbuilder 是框架的入口，在这个 package 中做的事情比较简单：\nexport * from './botFrameworkAdapter'; export * from './fileTranscriptStore'; export * from '../../botbuilder-core/lib'; 导出 botbuilder-core 和继承了 botAdapter 的子类 botFrameworkAdapter。\nfileTranscriptStore 是存储每个 activity 的 transcript 到文件中，Transcript 是人和 bot 的对话动作的日志。\n如果我们要定制自己的 bot 动作，其实就可以继承 botAdapter，然后对接自己的 IM 等等。botAdapter 也是 botbuilder-core 中的，所以 botbuilder-core 是核心，只要读懂了 botbuilder-core，就可以说是理解了微软的机器人框架。\nbotbuilder-core 看 botbuilder-core，也从 index.ts 开始。\nexport * from '../../botframework-schema/lib'; export * from './autoSaveStateMiddleware'; export * from './botAdapter'; export * from './botState'; export * from './botStatePropertyAccessor'; export * from './botStateSet'; export * from './browserStorage'; export * from './cardFactory'; export * from './conversationState'; export * from './memoryStorage'; export * from './memoryTranscriptStore'; export * from './messageFactory'; export * from './middlewareSet'; export * from './privateConversationState'; export * from './propertyManager'; export * from './recognizerResult'; export * from './showTypingMiddleware'; export * from './storage'; export * from './testAdapter'; export * from './transcriptLogger'; export * from './turnContext'; export * from './userState'; 这里引入了一个 botframework-schema，通过名字可以看出来，这就是一个类型定义的包，主要是机器人 Activity 的 Schema。Activity 是人和 bot 所做的会话的程序级别的表示，该 schema 中包含了文本协议、多媒体和非内容动作（如社交互动和打字指示符）的规定。\n","wordCount":"635","inLanguage":"en","datePublished":"2018-08-22T19:39:12Z","dateModified":"2018-08-22T19:39:12Z","author":{"@type":"Person","name":"Theme PaperMod"},"mainEntityOfPage":{"@type":"WebPage","@id":"/post/botbuilder/"},"publisher":{"@type":"Organization","name":"PaperMod","logo":{"@type":"ImageObject","url":"favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script><header class=header><nav class=nav><div class=logo><a href accesskey=h title="PaperMod (Alt + H)">PaperMod</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><ul class=lang-switch><li>|</li><li><a href=/fr/ title=French aria-label=:fr:>🇫🇷</a></li><li><a href=/fa/ title=Fa aria-label=Fa>Fa</a></li></ul></span></div><ul id=menu><li><a href=archives title=Archive><span>Archive</span></a></li><li><a href=categories/ title=Categories><span>Categories</span></a></li><li><a href=search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href>Home</a>&nbsp;»&nbsp;<a href=/post/>Posts</a></div><h1 class=post-title>谈谈聊天机器人框架的实现原理</h1><div class=post-meta><span title="2018-08-22 19:39:12 +0000 UTC">August 22, 2018</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href=https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content/post/botbuilder.md rel="noopener noreferrer" target=_blank>Suggest Changes</a></div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba aria-label=聊天机器人>聊天机器人</a></li><li><a href=#%e6%9c%ba%e5%99%a8%e4%ba%ba%e5%bc%80%e5%8f%91%e6%a1%86%e6%9e%b6 aria-label=机器人开发框架>机器人开发框架</a></li><li><a href=#%e5%ae%9e%e7%8e%b0%e6%96%b9%e5%bc%8f aria-label=实现方式>实现方式</a></li><li><a href=#conversation-ui aria-label="Conversation UI">Conversation UI</a></li><li><a href=#bot-service aria-label="Bot Service">Bot Service</a></li><li><a href=#bot-builder-%e6%ba%90%e7%a0%81%e9%98%85%e8%af%bb aria-label="Bot Builder 源码阅读">Bot Builder 源码阅读</a><ul><li><a href=#botbuilder aria-label=botbuilder>botbuilder</a></li><li><a href=#botbuilder-core aria-label=botbuilder-core>botbuilder-core</a></li></ul></li></ul></div></details></div><div class=post-content><p>在这篇文章不考虑人工智能，谈谈我对聊天机器人框架实现机制的理解。</p><h2 id=聊天机器人>聊天机器人<a hidden class=anchor aria-hidden=true href=#聊天机器人>#</a></h2><blockquote><p><strong>聊天机器人</strong>（Chatterbot）是经由对话或文字进行交谈的计算机程序[<a href=https://zh.wikipedia.org/wiki/%E8%81%8A%E5%A4%A9%E6%A9%9F%E5%99%A8%E4%BA%BA#cite_note-target-1>1]</a>。能够模拟人类对话，通过<a href=https://zh.wikipedia.org/wiki/%E5%9B%BE%E7%81%B5%E6%B5%8B%E8%AF%95>图灵测试</a>。</p></blockquote><p>我们可以看到现有的 IM 工具上已经有了很多机器人，其实聊天机器人不只是单纯的和用户进行聊天，他其实还可以做很多事情，例如根据用户输入的一些话，可以帮用户订餐。另外在运维领域，也出现了 chatops，通过和机器人聊天，进行运维操作。</p><h2 id=机器人开发框架>机器人开发框架<a hidden class=anchor aria-hidden=true href=#机器人开发框架>#</a></h2><p>作为聊天机器人开发者，面对如此多的 IM 工具和 SDK，常会感到无所适从。Bot 开发框架就是对聊天机器人开发过程中的人工内容做抽象化处理。简单地解释，机器人开发框架就是用来制造机器人并定义其行为。</p><p>然而尽管很多机器人框架宣称「代码一旦写好可部署到任何地方」，但是还会是出现为每一个 IM 工具开发一个单独的聊天机器人。而一个良好的机器人框架主要包含开发 SDK，连接器和模拟器等。</p><p>使用机器人框架其实并不适合初学者学习聊天机器人开发。它们尝试自动化太多工作，对初学者掩盖了基础机制。</p><h2 id=实现方式>实现方式<a hidden class=anchor aria-hidden=true href=#实现方式>#</a></h2><ul><li>webhook 事件回调</li><li>FSM 状态机</li><li>workflow 工作流</li></ul><p>最简单的机器人是没有上下文的语义理解的一问一答，仅仅是对用户的对话进行响应，这种就可以采用 webhook 的方式进行开发。不需要采用什么开发框架。</p><p>那么对于多轮对话的时候，就需要进行一定的对话管理。由此引入了 FSM 状态机。</p><p>可能有人不是很懂有限状态机，这里做一下简单说明。</p><blockquote><p>有限状态机在现实生活中其实随处可见，伸缩式圆珠笔其实就是一个有限状态机（两种状态互相转换）。</p><p>有限状态机，缩写为 FSM，又称为有限状态自动机，简称状态机。是表示有限个<a href=https://zh.wikipedia.org/wiki/%E7%8A%B6%E6%80%81>状态</a>以及在这些状态之间的转移和动作等行为的<a href=https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B>数学模型</a>。</p><p>可以总结为：f(state, action) => state’</p><p>也就是说，这个函数采用当前的状态和一次行动（即更改状态的方法），之后将该行动应用于这种状态并返回新的状态。</p><p>可以认为状态机是图灵完备的。</p></blockquote><p>我们可以将对话看做是在有限状态内跳转的过程，每个状态都有对应的动作和回复，如果能从开始节点顺利的流转到终止节点，任务就完成了。</p><p>我们可以将对话的过程，分为一个个的状态，然后使用 DSL 来实现一个 FSM，对于开发者来讲，我们只需要关注一个个状态函数即可。</p><p>特点是：</p><ul><li>人为定义对话流程</li><li>完全有系统主导，系统问用户答</li><li>答非所问的情况直接忽略</li><li>建模简单，能清晰明了的把交互匹配到模型</li><li>难以扩展，很容易变的复杂</li><li>适用于简单的任务，难以处理复杂问题</li><li>缺少灵活性，表达能力有限，输入有限，对话结构和流转路径有限</li></ul><p>示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>const {startWith, when, goto, stay, stop} = botkit.DSL(fsm);
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>startWith(MyStates.IDLE, {counter: 0});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>when(MyStates.IDLE)(async (sender, content, data) =&gt; {
+</span></span><span class=line><span class=cl>           
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>when(MyStates.UI)((sender, content, data) =&gt; {
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>when(MyStates.STEP1)((sender, content, data) =&gt; {
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>when(MyStates.STEP2)((sender, content, data) =&gt; {
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>when(MyStates.DONE)((sender, content, data) =&gt; {
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>when(MyStates.EMPTY)((sender, content, data) =&gt; {
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>when(MyStates.LOOP)((sender, content, data) =&gt; {
+</span></span><span class=line><span class=cl>           
+</span></span><span class=line><span class=cl>});
+</span></span></code></pre></div><p>从示例中可以发现，基于 fsm 的机器人框架需要使用类似 DSL 领域特定语言一样的描述语言，定义各种各样的状态，每一个状态都有触发点。当满足某个状态条件时，进入该状态，执行该状态的逻辑。这种基于状态机的机器人框架，对于简单的场景比较容易写，但是如果是遇到了复杂的场景，比如多轮对话中还附带上下文信息，就会写起来非常复杂。</p><p>于是引入了基于工作流的 chatbot 框架。其实工作流是对 fsm 的一种简化封装，本质上来讲，工作流能做到的，fsm 状态机也能做到，而且 fsm 状态机或许能拆的更细，但是工作流的一个个 function，或者是 function 的集合 dialog，可以互相组合，开发起来更符合大部分人的直觉。</p><ul><li><p>routing dialog</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>// hotels.js
+</span></span><span class=line><span class=cl>module.exports = [
+</span></span><span class=line><span class=cl>    // Destination
+</span></span><span class=line><span class=cl>    function (session) {
+</span></span><span class=line><span class=cl>        session.send(&#39;Welcome to the Hotels finder!&#39;);
+</span></span><span class=line><span class=cl>        builder.Prompts.text(session, &#39;Please enter your destination&#39;);
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    function (session, results, next) {
+</span></span><span class=line><span class=cl>        session.dialogData.destination = results.response;
+</span></span><span class=line><span class=cl>        session.send(&#39;Looking for hotels in %s&#39;, results.response); 
+</span></span><span class=line><span class=cl>        next();
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    ...
+</span></span><span class=line><span class=cl>];
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// app.js
+</span></span><span class=line><span class=cl>var bot = new builder.UniversalBot(connector, [
+</span></span><span class=line><span class=cl>    function (session) {
+</span></span><span class=line><span class=cl>        // ...
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    // ...
+</span></span><span class=line><span class=cl>]);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>bot.dialog(&#39;hotels&#39;, require(&#39;./hotels&#39;));
+</span></span><span class=line><span class=cl>bot.dialog(&#39;flights&#39;, require(&#39;./flights&#39;));
+</span></span></code></pre></div><p>通过 routing dialog，我们可以实现 dialog 的复用。</p></li><li><p>waterfall dialog</p><p>一个瀑布流的 dialog，可以让我们在一个 dialog 中像流一样完成一系列的动作。就像 fsm 的多种状态的集合。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>[
+</span></span><span class=line><span class=cl>    // Destination
+</span></span><span class=line><span class=cl>    function (session) {
+</span></span><span class=line><span class=cl>        session.send(&#39;Welcome to the Hotels finder!&#39;);
+</span></span><span class=line><span class=cl>        builder.Prompts.text(session, &#39;Please enter your destination&#39;);
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    function (session, results, next) {
+</span></span><span class=line><span class=cl>        session.dialogData.destination = results.response;
+</span></span><span class=line><span class=cl>        session.send(&#39;Looking for hotels in %s&#39;, results.response); 
+</span></span><span class=line><span class=cl>        next();
+</span></span><span class=line><span class=cl>    },
+</span></span><span class=line><span class=cl>    ...
+</span></span><span class=line><span class=cl>    function (session) {
+</span></span><span class=line><span class=cl>        var destination = session.dialogData.destination;
+</span></span><span class=line><span class=cl>        var checkIn = new Date(session.dialogData.checkIn);
+</span></span><span class=line><span class=cl>        var checkOut = checkIn.addDays(session.dialogData.nights);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        session.send(
+</span></span><span class=line><span class=cl>            &#39;Ok. Searching for Hotels in %s from %d/%d to %d/%d...&#39;,
+</span></span><span class=line><span class=cl>            destination,
+</span></span><span class=line><span class=cl>            checkIn.getMonth() + 1, checkIn.getDate(),
+</span></span><span class=line><span class=cl>            checkOut.getMonth() + 1, checkOut.getDate());
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        // Async search
+</span></span><span class=line><span class=cl>        Store
+</span></span><span class=line><span class=cl>            .searchHotels(destination, checkIn, checkOut)
+</span></span><span class=line><span class=cl>            .then(function (hotels) {
+</span></span><span class=line><span class=cl>                // Results
+</span></span><span class=line><span class=cl>                session.send(&#39;I found in total %d hotels for your dates:&#39;, hotels.length);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                var message = new builder.Message()
+</span></span><span class=line><span class=cl>                    .attachmentLayout(builder.AttachmentLayout.carousel)
+</span></span><span class=line><span class=cl>                    .attachments(hotels.map(hotelAsAttachment));
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                session.send(message);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                // End
+</span></span><span class=line><span class=cl>                session.endDialog();
+</span></span><span class=line><span class=cl>            });
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>]
+</span></span></code></pre></div></li><li><p>state</p><p>在一个 dialog 上下文中共享的数据，或者在多个 dialog 中共享的数据。对于微软的 botbuilder 来讲，他们提供了如下几个 API：</p><table><thead><tr><th>Field</th><th>Use Cases</th></tr></thead><tbody><tr><td>userData</td><td>Stores information globally for the user across all conversations.</td></tr><tr><td>conversationData</td><td>Stores information globally for a single conversation. This data is visible to everyone within the conversation so care should be used to what’s stored there. It’s disabled by default and needs to be enabled using the bots <a href=https://docs.botframework.com/en-us/node/builder/chat-reference/interfaces/_botbuilder_d_.iuniversalbotsettings.html#persistconversationdata><code>persistConversationData</code></a> setting.</td></tr><tr><td>privateConversationData</td><td>Stores information globally for a single conversation but its private data for the current user. This data spans all dialogs so it’s useful for storing temporary state that you want cleaned up when the conversation ends.</td></tr><tr><td>dialogData</td><td>Persists information for a single dialog instance. This is essential for storing temporary information in between the steps of a waterfall.</td></tr></tbody></table></li></ul><h2 id=conversation-ui>Conversation UI<a hidden class=anchor aria-hidden=true href=#conversation-ui>#</a></h2><p>对话式 UI（Conversation UI，下文简称 CUI）。</p><p>CUI 到底是什么？很好理解，我们日常跟人聊天的微信、短信界面就是。由一条条消息组成，按时间先后展示出来，就可以看作 CUI。</p><p>chatbot 在与用户交流时，不单单是只有文字，还会需要用户进行互动，这时候就是 CUI 的用武之地了。我们可以和移动端进行约定，对一些特定的消息格式进行渲染，这样就可以做出按钮，列表等。</p><h2 id=bot-service>Bot Service<a hidden class=anchor aria-hidden=true href=#bot-service>#</a></h2><p>作为一个机器人框架，开发完成之后，还需要和 telegram，Facebook messenger，slack 等 IM 平台进行对接，如果要开发者一个个对接的话，将会特别麻烦。作为 chatbot 开发框架的一部分，bot service 的工作就是对接 IM 平台。</p><h2 id=bot-builder-源码阅读>Bot Builder 源码阅读<a hidden class=anchor aria-hidden=true href=#bot-builder-源码阅读>#</a></h2><p>微软的 botbuilder-js 出到了 V4 版本，在新版本的机器人框架有着很大的变动，相比于 V3 目录结构变化了，而且机器人编写流程也有了一定的差异。</p><p>项目结构</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>├── botbuilder
+</span></span><span class=line><span class=cl>├── botbuilder-ai
+</span></span><span class=line><span class=cl>├── botbuilder-azure
+</span></span><span class=line><span class=cl>├── botbuilder-core
+</span></span><span class=line><span class=cl>├── botbuilder-dialogs
+</span></span><span class=line><span class=cl>├── botframework-config
+</span></span><span class=line><span class=cl>├── botframework-connector
+</span></span><span class=line><span class=cl>├── botframework-schema
+</span></span></code></pre></div><p>目录结构更加的组件化。</p><p>如果我们不使用微软的服务，那么 botbuilder-ai 和 botbuilder-azure 其实不重要。</p><h3 id=botbuilder>botbuilder<a hidden class=anchor aria-hidden=true href=#botbuilder>#</a></h3><p>botbuilder 是框架的入口，在这个 package 中做的事情比较简单：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botFrameworkAdapter&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./fileTranscriptStore&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;../../botbuilder-core/lib&#39;</span><span class=p>;</span>
+</span></span></code></pre></div><p>导出 botbuilder-core 和继承了 botAdapter 的子类 botFrameworkAdapter。</p><p>fileTranscriptStore 是存储每个 activity 的 transcript 到文件中，Transcript 是人和 bot 的对话动作的日志。</p><p>如果我们要定制自己的 bot 动作，其实就可以继承 botAdapter，然后对接自己的 IM 等等。botAdapter 也是 botbuilder-core 中的，所以 botbuilder-core 是核心，只要读懂了 botbuilder-core，就可以说是理解了微软的机器人框架。</p><h3 id=botbuilder-core>botbuilder-core<a hidden class=anchor aria-hidden=true href=#botbuilder-core>#</a></h3><p>看 botbuilder-core，也从 index.ts 开始。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;../../botframework-schema/lib&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./autoSaveStateMiddleware&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botAdapter&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botState&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botStatePropertyAccessor&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./botStateSet&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./browserStorage&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./cardFactory&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./conversationState&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./memoryStorage&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./memoryTranscriptStore&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./messageFactory&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./middlewareSet&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./privateConversationState&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./propertyManager&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./recognizerResult&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./showTypingMiddleware&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./storage&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./testAdapter&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./transcriptLogger&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./turnContext&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=o>*</span> <span class=kr>from</span> <span class=s1>&#39;./userState&#39;</span><span class=p>;</span>
+</span></span></code></pre></div><p>这里引入了一个 botframework-schema，通过名字可以看出来，这就是一个类型定义的包，主要是机器人 Activity 的 Schema。Activity 是人和 bot 所做的会话的程序级别的表示，该 schema 中包含了文本协议、多媒体和非内容动作（如社交互动和打字指示符）的规定。</p></div><footer class=post-footer><nav class=paginav><a class=prev href=/post/blockchain/><span class=title>« Prev Page</span><br><span>区块链学习笔记</span></a>
+<a class=next href=/post/parity/><span class=title>Next Page »</span><br><span>基于以太坊的 Parity 联盟链部署</span></a></nav><div class=share-buttons><a target=_blank rel="noopener noreferrer" aria-label="share 谈谈聊天机器人框架的实现原理 on twitter" href="https://twitter.com/intent/tweet/?text=%e8%b0%88%e8%b0%88%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%e6%a1%86%e6%9e%b6%e7%9a%84%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86&url=%2fpost%2fbotbuilder%2f&hashtags="><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 谈谈聊天机器人框架的实现原理 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=%2fpost%2fbotbuilder%2f&title=%e8%b0%88%e8%b0%88%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%e6%a1%86%e6%9e%b6%e7%9a%84%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86&summary=%e8%b0%88%e8%b0%88%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%e6%a1%86%e6%9e%b6%e7%9a%84%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86&source=%2fpost%2fbotbuilder%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 谈谈聊天机器人框架的实现原理 on reddit" href="https://reddit.com/submit?url=%2fpost%2fbotbuilder%2f&title=%e8%b0%88%e8%b0%88%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%e6%a1%86%e6%9e%b6%e7%9a%84%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 谈谈聊天机器人框架的实现原理 on facebook" href="https://facebook.com/sharer/sharer.php?u=%2fpost%2fbotbuilder%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 谈谈聊天机器人框架的实现原理 on whatsapp" href="https://api.whatsapp.com/send?text=%e8%b0%88%e8%b0%88%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%e6%a1%86%e6%9e%b6%e7%9a%84%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86%20-%20%2fpost%2fbotbuilder%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 谈谈聊天机器人框架的实现原理 on telegram" href="https://telegram.me/share/url?text=%e8%b0%88%e8%b0%88%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%e6%a1%86%e6%9e%b6%e7%9a%84%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86&url=%2fpost%2fbotbuilder%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></div></footer></article></main><footer class=footer><span>&copy; 2022 <a href>PaperMod</a></span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(t){t.preventDefault();var e=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({behavior:"smooth"}),e==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${e}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(t=>{const n=t.parentNode.parentNode,e=document.createElement("button");e.classList.add("copy-code"),e.innerText="copy";function s(){e.innerText="copied!",setTimeout(()=>{e.innerText="copy"},2e3)}e.addEventListener("click",o=>{if("clipboard"in navigator){navigator.clipboard.writeText(t.textContent),s();return}const e=document.createRange();e.selectNodeContents(t);const n=window.getSelection();n.removeAllRanges(),n.addRange(e);try{document.execCommand("copy"),s()}catch(e){}n.removeRange(e)}),n.classList.contains("highlight")?n.appendChild(e):n.parentNode.firstChild==n||(t.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?t.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(e):t.parentNode.appendChild(e))})</script></body></html>

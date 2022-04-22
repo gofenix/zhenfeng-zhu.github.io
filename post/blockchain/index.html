@@ -1,623 +1,118 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>区块链学习笔记 - Awesome Fenix</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="Fenix" /><meta name="description" content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。 理解区块链的分布式记账" /><meta name="keywords" content="Fenix, Clojure, Blog" />
-
-
-
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
-     crossorigin="anonymous"></script>
-
-
-<meta name="generator" content="Hugo 0.92.2 with theme even" />
-
-
-<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/blockchain/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="区块链学习笔记" />
-<meta property="og:description" content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。 理解区块链的分布式记账" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/blockchain/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-08-23T15:14:02+00:00" />
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
-
-<meta itemprop="name" content="区块链学习笔记">
-<meta itemprop="description" content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。 理解区块链的分布式记账"><meta itemprop="datePublished" content="2018-08-23T15:14:02+00:00" />
-<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
-<meta itemprop="wordCount" content="4311">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="区块链学习笔记"/>
-<meta name="twitter:description" content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。 理解区块链的分布式记账"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Awesome Fenix</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Awesome Fenix</a>
-</div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-</nav>
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">区块链学习笔记</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2018-08-23 </span>
-        
-          <span class="more-meta"> 约 4311 字 </span>
-          <span class="more-meta"> 预计阅读 9 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#理解区块链的分布式记账">理解区块链的分布式记账</a></li>
-        <li><a href="#区块链落地的一些问题和解决方案">区块链落地的一些问题和解决方案</a></li>
-        <li><a href="#区块链的相关技术">区块链的相关技术</a></li>
-        <li><a href="#以太坊常用操作">以太坊常用操作</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <blockquote>
-<p>本文是阅读<a href="http://www.netkiller.cn/blockchain/ch01s10.html">http://www.netkiller.cn/blockchain/ch01s10.html</a> 上的一些笔记。</p>
-</blockquote>
-<h2 id="理解区块链的分布式记账">理解区块链的分布式记账</h2>
-<p><a href="http://www.netkiller.cn/blockchain/ch01s10.html">http://www.netkiller.cn/blockchain/ch01s10.html</a></p>
-<p>区块链中提到的账本，记账等词汇是和会计无关的词汇。</p>
-<p>我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：</p>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>用途</th>
-<th>金额</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2018-08-23</td>
-<td>借</td>
-<td>100</td>
-</tr>
-<tr>
-<td>2018-08-22</td>
-<td>还</td>
-<td>200</td>
-</tr>
-<tr>
-<td>2018-08-21</td>
-<td>借</td>
-<td>50</td>
-</tr>
-<tr>
-<td>2018-08-20</td>
-<td>还</td>
-<td>1000</td>
-</tr>
-</tbody>
-</table>
-<p>如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。</p>
-<p>但是区块链的记账形式是：</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fujnyii772j30ku08twex.jpg" alt=""></p>
-<p>可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。</p>
-<p><strong>所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。</strong></p>
-<p>之所以采用区块链来做分布式记账，主要是区块链有如下好处：</p>
-<ul>
-<li>
-<p>去中心化</p>
-<p>传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。</p>
-<p>与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。</p>
-</li>
-<li>
-<p>可追溯</p>
-</li>
-<li>
-<p>安全</p>
-<p>安全分为很多层，区块链只能做到存储层的安全。</p>
-<p>区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。</p>
-</li>
-<li>
-<p>不可篡改</p>
-<p>很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。</p>
-<p>撰改是指非法修改区块链数据，而修改则是合法变更数据。</p>
-<p>通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。</p>
-<p>多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。</p>
-</li>
-</ul>
-<p>采用区块链作为账本的时候，会面临如下几个问题：</p>
-<ul>
-<li>
-<p>不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan.io 就是把以太坊上的区块重新入库，借助数据库实现数据检索。</p>
-</li>
-<li>
-<p>区块链只能顺序检索，运算成本高。例如在中心化账本中汇总求和操作，区块链必须从头向后遍历。</p>
-</li>
-<li>
-<p>所有账目均在一条链上，不同的分类混在一起，彼此相连。</p>
-</li>
-<li>
-<p>无法归档。</p>
-<p>传统的数据库，我们可以归档一段时间内的数据，而这些归档的数据基本都是冷数据，不会再被查询，归档数据的备份到存储介质上的解决方案也有很多。</p>
-<p>但是区块链的数据都是热数据，任何新增的节点都必须从 0 开始同步，并且保证同步到最新区块，否则可能无法完成交易，数据会一直膨胀下去。</p>
-<p>虽然有算法能够减少同步的量，但是现阶段的体验仍然不好。</p>
-</li>
-<li>
-<p>没有事务处理。</p>
-<p>因为区块链是首尾相连的链式结构，所以只能在尾部加区块，无法修改中间的区块。假设有个区块回滚，该区块的 hash 产生变化，后面的区块都要作废。</p>
-<p>所以当并发执行的时候，可能会出现混乱。因此我们要在应用层做一些处理。</p>
-</li>
-<li>
-<p>性能问题</p>
-</li>
-<li>
-<p>由于是异步执行，无法预测何时完成。</p>
-</li>
-<li>
-<p>交易容易阻塞</p>
-</li>
-<li>
-<p>gas 费用。</p>
-</li>
-</ul>
-<h2 id="区块链落地的一些问题和解决方案">区块链落地的一些问题和解决方案</h2>
-<p>如果要在企业中落地区块链，尝尝有如下解决方案：</p>
-<ul>
-<li>
-<p>解决性能问题</p>
-<p>目前区块链只适合做<strong>低频高价值业务</strong>。</p>
-<p>读取性能通常是没有问题的，但是写入实际上无论你用多少个服务器节点都不能提升，因为写入区块需要做共识算法，这步操作，会在所有节点上进行，同时还需要加密运算，这些操作都是 CPU 密集型操作。</p>
-<p>方案：</p>
-<ul>
-<li>
-<p>通过消息队列技术异步写入，将需要写入的区块放入队列，异步完成上链操作。</p>
-</li>
-<li>
-<p>并行写入，我们可以建设多个区块链平台。多个平台同时服务于业务。</p>
-<p>为了达到去中心化并行写入，我们将在客户端通过算法，匹配服务器。因为如果在平台前面增加负载均衡，加因为这样又回到了中心化系统。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>溯源颗粒度</p>
-<p>对于所要被溯源的物品或者交易来讲，有四种情况，低频低价值，低频高价值，高频高价值，高频低价值 。</p>
-<p>对于低频高价值和高频高价值的业务，尽量做到最小颗粒度。</p>
-<p>对于低频低价值和高频低价值的业务，可以颗粒度更粗。</p>
-</li>
-<li>
-<p>和传统数据库互补</p>
-<p>区块链技术本身是一种追求分布一致性的数据库。</p>
-<p>我们都知道 CAP 理论。CAP 理论是指的是在一个分布式系统中， Consistency（一致性）、 Availability（可用性）、Partition tolerance（分区容错性），三者不可得兼。大多数区块链，放弃了一些可用性，偏向了一致性和分区容错。</p>
-<p>区块链并非能解决所有问题，虽然他也算是一种数据库，它能解决问题十分有限，它的数据管理和查询能力还打不到 NoSQL 的水平，更别提 SQL 的复杂应用。所以在实际的应用中，区块链不能替代传统数据库，只能互补。</p>
-</li>
-<li>
-<p>链上链下数据一致性问题</p>
-<p>既然区块链替代不了传统数据库，那么必然要在项目中同时使用两种技术。这样问题来了，会有两份数据，一份存储在链下，即传统数据库，另外一部分数据上链，这样就有两份重复的数据，那么怎样保证他们的一致性呢？</p>
-<p>区块链和比特币网络不同，比特币是在链上产生的，它与区块链密布可分，是一体的，所以它的数据安全性是自闭环的。而我们的链下数据并不是在区块链中产生的，因此我们在上链的时候，尽量采用如下的方案：</p>
-<ul>
-<li>两端都做一次哈希，可快速对比数据是否一致</li>
-<li>以链上数据为准，因为数据库的数据更容易被篡改</li>
-<li>前端业务走链，后端业务走数据库，因为前台业务是为用户提供服务，所以要走链上数据，而后台是可以管理的，走数据库即可。</li>
-<li>共享数据上链，私有数据不上链。</li>
-</ul>
-</li>
-</ul>
-<h2 id="区块链的相关技术">区块链的相关技术</h2>
-<p>区块链的技术模型自下而上分为；数据层，网路层，共识层，激励层，合约层以及应用层。</p>
-<ul>
-<li>
-<p>数据层，封装了底层数据区块的链式结构，以及相关的非对称公私钥数据加密技术和时间戳等技术，这是整个区块链技术中最底层的数据结构。</p>
-<p>这些技术是构建全球金融系统的基础，数十年的使用证明了它非常安全的可靠性。而区块链，正式巧妙地把这些技术结合在了一起。</p>
-</li>
-<li>
-<p>网络层，包括 P2P 组网机制、数据传播机制和数据验证机制等。</p>
-<p>P2P 组网技术早期应用在 BT 这类 P2P 下载软件中，这就意味着区块链具有自动组网功能。</p>
-</li>
-<li>
-<p>共识层，封装了网络节点的各类共识机制算法。共识机制算法是区块链的核心技术，因为这决定了到底是谁来进行记账，而记账决定方式将会影响整个系统的安全性和可靠性。</p>
-<p>数据层、网络层、共识层是构建区块链技术的必要元素，缺少任何一层都将不能称之为真正意义上的区块链技术。</p>
-<p>目前已经出现了十余种共识机制算法，其中比较最为知名的有工作量证明机制（PoW，Proof of Work）、权益证明机制（PoS，Proof ofStake）、股份授权证明机制（DPoS，Delegated ProofofStake）等。</p>
-</li>
-<li>
-<p>激励层，将经济因素集成到区块链技术体系中来，包括经济激励的发行机制和分配机制等，主要出现在公有链当中。</p>
-<p>在公有链中必须激励遵守规则参与记账的节点，并且惩罚不遵守规则的节点，才能让整个系统朝着良性循环的方向发展。而在私有链当中，则不一定需要进行激励，因为参与记账的节点往往是在链外完成了博弈，通过强制力或自愿来要求参与记账。</p>
-</li>
-<li>
-<p>合约层，封装各类脚本、算法和智能合约，是区块链可编程特性的基础。</p>
-<p>比特币本身就具有简单脚本的编写功能，而以太坊极大的强化了编程语言协议，理论上可以编写实现任何功能的应用。如果把比特币看成是全球账本的话，以太坊可以看作是一台“全球计算机”，任何人都可以上传和执行任意的应用程序，并且程序的有效执行能得到保证。</p>
-</li>
-<li>
-<p>应用层，封装了区块链的各种应用场景和案例，比如搭建在以太坊上的各类区块链应用即部署在应用层，而未来的可编程金融和可编程社会也将会是搭建在应用层。</p>
-</li>
-</ul>
-<p>共识算法</p>
-<ul>
-<li>pow</li>
-<li>pos</li>
-<li>dpos</li>
-<li>poa</li>
-<li>pbft</li>
-<li>raft</li>
-</ul>
-<p>HD Wallet</p>
-<p>BIP32 定义 Hierarchical Deterministic wallet (简称 &ldquo;HD Wallet&rdquo;)，是一个系统可以从单个 seed 产生树状结构储存多组 keypairs（私钥和公钥）。</p>
-<p>BIP39 定义钱包助记词和 seed 生成规则，一般由 12 -24 个单字组成，称为 mnemonic。</p>
-<p>BIP44 基于 BIP32 的系统，赋予树状结构中的各层特殊的意义。让同一个 seed 可以支援多币种、多帐户等 。</p>
-<p>使用助记词生成确定性钱包。</p>
-<p>HD Wallet 采用 2048 个单词，或者汉字作为助记词，这些词库对外公开，很多钱包仅仅使用 path 第一个地址并且没有加密。如果你知道某个用户的助记词中的 11 各词的排列顺序，那么我们就可以通过穷举方法，算出所有地址的私钥，如果碰巧找到了已经在使用的地址。就可以将里面的 ETH 全部转走。</p>
-<h2 id="以太坊常用操作">以太坊常用操作</h2>
-<p>计算 gas 费用</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">var estimateGas = eth.estimateGas({from:eth.accounts[1], to: eth.accounts[2], value: web3.toWei(1)})
-
-var cost = estimateGas * gasPrice
-</code></pre></td></tr></table>
-</div>
-</div><p>解锁账户</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">personal.unlockAccount(eth.accounts[3], &#34;12345678&#34;)
-</code></pre></td></tr></table>
-</div>
-</div><p>转账</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">var txnHash = eth.sendTransaction({from: eth.accounts[3], to: eth.accounts[5], value: eth.getBalance(eth.accounts[3]) - cost, gas: estimateGas})
-</code></pre></td></tr></table>
-</div>
-</div><p>查看交易细节</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">web3.eth.getTransaction(txnHash)
-</code></pre></td></tr></table>
-</div>
-</div><p>获取余额</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">eth.getBalance(eth.accounts[3])
-</code></pre></td></tr></table>
-</div>
-</div><p>keystore 文件</p>
-<p>以太坊的每个外部账户都是由一对密钥（一个公钥和一个私钥）定义的。账户以地址为索引，地址由公钥衍生而来，取公钥的最后 20 个字节。</p>
-<p>每对私钥 /地址都编码在一个钥匙文件里，也就是我们说的 keystore 文件。该文件是 JSON 文本文件，可以用任何文本编辑器打开和浏览。钥匙文件的关键部分——账户私钥，通常用你创建帐户时设置的密码进行加密。如果你丢失了这个文件，你就丢失了私钥，意味着你失去了签署交易的能力，意味着你的资金被永久的锁定在了你的账户里。</p>
-<p>批量转账</p>
-<p>有时我们需要将 Token 发送到多个地址上去。通常的做法就是使用 web.js 写一个循环程序，但是实际使用过程中发现这种做法存在很多问题，常会发生转账失败情况。</p>
-<p>经过分析造成发送失败原因是，频率太高，因为 web.js 是异步操作，当前程序还未完成交易，交易尚未确认的情况下第二笔交易发送出去，这时就会出错。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">web3.eth.getTransactionCount(from).then(function(nonce){
- // 问题就出在 nonce ， nonce 如同数据库中的序列主键，如果上一个交易没有完成，下一个交易取得 nonce + 1 后与上一个 pending 的交易相同，产生冲突
-} 
-</code></pre></td></tr></table>
-</div>
-</div><p>最好的解方案是在合约中实现批量转账功能，这样需要一个交易 txhash 完成多比交易。</p>
-<p>如果你的 Token 已经在使用了，且没有批量转账的功能怎么解决呢？我们可以在写一个 Token 继承原来的 Token，在新的 Token 中实现批量转账功能。</p>
-<p>代币兑换</p>
-<p>兑换代币通常是指使用 ETH 或者其他币兑换 Token。通常是这样实现的，使用智能合约，将 ETH 达到指定合约地址，合约会打回代币给用户。</p>
-<p>这种方式不用人工参与，也不用开发程序。缺点不能做到实时汇率，需要人工设置汇率。</p>
-<p>ERC20 Token</p>
-<p>ERC20 “描述了实现代币合约的标准功能”，ERC20 是各个代币的标准接口。ERC20 代币仅仅是以太坊代币的子集。为了充分兼容 ERC20，开发者需要将一组特定的函数集成到他们的智能合约中，以便在高层面能够执行以下操作：</p>
-<ul>
-<li>获得代币总供应量</li>
-<li>获得账户余额</li>
-<li>转让代币</li>
-<li>批准花费代币</li>
-</ul>
-<p>最简单的合约如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">pragma solidity ^0.4.24;
-
-contract EncryptToken {
-    uint256 INITIAL_SUPPLY = 666666;
-    mapping(address =&gt; uint256) balances;
-
-    constructor() public {
-        balances[msg.sender] = INITIAL_SUPPLY;
-    }
-
-    function transfer(address to, uint256 amount) public{
-        assert(balances[msg.sender] &gt; amount);
-        balances[msg.sender] -= amount;
-        balances[to] += amount;
-    }
-
-    function balanceOf(address owner) constant  public returns (uint256){
-        return balances[owner];
-    }
-
-}
-</code></pre></td></tr></table>
-</div>
-</div><p>使用了 openzeppeline-solidity 的安全标准代币合约是：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">  pragma solidity ^0.4.24;
-  import &#34;openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol&#34;;
-
-  contract BloggerCoin is StandardToken{
-      string public name = &#34;BloggerCoin&#34;;  // 名字
-      string public symbol = &#34;BLC&#34;;   // 简称
-      uint8 public decimals = 4;   // 10的4次方
-      uint256 public INITIAL_SUPPLY = 666666;
-
-      constructor() public{
-          totalSupply_ = INITIAL_SUPPLY;
-          balances[msg.sender] = INITIAL_SUPPLY;
-      }
-  }
-</code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Fenix</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2022-01-18
-        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/queue-worker/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">queue-worker</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/botbuilder/">
-            <span class="next-text nav-default">谈谈聊天机器人框架的实现原理</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        <script src="https://utteranc.es/client.js"
-        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
-        issue-term="pathname"
-        label="Comment"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
-  </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2016 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-  </span>
-</div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-216295420-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-</body>
-</html>
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>区块链学习笔记 | PaperMod</title><meta name=keywords content><meta name=description content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。
+ 理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html
+区块链中提到的账本，记账等词汇是和会计无关的词汇。
+我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：
+   时间 用途 金额     2018-08-23 借 100   2018-08-22 还 200   2018-08-21 借 50   2018-08-20 还 1000    如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。
+但是区块链的记账形式是：
+可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。
+所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。
+之所以采用区块链来做分布式记账，主要是区块链有如下好处：
+  去中心化
+传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。
+与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。
+  可追溯
+  安全
+安全分为很多层，区块链只能做到存储层的安全。
+区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。
+  不可篡改
+很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。
+撰改是指非法修改区块链数据，而修改则是合法变更数据。
+通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。
+多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。
+  采用区块链作为账本的时候，会面临如下几个问题：
+  不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan."><meta name=author content="Theme PaperMod"><link rel=canonical href=/post/blockchain/><link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=favicon.ico><link rel=icon type=image/png sizes=16x16 href=favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=favicon-32x32.png><link rel=apple-touch-icon href=apple-touch-icon.png><link rel=mask-icon href=safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.97.3"><link rel=alternate hreflang=en href=/post/blockchain/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="区块链学习笔记"><meta property="og:description" content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。
+ 理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html
+区块链中提到的账本，记账等词汇是和会计无关的词汇。
+我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：
+   时间 用途 金额     2018-08-23 借 100   2018-08-22 还 200   2018-08-21 借 50   2018-08-20 还 1000    如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。
+但是区块链的记账形式是：
+可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。
+所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。
+之所以采用区块链来做分布式记账，主要是区块链有如下好处：
+  去中心化
+传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。
+与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。
+  可追溯
+  安全
+安全分为很多层，区块链只能做到存储层的安全。
+区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。
+  不可篡改
+很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。
+撰改是指非法修改区块链数据，而修改则是合法变更数据。
+通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。
+多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。
+  采用区块链作为账本的时候，会面临如下几个问题：
+  不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan."><meta property="og:type" content="article"><meta property="og:url" content="/post/blockchain/"><meta property="og:image" content="papermod-cover.png"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-08-23T15:14:02+00:00"><meta property="article:modified_time" content="2018-08-23T15:14:02+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="papermod-cover.png"><meta name=twitter:title content="区块链学习笔记"><meta name=twitter:description content="本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。
+ 理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html
+区块链中提到的账本，记账等词汇是和会计无关的词汇。
+我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：
+   时间 用途 金额     2018-08-23 借 100   2018-08-22 还 200   2018-08-21 借 50   2018-08-20 还 1000    如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。
+但是区块链的记账形式是：
+可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。
+所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。
+之所以采用区块链来做分布式记账，主要是区块链有如下好处：
+  去中心化
+传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。
+与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。
+  可追溯
+  安全
+安全分为很多层，区块链只能做到存储层的安全。
+区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。
+  不可篡改
+很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。
+撰改是指非法修改区块链数据，而修改则是合法变更数据。
+通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。
+多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。
+  采用区块链作为账本的时候，会面临如下几个问题：
+  不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"/post/"},{"@type":"ListItem","position":3,"name":"区块链学习笔记","item":"/post/blockchain/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"区块链学习笔记","name":"区块链学习笔记","description":"本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。\n 理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html\n区块链中提到的账本，记账等词汇是和会计无关的词汇。\n我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：\n   时间 用途 金额     2018-08-23 借 100   2018-08-22 还 200   2018-08-21 借 50   2018-08-20 还 1000    如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。\n但是区块链的记账形式是：\n可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。\n所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。\n之所以采用区块链来做分布式记账，主要是区块链有如下好处：\n  去中心化\n传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。\n与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。\n  可追溯\n  安全\n安全分为很多层，区块链只能做到存储层的安全。\n区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。\n  不可篡改\n很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。\n撰改是指非法修改区块链数据，而修改则是合法变更数据。\n通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。\n多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。\n  采用区块链作为账本的时候，会面临如下几个问题：\n  不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan.","keywords":[],"articleBody":" 本文是阅读http://www.netkiller.cn/blockchain/ch01s10.html 上的一些笔记。\n 理解区块链的分布式记账 http://www.netkiller.cn/blockchain/ch01s10.html\n区块链中提到的账本，记账等词汇是和会计无关的词汇。\n我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：\n   时间 用途 金额     2018-08-23 借 100   2018-08-22 还 200   2018-08-21 借 50   2018-08-20 还 1000    如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。\n但是区块链的记账形式是：\n可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。\n所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。\n之所以采用区块链来做分布式记账，主要是区块链有如下好处：\n  去中心化\n传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。\n与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。\n  可追溯\n  安全\n安全分为很多层，区块链只能做到存储层的安全。\n区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。\n  不可篡改\n很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。\n撰改是指非法修改区块链数据，而修改则是合法变更数据。\n通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。\n多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。\n  采用区块链作为账本的时候，会面临如下几个问题：\n  不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan.io 就是把以太坊上的区块重新入库，借助数据库实现数据检索。\n  区块链只能顺序检索，运算成本高。例如在中心化账本中汇总求和操作，区块链必须从头向后遍历。\n  所有账目均在一条链上，不同的分类混在一起，彼此相连。\n  无法归档。\n传统的数据库，我们可以归档一段时间内的数据，而这些归档的数据基本都是冷数据，不会再被查询，归档数据的备份到存储介质上的解决方案也有很多。\n但是区块链的数据都是热数据，任何新增的节点都必须从 0 开始同步，并且保证同步到最新区块，否则可能无法完成交易，数据会一直膨胀下去。\n虽然有算法能够减少同步的量，但是现阶段的体验仍然不好。\n  没有事务处理。\n因为区块链是首尾相连的链式结构，所以只能在尾部加区块，无法修改中间的区块。假设有个区块回滚，该区块的 hash 产生变化，后面的区块都要作废。\n所以当并发执行的时候，可能会出现混乱。因此我们要在应用层做一些处理。\n  性能问题\n  由于是异步执行，无法预测何时完成。\n  交易容易阻塞\n  gas 费用。\n  区块链落地的一些问题和解决方案 如果要在企业中落地区块链，尝尝有如下解决方案：\n  解决性能问题\n目前区块链只适合做低频高价值业务。\n读取性能通常是没有问题的，但是写入实际上无论你用多少个服务器节点都不能提升，因为写入区块需要做共识算法，这步操作，会在所有节点上进行，同时还需要加密运算，这些操作都是 CPU 密集型操作。\n方案：\n  通过消息队列技术异步写入，将需要写入的区块放入队列，异步完成上链操作。\n  并行写入，我们可以建设多个区块链平台。多个平台同时服务于业务。\n为了达到去中心化并行写入，我们将在客户端通过算法，匹配服务器。因为如果在平台前面增加负载均衡，加因为这样又回到了中心化系统。\n    溯源颗粒度\n对于所要被溯源的物品或者交易来讲，有四种情况，低频低价值，低频高价值，高频高价值，高频低价值 。\n对于低频高价值和高频高价值的业务，尽量做到最小颗粒度。\n对于低频低价值和高频低价值的业务，可以颗粒度更粗。\n  和传统数据库互补\n区块链技术本身是一种追求分布一致性的数据库。\n我们都知道 CAP 理论。CAP 理论是指的是在一个分布式系统中， Consistency（一致性）、 Availability（可用性）、Partition tolerance（分区容错性），三者不可得兼。大多数区块链，放弃了一些可用性，偏向了一致性和分区容错。\n区块链并非能解决所有问题，虽然他也算是一种数据库，它能解决问题十分有限，它的数据管理和查询能力还打不到 NoSQL 的水平，更别提 SQL 的复杂应用。所以在实际的应用中，区块链不能替代传统数据库，只能互补。\n  链上链下数据一致性问题\n既然区块链替代不了传统数据库，那么必然要在项目中同时使用两种技术。这样问题来了，会有两份数据，一份存储在链下，即传统数据库，另外一部分数据上链，这样就有两份重复的数据，那么怎样保证他们的一致性呢？\n区块链和比特币网络不同，比特币是在链上产生的，它与区块链密布可分，是一体的，所以它的数据安全性是自闭环的。而我们的链下数据并不是在区块链中产生的，因此我们在上链的时候，尽量采用如下的方案：\n 两端都做一次哈希，可快速对比数据是否一致 以链上数据为准，因为数据库的数据更容易被篡改 前端业务走链，后端业务走数据库，因为前台业务是为用户提供服务，所以要走链上数据，而后台是可以管理的，走数据库即可。 共享数据上链，私有数据不上链。    区块链的相关技术 区块链的技术模型自下而上分为；数据层，网路层，共识层，激励层，合约层以及应用层。\n  数据层，封装了底层数据区块的链式结构，以及相关的非对称公私钥数据加密技术和时间戳等技术，这是整个区块链技术中最底层的数据结构。\n这些技术是构建全球金融系统的基础，数十年的使用证明了它非常安全的可靠性。而区块链，正式巧妙地把这些技术结合在了一起。\n  网络层，包括 P2P 组网机制、数据传播机制和数据验证机制等。\nP2P 组网技术早期应用在 BT 这类 P2P 下载软件中，这就意味着区块链具有自动组网功能。\n  共识层，封装了网络节点的各类共识机制算法。共识机制算法是区块链的核心技术，因为这决定了到底是谁来进行记账，而记账决定方式将会影响整个系统的安全性和可靠性。\n数据层、网络层、共识层是构建区块链技术的必要元素，缺少任何一层都将不能称之为真正意义上的区块链技术。\n目前已经出现了十余种共识机制算法，其中比较最为知名的有工作量证明机制（PoW，Proof of Work）、权益证明机制（PoS，Proof ofStake）、股份授权证明机制（DPoS，Delegated ProofofStake）等。\n  激励层，将经济因素集成到区块链技术体系中来，包括经济激励的发行机制和分配机制等，主要出现在公有链当中。\n在公有链中必须激励遵守规则参与记账的节点，并且惩罚不遵守规则的节点，才能让整个系统朝着良性循环的方向发展。而在私有链当中，则不一定需要进行激励，因为参与记账的节点往往是在链外完成了博弈，通过强制力或自愿来要求参与记账。\n  合约层，封装各类脚本、算法和智能合约，是区块链可编程特性的基础。\n比特币本身就具有简单脚本的编写功能，而以太坊极大的强化了编程语言协议，理论上可以编写实现任何功能的应用。如果把比特币看成是全球账本的话，以太坊可以看作是一台“全球计算机”，任何人都可以上传和执行任意的应用程序，并且程序的有效执行能得到保证。\n  应用层，封装了区块链的各种应用场景和案例，比如搭建在以太坊上的各类区块链应用即部署在应用层，而未来的可编程金融和可编程社会也将会是搭建在应用层。\n  共识算法\n pow pos dpos poa pbft raft  HD Wallet\nBIP32 定义 Hierarchical Deterministic wallet (简称 “HD Wallet”)，是一个系统可以从单个 seed 产生树状结构储存多组 keypairs（私钥和公钥）。\nBIP39 定义钱包助记词和 seed 生成规则，一般由 12 -24 个单字组成，称为 mnemonic。\nBIP44 基于 BIP32 的系统，赋予树状结构中的各层特殊的意义。让同一个 seed 可以支援多币种、多帐户等 。\n使用助记词生成确定性钱包。\nHD Wallet 采用 2048 个单词，或者汉字作为助记词，这些词库对外公开，很多钱包仅仅使用 path 第一个地址并且没有加密。如果你知道某个用户的助记词中的 11 各词的排列顺序，那么我们就可以通过穷举方法，算出所有地址的私钥，如果碰巧找到了已经在使用的地址。就可以将里面的 ETH 全部转走。\n以太坊常用操作 计算 gas 费用\nvar estimateGas = eth.estimateGas({from:eth.accounts[1], to: eth.accounts[2], value: web3.toWei(1)}) var cost = estimateGas * gasPrice 解锁账户\npersonal.unlockAccount(eth.accounts[3], \"12345678\") 转账\nvar txnHash = eth.sendTransaction({from: eth.accounts[3], to: eth.accounts[5], value: eth.getBalance(eth.accounts[3]) - cost, gas: estimateGas}) 查看交易细节\nweb3.eth.getTransaction(txnHash) 获取余额\neth.getBalance(eth.accounts[3]) keystore 文件\n以太坊的每个外部账户都是由一对密钥（一个公钥和一个私钥）定义的。账户以地址为索引，地址由公钥衍生而来，取公钥的最后 20 个字节。\n每对私钥 /地址都编码在一个钥匙文件里，也就是我们说的 keystore 文件。该文件是 JSON 文本文件，可以用任何文本编辑器打开和浏览。钥匙文件的关键部分——账户私钥，通常用你创建帐户时设置的密码进行加密。如果你丢失了这个文件，你就丢失了私钥，意味着你失去了签署交易的能力，意味着你的资金被永久的锁定在了你的账户里。\n批量转账\n有时我们需要将 Token 发送到多个地址上去。通常的做法就是使用 web.js 写一个循环程序，但是实际使用过程中发现这种做法存在很多问题，常会发生转账失败情况。\n经过分析造成发送失败原因是，频率太高，因为 web.js 是异步操作，当前程序还未完成交易，交易尚未确认的情况下第二笔交易发送出去，这时就会出错。\nweb3.eth.getTransactionCount(from).then(function(nonce){ // 问题就出在 nonce ， nonce 如同数据库中的序列主键，如果上一个交易没有完成，下一个交易取得 nonce + 1 后与上一个 pending 的交易相同，产生冲突 } 最好的解方案是在合约中实现批量转账功能，这样需要一个交易 txhash 完成多比交易。\n如果你的 Token 已经在使用了，且没有批量转账的功能怎么解决呢？我们可以在写一个 Token 继承原来的 Token，在新的 Token 中实现批量转账功能。\n代币兑换\n兑换代币通常是指使用 ETH 或者其他币兑换 Token。通常是这样实现的，使用智能合约，将 ETH 达到指定合约地址，合约会打回代币给用户。\n这种方式不用人工参与，也不用开发程序。缺点不能做到实时汇率，需要人工设置汇率。\nERC20 Token\nERC20 “描述了实现代币合约的标准功能”，ERC20 是各个代币的标准接口。ERC20 代币仅仅是以太坊代币的子集。为了充分兼容 ERC20，开发者需要将一组特定的函数集成到他们的智能合约中，以便在高层面能够执行以下操作：\n 获得代币总供应量 获得账户余额 转让代币 批准花费代币  最简单的合约如下：\npragma solidity ^0.4.24; contract EncryptToken { uint256 INITIAL_SUPPLY = 666666; mapping(address = uint256) balances; constructor() public { balances[msg.sender] = INITIAL_SUPPLY; } function transfer(address to, uint256 amount) public{ assert(balances[msg.sender]  amount); balances[msg.sender] -= amount; balances[to] += amount; } function balanceOf(address owner) constant public returns (uint256){ return balances[owner]; } } 使用了 openzeppeline-solidity 的安全标准代币合约是：\npragma solidity ^0.4.24; import \"openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol\"; contract BloggerCoin is StandardToken{ string public name = \"BloggerCoin\"; // 名字 string public symbol = \"BLC\"; // 简称 uint8 public decimals = 4; // 10的4次方 uint256 public INITIAL_SUPPLY = 666666; constructor() public{ totalSupply_ = INITIAL_SUPPLY; balances[msg.sender] = INITIAL_SUPPLY; } } ","wordCount":"370","inLanguage":"en","datePublished":"2018-08-23T15:14:02Z","dateModified":"2018-08-23T15:14:02Z","author":{"@type":"Person","name":"Theme PaperMod"},"mainEntityOfPage":{"@type":"WebPage","@id":"/post/blockchain/"},"publisher":{"@type":"Organization","name":"PaperMod","logo":{"@type":"ImageObject","url":"favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script><header class=header><nav class=nav><div class=logo><a href accesskey=h title="PaperMod (Alt + H)">PaperMod</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><ul class=lang-switch><li>|</li><li><a href=/fr/ title=French aria-label=:fr:>🇫🇷</a></li><li><a href=/fa/ title=Fa aria-label=Fa>Fa</a></li></ul></span></div><ul id=menu><li><a href=archives title=Archive><span>Archive</span></a></li><li><a href=categories/ title=Categories><span>Categories</span></a></li><li><a href=search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href>Home</a>&nbsp;»&nbsp;<a href=/post/>Posts</a></div><h1 class=post-title>区块链学习笔记</h1><div class=post-meta><span title="2018-08-23 15:14:02 +0000 UTC">August 23, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href=https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content/post/blockchain.md rel="noopener noreferrer" target=_blank>Suggest Changes</a></div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#%e7%90%86%e8%a7%a3%e5%8c%ba%e5%9d%97%e9%93%be%e7%9a%84%e5%88%86%e5%b8%83%e5%bc%8f%e8%ae%b0%e8%b4%a6 aria-label=理解区块链的分布式记账>理解区块链的分布式记账</a></li><li><a href=#%e5%8c%ba%e5%9d%97%e9%93%be%e8%90%bd%e5%9c%b0%e7%9a%84%e4%b8%80%e4%ba%9b%e9%97%ae%e9%a2%98%e5%92%8c%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88 aria-label=区块链落地的一些问题和解决方案>区块链落地的一些问题和解决方案</a></li><li><a href=#%e5%8c%ba%e5%9d%97%e9%93%be%e7%9a%84%e7%9b%b8%e5%85%b3%e6%8a%80%e6%9c%af aria-label=区块链的相关技术>区块链的相关技术</a></li><li><a href=#%e4%bb%a5%e5%a4%aa%e5%9d%8a%e5%b8%b8%e7%94%a8%e6%93%8d%e4%bd%9c aria-label=以太坊常用操作>以太坊常用操作</a></li></ul></div></details></div><div class=post-content><blockquote><p>本文是阅读<a href=http://www.netkiller.cn/blockchain/ch01s10.html>http://www.netkiller.cn/blockchain/ch01s10.html</a> 上的一些笔记。</p></blockquote><h2 id=理解区块链的分布式记账>理解区块链的分布式记账<a hidden class=anchor aria-hidden=true href=#理解区块链的分布式记账>#</a></h2><p><a href=http://www.netkiller.cn/blockchain/ch01s10.html>http://www.netkiller.cn/blockchain/ch01s10.html</a></p><p>区块链中提到的账本，记账等词汇是和会计无关的词汇。</p><p>我们传统理解的账本是一个二维的表格，记录了某年某月某日的费用：</p><table><thead><tr><th>时间</th><th>用途</th><th>金额</th></tr></thead><tbody><tr><td>2018-08-23</td><td>借</td><td>100</td></tr><tr><td>2018-08-22</td><td>还</td><td>200</td></tr><tr><td>2018-08-21</td><td>借</td><td>50</td></tr><tr><td>2018-08-20</td><td>还</td><td>1000</td></tr></tbody></table><p>如果账目比较多，可以拆账，将不同分类的账目放在特定的账本中，而且二维表格还可以设置索引等，快速找到一笔交易。</p><p>但是区块链的记账形式是：</p><p><img loading=lazy src=https://ws4.sinaimg.cn/large/006tNbRwgy1fujnyii772j30ku08twex.jpg alt></p><p>可以发现，区块链的这种记账方式是做了行列矩阵转换，节点之间收尾相互连接，成为链式结构，所有的账目都在一条链上。</p><p><strong>所谓分布式记账，其实就是上述链状的数据结构保存在所有的节点上，形成分布式集群。</strong></p><p>之所以采用区块链来做分布式记账，主要是区块链有如下好处：</p><ul><li><p>去中心化</p><p>传统的数据库存储是中心化的，通过暴露 ip 地址和端口号提供服务，后来分布式进群化之后，出现了主主从架构等。</p><p>与数据库相比，区块链是多主架构，而且实现更为复杂，节点之间的数据之间不是简单的二进制日志同步，而是要通过加密技术，节点达成共识之后才存储。</p></li><li><p>可追溯</p></li><li><p>安全</p><p>安全分为很多层，区块链只能做到存储层的安全。</p><p>区块链无法解决用户层，应用层，逻辑层等安全问题，他只能保证存储在硬盘上的区块不被修改。</p></li><li><p>不可篡改</p><p>很多人认为区块链数据一旦创建之后就不能修改，所以采用区块链技术很安全。其实不然，数据是可以修改的，但是不能篡改。</p><p>撰改是指非法修改区块链数据，而修改则是合法变更数据。</p><p>通常撰改区块链数据多指数据存储层面的修改。而修改则是通过合约提供的修改函数变更区块链里面的数据。</p><p>多数区块链平台没有用户认证权限管理模块。所以无法控制区块中的哪些数据能被修改，哪些不能修改，哪些用户可以修改等等。即使有些区块链平台具备权限控制，颗粒度也无法达到目前的数据库控制的那么细。</p></li></ul><p>采用区块链作为账本的时候，会面临如下几个问题：</p><ul><li><p>不能建立索引，无法快速搜索出区块中的数据，必须依赖区块链以外的技术，如搜索引擎，数据库等。例如；etherscan.io 就是把以太坊上的区块重新入库，借助数据库实现数据检索。</p></li><li><p>区块链只能顺序检索，运算成本高。例如在中心化账本中汇总求和操作，区块链必须从头向后遍历。</p></li><li><p>所有账目均在一条链上，不同的分类混在一起，彼此相连。</p></li><li><p>无法归档。</p><p>传统的数据库，我们可以归档一段时间内的数据，而这些归档的数据基本都是冷数据，不会再被查询，归档数据的备份到存储介质上的解决方案也有很多。</p><p>但是区块链的数据都是热数据，任何新增的节点都必须从 0 开始同步，并且保证同步到最新区块，否则可能无法完成交易，数据会一直膨胀下去。</p><p>虽然有算法能够减少同步的量，但是现阶段的体验仍然不好。</p></li><li><p>没有事务处理。</p><p>因为区块链是首尾相连的链式结构，所以只能在尾部加区块，无法修改中间的区块。假设有个区块回滚，该区块的 hash 产生变化，后面的区块都要作废。</p><p>所以当并发执行的时候，可能会出现混乱。因此我们要在应用层做一些处理。</p></li><li><p>性能问题</p></li><li><p>由于是异步执行，无法预测何时完成。</p></li><li><p>交易容易阻塞</p></li><li><p>gas 费用。</p></li></ul><h2 id=区块链落地的一些问题和解决方案>区块链落地的一些问题和解决方案<a hidden class=anchor aria-hidden=true href=#区块链落地的一些问题和解决方案>#</a></h2><p>如果要在企业中落地区块链，尝尝有如下解决方案：</p><ul><li><p>解决性能问题</p><p>目前区块链只适合做<strong>低频高价值业务</strong>。</p><p>读取性能通常是没有问题的，但是写入实际上无论你用多少个服务器节点都不能提升，因为写入区块需要做共识算法，这步操作，会在所有节点上进行，同时还需要加密运算，这些操作都是 CPU 密集型操作。</p><p>方案：</p><ul><li><p>通过消息队列技术异步写入，将需要写入的区块放入队列，异步完成上链操作。</p></li><li><p>并行写入，我们可以建设多个区块链平台。多个平台同时服务于业务。</p><p>为了达到去中心化并行写入，我们将在客户端通过算法，匹配服务器。因为如果在平台前面增加负载均衡，加因为这样又回到了中心化系统。</p></li></ul></li><li><p>溯源颗粒度</p><p>对于所要被溯源的物品或者交易来讲，有四种情况，低频低价值，低频高价值，高频高价值，高频低价值 。</p><p>对于低频高价值和高频高价值的业务，尽量做到最小颗粒度。</p><p>对于低频低价值和高频低价值的业务，可以颗粒度更粗。</p></li><li><p>和传统数据库互补</p><p>区块链技术本身是一种追求分布一致性的数据库。</p><p>我们都知道 CAP 理论。CAP 理论是指的是在一个分布式系统中， Consistency（一致性）、 Availability（可用性）、Partition tolerance（分区容错性），三者不可得兼。大多数区块链，放弃了一些可用性，偏向了一致性和分区容错。</p><p>区块链并非能解决所有问题，虽然他也算是一种数据库，它能解决问题十分有限，它的数据管理和查询能力还打不到 NoSQL 的水平，更别提 SQL 的复杂应用。所以在实际的应用中，区块链不能替代传统数据库，只能互补。</p></li><li><p>链上链下数据一致性问题</p><p>既然区块链替代不了传统数据库，那么必然要在项目中同时使用两种技术。这样问题来了，会有两份数据，一份存储在链下，即传统数据库，另外一部分数据上链，这样就有两份重复的数据，那么怎样保证他们的一致性呢？</p><p>区块链和比特币网络不同，比特币是在链上产生的，它与区块链密布可分，是一体的，所以它的数据安全性是自闭环的。而我们的链下数据并不是在区块链中产生的，因此我们在上链的时候，尽量采用如下的方案：</p><ul><li>两端都做一次哈希，可快速对比数据是否一致</li><li>以链上数据为准，因为数据库的数据更容易被篡改</li><li>前端业务走链，后端业务走数据库，因为前台业务是为用户提供服务，所以要走链上数据，而后台是可以管理的，走数据库即可。</li><li>共享数据上链，私有数据不上链。</li></ul></li></ul><h2 id=区块链的相关技术>区块链的相关技术<a hidden class=anchor aria-hidden=true href=#区块链的相关技术>#</a></h2><p>区块链的技术模型自下而上分为；数据层，网路层，共识层，激励层，合约层以及应用层。</p><ul><li><p>数据层，封装了底层数据区块的链式结构，以及相关的非对称公私钥数据加密技术和时间戳等技术，这是整个区块链技术中最底层的数据结构。</p><p>这些技术是构建全球金融系统的基础，数十年的使用证明了它非常安全的可靠性。而区块链，正式巧妙地把这些技术结合在了一起。</p></li><li><p>网络层，包括 P2P 组网机制、数据传播机制和数据验证机制等。</p><p>P2P 组网技术早期应用在 BT 这类 P2P 下载软件中，这就意味着区块链具有自动组网功能。</p></li><li><p>共识层，封装了网络节点的各类共识机制算法。共识机制算法是区块链的核心技术，因为这决定了到底是谁来进行记账，而记账决定方式将会影响整个系统的安全性和可靠性。</p><p>数据层、网络层、共识层是构建区块链技术的必要元素，缺少任何一层都将不能称之为真正意义上的区块链技术。</p><p>目前已经出现了十余种共识机制算法，其中比较最为知名的有工作量证明机制（PoW，Proof of Work）、权益证明机制（PoS，Proof ofStake）、股份授权证明机制（DPoS，Delegated ProofofStake）等。</p></li><li><p>激励层，将经济因素集成到区块链技术体系中来，包括经济激励的发行机制和分配机制等，主要出现在公有链当中。</p><p>在公有链中必须激励遵守规则参与记账的节点，并且惩罚不遵守规则的节点，才能让整个系统朝着良性循环的方向发展。而在私有链当中，则不一定需要进行激励，因为参与记账的节点往往是在链外完成了博弈，通过强制力或自愿来要求参与记账。</p></li><li><p>合约层，封装各类脚本、算法和智能合约，是区块链可编程特性的基础。</p><p>比特币本身就具有简单脚本的编写功能，而以太坊极大的强化了编程语言协议，理论上可以编写实现任何功能的应用。如果把比特币看成是全球账本的话，以太坊可以看作是一台“全球计算机”，任何人都可以上传和执行任意的应用程序，并且程序的有效执行能得到保证。</p></li><li><p>应用层，封装了区块链的各种应用场景和案例，比如搭建在以太坊上的各类区块链应用即部署在应用层，而未来的可编程金融和可编程社会也将会是搭建在应用层。</p></li></ul><p>共识算法</p><ul><li>pow</li><li>pos</li><li>dpos</li><li>poa</li><li>pbft</li><li>raft</li></ul><p>HD Wallet</p><p>BIP32 定义 Hierarchical Deterministic wallet (简称 &ldquo;HD Wallet&rdquo;)，是一个系统可以从单个 seed 产生树状结构储存多组 keypairs（私钥和公钥）。</p><p>BIP39 定义钱包助记词和 seed 生成规则，一般由 12 -24 个单字组成，称为 mnemonic。</p><p>BIP44 基于 BIP32 的系统，赋予树状结构中的各层特殊的意义。让同一个 seed 可以支援多币种、多帐户等 。</p><p>使用助记词生成确定性钱包。</p><p>HD Wallet 采用 2048 个单词，或者汉字作为助记词，这些词库对外公开，很多钱包仅仅使用 path 第一个地址并且没有加密。如果你知道某个用户的助记词中的 11 各词的排列顺序，那么我们就可以通过穷举方法，算出所有地址的私钥，如果碰巧找到了已经在使用的地址。就可以将里面的 ETH 全部转走。</p><h2 id=以太坊常用操作>以太坊常用操作<a hidden class=anchor aria-hidden=true href=#以太坊常用操作>#</a></h2><p>计算 gas 费用</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>var estimateGas = eth.estimateGas({from:eth.accounts[1], to: eth.accounts[2], value: web3.toWei(1)})
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>var cost = estimateGas * gasPrice
+</span></span></code></pre></div><p>解锁账户</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>personal.unlockAccount(eth.accounts[3], &#34;12345678&#34;)
+</span></span></code></pre></div><p>转账</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>var txnHash = eth.sendTransaction({from: eth.accounts[3], to: eth.accounts[5], value: eth.getBalance(eth.accounts[3]) - cost, gas: estimateGas})
+</span></span></code></pre></div><p>查看交易细节</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>web3.eth.getTransaction(txnHash)
+</span></span></code></pre></div><p>获取余额</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>eth.getBalance(eth.accounts[3])
+</span></span></code></pre></div><p>keystore 文件</p><p>以太坊的每个外部账户都是由一对密钥（一个公钥和一个私钥）定义的。账户以地址为索引，地址由公钥衍生而来，取公钥的最后 20 个字节。</p><p>每对私钥 /地址都编码在一个钥匙文件里，也就是我们说的 keystore 文件。该文件是 JSON 文本文件，可以用任何文本编辑器打开和浏览。钥匙文件的关键部分——账户私钥，通常用你创建帐户时设置的密码进行加密。如果你丢失了这个文件，你就丢失了私钥，意味着你失去了签署交易的能力，意味着你的资金被永久的锁定在了你的账户里。</p><p>批量转账</p><p>有时我们需要将 Token 发送到多个地址上去。通常的做法就是使用 web.js 写一个循环程序，但是实际使用过程中发现这种做法存在很多问题，常会发生转账失败情况。</p><p>经过分析造成发送失败原因是，频率太高，因为 web.js 是异步操作，当前程序还未完成交易，交易尚未确认的情况下第二笔交易发送出去，这时就会出错。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>web3.eth.getTransactionCount(from).then(function(nonce){
+</span></span><span class=line><span class=cl> // 问题就出在 nonce ， nonce 如同数据库中的序列主键，如果上一个交易没有完成，下一个交易取得 nonce + 1 后与上一个 pending 的交易相同，产生冲突
+</span></span><span class=line><span class=cl>} 
+</span></span></code></pre></div><p>最好的解方案是在合约中实现批量转账功能，这样需要一个交易 txhash 完成多比交易。</p><p>如果你的 Token 已经在使用了，且没有批量转账的功能怎么解决呢？我们可以在写一个 Token 继承原来的 Token，在新的 Token 中实现批量转账功能。</p><p>代币兑换</p><p>兑换代币通常是指使用 ETH 或者其他币兑换 Token。通常是这样实现的，使用智能合约，将 ETH 达到指定合约地址，合约会打回代币给用户。</p><p>这种方式不用人工参与，也不用开发程序。缺点不能做到实时汇率，需要人工设置汇率。</p><p>ERC20 Token</p><p>ERC20 “描述了实现代币合约的标准功能”，ERC20 是各个代币的标准接口。ERC20 代币仅仅是以太坊代币的子集。为了充分兼容 ERC20，开发者需要将一组特定的函数集成到他们的智能合约中，以便在高层面能够执行以下操作：</p><ul><li>获得代币总供应量</li><li>获得账户余额</li><li>转让代币</li><li>批准花费代币</li></ul><p>最简单的合约如下：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>pragma solidity ^0.4.24;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>contract EncryptToken {
+</span></span><span class=line><span class=cl>    uint256 INITIAL_SUPPLY = 666666;
+</span></span><span class=line><span class=cl>    mapping(address =&gt; uint256) balances;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    constructor() public {
+</span></span><span class=line><span class=cl>        balances[msg.sender] = INITIAL_SUPPLY;
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    function transfer(address to, uint256 amount) public{
+</span></span><span class=line><span class=cl>        assert(balances[msg.sender] &gt; amount);
+</span></span><span class=line><span class=cl>        balances[msg.sender] -= amount;
+</span></span><span class=line><span class=cl>        balances[to] += amount;
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    function balanceOf(address owner) constant  public returns (uint256){
+</span></span><span class=line><span class=cl>        return balances[owner];
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></div><p>使用了 openzeppeline-solidity 的安全标准代币合约是：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>  pragma solidity ^0.4.24;
+</span></span><span class=line><span class=cl>  import &#34;openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol&#34;;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  contract BloggerCoin is StandardToken{
+</span></span><span class=line><span class=cl>      string public name = &#34;BloggerCoin&#34;;  // 名字
+</span></span><span class=line><span class=cl>      string public symbol = &#34;BLC&#34;;   // 简称
+</span></span><span class=line><span class=cl>      uint8 public decimals = 4;   // 10的4次方
+</span></span><span class=line><span class=cl>      uint256 public INITIAL_SUPPLY = 666666;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      constructor() public{
+</span></span><span class=line><span class=cl>          totalSupply_ = INITIAL_SUPPLY;
+</span></span><span class=line><span class=cl>          balances[msg.sender] = INITIAL_SUPPLY;
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>  }
+</span></span></code></pre></div></div><footer class=post-footer><nav class=paginav><a class=prev href=/post/queue-worker/><span class=title>« Prev Page</span><br><span>queue-worker</span></a>
+<a class=next href=/post/botbuilder/><span class=title>Next Page »</span><br><span>谈谈聊天机器人框架的实现原理</span></a></nav><div class=share-buttons><a target=_blank rel="noopener noreferrer" aria-label="share 区块链学习笔记 on twitter" href="https://twitter.com/intent/tweet/?text=%e5%8c%ba%e5%9d%97%e9%93%be%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0&url=%2fpost%2fblockchain%2f&hashtags="><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 区块链学习笔记 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=%2fpost%2fblockchain%2f&title=%e5%8c%ba%e5%9d%97%e9%93%be%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0&summary=%e5%8c%ba%e5%9d%97%e9%93%be%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0&source=%2fpost%2fblockchain%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 区块链学习笔记 on reddit" href="https://reddit.com/submit?url=%2fpost%2fblockchain%2f&title=%e5%8c%ba%e5%9d%97%e9%93%be%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 区块链学习笔记 on facebook" href="https://facebook.com/sharer/sharer.php?u=%2fpost%2fblockchain%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 区块链学习笔记 on whatsapp" href="https://api.whatsapp.com/send?text=%e5%8c%ba%e5%9d%97%e9%93%be%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0%20-%20%2fpost%2fblockchain%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share 区块链学习笔记 on telegram" href="https://telegram.me/share/url?text=%e5%8c%ba%e5%9d%97%e9%93%be%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0&url=%2fpost%2fblockchain%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></div></footer></article></main><footer class=footer><span>&copy; 2022 <a href>PaperMod</a></span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(t){t.preventDefault();var e=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({behavior:"smooth"}),e==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${e}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(t=>{const n=t.parentNode.parentNode,e=document.createElement("button");e.classList.add("copy-code"),e.innerText="copy";function s(){e.innerText="copied!",setTimeout(()=>{e.innerText="copy"},2e3)}e.addEventListener("click",o=>{if("clipboard"in navigator){navigator.clipboard.writeText(t.textContent),s();return}const e=document.createRange();e.selectNodeContents(t);const n=window.getSelection();n.removeAllRanges(),n.addRange(e);try{document.execCommand("copy"),s()}catch(e){}n.removeRange(e)}),n.classList.contains("highlight")?n.appendChild(e):n.parentNode.firstChild==n||(t.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?t.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(e):t.parentNode.appendChild(e))})</script></body></html>

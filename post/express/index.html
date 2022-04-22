@@ -1,607 +1,80 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>express - Awesome Fenix</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="Fenix" /><meta name="description" content="Express 快速入门 安装 1 2 3 npm init npm install --save express hello world 1 2 3 4 5 6 7 8 9 10 var express = require(&amp;#39;express&amp;#39;); var app = express(); app.get(&amp;#39;/&amp;#39;, function (req, res) { res.send(&amp;#39;Hello World!&amp;#39;); }); app.listen(3000, function () { console.log(&amp;#39;Example app listening on port 3000!&amp;#39;); }); 执行命令运行应用程序 1 node app.js 然后" /><meta name="keywords" content="Fenix, Clojure, Blog" />
-
-
-
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112"
-     crossorigin="anonymous"></script>
-
-
-<meta name="generator" content="Hugo 0.92.2 with theme even" />
-
-
-<link rel="canonical" href="https://zhenfeng-zhu.github.io/post/express/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="express" />
-<meta property="og:description" content="Express 快速入门 安装 1 2 3 npm init npm install --save express hello world 1 2 3 4 5 6 7 8 9 10 var express = require(&#39;express&#39;); var app = express(); app.get(&#39;/&#39;, function (req, res) { res.send(&#39;Hello World!&#39;); }); app.listen(3000, function () { console.log(&#39;Example app listening on port 3000!&#39;); }); 执行命令运行应用程序 1 node app.js 然后" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhenfeng-zhu.github.io/post/express/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-03-24T17:41:01+00:00" />
-<meta property="article:modified_time" content="2022-01-18T10:28:15+08:00" />
-
-<meta itemprop="name" content="express">
-<meta itemprop="description" content="Express 快速入门 安装 1 2 3 npm init npm install --save express hello world 1 2 3 4 5 6 7 8 9 10 var express = require(&#39;express&#39;); var app = express(); app.get(&#39;/&#39;, function (req, res) { res.send(&#39;Hello World!&#39;); }); app.listen(3000, function () { console.log(&#39;Example app listening on port 3000!&#39;); }); 执行命令运行应用程序 1 node app.js 然后"><meta itemprop="datePublished" content="2018-03-24T17:41:01+00:00" />
-<meta itemprop="dateModified" content="2022-01-18T10:28:15+08:00" />
-<meta itemprop="wordCount" content="1437">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="express"/>
-<meta name="twitter:description" content="Express 快速入门 安装 1 2 3 npm init npm install --save express hello world 1 2 3 4 5 6 7 8 9 10 var express = require(&#39;express&#39;); var app = express(); app.get(&#39;/&#39;, function (req, res) { res.send(&#39;Hello World!&#39;); }); app.listen(3000, function () { console.log(&#39;Example app listening on port 3000!&#39;); }); 执行命令运行应用程序 1 node app.js 然后"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Awesome Fenix</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Awesome Fenix</a>
-</div>
-
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-</nav>
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">express</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2018-03-24 </span>
-        
-          <span class="more-meta"> 约 1437 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#express-快速入门">Express 快速入门</a>
-          <ul>
-            <li><a href="#安装">安装</a></li>
-            <li><a href="#hello-world">hello world</a></li>
-          </ul>
-        </li>
-        <li><a href="#express-程序生成器">express 程序生成器</a>
-          <ul>
-            <li><a href="#安装-1">安装</a></li>
-            <li><a href="#示例">示例</a></li>
-          </ul>
-        </li>
-        <li><a href="#路由">路由</a>
-          <ul>
-            <li><a href="#基本路由">基本路由</a></li>
-            <li><a href="#响应方法">响应方法</a></li>
-            <li><a href="#approute">app.route()</a></li>
-            <li><a href="#expressrouter">express.Router</a></li>
-          </ul>
-        </li>
-        <li><a href="#中间件">中间件</a></li>
-        <li><a href="#模板引擎">模板引擎</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <h2 id="express-快速入门">Express 快速入门</h2>
-<h3 id="安装">安装</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">npm init
-
-npm install --save express
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="hello-world">hello world</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">var express = require(&#39;express&#39;);
-var app = express();
-
-app.get(&#39;/&#39;, function (req, res) {
-  res.send(&#39;Hello World!&#39;);
-});
-
-app.listen(3000, function () {
-  console.log(&#39;Example app listening on port 3000!&#39;);
-});
-</code></pre></td></tr></table>
-</div>
-</div><p>执行命令运行应用程序</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">node app.js
-</code></pre></td></tr></table>
-</div>
-</div><p>然后，在浏览器中输入 <a href="http://localhost:3000/">http://localhost:3000/</a> 以查看输出。</p>
-<h2 id="express-程序生成器">express 程序生成器</h2>
-<h3 id="安装-1">安装</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">npm install -g express-generator
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="示例">示例</h3>
-<p>以下语句在当前工作目录中创建名为 <em>myapp</em> 的 Express 应用程序：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">express --view=pug myapp
-</code></pre></td></tr></table>
-</div>
-</div><p>在 MacOS 或 Linux 上，采用以下命令运行此应用程序：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">DEBUG=myapp:* npm start
-</code></pre></td></tr></table>
-</div>
-</div><p>然后在浏览器中输入 <code>http://localhost:3000/</code> 以访问此应用程序。</p>
-<h2 id="路由">路由</h2>
-<h3 id="基本路由">基本路由</h3>
-<p><em>路由</em>用于确定应用程序如何响应对特定端点的客户机请求，包含一个 URI（或路径）和一个特定的 HTTP 请求方法（GET、POST 等）。</p>
-<p>每个路由可以具有一个或多个处理程序函数，这些函数在路由匹配时执行。</p>
-<p>路由定义采用以下结构：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">app.METHOD(PATH, HANDLER)
-</code></pre></td></tr></table>
-</div>
-</div><p>其中：</p>
-<ul>
-<li><code>app</code> 是 <code>express</code> 的实例。</li>
-<li><code>METHOD</code> 是 <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP 请求方法</a>。</li>
-<li><code>PATH</code> 是服务器上的路径。</li>
-<li><code>HANDLER</code> 是在路由匹配时执行的函数。</li>
-</ul>
-<p>比如简单的 Hello world：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">app.get(&#39;/&#39;, function (req, res) {
-  res.send(&#39;Hello World!&#39;);
-});
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="响应方法">响应方法</h3>
-<p>下表中响应对象 (<code>res</code>) 的方法可以向客户机发送响应，并终止请求/响应循环。如果没有从路由处理程序调用其中任何方法，客户机请求将保持挂起状态。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.download">res.download()</a></td>
-<td>提示将要下载文件。</td>
-</tr>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.end">res.end()</a></td>
-<td>结束响应进程。</td>
-</tr>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.json">res.json()</a></td>
-<td>发送 JSON 响应。</td>
-</tr>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.jsonp">res.jsonp()</a></td>
-<td>在 JSONP 的支持下发送 JSON 响应。</td>
-</tr>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.redirect">res.redirect()</a></td>
-<td>重定向请求。</td>
-</tr>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.render">res.render()</a></td>
-<td>呈现视图模板。</td>
-</tr>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.send">res.send()</a></td>
-<td>发送各种类型的响应。</td>
-</tr>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.sendFile">res.sendFile</a></td>
-<td>以八位元流形式发送文件。</td>
-</tr>
-<tr>
-<td><a href="http://expressjs.com/zh-cn/4x/api.html#res.sendStatus">res.sendStatus()</a></td>
-<td>设置响应状态码并以响应主体形式发送其字符串表示。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="approute">app.route()</h3>
-<p>可以使用 <code>app.route()</code> 为路由路径创建可链接的路由处理程序。 因为在单一位置指定路径，所以可以减少冗余和输入错误。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">app.route(&#39;/book&#39;)
-  .get(function(req, res) {
-    res.send(&#39;Get a random book&#39;);
-  })
-  .post(function(req, res) {
-    res.send(&#39;Add a book&#39;);
-  })
-  .put(function(req, res) {
-    res.send(&#39;Update the book&#39;);
-  });
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="expressrouter">express.Router</h3>
-<p>使用 <code>express.Router</code> 类来创建可安装的模块化路由处理程序。<code>Router</code> 实例是完整的中间件和路由系统；因此，常常将其称为“微型应用程序”。</p>
-<p>以下示例将路由器创建为模块，在其中装入中间件，定义一些路由，然后安装在主应用程序的路径中。</p>
-<p>在应用程序目录中创建名为 <code>birds.js</code> 的路由器文件，其中包含以下内容：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">var express = require(&#39;express&#39;);
-var router = express.Router();
-
-// middleware that is specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log(&#39;Time: &#39;, Date.now());
-  next();
-});
-// define the home page route
-router.get(&#39;/&#39;, function(req, res) {
-  res.send(&#39;Birds home page&#39;);
-});
-// define the about route
-router.get(&#39;/about&#39;, function(req, res) {
-  res.send(&#39;About birds&#39;);
-});
-
-module.exports = router;
-</code></pre></td></tr></table>
-</div>
-</div><p>接着，在应用程序中装入路由器模块：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">var birds = require(&#39;./birds&#39;);
-...
-app.use(&#39;/birds&#39;, birds);
-</code></pre></td></tr></table>
-</div>
-</div><p>此应用程序现在可处理针对 <code>/birds</code> 和 <code>/birds/about</code> 的请求，调用特定于此路由的 <code>timeLog</code> 中间件函数。</p>
-<h2 id="中间件">中间件</h2>
-<p><em>中间件</em>函数能够访问<a href="http://expressjs.com/zh-cn/4x/api.html#req">请求对象</a> (<code>req</code>)、<a href="http://expressjs.com/zh-cn/4x/api.html#res">响应对象</a> (<code>res</code>) 以及应用程序的请求/响应循环中的下一个中间件函数。下一个中间件函数通常由名为 <code>next</code> 的变量来表示。</p>
-<blockquote>
-<p><code>next()</code> 函数不是 Node.js 或 Express API 的一部分，而是传递给中间件函数的第三自变量。<code>next()</code> 函数可以命名为任何名称，但是按约定，始终命名为“next”。</p>
-</blockquote>
-<p>中间件函数可以执行以下任务：</p>
-<ul>
-<li>执行任何代码。</li>
-<li>对请求和响应对象进行更改。</li>
-<li>结束请求/响应循环。</li>
-<li>调用堆栈中的下一个中间件。</li>
-</ul>
-<p>如果当前中间件函数没有结束请求/响应循环，那么它必须调用 <code>next()</code>，以将控制权传递给下一个中间件函数。否则，请求将保持挂起状态。</p>
-<p>Express 应用程序可以使用以下类型的中间件：</p>
-<ul>
-<li><a href="http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.application">应用层中间件</a></li>
-<li><a href="http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.router">路由器层中间件</a></li>
-<li><a href="http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.error-handling">错误处理中间件</a></li>
-<li><a href="http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.built-in">内置中间件</a></li>
-<li><a href="http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.third-party">第三方中间件</a></li>
-</ul>
-<h2 id="模板引擎">模板引擎</h2>
-<p>在 Express 可以呈现模板文件之前，必须设置以下应用程序设置：</p>
-<ul>
-<li><code>views</code>：模板文件所在目录。例如：<code>app.set('views', './views')</code></li>
-<li><code>view engine</code>：要使用的模板引擎。例如：<code>app.set('view engine', 'pug')</code></li>
-</ul>
-<p>然后安装对应的模板引擎 npm 包：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">npm install pug --save
-</code></pre></td></tr></table>
-</div>
-</div><p>在 <code>views</code> 目录中创建名为 <code>index.pug</code> 的 Pug 模板文件，其中包含以下内容：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">html
-  head
-    title!= title
-  body
-    h1!= message
-</code></pre></td></tr></table>
-</div>
-</div><p>随后创建路由以呈现 <code>index.pug</code> 文件。如果未设置 <code>view engine</code> 属性，必须指定 <code>view</code> 文件的扩展名。否则，可以将其忽略。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain">app.get(&#39;/&#39;, function (req, res) {
-  res.render(&#39;index&#39;, { title: &#39;Hey&#39;, message: &#39;Hello there!&#39;});
-});
-</code></pre></td></tr></table>
-</div>
-</div><p>向主页发出请求时，<code>index.pug</code> 文件将呈现为 HTML。</p>
-
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Fenix</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2022-01-18
-        <a href="zhenfeng-zhu/zhenfeng-zhu.github.io/commit/b3281d91b8ae2b0df9f713dc70fa68f7d320ec89" title="restore blog Tue Jan 18 10:28:15 CST 2022">(b3281d9)</a>
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/docker/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">docker</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/a-month-in-finogeeks/">
-            <span class="next-text nav-default">碎碎念</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        <script src="https://utteranc.es/client.js"
-        repo="zhenfeng-zhu/zhenfeng-zhu.github.io"
-        issue-term="pathname"
-        label="Comment"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-  <a href="https://zhenfeng-zhu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
-  </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2016 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fenix</span>
-  </span>
-</div>
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-216295420-1', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-</body>
-</html>
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>express | PaperMod</title><meta name=keywords content><meta name=description content="Express 快速入门 安装 npm init npm install --save express hello world var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序
+node app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。
+express 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
+express --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
+DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。"><meta name=author content="Theme PaperMod"><link rel=canonical href=/post/express/><link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=favicon.ico><link rel=icon type=image/png sizes=16x16 href=favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=favicon-32x32.png><link rel=apple-touch-icon href=apple-touch-icon.png><link rel=mask-icon href=safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.97.3"><link rel=alternate hreflang=en href=/post/express/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="express"><meta property="og:description" content="Express 快速入门 安装 npm init npm install --save express hello world var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序
+node app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。
+express 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
+express --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
+DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。"><meta property="og:type" content="article"><meta property="og:url" content="/post/express/"><meta property="og:image" content="papermod-cover.png"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-03-24T17:41:01+00:00"><meta property="article:modified_time" content="2018-03-24T17:41:01+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="papermod-cover.png"><meta name=twitter:title content="express"><meta name=twitter:description content="Express 快速入门 安装 npm init npm install --save express hello world var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序
+node app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。
+express 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：
+express --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：
+DEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"/post/"},{"@type":"ListItem","position":3,"name":"express","item":"/post/express/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"express","name":"express","description":"Express 快速入门 安装 npm init npm install --save express hello world var express = require(\u0026#39;express\u0026#39;); var app = express(); app.get(\u0026#39;/\u0026#39;, function (req, res) { res.send(\u0026#39;Hello World!\u0026#39;); }); app.listen(3000, function () { console.log(\u0026#39;Example app listening on port 3000!\u0026#39;); }); 执行命令运行应用程序\nnode app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。\nexpress 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：\nexpress --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：\nDEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。","keywords":[],"articleBody":"Express 快速入门 安装 npm init npm install --save express hello world var express = require('express'); var app = express(); app.get('/', function (req, res) { res.send('Hello World!'); }); app.listen(3000, function () { console.log('Example app listening on port 3000!'); }); 执行命令运行应用程序\nnode app.js 然后，在浏览器中输入 http://localhost:3000/ 以查看输出。\nexpress 程序生成器 安装 npm install -g express-generator 示例 以下语句在当前工作目录中创建名为 myapp 的 Express 应用程序：\nexpress --view=pug myapp 在 MacOS 或 Linux 上，采用以下命令运行此应用程序：\nDEBUG=myapp:* npm start 然后在浏览器中输入 http://localhost:3000/ 以访问此应用程序。\n路由 基本路由 路由用于确定应用程序如何响应对特定端点的客户机请求，包含一个 URI（或路径）和一个特定的 HTTP 请求方法（GET、POST 等）。\n每个路由可以具有一个或多个处理程序函数，这些函数在路由匹配时执行。\n路由定义采用以下结构：\napp.METHOD(PATH, HANDLER) 其中：\n app 是 express 的实例。 METHOD 是 HTTP 请求方法。 PATH 是服务器上的路径。 HANDLER 是在路由匹配时执行的函数。  比如简单的 Hello world：\napp.get('/', function (req, res) { res.send('Hello World!'); }); 响应方法 下表中响应对象 (res) 的方法可以向客户机发送响应，并终止请求/响应循环。如果没有从路由处理程序调用其中任何方法，客户机请求将保持挂起状态。\n   方法 描述     res.download() 提示将要下载文件。   res.end() 结束响应进程。   res.json() 发送 JSON 响应。   res.jsonp() 在 JSONP 的支持下发送 JSON 响应。   res.redirect() 重定向请求。   res.render() 呈现视图模板。   res.send() 发送各种类型的响应。   res.sendFile 以八位元流形式发送文件。   res.sendStatus() 设置响应状态码并以响应主体形式发送其字符串表示。    app.route() 可以使用 app.route() 为路由路径创建可链接的路由处理程序。 因为在单一位置指定路径，所以可以减少冗余和输入错误。\napp.route('/book') .get(function(req, res) { res.send('Get a random book'); }) .post(function(req, res) { res.send('Add a book'); }) .put(function(req, res) { res.send('Update the book'); }); express.Router 使用 express.Router 类来创建可安装的模块化路由处理程序。Router 实例是完整的中间件和路由系统；因此，常常将其称为“微型应用程序”。\n以下示例将路由器创建为模块，在其中装入中间件，定义一些路由，然后安装在主应用程序的路径中。\n在应用程序目录中创建名为 birds.js 的路由器文件，其中包含以下内容：\nvar express = require('express'); var router = express.Router(); // middleware that is specific to this router router.use(function timeLog(req, res, next) { console.log('Time: ', Date.now()); next(); }); // define the home page route router.get('/', function(req, res) { res.send('Birds home page'); }); // define the about route router.get('/about', function(req, res) { res.send('About birds'); }); module.exports = router; 接着，在应用程序中装入路由器模块：\nvar birds = require('./birds'); ... app.use('/birds', birds); 此应用程序现在可处理针对 /birds 和 /birds/about 的请求，调用特定于此路由的 timeLog 中间件函数。\n中间件 中间件函数能够访问请求对象 (req)、响应对象 (res) 以及应用程序的请求/响应循环中的下一个中间件函数。下一个中间件函数通常由名为 next 的变量来表示。\n next() 函数不是 Node.js 或 Express API 的一部分，而是传递给中间件函数的第三自变量。next() 函数可以命名为任何名称，但是按约定，始终命名为“next”。\n 中间件函数可以执行以下任务：\n 执行任何代码。 对请求和响应对象进行更改。 结束请求/响应循环。 调用堆栈中的下一个中间件。  如果当前中间件函数没有结束请求/响应循环，那么它必须调用 next()，以将控制权传递给下一个中间件函数。否则，请求将保持挂起状态。\nExpress 应用程序可以使用以下类型的中间件：\n 应用层中间件 路由器层中间件 错误处理中间件 内置中间件 第三方中间件  模板引擎 在 Express 可以呈现模板文件之前，必须设置以下应用程序设置：\n views：模板文件所在目录。例如：app.set('views', './views') view engine：要使用的模板引擎。例如：app.set('view engine', 'pug')  然后安装对应的模板引擎 npm 包：\nnpm install pug --save 在 views 目录中创建名为 index.pug 的 Pug 模板文件，其中包含以下内容：\nhtml head title!= title body h1!= message 随后创建路由以呈现 index.pug 文件。如果未设置 view engine 属性，必须指定 view 文件的扩展名。否则，可以将其忽略。\napp.get('/', function (req, res) { res.render('index', { title: 'Hey', message: 'Hello there!'}); }); 向主页发出请求时，index.pug 文件将呈现为 HTML。\n","wordCount":"327","inLanguage":"en","datePublished":"2018-03-24T17:41:01Z","dateModified":"2018-03-24T17:41:01Z","author":{"@type":"Person","name":"Theme PaperMod"},"mainEntityOfPage":{"@type":"WebPage","@id":"/post/express/"},"publisher":{"@type":"Organization","name":"PaperMod","logo":{"@type":"ImageObject","url":"favicon.ico"}}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8502076734034112" crossorigin=anonymous></script><header class=header><nav class=nav><div class=logo><a href accesskey=h title="PaperMod (Alt + H)">PaperMod</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><ul class=lang-switch><li>|</li><li><a href=/fr/ title=French aria-label=:fr:>🇫🇷</a></li><li><a href=/fa/ title=Fa aria-label=Fa>Fa</a></li></ul></span></div><ul id=menu><li><a href=archives title=Archive><span>Archive</span></a></li><li><a href=categories/ title=Categories><span>Categories</span></a></li><li><a href=search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href>Home</a>&nbsp;»&nbsp;<a href=/post/>Posts</a></div><h1 class=post-title>express</h1><div class=post-meta><span title="2018-03-24 17:41:01 +0000 UTC">March 24, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href=https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content/post/express.md rel="noopener noreferrer" target=_blank>Suggest Changes</a></div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#express-%e5%bf%ab%e9%80%9f%e5%85%a5%e9%97%a8 aria-label="Express 快速入门">Express 快速入门</a><ul><li><a href=#%e5%ae%89%e8%a3%85 aria-label=安装>安装</a></li><li><a href=#hello-world aria-label="hello world">hello world</a></li></ul></li><li><a href=#express-%e7%a8%8b%e5%ba%8f%e7%94%9f%e6%88%90%e5%99%a8 aria-label="express 程序生成器">express 程序生成器</a><ul><li><a href=#%e5%ae%89%e8%a3%85-1 aria-label=安装>安装</a></li><li><a href=#%e7%a4%ba%e4%be%8b aria-label=示例>示例</a></li></ul></li><li><a href=#%e8%b7%af%e7%94%b1 aria-label=路由>路由</a><ul><li><a href=#%e5%9f%ba%e6%9c%ac%e8%b7%af%e7%94%b1 aria-label=基本路由>基本路由</a></li><li><a href=#%e5%93%8d%e5%ba%94%e6%96%b9%e6%b3%95 aria-label=响应方法>响应方法</a></li><li><a href=#approute aria-label=app.route()>app.route()</a></li><li><a href=#expressrouter aria-label=express.Router>express.Router</a></li></ul></li><li><a href=#%e4%b8%ad%e9%97%b4%e4%bb%b6 aria-label=中间件>中间件</a></li><li><a href=#%e6%a8%a1%e6%9d%bf%e5%bc%95%e6%93%8e aria-label=模板引擎>模板引擎</a></li></ul></div></details></div><div class=post-content><h2 id=express-快速入门>Express 快速入门<a hidden class=anchor aria-hidden=true href=#express-快速入门>#</a></h2><h3 id=安装>安装<a hidden class=anchor aria-hidden=true href=#安装>#</a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>npm init
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>npm install --save express
+</span></span></code></pre></div><h3 id=hello-world>hello world<a hidden class=anchor aria-hidden=true href=#hello-world>#</a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>var express = require(&#39;express&#39;);
+</span></span><span class=line><span class=cl>var app = express();
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>app.get(&#39;/&#39;, function (req, res) {
+</span></span><span class=line><span class=cl>  res.send(&#39;Hello World!&#39;);
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>app.listen(3000, function () {
+</span></span><span class=line><span class=cl>  console.log(&#39;Example app listening on port 3000!&#39;);
+</span></span><span class=line><span class=cl>});
+</span></span></code></pre></div><p>执行命令运行应用程序</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>node app.js
+</span></span></code></pre></div><p>然后，在浏览器中输入 <a href=http://localhost:3000/>http://localhost:3000/</a> 以查看输出。</p><h2 id=express-程序生成器>express 程序生成器<a hidden class=anchor aria-hidden=true href=#express-程序生成器>#</a></h2><h3 id=安装-1>安装<a hidden class=anchor aria-hidden=true href=#安装-1>#</a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>npm install -g express-generator
+</span></span></code></pre></div><h3 id=示例>示例<a hidden class=anchor aria-hidden=true href=#示例>#</a></h3><p>以下语句在当前工作目录中创建名为 <em>myapp</em> 的 Express 应用程序：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>express --view=pug myapp
+</span></span></code></pre></div><p>在 MacOS 或 Linux 上，采用以下命令运行此应用程序：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DEBUG=myapp:* npm start
+</span></span></code></pre></div><p>然后在浏览器中输入 <code>http://localhost:3000/</code> 以访问此应用程序。</p><h2 id=路由>路由<a hidden class=anchor aria-hidden=true href=#路由>#</a></h2><h3 id=基本路由>基本路由<a hidden class=anchor aria-hidden=true href=#基本路由>#</a></h3><p><em>路由</em>用于确定应用程序如何响应对特定端点的客户机请求，包含一个 URI（或路径）和一个特定的 HTTP 请求方法（GET、POST 等）。</p><p>每个路由可以具有一个或多个处理程序函数，这些函数在路由匹配时执行。</p><p>路由定义采用以下结构：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>app.METHOD(PATH, HANDLER)
+</span></span></code></pre></div><p>其中：</p><ul><li><code>app</code> 是 <code>express</code> 的实例。</li><li><code>METHOD</code> 是 <a href=http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol>HTTP 请求方法</a>。</li><li><code>PATH</code> 是服务器上的路径。</li><li><code>HANDLER</code> 是在路由匹配时执行的函数。</li></ul><p>比如简单的 Hello world：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>app.get(&#39;/&#39;, function (req, res) {
+</span></span><span class=line><span class=cl>  res.send(&#39;Hello World!&#39;);
+</span></span><span class=line><span class=cl>});
+</span></span></code></pre></div><h3 id=响应方法>响应方法<a hidden class=anchor aria-hidden=true href=#响应方法>#</a></h3><p>下表中响应对象 (<code>res</code>) 的方法可以向客户机发送响应，并终止请求/响应循环。如果没有从路由处理程序调用其中任何方法，客户机请求将保持挂起状态。</p><table><thead><tr><th>方法</th><th>描述</th></tr></thead><tbody><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.download>res.download()</a></td><td>提示将要下载文件。</td></tr><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.end>res.end()</a></td><td>结束响应进程。</td></tr><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.json>res.json()</a></td><td>发送 JSON 响应。</td></tr><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.jsonp>res.jsonp()</a></td><td>在 JSONP 的支持下发送 JSON 响应。</td></tr><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.redirect>res.redirect()</a></td><td>重定向请求。</td></tr><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.render>res.render()</a></td><td>呈现视图模板。</td></tr><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.send>res.send()</a></td><td>发送各种类型的响应。</td></tr><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.sendFile>res.sendFile</a></td><td>以八位元流形式发送文件。</td></tr><tr><td><a href=http://expressjs.com/zh-cn/4x/api.html#res.sendStatus>res.sendStatus()</a></td><td>设置响应状态码并以响应主体形式发送其字符串表示。</td></tr></tbody></table><h3 id=approute>app.route()<a hidden class=anchor aria-hidden=true href=#approute>#</a></h3><p>可以使用 <code>app.route()</code> 为路由路径创建可链接的路由处理程序。 因为在单一位置指定路径，所以可以减少冗余和输入错误。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>app.route(&#39;/book&#39;)
+</span></span><span class=line><span class=cl>  .get(function(req, res) {
+</span></span><span class=line><span class=cl>    res.send(&#39;Get a random book&#39;);
+</span></span><span class=line><span class=cl>  })
+</span></span><span class=line><span class=cl>  .post(function(req, res) {
+</span></span><span class=line><span class=cl>    res.send(&#39;Add a book&#39;);
+</span></span><span class=line><span class=cl>  })
+</span></span><span class=line><span class=cl>  .put(function(req, res) {
+</span></span><span class=line><span class=cl>    res.send(&#39;Update the book&#39;);
+</span></span><span class=line><span class=cl>  });
+</span></span></code></pre></div><h3 id=expressrouter>express.Router<a hidden class=anchor aria-hidden=true href=#expressrouter>#</a></h3><p>使用 <code>express.Router</code> 类来创建可安装的模块化路由处理程序。<code>Router</code> 实例是完整的中间件和路由系统；因此，常常将其称为“微型应用程序”。</p><p>以下示例将路由器创建为模块，在其中装入中间件，定义一些路由，然后安装在主应用程序的路径中。</p><p>在应用程序目录中创建名为 <code>birds.js</code> 的路由器文件，其中包含以下内容：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>var express = require(&#39;express&#39;);
+</span></span><span class=line><span class=cl>var router = express.Router();
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// middleware that is specific to this router
+</span></span><span class=line><span class=cl>router.use(function timeLog(req, res, next) {
+</span></span><span class=line><span class=cl>  console.log(&#39;Time: &#39;, Date.now());
+</span></span><span class=line><span class=cl>  next();
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>// define the home page route
+</span></span><span class=line><span class=cl>router.get(&#39;/&#39;, function(req, res) {
+</span></span><span class=line><span class=cl>  res.send(&#39;Birds home page&#39;);
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>// define the about route
+</span></span><span class=line><span class=cl>router.get(&#39;/about&#39;, function(req, res) {
+</span></span><span class=line><span class=cl>  res.send(&#39;About birds&#39;);
+</span></span><span class=line><span class=cl>});
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>module.exports = router;
+</span></span></code></pre></div><p>接着，在应用程序中装入路由器模块：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>var birds = require(&#39;./birds&#39;);
+</span></span><span class=line><span class=cl>...
+</span></span><span class=line><span class=cl>app.use(&#39;/birds&#39;, birds);
+</span></span></code></pre></div><p>此应用程序现在可处理针对 <code>/birds</code> 和 <code>/birds/about</code> 的请求，调用特定于此路由的 <code>timeLog</code> 中间件函数。</p><h2 id=中间件>中间件<a hidden class=anchor aria-hidden=true href=#中间件>#</a></h2><p><em>中间件</em>函数能够访问<a href=http://expressjs.com/zh-cn/4x/api.html#req>请求对象</a> (<code>req</code>)、<a href=http://expressjs.com/zh-cn/4x/api.html#res>响应对象</a> (<code>res</code>) 以及应用程序的请求/响应循环中的下一个中间件函数。下一个中间件函数通常由名为 <code>next</code> 的变量来表示。</p><blockquote><p><code>next()</code> 函数不是 Node.js 或 Express API 的一部分，而是传递给中间件函数的第三自变量。<code>next()</code> 函数可以命名为任何名称，但是按约定，始终命名为“next”。</p></blockquote><p>中间件函数可以执行以下任务：</p><ul><li>执行任何代码。</li><li>对请求和响应对象进行更改。</li><li>结束请求/响应循环。</li><li>调用堆栈中的下一个中间件。</li></ul><p>如果当前中间件函数没有结束请求/响应循环，那么它必须调用 <code>next()</code>，以将控制权传递给下一个中间件函数。否则，请求将保持挂起状态。</p><p>Express 应用程序可以使用以下类型的中间件：</p><ul><li><a href=http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.application>应用层中间件</a></li><li><a href=http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.router>路由器层中间件</a></li><li><a href=http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.error-handling>错误处理中间件</a></li><li><a href=http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.built-in>内置中间件</a></li><li><a href=http://expressjs.com/zh-cn/guide/using-middleware.html#middleware.third-party>第三方中间件</a></li></ul><h2 id=模板引擎>模板引擎<a hidden class=anchor aria-hidden=true href=#模板引擎>#</a></h2><p>在 Express 可以呈现模板文件之前，必须设置以下应用程序设置：</p><ul><li><code>views</code>：模板文件所在目录。例如：<code>app.set('views', './views')</code></li><li><code>view engine</code>：要使用的模板引擎。例如：<code>app.set('view engine', 'pug')</code></li></ul><p>然后安装对应的模板引擎 npm 包：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>npm install pug --save
+</span></span></code></pre></div><p>在 <code>views</code> 目录中创建名为 <code>index.pug</code> 的 Pug 模板文件，其中包含以下内容：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>html
+</span></span><span class=line><span class=cl>  head
+</span></span><span class=line><span class=cl>    title!= title
+</span></span><span class=line><span class=cl>  body
+</span></span><span class=line><span class=cl>    h1!= message
+</span></span></code></pre></div><p>随后创建路由以呈现 <code>index.pug</code> 文件。如果未设置 <code>view engine</code> 属性，必须指定 <code>view</code> 文件的扩展名。否则，可以将其忽略。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>app.get(&#39;/&#39;, function (req, res) {
+</span></span><span class=line><span class=cl>  res.render(&#39;index&#39;, { title: &#39;Hey&#39;, message: &#39;Hello there!&#39;});
+</span></span><span class=line><span class=cl>});
+</span></span></code></pre></div><p>向主页发出请求时，<code>index.pug</code> 文件将呈现为 HTML。</p></div><footer class=post-footer><nav class=paginav><a class=prev href=/post/docker/><span class=title>« Prev Page</span><br><span>docker</span></a>
+<a class=next href=/post/a-month-in-finogeeks/><span class=title>Next Page »</span><br><span>碎碎念</span></a></nav><div class=share-buttons><a target=_blank rel="noopener noreferrer" aria-label="share express on twitter" href="https://twitter.com/intent/tweet/?text=express&url=%2fpost%2fexpress%2f&hashtags="><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share express on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=%2fpost%2fexpress%2f&title=express&summary=express&source=%2fpost%2fexpress%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share express on reddit" href="https://reddit.com/submit?url=%2fpost%2fexpress%2f&title=express"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share express on facebook" href="https://facebook.com/sharer/sharer.php?u=%2fpost%2fexpress%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share express on whatsapp" href="https://api.whatsapp.com/send?text=express%20-%20%2fpost%2fexpress%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a><a target=_blank rel="noopener noreferrer" aria-label="share express on telegram" href="https://telegram.me/share/url?text=express&url=%2fpost%2fexpress%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></div></footer></article></main><footer class=footer><span>&copy; 2022 <a href>PaperMod</a></span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(t){t.preventDefault();var e=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({behavior:"smooth"}),e==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${e}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(t=>{const n=t.parentNode.parentNode,e=document.createElement("button");e.classList.add("copy-code"),e.innerText="copy";function s(){e.innerText="copied!",setTimeout(()=>{e.innerText="copy"},2e3)}e.addEventListener("click",o=>{if("clipboard"in navigator){navigator.clipboard.writeText(t.textContent),s();return}const e=document.createRange();e.selectNodeContents(t);const n=window.getSelection();n.removeAllRanges(),n.addRange(e);try{document.execCommand("copy"),s()}catch(e){}n.removeRange(e)}),n.classList.contains("highlight")?n.appendChild(e):n.parentNode.firstChild==n||(t.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?t.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(e):t.parentNode.appendChild(e))})</script></body></html>
