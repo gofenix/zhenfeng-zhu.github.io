@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/post/hello/</loc>
-    <lastmod>2022-04-22T10:11:00+08:00</lastmod>
+    <loc>/post/crystal-1.4.0/</loc>
+    <lastmod>2022-04-23T17:21:00+08:00</lastmod>
   </url><url>
     <loc>/</loc>
-    <lastmod>2022-04-22T10:11:00+08:00</lastmod>
+    <lastmod>2022-04-23T17:21:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -24,6 +24,9 @@
                 />
   </url><url>
     <loc>/post/</loc>
+    <lastmod>2022-04-23T17:21:00+08:00</lastmod>
+  </url><url>
+    <loc>/post/hello/</loc>
     <lastmod>2022-04-22T10:11:00+08:00</lastmod>
   </url><url>
     <loc>/post/%E6%88%91%E6%89%BF%E8%AE%A4%E6%88%91%E7%88%B1%E4%B8%8A%E4%BA%86%E6%81%90%E6%83%A7/</loc>

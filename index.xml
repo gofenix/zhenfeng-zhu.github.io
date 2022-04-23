@@ -9,7 +9,32 @@
       <link>papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 22 Apr 2022 10:11:00 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Apr 2022 17:21:00 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Crystal 1.4.0</title>
+      <link>/post/crystal-1.4.0/</link>
+      <pubDate>Sat, 23 Apr 2022 17:21:00 +0800</pubDate>
+      
+      <guid>/post/crystal-1.4.0/</guid>
+      <description>为了庆祝我们心爱的语言的1.X系列的第一年，我们提供了一个新的版本，其中有几个bug的修复和改进。
+下面我们列出了最重要或最有趣的变化，但没有提到几个错误的修复和较小的改进。欲了解更多细节，请访问更新日志。那些对新的解释器感到兴奋的人可能会高兴地发现正在进行的改进工作。
+预建包可以在GitHub Releases和我们的官方发布渠道上找到。安装说明见 crystal-lang.org/install。
+像往常一样，突破性的改动会用⚠️标记。
+统计资料 在这个版本中，我们包含了自1.3.2版本以来由31位贡献者所做的132项修改。我们感谢所有为改进语言所做的努力 ❤️
+对WASM的支持 1.4.0版目前只支持编译成WebAssembly（将程序与基于WASI的LibC连接）。有几个重要的部分缺失；请查看#10870了解详情。最新的试用说明是。
+写一个简单的crystal程序，比方说。
+puts &amp;#34;Hello WebAssembly!&amp;#34; 并将其命名为main.cr。你也可以尝试更复杂的程序，但请记住，这仍然是实验性的，还没有准备好用于生产。
+你需要在你的系统上安装wasm-ld，它是来自LLVM的WebAssembly连接程序。在一些系统上，它是通过安装ld来实现的。通过使用wasm-ld &amp;ndash;version 确认它已经安装。也请检查它的版本是否与Crystal的LLVM版本相似（ crystal &amp;ndash;version）。
+你将需要libc和libpcre编译到wasm32-wasi目标上。你可以在这里获取它们的预编译版本。检查wasm32-wasi-libs.tar.gz资产，下载并解压它。
+用 crystal build main.cr &amp;ndash;cross-compile &amp;ndash;target wasm32-wasi 进行交叉编译。
+链接到
+wasm-ld main.wasm -o main-final.wasm -L &amp;#34;$PWD/wasm32-wasi-libs&amp;#34; -lc -lpcre -lclang_rt.builtins-wasm32 用wasmer main-final.wasm或wasmtime main-final.wasm运行WebAssembly模块，并获得乐趣。
+注意：目前有#11948，将简化上述第4和第5步。
+对实例和类变量进行更好的类型推理 在这个版本之前，像下面这样的简单程序会因为无法推断出实例变量的类型而无法打字。
+class DisplayHello DELAY = 10.milliseconds @timer_countdown = DELAY end 现在它编译得很好，正确推断出@timer_countdown的类型是Time::Span。在其他情况下也可以省略类型（详情）。
+class DisplayHello def initialize(delay : Time::Span) @timer_countdown = delay + 10.seconds end end 集合 Enumerable</description>
+    </item>
+    
     <item>
       <title>Hello</title>
       <link>/post/hello/</link>
