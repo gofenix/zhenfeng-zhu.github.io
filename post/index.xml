@@ -16,23 +16,17 @@
       <pubDate>Sat, 23 Apr 2022 17:21:00 +0800</pubDate>
       
       <guid>https://zhenfeng-zhu.github.io/post/crystal-1.4.0/</guid>
-      <description>为了庆祝我们心爱的语言的1.X系列的第一年，我们提供了一个新的版本，其中有几个bug的修复和改进。
+      <description>为了庆祝我们心爱的语言的 1.X 系列的第一年，我们提供了一个新的版本，其中有几个 bug 的修复和改进。
 下面我们列出了最重要或最有趣的变化，但没有提到几个错误的修复和较小的改进。欲了解更多细节，请访问更新日志。那些对新的解释器感到兴奋的人可能会高兴地发现正在进行的改进工作。
-预建包可以在GitHub Releases和我们的官方发布渠道上找到。安装说明见 crystal-lang.org/install。
+预建包可以在 GitHub Releases 和我们的官方发布渠道上找到。安装说明见 crystal-lang.org/install。
 像往常一样，突破性的改动会用⚠️标记。
-统计资料 在这个版本中，我们包含了自1.3.2版本以来由31位贡献者所做的132项修改。我们感谢所有为改进语言所做的努力 ❤️
-对WASM的支持 1.4.0版目前只支持编译成WebAssembly（将程序与基于WASI的LibC连接）。有几个重要的部分缺失；请查看#10870了解详情。最新的试用说明是。
-写一个简单的crystal程序，比方说。
-puts &amp;#34;Hello WebAssembly!&amp;#34; 并将其命名为main.cr。你也可以尝试更复杂的程序，但请记住，这仍然是实验性的，还没有准备好用于生产。
-你需要在你的系统上安装wasm-ld，它是来自LLVM的WebAssembly连接程序。在一些系统上，它是通过安装ld来实现的。通过使用wasm-ld &amp;ndash;version 确认它已经安装。也请检查它的版本是否与Crystal的LLVM版本相似（ crystal &amp;ndash;version）。
-你将需要libc和libpcre编译到wasm32-wasi目标上。你可以在这里获取它们的预编译版本。检查wasm32-wasi-libs.tar.gz资产，下载并解压它。
-用 crystal build main.cr &amp;ndash;cross-compile &amp;ndash;target wasm32-wasi 进行交叉编译。
-链接到
-wasm-ld main.wasm -o main-final.wasm -L &amp;#34;$PWD/wasm32-wasi-libs&amp;#34; -lc -lpcre -lclang_rt.builtins-wasm32 用wasmer main-final.wasm或wasmtime main-final.wasm运行WebAssembly模块，并获得乐趣。
-注意：目前有#11948，将简化上述第4和第5步。
-对实例和类变量进行更好的类型推理 在这个版本之前，像下面这样的简单程序会因为无法推断出实例变量的类型而无法打字。
-class DisplayHello  DELAY = 10.milliseconds   @timer_countdown = DELAY end 现在它编译得很好，正确推断出@timer_countdown的类型是Time::Span。在其他情况下也可以省略类型（详情）。
-class DisplayHello   def initialize(delay : Time::Span)  @timer_countdown = delay + 10.</description>
+统计资料 在这个版本中，我们包含了自 1.3.2 版本以来由 31 位贡献者所做的 132 项修改。我们感谢所有为改进语言所做的努力 ❤️
+对 WASM 的支持 1.4.0 版目前只支持编译成 WebAssembly（将程序与基于 WASI 的 LibC 连接）。有几个重要的部分缺失；请查看#10870 了解详情。最新的试用说明是。
+写一个简单的 crystal 程序，比方说。
+puts &amp;#34;Hello WebAssembly!&amp;#34; 并将其命名为 main.cr。你也可以尝试更复杂的程序，但请记住，这仍然是实验性的，还没有准备好用于生产。
+你需要在你的系统上安装 wasm-ld，它是来自 LLVM 的 WebAssembly 连接程序。在一些系统上，它是通过安装 ld 来实现的。通过使用 wasm-ld &amp;ndash;version 确认它已经安装。也请检查它的版本是否与 Crystal 的 LLVM 版本相似（ crystal &amp;ndash;version）。
+你将需要 libc 和 libpcre 编译到 wasm32-wasi 目标上。你可以在这里获取它们的预编译版本。检查 wasm32-wasi-libs.tar.gz 资产，下载并解压它。
+用 crystal build main.cr &amp;ndash;cross-compile &amp;ndash;target wasm32-wasi 进行交叉编译。</description>
     </item>
     
     <item>
@@ -50,7 +44,7 @@ class DisplayHello   def initialize(delay : Time::Span)  @timer_countdown = dela
       <pubDate>Sun, 27 Feb 2022 18:39:35 +0800</pubDate>
       
       <guid>https://zhenfeng-zhu.github.io/post/%E6%88%91%E6%89%BF%E8%AE%A4%E6%88%91%E7%88%B1%E4%B8%8A%E4%BA%86%E6%81%90%E6%83%A7/</guid>
-      <description>在我迄今18年人生的后10年里，我一直在追寻着的是一种纷乱的、充满恐惧的爱。我是一名专业的自由式滑雪运动员，脚上的一双雪板、22英尺长的u型池和各种特技动作是我肾上腺素的主要来源，也是极限运动中真正令人上瘾的核心要素。
+      <description>在我迄今 18 年人生的后 10 年里，我一直在追寻着的是一种纷乱的、充满恐惧的爱。我是一名专业的自由式滑雪运动员，脚上的一双雪板、22 英尺长的 u 型池和各种特技动作是我肾上腺素的主要来源，也是极限运动中真正令人上瘾的核心要素。
 正如所有那些能迷倒常人的恋人一样（至少是像我从小说中读到的那些一样，因为现实生活中我还缺乏相应的经验），你这个重要的另一半有时可能会很……反复无常。实际上，“恐惧”可以算是三种不同感觉的总称，那就是兴奋、不确定和压力。
 我已经发现，如果这些感觉能被识别和积极地利用，那么每一种感觉中都有一些微妙的指标可以帮助你成功，而如果其原理被忽视，那么这些感觉可能就会是你受伤的前兆。
 虽然从事极限运动的运动员很容易被贴上“无畏”或“任性”的标签，但无论是我为构思技巧而花费的无数个小时，还是在泡沫坑(泡沫粒子到处都是的那种)里和安全气囊上度过的无数时间都可以表明情况并非如此。
@@ -59,11 +53,11 @@ class DisplayHello   def initialize(delay : Time::Span)  @timer_countdown = dela
 这项工作的第一步叫做具象化：在我尝试一个新的技巧动作之前，我会感到胸腔（准确地说，是在我的喉咙底部和膈肌顶部之间）有一种紧张感。
 我深吸一口气，闭上眼睛。当我爬上巨大的起飞坡道时，我会在想象中伸展我的双腿以最大限度地提高升力。然后，我要在脑海中描绘如何以相反的方向扭转我的上半身，产生扭矩，然后再让它朝另一个方向弹回来。
 现在，在我的意识里，我已经是飞在空中的状态了。
-我在跃起后第一时间就会看到自己的背后，然后身体旋转会把我的视线拽向头顶万里无云的天空。风声如同我耳朵里的一种音乐，每一个360度的旋转都在为我的运动提供音乐般的节拍。
+我在跃起后第一时间就会看到自己的背后，然后身体旋转会把我的视线拽向头顶万里无云的天空。风声如同我耳朵里的一种音乐，每一个 360 度的旋转都在为我的运动提供音乐般的节拍。
 当我的脚在我的身体下面时，我就可以在把身体拉到第二个空翻前的一瞬间发现最终落地的地点。当我回到可以面向前方的位置时，我会想象着我的腿在我的脚下摆动，并让雪鞋的前端承载着我的重量碰到地面。
-我露出微笑，然后睁开眼睛，一个1440度的翻转动作就完成了。
+我露出微笑，然后睁开眼睛，一个 1440 度的翻转动作就完成了。
 在完成“具象化”的几秒之后，我胸腔中的紧迫感会有一阵上下的波动，然后开始扩散——这个时候，我们已经来到破茧成蝶的关键阶段。
-兴奋感是肾上腺素的产物，也是我所酷爱和着迷的存在。我既有着对自己安全创造奇迹的信心，也会产生对即将到来的不可预知体验的兴奋感，二者的平衡非常不稳定。我听说这个状态可以被称为“入境（zone）”，去年秋天，当我成为历史上第一个完成1440度偏轴转体动作的的女性双板滑雪运动员时，我就曾体会过这样的心境。
+兴奋感是肾上腺素的产物，也是我所酷爱和着迷的存在。我既有着对自己安全创造奇迹的信心，也会产生对即将到来的不可预知体验的兴奋感，二者的平衡非常不稳定。我听说这个状态可以被称为“入境（zone）”，去年秋天，当我成为历史上第一个完成 1440 度偏轴转体动作的的女性双板滑雪运动员时，我就曾体会过这样的心境。
 不幸的是，你心中的不确定感往往很容易就会压倒自信心。
 不完美的准备会使我的手心出汗，并使得我之前所说的那个感到紧张的位置被转移到自己的胃里，从而使你的每次呼吸都比上一次更浅。这种感觉不是恐慌，而是某种类似于畏惧的感觉。危险的信号会激发出进化的本能。
 如果我选择忽略这个安全机制，我的身体可能会在空中不由自主地行动，旋转会失去控制，并迫使我为即将遭受的冲击做好准备，因为这个时候的我真的要恐惧了：如果完全投入这个动作，可能会产生灾难性的后果。
@@ -102,7 +96,7 @@ class DisplayHello   def initialize(delay : Time::Span)  @timer_countdown = dela
     </item>
     
     <item>
-      <title>打造好用的win上开发体验</title>
+      <title>打造好用的 win 上开发体验</title>
       <link>https://zhenfeng-zhu.github.io/post/%E6%89%93%E9%80%A0%E5%A5%BD%E7%94%A8%E7%9A%84win%E4%B8%8A%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Sat, 12 Feb 2022 22:22:28 +0800</pubDate>
       
@@ -110,10 +104,10 @@ class DisplayHello   def initialize(delay : Time::Span)  @timer_countdown = dela
       <description>0x00：科学上网 如果不能够科学上网的话，整个开发体验将大打折扣。
 此过程较为敏感，所以需要大家自行选择科学上网的方式。
 0x01：基本可用的终端 https://gitforwindows.org/
-git for windows 内嵌了git bash，git bash的使用体验和linux 或 mac的体验类似。
-安装好之后，需要进入到home目录，编辑 .bashrc 文件，使终端也可以科学上网：
-$ cd $ vim .bashrc 配置如下：
-function proxy_on(){  git config --global https.proxy http://127.0.0.1:1081  git config --global https.proxy http://127.0.0.1:1081   export http_proxy=&amp;#34;http://127.0.0.1:1081&amp;#34;  export https_proxy=&amp;#34;http://127.0.0.1:1081&amp;#34;  export all_proxy=&amp;#34;http://127.0.0.1:1081&amp;#34;   print_proxy }  function proxy_off(){  git config --global --unset https.proxy  git config --global --unset https.proxy   unset http_proxy  unset https_proxy  unset all_proxy   print_proxy }   function print_proxy(){  echo $http_proxy  echo $https_proxy  echo $all_proxy }  function l(){  ll }  proxy_on proxy_on是打开代理，proxy_off是关闭代理，print_proxy是一个帮助函数，用来查看当前的代理，l 函数是因为自己经常使用l命令，为了不报错而加的。</description>
+git for windows 内嵌了 git bash，git bash 的使用体验和 linux 或 mac 的体验类似。
+安装好之后，需要进入到 home 目录，编辑 .bashrc 文件，使终端也可以科学上网：
+cd vim .bashrc 配置如下：
+function proxy_on(){  git config --global https.proxy http://127.0.0.1:1081  git config --global https.proxy http://127.0.0.1:1081   export http_proxy=&amp;#34;http://127.0.0.1:1081&amp;#34;  export https_proxy=&amp;#34;http://127.0.0.1:1081&amp;#34;  export all_proxy=&amp;#34;http://127.0.0.1:1081&amp;#34;   print_proxy }  function proxy_off(){  git config --global --unset https.proxy  git config --global --unset https.proxy   unset http_proxy  unset https_proxy  unset all_proxy   print_proxy }   function print_proxy(){  echo $http_proxy  echo $https_proxy  echo $all_proxy }  function l(){  ll }  proxy_on proxy_on 是打开代理，proxy_off 是关闭代理，print_proxy 是一个帮助函数，用来查看当前的代理，l 函数是因为自己经常使用 l 命令，为了不报错而加的。</description>
     </item>
     
     <item>
