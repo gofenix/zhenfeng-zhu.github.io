@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>clojure on PaperMod</title>
-    <link>/tags/clojure/</link>
-    <description>Recent content in clojure on PaperMod</description>
+    <title>clojure on Awesome Fenix</title>
+    <link>https://zhenfeng-zhu.github.io/tags/clojure/</link>
+    <description>Recent content in clojure on Awesome Fenix</description>
     <image>
-      <url>papermod-cover.png</url>
-      <link>papermod-cover.png</link>
+      <url>https://zhenfeng-zhu.github.io/papermod-cover.png</url>
+      <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 15 Jan 2022 21:45:17 +0800</lastBuildDate><atom:link href="/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jan 2022 21:45:17 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Farewell 永别了</title>
-      <link>/post/farewell/</link>
+      <link>https://zhenfeng-zhu.github.io/post/farewell/</link>
       <pubDate>Sat, 15 Jan 2022 21:45:17 +0800</pubDate>
       
-      <guid>/post/farewell/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/farewell/</guid>
       <description>永别了 正如 Semisonic 在 90 年代的热门歌曲 &amp;ldquo;Closing Time &amp;ldquo;所告诉我们的那样，每一个新的开始都来自于其他一些开始的结束。恭喜你，高贵的读者，完成了这次 Clojure 之旅。我希望你发现它是有价值的，我也希望你期待着更多的东西！相信我，还有更多的东西等着你。
 相信我，还有很多东西。我最喜欢 Clojure 的一点是，它有一个完整的世界可以探索。逻辑编程、解析器、类型系统……只要你能说出计算机科学的一个有趣领域，你就可以用 Clojure 来研究它。我把我对下一步要去哪里的建议留给你。
 如果你想对 Clojure 生态系统有一个广泛的了解，请查看The Clojure Toolbox，它列出了数百个 Clojure 项目，并按照它们所解决的问题进行组织。
@@ -27,10 +27,10 @@
     
     <item>
       <title>AppendixB 花哨的 Boot</title>
-      <link>/post/appendixb/</link>
+      <link>https://zhenfeng-zhu.github.io/post/appendixb/</link>
       <pubDate>Sat, 15 Jan 2022 21:41:09 +0800</pubDate>
       
-      <guid>/post/appendixb/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/appendixb/</guid>
       <description>Boot，花哨的 Clojure 构建框架 Boot 是 Leiningen 的替代品，提供同样的功能。Leiningen 更受欢迎（截至 2015 年夏天），但我个人喜欢用 Boot 工作，因为它更容易扩展。本附录解释了 Boot 的基本概念，并指导你编写你的第一个 Boot 任务。如果你对使用 Boot 构建项目感兴趣，请查看它的 GitHub README（GitHub - boot-clj/boot: Build tooling for Clojure.）和它的 wiki（Home - boot-clj/boot Wiki - GitHub）。
 注意 截至本文写作时，Boot 对 Windows 的支持有限。Boot 团队欢迎大家的贡献!
 Boot 的抽象 Boot 由 Micha Niskin 和 Alan Dipert 创建，是对 Clojure 工具领域的一个有趣而强大的补充。从表面上看，它是构建 Clojure 应用程序和从命令行运行 Clojure 任务的一种便捷方式。深入研究一下，你会发现 Boot 就像 Git 和 Unix 的爱情结晶，它提供的抽象使你在操作系统和应用程序的交叉点上编写代码时更加愉快。
@@ -40,10 +40,10 @@ Unix 提供了我们都很熟悉的抽象，以至于我们认为它们是理所
     
     <item>
       <title>AppendixA 用 Leiningen 构建和开发</title>
-      <link>/post/appendixa/</link>
+      <link>https://zhenfeng-zhu.github.io/post/appendixa/</link>
       <pubDate>Sat, 15 Jan 2022 21:39:36 +0800</pubDate>
       
-      <guid>/post/appendixa/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/appendixa/</guid>
       <description>用 Leiningen 构建和开发 用任何语言编写软件都需要生成工件，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为依赖，以确保它们被加载到你正在构建的项目中。Clojurists 中最流行的管理工件的工具是 Leiningen，本附录将告诉你如何使用它。你还将学习如何使用 Leiningen 来完全增强你的开发经验，使用插件。
 Artifact Ecosystem 因为 Clojure 托管在 Java 虚拟机（JVM）上，所以 Clojure 的工件是以 JAR 文件的形式分发的（在第 12 章有介绍）。Java 地已经有一个处理 JAR 文件的完整的工件生态系统，Clojure 也使用它。神器生态系统并不是一个官方的编程术语；我用它来指代用于识别和分发神器的一套工具、资源和惯例。Java 的生态系统是围绕着 Maven 构建工具发展起来的，由于 Clojure 使用这个生态系统，你会经常看到对 Maven 的引用。Maven 是一个巨大的工具，可以执行各种古怪的项目管理任务。值得庆幸的是，你不需要获得 Maven 学的博士学位就能成为一名有效的 Clojurist。你需要知道的唯一特征是，Maven 规定了一种识别 Clojure 项目所遵守的工件的模式，它还规定了如何在 Maven 仓库中托管这些工件，Maven *仓库只是存储工件以供分发的服务器。
 Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个版本。你可以在project.clj文件中为你的项目指定这些。以下是你在第一章创建的clojure-noob项目的project.clj第一行的内容。
@@ -53,10 +53,10 @@ Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个�
     
     <item>
       <title>Chapter13 抽象</title>
-      <link>/post/chapter13/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter13/</link>
       <pubDate>Sat, 15 Jan 2022 21:29:04 +0800</pubDate>
       
-      <guid>/post/chapter13/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter13/</guid>
       <description>用 Multimethods、协议和记录创建和扩展抽象概念 花一分钟思考一下，作为大自然的顶级产品之一：人类是多么伟大。作为一个人类，你可以在社交媒体上闲聊，玩龙与地下城，戴帽子。也许更重要的是，你可以用抽象的概念来思考和交流。
 抽象思考的能力确实是人类最好的特征之一。它可以让你规避你的认知极限，将不同的细节捆绑在一起，形成一个整齐的概念包，让你可以在工作记忆中持有。你不需要去想 &amp;ldquo;可挤压的红球鼻子装饰 &amp;ldquo;这种笨重的想法，而只需要 &amp;ldquo;小丑鼻子 &amp;ldquo;这个概念。
 在 Clojure 中，一个抽象是一个操作的集合，而数据类型实现抽象。例如，seq 抽象由 &amp;ldquo;first &amp;ldquo;和 &amp;ldquo;rest &amp;ldquo;等操作组成，而 Vector 数据类型是该抽象的实现；它对所有 seq 操作做出响应。像[:seltzer :water]这样的特定 Vector 是该数据类型的*实例。
@@ -71,10 +71,10 @@ Multimethods Multimethods为你提供了一种直接的、灵活的方法，将�
     
     <item>
       <title>Chapter12 与 Java 的互操作</title>
-      <link>/post/chapter12/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter12/</link>
       <pubDate>Sat, 15 Jan 2022 20:55:18 +0800</pubDate>
       
-      <guid>/post/chapter12/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter12/</guid>
       <description>与 JVM 一起工作 在每个 Clojurist 的生命中都会有这么一天，她必须从纯函数和不可变数据结构的庇护所冒险进入野蛮的 Java 大陆。这段艰难的旅程是必要的，因为 Clojure 是在 Java 虚拟机（JVM）上托管的，这赋予了它三个基本特性。
 赋予它三个基本特征。首先，你运行 Clojure 应用程序的方式与你运行 Java 应用程序的方式相同。第二，你需要使用 Java 对象来实现核心功能，如读取文件和处理日期。第三，Java 有一个庞大的有用库的生态系统，你需要对 Java 有一定的了解才能使用它们。
 这样一来，Clojure 就有点像一个乌托邦社区，被放置在一个乌托邦国家的中间。显然，你更愿意与其他乌托邦人互动，但偶尔你也需要与当地人交谈，以便完成工作。
@@ -86,10 +86,10 @@ JVM 开发人员用 JVM 这个词来指代一些不同的东西。你会听到�
     
     <item>
       <title>Chapter11 core.async</title>
-      <link>/post/chapter11/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter11/</link>
       <pubDate>Sat, 15 Jan 2022 12:56:01 +0800</pubDate>
       
-      <guid>/post/chapter11/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter11/</guid>
       <description>用 core.async 掌握并发进程 有一天，当你走在大街上时，你会惊讶、好奇，并有点厌恶地发现一台热狗自动贩卖机。你的头皮被有罪的好奇心刺痛，你会忍不住掏出三块钱，看看这个装置是否真的能工作。在 &amp;ldquo;咔嚓 &amp;ldquo;一声接受了你的钱后，它弹出了一个新鲜的热狗，包括面包和所有的东西。
 自动售货机表现出简单的行为：当它收到钱时，它会放出一个热狗，然后为下一次购买做准备。当它的热狗用完时，它就会停止。我们周围的热狗自动售货机以不同的面貌出现，它们是独立的实体，同时对世界上的事件作出反应。你最喜欢的咖啡店的浓缩咖啡机，你小时候喜欢的宠物仓鼠&amp;ndash;所有的东西都可以被分解成一组行为，这些行为遵循一般的形式 &amp;ldquo;当x发生时，做y&amp;quot;。甚至我们写的程序也只是美化的热狗贩卖机，每一个都是独立的进程，等待着下一个事件的发生，无论是击键、超时，还是套接字上的数据到达。
 Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。 本章描述了思考这种编程风格的有用模型，以及你在实际编写代码时需要了解的实际细节。你将学习如何使用通道在由 go 块和thread创建的独立进程之间进行通信；了解一些关于 Clojure 如何通过停放和阻塞有效地管理线程；如何使用alts!!；以及一种更直接的创建队列的方法。最后，你将学习如何用进程管道来踢回调的屁股。
@@ -103,10 +103,10 @@ Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。
     
     <item>
       <title>Chapter10 形而上学</title>
-      <link>/post/chapter10/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter10/</link>
       <pubDate>Sat, 15 Jan 2022 12:42:26 +0800</pubDate>
       
-      <guid>/post/chapter10/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter10/</guid>
       <description>Clojure Metaphysics: 原子、Refs、Vars 和拥抱僵尸 三个并发性的小妖精都是从同一个邪恶的坑里生出来的：对可变状态的共享访问。你可以在第九章的引用单元讨论中看到这一点。当两个线程对引用单元进行不协调的更改时，结果是不可预测的。
 Rich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产生的问题。事实上，Clojure 体现了一种非常清晰的状态概念，使其在本质上比大多数流行的编程语言更安全。它是安全的，一直到它的meta-freakin-physics。
 在本章中，你将了解 Clojure 的底层形而上学，与典型的面向对象（OO）语言的形而上学相比较。学习这种哲学将使你准备好处理 Clojure 剩下的并发工具，atom、ref和var引用类型。(Clojure 还有一个额外的引用类型，agents，本书没有涉及。) 这些类型中的每一个都能让你安全地同时执行状态修改操作。你还会学到一些简单的方法，使你的程序更有效率，而不需要引入状态。
@@ -119,10 +119,10 @@ class CuddleZombie # attr_accessor is just a shorthand way for creating getters 
     
     <item>
       <title>Chapter9 并发的艺术</title>
-      <link>/post/chapter9/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter9/</link>
       <pubDate>Sat, 15 Jan 2022 12:30:14 +0800</pubDate>
       
-      <guid>/post/chapter9/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter9/</guid>
       <description>并发和并行编程的神圣艺术 如果我是一个庄园的主人，而你是我的继承人，我会在你的第 13 个命名日让你坐下来，告诉你：&amp;ldquo;计算的世界正在改变，小姑娘，你必须为多核处理器的新世界做好准备，以免你被它践踏。
 &amp;ldquo;好好听着。近年来，CPU 的时钟速度几乎没有增加，但双核和四核计算机已经变得很普遍。物理定律是残酷而绝对的，它们要求提高时钟速度需要成倍的功率。领域内最好的工程师不太可能很快克服这一限制，如果有的话。因此，你可以预期单台机器上的内核不断增加的趋势将继续下去&amp;ndash;作为一个程序员，你将知道如何充分利用现代硬件的期望也是如此。
 &amp;ldquo;在这种新模式下学习编程将是有趣和迷人的，真的。但请注意：它也充满了危险。你必须学习并发和并行编程*，这是一门神圣的艺术，使你的应用结构安全地管理多个同时执行的任务。
@@ -140,10 +140,10 @@ class CuddleZombie # attr_accessor is just a shorthand way for creating getters 
     
     <item>
       <title>Chapter8 宏</title>
-      <link>/post/chapter8/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter8/</link>
       <pubDate>Sat, 15 Jan 2022 12:22:42 +0800</pubDate>
       
-      <guid>/post/chapter8/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter8/</guid>
       <description>编写宏 当我 18 岁时，我在新墨西哥州圣菲的一家酒店找到了一份夜班审计师的工作，每周工作四个晚上，从晚上 11 点到早上 7 点。经过几个月的这种不眠不休的工作，我的情绪有了自己的变化。一天晚上，大约在
 凌晨 3 点，我正在看一个信息广告，该产品声称可以恢复男人的头发。当我看到一个曾经秃头的人的故事时，我被真诚的喜悦所淹没。&amp;ldquo;终于来了！&amp;ldquo;我的大脑涌动着。&amp;ldquo;这个人得到了他应得的爱和成功! 多么不可思议的产品，给无望的人以希望！&amp;rdquo;
 从那时起，我发现自己一直在想，我是否能以某种方式重新创造因长期睡眠不足而引起的情感放弃和对生命的欣赏。也许是某种药水&amp;ndash;喝上几口，释放我内心的理查德-西蒙斯，但时间不会太长。
@@ -161,10 +161,10 @@ class CuddleZombie # attr_accessor is just a shorthand way for creating getters 
     
     <item>
       <title>Chapter7 炼金术</title>
-      <link>/post/chapter7/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter7/</link>
       <pubDate>Sat, 15 Jan 2022 12:14:36 +0800</pubDate>
       
-      <guid>/post/chapter7/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter7/</guid>
       <description>Clojure 炼金术：读取器、求值器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Clojure 提供了一种工具，使哲学家的石头看起来只是一个小饰品：*宏。
 宏允许你将任意的表达式转化为有效的 Clojure，因此你可以扩展语言本身以满足你的需求。而且，你甚至不需要是一个穿长袍的老家伙或老太太来使用它们
 为了获得这种能力，请考虑这个微不足道的宏。
@@ -176,10 +176,10 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     
     <item>
       <title>Chapter6 组织你的项目</title>
-      <link>/post/chapter6/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter6/</link>
       <pubDate>Fri, 14 Jan 2022 12:40:41 +0800</pubDate>
       
-      <guid>/post/chapter6/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter6/</guid>
       <description>组织你的项目：一个图书管理员的故事 在我们每个人心中都住着一个叫 Melvil 的图书管理员，一个以组织艺术为乐的奇异生物。日日夜夜，Melvil 都渴望为你的代码库带来秩序。幸运的是，Clojure 提供了一套工具，专门用来帮助这个侏儒与混乱的力量不断斗争。
 这些工具通过将相关的函数和数据分组来帮助你组织你的代码。它们还可以防止名称冲突，这样你就不会意外地覆盖别人的代码，反之亦然。在这个充满悬念和神秘的故事中，请和我一起学习如何使用这些工具，并解决一生中的抢劫案吧 在这个传奇故事的最后，你将了解以下内容。
   `def&amp;rsquo;是做什么的
@@ -201,10 +201,10 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     
     <item>
       <title>Chapter5 函数式编程</title>
-      <link>/post/chapter5/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter5/</link>
       <pubDate>Fri, 14 Jan 2022 10:00:07 +0800</pubDate>
       
-      <guid>/post/chapter5/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter5/</guid>
       <description>函数式编程 到目前为止，你已经专注于熟悉 Clojure 提供的工具：不可变的数据结构、函数、抽象，等等。在这一章中，你将学习如何思考你的编程任务，以最好的方式利用这些工具。你将开始把你的经验整合到一个新的函数式编程思维中。
 你将学到的核心概念包括：什么是纯函数，为什么它们很有用；如何使用不可变的数据结构，为什么它们比可变的表亲更有优势；如何将数据和函数分开，给你带来更多的力量和灵活性；以及为什么对一小部分数据抽象进行编程会很强大。一旦你把所有这些知识塞进你的大脑，你就会有一个全新的解决问题的方法
 在学习了这些主题之后，你将通过编写一个基于终端的游戏来运用你所学到的一切，这个游戏的灵感来自于美国各地 Cracker Barrel 餐馆中的一种古老而神秘的思维训练装置。Peg Thing!
@@ -213,16 +213,16 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
 纯函数和算术一样稳定，没有问题（你最后一次为两个数字相加而烦恼是什么时候？） 它们是巨大的函数小砖块，你可以自信地将其作为你程序的基础。让我们更详细地看看引用透明性和无副作用，看看它们到底是什么，以及它们是如何发挥作用的。
 纯函数是引用透明的 为了在调用相同参数时返回相同的结果，纯函数只依靠 1）自己的参数和 2）不可变的值来决定其返回值。例如，数学函数是引用透明的。
 (+ 1 2) ; =&amp;gt; 3 如果一个函数依赖于一个不可变的值，那么它就是引用透明的。字符串`&amp;rdquo;, Daniel-san &amp;ldquo;是不可变的，所以下面的函数也是引用透明的。
-(defn wisdom [words] (str words &amp;#34;, Daniel-san&amp;#34;)) (wisdom &amp;#34;Always bathe on Fridays&amp;#34;) ; =&amp;gt; &amp;#34;Always bathe on Fridays, Daniel-san&amp;#34; 相比之下，下面的函数在相同的参数下不会产生相同的结果；因此，它们在指称上是不透明的。任何依赖随机数生成器的函数都不可能是指称透明的。
-(defn year-end-evaluation [] (if (&amp;gt; (rand) 0.5) &amp;#34;You get a raise!&amp;#34; &amp;#34;Better luck next year!</description>
+(defn wisdom  [words]  (str words &amp;#34;, Daniel-san&amp;#34;))  (wisdom &amp;#34;Always bathe on Fridays&amp;#34;) ; =&amp;gt; &amp;#34;Always bathe on Fridays, Daniel-san&amp;#34; 相比之下，下面的函数在相同的参数下不会产生相同的结果；因此，它们在指称上是不透明的。任何依赖随机数生成器的函数都不可能是指称透明的。
+(defn year-end-evaluation  []  (if (&amp;gt; (rand) 0.5)  &amp;#34;You get a raise!</description>
     </item>
     
     <item>
       <title>Chapter4 深入研究核心函数</title>
-      <link>/post/chapter4/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter4/</link>
       <pubDate>Thu, 13 Jan 2022 17:39:28 +0800</pubDate>
       
-      <guid>/post/chapter4/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter4/</guid>
       <description>核心函数的深入研究 如果你像我一样是焦虑的、以青少年为中心的准肥皂剧*《吸血鬼日记》*的超级粉丝，你一定记得主角埃琳娜开始质疑她苍白的、神秘的暗恋者的行为的那一集。&amp;ldquo;为什么当我的膝盖被刮伤时，他立刻消失得无影无踪？&amp;ldquo;和 &amp;ldquo;为什么当我的手指被划破时，他的脸变成了一个怪异的死亡面具？&amp;ldquo;等等。
 如果你已经开始把玩 Clojure 的核心函数，你可能也会问自己类似的问题。&amp;ldquo;为什么map会返回一个列表，而我给它的是一个 Vector？&amp;ldquo;和 &amp;ldquo;为什么reduce会把我的 map 当成一个 Vector？&amp;ldquo;等等。(不过，有了 Clojure，你至少可以免于思考作为一个 17 岁孩子的深刻的存在恐惧，直到永远）。
 在这一章中，你将了解到 Clojure 的深邃、黑暗、嗜血、超自然的cough，我的意思是，在这一章中，你将了解到 Clojure 的抽象的基本概念以及序列和集合的抽象。你还会了解到疯狂的序列。这将为你提供所需的基础，使你能够阅读你以前没有使用过的函数的文档，并理解当你试着使用它们时发生了什么。
@@ -236,10 +236,10 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
     
     <item>
       <title>Chapter3 速成班</title>
-      <link>/post/chapter3/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter3/</link>
       <pubDate>Thu, 13 Jan 2022 11:12:19 +0800</pubDate>
       
-      <guid>/post/chapter3/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter3/</guid>
       <description>做事情：Clojure 速成班 是时候学习如何用 Clojure 真正地做事了! 该死的! 尽管你无疑已经听说过 Clojure 令人敬畏的并发支持和其他了不起的功能，但 Clojure 最突出的特点是它是一种 Lisp 语言。在本章中，你将探索构成这个 Lisp 核心的元素：语法、函数和数据。它们将共同为你在 Clojure 中表示和解决问题打下坚实的基础。
 在打下这个基础之后，你将能够编写一些超级重要的代码。在最后一节中，你将通过创建一个霍比特人的模型，并编写一个函数将其打在一个随机的位置上，从而将一切联系起来。超级! 重要的!
 当你阅读本章时，我建议你在 REPL 中输入例子并运行它们。用一种新的语言编程是一种技能，就像约德尔舞或花样游泳一样，你必须通过练习来学习它。 请留意它!
@@ -253,10 +253,10 @@ Form 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识�
     
     <item>
       <title>Chapter2 如何使用 Emacs</title>
-      <link>/post/chapter2/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter2/</link>
       <pubDate>Thu, 13 Jan 2022 10:43:56 +0800</pubDate>
       
-      <guid>/post/chapter2/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter2/</guid>
       <description>如何使用 Emacs，一个优秀的 Clojure 编辑器 在你掌握 Clojure 的过程中，你的编辑器将是你最亲密的盟友。我强烈建议使用 Emacs，但你当然也可以使用任何你想要的编辑器。如果你不遵循本章中关于 Emacs 的详尽说明，或者你选择使用一个不同的编辑器，那么至少值得投入一些时间来设置你的编辑器，以便与 REPL 一起工作。我推荐的两个在社区中受到好评的替代品是Cursive和Nightcode。
 我推荐 Emacs 的原因是，它提供了与 Clojure REPL 的紧密集成，这使你可以在写作时立即尝试你的代码。这种紧密的反馈回路在学习 Clojure 和以后编写真正的 Clojure 程序时都很有用。Emacs 也很适合与任何 Lisp 方言一起工作；事实上，Emacs 是用一种叫做 Emacs Lisp（elisp）的 Lisp 方言编写的。
 在本章结束时，你的 Emacs 设置将看起来像图 2-1。
@@ -268,10 +268,10 @@ Form 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识�
     
     <item>
       <title>Chapter1 构建、运行和 REPL</title>
-      <link>/post/chapter1/</link>
+      <link>https://zhenfeng-zhu.github.io/post/chapter1/</link>
       <pubDate>Thu, 13 Jan 2022 10:26:48 +0800</pubDate>
       
-      <guid>/post/chapter1/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/chapter1/</guid>
       <description>构建、运行和 REPL 在本章中，你将预先投入少量时间来熟悉建立和运行 Clojure 程序的快速、傻瓜式方法。让一个真正的程序运行起来感觉很好。达到了这个里程碑，你就可以自由地进行实验，分享你的工作，并向那些仍在使用上个世纪的语言的同事幸灾乐祸。这将有助于保持你的积极性!
 你还将学习如何使用*Read-Eval-Print Loop（REPL）*在一个正在运行的 Clojure 进程中即时运行代码，这使你能够快速测试你对语言的理解并更有效地学习。
 但首先，我将简要地介绍 Clojure。接下来，我将介绍 Leiningen，这是 Clojure 事实上的标准构建工具。在本章结束时，你将知道如何做以下事情。
@@ -282,10 +282,10 @@ Form 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识�
     
     <item>
       <title>Introduction 简介</title>
-      <link>/post/introduction/</link>
+      <link>https://zhenfeng-zhu.github.io/post/introduction/</link>
       <pubDate>Thu, 13 Jan 2022 10:11:25 +0800</pubDate>
       
-      <guid>/post/introduction/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/introduction/</guid>
       <description>简介 在你的内心深处，你一直都知道你注定要学习 Clojure。 每当你高举着键盘，为一个难以理解的类层次结构而痛苦地哭泣时；每当你晚上躺在床上，为一个突变引起的海森堡虫而哭泣扰乱你的亲人时；每当一个竞赛条件使你拔掉更多你不断减少的头发时，你的某个秘密部分已经知道一定有一个更好的办法。
 现在，终于，你面前的教学材料将使你与你渴望已久的编程语言结合起来。
 学习一种新的编程语言：穿越四个迷宫的旅程 为了最大限度地发挥 Clojure 的作用，你需要在每个学习新语言的程序员面临的四个迷宫中找到自己的路。
@@ -300,10 +300,10 @@ Form 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识�
     
     <item>
       <title>Acknowledgments 致谢</title>
-      <link>/post/acknowledgments/</link>
+      <link>https://zhenfeng-zhu.github.io/post/acknowledgments/</link>
       <pubDate>Thu, 13 Jan 2022 10:06:10 +0800</pubDate>
       
-      <guid>/post/acknowledgments/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/acknowledgments/</guid>
       <description>致谢 有很多人帮助我诞生了这个奇怪的婴儿，我对他们的支持感到感激。
 首先，感谢我的妻子杰西，她为这本书绘制了插图，使它具有我所希望的视觉特性。也感谢你的支持，感谢你在我处于疯狂的作家模式时容忍我。(附注：通过一本编程书的封面感谢我的妻子，感觉很奇怪。）
 感谢我在麦肯锡的朋友和同事，他们阅读了早期的修订稿并鼓励我继续写作。其中最重要的是 Pat Shaughnessy、Alex Rothenberg、Thomas Newton、Jalil Fanaian、Chris Parker、Mark Daggett、Christian Lilley，以及 Mike Morreale。你们都太伟大了；请搬到 Durham。
@@ -315,10 +315,10 @@ Form 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识�
     
     <item>
       <title>Foreword 前言</title>
-      <link>/post/foreword/</link>
+      <link>https://zhenfeng-zhu.github.io/post/foreword/</link>
       <pubDate>Thu, 13 Jan 2022 10:04:46 +0800</pubDate>
       
-      <guid>/post/foreword/</guid>
+      <guid>https://zhenfeng-zhu.github.io/post/foreword/</guid>
       <description>前言 当你阅读这本搞笑的书时，你会在某个时刻经历一个非常严肃的时刻。在了解了一些 Clojure 之后，编程变得更加有趣。这也是你在这本书上的投资，包括金钱和时间，得到回报的时刻&amp;ndash;有趣。
 幽默与严肃性有一定的关系。对严肃的事情开玩笑是合适的，但只有在适当的时间过去之后。例如，当我想起我最喜欢的叔叔的最后一句话时，我花了很多年才能够破涕为笑。&amp;ldquo;拿着我的啤酒&amp;rdquo;。
 这本书的工作方式正好相反。它在严肃事件发生之前，甚至在严肃事件发生期间，适时地指出了真正有趣的事情&amp;ndash;那一刻你意识到你因为 Clojure 而更喜欢编程。它在做到这一点的同时，并没有掩盖你将要学习的 Clojure 编程的深层技术层面。
