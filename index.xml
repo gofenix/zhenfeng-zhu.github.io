@@ -9,7 +9,24 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 23 Apr 2022 17:21:00 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Apr 2022 18:53:11 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lsp Intro</title>
+      <link>https://zhenfeng-zhu.github.io/post/lsp-intro/</link>
+      <pubDate>Sat, 30 Apr 2022 18:53:11 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/post/lsp-intro/</guid>
+      <description>为什么是语言服务器 语言服务器是一种特殊的 Visual Studio Code 扩展，为许多编程语言的编辑体验提供动力。通过语言服务器，你可以实现自动完成、错误检查（诊断）、跳转到定义，以及 VS Code 中支持的许多其他语言功能。
+然而，在实现对 VS Code 中语言功能的支持时，我们发现了三个常见的问题:
+首先，语言服务器通常是用他们的本地编程语言实现的，这给他们与具有 Node.js 运行时间的 VS Code 集成带来了挑战。
+此外，语言功能可能是资源密集型的。例如，为了正确验证一个文件，语言服务器需要解析大量的文件，为它们建立抽象语法树并进行静态程序分析。这些操作可能会产生大量的 CPU 和内存占用，我们需要确保 VS Code 的性能不受影响。
+最后，将多种语言工具与多种代码编辑器整合在一起，可能会涉及大量的工作。从语言工具的角度来看，他们需要适应具有不同 API 的代码编辑器。从代码编辑器的角度来看，他们不能期望从语言工具中获得任何统一的 API。这使得在 N 个代码编辑器中实现对 M 种语言的语言支持成为 M*N 的工作。
+为了解决这些问题，微软制定了语言服务器协议，它使语言工具和代码编辑器之间的通信标准化。这样，语言服务器可以用任何语言实现，并在自己的进程中运行，以避免性能成本，因为它们通过语言服务器协议与代码编辑器通信。此外，任何符合 LSP 的语言工具都可以与多个符合 LSP 的代码编辑器集成，任何符合 LSP 的代码编辑器都可以轻易地接上多个符合 LSP 的语言工具。LSP 对于语言工具供应商和代码编辑器供应商来说都是一种共赢。
+实现一个语言服务器 概述 在 VS Code 中，一个语言服务器有两个部分：
+ 语言客户端。一个用 JavaScript/TypeScript 编写的普通 VS Code 扩展。这个扩展可以访问所有 VS Code 的命名空间 API。 语言服务器。一个在独立进程中运行的语言分析工具。  如上所述，在一个单独的进程中运行语言服务器有两个好处：
+ 分析工具可以用任何语言实现，只要它能按照语言服务器协议与语言客户端通信。 由于语言分析工具通常对 CPU 和内存的使用率很高，在单独的进程中运行它们可以避免性能成本。  下面是一个 VS Code 运行两个语言服务器扩展的例子：</description>
+    </item>
+    
     <item>
       <title>Crystal 1.4.0</title>
       <link>https://zhenfeng-zhu.github.io/post/crystal-1.4.0/</link>
