@@ -19,15 +19,15 @@
       <description>Lab 11 - 高级函数 - 使用 HMAC 的信任 前言 用于微服务的传统认证策略与函数的工作原理完全相同。在这个实验室中，我们将讨论使用共享秘密和基于哈希的消息验证码（HMAC）的几种可用方法之一。有关其他认证策略和想法，请参见。openfaas-function-auth
 这绝不是一个广泛的清单，安全和认证是一个复杂的领域，最好留给专家使用经过试验的方法。
 准备好你的环境 在开始这个实验之前，创建一个新的文件夹
-mkdir -p lab11\`bash  &amp;amp;&amp;amp; cd lab11 也要确保你的faas-cli&#39;版本是0.7.4&amp;rsquo;或以上，使用以下命令。
-faas-cli version 什么是 HMAC 如果没有任何形式的认证或信任，我们的函数可能会暴露给任何能猜到其 URL 的人。如果我们的函数可以在互联网或本地网络上访问，那么它们就可能被坏的行为者调用。默认情况下，函数会对任何请求做出响应。然而，如果我们想控制对函数的访问，我们可以使用基于哈希的消息验证码（HMAC）来验证信息的来源。
+1 2  mkdir -p lab11\`bash  &amp;amp;&amp;amp; cd lab11   也要确保你的faas-cli&#39;版本是0.7.4&amp;rsquo;或以上，使用以下命令。
+1  faas-cli version   什么是 HMAC 如果没有任何形式的认证或信任，我们的函数可能会暴露给任何能猜到其 URL 的人。如果我们的函数可以在互联网或本地网络上访问，那么它们就可能被坏的行为者调用。默认情况下，函数会对任何请求做出响应。然而，如果我们想控制对函数的访问，我们可以使用基于哈希的消息验证码（HMAC）来验证信息的来源。
 来自[alexellis/hmac]（https://github.com/alexellis/hmac）。
  HMAC 使用发送方/接收方提前共享的对称密钥。发送方在想要传输信息时将产生一个哈希值&amp;ndash;该数据与有效载荷一起发送。然后，收件人将用共享密钥签署有效载荷，如果哈希值匹配，则假定有效载荷来自发件人。
  这样我们就可以避免我们的函数被无效的甚至是危险的信息所调用。
 使用 HMAC 我们将使用 faas-cli 提供的--sign标志来包含一个头，其中包含使用我们用--key标志提供的共享密钥创建的散列信息。
  注意: --sign和--key必须同时存在。
  让我们首先通过部署-env函数来检查该标志的作用，该函数将打印函数中可访问的所有环境变量。
-faas-cli deploy --name env --fprocess=&amp;#34;env&amp;#34; --image=&amp;#34;function/alpine:new&amp;#34;  调用不带--sign标志的函数。  $ echo &amp;#34;The message&amp;#34; | faas-cli invoke env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin HOSTNAME=d2c1a2cb20c2 fprocess=env HOME=/root Http_X_Call_Id=b84947c6-2970-4fcf-ba3b-66dde6943999 Http_X_Forwarded_For=10.255.0.2:34974 Http_X_Forwarded_Host=127.0.0.1:8080 Http_Content_Length=0 Http_Accept_Encoding=gzip Http_Content_Type=text/plain Http_User_Agent=Go-http-client/1.</description>
+1  faas-cli deploy --name env --fprocess=&amp;#34;env&amp;#34; --image=&amp;#34;function/alpine:new&amp;#34;    调用不带--sign标志的函数。  1 2 3 4 5 6 7 8 9 10 11 12 13 14  $ echo &amp;#34;The message&amp;#34; | faas-cli invoke env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin HOSTNAME=d2c1a2cb20c2 fprocess=env HOME=/root Http_X_Call_Id=b84947c6-2970-4fcf-ba3b-66dde6943999 Http_X_Forwarded_For=10.</description>
     </item>
     
     <item>
@@ -37,16 +37,15 @@ faas-cli deploy --name env --fprocess=&amp;#34;env&amp;#34; --image=&amp;#34;fun
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab10/</guid>
       <description>Lab 10 - 高级函数 - 秘密 在开始本实验室之前，为你的文件创建一个新的文件夹。由于本实验室是建立在先前的实验室基础上的，因此请复制 lab5。
-$ cp -r lab5 lab10\  &amp;amp;&amp;amp; cd lab10 使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。
+1 2  $ cp -r lab5 lab10\  &amp;amp;&amp;amp; cd lab10   使用秘密 实验室 5研究了issue-bot如何从环境变量（auth_token）获得 GitHub 的*个人访问令牌。 另一种方法是使用机密来存储敏感信息。
 来自 Docker 文档。
  &amp;hellip; 秘密是一团数据，如密码、SSH 私钥、SSL 证书或其他数据，不应通过网络传输或未经加密存储在 Docker 文件或应用程序的源代码中。
  这是一个比环境变量更安全的选择。环境变量更容易使用，但最适合于非保密的配置项目。 似乎很适合用于存储auth_token值。
 请参阅docs中关于秘密的更多信息和它的设计。
 创建一个秘密  秘密名称必须遵循 DNS-1123 惯例，由小写字母数字字符或&amp;rsquo;-&amp;lsquo;组成，并且必须以一个字母数字字符开始和结束
  从一个终端运行以下命令。
-echo -n &amp;lt;auth_token&amp;gt; | faas-cli secret create auth-token 测试秘密是否被创建。
-faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。
- kubectl get secret auth-token -n openfaas-fn -o json  注意：如果你在远程网关上部署你的函数，确保你在你用于网关的虚拟机上创建你的秘密。</description>
+1  echo -n &amp;lt;auth_token&amp;gt; | faas-cli secret create auth-token   测试秘密是否被创建。
+1  faas-cli secret ls    注意：请记住，-g标志可以在网关之间轻松切换。 这也适用于秘密。</description>
     </item>
     
     <item>
@@ -65,7 +64,7 @@ faas-cli secret ls  注意：请记住，-g标志可以在网关之间轻松切�
 你可以通过设置com.openfaas.scale.max来控制一个函数可以产生的最大复制量，目前默认值是20。
  注意: 如果你把com.openfaas.scale.min和com.openfaas.scale.max设置成相同的值，你就会禁用自动缩放函数。
  查看 Prometheus 你需要运行这个端口转发命令，以便能够在http://127.0.0.1:9090访问 Prometheus。
-kubectl port-forward deployment/prometheus 9090:9090 -n openfaas 现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code=&amp;quot;200&amp;quot;} [20s])作为查询来实现。导致一个看起来像这样的页面。</description>
+1  kubectl port-forward deployment/prometheus 9090:9090 -n openfaas   现在添加一个所有成功调用部署的函数的图。我们可以通过执行rate( gateway_function_invocation_total{code=&amp;quot;200&amp;quot;} [20s])作为查询来实现。导致一个看起来像这样的页面。</description>
     </item>
     
     <item>
@@ -75,15 +74,15 @@ kubectl port-forward deployment/prometheus 9090:9090 -n openfaas 现在添加一
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab8/</guid>
       <description>Lab 8 - 高级函数 - 超时 在开始这个实验之前，为你的文件创建一个新的文件夹。
-$ mkdir -p lab8 \  &amp;amp;&amp;amp; cd lab8 用read_timeout扩展超时时间 timeout对应于一个函数可以运行多长时间，直到被执行。它对防止分布式系统中的误操作很重要。
+1 2  $ mkdir -p lab8 \  &amp;amp;&amp;amp; cd lab8   用read_timeout扩展超时时间 timeout对应于一个函数可以运行多长时间，直到被执行。它对防止分布式系统中的误操作很重要。
 有几个地方可以为你的函数配置超时，在每个地方都可以通过使用环境变量来完成。
   函数超时
   read_timeout - 允许函数通过 HTTP 读取一个请求的时间
   write_timeout - 允许函数在 HTTP 上写一个响应的时间
   exec_timeout - 一个函数在被终止前可以运行的最大时间。
   API 网关的默认时间是 20 秒，所以我们来测试一下在一个函数上设置一个更短的超时时间。
-faas-cli new --lang python3 sleep-for --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑handler.py。
-import time import os  def handle(req):  &amp;#34;&amp;#34;&amp;#34;handle a request to the function Args: req (str): request body &amp;#34;&amp;#34;&amp;#34;   sleep_duration = int(os.</description>
+1  faas-cli new --lang python3 sleep-for --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34;   编辑handler.py。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14  import time import os  def handle(req):  &amp;#34;&amp;#34;&amp;#34;handle a request to the function Args: req (str): request body &amp;#34;&amp;#34;&amp;#34;   sleep_duration = int(os.</description>
     </item>
     
     <item>
@@ -93,12 +92,12 @@ import time import os  def handle(req):  &amp;#34;&amp;#34;&amp;#34;handle a req
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab7/</guid>
       <description>实验 7&amp;ndash;异步函数 在开始这个实验之前，为你的文件创建一个新的文件夹。
-$ mkdir -p lab7 \  &amp;amp;&amp;amp; cd lab7 同步与异步地调用一个函数 当你同步调用一个函数时，一个连接会通过网关连接到你的函数，并且在整个执行过程中保持开放。同步调用是*阻塞的，所以你应该看到你的客户端暂停，变得不活跃，直到该函数完成其任务。
+1 2  $ mkdir -p lab7 \  &amp;amp;&amp;amp; cd lab7   同步与异步地调用一个函数 当你同步调用一个函数时，一个连接会通过网关连接到你的函数，并且在整个执行过程中保持开放。同步调用是*阻塞的，所以你应该看到你的客户端暂停，变得不活跃，直到该函数完成其任务。
  网关使用的路由是。/function/&amp;lt;function_name&amp;gt;。 你必须等待，直到它完成 你在调用后得到结果 你知道它是通过还是失败  异步任务以类似的方式运行，但有一些区别。
  网关使用不同的路由：/async-function/&amp;lt;function_name&amp;gt;。 客户端从网关得到一个立即的202 接受的响应。 该函数稍后使用一个队列工作器来调用 默认情况下，结果被丢弃  让我们试一试快速演示。
-faas-cli new --lang dockerfile long-task --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑long-task/Dockerfile并将 fprocess 改为sleep 1。
+1  faas-cli new --lang dockerfile long-task --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34;   编辑long-task/Dockerfile并将 fprocess 改为sleep 1。
 现在构建、部署并同步调用你的函数 10 次，像这样。
-echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task 现在异步调用该函数 10 次。</description>
+1 2 3 4 5 6 7 8 9 10  echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task   现在异步调用该函数 10 次。</description>
     </item>
     
     <item>
@@ -108,11 +107,9 @@ echo -n &amp;#34;&amp;#34; | faas-cli invoke long-task echo -n &amp;#34;&amp;#34
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab6/</guid>
       <description>实验 6&amp;ndash;你的函数的 HTML 在开始这个实验之前，为你的文件创建一个新的文件夹。
-$ mkdir -p lab6\  &amp;amp;&amp;amp; cd lab6 从一个函数中生成并返回基本的 HTML 函数可以返回 HTML，并将Content-Type设置为text/html。因此，函数返回的 HTML 可以通过浏览器进行渲染。让我们创建一个简单的函数，生成并返回一个基本的 HTML。
-faas-cli new --lang python3 show-html --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34; 编辑handler.py。
-def handle(req):  &amp;#34;&amp;#34;&amp;#34;handle a request to the function Args: req (str): request body &amp;#34;&amp;#34;&amp;#34;   html = &amp;#39;&amp;lt;html&amp;gt;&amp;lt;h2&amp;gt;Hi, from your function!&amp;lt;/h2&amp;gt;&amp;lt;/html&amp;gt;&amp;#39;   return html 这将返回 HTML 给调用者。 还有一件事我们应该做的是设置响应的Content-Type&#39;。我们100%确定这个函数将返回一个HTML，所以Content-Type应该总是text/html。我们可以利用show-html.yml文件中的environment`部分来设置。
-编辑show-html.yml。
-provider:  name: openfaas  gateway: http://127.0.0.1:8080  functions:  show-html:  lang: python3  handler: .</description>
+1 2  $ mkdir -p lab6\  &amp;amp;&amp;amp; cd lab6   从一个函数中生成并返回基本的 HTML 函数可以返回 HTML，并将Content-Type设置为text/html。因此，函数返回的 HTML 可以通过浏览器进行渲染。让我们创建一个简单的函数，生成并返回一个基本的 HTML。
+1  faas-cli new --lang python3 show-html --prefix=&amp;#34;&amp;lt;your-docker-username-here&amp;gt;&amp;#34;   编辑handler.py。
+1 2 3 4 5 6 7 8 9  def handle(req):  &amp;#34;&amp;#34;&amp;#34;handle a request to the function Args: req (str): request body &amp;#34;&amp;#34;&amp;#34;   html = &amp;#39;&amp;lt;html&amp;gt;&amp;lt;h2&amp;gt;Hi, from your function!&amp;lt;/h2&amp;gt;&amp;lt;/html&amp;gt;&amp;#39;   return html   这将返回 HTML 给调用者。 还有一件事我们应该做的是设置响应的Content-Type&#39;。我们100%确定这个函数将返回一个HTML，所以Content-Type应该总是text/html。我们可以利用show-html.</description>
     </item>
     
     <item>
@@ -122,7 +119,7 @@ provider:  name: openfaas  gateway: http://127.0.0.1:8080  functions:  show-html
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab5/</guid>
       <description>Lab 5 - 创建一个 GitHub 机器人 在开始这个实验之前，为你的文件创建一个新的文件夹。
-$ mkdir -p lab5\  &amp;amp;&amp;amp; cd lab5 我们将使用 OpenFaaS 的函数来创建一个名为 issue-bot的 GitHub 机器人。
+1 2  $ mkdir -p lab5\  &amp;amp;&amp;amp; cd lab5   我们将使用 OpenFaaS 的函数来创建一个名为 issue-bot的 GitHub 机器人。
 问题机器人的工作是通过分析 描述 字段的情绪来分流新的问题，然后它将应用一个积极或审查的标签。这将有助于维护者在繁忙的工作中，可以优先考虑哪些问题需要首先处理。
 问题机器人的图示](./diagram/issue-bot.png)
 获取一个 GitHub 账户   注册一个GitHub 账户，如果你还没有一个账户。
@@ -132,7 +129,7 @@ $ mkdir -p lab5\  &amp;amp;&amp;amp; cd lab5 我们将使用 OpenFaaS 的函数�
 inlets 有一个叫做 inlets-operator 的 Kubernetes 集成。你可以用它来设置 LoadBalancers 或带有 TLS 的 Ingress。它的工作原理是为你创建一个云虚拟机，并在那里运行一个隧道服务器，然后为你运行一个隧道客户端作为一个 Pod，你就可以获得传入流量。
 在你喜欢的云提供商（如 DigitalOcean）的 API 页面下创建一个写入访问令牌，然后将内容保存到digital-ocean-api-token.txt。
 设置完订阅后，将你的密钥保存到$HOME/.inlets/LICENSE，然后运行以下程序。
-arkade install inlets-operator \  --provider digitalocean \  --region lon1 \  --token-file $HOME/digital-ocean-api-token.</description>
+1 2 3 4  arkade install inlets-operator \  --provider digitalocean \  --region lon1 \  --token-file $HOME/digital-ocean-api-token.</description>
     </item>
     
     <item>
@@ -142,15 +139,15 @@ arkade install inlets-operator \  --provider digitalocean \  --region lon1 \  --
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab2/</guid>
       <description>实验室 2&amp;ndash;测试东西 在开始这个实验之前，创建一个新的文件夹。
-$ mkdir -p lab2 \  &amp;amp;&amp;amp; cd lab2 使用 UI 门户 现在你可以测试一下 OpenFaaS 的用户界面了。
+1 2  $ mkdir -p lab2 \  &amp;amp;&amp;amp; cd lab2   使用 UI 门户 现在你可以测试一下 OpenFaaS 的用户界面了。
 如果你已经设置了一个$OPENFAAS_URL，那么就可以得到这个 URL，然后点击它。
-echo $OPENFAAS_URL http://127.0.0.1:31112 如果你没有设置&amp;quot;$OPENFAAS_URL&amp;quot;，那么默认情况下是这样的。http://127.0.0.1:8080.
+1 2  echo $OPENFAAS_URL http://127.0.0.1:31112   如果你没有设置&amp;quot;$OPENFAAS_URL&amp;quot;，那么默认情况下是这样的。http://127.0.0.1:8080.
 我们可以部署一些样本函数，然后用它们来测试一下。
-faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 你可以在用户界面中试用它们，比如将 Markdown 代码转换为 HTML 的 Markdown 函数。
+1  faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml   你可以在用户界面中试用它们，比如将 Markdown 代码转换为 HTML 的 Markdown 函数。
 在Request字段中键入以下内容。
-## The **OpenFaaS** _workshop_ 现在点击Invoke，看到响应出现在屏幕的下半部分。
+1  ## The **OpenFaaS** _workshop_   现在点击Invoke，看到响应出现在屏幕的下半部分。
 即。
-&amp;lt;h2&amp;gt;The &amp;lt;strong&amp;gt;OpenFaaS&amp;lt;/strong&amp;gt; &amp;lt;em&amp;gt;workshop&amp;lt;/em&amp;gt;&amp;lt;/h2&amp;gt; 你将看到以下字段显示。
+1  &amp;lt;h2&amp;gt;The &amp;lt;strong&amp;gt;OpenFaaS&amp;lt;/strong&amp;gt; &amp;lt;em&amp;gt;workshop&amp;lt;/em&amp;gt;&amp;lt;/h2&amp;gt;   你将看到以下字段显示。
  状态 - 该函数是否准备好运行。在状态显示准备好之前，你将不能从用户界面调用该函数。 Replicas - 在集群中运行的函数的副本数量 镜像 - 发布在 Docker Hub 或 Docker 资源库中的 Docker 图像名称和版本 调用次数 - 这显示了该函数被调用的次数，每 5 秒更新一次  点击Invoke若干次，看到Invocation count的增加。</description>
     </item>
     
@@ -161,8 +158,7 @@ faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab1b/</guid>
       <description>Lab 1 - 用 Kubernetes 设置 OpenFaaS 安装最新的 kubectl 使用下面的说明或官方文档为你的操作系统安装kubectl。
- Linux  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  MacOS  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/  Windows  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/windows/amd64/kubectl.exe chmod +x kubectl.exe mkdir -p $HOME/bin/ mv kubectl $HOME/bin/ 设置一个 Kubernetes 集群 你可以在使用 Kubernetes 的同时按照实验进行操作，但你可能需要沿途做一些小改动。网关的服务地址从http://gateway:8080改为http://gateway.openfaas:8080。这些差异已经尽可能地被记录下来，每个实验室都提供了替代方案。
-在你的笔记本电脑上创建一个本地集群 k3s 使用 k3d 如果你的电脑上有 Docker，那么你可以使用 Rancher 实验室托管的k3d工具。它安装了一个轻量级的 Kubernetes 版本，叫做k3s，并在 Docker 容器中运行，这意味着它可以在任何有 Docker 的电脑上运行。</description>
+ Linux  1 2 3 4  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/linux/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/    MacOS  1 2 3 4  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.googleapis.com/kubernetes-release/release/$VER/bin/darwin/amd64/kubectl chmod +x kubectl mv kubectl /usr/local/bin/    Windows  1 2 3 4 5  export VER=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) curl -LO https://storage.</description>
     </item>
     
     <item>
@@ -222,7 +218,7 @@ Docker 适用于 Mac
 下面的视频展示了如何创建 OpenFaaS 栈，并在实际中使用：
 https://www.youtube.com/watch?v=kX8mXv5d1qg&amp;amp;feature=youtu.be
 这里是创建栈的compose.yml文件：
-version: &amp;#34;2&amp;#34; services:  alertmanager:  image: functions/alertmanager:latest  labels:  io.rancher.container.pull_image: always  stop_signal: SIGTERM  restart: always  stdin_open: true  tty: true  scale: 1  faas-rancher:  environment:  - CATTLE_URL=${CATTLE_URL}  - CATTLE_ACCESS_KEY=${CATTLE_ACCESS_KEY}  - CATTLE_SECRET_KEY=${CATTLE_SECRET_KEY}  - FUNCTION_STACK_NAME=faas-functions  image: kenfdev/faas-rancher:v3  labels:  io.rancher.container.pull_image: always  stop_signal: SIGTERM  restart: always  stdin_open: true  tty: true  scale: 1  gateway:  environment:  - functions_provider_url=http://faas-rancher:8080/  image: functions/gateway:0.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49  version: &amp;#34;2&amp;#34; services:  alertmanager:  image: functions/alertmanager:latest  labels:  io.</description>
     </item>
     
     <item>
@@ -232,14 +228,14 @@ version: &amp;#34;2&amp;#34; services:  alertmanager:  image: functions/alertman
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab4/</guid>
       <description>实验 4&amp;ndash;更深入地使用函数 在开始本实验之前，为你的文件创建一个新的文件夹。由于本实验是建立在早期实验的基础上的，所以请复制 lab3。
-$ cp -r lab3 lab4\  &amp;amp;&amp;amp; cd lab4 通过环境变量注入配置 能够控制一个函数在运行时的行为方式是很有用的，我们至少可以通过两种方式来实现这一点。
+1 2  $ cp -r lab3 lab4\  &amp;amp;&amp;amp; cd lab4   通过环境变量注入配置 能够控制一个函数在运行时的行为方式是很有用的，我们至少可以通过两种方式来实现这一点。
 在部署时 *在部署时设置环境变量
 我们在Lab 3中用write_debug做了这个 - 你也可以在这里设置任何你想要的自定义环境变量 - 例如，如果你想为你的hello world函数配置一种语言，你可以引入一个spoken_language变量。
 使用 HTTP 上下文&amp;ndash;querystring / headers *使用 querystring 和 HTTP headers
 另一个更动态的、可以在每个请求层面上改变的选项是使用查询字符串和 HTTP 头信息，两者都可以通过faas-cli或curl传递。
 这些头信息通过环境变量暴露出来，所以它们很容易在你的函数中被使用。所以任何头信息都以Http_为前缀，所有-连字符都被替换成_下划线。
 让我们用 querystring 和一个列出所有环境变量的函数来试试。
- 使用 BusyBox 的内置命令，部署一个打印环境变量的函数。  faas-cli deploy --name env --fprocess=&amp;#34;env&amp;#34; --image=&amp;#34;function/alpine:latest&amp;#34;  用一个查询字符串调用该函数。  $ echo &amp;#34;&amp;#34; | faas-cli invoke env --query workshop=1 PATH=/usr/local/bin:/usr/local/bin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_Connection=close Http_Content_Type=text/plain Http_X_Call_Id=cdbed396-a20a-43fe-9123-1d5a122c976d Http_X_Forwarded_For=10.</description>
+ 使用 BusyBox 的内置命令，部署一个打印环境变量的函数。  1  faas-cli deploy --name env --fprocess=&amp;#34;env&amp;#34; --image=&amp;#34;function/alpine:latest&amp;#34;    用一个查询字符串调用该函数。  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  $ echo &amp;#34;&amp;#34; | faas-cli invoke env --query workshop=1 PATH=/usr/local/bin:/usr/local/bin:/usr/bin:/sbin:/bin HOSTNAME=05e8db360c5a fprocess=env HOME=/root Http_Connection=close Http_Content_Type=text/plain Http_X_Call_Id=cdbed396-a20a-43fe-9123-1d5a122c976d Http_X_Forwarded_For=10.</description>
     </item>
     
     <item>
@@ -249,10 +245,9 @@ $ cp -r lab3 lab4\  &amp;amp;&amp;amp; cd lab4 通过环境变量注入配置 �
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas-workshop-lab3/</guid>
       <description>实验 3&amp;ndash;函数介绍 在开始这个实验之前，为你的文件创建一个新的文件夹。
-$ mkdir -p lab3\`s  &amp;amp;&amp;amp; cd lab3 创建一个新的函数 有两种方法来创建一个新的函数。
+1 2  $ mkdir -p lab3\`s  &amp;amp;&amp;amp; cd lab3   创建一个新的函数 有两种方法来创建一个新的函数。
  使用一个内置的或社区的代码模板建立一个函数（默认情况下） 使用一个现有的二进制文件并将其作为你的函数（高级）  构建或生成一个新函数 在用模板创建新函数之前，请确保你从 GitHub 上提取了模板。
-$ faas-cli template pull  Fetch templates from repository: https://github.com/openfaas/templates.git  Attempting to expand templates from https://github.com/openfaas/templates.git 2021/08/25 15:58:10 Fetched 13 template(s) : [csharp dockerfile go java11 java11-vert-x node node12 node14 php7 python python3 python3-debian ruby] from https://github.com/openfaas/templates.git 之后，要想知道哪些语言是可用的，请键入。
-$ faas-cli new --list Languages available as templates: - csharp - dockerfile - go - java11 - java11-vert-x - node - node12 - node14 - php7 - python - python3 - python3-debian - ruby 或者创建一个包含Dockerfile的文件夹，然后在 YAML 文件中选择 Dockerfile语言类型。</description>
+1 2 3 4 5  $ faas-cli template pull  Fetch templates from repository: https://github.com/openfaas/templates.git  Attempting to expand templates from https://github.com/openfaas/templates.git 2021/08/25 15:58:10 Fetched 13 template(s) : [csharp dockerfile go java11 java11-vert-x node node12 node14 php7 python python3 python3-debian ruby] from https://github.com/openfaas/templates.git   之后，要想知道哪些语言是可用的，请键入。</description>
     </item>
     
     <item>
@@ -262,18 +257,14 @@ $ faas-cli new --list Languages available as templates: - csharp - dockerfile - 
       
       <guid>https://zhenfeng-zhu.github.io/post/openfaas/</guid>
       <description>对于 mac 环境来讲，首先安装新版 docker:
-brew cask install docker 然后启动 docker。
+1  brew cask install docker   然后启动 docker。
 命令行登陆 docker hub
-docker login 启动 docker swarm
-docker swarm init 安装 faas-cli
-brew install faas-cli clone 下来代码：
-git clone https://github.com/openfaas/faas 然后执行
-./deploy_stack.sh 部署一些示例
-faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml 使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。
-安装 grafana 进行监控
-docker service create -d \ --name=grafana \ --publish=3000:3000 \ --network=func_functions \ stefanprodan/faas-grafana:4.6.3 浏览器打开： http://127.0.0.1:3000 登陆 admin admin 查看。
-常用命令：
-faas-cli new --list faas-cli build -f .</description>
+1  docker login   启动 docker swarm
+1  docker swarm init   安装 faas-cli
+1  brew install faas-cli   clone 下来代码：
+1  git clone https://github.com/openfaas/faas   然后执行
+1  ./deploy_stack.sh   部署一些示例
+1  faas-cli deploy -f https://raw.githubusercontent.com/openfaas/faas/master/stack.yml   使用浏览器打开 http://127.0.0.1:8080 就可以看到 ui 界面了。</description>
     </item>
     
   </channel>

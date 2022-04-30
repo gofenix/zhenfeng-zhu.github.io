@@ -47,7 +47,7 @@ Unix 提供了我们都很熟悉的抽象，以至于我们认为它们是理所
       <description>用 Leiningen 构建和开发 用任何语言编写软件都需要生成工件，即可执行文件或库包，用于部署或共享。它还涉及到管理依赖工件，也称为依赖，以确保它们被加载到你正在构建的项目中。Clojurists 中最流行的管理工件的工具是 Leiningen，本附录将告诉你如何使用它。你还将学习如何使用 Leiningen 来完全增强你的开发经验，使用插件。
 Artifact Ecosystem 因为 Clojure 托管在 Java 虚拟机（JVM）上，所以 Clojure 的工件是以 JAR 文件的形式分发的（在第 12 章有介绍）。Java 地已经有一个处理 JAR 文件的完整的工件生态系统，Clojure 也使用它。神器生态系统并不是一个官方的编程术语；我用它来指代用于识别和分发神器的一套工具、资源和惯例。Java 的生态系统是围绕着 Maven 构建工具发展起来的，由于 Clojure 使用这个生态系统，你会经常看到对 Maven 的引用。Maven 是一个巨大的工具，可以执行各种古怪的项目管理任务。值得庆幸的是，你不需要获得 Maven 学的博士学位就能成为一名有效的 Clojurist。你需要知道的唯一特征是，Maven 规定了一种识别 Clojure 项目所遵守的工件的模式，它还规定了如何在 Maven 仓库中托管这些工件，Maven *仓库只是存储工件以供分发的服务器。
 Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个版本。你可以在project.clj文件中为你的项目指定这些。以下是你在第一章创建的clojure-noob项目的project.clj第一行的内容。
-(defproject clojure-noob &amp;#34;0.1.0-SNAPSHOT&amp;#34; clojure-noob是你项目的组 ID 和工件 ID，&amp;quot;0.1.0-SNAPSHOT&amp;quot;是其版本。一般来说，版本是永久性的；如果你将一个版本为 0.1.0 的工件部署到存储库，你不能对该工件进行修改并使用相同的版本号进行部署。您需要改变版本号。(许多程序员喜欢 Semantic Versioning 系统，您可以在*Semantic Versioning 2.0.0 | Semantic Versioning.*中阅读到这一系统。） 如果你想表明该版本是一个正在进行的工作，并且你计划不断地更新它，你可以在你的版本号后面加上-SNAPSHOT。
+1  (defproject clojure-noob &amp;#34;0.1.0-SNAPSHOT&amp;#34;   clojure-noob是你项目的组 ID 和工件 ID，&amp;quot;0.1.0-SNAPSHOT&amp;quot;是其版本。一般来说，版本是永久性的；如果你将一个版本为 0.1.0 的工件部署到存储库，你不能对该工件进行修改并使用相同的版本号进行部署。您需要改变版本号。(许多程序员喜欢 Semantic Versioning 系统，您可以在*Semantic Versioning 2.0.0 | Semantic Versioning.*中阅读到这一系统。） 如果你想表明该版本是一个正在进行的工作，并且你计划不断地更新它，你可以在你的版本号后面加上-SNAPSHOT。
 如果你想让你的组 ID 与你的工件 ID 不同，你可以用斜线将两者分开，像这样。</description>
     </item>
     
@@ -66,7 +66,7 @@ Identification Maven 工件需要一个组 ID，一个工件 ID，以及一个�
 因为 Clojure 的许多数据类型都依赖于 Java 的标准库，所以本章中使用了一点 Java。例如，Clojure 的字符串只是 Java 的字符串，是 Java 类java.lang.String的实例。要在 Java 中定义你自己的数据类型，你要使用类。Clojure 提供了额外的类型结构。 记录和类型。本书只涉及记录。
 在我们学习记录之前，让我们看看 Multimethods，这是我们定义多态行为的第一个工具。
 Multimethods Multimethods为你提供了一种直接的、灵活的方法，将多态引入你的代码中。使用 Multimethods，你可以通过定义一个调度函数将一个名字与多个实现联系起来，该函数产生调度值，用来决定使用哪个方法。调度函数就像餐厅里的主人。主人会问你一些问题，比如 &amp;ldquo;你有预订吗？&amp;ldquo;和 &amp;ldquo;聚会人数？&amp;quot;，然后给你安排相应的座位。同样，当你调用一个 Multimethods 时，调度函数将询问参数，并将它们发送到正确的方法，正如这个例子所显示的。
-(ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf [were-creature] (str (:name were-creature) &amp;#34; will howl and murder&amp;#34;)) ➌ (defmethod full-moon-behavior :simmons [were-creature] (str (:name were-creature) &amp;#34; will encourage people and sweat to the oldies&amp;#34;)) (full-moon-behavior {:were-type :wolf ➍ :name &amp;#34;Rachel from next door&amp;#34;}) ; =&amp;gt; &amp;#34;Rachel from next door will howl and murder&amp;#34; (full-moon-behavior {:name &amp;#34;Andy the baker&amp;#34; ➎ :were-type :simmons}) ; =&amp;gt; &amp;#34;Andy the baker will encourage people and sweat to the oldies&amp;#34; 这个 Multimethods 显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  (ns were-creatures) ➊ (defmulti full-moon-behavior (fn [were-creature] (:were-type were-creature))) ➋ (defmethod full-moon-behavior :wolf  [were-creature]  (str (:name were-creature) &amp;#34; will howl and murder&amp;#34;)) ➌ (defmethod full-moon-behavior :simmons  [were-creature]  (str (:name were-creature) &amp;#34; will encourage people and sweat to the oldies&amp;#34;))  (full-moon-behavior {:were-type :wolf ➍ :name &amp;#34;Rachel from next door&amp;#34;}) ; =&amp;gt; &amp;#34;Rachel from next door will howl and murder&amp;#34;  (full-moon-behavior {:name &amp;#34;Andy the baker&amp;#34; ➎ :were-type :simmons}) ; =&amp;gt; &amp;#34;Andy the baker will encourage people and sweat to the oldies&amp;#34;   这个 Multimethods 显示了你如何定义不同种类的狼人生物的满月行为。大家都知道狼人变成了狼，到处嚎叫着杀人。一种不太知名的狼人，即狼-西蒙斯，变成理查德-西蒙斯，烫着头发，到处跑，鼓励人们做最好的自己，为老人们流汗。你不想被这两种生物咬到，否则你就会变成它们。</description>
     </item>
     
     <item>
@@ -96,9 +96,9 @@ Clojure 的 core.async 库允许你在一个程序中创建多个独立进程。
 进程的入门 core.async 的核心是*进程，一个并发运行的逻辑单元，对事件做出反应。进程对应于我们对现实世界的心理模型：实体之间的互动和响应是独立的，没有某种中央控制机制的牵制。你把钱放进机器里，就会有一个热狗出来，所有这些都不需要光照派或老大哥来策划整个事情。这与你迄今为止一直在探索的并发性观点不同，在那里，你定义的任务要么只是控制主线程的扩展（例如，用pmap实现数据并行），要么是你没有兴趣与之交流的任务（如用future创建的一次性任务）。
 把自动售货机看成是一个进程可能很奇怪：自动售货机是名词和事物，而进程是动词和行为。为了获得正确的思维方式，可以尝试将现实世界的物体定义为其事件驱动的行为的总和。当一粒种子被浇水时，它就会发芽；当母亲看着她的新生儿时，她就会感受到爱；而当你观看《星战》第一集时，你会充满愤怒和绝望。如果你想变得超级哲学，可以考虑是否有可能将每个事物的本质定义为它所识别的事件的集合，以及它如何做出反应。现实是否只是热狗售卖机的组成？
 总之，我说得够多了! 让我们通过创建一些简单的过程，从理论上走向具体。首先，用 &amp;ldquo;lein new app playsync &amp;ldquo;创建一个新的 Leiningen 项目，名为playsync。然后，打开project.clj文件，将 core.async 添加到:dependenciesVector 中，使其内容如下。
-[[org.clojure/clojure &amp;#34;1.9.0&amp;#34;] [org.clojure/core.async &amp;#34;0.1.346.0-17112a-alpha&amp;#34;]] 注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
+1 2  [[org.clojure/clojure &amp;#34;1.9.0&amp;#34;] [org.clojure/core.async &amp;#34;0.1.346.0-17112a-alpha&amp;#34;]]   注意 自从我写完这篇文章后，core.async 的版本有可能有所进步。关于最新的版本，请查看 core.async 的 GitHub 项目页面。但为了这些练习的目的，请使用这里列出的版本。
 接下来，打开src/playsync/core.clj，使其看起来像这样。
-(ns playsync.core (:require [clojure.core.async :as a :refer [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;!! go chan buffer close! thread alts! alts!! timeout]])) 现在，当你在 REPL 中打开它时，你将拥有最常用的 core.async 函数供你使用。很好! 在创建像热狗售卖机那样复杂和革命性的东西之前，先创建一个进程，简单地打印它收到的消息。</description>
+1 2 3 4 5  (ns playsync.core  (:require [clojure.core.async  :as a  :refer [&amp;gt;! &amp;lt;! &amp;gt;!! &amp;lt;!! go chan buffer close!</description>
     </item>
     
     <item>
@@ -114,7 +114,7 @@ Rich Hickey 设计 Clojure 是为了专门解决共享访问易变状态所产�
  那里有什么？ 它是什么样子的？  为了引出 Clojure 和 OO 语言之间的差异，我将解释两种不同的拥抱僵尸的建模方式。与普通的僵尸不同，拥抱僵尸并不想要吞噬你的大脑。它只想用勺子舀你，也许还想闻闻你的脖子。这使得它的不死、摇晃、腐烂的状态更加悲惨。你怎么能试图杀死只想要爱的东西呢？谁是这里真正的怪物？
 面向对象的形而上学 OO 形而上学将拥抱僵尸视为存在于世界上的一个对象。这个对象的属性可能会随着时间的推移而改变，但它仍然被当作一个单一的、不变的对象。如果这看起来是一个完全明显的、没有争议的僵尸形而上学的方法，那么你可能没有在哲学入门课上花几个小时来争论一把椅子的存在意味着什么，以及什么真正使它首先成为一把椅子。
 棘手的部分是，拥抱的僵尸总是在变化。它的身体慢慢恶化。随着时间的推移，它对拥抱的不灭渴望越来越强烈。在 OO 术语中，我们会说拥抱僵尸是一个具有可改变状态的对象，它的状态是不断波动的。但是不管这个僵尸有多大的变化，我们仍然把它认定为同一个僵尸。下面是你如何在 Ruby 中对抱团僵尸进行建模和交互。
-class CuddleZombie # attr_accessor is just a shorthand way for creating getters and # setters for the listed instance variables attr_accessor :cuddle_hunger_level, :percent_deteriorated def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0) self.cuddle_hunger_level = cuddle_hunger_level self.percent_deteriorated = percent_deteriorated end end fred = CuddleZombie.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  class CuddleZombie  # attr_accessor is just a shorthand way for creating getters and  # setters for the listed instance variables  attr_accessor :cuddle_hunger_level, :percent_deteriorated   def initialize(cuddle_hunger_level = 1, percent_deteriorated = 0)  self.</description>
     </item>
     
     <item>
@@ -151,12 +151,9 @@ class CuddleZombie # attr_accessor is just a shorthand way for creating getters 
 在这一章中，你将彻底研究如何编写宏，从基本的例子开始，逐步提高复杂性。最后，你将戴上你的假想帽，用宏来验证你想象中的在线药水店的客户订单。
 在本章结束时，你将了解你用来编写宏的所有工具：引号、语法引号、解引号、解引号拼接（又称皮纳塔工具）和 gensym。你还会了解到对毫无戒心的宏作者来说隐藏着的危险：双重求值、变量捕获和宏感染。
 宏是必不可少的 在你开始编写宏之前，我想帮助你把它们放在适当的环境中。是的，宏比北极熊的脚趾甲还要酷，但你不应该把宏看成是一些深奥的工具，当你想对你的代码进行额外的花哨处理时，就把它拿出来。事实上，宏允许 Clojure 从一个很小的函数和特殊形式的核心中获得大量的内置功能。以when为例。 when有这样的一般形式。
-(when boolean-expression expression-1 expression-2 expression-3 ... expression-x) 你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
+1 2 3 4 5 6  (when boolean-expression  expression-1  expression-2  expression-3  ...  expression-x)   你可能认为when是一个像if一样的特殊形式。那么你猜怎么着？它不是! 在大多数其他语言中，你只能使用特殊的关键字来创建条件表达式，而没有办法创建你自己的条件运算符。然而，when实际上是一个宏。
 在这个宏扩展中，你可以看到when是用if和do来实现的。
-(macroexpand &amp;#39;(when boolean-expression expression-1 expression-2 expression-3)) ; =&amp;gt; (if boolean-expression (do expression-1 expression-2 expression-3)) 这表明宏是 Clojure 开发中不可或缺的一部分&amp;ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。
-解剖巨集 巨集定义看起来很像函数定义。它们有一个名称，一个可选的文档字符串，一个参数列表，以及一个主体。主体几乎总是返回一个列表。这是有道理的，因为宏是将数据结构转化为 Clojure 可以求值的形式的一种方式，而 Clojure 使用列表来表示函数调用、特殊形式调用和宏调用。你可以在宏主体中使用任何函数、宏或特殊形式，你调用宏就像调用函数或特殊形式一样。
-作为一个例子，这里有我们的老朋友infix宏。
-(defmacro infix &amp;#34;Use this macro when you pine for the notation of your childhood&amp;#34; [infixed] (list (second infixed) (first infixed) (last infixed))) 这个宏将一个列表重新排列成正确的 infix 记号顺序。下面是一个例子。</description>
+1 2 3 4 5 6 7 8  (macroexpand &amp;#39;(when boolean-expression  expression-1  expression-2  expression-3)) ; =&amp;gt; (if boolean-expression  (do expression-1  expression-2  expression-3))   这表明宏是 Clojure 开发中不可或缺的一部分&amp;ndash;它们甚至被用来提供基本操作。宏并不是为奇特的特殊情况而保留的；你应该把写宏看作是你工具包中的另一个工具。当你学会编写自己的宏时，你会发现它们是如何让你进一步扩展语言，使其适合你的特定问题领域的形状。</description>
     </item>
     
     <item>
@@ -168,10 +165,9 @@ class CuddleZombie # attr_accessor is just a shorthand way for creating getters 
       <description>Clojure 炼金术：读取器、求值器和宏 哲学家之石，与生命之药和伟哥一样，是炼金术传说中最著名的标本之一，因其能将铅转化为金而受到追捧。然而，Clojure 提供了一种工具，使哲学家的石头看起来只是一个小饰品：*宏。
 宏允许你将任意的表达式转化为有效的 Clojure，因此你可以扩展语言本身以满足你的需求。而且，你甚至不需要是一个穿长袍的老家伙或老太太来使用它们
 为了获得这种能力，请考虑这个微不足道的宏。
-(defmacro backwards [form] (reverse form)) (backwards (&amp;#34; backwards&amp;#34; &amp;#34; am&amp;#34; &amp;#34;I&amp;#34; str)) ; =&amp;gt; &amp;#34;I am backwards&amp;#34; backwards宏允许 Clojure 成功地 Eval 表达式(&amp;quot; backwards&amp;quot; &amp;quot; am&amp;quot; &amp;quot;I&amp;quot; str)，尽管它没有遵循 Clojure 的内置语法规则，这些规则要求表达式的操作数首先出现（更不用说表达式不能按相反顺序书写的规则）。如果没有 &amp;ldquo;向后&amp;rdquo;，这个表达式会比几千年来的炼金术士用他们的一生来追求不可能实现的长生不老的方法更难失败。有了`向后&amp;rsquo;，*你就创造了你自己的语法！*你扩展了 Clojure，这样你就可以随心所欲地写代码了 我告诉你，这比把铅变成金子要好得多!
+1 2 3 4 5 6  (defmacro backwards  [form]  (reverse form))  (backwards (&amp;#34; backwards&amp;#34; &amp;#34; am&amp;#34; &amp;#34;I&amp;#34; str)) ; =&amp;gt; &amp;#34;I am backwards&amp;#34;   backwards宏允许 Clojure 成功地 Eval 表达式(&amp;quot; backwards&amp;quot; &amp;quot; am&amp;quot; &amp;quot;I&amp;quot; str)，尽管它没有遵循 Clojure 的内置语法规则，这些规则要求表达式的操作数首先出现（更不用说表达式不能按相反顺序书写的规则）。如果没有 &amp;ldquo;向后&amp;rdquo;，这个表达式会比几千年来的炼金术士用他们的一生来追求不可能实现的长生不老的方法更难失败。有了`向后&amp;rsquo;，*你就创造了你自己的语法！*你扩展了 Clojure，这样你就可以随心所欲地写代码了 我告诉你，这比把铅变成金子要好得多!
 本章为你提供了编写自己的宏所需的概念基础，使你能够疯狂地编写自己的宏。它解释了 Clojure 求值模型的元素：读取器，求值器，和宏扩展器。这就像 Clojure 元素的周期表。想想周期表是如何揭示原子的特性的：同一列的元素行为相似，因为它们有相同的核电荷。如果没有元素周期表及其基础理论，我们就会像过去的炼金术士一样，随意地把东西混在一起，看看什么东西会爆炸。但是，随着对元素的深入了解，你可以看到为什么东西会爆炸，并学会如何有目的地炸毁东西。
-A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps）有一个不同于大多数其他语言的求值模型：它有一个两阶段的系统，它读文本源代码，产生 Clojure 数据结构。然后对这些数据结构进行*求值。Clojure 遍历数据结构，并根据数据结构的类型执行函数应用或 var 查找等操作。例如，当 Clojure 读取文本(+ 1 2)时，结果是一个列表数据结构，其第一个元素是一个+符号，后面是数字 1 和 2。这个数据结构被传递给 Clojure 的求值器，求值器查找+对应的函数，并将该函数应用于 1 和 2。
-在源代码、数据和求值之间有这种关系的语言被称为homoiconic（顺便说一句，如果你在浴室的镜子前熄灯说三次homoiconic，约翰-麦卡锡的幽灵就会出现并给你一个小括号）。同源语言使你能够将你的代码作为一组数据结构进行推理，你可以通过程序进行操作。为了说明这一点，让我们在编译的土地上走一圈。</description>
+A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps）有一个不同于大多数其他语言的求值模型：它有一个两阶段的系统，它读文本源代码，产生 Clojure 数据结构。然后对这些数据结构进行*求值。Clojure 遍历数据结构，并根据数据结构的类型执行函数应用或 var 查找等操作。例如，当 Clojure 读取文本(+ 1 2)时，结果是一个列表数据结构，其第一个元素是一个+符号，后面是数字 1 和 2。这个数据结构被传递给 Clojure 的求值器，求值器查找+对应的函数，并将该函数应用于 1 和 2。</description>
     </item>
     
     <item>
@@ -194,9 +190,8 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
 在 Clojure 中想象一个类似的设置是很有用的。我认为 Clojure 是将对象（如数据结构和函数）存储在一组巨大的编号架上。没有人能够直接知道一个对象被存储在哪个架子上。相反，我们给 Clojure 一个标识符，它用来检索该对象。
 为了使之成功，Clojure 必须维护我们的标识符和货架地址之间的关联。它通过使用namespaces来做到这一点。命名空间包含了人类友好的符号和书架地址的引用之间的 Map，被称为vars，很像卡片目录。
 从技术上讲，命名空间是 &amp;ldquo;clojure.lang.Namespace &amp;ldquo;类型的对象，你可以与它们互动，就像你可以与 Clojure 数据结构互动一样。例如，你可以用*ns*来引用当前的命名空间，你可以用(ns-name *ns*)来获得其名称。
-(ns-name *ns*) ; =&amp;gt; user 例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=&amp;gt;。
-当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。
-至于符号，你一直在使用它们，甚至没有意识到。例如，当你写(map inc [1 2])时，map和inc都是符号。符号是 Clojure 中的数据类型，我将在下一章中彻底解释它们。现在，你需要知道的是，当你给 Clojure 一个像map这样的符号时，它会在当前命名空间中找到相应的 var，得到一个架子上的地址，并为你从那个架子上检索一个对象&amp;ndash;在这里，就是map所指的那个函数。如果你想只使用符号本身，而不是它所指的东西，你必须引用它。引述任何 Clojure 的形式告诉 Clojure 不要求值它，而是把它当作数据。接下来的几个例子显示了当你引用一个 Form 时会发生什么。</description>
+1 2  (ns-name *ns*) ; =&amp;gt; user   例如，当你启动 REPL 时，你在user命名空间中（正如你在这里看到的）。提示符显示当前名称空间，使用user=&amp;gt;。
+当前名字空间的概念意味着你可以有多个名字空间，事实上 Clojure 允许你创建任意多的名字空间（尽管从技术上讲，你可以创建的名字数量可能有一个上限）。在 Clojure 程序中，你总是在个命名空间中。</description>
     </item>
     
     <item>
@@ -212,9 +207,8 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
  如果给出相同的参数，它总是返回相同的结果。这被称为引用透明度，你可以把它添加到你的 5 美元编程术语列表中。 它不能引起任何副作用。也就是说，该函数不能做出任何在函数本身之外可以观察到的改变&amp;ndash;例如，通过改变一个外部可访问的可改变对象或写到一个文件。  这些特性使你更容易推理你的程序，因为这些函数是完全隔离的，无法影响你系统的其他部分。当你使用它们时，你不必问自己，&amp;ldquo;我调用这个函数会破坏什么？&amp;rdquo; 它们也是一致的：你永远不需要搞清楚为什么给一个函数传递相同的参数会导致不同的返回值，因为这永远不会发生。
 纯函数和算术一样稳定，没有问题（你最后一次为两个数字相加而烦恼是什么时候？） 它们是巨大的函数小砖块，你可以自信地将其作为你程序的基础。让我们更详细地看看引用透明性和无副作用，看看它们到底是什么，以及它们是如何发挥作用的。
 纯函数是引用透明的 为了在调用相同参数时返回相同的结果，纯函数只依靠 1）自己的参数和 2）不可变的值来决定其返回值。例如，数学函数是引用透明的。
-(+ 1 2) ; =&amp;gt; 3 如果一个函数依赖于一个不可变的值，那么它就是引用透明的。字符串`&amp;rdquo;, Daniel-san &amp;ldquo;是不可变的，所以下面的函数也是引用透明的。
-(defn wisdom  [words]  (str words &amp;#34;, Daniel-san&amp;#34;))  (wisdom &amp;#34;Always bathe on Fridays&amp;#34;) ; =&amp;gt; &amp;#34;Always bathe on Fridays, Daniel-san&amp;#34; 相比之下，下面的函数在相同的参数下不会产生相同的结果；因此，它们在指称上是不透明的。任何依赖随机数生成器的函数都不可能是指称透明的。
-(defn year-end-evaluation  []  (if (&amp;gt; (rand) 0.5)  &amp;#34;You get a raise!</description>
+1 2  (+ 1 2) ; =&amp;gt; 3   如果一个函数依赖于一个不可变的值，那么它就是引用透明的。字符串`&amp;rdquo;, Daniel-san &amp;ldquo;是不可变的，所以下面的函数也是引用透明的。
+1 2 3 4 5 6  (defn wisdom  [words]  (str words &amp;#34;, Daniel-san&amp;#34;))  (wisdom &amp;#34;Always bathe on Fridays&amp;#34;) ; =&amp;gt; &amp;#34;Always bathe on Fridays, Daniel-san&amp;#34;   相比之下，下面的函数在相同的参数下不会产生相同的结果；因此，它们在指称上是不透明的。任何依赖随机数生成器的函数都不可能是指称透明的。</description>
     </item>
     
     <item>
@@ -246,9 +240,8 @@ A Overview of Clojure&amp;rsquo;s Evaluation Model Clojure（像所有的 Lisps�
 语法 Clojure 的语法很简单。像所有的 Lisp 一样，它采用了统一的结构、少量的特殊运算符，以及从藏在麻省理工学院下面的小括号矿井中不断提供的小括号，Lisp 就是在那里诞生的。
 Form 所有的 Clojure 代码都是以统一结构编写的。Clojure 可以识别两种结构。
  数据结构的字面表示（如数字、字符串、Map 和 Vector） 操作  我们使用术语form来指代有效的代码。我有时也会用表达式来指代 Clojure Form。但不要太纠结于术语。Clojure 求值每一个 Form，以产生一个值。这些字面意义的表达都是有效的 Form。
-1 &amp;#34;a string&amp;#34; [&amp;#34;a&amp;#34; &amp;#34;vector&amp;#34; &amp;#34;of&amp;#34; &amp;#34;strings&amp;#34;] 当然，你的代码很少包含自由浮动的字符，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的 Form 都是：开括号，操作符，操作数，闭括号。
-(operator operand1 operand2 ... operandn) 请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。
-(+ 1 2 3) ; =&amp;gt; 6 (str &amp;#34;It was the panda &amp;#34; &amp;#34;in the library &amp;#34; &amp;#34;with a dust buster&amp;#34;) ; =&amp;gt; &amp;#34;It was the panda in the library with a dust buster&amp;#34; 在第一个操作中，运算符+将操作数1、2和3相加。在第二个操作中，运算符str将三个字符串连接起来，形成一个新的字符串。这两种 Form 都是有效的。这里有一个不是 Form 的东西，因为它没有一个结束的小括号。</description>
+1 2 3  1 &amp;#34;a string&amp;#34; [&amp;#34;a&amp;#34; &amp;#34;vector&amp;#34; &amp;#34;of&amp;#34; &amp;#34;strings&amp;#34;]   当然，你的代码很少包含自由浮动的字符，因为它们本身实际上并不做什么。相反，你会在操作中使用字面符号。操作是你做事情的方式。所有操作的 Form 都是：开括号，操作符，操作数，闭括号。
+1  (operator operand1 operand2 ... operandn)   请注意，这里没有逗号。Clojure 使用空格来分隔操作数，它将逗号视为空格。下面是一些操作的例子。</description>
     </item>
     
     <item>
