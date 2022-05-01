@@ -9,7 +9,23 @@
       <link>https://zhenfeng-zhu.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 30 Apr 2022 18:53:11 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 May 2022 13:09:23 +0800</lastBuildDate><atom:link href="https://zhenfeng-zhu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lsp Practice</title>
+      <link>https://zhenfeng-zhu.github.io/post/lsp-practice/</link>
+      <pubDate>Sun, 01 May 2022 13:09:23 +0800</pubDate>
+      
+      <guid>https://zhenfeng-zhu.github.io/post/lsp-practice/</guid>
+      <description>我们在上一节主要讲了 lsp 的一些基本介绍和官网的例子，在这一讲中，我们自己来实现一个语言服务器。
+准备工作 首先安装 yo 和 generator-code，他们是 vscode 扩展开发的脚手架。
+1  npm install -g yo generator-code   然后
+1  yo code   选择 ts 模板，进行开发。
+修改 package.json 然后再 package.json 中这样改：
+1 2 3  &amp;#34;activationEvents&amp;#34;: [  &amp;#34;onLanguage:plaintext&amp;#34; ]   这段的意思就是在检测到时文本类型文件的时候，就启动插件。
+然后是设置 configuration：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25   &amp;#34;contributes&amp;#34;: {  &amp;#34;configuration&amp;#34;: {  &amp;#34;type&amp;#34;: &amp;#34;object&amp;#34;,  &amp;#34;title&amp;#34;: &amp;#34;Example configuration&amp;#34;,  &amp;#34;properties&amp;#34;: {  &amp;#34;languageServerExample.</description>
+    </item>
+    
     <item>
       <title>Lsp Intro</title>
       <link>https://zhenfeng-zhu.github.io/post/lsp-intro/</link>
