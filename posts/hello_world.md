@@ -6,7 +6,7 @@ publish_date: 2022-12-20
 This is my first blog post!
 
 ```js
-console.log("hello world")
+console.log("hello world");
 ```
 
 ```go
