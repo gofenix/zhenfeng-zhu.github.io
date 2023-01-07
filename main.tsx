@@ -9,6 +9,7 @@ blog({
   // section: <section>Your custom section</section>,
   // footer: <footer>Your custom footer</footer>,
   avatar: "./avatar.jpeg",
+  favicon: "./favicon.ico",
   avatarClass: "rounded-full",
   author: "Fenix",
   theme: "auto",
