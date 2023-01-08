@@ -94,7 +94,7 @@ http import 等等。
 当然，还有一个比较出色的点是构建层做到了
 Bundle-less，即应用代码不需要打包即可直接部署上线，后文会介绍这部分的具体实现。
 
-# 开始干活
+# 函数运行时
 
 在选定技术栈之后，就开始干活。
 
@@ -168,4 +168,105 @@ if (Math.random() > 0.5) {
 import { importString } from "https://deno.land/x/import/mod.ts";
 
 console.log(await importString('export const foo = "bar"'));
+```
+
+因此，我们就可以通过这种形式加载代码并执行。
+
+## 动态 API 路由
+
+利用 fresh 框架的动态路由，我们可以很方便的构建函数 API。
+
+![](https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202301081909263.png)
+
+如上图所示，`[name].ts` 就是动态的 api 路由，我们可以在函数中获取到 name 参数。
+
+```ts
+export const handler = async (
+  _req: Request,
+  _ctx: HandlerContext
+): Promise<Response> => {
+  const name = _ctx.params.name;
+
+  if (_req.method !== "POST") {
+    return Response.json({ error: "Only support post" });
+  }
+
+  const payload = await _req.json();
+  return Response.json(result);
+};
+```
+
+通过这段代码，我们可以看到：
+
+1. 在 fresh 中，写一个 api 的特别简单，整个的格式如下：
+
+```ts
+export const handler = async (
+  _req: Request,
+  _ctx: HandlerContext
+): Promise<Response> => {
+  return Response.json({ status: 200 });
+};
+```
+
+2. 获取动态路由参数，直接从 ctx.params 获取即可。
+
+3. 从 `_req.json()` 可以获取到 post 请求中的 body。
+
+# 智能合约
+
+在这个过程中，我们需要将函数代码片段存储到链上。在以太坊上，智能合约的开发一般选择
+hardhat。
+
+## 合约开发环境
+
+### Foundry
+
+在以太坊的智能合约开发环境中，如果你是 nodejs 开发者，那么一定会习惯 hardhat
+体系的开发， foundry 是后起之秀，如果你满足以下条件或有过类似体验，你一定要试试
+Foundry：
+
+- 如果你有 Rust “语言信仰”，如果你是个专业的 以太坊（Solidity 语言）应用开发者；
+- 你曾经用过类似 Hardhat.js 这样的工具；
+- 你厌倦了大量测试用例的等待，需要有工具更加快速的跑完你的测试用例；
+- 你觉得处理 BigNumber 稍微有一点点 🤏 麻烦;
+- 有过通过 Solidity 语言本身完成测试用例（或测试合约的合约）的需求；
+- 你觉得通过 git submodule 的方式管理依赖更加方便（而不是 npm）；
+
+这次，由于这一次的智能合约并不复杂，类似一个 ERC721 的 NFT 合约，我们需要把代码片段上传到链上，所以选择尝鲜一下 foundry。
+
+首先是下载安装：
+
+```bash
+$ curl -L https://foundry.paradigm.xyz | bash
+```
+
+然后初始化项目：
+
+```bash
+$ forge init faas3_contract
+Initializing /Users/bytedance/github/faas3/faas3_contract...
+Installing forge-std in "/Users/bytedance/github/faas3/faas3_contract/lib/forge-std" (url: Some("https://github.com/foundry-rs/forge-std"), tag: None)
+    Installed forge-std v1.2.0
+    Initialized forge project.
+```
+
+该过程通过安装依赖 forge-std 初始化了一个 Foundry 项目。
+
+项目的目录如下：
+
+```bash
+$ tree -L 2
+.
+├── foundry.toml
+├── lib
+│   └── forge-std
+├── script
+│   └── Counter.s.sol
+├── src
+│   └── Counter.sol
+└── test
+    └── Counter.t.sol
+
+6 directories, 4 files
 ```
