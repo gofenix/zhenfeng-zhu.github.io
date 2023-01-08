@@ -4,13 +4,12 @@ import blog, { ga, h, redirects } from "blog";
 import "./prismjs-extensions.ts";
 
 blog({
-  title: "Awesome Fenix's Blog",
-  // header: <header>Your custom header</header>,
-  // section: <section>Your custom section</section>,
-  // footer: <footer>Your custom footer</footer>,
+  title: "Fenix's Blog",
+  description: "code less, play more!",
   avatar: "./avatar.jpeg",
   favicon: "./favicon.ico",
   avatarClass: "rounded-full",
+  cover: "./background.png",
   author: "Fenix",
   theme: "auto",
   links: [
