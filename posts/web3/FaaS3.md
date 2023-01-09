@@ -183,7 +183,7 @@ console.log(await importString('export const foo = "bar"'));
 ```ts
 export const handler = async (
   _req: Request,
-  _ctx: HandlerContext
+  _ctx: HandlerContext,
 ): Promise<Response> => {
   const name = _ctx.params.name;
 
@@ -203,7 +203,7 @@ export const handler = async (
 ```ts
 export const handler = async (
   _req: Request,
-  _ctx: HandlerContext
+  _ctx: HandlerContext,
 ): Promise<Response> => {
   return Response.json({ status: 200 });
 };
@@ -233,7 +233,8 @@ Foundry：
 - 有过通过 Solidity 语言本身完成测试用例（或测试合约的合约）的需求；
 - 你觉得通过 git submodule 的方式管理依赖更加方便（而不是 npm）；
 
-这次，由于这一次的智能合约并不复杂，类似一个 ERC721 的 NFT 合约，我们需要把代码片段上传到链上，所以选择尝鲜一下 foundry。
+这次，由于这一次的智能合约并不复杂，类似一个 ERC721 的 NFT
+合约，我们需要把代码片段上传到链上，所以选择尝鲜一下 foundry。
 
 首先是下载安装：
 
@@ -269,4 +270,25 @@ $ tree -L 2
     └── Counter.t.sol
 
 6 directories, 4 files
+```
+
+主要由业务逻辑构成 src 目录中的 ./src/Counter.sol:
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+contract Counter {          // 一个很简单的 Counter 合约
+    uint256 public number;  // 维护一个 public 的 uint256 数字
+
+    // 设置 number 变量的内容
+    function setNumber(uint256 newNumber) public {
+        number = newNumber;
+    }
+
+    // 让 number 变量的内容自增
+    function increment() public {
+        number++;
+    }
+}
 ```
