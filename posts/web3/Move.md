@@ -3,38 +3,58 @@ title: Sui Move合约案例分享和源码解析
 publish_date: 2023-01-08
 ---
 
+[toc]
+
+# 课程目标
+
+主要介绍几个 sui 的合约案例和源码解析。
+
+# 简单介绍一下 sui 和 move
+
+Move 诞生于 2018 年 Libra 项目初期。多年来，许多人为 Move 的设计和实现做出了贡献，因为该语言从一个关键思想演变为一种与平台无关的智能合约语言，其大胆的目标是成为"Web3 JavaScript"。
+
+## sui
+
+Sui 是由 Mysten Labs 团队开发的高性能公链，目标是建设安全、高效、大规模使用的智能合约平台，完善的 web3 基础设施，Sui 主要相比于其他区块链有以下特点：
+
+1. 区分了简单交易和复杂交易，采用不同的共识机制，实行大规模并行计算。
+2. 采用“面向资源”的 Sui Move 语言，提供更具备安全性和可组合性的区块链编程语言。
+
+Aptos 和 Sui 都采用了 Move 这一语言，不过，具体使用的模型略有不同。Aptos 使用 Diem 团队创建的 Core Move 语言，而 Sui 正在利用他们自己的替代版本，称为“Sui Move”，对象是 Sui Move 中最基础的概念，像组织数据，某款 NFT、某个代币的余额、某项智能合约，这些都是不同的对象。
+
+这意味着 Sui 链上的交易可以根据对象的不同可以来分组处理。使得大规模并行计算成为可能。下图是一个简单的例子，描述了可分为 3 组的 5 笔不同交易。这 3 组交易完全可以实现并行处理。
+
+![](https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202301101000459.png)
+
 # 环境准备
 
-首先，大家需要安装 sui 和 move analyzer。
+1. Rust
+
+2. Sui
 
 ```bash
 # install sui
 cargo install --locked --force  --git https://github.com/MystenLabs/sui.git --branch devnet sui
+```
 
+3. Move Analyzer
+
+```bash
 # install move-analyzer
 cargo install --git https://github.com/move-language/move move-analyzer --locked --force
 ```
 
-我们本次课程使用的编辑器是 [vscode](https://code.visualstudio.com/)。
+4. 编辑器：[vscode](https://code.visualstudio.com/)
 
-需要安装
-[move-analyzer](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer)
-和
-[Move syntax](https://marketplace.visualstudio.com/items?itemName=damirka.move-syntax)。
+5. 插件：[move-analyzer](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer) 和 [Move syntax](https://marketplace.visualstudio.com/items?itemName=damirka.move-syntax)
 
-# 源码
+# object
 
-本次课程的源代码都在github上，大家可以自行clone阅读。
-
-# object basics
-
-sui move 最大的特点就是object。
+sui move 最大的特点就是 object。
 
 快速入门：
 
 - 什么是面向对象
-
-
 
 # ft
 
@@ -44,25 +64,27 @@ sui move 最大的特点就是object。
 
 # tic toe
 
-安装好sui
+安装好 sui
 
 初始化创世区块
+
 ```
 sui genesis --force
 ```
 
-启动sui
+启动 sui
+
 ```
 sui start
 ```
 
-由于游戏需要3个账号，我们看下自己有多少个
+由于游戏需要 3 个账号，我们看下自己有多少个
 
 ```
 sui addresses
 ```
 
-如果不够3个的话，需要手动创建一些
+如果不够 3 个的话，需要手动创建一些
 
 ```
 sui client new-address ed25519
@@ -97,11 +119,11 @@ BUILDING Games
 Cannot find gas coin for signer address [0x4e08311c5ab41519182d9d171a1a7141d7653d88] with amount sufficient for the budget [3000].
 ```
 
-报失败的话，拿着这个地址，去discord上申请测试币。
+报失败的话，拿着这个地址，去 discord 上申请测试币。
 
 ![](https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202301082251225.png)
 
-如果报gas不足的话，就增加gas的预算。
+如果报 gas 不足的话，就增加 gas 的预算。
 
 ```
 $ sui client publish --gas-budget 5000
@@ -127,3 +149,10 @@ Mutated Objects:
 
 然后就可以部署使用了。
 
+# move 设计模式
+
+# 参考
+
+## sandwich
+
+https://learnblockchain.cn/article/5251
