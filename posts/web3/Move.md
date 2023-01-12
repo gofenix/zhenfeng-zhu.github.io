@@ -56,6 +56,80 @@ sui move 最大的特点就是 object。
 
 - 什么是面向对象
 
+我们知道，面向对象的编程有三大特性：封装、继承和多态。
+
+面向对象编程是一种具有对象概念的程序编程范型，同时也是一种程序开发的抽象方针，它可能包含数据、属性、代码与方法。对象则指的是类的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的可重用性、灵活性和可扩展性，对象里的程序可以访问及修改对象相关联的数据。在面向对象编程里，计算机程序会被设计成彼此相关的对象。
+
+我们来看 sui 是怎么应用这种编程思想的：
+
+> 在 Sui 中，存储的基本单位是对象。与其他许多区块链的存储以账户为中心，每个账户都包含一个键值存储不同，Sui 的存储是以对象为中心的。一个智能合约就是一个对象（称为 Move Package）。
+
+我们来看一个样例：
+
+```rust
+module basics::object_basics {
+    use sui::event;
+    use sui::object::{Self, UID};
+    use sui::tx_context::{Self, TxContext};
+    use sui::transfer;
+
+    struct Object has key, store {
+        id: UID,
+        value: u64,
+    }
+
+    struct Wrapper has key {
+        id: UID,
+        o: Object
+    }
+
+    struct NewValueEvent has copy, drop {
+        new_value: u64
+    }
+
+    public entry fun create(value: u64, recipient: address, ctx: &mut TxContext) {
+        transfer::transfer(
+            Object { id: object::new(ctx), value },
+            recipient
+        )
+    }
+
+    public entry fun transfer(o: Object, recipient: address) {
+        transfer::transfer(o, recipient)
+    }
+
+    public entry fun freeze_object(o: Object) {
+        transfer::freeze_object(o)
+    }
+
+    public entry fun set_value(o: &mut Object, value: u64) {
+        o.value = value;
+    }
+
+    // test that reading o2 and updating o1 works
+    public entry fun update(o1: &mut Object, o2: &Object) {
+        o1.value = o2.value;
+        // emit an event so the world can see the new value
+        event::emit(NewValueEvent { new_value: o2.value })
+    }
+
+    public entry fun delete(o: Object) {
+        let Object { id, value: _ } = o;
+        object::delete(id);
+    }
+
+    public entry fun wrap(o: Object, ctx: &mut TxContext) {
+        transfer::transfer(Wrapper { id: object::new(ctx), o }, tx_context::sender(ctx))
+    }
+
+    public entry fun unwrap(w: Wrapper, ctx: &mut TxContext) {
+        let Wrapper { id, o } = w;
+        object::delete(id);
+        transfer::transfer(o, tx_context::sender(ctx))
+    }
+}
+```
+
 # ft
 
 # nft
