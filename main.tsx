@@ -9,9 +9,8 @@ blog({
   avatar: "./avatar.jpeg",
   favicon: "./favicon.ico",
   avatarClass: "rounded-full",
-  cover: "./background.png",
   author: "Fenix",
-  theme: "light",
+  theme: "auto",
   links: [
     { title: "Email", url: "mailto:codeless98@163.com" },
     { title: "GitHub", url: "https://github.com/zhenfeng-zhu" },
