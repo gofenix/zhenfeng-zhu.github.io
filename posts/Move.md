@@ -22,7 +22,7 @@ Aptos 和 Sui 都采用了 Move 这一语言，不过，具体使用的模型略
 
 ![](https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202301101000459.png)
 
-# 环境准备
+# 三、环境准备
 
 1. Sui
 
@@ -42,9 +42,9 @@ cargo install --git https://github.com/move-language/move move-analyzer --locked
 
 4. 插件：[move-analyzer](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer) 和 [Move syntax](https://marketplace.visualstudio.com/items?itemName=damirka.move-syntax)
 
-# 基础知识
+# 四、基础知识
 
-## Move.toml
+## 4.1 Move.toml
 
 在 sui move package 中，都会有一个 `Move.toml` 文件。
 
@@ -64,7 +64,7 @@ basics =  "0x0"
 - `[dependencies]`：指定这个项目的一些依赖。
 - `[addresses]`：地址的别名
 
-## init 函数
+## 4.2 init 函数
 
 init 函数是一个特殊的函数，当相关模块被发布的时候，只会被执行一次。
 
@@ -74,7 +74,7 @@ init 函数是一个特殊的函数，当相关模块被发布的时候，只会
 fun init(ctx: &mut TxContext) { /* ... */ }
 ```
 
-## entry 函数
+## 4.3 entry 函数
 
 entry 是一个函数的修饰符，用来表示这个函数是可以被交易直接调用。
 
@@ -103,7 +103,7 @@ module examples::object {
 - `create`，是一个 public 类型的，任何一个模块都可以调用它。
 - `create_and_transfer`，是一个 entry 函数，entry 函数不能有返回值，而且这个函数是在交易中被直接调用。
 
-## 字符串
+## 4.4 字符串
 
 move 本身是没有 string 类型的，sui 这里提供了一个很好用的封装。
 
@@ -139,7 +139,7 @@ module examples::strings {
 
 这些字符串是一个 utf 编码的。
 
-## 共享对象
+## 4.5 共享对象
 
 在 move 中，一般对象都是有所有者的。我们也可以将一个对象，变成共享对象，这样任何人都可以访问到这个对象。
 
@@ -153,7 +153,7 @@ transfer::share_object(DonutShop {
 
 通过 share_object 方法就可以将一个对象变成 shared_object。
 
-## transfer
+## 4.6 transfer
 
 被 key 和 store 修饰的对象，可以用 transfer::transfer 函数自由的转移。
 
@@ -200,7 +200,7 @@ public entry fun cool_transfer(
 
 这两个函数实现的功能都是一样的，大家可以仔细品一下。
 
-## 事件
+## 4.7 事件
 
 这个和 solidity 类似。
 
@@ -266,7 +266,7 @@ public entry fun buy_donut(
 }
 ```
 
-## one time witness
+## 4.8 one time witness
 
 OTW，是一个特殊的实例，保证在在整个系统中都是独一无二的。需要满足如下的条件：
 
@@ -297,7 +297,7 @@ module examples::my_otw {
 }
 ```
 
-# 深入 object
+# 五、深入 object
 
 sui move 最大的特点就是 object。
 
@@ -336,7 +336,7 @@ struct ColorObject has key {
 
 我们来看一个具体的例子：
 
-## **创建 Sui 对象**
+## 5.1 创建 Sui 对象
 
 ```move
 use sui::object;
@@ -356,7 +356,7 @@ fun new(red: u8, green: u8, blue: u8, ctx: &mut TxContext): ColorObject {
 2. ctx，是我们交易的上下文，是一个从入口函数传下来的参数。
 3. object::new，是给 Sui 对象创建 UID 的方法。
 
-## 存储 Sui 对象
+## 5.2 存储 Sui 对象
 
 在上面的 new 函数，可以认为是一个构造函数。我们可以把这个对象放在持久的全局存储中。最关键的 API 就是 transfer 函数：
 
@@ -388,7 +388,7 @@ public fun get_color(self: &ColorObject): (u8, u8, u8) {
 }
 ```
 
-## 完整代码和单元测试
+## 5.3 完整代码
 
 ```bash
 $ sui move new basics
@@ -471,7 +471,7 @@ module basics::color_object {
 }
 ```
 
-# Move 设计模式
+# 六、Move 设计模式
 
 首先我们来看，为什么 Move 会有设计模式。
 
@@ -507,7 +507,7 @@ contract A {
     - store: 允许此类型的值存在于全局存储中或者某个结构体中
     - key: 允许此类型作为全局存储中的键(具有 key 能力的类型才能保存到全局存储中)
 
-## 能力
+## 6.1 能力
 
 Capability 是一个能够证明资源所有者特定权限的资源（注意：它是一个资源也就是一个 Move 中的结构体），其作用主要是用来进行访问控制。
 
@@ -563,7 +563,7 @@ module capability::m {
 
 相较于其他语言的访问控制（例如 Solidity 中定一个 address owner 即可，或者定义一个 mapping），Move 中的访问控制实现上是复杂的，主要由于 Move 中独特的存储架构，模组不存储状态变量，需要将资源存储到一个账户下面。
 
-## witness
+## 6.2 witness
 
 witness 是一种临时资源，相关资源只能被使用一次，资源在使用后被丢弃，确保不能重复使用相同的资源来初始化任何其他结构，通常用来确认一个类型的的所有权。
 
@@ -577,7 +577,7 @@ witness 在 Sui 中与其他 Move 公链有一些区别。
 
 我们在上面讲过，这里不再赘述。
 
-## hot potato
+## 6.3 hot potato
 
 一个没有任何能力的结构体，而且强制该结构在创建它的模块中使用掉，这样的结构被称之为 Hot potato。
 
@@ -722,9 +722,9 @@ module example::hot_potato {
 }
 ```
 
-# 样例
+# 七、现实世界的样例
 
-## NFT
+## 7.1 NFT
 
 在 Sui 中，everything is an NFT。Sui 的对象是独特的，非同质化的，而且是有所有权的。
 
@@ -897,7 +897,7 @@ module examples::devnet_nft {
 
 从 nft 实例里面，解构出来信息，调用 object::delete 方法，就可以销毁 NFT。
 
-## Coin
+## 7.2 Coin
 
 发一个 coin 就就像定义一个类型一样简单，只是会用到 one-time witness 模式。
 
@@ -927,9 +927,9 @@ module examples::mycoin {
 2. 调用 coin::create_currency 去创建一个 treasury 实例。
 3. 然后转给所有者就行了
 
-# sui move 工程化
+# 八、Sui move 工程化
 
-## 单元测试
+## 8.1 单元测试
 
 我们在上面已经介绍过正常的代码结构，然后咱们来看下 sui move 是如何来做单元测试的。
 
@@ -982,7 +982,7 @@ test_scenario::end(scenario_val);
 
 我们来看下完整的代码，然后在项目中就可以执行 sui move test 命令了。
 
-## multi package
+## 8.2 multi package
 
 一般大型一些的工程化的代码，会拆分成多个 package，方便管理和代码复用。
 
@@ -1032,7 +1032,7 @@ module main_package::main_module {
 }
 ```
 
-# 总结
+# 九、总结
 
 到此，本次的分享就到这里啦。
 
