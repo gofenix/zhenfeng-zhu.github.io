@@ -3,17 +3,13 @@ title: Sui Move合约案例分享和源码解析
 publish_date: 2023-01-08
 ---
 
-[toc]
-
-# 课程目标
+# 一、课程目标
 
 主要介绍几个 sui 的合约案例和源码解析。
 
-# 简单介绍一下 sui 和 move
+# 二、简单介绍 sui move
 
 Move 诞生于 2018 年 Libra 项目初期。多年来，许多人为 Move 的设计和实现做出了贡献，因为该语言从一个关键思想演变为一种与平台无关的智能合约语言，其大胆的目标是成为"Web3 JavaScript"。
-
-## sui
 
 Sui 是由 Mysten Labs 团队开发的高性能公链，目标是建设安全、高效、大规模使用的智能合约平台，完善的 web3 基础设施，Sui 主要相比于其他区块链有以下特点：
 
@@ -28,25 +24,23 @@ Aptos 和 Sui 都采用了 Move 这一语言，不过，具体使用的模型略
 
 # 环境准备
 
-1. move
-
-2. Sui
+1. Sui
 
 ```bash
 # install sui
 cargo install --locked --force  --git https://github.com/MystenLabs/sui.git --branch devnet sui
 ```
 
-3. Move Analyzer
+2. Move Analyzer
 
 ```bash
 # install move-analyzer
 cargo install --git https://github.com/move-language/move move-analyzer --locked --force
 ```
 
-4. 编辑器：[vscode](https://code.visualstudio.com/)
+3. 编辑器：[vscode](https://code.visualstudio.com/)
 
-5. 插件：[move-analyzer](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer) 和 [Move syntax](https://marketplace.visualstudio.com/items?itemName=damirka.move-syntax)
+4. 插件：[move-analyzer](https://marketplace.visualstudio.com/items?itemName=move.move-analyzer) 和 [Move syntax](https://marketplace.visualstudio.com/items?itemName=damirka.move-syntax)
 
 # 基础知识
 
@@ -106,8 +100,8 @@ module examples::object {
 
 比如，上面是有两个函数：
 
-- create，是一个 public 类型的，任何一个模块都可以调用它。
-- create_and_transfer，是一个 entry 函数，entry 函数不能有返回值，而且这个函数是在交易中被直接调用。
+- `create`，是一个 public 类型的，任何一个模块都可以调用它。
+- `create_and_transfer`，是一个 entry 函数，entry 函数不能有返回值，而且这个函数是在交易中被直接调用。
 
 ## 字符串
 
@@ -150,11 +144,11 @@ module examples::strings {
 在 move 中，一般对象都是有所有者的。我们也可以将一个对象，变成共享对象，这样任何人都可以访问到这个对象。
 
 ```move
-        transfer::share_object(DonutShop {
-            id: object::new(ctx),
-            price: 1000,
-            balance: balance::zero()
-        })
+transfer::share_object(DonutShop {
+    id: object::new(ctx),
+    price: 1000,
+    balance: balance::zero()
+})
 ```
 
 通过 share_object 方法就可以将一个对象变成 shared_object。
@@ -166,40 +160,41 @@ module examples::strings {
 在原生的 move 中，转账或者说所有权的转让，是一个比较复杂的方式，我们需要 borrow，也需要用包装器模式的方式去构建一个 table 表。
 
 ```move
-
 struct CoolAssetStore has key {
-  assets: Table<TokenId, CoolAsset>
- }public fun opt_in(addr: &signer) {
-  move_to(addr, CoolAssetHolder { assets: table::new() }
- }public entry fun cool_transfer(
-  addr: &signer, recipient: address, id: TokenId
- )acquires CoolAssetStore {
-  // withdraw
-  let sender = signer::address_of(addr);
-  assert!(exists<CoolAssetStore>(sender), ETokenStoreNotPublished);
-  let sender_assets = &mut borrow_global_mut<CoolAssetStore (sender).assets;
-  assert!(table::contains(sender_assets, id), ETokenNotFound);
-   let asset = table::remove(&sender_assets, id);
-  // check that 30 days have elapsed
-  assert!(time::today() > asset.creation_date + 30, ECantTransferYet)
+    assets: Table<TokenId, CoolAsset>
+}
+
+public fun opt_in(addr: &signer) {
+    move_to(addr, CoolAssetHolder { assets: table::new() }
+}
+
+public entry fun cool_transfer(addr: &signer, recipient: address, id:TokenId) acquires CoolAssetStore {
+    // withdraw
+    let sender = signer::address_of(addr);
+    assert!(exists<CoolAssetStore>(sender), ETokenStoreNotPublished);
+    let sender_assets = &mut borrow_global_mut<CoolAssetStore (sender).assets;
+    assert!(table::contains(sender_assets, id), ETokenNotFound);
+    let asset = table::remove(&sender_assets, id);
+
+    // check that 30 days have elapsed
+    assert!(time::today() > asset.creation_date + 30, ECantTransferYet)
+
    // deposit
    assert!(exists<CoolAssetStore>(recipient), ETokenStoreNotPublished);
-  let recipient_assets = &mut borrow_global_mut<CoolAssetStore>
- (recipient).assets;
-  assert!(table::contains(recipient_assets, id), ETokenIdAlreadyUsed);
-  table::add(recipient_assets, asset)
+    let recipient_assets = &mut borrow_global_mut<CoolAssetStore>(recipient).assets;
+    assert!(table::contains(recipient_assets, id), ETokenIdAlreadyUsed);
+    table::add(recipient_assets, asset)
 }
 ```
 
 代码相当复杂，但是如果是 sui move，有了 transfer 函数之后，我们就能让代码简洁很多。
 
 ```move
-
 public entry fun cool_transfer(
- asset: CoolAsset, recipient: address, ctx: &mut TxContext
+    asset: CoolAsset, recipient: address, ctx: &mut TxContext
 ) {
- assert!(tx_context::epoch(ctx) > asset.creation_date + 30, ECantTransferYet);
- transfer(asset, recipient)
+    assert!(tx_context::epoch(ctx) > asset.creation_date + 30, ECantTransferYet);
+    transfer(asset, recipient)
 }
 ```
 
@@ -216,24 +211,24 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 ```
 
 ```solidity
-    // 定义_transfer函数，执行转账逻辑
-    function _transfer(
-        address from,
-        address to,
-        uint256 amount
-    ) external {
+// 定义_transfer函数，执行转账逻辑
+function _transfer(
+    address from,
+    address to,
+    uint256 amount
+) external {
 
-        _balances[from] = 10000000; // 给转账地址一些初始代币
+    _balances[from] = 10000000; // 给转账地址一些初始代币
 
-        _balances[from] -=  amount; // from地址减去转账数量
-        _balances[to] += amount; // to地址加上转账数量
+    _balances[from] -=  amount; // from地址减去转账数量
+    _balances[to] += amount; // to地址加上转账数量
 
-        // 释放事件
-        emit Transfer(from, to, amount);
-    }
+    // 释放事件
+    emit Transfer(from, to, amount);
+}
 ```
 
-每次用\_transfer()函数进行转账操作的时候，都会释放 Transfer 事件，并记录相应的变量。
+每次用`_transfer()`函数进行转账操作的时候，都会释放 Transfer 事件，并记录相应的变量。
 
 我们来看看在 move 中，是怎么用的:
 
@@ -246,30 +241,29 @@ use sui::event;
 2. 定义事件的数据结构
 
 ```move
-    struct DonutBought has copy, drop {
-        id: ID
-    }
+struct DonutBought has copy, drop {
+    id: ID
+}
 ```
 
 3. 在函数中释放事件
 
 ```move
-    /// Buy a donut.
-    public entry fun buy_donut(
-        shop: &mut DonutShop, payment: &mut Coin<SUI>, ctx: &mut TxContext
-    ) {
-        assert!(coin::value(payment) >= shop.price, ENotEnough);
+/// Buy a donut.
+public entry fun buy_donut(
+    shop: &mut DonutShop, payment: &mut Coin<SUI>, ctx: &mut TxContext) {
+    assert!(coin::value(payment) >= shop.price, ENotEnough);
 
-        let coin_balance = coin::balance_mut(payment);
-        let paid = balance::split(coin_balance, shop.price);
-        let id = object::new(ctx);
+    let coin_balance = coin::balance_mut(payment);
+    let paid = balance::split(coin_balance, shop.price);
+    let id = object::new(ctx);
 
-        balance::join(&mut shop.balance, paid);
+    balance::join(&mut shop.balance, paid);
 
-        // Emit the event using future object's ID.
-        event::emit(DonutBought { id: object::uid_to_inner(&id) });
-        transfer::transfer(Donut { id }, tx_context::sender(ctx))
-    }
+    // Emit the event using future object's ID.
+    event::emit(DonutBought { id: object::uid_to_inner(&id) });
+    transfer::transfer(Donut { id }, tx_context::sender(ctx))
+}
 ```
 
 ## one time witness
@@ -990,8 +984,56 @@ test_scenario::end(scenario_val);
 
 ## multi package
 
-live coding
+一般大型一些的工程化的代码，会拆分成多个 package，方便管理和代码复用。
+
+我们来看下在 sui move 中如何实现。
+
+```bash
+$ sui move new main_package
+$ sui move new dep_package
+```
+
+我们的 dep_package 的代码如下：
+
+```move
+module dep_package::dep_module {
+
+    public fun foo(): u64 {
+        42
+    }
+
+}
+```
+
+然后我们可以在 main_package 的 Move.toml 中引用 dep_package：
+
+```toml
+[package]
+name = "MainPackage"
+version = "0.0.1"
+
+[dependencies]
+DepPackage = { local = "../dep_package" }
+
+[addresses]
+main_package = "0x0"
+```
+
+然后就可以在 main_package 中愉快的使用代码了：
+
+```move
+module main_package::main_module {
+    use dep_package::dep_module;
+
+    fun foo(): u64 {
+        dep_module::foo()
+    }
+
+}
+```
 
 # 总结
 
+到此，本次的分享就到这里啦。
 
+感谢大家的收看。
