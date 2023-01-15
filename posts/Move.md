@@ -303,6 +303,180 @@ module examples::my_otw {
 }
 ```
 
+# 深入 object
+
+sui move 最大的特点就是 object。
+
+我们知道，面向对象的编程有三大特性：封装、继承和多态。
+
+面向对象编程是一种具有对象概念的程序编程范型，同时也是一种程序开发的抽象方针，它可能包含数据、属性、代码与方法。对象则指的是类的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的可重用性、灵活性和可扩展性，对象里的程序可以访问及修改对象相关联的数据。在面向对象编程里，计算机程序会被设计成彼此相关的对象。
+
+我们来看 sui 是怎么应用这种编程思想的：
+
+> 在 Sui 中，存储的基本单位是对象。与其他许多区块链的存储以账户为中心，每个账户都包含一个键值存储不同，Sui 的存储是以对象为中心的。一个智能合约就是一个对象（称为 Move Package）。
+
+```move
+struct Color {
+    red: u8,
+    green: u8,
+    blue: u8,
+}
+```
+
+这个结构体定义了一个 Color 的数据结构。然而，这样的 struct 还不是 sui 对象。
+
+```move
+use sui::object::UID;
+
+struct ColorObject has key {
+    id: UID,
+    red: u8,
+    green: u8,
+    blue: u8,
+}
+```
+
+1. key
+2. 第一个字段是`id: UID`
+   UID 是 sui 内部类型，一般不需要直接和它打交道。在 Sui 中，任意一个 UI 的值都是独特的。
+
+我们来看一个具体的例子：
+
+## **创建 Sui 对象**
+
+```move
+use sui::object;
+use sui::tx_context::TxContext;
+
+fun new(red: u8, green: u8, blue: u8, ctx: &mut TxContext): ColorObject {
+    ColorObject {
+        id: object::new(ctx),
+        red,
+        green,
+        blue,
+    }
+}
+```
+
+1. 我们必须给每个字段分配一个初始值，这里就是 red，green，blue 等作为传入参数。
+2. ctx，是我们交易的上下文，是一个从入口函数传下来的参数。
+3. object::new，是给 Sui 对象创建 UID 的方法。
+
+## 存储 Sui 对象
+
+在上面的 new 函数，可以认为是一个构造函数。我们可以把这个对象放在持久的全局存储中。最关键的 API 就是 transfer 函数：
+
+```move
+public fun transfer<T: key>(obj: T, recipient: address)
+```
+
+在 Sui 中，每个对象都必须有一个所有者，可以是一个地址，也可以是另一个对象。
+
+这个 transfer 函数另一个常见的用途，就是把对象转移给交易的发送者，比如把自己的 NFT 转给别人。比如，下面这个函数：
+
+```move
+use sui::transfer;
+
+// This is an entry function that can be called directly by a Transaction.
+public entry fun create(red: u8, green: u8, blue: u8, ctx: &mut TxContext) {
+    let color_object = new(red, green, blue, ctx);
+    transfer::transfer(color_object, tx_context::sender(ctx))
+}
+```
+
+其实，就是创建一个 color 对象，然后把这个对象让这个交易的发送者持有。
+
+当然，我们也可以给 ColorObject 添加一个 getter 方法，这样其他模块就可以读取到。
+
+```move
+public fun get_color(self: &ColorObject): (u8, u8, u8) {
+    (self.red, self.green, self.blue)
+}
+```
+
+## 完整代码和单元测试
+
+```bash
+$ sui move new basics
+$ cd basics/sources
+$ touch color_object.move
+```
+
+然后用 vscode 打开项目，输入以下代码：
+
+```move
+module basics::color_object {
+    use sui::object::{Self, UID};
+    use sui::transfer;
+    use sui::tx_context::{Self, TxContext};
+
+    struct ColorObject has key {
+        id: UID,
+        red: u8,
+        green: u8,
+        blue: u8,
+    }
+
+    // == Functions covered in Chapter 1 ==
+
+    fun new(red: u8, green: u8, blue: u8, ctx: &mut TxContext): ColorObject {
+        ColorObject {
+            id: object::new(ctx),
+            red,
+            green,
+            blue,
+        }
+    }
+
+    public entry fun create(red: u8, green: u8, blue: u8, ctx: &mut TxContext) {
+        let color_object = new(red, green, blue, ctx);
+        transfer::transfer(color_object, tx_context::sender(ctx))
+    }
+
+    public fun get_color(self: &ColorObject): (u8, u8, u8) {
+        (self.red, self.green, self.blue)
+    }
+
+    // == Functions covered in Chapter 2 ==
+
+    /// Copies the values of `from_object` into `into_object`.
+    public entry fun copy_into(from_object: &ColorObject, into_object: &mut ColorObject) {
+        into_object.red = from_object.red;
+        into_object.green = from_object.green;
+        into_object.blue = from_object.blue;
+    }
+
+    public entry fun delete(object: ColorObject) {
+        let ColorObject { id, red: _, green: _, blue: _ } = object;
+        object::delete(id);
+    }
+
+    public entry fun transfer(object: ColorObject, recipient: address) {
+        transfer::transfer(object, recipient)
+    }
+
+    // == Functions covered in Chapter 3 ==
+
+    public entry fun freeze_object(object: ColorObject) {
+        transfer::freeze_object(object)
+    }
+
+    public entry fun create_immutable(red: u8, green: u8, blue: u8, ctx: &mut TxContext) {
+        let color_object = new(red, green, blue, ctx);
+        transfer::freeze_object(color_object)
+    }
+
+    public entry fun update(
+        object: &mut ColorObject,
+        red: u8, green: u8, blue: u8,
+    ) {
+        object.red = red;
+        object.green = green;
+        object.blue = blue;
+    }
+}
+```
+
 # Move 设计模式
 
 首先我们来看，为什么 Move 会有设计模式。
@@ -554,346 +728,214 @@ module example::hot_potato {
 }
 ```
 
+# 样例
 
+## NFT
 
-# object
+在 Sui 中，everything is an NFT。Sui 的对象是独特的，非同质化的，而且是有所有权的。
 
-sui move 最大的特点就是 object。
-
-快速入门：
-
-- 什么是面向对象
-
-我们知道，面向对象的编程有三大特性：封装、继承和多态。
-
-面向对象编程是一种具有对象概念的程序编程范型，同时也是一种程序开发的抽象方针，它可能包含数据、属性、代码与方法。对象则指的是类的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的可重用性、灵活性和可扩展性，对象里的程序可以访问及修改对象相关联的数据。在面向对象编程里，计算机程序会被设计成彼此相关的对象。
-
-我们来看 sui 是怎么应用这种编程思想的：
-
-> 在 Sui 中，存储的基本单位是对象。与其他许多区块链的存储以账户为中心，每个账户都包含一个键值存储不同，Sui 的存储是以对象为中心的。一个智能合约就是一个对象（称为 Move Package）。
+我们来看一个 devnet 上的 nft。
 
 ```move
-struct Color {
-    red: u8,
-    green: u8,
-    blue: u8,
-}
-```
-
-这个结构体定义了一个 Color 的数据结构。然而，这样的 struct 还不是 sui 对象。
-
-```move
-use sui::object::UID;
-
-struct ColorObject has key {
-    id: UID,
-    red: u8,
-    green: u8,
-    blue: u8,
-}
-```
-
-1. key
-2. 第一个字段是`id: UID`
-   UID 是 sui 内部类型，一般不需要直接和它打交道。在 Sui 中，任意一个 UI 的值都是独特的。
-
-我们来看一个具体的例子：
-
-## **创建 Sui 对象**
-
-```move
-use sui::object;
-use sui::tx_context::TxContext;
-
-fun new(red: u8, green: u8, blue: u8, ctx: &mut TxContext): ColorObject {
-    ColorObject {
-        id: object::new(ctx),
-        red,
-        green,
-        blue,
-    }
-}
-```
-
-1. 我们必须给每个字段分配一个初始值，这里就是 red，green，blue 等作为传入参数。
-2. ctx，是我们交易的上下文，是一个从入口函数传下来的参数。
-3. object::new，是给 Sui 对象创建 UID 的方法。
-
-## 存储 Sui 对象
-
-在上面的 new 函数，可以认为是一个构造函数。我们可以把这个对象放在持久的全局存储中。最关键的 API 就是 transfer 函数：
-
-```move
-public fun transfer<T: key>(obj: T, recipient: address)
-```
-
-在 Sui 中，每个对象都必须有一个所有者，可以是一个地址，也可以是另一个对象。
-
-这个 transfer 函数另一个常见的用途，就是把对象转移给交易的发送者，比如把自己的 NFT 转给别人。比如，下面这个函数：
-
-```move
-use sui::transfer;
-
-// This is an entry function that can be called directly by a Transaction.
-public entry fun create(red: u8, green: u8, blue: u8, ctx: &mut TxContext) {
-    let color_object = new(red, green, blue, ctx);
-    transfer::transfer(color_object, tx_context::sender(ctx))
-}
-```
-
-其实，就是创建一个 color 对象，然后把这个对象让这个交易的发送者持有。
-
-当然，我们也可以给 ColorObject 添加一个 getter 方法，这样其他模块就可以读取到。
-
-```move
-public fun get_color(self: &ColorObject): (u8, u8, u8) {
-    (self.red, self.green, self.blue)
-}
-```
-
-## 完整代码和单元测试
-
-```bash
-$ sui move new basics
-$ cd basics/sources
-$ touch color_object.move
-```
-
-然后用 vscode 打开项目，输入以下代码：
-
-```move
-module basics::color_object {
-    use sui::object::{Self, UID};
+module examples::devnet_nft {
+    use sui::url::{Self, Url};
+    use std::string;
+    use sui::object::{Self, ID, UID};
+    use sui::event;
     use sui::transfer;
     use sui::tx_context::{Self, TxContext};
 
-    struct ColorObject has key {
+    /// An example NFT that can be minted by anybody
+    struct DevNetNFT has key, store {
         id: UID,
-        red: u8,
-        green: u8,
-        blue: u8,
+        /// Name for the token
+        name: string::String,
+        /// Description of the token
+        description: string::String,
+        /// URL for the token
+        url: Url,
+        // TODO: allow custom attributes
     }
 
-    // == Functions covered in Chapter 1 ==
+    // ===== Events =====
 
-    fun new(red: u8, green: u8, blue: u8, ctx: &mut TxContext): ColorObject {
-        ColorObject {
-            id: object::new(ctx),
-            red,
-            green,
-            blue,
-        }
+    struct NFTMinted has copy, drop {
+        // The Object ID of the NFT
+        object_id: ID,
+        // The creator of the NFT
+        creator: address,
+        // The name of the NFT
+        name: string::String,
     }
 
-    public entry fun create(red: u8, green: u8, blue: u8, ctx: &mut TxContext) {
-        let color_object = new(red, green, blue, ctx);
-        transfer::transfer(color_object, tx_context::sender(ctx))
+    // ===== Public view functions =====
+
+    /// Get the NFT's `name`
+    public fun name(nft: &DevNetNFT): &string::String {
+        &nft.name
     }
 
-    public fun get_color(self: &ColorObject): (u8, u8, u8) {
-        (self.red, self.green, self.blue)
+    /// Get the NFT's `description`
+    public fun description(nft: &DevNetNFT): &string::String {
+        &nft.description
     }
 
-    // == Functions covered in Chapter 2 ==
-
-    /// Copies the values of `from_object` into `into_object`.
-    public entry fun copy_into(from_object: &ColorObject, into_object: &mut ColorObject) {
-        into_object.red = from_object.red;
-        into_object.green = from_object.green;
-        into_object.blue = from_object.blue;
+    /// Get the NFT's `url`
+    public fun url(nft: &DevNetNFT): &Url {
+        &nft.url
     }
 
-    public entry fun delete(object: ColorObject) {
-        let ColorObject { id, red: _, green: _, blue: _ } = object;
-        object::delete(id);
-    }
+    // ===== Entrypoints =====
 
-    public entry fun transfer(object: ColorObject, recipient: address) {
-        transfer::transfer(object, recipient)
-    }
-
-    // == Functions covered in Chapter 3 ==
-
-    public entry fun freeze_object(object: ColorObject) {
-        transfer::freeze_object(object)
-    }
-
-    public entry fun create_immutable(red: u8, green: u8, blue: u8, ctx: &mut TxContext) {
-        let color_object = new(red, green, blue, ctx);
-        transfer::freeze_object(color_object)
-    }
-
-    public entry fun update(
-        object: &mut ColorObject,
-        red: u8, green: u8, blue: u8,
+    /// Create a new devnet_nft
+    public entry fun mint_to_sender(
+        name: vector<u8>,
+        description: vector<u8>,
+        url: vector<u8>,
+        ctx: &mut TxContext
     ) {
-        object.red = red;
-        object.green = green;
-        object.blue = blue;
-    }
-}
-
-#[test_only]
-module basics::color_objectTests {
-    use sui::test_scenario;
-    use basics::color_object::{Self, ColorObject};
-    use sui::object;
-    use sui::transfer;
-    use sui::tx_context;
-
-    // == Tests covered in Chapter 1 ==
-
-    #[test]
-    fun test_create() {
-        let owner = @0x1;
-        // Create a ColorObject and transfer it to @owner.
-        let scenario_val = test_scenario::begin(owner);
-        let scenario = &mut scenario_val;
-        {
-            let ctx = test_scenario::ctx(scenario);
-            color_object::create(255, 0, 255, ctx);
+        let sender = tx_context::sender(ctx);
+        let nft = DevNetNFT {
+            id: object::new(ctx),
+            name: string::utf8(name),
+            description: string::utf8(description),
+            url: url::new_unsafe_from_bytes(url)
         };
-        // Check that @not_owner does not own the just-created ColorObject.
-        let not_owner = @0x2;
-        test_scenario::next_tx(scenario, not_owner);
-        {
-            assert!(!test_scenario::has_most_recent_for_sender<ColorObject>(scenario), 0);
-        };
-        // Check that @owner indeed owns the just-created ColorObject.
-        // Also checks the value fields of the object.
-        test_scenario::next_tx(scenario, owner);
-        {
-            let object = test_scenario::take_from_sender<ColorObject>(scenario);
-            let (red, green, blue) = color_object::get_color(&object);
-            assert!(red == 255 && green == 0 && blue == 255, 0);
-            test_scenario::return_to_sender(scenario, object);
-        };
-        test_scenario::end(scenario_val);
+
+        event::emit(NFTMinted {
+            object_id: object::id(&nft),
+            creator: sender,
+            name: nft.name,
+        });
+
+        transfer::transfer(nft, sender);
     }
 
-    // == Tests covered in Chapter 2 ==
-
-    #[test]
-    fun test_copy_into() {
-        let owner = @0x1;
-        let scenario_val = test_scenario::begin(owner);
-        let scenario = &mut scenario_val;
-        // Create two ColorObjects owned by `owner`, and obtain their IDs.
-        let (id1, id2) = {
-            let ctx = test_scenario::ctx(scenario);
-            color_object::create(255, 255, 255, ctx);
-            let id1 =
-                object::id_from_address(tx_context::last_created_object_id(ctx));
-            color_object::create(0, 0, 0, ctx);
-            let id2 =
-                object::id_from_address(tx_context::last_created_object_id(ctx));
-            (id1, id2)
-        };
-        test_scenario::next_tx(scenario, owner);
-        {
-            let obj1 = test_scenario::take_from_sender_by_id<ColorObject>(scenario, id1);
-            let obj2 = test_scenario::take_from_sender_by_id<ColorObject>(scenario, id2);
-            let (red, green, blue) = color_object::get_color(&obj1);
-            assert!(red == 255 && green == 255 && blue == 255, 0);
-
-            color_object::copy_into(&obj2, &mut obj1);
-            test_scenario::return_to_sender(scenario, obj1);
-            test_scenario::return_to_sender(scenario, obj2);
-        };
-        test_scenario::next_tx(scenario, owner);
-        {
-            let obj1 = test_scenario::take_from_sender_by_id<ColorObject>(scenario, id1);
-            let (red, green, blue) = color_object::get_color(&obj1);
-            assert!(red == 0 && green == 0 && blue == 0, 0);
-            test_scenario::return_to_sender(scenario, obj1);
-        };
-        test_scenario::end(scenario_val);
+    /// Transfer `nft` to `recipient`
+    public entry fun transfer(
+        nft: DevNetNFT, recipient: address, _: &mut TxContext
+    ) {
+        transfer::transfer(nft, recipient)
     }
 
-    #[test]
-    fun test_delete() {
-        let owner = @0x1;
-        // Create a ColorObject and transfer it to @owner.
-        let scenario_val = test_scenario::begin(owner);
-        let scenario = &mut scenario_val;
-        {
-            let ctx = test_scenario::ctx(scenario);
-            color_object::create(255, 0, 255, ctx);
-        };
-        // Delete the ColorObject we just created.
-        test_scenario::next_tx(scenario, owner);
-        {
-            let object = test_scenario::take_from_sender<ColorObject>(scenario);
-            color_object::delete(object);
-        };
-        // Verify that the object was indeed deleted.
-        test_scenario::next_tx(scenario, owner);
-        {
-            assert!(!test_scenario::has_most_recent_for_sender<ColorObject>(scenario), 0);
-        };
-        test_scenario::end(scenario_val);
+    /// Update the `description` of `nft` to `new_description`
+    public entry fun update_description(
+        nft: &mut DevNetNFT,
+        new_description: vector<u8>,
+        _: &mut TxContext
+    ) {
+        nft.description = string::utf8(new_description)
     }
 
-    #[test]
-    fun test_transfer() {
-        let owner = @0x1;
-        // Create a ColorObject and transfer it to @owner.
-        let scenario_val = test_scenario::begin(owner);
-        let scenario = &mut scenario_val;
-        {
-            let ctx = test_scenario::ctx(scenario);
-            color_object::create(255, 0, 255, ctx);
-        };
-        // Transfer the object to recipient.
-        let recipient = @0x2;
-        test_scenario::next_tx(scenario, owner);
-        {
-            let object = test_scenario::take_from_sender<ColorObject>(scenario);
-            transfer::transfer(object, recipient);
-        };
-        // Check that owner no longer owns the object.
-        test_scenario::next_tx(scenario, owner);
-        {
-            assert!(!test_scenario::has_most_recent_for_sender<ColorObject>(scenario), 0);
-        };
-        // Check that recipient now owns the object.
-        test_scenario::next_tx(scenario, recipient);
-        {
-            assert!(test_scenario::has_most_recent_for_sender<ColorObject>(scenario), 0);
-        };
-        test_scenario::end(scenario_val);
-    }
-
-    // == Tests covered in Chapter 3 ==
-
-    #[test]
-    fun test_immutable() {
-        let sender1 = @0x1;
-        let scenario_val = test_scenario::begin(sender1);
-        let scenario = &mut scenario_val;
-        {
-            let ctx = test_scenario::ctx(scenario);
-            color_object::create_immutable(255, 0, 255, ctx);
-        };
-        test_scenario::next_tx(scenario, sender1);
-        {
-            // take_owned does not work for immutable objects.
-            assert!(!test_scenario::has_most_recent_for_sender<ColorObject>(scenario), 0);
-        };
-        // Any sender can work.
-        let sender2 = @0x2;
-        test_scenario::next_tx(scenario, sender2);
-        {
-            let object_val = test_scenario::take_immutable<ColorObject>(scenario);
-            let object = &object_val;
-            let (red, green, blue) = color_object::get_color(object);
-            assert!(red == 255 && green == 0 && blue == 255, 0);
-            test_scenario::return_immutable(object_val);
-        };
-        test_scenario::end(scenario_val);
+    /// Permanently delete `nft`
+    public entry fun burn(nft: DevNetNFT, _: &mut TxContext) {
+        let DevNetNFT { id, name: _, description: _, url: _ } = nft;
+        object::delete(id)
     }
 }
 ```
+
+1. DevNetNFT 这个结构体，有 key 和 store 两个能力。
+
+   它有三个字段，name、description 和 url。
+
+```move
+    struct DevNetNFT has key, store {
+        id: UID,
+        /// Name for the token
+        name: string::String,
+        /// Description of the token
+        description: string::String,
+        /// URL for the token
+        url: Url,
+    }
+```
+
+2. 我们也定义了一个 event 结构体
+
+```move
+    struct NFTMinted has copy, drop {
+        // The Object ID of the NFT
+        object_id: ID,
+        // The creator of the NFT
+        creator: address,
+        // The name of the NFT
+        name: string::String,
+    }
+```
+
+3. 有几个公开的函数，类似是 get 方法
+
+- name
+- description
+- url
+
+4. mint 方法，三个参数，传入 name、description、url，填充基础信息。
+   然后发出 mint 的事件，将 mint 出来的 nft 实例，转移给 sender 对象。
+
+```
+    /// Create a new devnet_nft
+    public entry fun mint_to_sender(
+        name: vector<u8>,
+        description: vector<u8>,
+        url: vector<u8>,
+        ctx: &mut TxContext
+    ) {
+        let sender = tx_context::sender(ctx);
+        let nft = DevNetNFT {
+            id: object::new(ctx),
+            name: string::utf8(name),
+            description: string::utf8(description),
+            url: url::new_unsafe_from_bytes(url)
+        };
+
+        event::emit(NFTMinted {
+            object_id: object::id(&nft),
+            creator: sender,
+            name: nft.name,
+        });
+
+        transfer::transfer(nft, sender);
+    }
+```
+
+5. 销毁 NFT
+
+从 nft 实例里面，解构出来信息，调用 object::delete 方法，就可以销毁 NFT。
+
+## Coin
+
+发一个 coin 就就像定义一个类型一样简单，只是会用到 one-time witness 模式。
+
+```move
+module examples::mycoin {
+    use std::option;
+    use sui::coin;
+    use sui::transfer;
+    use sui::tx_context::{Self, TxContext};
+
+    /// The type identifier of coin. The coin will have a type
+    /// tag of kind: `Coin<package_object::mycoin::MYCOIN>`
+    /// Make sure that the name of the type matches the module's name.
+    struct MYCOIN has drop {}
+
+    /// Module initializer is called once on module publish. A treasury
+    /// cap is sent to the publisher, who then controls minting and burning
+    fun init(witness: MYCOIN, ctx: &mut TxContext) {
+        let (treasury, metadata) = coin::create_currency(witness, 6, b"MYCOIN", b"", b"", option::none(), ctx);
+        transfer::freeze_object(metadata);
+        transfer::transfer(treasury, tx_context::sender(ctx))
+    }
+}
+```
+
+1. MYCOIN 就是 witness
+2. 调用 coin::create_currency 去创建一个 treasury 实例。
+3. 然后转给所有者就行了
+
+# sui move 工程化
+
+## 单元测试
 
 我们在上面已经介绍过正常的代码结构，然后咱们来看下 sui move 是如何来做单元测试的。
 
@@ -946,103 +988,10 @@ test_scenario::end(scenario_val);
 
 我们来看下完整的代码，然后在项目中就可以执行 sui move test 命令了。
 
-# ft
+## multi package
 
-# nft
+live coding
 
-# sui move 工程化示例：multi packages
+# 总结
 
-# tic toe
 
-安装好 sui
-
-初始化创世区块
-
-```
-sui genesis --force
-```
-
-启动 sui
-
-```
-sui start
-```
-
-由于游戏需要 3 个账号，我们看下自己有多少个
-
-```
-sui addresses
-```
-
-如果不够 3 个的话，需要手动创建一些
-
-```
-sui client new-address ed25519
-```
-
-然后再看下：
-
-```
-$ sui client addresses
-Showing 3 results.
-0x4e08311c5ab41519182d9d171a1a7141d7653d88
-0x6c8c722e08d1a1d896594edd2d4748e43eaf3a1c
-0xa5915281c83f87266dd3eb46bbd03468eeb4f16e
-```
-
-给这三个一下：
-
-```
-export ADMIN=0x4e08311c5ab41519182d9d171a1a7141d7653d88
-export PLAYER_X=0x6c8c722e08d1a1d896594edd2d4748e43eaf3a1c
-export PLAYER_O=0xa5915281c83f87266dd3eb46bbd03468eeb4f16e
-```
-
-然后发布的时候，可以看下：
-
-```
-sui client publish --gas-budget 3000
-INCLUDING DEPENDENCY MoveStdlib
-INCLUDING DEPENDENCY Sui
-BUILDING Games
-[warn] Client/Server api version mismatch, client api version : 0.20.0, server api version : 0.20.1
-Cannot find gas coin for signer address [0x4e08311c5ab41519182d9d171a1a7141d7653d88] with amount sufficient for the budget [3000].
-```
-
-报失败的话，拿着这个地址，去 discord 上申请测试币。
-
-![](https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202301082251225.png)
-
-如果报 gas 不足的话，就增加 gas 的预算。
-
-```
-$ sui client publish --gas-budget 5000
-INCLUDING DEPENDENCY MoveStdlib
-INCLUDING DEPENDENCY Sui
-BUILDING Games
-[warn] Client/Server api version mismatch, client api version : 0.20.0, server api version : 0.20.1
------ Certificate ----
-Transaction Hash: D8WkoQt6StS9ZPFJpNkUqMUx5L5YUB7NH7rjAnqifW1q
-Transaction Signature: AA==@J26OncJYU9tfkBjfgoxbMR3RAVONLnnTkmPoj4uNNX2vEuZUClON+lkOejqJZ2MC4eL3/T4BUI0ewBVBI+GmAA==@YSkiAxvMhUVWjVy+w4aPmHjieRPuwI5NmsCR/3ceLBw=
-Signed Authorities Bitmap: RoaringBitmap<[0, 1, 3]>
-Transaction Kind : Publish
------ Transaction Effects ----
-Status : Success
-Created Objects:
-  - ID: 0x7450261e72f90d0ff7b9920fd9a9951eddca1a77 , Owner: Account Address ( 0x4e08311c5ab41519182d9d171a1a7141d7653d88 )
-  - ID: 0xc98a4ea4ca5d1d2060e652337abd95df6f8f646c , Owner: Immutable
-  - ID: 0xcd79f86f247eb80cf687c77c5b171d70687bc729 , Owner: Account Address ( 0x4e08311c5ab41519182d9d171a1a7141d7653d88 )
-  - ID: 0xdafd19fd9fc418aaa72069b3b914769fbc25923f , Owner: Immutable
-Mutated Objects:
-  - ID: 0x0dc54c8cadc0132fb29f3a682dbc36de2ea4c28b , Owner: Account Address ( 0x4e08311c5ab41519182d9d171a1a7141d7653d88 )
-```
-
-然后就可以部署使用了。
-
-# move 设计模式
-
-# 参考
-
-## sandwich
-
-https://learnblockchain.cn/article/5251
