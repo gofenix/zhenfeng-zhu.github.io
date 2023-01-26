@@ -183,7 +183,7 @@ console.log(await importString('export const foo = "bar"'));
 ```ts
 export const handler = async (
   _req: Request,
-  _ctx: HandlerContext,
+  _ctx: HandlerContext
 ): Promise<Response> => {
   const name = _ctx.params.name;
 
@@ -203,7 +203,7 @@ export const handler = async (
 ```ts
 export const handler = async (
   _req: Request,
-  _ctx: HandlerContext,
+  _ctx: HandlerContext
 ): Promise<Response> => {
   return Response.json({ status: 200 });
 };
@@ -215,80 +215,173 @@ export const handler = async (
 
 # 智能合约
 
-在这个过程中，我们需要将函数代码片段存储到链上。在以太坊上，智能合约的开发一般选择
-hardhat。
+我选择sui来作为合约的。
 
-## 合约开发环境
 
-### Foundry
+# 重新开始写
 
-在以太坊的智能合约开发环境中，如果你是 nodejs 开发者，那么一定会习惯 hardhat
-体系的开发， foundry 是后起之秀，如果你满足以下条件或有过类似体验，你一定要试试
-Foundry：
+- 缘由
 
-- 如果你有 Rust “语言信仰”，如果你是个专业的 以太坊（Solidity 语言）应用开发者；
-- 你曾经用过类似 Hardhat.js 这样的工具；
-- 你厌倦了大量测试用例的等待，需要有工具更加快速的跑完你的测试用例；
-- 你觉得处理 BigNumber 稍微有一点点 🤏 麻烦;
-- 有过通过 Solidity 语言本身完成测试用例（或测试合约的合约）的需求；
-- 你觉得通过 git submodule 的方式管理依赖更加方便（而不是 npm）；
+一直对faas很有兴趣，机缘巧合之下，参与了大狗的dao组织里面，对micro faas做了一些研究。
 
-这次，由于这一次的智能合约并不复杂，类似一个 ERC721 的 NFT
-合约，我们需要把代码片段上传到链上，所以选择尝鲜一下 foundry。
+我是一个爱折腾的人，学习了陈天老师的deno课程，对deno越来越感兴趣。
 
-首先是下载安装：
+同时，最近也对sui比较感兴趣。
 
-```bash
-$ curl -L https://foundry.paradigm.xyz | bash
-```
+于是，sui + deno + faas，这三者的碰撞，是不是会产生火花🔥。
 
-然后初始化项目：
+- 动手
 
-```bash
-$ forge init faas3_contract
-Initializing /Users/bytedance/github/faas3/faas3_contract...
-Installing forge-std in "/Users/bytedance/github/faas3/faas3_contract/lib/forge-std" (url: Some("https://github.com/foundry-rs/forge-std"), tag: None)
-    Installed forge-std v1.2.0
-    Initialized forge project.
-```
+首先，我需要将代码存到链上。
 
-该过程通过安装依赖 forge-std 初始化了一个 Foundry 项目。
+这点，在move系区块链中，支持的比较好。特别是sui，每一个package就是一个nft。
 
-项目的目录如下：
+那么，就有了如下的合约：
 
-```bash
-$ tree -L 2
-.
-├── foundry.toml
-├── lib
-│   └── forge-std
-├── script
-│   └── Counter.s.sol
-├── src
-│   └── Counter.sol
-└── test
-    └── Counter.t.sol
+```rust
+module faas3::faas_nft {
+    use sui::url::{Self, Url};
+    use std::string::{Self, String};
+    use sui::object::{Self, ID, UID};
+    use sui::event;
+    use sui::transfer;
+    use sui::tx_context::{Self, TxContext};
 
-6 directories, 4 files
-```
+    struct FaaSNFT has key, store {
+        id: UID,
 
-主要由业务逻辑构成 src 目录中的 ./src/Counter.sol:
-
-```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
-
-contract Counter {          // 一个很简单的 Counter 合约
-    uint256 public number;  // 维护一个 public 的 uint256 数字
-
-    // 设置 number 变量的内容
-    function setNumber(uint256 newNumber) public {
-        number = newNumber;
+        name: String,
+        description: String,
+        url: Url,
+        content: String,
     }
 
-    // 让 number 变量的内容自增
-    function increment() public {
-        number++;
+    struct NFTMinted has copy, drop {
+        object_id: ID,
+        creator: address,
+        name: string::String,
+    }
+
+    public entry fun mint(
+        name: vector<u8>,
+        description: vector<u8>,
+        url: vector<u8>,
+        content: vector<u8>,
+        ctx: &mut TxContext
+    ) {
+        let nft = FaaSNFT {
+            id: object::new(ctx),
+            name: string::utf8(name),
+            description: string::utf8(description),
+            url: url::new_unsafe_from_bytes(url),
+            content: string::utf8(content),
+        };
+
+        let sender = tx_context::sender(ctx);
+        event::emit(NFTMinted {
+            object_id: object::id(&nft),
+            creator: sender,
+            name: nft.name,
+        });
+        transfer::transfer(nft, sender);
+    }
+
+    public entry fun burn(nft: FaaSNFT) {
+        let FaaSNFT { id, name: _, description: _, url: _, content: _ } = nft;
+        object::delete(id)
+    }
+
+    public entry fun update_description(
+        nft: &mut FaaSNFT,
+        new_description: vector<u8>
+    ) {
+        nft.description = string::utf8(new_description)
+    }
+
+    public entry fun update_content(
+        nft: &mut FaaSNFT,
+        new_content: vector<u8>
+    ) {
+        nft.content = string::utf8(new_content)
+    }
+
+    public fun name(nft: &FaaSNFT): &String {
+        &nft.name
+    }
+
+    public fun description(nft: &FaaSNFT): &String {
+        &nft.description
+    }
+
+    public fun url(nft: &FaaSNFT): &Url {
+        &nft.url
+    }
+
+    public fun content(nft: &FaaSNFT): &String {
+        &nft.content
     }
 }
 ```
+
+这段代码比较好理解，定义了一个FaaSNFT，有一些基础属性，我们可以在mint nft的时候，把数据存到链上。而且由于这个nft，是属于mint的人，并且可以交易，相当于代码的所有权就是属于faas的开发者。
+
+- deno runtime
+
+我们用deno来做serverless的运行时。
+
+主要是有如下的一些考虑：
+
+1. 首先，我们写代码片段的时候，不需要复杂的包管理机制，我们不需要引入一堆的npm包
+2. 我们又不得不使用到外界的包，这时http import就在这个环境下发挥了用武之地。
+
+- faas cli
+
+好的命令行工具很重要。
+
+我们可以用clap去实现我们的命令行工具。
+
+首先，我们定义一个config文件。
+
+```
+[basic]
+version = "0.0.1" 
+name = "dao-demo" # your function name, it's unique.
+description = ""
+owner = "0x5d547ccd49f6f35fc0dd66fb76e032e8fbf570ff" # Your sui address
+```
+
+我们的 `main.ts` 文件
+
+```
+import * as o from "https://deno.land/x/cowsay/mod.ts"
+
+export async function handler(payload = {}) {
+    let m = o.say({
+        text: "hello every one",
+    })
+    console.log(m)
+    return m
+}
+
+```
+
+然后就可以在handler里面写函数。
+
+远程调用和本地调试。
+
+```
+faas3 call function-name
+```
+
+```
+faas3 deploy
+```
+
+部署到区块链中
+
+- landing page
+
+我们也需要一个landing page。
+
+这里选择 fresh 来做。
+
