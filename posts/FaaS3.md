@@ -39,10 +39,7 @@ ry 在几年后，自我革命，重新用 v8 打造 deno，意欲将 deno
 
 # 沙箱
 
-我认为可能是 deno 相对于 node 做出的最重要的架构上的重塑，就是 security。v8
-倾尽全力打造了一个安全的沙箱，node 却只关心其 javascript
-解释器，而在现在，服务器的世界就进入了一个沙箱（VM / container /
-wasm）横行的时代。
+我认为可能是 deno 相对于 node 做出的最重要的架构上的重塑，就是 security。v8 倾尽全力打造了一个安全的沙箱，node 却只关心其 javascript解释器，而在现在，服务器的世界就进入了一个沙箱（VM / container / wasm）横行的时代。
 
 ![](https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202301072215245.png)
 
@@ -69,8 +66,7 @@ const moment = require("moment");
 
 这个是相当的中心化，
 
-不管是谁要在本地运行你的 NodeJS 存储库，都必须从 NPM 安装所有依赖项。而
-web，本来就支持 http import，去中心化的，npm 管理反而是后来开发的。
+不管是谁要在本地运行你的 NodeJS 存储库，都必须从 NPM 安装所有依赖项。而web，本来就支持 http import，去中心化的，npm 管理反而是后来开发的。
 
 ![](https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202301072216928.png)
 
@@ -100,8 +96,7 @@ Bundle-less，即应用代码不需要打包即可直接部署上线，后文会
 
 ## 动态导入
 
-从本质上来说，就是加载一个代码片段执行并获取结果。有点儿类似动态语言中的 eval
-函数。
+从本质上来说，就是加载一个代码片段执行并获取结果。有点儿类似动态语言中的 eval函数。
 
 我们都知道，在 js 中，如果要导入一个函数，一般用 import 语句。比如：
 
