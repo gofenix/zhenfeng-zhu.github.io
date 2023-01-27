@@ -673,8 +673,6 @@ two.fmap(one).run();
 
 我们把这种类型的 Monad 称为 IO，我们在 IO 中处理打印（副作用）。把之前我们学习到的类型合并一下，得到一个示例：
 
-![](https://raw.githubusercontent.com/zhenfeng-zhu/pic-go/main/202301271448150.png)
-
 ```ts
 function main() {
   const addOne = (x) => x + 1; // pure function
