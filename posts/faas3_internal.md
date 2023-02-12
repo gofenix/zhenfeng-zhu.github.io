@@ -172,279 +172,9 @@ Mutated Objects:
 
 这里的 Immutable 的 ObjectId 就是我们部署的合约的 package_id。
 
-# FaaS3 Cli
-
-在有了上一步部署的合约之后，我们就可以 mint 一个 FaaSNFT。这里我选择的是 Sui 的 Rust SDK 来做这件事儿。
-
-需要引入如下的包：
-
-```toml
-sui-sdk = { git = "https://github.com/MystenLabs/sui", branch = "devnet" }
-sui-keys = { git = "https://github.com/MystenLabs/sui", branch = "devnet" }
-sui-types = { git = "https://github.com/MystenLabs/sui", branch = "devnet" }
-```
-
-1. 第一步，需要初始化 client。
-
-```rust
-let sui = SuiClient::new("https://fullnode.devnet.sui.io:443", None, None).await?;
-```
-
-2. 第二步，读取 keystore。
-
-```rust
-fn default_keystore_path() -> PathBuf {
-    match dirs::home_dir() {
-        Some(v) => v.join(".sui").join("sui_config").join("sui.keystore"),
-        None => panic!("cannot obtain home directory path"),
-    }
-}
-```
-
-```rust
-let keystore_path = default_keystore_path();
-let keystore = Keystore::File(FileBasedKeystore::new(&keystore_path)?);
-```
-
-3. 第三步，构建 TransactionData
-
-```rust
-let mint_call = sui
-        .transaction_builder()
-        .move_call(
-            my_address,
-            package_object_id,
-            "faas_nft",
-            "mint",
-            vec![],
-            vec![
-                SuiJsonValue::from_str(move_func.name.as_str())?,
-                SuiJsonValue::from_str(move_func.description.as_str())?,
-                SuiJsonValue::from_str("")?,
-                SuiJsonValue::from_str(move_func.content.as_str())?,
-            ],
-            None,
-            1000,
-        )
-        .await?;
-```
-
-4. 第四步，签署交易并执行
-
-```rust
-let signature = keystore.sign_secure(&my_address, &mint_call, Intent::default())?;
-let response = sui
-        .quorum_driver()
-        .execute_transaction(
-            Transaction::from_data(mint_call, Intent::default(), signature).verify()?,
-            Some(ExecuteTransactionRequestType::WaitForLocalExecution),
-        )
-        .await?;
-assert!(response.confirmed_local_execution);
-```
-
-5. 第五步，解析 response
-
-```rust
-let func_id = response
-        .effects
-        .unwrap()
-        .created
-        .first()
-        .unwrap()
-        .reference
-        .object_id;
-println!("the object id is {:?}", func_id);
-```
-
-至此，一个 NFT 就被 mint 出来了，我们可以 Sui explorer 中去查看。
-
-FaaS Cli 的作用不仅仅是和链上交互并 mint nft。它也起到了本地化构建开发的作用。
-
-```bash
-$ faas3 --help
-Usage: faas3 [COMMAND]
-
-Commands:
-  create  create the function
-  deploy  deploy the function to runtime and blockchain
-  run     local run
-  call    remote call the function
-  list    list the functions
-  verify  verify the runtime function, which should equal to the on-chain code
-  help    Print this message or the help of the given subcommand(s)
-
-Options:
-  -h, --help     Print help
-  -V, --version  Print version
-```
-
-## create 命令
-
-下面我通过 create 命令的实现，带大家看下在 Rust 中是如何优雅的实现命令行工具。
-
-```bash
-$ tree
-.
-├── config.toml
-└── main.ts
-
-1 directory, 2 files
-```
-
-- config 文件是 FaaS3 项目的一些基础配置。
-
-```toml
-[basic]
-version = "0.0.1"
-name = "dao-demo" # your function name, it's unique.
-description = ""
-owner = "0x5d547ccd49f6f35fc0dd66fb76e032e8fbf570ff" # Your sui address
-```
-
-owner 是你自己的 Sui 地址，必须要确保里面有足够的测试币，不足的话可以去 Discord 中申领。
-
-- main.ts，主要是代码的逻辑
-
-```ts
-import * as o from "https://deno.land/x/cowsay/mod.ts";
-
-export async function handler(payload = {}) {
-  let m = o.say({
-    text: "hello every one",
-  });
-  console.log(m);
-  return m;
-}
-```
-
-可以通过 http-import 的方式去获取链上的代码，我们可以在 handler 中写具体的代码逻辑。
-
-有了上述的模板，我们就可以在 Rust 中编写命令行工具了。在这里，我使用的是 Clap。
-
-1. 定义命令的 struct
-
-```rust
-#[derive(Parser, Debug)]
-#[clap(author, version, about, long_about = None)]
-struct Cli {
-    #[command(subcommand)]
-    command: Option<Commands>,
-}
-
-#[derive(Subcommand, Debug)]
-enum Commands {
-    /// create the function
-    Create {
-        /// the function name
-        name: String,
-    },
-    /// deploy the function to runtime and blockchain
-    Deploy,
-    /// local run
-    Run,
-    /// remote call the function
-    Call {
-        /// the function name
-        name: String,
-    },
-    /// list the functions
-    List {
-        /// the functions of owner
-        #[arg(short, long)]
-        owner: String,
-
-        /// the funcitons of source, can only be: runtime or chain
-        #[arg(short, long)]
-        source: String,
-    },
-    /// verify the runtime function, which should equal to the on-chain code.
-    Verify { name: String },
-}
-```
-
-这里的注释，就是命令的帮助注释。
-
-2. 在 main 函数中解析命令行参数
-
-```rust
-let cli = Cli::parse();
-match &cli.command {
-    Some(Commands::Create { name }) => {
-        create_action(name.clone()).await?;
-    }
-    Some(Commands::Deploy) => {
-        deploy_action().await?;
-    }
-    Some(Commands::Run) => {
-        println!("🚧 This command is still WIP!");
-    }
-    Some(Commands::Call { name }) => {
-        call_action(name.clone()).await?;
-    }
-    Some(Commands::List {
-        owner: _,
-        source: _,
-    }) => {
-        println!("🚧 This command is still WIP!");
-    }
-    Some(Commands::Verify { name }) => {
-        verify_action(name.clone()).await?;
-        println!("🚧 This command is still WIP!");
-    }
-    None => {}
-}
-```
-
-然后，我们就可以编写 create 命令具体的逻辑了
-
-```rust
-async fn create_action(name: String) -> Result<(), anyhow::Error> {
-    let path = name;
-    fs::create_dir(&path)?;
-    let conf = format!(
-        r#"
-[basic]
-version = "0.0.1"
-name = "{}" # your function name, it's unique.
-description = ""
-owner = "0x5d547ccd49f6f35fc0dd66fb76e032e8fbf570ff" # Your sui address"#,
-        &path
-    );
-    let conf_file = format!("{}/config.toml", &path);
-    fs::write(conf_file, conf.trim_start_matches('\n'))?;
-
-    let tpl = r#"
-import * as o from "https://deno.land/x/cowsay/mod.ts"
-
-export async function handler(payload = {}) {
-    let m = o.say({
-        text: "hello every one",
-    })
-    console.log(m)
-    return m
-}
-"#;
-
-    let main_file = format!("{}/main.ts", &path);
-    fs::write(main_file, tpl.trim_start_matches('\n'))?;
-
-    println!("🎉 Awesome, The [{}] function is created!", path);
-    println!("🚑 change the owner to your Sui address!");
-
-    Ok(())
-}
-```
-
-这段代码的主要功能是：
-
-1. 创建一个文件夹
-2. 写入 config.toml 文件
-3. 写入 main.ts 文件
-
-有了 Clap 之后，Rust 来写命令行是相当的简洁优雅。
-
 # FaaS Runtime
+
+## Deno Runtime
 
 因为要加载 deno 的代码执行，这里我选择了 Fresh 框架。
 
@@ -468,10 +198,9 @@ Fresh 由 Deno 作者出品，在最近发布了 1.0 的正式版本，宣布支
 
 ```ts
 import { HandlerContext } from "$fresh/server.ts";
-import { importString } from "https://deno.land/x/import@v0.1.6/mod.ts";
-import { Database } from "../../utils/database.ts";
-
-const db = new Database();
+import { db } from "../../../utils/database.ts";
+import { importString } from "import";
+import axiod from "axiod";
 
 export const handler = async (
   _req: Request,
@@ -481,25 +210,35 @@ export const handler = async (
     return Response.json({ error: "only support post" });
   }
 
-  const payload = await _req.json();
-  console.log(`payload: ${payload}`);
-  const data = await db.find_by_name(payload.name);
-
-  const func = data[0];
-  if (func.name != payload.name) {
-    return Response.json({ error: "name is not equal" });
+  const { name } = _ctx.params;
+  let payload = await _req.json();
+  if (typeof payload == "string") {
+    payload = JSON.parse(payload);
   }
 
-  console.log(func.content);
-  const mod = await importString(func.content);
-  const result = await mod.handler();
+  const data = await db.findByName(name);
+  const func = data[0];
+
+  let result;
+  if (func.template === "deno") {
+    result = await runDeno(func.content!, payload);
+  } else if (func.template === "node") {
+    result = await runNode(func.content!, payload);
+  } else {
+    result = { reason: "unsupported template" };
+  }
+
   return Response.json(result);
 };
+
+async function runDeno(content: string, payload: any) {
+  console.log("running in deno...");
+  const mod = await importString(content);
+  return await mod.handler(payload);
+}
 ```
 
-你会发现，我在这里引入了一个 db。
-
-这里的考虑主要是，现阶段 Sui 还是在 Devnet 阶段，数据会被定期清理。同时现阶段的链上访问速度还不是很高，我们需要用一个 db 来做代码的缓存层。降低冷启动时间。
+你会发现，我在这里引入了一个 db。这里的考虑主要是，现阶段 Sui 还是在 Devnet 阶段，数据会被定期清理。同时现阶段的链上访问速度还不是很高，我们需要用一个 db 来做代码的缓存层。降低冷启动时间。
 
 supabase 就是这样的一个数据库，非常好用。
 
@@ -509,13 +248,13 @@ supabase 就是这样的一个数据库，非常好用。
 supabase 的 api 非常简洁易用，比如我们要从中 CRUD 数据，可以：
 
 ```ts
-async insert_move(data: Array<MoveFunc>) {
+async insertMove(data: Array<MoveFunc>) {
     const res = await this.#client.from("move_functions").insert(data);
     console.log(res);
     return res;
 }
 
-async find_by_name(name: string): Promise<MoveFunc[] | null> {
+async findByName(name: string): Promise<MoveFunc[] | null> {
     const { data } = await this.#client
       .from("move_functions")
       .select("*")
@@ -524,11 +263,468 @@ async find_by_name(name: string): Promise<MoveFunc[] | null> {
 }
 ```
 
-# Landing Page
+## Node Runtime
 
-仅有简单的命令行是不够的，每一个成功的产品，都需要一个 Landing Page。
+我们这里也支持 Node 函数。虽然 Deno 很美好，但是现阶段有一些第三方包仍然不适配 Deno。另一个考虑的点是 Node 的开发者众多，如果天然支持 Node，会自然吸引很多开发者。
 
-这里我仍然使用 Fresh 来做，这里偏前端工作，而且实现起来也比较简单，大家可以直接访问源码仓库查看即可。
+当检测到函数的类型是 node 的时候，会调用远端的 node runtime 来执行。
+
+```ts
+async function runNode(content: string, payload: any) {
+  console.log("running in node...");
+  const result = await axiod.post(
+    "https://faas3-next.up.railway.app/api/runtime",
+    { content, payload }
+  );
+  return result.data;
+}
+```
+
+在远程是用 next 框架来实现的，部署在 railway 上。核心代码参考：
+
+```ts
+import type { NextApiRequest, NextApiResponse } from "next";
+import { importFromString } from "module-from-string";
+
+type Data = {
+  name: string;
+};
+
+type Body = {
+  content: string;
+  payload: any;
+};
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
+  const body: Body = req.body;
+  const mod = await getMod(body.content);
+  const data = await callMod(mod, body.payload);
+  res.status(200).json(data);
+}
+
+async function getMod(code: string) {
+  return await importFromString(code);
+}
+
+async function callMod(mod: any, payload: any) {
+  return await mod.handler(payload);
+}
+```
+
+# FaaS3 Cli
+
+在有了上述的 runtime 和合约之后，我们就可以来实现 cli 命令行工具。
+
+在这里，我使用的是 Clap。
+
+```toml
+clap = { version = "4.1.4", features = ["derive"] }
+```
+
+使用 derive，这样就可以定义 struct 的同时，自动生成我们想要的帮助。
+
+```rust
+#[derive(Parser, Debug)]
+#[clap(author, version, about, long_about = None)]
+struct Cli {
+    #[command(subcommand)]
+    command: Option<Commands>,
+}
+
+#[derive(Subcommand, Debug)]
+enum Commands {
+    /// create the function
+    Create {
+        /// the function name
+        name: String,
+        // the function template
+        #[arg(short, long)]
+        template: String,
+    },
+    /// deploy the function to runtime and blockchain
+    Deploy,
+    /// local run
+    Run,
+    /// remote call the function
+    Call {
+        /// the function name
+        name: String,
+        /// the post body, it's json string
+        #[arg(short, long)]
+        body: String,
+    },
+    /// list the functions
+    List {
+        /// the functions of owner
+        #[arg(short, long)]
+        owner: Option<String>,
+
+        /// the functions in template
+        #[arg(short, long)]
+        template: Option<String>,
+    },
+    /// show the function info
+    Info {
+        /// the function name
+        name: String,
+    },
+    /// verify the runtime function, which should equal to the on-chain code.
+    Verify { name: String },
+}
+```
+
+在 main 函数中，通过强大的模式匹配去解析命令：
+
+```rust
+#[tokio::main]
+async fn main() -> Result<(), anyhow::Error> {
+    let cli = Cli::parse();
+    match &cli.command {
+        Some(Commands::Create { name, template }) => {
+            create_action(name.clone(), template.clone()).await?;
+        }
+        Some(Commands::Deploy) => {
+            deploy_action().await?;
+        }
+        Some(Commands::Run) => {
+            println!("This command is still WIP")
+        }
+        Some(Commands::Call { name, body }) => {
+            call_action(name.clone(), body.clone()).await?;
+        }
+        Some(Commands::List { owner, template }) => {
+            list_action(owner.clone(), template.clone()).await?;
+        }
+        Some(Commands::Verify { name }) => {
+            verify_action(name.clone()).await?;
+        }
+        Some(Commands::Info { name }) => {
+            info_action(name.clone()).await?;
+        }
+        None => {}
+    }
+
+    Ok(())
+}
+```
+
+# 实战：move-did
+
+move-did 项目是 NonceGeek Dao 下面的一个专注 move 生态的 did 项目。
+
+我们可以通过这个样例，来实战一下如何在 faas3 下面开发函数。
+
+## 安装 faas3-cli
+
+```
+$ cargo install --force --locked --git https://github.com/faas3/faas3-cli.git
+```
+
+## 创建项目
+
+```
+$ faas3 create move-did
+```
+
+然后我们看下目录结构：
+
+```bash
+$ tree
+.
+├── config.toml
+├── main.mjs
+└── test.mjs
+```
+
+- config.toml 是配置文件。 注意修改 owner 为自己的 sui 的地址。
+
+- main.mjs 是主要文件，在这里写我们的函数。
+
+```ts
+// You can import inner sdk
+export async function handler(payload) {
+  console.log(payload);
+}
+```
+
+我们可以在这里引入内置的包，目前有 aptos 和 ethers 两个 sdk。
+
+- test.mjs 是测试文件
+
+```ts
+// this file is for faas3 run
+import { handler } from "./main.mjs";
+
+const res = await handler();
+console.log(res);
+```
+
+## 编写函数
+
+首先引入 aptos 的 sdk。
+
+```ts
+import * as aptos from "aptos";
+```
+
+我们可以从 payload 中拿到请求的参数，这里请求的参数为 addr，也就是传入的地址。
+
+```ts
+import * as aptos from "aptos";
+
+export async function handler(payload) {
+  const NODE_URL = "https://fullnode.testnet.aptoslabs.com";
+  const client = new aptos.AptosClient(NODE_URL);
+
+  console.log("Your payload is ");
+  console.log(payload);
+  const dogAddr = payload.addr;
+  const dog = new aptos.HexString(dogAddr);
+  const AddrAggregator = await client.getAccountResource(
+    dog,
+    "0x65f4a0954aa6e68d2381ff98b7676df2fe57beee3ca37a4a8a57fa621c1db872::addr_aggregator::AddrAggregator"
+  );
+
+  const {
+    key_addr: keyAddr,
+    type: rawType,
+    description,
+    addrs,
+    addr_infos_map: { handle },
+  } = AddrAggregator.data;
+
+  const key = addrs[0];
+  const syntax =
+    "did:movedid:0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed";
+
+  const methods = await genVerificationMethods(client, handle, syntax, key);
+
+  const services = await genServices(client, keyAddr, syntax);
+
+  const result = {
+    id: syntax,
+    type: genType(rawType),
+    description,
+    verification_methods: methods,
+    services,
+  };
+
+  return result;
+}
+
+async function genVerificationMethods(client, handle, syntax, key) {
+  const item = await client.getTableItem(handle, {
+    key_type: "0x1::string::String",
+    value_type:
+      "0x65f4a0954aa6e68d2381ff98b7676df2fe57beee3ca37a4a8a57fa621c1db872::addr_info::AddrInfo",
+    key,
+  });
+  return [
+    {
+      id: `${syntax}-${key}}`,
+      internal_id: item.id,
+      properties: {
+        description: item.description,
+        chains: item.chains,
+      },
+      type: addrType(item.addr_type),
+      addr: item.addr,
+      pubkey: item.pubkey,
+      verificated: verify(item.signature),
+      verification: {
+        msg: item.msg,
+        signature: item.signature,
+      },
+      created_at: item.created_at,
+      expired_at: item.expired_at,
+    },
+  ];
+}
+
+async function genServices(client, keyAddr, syntax) {
+  const ServiceAggregator = await client.getAccountResource(
+    keyAddr,
+    "0x65f4a0954aa6e68d2381ff98b7676df2fe57beee3ca37a4a8a57fa621c1db872::service_aggregator::ServiceAggregator"
+  );
+  const {
+    names: keys,
+    services_map: { handle },
+  } = ServiceAggregator.data;
+
+  const item = await client.getTableItem(handle, {
+    key_type: "0x1::string::String",
+    value_type:
+      "0x65f4a0954aa6e68d2381ff98b7676df2fe57beee3ca37a4a8a57fa621c1db872::service_aggregator::Service",
+    key: keys[0],
+  });
+
+  return {
+    id: `${syntax}-${keys[0]}}`,
+    description: item.description,
+    verification_url: item.verification_url,
+    url: item.url,
+  };
+}
+
+function addrType(type) {
+  switch (type) {
+    case "0":
+      return "EcdsaSecp256k1VerificationKey2019";
+    case "1":
+      return "Ed25519VerificationKey2020";
+    default:
+      return "other";
+  }
+}
+
+function verify(signature) {
+  if (signature == "0x") {
+    return false;
+  }
+  return true;
+}
+function genType(rawType) {
+  switch (rawType) {
+    case "0":
+      return "Human";
+    case "1":
+      return "DAO";
+    case "2":
+      return "Bot";
+    default:
+      return "other";
+  }
+}
+```
+
+## 如何本地测试
+
+我们可以通过 npm init 的方式，安装 aptos 包到本地。
+
+然后在 test 中执行测试代码。
+
+```bash
+$ tree
+.
+├── config.toml
+├── main.mjs
+├── node_modules
+│   └── aptos -> .pnpm/aptos@1.6.0/node_modules/aptos
+├── package.json
+├── pnpm-lock.yaml
+├── readme.md
+└── test.mjs
+```
+
+test.mjs 的代码如下：
+
+```ts
+import { handler } from "./main.mjs";
+const res = await handler({
+  addr: "0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed",
+});
+console.log(res);
+```
+
+然后执行 `node test.mjs`即可看到输出
+
+```bash
+$ node test.mjs
+Your payload is
+{
+  addr: '0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed'
+}
+{
+  id: 'did:movedid:0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed',
+  type: 'Human',
+  description: 'My First DID',
+  verification_methods: [
+    {
+      id: 'did:movedid:0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed-0x73c7448760517E3E6e416b2c130E3c6dB2026A1d}',
+      internal_id: '1',
+      properties: [Object],
+      type: 'EcdsaSecp256k1VerificationKey2019',
+      addr: '0x73c7448760517E3E6e416b2c130E3c6dB2026A1d',
+      pubkey: '',
+      verificated: false,
+      verification: [Object],
+      created_at: '1673525423',
+      expired_at: '1705061423'
+    }
+  ],
+  services: {
+    id: 'did:movedid:0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed-github}',
+    description: "leeduckgo's github",
+    verification_url: 'https://gist.github.com/0x',
+    url: 'https://github.com/leeduckgo'
+  }
+}
+```
+
+## 部署
+
+deploy 到 faas3 系统。
+
+```bash
+$ faas3 deploy
+```
+
+## 使用
+
+可以使用 faas-cli 的 call 命令调用，也可以通过 curl 的方式来调用。
+
+- call 命令
+
+```bash
+$ faas3 call move-did --body '{"addr" : "0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed"}'
+✅ Your resp is:
+ Object {
+    "id": String("did:movedid:0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed"),
+    "type": String("Human"),
+    "description": String("My First DID"),
+    "verification_methods": Array [
+        Object {
+            "id": String("did:movedid:0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed-0x73c7448760517E3E6e416b2c130E3c6dB2026A1d}"),
+            "internal_id": String("1"),
+            "properties": Object {
+                "description": String("A Test Addr"),
+                "chains": Array [
+                    String("ethereum"),
+                ],
+            },
+            "type": String("EcdsaSecp256k1VerificationKey2019"),
+            "addr": String("0x73c7448760517E3E6e416b2c130E3c6dB2026A1d"),
+            "pubkey": String(""),
+            "verificated": Bool(false),
+            "verification": Object {
+                "msg": String("50789538.1.nonce_geek"),
+                "signature": String("0x"),
+            },
+            "created_at": String("1673525423"),
+            "expired_at": String("1705061423"),
+        },
+    ],
+    "services": Object {
+        "id": String("did:movedid:0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed-github}"),
+        "description": String("leeduckgo's github"),
+        "verification_url": String("https://gist.github.com/0x"),
+        "url": String("https://github.com/leeduckgo"),
+    },
+}
+```
+
+- curl
+
+```bash
+$ curl --location --request POST 'https://faas3.deno.dev/api/runner/move-did' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "addr" : "0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed"
+}'
+```
 
 # 总结
 
@@ -539,3 +735,4 @@ async find_by_name(name: string): Promise<MoveFunc[] | null> {
 - [faas3](https://github.com/faas3/faas3)：faas3 的 Runtime 和 websit。
 - [faas3-cli](https://github.com/faas3/faas3-cli)：faas3 的命令行工具
 - [faas3-move](https://github.com/faas3/faas3-move)：move 合约
+- [faas3-next-runtime](https://github.com/faas3/faas3-next-runtime)：node 的 runtime
